@@ -7,7 +7,7 @@ import { StyleSheet, ScrollView, Button, Alert, Text, View } from 'react-native'
 const ItemButton = () => {
     const [isButton, isSetButton] = useState(true);
     return(
-        <View>
+        <View style ={styles.footer}>
             <Button
                 onPress={() => {
                     isSetButton(!isButton);
@@ -46,7 +46,9 @@ function App() {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
+    }, footer: {
+        height: 50,
+    }, 
 });
 
 export default App
