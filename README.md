@@ -3,6 +3,7 @@ The application for Make It Good Agains exchange stations
 
 # Setup guide
 This will be a guide on how to start the application on your system, I’ll start the same for every system and change later on.
+
 ##Start (every system)
 To start of with, it doesn’t matter what system you have all the first steps are exactly the same, which is to say...
 
