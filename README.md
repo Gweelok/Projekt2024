@@ -85,5 +85,5 @@ expo start
 And that should be it on the computer side, there’ll be a last section for how to run the application on your phone.
 
 ## To run app on phone
-To actually run our application, after you’re run the command “expo start” successfully, you’ll have to download the app ”expo go”, in it I’ll have a qr code reader, scan your given qr code and presto, app now runs (after a initial installation).
+To actually run our application, after you’re run the command “expo start” successfully, you’ll have to download the app ”expo go”, and also connect to the same internet as your computer, in it I’ll have a qr code reader, scan your given qr code and presto, app now runs (after a initial installation).
 
