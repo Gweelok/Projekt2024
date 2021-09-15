@@ -1,5 +1,8 @@
 package com.retireditems;
 
+// com.myapp should be your package name
+import com.retireditems.generated.BasePackageList;
+
 import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
@@ -27,10 +30,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
+ 
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
+import org.unimodules.adapters.react.ReactModuleRegistryProvider;
+
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(
-    new BasePackageList().getPackageList()
+    new BasePackageList().getPackageList(),null
   );
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -43,6 +50,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
       packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
+       // Add unimodules
+          List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
+            new ModuleRegistryAdapter(mModuleRegistryProvider)
+          );
+          packages.addAll(unimodules);
       return packages;
     }
 

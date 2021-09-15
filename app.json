@@ -7,5 +7,7 @@
       "**/*"
     ]
   },
-  "name": "retireditems"
+//  "name": "retireditems"
+  "name" : "main",
+  "displayName": "retireditems"
 }
