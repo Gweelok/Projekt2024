@@ -96,8 +96,7 @@ Secondly you'll install visual studio code, or vscode, this will be the editor w
 Thirdly, delete the content of the project you previosly installed, just to make the process easier later on.
 
 ## Vscode
-When all is installed, open up vscode, then choose a theme, any theme. Then click this icon__ 
-[ext](https://puu.sh/IbJeB/8232082d98.png)__ 
+When all is installed, open up vscode, then choose a theme, any theme. Then click this icon [image 1](https://puu.sh/IbJeB/8232082d98.png)<br /> 
 to access extentions, where you'll want to install the extentions "ES7 React/Redux/...", "React Native Tools" and "ESLint".
 
 Then go into the folder where the project once was, and that should be the first part.
@@ -108,16 +107,15 @@ Start by opening up git bash and typing the commands:
 git config --global user.name "<your name here>"
 git config --global user.email "<your email here>"
 ```
-Then go back to vscode and press the Source Control button__ 
-[src](https://puu.sh/IbJFi/7e3cf406aa.png)__ 
+Then go back to vscode and press the Source Control button 
+[image 2](https://puu.sh/IbJFi/7e3cf406aa.png)<br />
 From here, when inside the folder you'd want the project in press the "..." button and choose "clone". 
 
 After that go back into Source Control press the "..." button choose "remote" and "add remote" then again input the github url of the project, then give it the name "origin" for ease of use for later.
 
 Then for fun and to test if it works, add somethign to "App.js" maybe a comment with "// "or something, then in Source Control type something in the message box, usually what you've done, then press the "+" on the files you've changed and then press the tick to commit.
 
-After that press this button:
-[idk](https://puu.sh/IbKni/d82e20185b.png)
+After that press this button: [image 1](https://puu.sh/IbKni/d82e20185b.png)<br />
 choose terminal and input this command:
 ```
 git push --set-upstream origin main
