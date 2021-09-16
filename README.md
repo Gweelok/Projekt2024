@@ -125,4 +125,4 @@ git push --set-upstream origin main
 to set where your commits go, after that when you want to push your commits to the github just go to Source Control and press ... and choose push.
 
 ## And that's it
-And that should be it, i hope.
+And that should be it, i hope, just remember to "pull" every time you open up the project, just to make sure there's no problems.
