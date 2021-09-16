@@ -1,7 +1,7 @@
 ﻿# retireditems
 The application for Make It Good Agains exchange stations
 
-# Setup guide
+# Native React expo: Setup guide
 This will be a guide on how to start the application on your system, I’ll start the same for every system and change later on.
 
 ##Start (every system)
@@ -87,3 +87,42 @@ And that should be it on the computer side, there’ll be a last section for how
 ## To run app on phone
 To actually run our application, after you’re run the command “expo start” successfully, you’ll have to download the app ”expo go”, and also connect to the same internet as your computer, in it I’ll have a qr code reader, scan your given qr code and presto, app now runs (after a initial installation).
 
+
+# Code editor: prerequisites
+Firstly you'll need to install git, while installing there'll be lots of options, most you don't need to touch except for: "choose default editor for git" which should be set to "visual studio code", "ajust the name of the initial branch" which should be set to "override the default" and the name shoudl be changed to "main".
+
+Secondly you'll install visual studio code, or vscode, this will be the editor we'll be using. Just install it from their website and that's it.
+
+Thirdly, delete the content of the project you previosly installed, just to make the process easier later on.
+
+## Vscode
+When all is installed, open up vscode, then choose a theme, any theme. Then click this icon__ 
+[ext](https://puu.sh/IbJeB/8232082d98.png)__ 
+to access extentions, where you'll want to install the extentions "ES7 React/Redux/...", "React Native Tools" and "ESLint".
+
+Then go into the folder where the project once was, and that should be the first part.
+
+## Git (and github)
+Start by opening up git bash and typing the commands:
+```
+git config --global user.name "<your name here>"
+git config --global user.email "<your email here>"
+```
+Then go back to vscode and press the Source Control button__ 
+[src](https://puu.sh/IbJFi/7e3cf406aa.png)__ 
+From here, when inside the folder you'd want the project in press the "..." button and choose "clone". 
+
+After that go back into Source Control press the "..." button choose "remote" and "add remote" then again input the github url of the project, then give it the name "origin" for ease of use for later.
+
+Then for fun and to test if it works, add somethign to "App.js" maybe a comment with "// "or something, then in Source Control type something in the message box, usually what you've done, then press the "+" on the files you've changed and then press the tick to commit.
+
+After that press this button:
+[idk](https://puu.sh/IbKni/d82e20185b.png)
+choose terminal and input this command:
+```
+git push --set-upstream origin main
+```
+to set where your commits go, after that when you want to push your commits to the github just go to Source Control and press ... and choose push.
+
+## And that's it
+And that should be it, i hope.
