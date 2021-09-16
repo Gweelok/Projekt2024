@@ -11,7 +11,7 @@ const Dashboard = () => {
 		<View style={styles.container}>
 			<ScrollView>
 				<Text>
-					DashBoard
+					DashBoard 
 				</Text>
 			</ScrollView>
 		</View>
