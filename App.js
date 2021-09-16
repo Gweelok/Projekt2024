@@ -15,7 +15,7 @@ const Dashboard = () => {
 				</Text>
 			</ScrollView>
 		</View>
-		);
+	);
 };
 
 const ItemButton = () => {
@@ -49,7 +49,8 @@ export default function App() {
 					(txObj, {rows: { _array } }) => setData(_array),
 					(txObj, error) => console.log('DB Error: ', error)
 				)
-		});
+			}
+		);
 	},[]);
 
 	const Item = ( item ) => (
