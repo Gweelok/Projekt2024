@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 /* Donia Inputs
 */
 
-// Used the "Dashboard" and "ItemButton" function created by Sebastian to create a identical "LandingPage" and "RegisterItem" button.
+// Used the "Dashboard" and "ItemButton" function created by Sebastian to create a identical "LandingPage" page and "RegisterItem" button.
 const LandingPage = () => {
 	return(
 		<View style={styles.container}>
@@ -120,7 +120,7 @@ const RegisterItem = () => {
 				color="#4cac6a"
 				onPress={() => {
 					isSetButton(!isButton);				
-					// If button is pressed redicret to "registrering item"
+					// If button is pressed: Redirect to "registrering item"
 				}}
 				
 				title={isButton ? "+ \n Register item" : "\n Registering item"}
