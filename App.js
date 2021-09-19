@@ -3,7 +3,7 @@ import { SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } fr
 // sqlite database
 import * as SQLite from 'expo-sqlite';
 
-// Test
+// Test -- Donia is the best
 var db = SQLite.openDatabase('db.testDb');
 
 const Dashboard = () => {
