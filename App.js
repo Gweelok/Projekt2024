@@ -5,7 +5,7 @@ import * as SQLite from 'expo-sqlite';
 
 
 var db = SQLite.openDatabase('db.testDb');
-
+/*
 const Dashboard = () => {
 	return(
 		<View style={styles.container}>
@@ -31,6 +31,7 @@ const ItemButton = () => {
 		</View>
 	);
 };
+*/
 
 
 // Main function that everything runs in
@@ -92,11 +93,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	}, footer: {
 		height: 50,
-	}, 
+	},
 });
 
 /* Donia Inputs
 */
+
+// Used the "Dashboard" and "ItemButton" function created by Sebastian to create a identical "LandingPage" and "RegisterItem" button.
 const LandingPage = () => {
 	return(
 		<View style={styles.container}>
@@ -114,10 +117,13 @@ const RegisterItem = () => {
 	return(
 		<View style ={styles.footer}>
 			<Button
+				color="#4cac6a"
 				onPress={() => {
-					isSetButton(!isButton);
-					}}
-				title={isButton ? "+ \n Register Item" : "Thank you!"}
+					isSetButton(!isButton);				
+					// If button is pressed redicret to "registrering item"
+				}}
+				
+				title={isButton ? "+ \n Register item" : "\n Registering item"}
 			/>
 		</View>
 	);
