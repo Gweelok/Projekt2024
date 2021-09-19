@@ -67,7 +67,7 @@ export default function App() {
 
 	return (
 		<>
-			<Dashboard/>
+			<LandingPage/>
 	<SafeAreaView style={{ flex: 1 }}>
 		<View style={{flex:1}}>
 				<FlatList
@@ -77,7 +77,7 @@ export default function App() {
 				/>
 		</View>
 	</SafeAreaView>
-			<ItemButton/>
+			<RegisterItem/>
 		</>
 		);
 	}
@@ -94,6 +94,34 @@ const styles = StyleSheet.create({
 		height: 50,
 	}, 
 });
+
+/* Donia Inputs
+*/
+const LandingPage = () => {
+	return(
+		<View style={styles.container}>
+			<ScrollView>
+				<Text>
+					LandingPage 
+				</Text>
+			</ScrollView>
+		</View>
+	);
+};
+
+const RegisterItem = () => {
+	const [isButton, isSetButton] = useState(true);
+	return(
+		<View style ={styles.footer}>
+			<Button
+				onPress={() => {
+					isSetButton(!isButton);
+					}}
+				title={isButton ? "+ \n Register Item" : "Thank you!"}
+			/>
+		</View>
+	);
+};
 
 
 
