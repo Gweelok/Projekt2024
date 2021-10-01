@@ -4,7 +4,7 @@ The application for Make It Good Agains exchange stations
 # Native React expo: Setup guide
 This will be a guide on how to start the application on your system, I’ll start the same for every system and change later on.
 
-##Start (every system)
+## Start (every system)
 To start of with, it doesn’t matter what system you have all the first steps are exactly the same, which is to say...
 
 Start by downloadning node.js [here](https://nodejs.org/en/download/).
@@ -124,3 +124,47 @@ to set where your commits go, after that when you want to push your commits to t
 
 ## And that's it
 And that should be it, i hope, just remember to "pull" every time you open up the project, just to make sure there's no problems.
+
+
+# Branching and you: the best way to avoid error in code when lots of people code
+Something important that i grievously forgot is to talk about branches, a very practical system that helps avoid code error that might occur when more than one person is working on code and they're not coordinating.
+
+To start a new branch and check it out you can use the following command:
+```
+git checkout -b <name here>
+```
+which is the same as:
+```
+git branch <name here>
+git checkout <name here>
+```
+or just click "..." in source control and press the "branch" option and choose "new branch".
+To switch between branches use the code
+```
+git checkout <name here> 
+```
+and to do it in vscode click "checkout to..." and choose the branch you want.
+Just a heads up, you can't branch if you have uncommited changes, so either stash it away or commit it.
+
+This is another important point to remember: when you switch branches, Git resets your working directory to look like it did the last time you committed on that branch. It adds, removes, and modifies files automatically to make sure your working copy is what the branch looked like on your last commit to it.
+
+## github merging
+Github has a more formal way of mergin branches, in "pull requests" you can create a formal merge between two branches where you'll be able to see what changes will happen. this is more used when there's a head programmer or somebody who has to check that nothing goes wrong when the merge happens. I'll probably not be very important for us now, but you can test it out if you will.
+
+
+press "pull request" -> press "compare and pull request" -> choose which way it should merge (branch you want to merge into <- branch with changes you want into the first branch) -> write a comment on what's happening -> check there's no conflicts -> press "create pull request" -> and done
+
+To actually merge the branches together you need to press "confirm pull request" which should come up after your pull request is created. But yeah that's about it for github merging.
+
+## Manual merging
+When you're done working on the branch and want to put your new changes into the main branch, or want to get some of the new features from the main branch into your branch use the following command:
+```
+git checkout <branch you want to merge into>
+git merge <branch with changes you want into the first branch>
+```
+Or by pressing "merge branch..." in source control
+When that is done, if you're done with the branch use the command, to delete your old branch:
+```
+git branch -d <name here>
+```
+or in source control. And that should be it, if there's any merge conflicts then it should be easy to see what to keep and what not to keep if using vscode.
