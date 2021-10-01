@@ -1,4 +1,4 @@
-﻿# retireditems
+# retireditems
 The application for Make It Good Agains exchange stations
 
 # Native React expo: Setup guide
@@ -124,3 +124,65 @@ to set where your commits go, after that when you want to push your commits to t
 
 ## And that's it
 And that should be it, i hope, just remember to "pull" every time you open up the project, just to make sure there's no problems.
+
+
+
+# Databases and you
+To make use of the database i've implemented some functions that can do some simple CRUD (create, read, update, delete) actions. To access every action, use the function:
+```
+`setPlace({
+	choice: <action you want to do here>,
+	id: <id here, must be a int>,
+	name: <name here, must be a string>
+	lat: <latitude here, should be a float>
+	long: <longitude here, should be a float>
+	)
+}
+```
+Differnt actions you can do include:
+* "drop" which deletes the whole table
+* "truncate" which removes all data in table but not the table
+* "insert" which inserts data into the table with the given data in place
+* "update" which updates a selected data with the given data in place, and is determined by id
+* "specific" which selects a specific data and puts it in the data variable, and is determined by id
+* "data" which gets	all data from the table and puts them in the data variable
+Not every action requires all values filled, if you just want to get all data, truncate or drop data then you can jst pul "null" into the other values.
+
+## to create your own sql action
+To make use of the sql api, you'll need to have initialized the database at the start of the code with this line:
+```
+const <variable name here> = SQLite.openDatabase( '<name here>.db' )" 
+```
+
+To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
+```
+<variable name here>.transaction(tx => {tx.executeSql(<sql you'd want to run>,[<input(s)>],<what happens when it's successful>, what happens when it's unsuccessfull)})
+```
+In the success or error state i'll give you some sql text which isn't too relevant for us and the result, to access the result, one very efffective way i've learned is by doing th following:
+```
+(txObj, results/error) => { <your code here> }
+```
+
+Remember, the results you get from the database are formatted like this:
+```
+{
+  insertId,
+  rowsAffected,
+  rows: {
+    length,
+    item(),
+    _array,
+  },
+}
+```
+it also comes with some prebuild functions:
+    insertId -- The row ID of the row that the SQL statement inserted into the database, if a row was inserted.
+    rowsAffected -- The number of rows that were changed by the SQL statement.
+    rows.length -- The number of rows returned by the query.
+    rows.item(number) -- rows.item(index) returns the row with the given index. If there is no such row, returns null.
+    rows.array -- The actual array of rows returned by the query. Can be used directly instead of getting rows through rows.item().
+This means that if you want to access a specific item (which would be formatted as an item) you would run the line:
+```
+results.rows.item(<number>)
+```
+that should be everything you'd need to know if you want to work with sql, best of luck.
