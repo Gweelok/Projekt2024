@@ -151,7 +151,7 @@ Not every action requires all values filled, if you just want to get all data, t
 ## to create your own sql action
 To make use of the sql api, you'll need to have initialized the database at the start of the code with this line:
 ```
-const <variable name here> = SQLite.openDatabase( '<name here>.db' ) 
+const <variable name here> = SQLite.openDatabase( '<database name here>.db' ) 
 ```
 
 To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
