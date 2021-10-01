@@ -151,7 +151,7 @@ Not every action requires all values filled, if you just want to get all data, t
 ## to create your own sql action
 To make use of the sql api, you'll need to have initialized the database at the start of the code with this line:
 ```
-const <variable name here> = SQLite.openDatabase( '<name here>.db' )" 
+const <variable name here> = SQLite.openDatabase( '<name here>.db' ) 
 ```
 
 To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
@@ -184,11 +184,11 @@ Remember, the results you get from the database are formatted like this:
 }
 ```
 it also comes with some prebuild functions:
-    insertId -- The row ID of the row that the SQL statement inserted into the database, if a row was inserted.
-    rowsAffected -- The number of rows that were changed by the SQL statement.
-    rows.length -- The number of rows returned by the query.
-    rows.item(number) -- rows.item(index) returns the row with the given index. If there is no such row, returns null.
-    rows.array -- The actual array of rows returned by the query. Can be used directly instead of getting rows through rows.item().
+* insertId -- The row ID of the row that the SQL statement inserted into the database, if a row was inserted.
+* rowsAffected -- The number of rows that were changed by the SQL statement.
+* rows.length -- The number of rows returned by the query.
+* rows.item(number) -- rows.item(index) returns the row with the given index. If there is no such row, returns null.
+* rows.array -- The actual array of rows returned by the query. Can be used directly instead of getting rows through rows.item().
 This means that if you want to access a specific item (which would be formatted as an item) you would run the line:
 ```
 results.rows.item(<number>)
