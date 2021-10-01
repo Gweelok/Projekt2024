@@ -157,12 +157,12 @@ const <variable name here> = SQLite.openDatabase( '<name here>.db' )"
 To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
 ```
 <variable name here>.transaction(tx => 
-									{tx.executeSql(<sql you'd want to run>,
-									[<input(s)>],
-									<what happens when it's successful>, 
-									what happens when it's unsuccessfull)
-									}
-								)
+		{tx.executeSql(<sql you'd want to run>,
+		[<input(s)>],
+		<what happens when it's successful>, 
+		what happens when it's unsuccessfull)
+		}
+	)
 ```
 In the success or error state i'll give you some sql text which isn't too relevant for us and the result, to access the result, one very efffective way i've learned is by doing th following:
 ```
