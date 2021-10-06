@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps'
 
+//custom marker
 const MARKER_DATA =[
 	{
 		id:'1',
