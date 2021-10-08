@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps'
+//import MapViewDirections from 'react-native-maps-directions'
+
 
 //custom marker
 const MARKER_DATA =[
@@ -11,8 +13,17 @@ const MARKER_DATA =[
 		color: '#2F3136',
 		name: 'Test',
 		direction: 'arbejde,100'
+	},
+	{
+		id:'2',
+		latitude: 55.216944,
+		longitude: 12.161667,
+		color:'#CCAC93',
+		name:'seb2',
+		direction:'faxe,16'
 	}
 ]
+
 
 // Main function that everything runs in
 export default function App() {
@@ -44,6 +55,16 @@ export default function App() {
 			</SafeAreaView>
 		);
 	}
+
+//				Directions API, that we'll test later on
+				/*	<MapViewDirections
+						origin={coordinates[1]}
+						destination={coordinates[0]}
+						strokeWidth = {2}
+						apikey={GOOGLE_MAPS_APIKEY}
+						strokeColor="hotpink"
+					/>
+				*/
 
 // Stylesheet like CSS
 const styles = StyleSheet.create({
