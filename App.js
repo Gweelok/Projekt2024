@@ -42,8 +42,16 @@ export default function App() {
 		try {
 			database.getTable()
 			switch (getPlace.choice) {
-				case ("table"):
-					database.getTable("EStations")
+				// crud functions
+				case ("insert"):
+					database.insertData(getPlace);
+					database.getData(setData)
+					break;
+				case ("data"):
+					database.getData(setData)
+					break;
+				case ("specific"):
+					database.getSpecificData(getPlace.id,setData)
 					break
 				case ("update"):
 					database.updateData(getPlace)
@@ -53,23 +61,19 @@ export default function App() {
 					database.deleteData(getPlace.id)
 					database.getData(setData)
 					break;
-				case ("insert"):
-					database.insertData(getPlace);
-					database.getData(setData)
-					break;
+				// utility functions
+				case ("table"):
+					database.getTable("EStations")
+					break
 				case ("drop"):
 					database.dropData()
-					database.getData(setData)
-					break;
-				case ("specific"):
-					database.getSpecificData(getPlace.id,setData)
-					break
-				case ("data"):
 					database.getData(setData)
 					break;
 				case ("vacuum"):
 					database.vacuums()
 					break
+				// test data
+				//###### only run once ######
 				case ("testdata"):
 					TestData()
 					break
@@ -96,7 +100,6 @@ export default function App() {
 
 
 //				Render of database
-
 // eslint-disable-next-line react/prop-types
 const Render = ({data}) => {
 	// eslint-disable-next-line react/prop-types

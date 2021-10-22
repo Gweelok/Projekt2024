@@ -1,4 +1,5 @@
 import * as SQLite from 'expo-sqlite';
+const db = SQLite.openDatabase('sqlite.db')
 
 // for 'table' in the functions
 const est = 'EStations'
@@ -9,50 +10,11 @@ const bnd = 'Brands'
 
 var table = null
 
+
+//############  IMPORTANT ###############
+// MUST be used when starting app
 const setTable = (temp) => table = temp;
 
-const db = SQLite.openDatabase('sqlite.db')
-
-// create and set the table
-// only needs to be used once per new system
-const getTable = async () => {
-	switch (table){
-		case ('Products'):
-			await db.transaction(tx => {
-				tx.executeSql(
-						'CREATE TABLE IF NOT EXISTS Products (id INTEGER PRIMARY KEY, catId INTEGER, name VARCHAR(20), modId INTEGER, bndId INTEGER)'
-					)
-				},
-				(_, error) => {console.log('db error creating tables: ', error)},
-				(_, success) => {console.log('table gotten')}
-			)
-			break
-		case ('Models'):
-		case ('Brands'):
-		case ('Catagories'):
-			await db.transaction(tx => {
-				tx.executeSql(
-						'CREATE TABLE IF NOT EXISTS '+table+' (id INTEGER PRIMARY KEY, name VARCHAR(20))'
-					)
-				},
-				(_, error) => {console.log('db error creating tables: ' +error)},
-				(_, success) => {console.log('table gotten')}
-			)
-			break
-		case ('EStations'):
-			await db.transaction(tx => {
-				tx.executeSql(
-						'CREATE TABLE IF NOT EXISTS EStations (id INTEGER PRIMARY KEY, name VARCHAR(20), lat DECIMAL(15,10), long DECIMAL(15,10))'
-					)
-				},
-				(_, error) => {console.log('db error creating tables: ' +error)},
-				(_, success) => {console.log('table gotten')}
-			)
-			break
-		default:
-			console.log('Table Error: Not valid input')
-	}
-}
 
 // standard CRUD for database
 const insertData = async (item) => {
@@ -186,8 +148,6 @@ const updateData = async (item) => {
 	}
 }
 
-
-// other utility functions
 const deleteData = async (id) => {
 	await db.transaction(tx => {
 		tx.executeSql(
@@ -196,6 +156,46 @@ const deleteData = async (id) => {
 			(txObj,error) => {console.log("db data delete error: ", error)}
 		)
 	})
+}
+
+// other utility functions
+const getTable = async () => {
+	switch (table){
+		case ('Products'):
+			await db.transaction(tx => {
+				tx.executeSql(
+						'CREATE TABLE IF NOT EXISTS Products (id INTEGER PRIMARY KEY, catId INTEGER, name VARCHAR(20), modId INTEGER, bndId INTEGER)'
+					)
+				},
+				(_, error) => {console.log('db error creating tables: ', error)},
+				(_, success) => {console.log('table gotten')}
+			)
+			break
+		case ('Models'):
+		case ('Brands'):
+		case ('Catagories'):
+			await db.transaction(tx => {
+				tx.executeSql(
+						'CREATE TABLE IF NOT EXISTS '+table+' (id INTEGER PRIMARY KEY, name VARCHAR(20))'
+					)
+				},
+				(_, error) => {console.log('db error creating tables: ' +error)},
+				(_, success) => {console.log('table gotten')}
+			)
+			break
+		case ('EStations'):
+			await db.transaction(tx => {
+				tx.executeSql(
+						'CREATE TABLE IF NOT EXISTS EStations (id INTEGER PRIMARY KEY, name VARCHAR(20), lat DECIMAL(15,10), long DECIMAL(15,10))'
+					)
+				},
+				(_, error) => {console.log('db error creating tables: ' +error)},
+				(_, success) => {console.log('table gotten')}
+			)
+			break
+		default:
+			console.log('Table Error: Not valid input')
+	}
 }
 
 const dropData = async () => {
@@ -233,33 +233,27 @@ export const database = {
 // ##########   WARNING ###########
 // ######### only run once ########
 export const TestData = async () => {
-	getTable(table)
-	switch(table){
-		case (cat):
-			for (let i = 0; i < Catagories.length; i++) {
-				insertData(Catagories[i],est)
-			}
-			break
-		case (est):
-			break
-		case (pro):
-			for (let i = 0; i < Products.length; i++) {
-				insertData(Products[i],pro)
-			}
-			break
-		case (mod):
-			for (let i = 0; i < Model.length; i++) {
-				insertData(Model[i],mod)
-			}
-			break
-		case (bnd):
-			for (let i = 0; i < Brand.length; i++) {
-				insertData(Brand[i],bnd)
-			}
-			break
-		default:
-			console.log('Test data error: Not a real table')
+	getTable(cat)
+	for (let i = 0; i < Catagories.length; i++) {
+		insertData(Catagories[i],cat)
 	}
+	console.log('Catagories data insertet')
+	getTable(pro)
+	for (let i = 0; i < Products.length; i++) {
+		insertData(Products[i],pro)
+	}
+	console.log('Products data insertet')
+	getTable(mod)
+	for (let i = 0; i < Model.length; i++) {
+		insertData(Model[i],mod)
+	}
+	console.log('Models data insertet')
+	getTable(bnd)
+	for (let i = 0; i < Brand.length; i++) {
+		insertData(Brand[i],bnd)
+	}
+	console.log('Brands data insertet')
+	console.log('Test data insertet')
 }
 
 

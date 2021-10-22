@@ -128,32 +128,31 @@ And that should be it, i hope, just remember to "pull" every time you open up th
 
 
 # Databases and you
-To make use of the database i've implemented some functions that can do some simple CRUD (create, read, update, delete) actions. To access every action, use the function:
+To make use of the database i've implemented you'll want to import verying you're gonna need, which is done by writing this line with the other imports:
 ```
-`setPlace({
-	choice: <action you want to do here>,
-	id: <id here, must be a int>,
-	name: <name here, must be a string>
-	lat: <latitude here, should be a float>
-	long: <longitude here, should be a float>
-	)
-}
+import { database } from './utility/database'
 ```
-Differnt actions you can do include:
-* "drop" which deletes the whole table
-* "truncate" which removes all data in table but not the table
-* "insert" which inserts data into the table with the given data in place
-* "update" which updates a selected data with the given data in place, and is determined by id
-* "specific" which selects a specific data and puts it in the data variable, and is determined by id
-* "data" which gets	all data from the table and puts them in the data variable
-Not every action requires all values filled, if you just want to get all data, truncate or drop data then you can jst pul "null" into the other values.
+To access a database you HAVE to run the function:
+```
+setTable( < name of table here > )
+```
+On the database there's some built in functions that are already accessable, to access them you'll want to start each function with 
+```
+database.<function name>
+```
+Actions you can do include:
+* "insertData(<object with data>)" inserts data into the table with the given data in item
+* "getData(<data setting function>)" selects all data from the table and puts them into the function that you give it
+* "getSpecificData(<id>, <data setting function>)" selects a specific data determined by the id you give it and selects said data and sets it with the function you give it
+* "updateData(<object with data>)" updates the data with the same id as the one you give it
+* "deleteData(<id>)" deletes a datapoint with the same id 
+* "getTable()" creates and sets the table if there is none
+* "dropData" which deletes all data in a given table
+* "vacuums" cleans up database file
+
+If you want some quick data to work with you can import the "TestData" function and run it once.
 
 ## to create your own sql action
-To make use of the sql api, you'll need to have initialized the database at the start of the code with this line:
-```
-const <variable name here> = SQLite.openDatabase( '<database name here>.db' ) 
-```
-
 To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
 ```
 <variable name here>.transaction(tx => {
@@ -161,7 +160,7 @@ To do any actions on the database you first need to start a transaction, and the
 				<sql you'd want to run>,
 				[<input(s)>],
 				<what happens when it's successful>, 
-				what happens when it's unsuccessfull
+				<what happens when it's unsuccessful>
 			)
 		}
 	)
