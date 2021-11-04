@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity ,SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 
 import { setXlsx, Render } from './src/utils/mobile_phone'
 
@@ -68,90 +68,3 @@ const RegisterItem = () => {
 		</View>
 	);
 };
-
-
-
-/**		 Unused code (or a maybe will be used code)
- * 
- *	<StatusBar style="auto" />
-
-const databasestuff = () => {
-	return (
-	<SafeAreaView style={{ flex: 1 }}>
-		<View style={{flex:1}}>
-				<FlatList
-					data={data}
-					renderItem={renderItem}
-					keyExtractor= {(item) => item.id }
-					extraData={selectedId}
-				/>
-		</View>
-	</SafeAreaView>
-		)
-// Parts gotten from https://reactnativecode.com/view-all-data-from-sqlite-database/
-/*	useEffect(() => {
-		db.transaction(function (txn) {
-			txn.executeSql(
-				"SELECT name FROM sqlite_master WHERE type='table' AND name='EStations'",
-				[]
-			);
-		})
-	}, []);
-
-
-	const viewStation = () => {
-		db.transaction((tx) => {
-			tx.executeSql(
-				'SELECT * FROM EStations',
-				[],
-				(tx, results) => {
-					var temp = [];
-					for (let i = 0; i < results.rows.length; ++i)
-						temp.push(results.rows.item(i));
-						setListE(temp);
-	
-					if (results.rows.length >= 1) {
-						setEmpty(false);
-					} else {
-						setEmpty(true)
-					}
-				}
-			);
-		})
-	};
-
-
-const emptyMSG = (status) => {
-	return (( {item} ) => {
-		return(
-
-		<View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-			<Text style={{ fontSize: 25, textAlign: 'center' }}>
-				Database is Empty...
-			</Text>
-		</View>
-	);
-}
-const renderItem = ({ item }) => (
-	<Item title={item.title} />
-);
-
-return(
-	<SafeAreaView style={{ flex: 1 }}>
-		<View style={{flex:1}}>
-			{empty ? emptyMGS(empty) :
-				<FlatList
-					data={listE}
-					renderItem = {({ listEsss }) =>
-						<View key={listE.id} style={{padding:20}}>
-							<Text> Id: {listE.id} </Text>
-							<Text> Name: {listE.name} </Text>
-						</View>
-					}
-				/>
-			}
-		</View>
-	</SafeAreaView>
-	);
-/
-}*/
