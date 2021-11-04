@@ -2,10 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 // sqlite database
 import { database, TestData } from './database'
+import { setXlsx } from './src/utils/mobile_phone'
 
 console.log('start');
-
-
 
 // Main function that everything runs in
 export default function App() {
@@ -157,7 +156,7 @@ const RegisterItem = () => {
 					// If button is pressed: Redirect to "registrering item"
 				}}
 				
-				title={isButton ? "+ \n Register item" : "\n Registering item"}
+				title={isButton ? "+ \nRegister item" : "\nRegistering item"}
 			/>
 		</View>
 	);
