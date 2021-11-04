@@ -1,87 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
-// sqlite database
-import * as SQLite from 'expo-sqlite';
+import { TouchableOpacity ,SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 
-
-var db = SQLite.openDatabase('db.testDb');
-/*
-const Dashboard = () => {
-	return(
-		<View style={styles.container}>
-			<ScrollView>
-				<Text>
-					DashBoard 
-				</Text>
-			</ScrollView>
-		</View>
-	);
-};
-
-const ItemButton = () => {
-	const [isButton, isSetButton] = useState(true);
-	return(
-		<View style ={styles.footer}>
-			<Button
-				onPress={() => {
-					isSetButton(!isButton);
-					}}
-				title={isButton ? "Press Me" : "Thank you!"}
-			/>
-		</View>
-	);
-};
-*/
-
+import { setXlsx, Render } from './src/utils/mobile_phone'
 
 // Main function that everything runs in
 export default function App() {
 	const [data, setData] = useState([]);
 	useEffect(() => {
-		db.transaction(tx => {
-			tx.executeSql(
-				'CREATE TABLE IF NOT EXISTS EStations (id INTEGER PRIMARY KEY, name VARCHAR(20))'
-			)
-		})
-
-		db.transaction(tx => {
-			tx.executeSql(
-					'SELECT * FROM EStations', null,
-					(txObj, {rows: { _array } }) => setData(_array),
-					(txObj, error) => console.log('DB Error: ', error)
-				)
-			}
-		);
 	},[]);
-
-	const Item = ( item ) => (
-			<Text>{item.name}</Text>
-		
-	);
-	const renderItem = ( {item} ) => {
-		return(
-				<Item
-					item ={item}
-				/>
-			);
-	};
-
+	
+	
+	
 	return (
-		<>
+		<SafeAreaView style={{ flex: 1 }}>
 			<LandingPage/>
-	<SafeAreaView style={{ flex: 1 }}>
-		<View style={{flex:1}}>
-				<FlatList
-					data={data}
-					renderItem={renderItem}
-					keyExtractor= {(item) => item.id }
-				/>
-		</View>
-	</SafeAreaView>
+				<View style={{flex:1}}>
+					<Button title='test' onPress={() => setXlsx(setData)}/>
+					<Render data={data}/>
+				</View>
 			<RegisterItem/>
-		</>
-		);
-	}
+		</SafeAreaView>
+	);
+}
 
 // Stylesheet like CSS
 const styles = StyleSheet.create({
@@ -123,7 +63,7 @@ const RegisterItem = () => {
 					// If button is pressed: Redirect to "registrering item"
 				}}
 				
-				title={isButton ? "+ \n Register item" : "\n Registering item"}
+				title={isButton ? "+ \nRegister item" : "\nRegistering item"}
 			/>
 		</View>
 	);
