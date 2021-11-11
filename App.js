@@ -1,71 +1,21 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps'
+import { SafeAreaView ,StyleSheet, ScrollView, Button, Text, View } from 'react-native';
+// used when we pay
 //import MapViewDirections from 'react-native-maps-directions'
 
-
-//custom marker
-const MARKER_DATA =[
-	{
-		id:'1',
-		latitude: 55.6622, 
-		longitude: 12.5408,
-		color: '#2F3136',
-		name: 'Test',
-		direction: 'arbejde,100'
-	},
-	{
-		id:'2',
-		latitude: 55.216944,
-		longitude: 12.161667,
-		color:'#CCAC93',
-		name:'seb2',
-		direction:'faxe,16'
-	}
-]
+import { Map, MARKER_DATA } from './src/utils/Map'
 
 
 // Main function that everything runs in
 export default function App() {
-	const mapRegion={
-	latitude: 55.6622, 
-	longitude: 12.5408,
-	latitudeDelta: 0.003,
-	longitudeDelta: 0.003,
-	}
-
 	return (
-			<SafeAreaView style={{ flex: 1 }}>
-				<LandingPage/>
-				<MapView
-				style={StyleSheet.absoluteFillObject}
-				provider={MapView.PROVIDER_GOOGLE}
-				region={mapRegion}
-				>
-					{MARKER_DATA.map((marker) => (
-						<Marker
-						key={marker.id}
-						coordinate={{
-							latitude: marker.latitude,
-							longitude: marker.longitude,
-						}}></Marker>
-					))}
-				</MapView>
-				<RegisterItem/>
-			</SafeAreaView>
-		);
-	}
-
-//				Directions API, that we'll test later on
-				/*	<MapViewDirections
-						origin={coordinates[1]}
-						destination={coordinates[0]}
-						strokeWidth = {2}
-						apikey={GOOGLE_MAPS_APIKEY}
-						strokeColor="hotpink"
-					/>
-				*/
-
+		<SafeAreaView style={{ flex: 1 }}>
+			<LandingPage/>
+			<Map/>
+			<RegisterItem/>
+		</SafeAreaView>
+	)
+}
 // Stylesheet like CSS
 const styles = StyleSheet.create({
 	container: {
