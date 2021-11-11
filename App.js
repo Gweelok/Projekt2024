@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 // sqlite database
-import { database, TestData } from './database'
-import { setXlsx } from './src/utils/mobile_phone'
+import { database, createTestData } from './src/utils/Database'
+
+//const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands' ]
 
 console.log('start');
 
 // Main function that everything runs in
 export default function App() {
-	const [data, setData] = useState([]);
-	const [place, setPlace] = useState({choice: "data", id: 1, name: "Dummy 1.1", lat: 55.111, long: 55.111})
+	const [data, setData] = useState([])
+	const [place, setPlace] = useState({choice: "data", id: 2, name: "Dummy 2", lat: 57.121, long: 53.887})
 	//,name: null, id: 0, lat: null, long: null});
 	const getPlace = useMemo (() => createPlace(place),[place])
-
 
 	function createPlace(item) {
 		console.log('place created');
@@ -20,7 +20,6 @@ export default function App() {
 			/* Different  
 			{
 				choice: 
-				table:
 				name: 
 				id: 
 				lat: 
@@ -36,7 +35,7 @@ export default function App() {
 
 	useEffect( () => {
 		console.log('useEffect start');
-		database.setTable("EStations")
+		database.setTable('Models')
 
 		try {
 			database.getTable()
@@ -62,19 +61,22 @@ export default function App() {
 					break;
 				// utility functions
 				case ("table"):
-					database.getTable("EStations")
+					database.getTable()
 					break
 				case ("drop"):
 					database.dropData()
-					database.getData(setData)
+					setData([])
 					break;
+				case ("dropall"):
+					database.dropAll()
+					break
 				case ("vacuum"):
 					database.vacuums()
 					break
 				// test data
 				//###### only run once ######
 				case ("testdata"):
-					TestData()
+					createTestData()
 					break
 				default:
 					console.log('error: not a possible action');
@@ -82,10 +84,9 @@ export default function App() {
 		} catch (error) {
 			console.warn(error)
 		}
-		
 	},[getPlace])
 
-				
+	
 	//setPlace()
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
@@ -96,24 +97,45 @@ export default function App() {
 	);
 }
 
-
+/* Different  
+			{
+				choice:
+				name: 
+				id: 
+				lat: 
+				long: 
+				catId:
+				modId:
+				bndId:
+			}
+			*/
 
 //				Render of database
 // eslint-disable-next-line react/prop-types
 const Render = ({data}) => {
 	// eslint-disable-next-line react/prop-types
-	const Item = ({ title, description }) => {
+	const Item = ({ name, id, lat, long, catId, modId, bndId }) => {
 		//console.log(description + " "+ title);
 		return (
 			<View>
-				<Text>{title} </Text>
-				<Text>{description} </Text>
+				<Text>Name: {name}, Id: {id}</Text>
+				<Text>Latitude: {lat}, Longitude: {long}</Text>
+				<Text>Catagory id: {catId}, Models id: {modId}, Brand id: {bndId}</Text>
+				<Text/>
 			</View>
 		);
 	}
 
 	const renderItem = ( {item} ) => (
-		<Item title={"name: "+item.name+" \b id: "+item.id} description={"lat: "+item.lat +" long: "+ item.long} />
+		<Item 
+				name = {item.name || 'Joe'} 
+				id = {item.id || 0}
+				lat = {item.lat || 'space'} 
+				long = {item.long || 'sea'} 
+				catId = {item.catId || 27} 
+				modId = {item.modId || 12} 
+				bndId = {item.bndId || 1997}
+		/>
 	);
 
 	return (

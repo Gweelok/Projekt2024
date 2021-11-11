@@ -49,28 +49,54 @@ export const setXlsx = async (setData) => {
 		const ws = workbook.Sheets['Phones database']
 		const halloween = XLSX.utils.sheet_to_json(ws)
 		halloween.splice(0,10)
+		halloween.sort((a,b) => {return a.LITE - b.LITE})
 		setData(halloween)
-		console.log(halloween);
+		//console.log(halloween);
 	} catch (e) {
 		console.log(e); 
 	}
 }
 
+export const getBrands = props => {
+	const unique = [...new Set(props.map(item => item.LITE_1))]
+	console.log(unique);
+	return unique
+}
+
+
 // eslint-disable-next-line react/prop-types
-export const Render = ({data}) => {
+export const RenderMobile = ({data}) => {
 	// eslint-disable-next-line react/prop-types
-	const Item = ({ title, description }) => {
+	const Item = ({ id, brand, model, notes, image, prop, release, available, os }) => {
 		//console.log(description + " "+ title);
 		return (
 			<View>
-				<Text>{title} </Text>
-				<Text>{description} </Text>
+				<Text>Id = LITE: {id} </Text>
+				<Text>Brand = LITE_1: {brand}</Text>
+				<Text>Model = LITE_2: {model}</Text>
+				<Text>Notes = LITE_3: {notes}</Text>
+				<Text>Image = LITE_4: {image}</Text>
+				<Text>??? = LITE_5: {prop}</Text>
+				<Text>Release date = LITE_6: {release}</Text>
+				<Text>Availability = LITE_7: {available}</Text>
+				<Text>OS = LITE_8: {os}</Text>
+				<Text/>
 			</View>
 		);
 	}
 
 	const renderItem = ( {item} ) => (
-		<Item title={'\nLITE: '+item.LITE} description={'LITE_1: '+item.LITE_1+"\nLITE_2: "+item.LITE_2+'\nLITE_3: '+item.LITE_3+'\nLITE_4: '+item.LITE_4+'\nLITE_5: '+item.LITE_5+'\nLITE_6: '+item.LITE_7+'\nLITE_8: '+item.LITE_8} />
+		<Item 
+			id={item.LITE} 
+			brand={item.LITE_1}
+			model={item.LITE_2}
+			notes={item.LITE_3}
+			image={item.LITE_4}
+			prop={item.LITE_5}
+			release={item.LITE_6}
+			available={item.LITE_7}
+			os={item.LITE_8} 
+		/>
 	);
 
 	return (
