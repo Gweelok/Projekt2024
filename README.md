@@ -1,4 +1,4 @@
-﻿# retireditems
+# retireditems
 The application for Make It Good Agains exchange stations
 
 # Native React expo: Setup guide
@@ -126,6 +126,73 @@ to set where your commits go, after that when you want to push your commits to t
 And that should be it, i hope, just remember to "pull" every time you open up the project, just to make sure there's no problems.
 
 
+
+# Databases and you
+To make use of the database i've implemented you'll want to import verying you're gonna need, which is done by writing this line with the other imports:
+```
+import { database } from './utility/database'
+```
+To access a database you HAVE to run the function:
+```
+setTable( < name of table here > )
+```
+On the database there's some built in functions that are already accessable, to access them you'll want to start each function with 
+```
+database.<function name>
+```
+Actions you can do include:
+* "insertData(<object with data>)" inserts data into the table with the given data in item
+* "getData(<data setting function>)" selects all data from the table and puts them into the function that you give it
+* "getSpecificData(<id>, <data setting function>)" selects a specific data determined by the id you give it and selects said data and sets it with the function you give it
+* "updateData(<object with data>)" updates the data with the same id as the one you give it
+* "deleteData(<id>)" deletes a datapoint with the same id 
+* "getTable()" creates and sets the table if there is none
+* "dropData" which deletes all data in a given table
+* "vacuums" cleans up database file
+
+If you want some quick data to work with you can import the "TestData" function and run it once.
+
+## to create your own sql action
+To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
+```
+<variable name here>.transaction(tx => {
+			tx.executeSql(
+				<sql you'd want to run>,
+				[<input(s)>],
+				<what happens when it's successful>, 
+				<what happens when it's unsuccessful>
+			)
+		}
+	)
+```
+In the success or error state i'll give you some sql text which isn't too relevant for us and the result, to access the result, one very efffective way i've learned is by doing th following:
+```
+(txObj, results/error) => { <your code here> }
+```
+
+Remember, the results you get from the database are formatted like this:
+```
+{
+  insertId,
+  rowsAffected,
+  rows: {
+    length,
+    item(),
+    _array,
+  },
+}
+```
+it also comes with some prebuild functions:
+* insertId -- The row ID of the row that the SQL statement inserted into the database, if a row was inserted.
+* rowsAffected -- The number of rows that were changed by the SQL statement.
+* rows.length -- The number of rows returned by the query.
+* rows.item(number) -- rows.item(index) returns the row with the given index. If there is no such row, returns null.
+* rows.array -- The actual array of rows returned by the query. Can be used directly instead of getting rows through rows.item().
+This means that if you want to access a specific item (which would be formatted as an item) you would run the line:
+```
+results.rows.item(<number>)
+```
+that should be everything you'd need to know if you want to work with sql, best of luck.
 # Branching and you: the best way to avoid error in code when lots of people code
 Something important that i grievously forgot is to talk about branches, a very practical system that helps avoid code error that might occur when more than one person is working on code and they're not coordinating.
 
