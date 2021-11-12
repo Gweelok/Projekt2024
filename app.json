@@ -7,9 +7,17 @@
       "**/*"
     ],
     "android": {
+<<<<<<< HEAD
       "permissions" : [
         "READ_EXTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE"
       ]
+=======
+      "config": {
+        "googleMaps": {
+          "apiKey": "REPLACE_FOR_API_KEY"
+        }
+      }
+>>>>>>> mapview
     }
   },
 //  "name": "retireditems"

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { SafeAreaView, FlatList, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 // sqlite database
 import { database, createTestData } from './src/utils/Database'
+import { Map, MARKER_DATA } from './src/utils/Map'
 
 //const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands' ]
 
