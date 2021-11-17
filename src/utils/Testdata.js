@@ -13,6 +13,30 @@ export const EStations = [
 	}
 ]
 
+export const Items = [
+	{
+		id: 1,
+		aval: 1,
+		estId: 1,
+		bndId: 1,
+		modId: 1
+	},
+	{
+		id: 2,
+		aval: 1,
+		estId: 1,
+		bndId: 5,
+		modId: 2
+	},
+	{
+		id: 3,
+		aval: 0,
+		estId: 2,
+		bndId: 400,
+		modId: null
+	}
+]
+
 export const Catagories = [
 	{
 		id: 1,

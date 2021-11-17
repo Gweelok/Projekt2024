@@ -1,11 +1,11 @@
 import * as SQLite from 'expo-sqlite';
-const db = SQLite.openDatabase('sqlite.db')
+export const db = SQLite.openDatabase('sqlite.db')
 
 import { setXlsx } from './Mobile_phone'
-import { Catagories, Products, Models, Brands, EStations } from './Testdata'
+import { Catagories, Products, Models, Brands, EStations, Items } from './Testdata'
 
 // for 'table' in the functions
-const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands' ]
+const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands', 'Items' ]
 
 var table = null
 
@@ -40,10 +40,10 @@ const getData = async (setDataFunc, tempTable = table) => {
 	)
 }
 
-const getSpecificData = async (id,setDataFunc) => {
+const getSpecificData = async (id,setDataFunc, tempTable = table) => {
 	await db.transaction(tx => {
 		tx.executeSql(
-				"SELECT * FROM "+table+" WHERE id = ?",
+				"SELECT * FROM "+tempTable+" WHERE id = ?",
 				[id],
 				(_, { rows: { _array } }) => {
 					setDataFunc(_array)
@@ -64,10 +64,10 @@ const updateData = async (item, tempTable = table) => {
 	})
 }
 
-const deleteData = async (id) => {
+const deleteData = async (id, tempTable = table) => {
 	await db.transaction(tx => {
 		tx.executeSql(
-			'DELETE FROM '+table+ ' WHERE id = ?', id,
+			'DELETE FROM '+tempTable+ ' WHERE id = ?', id,
 			(txObj, results) => {console.log("db data deleted success: haleluja! ", results)},
 			(txObj,error) => {console.log("db data delete error: ", error)}
 		)
@@ -86,8 +86,8 @@ const getTable = async (tempTable = table) => {
 	)
 }
 
-const dropData = async () => {
-	var tempStr = 'DROP TABLE ' +table 
+const dropData = async (tempTable = table) => {
+	var tempStr = 'DROP TABLE ' +tempTable 
 	await db.transaction(tx => {
 		tx.executeSql(
 			tempStr,null,
@@ -155,7 +155,7 @@ async function applyExtraData (data) {
 		Models.push({id: Models.length+1, bndId: knowBrand+1, name: data[i].LITE_2})
 	}
 
-	const testdata = [createInsertSql(EStations,tableList[0]),createInsertSql(Catagories,tableList[1]),createInsertSql(Products,tableList[2]),createInsertSql(Models,tableList[3]),createInsertSql(Brands,tableList[4])]
+	const testdata = [createInsertSql(EStations,tableList[0]),createInsertSql(Catagories,tableList[1]),createInsertSql(Products,tableList[2]),createInsertSql(Models,tableList[3]),createInsertSql(Brands,tableList[4]),createInsertSql(Items,tableList[5])]
 
 	testdata.forEach(prop => console.log(prop))
 
@@ -213,6 +213,13 @@ const createInsertSql = (props, tab) => {
 				console.log(prop)}
 			)
 			return tempStr.slice(0,-1)
+		case 'Items':
+			tempStr += tab + ' (id, aval, estId, bndId, modId) VALUES '
+			props.forEach(prop =>{
+				tempStr += '('+prop.id+','+prop.aval+','+prop.estId+','+prop.bndId+','+prop.modId+'),' 
+				console.log(prop)}
+			)
+			return tempStr.slice(0,-1)
 	}
 }
 
@@ -220,15 +227,17 @@ const createTableSql = (tab) => {
 	var tempStr = 'CREATE TABLE IF NOT EXISTS '
 	switch (tab){
 		case 'Products':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, catId INTEGER, name VARCHAR(20))'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, catId INTEGER NOT NULL, name TEXT NOT NULL)'
 		case 'Catagories':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name VARCHAR(20))'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name TEXT NOT NULL)'
 		case 'Brands':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, proId INTEGER, name VARCHAR(20))'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, proId INTEGER NOT NULL, name TEXT NOT NULL)'
 		case 'Models':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, bndId INTEGER, name VARCHAR(20))'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, bndId INTEGER NOT NULL, name TEXT NOT NULL)'
 		case 'EStations':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name VARCHAR(20), lat DECIMAL(15,10), long DECIMAL(15,10))'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name TEXT NOT NULL, lat DECIMAL(15,10) NOT NULL, long DECIMAL(15,10) NOT NULL)'
+		case 'Items':
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, aval INTEGER NOT NULL, estId INTEGER NOT NULL, bndId INTEGER NOT NULL, modId INTEGER)'
 	}
 }
 
@@ -245,5 +254,7 @@ const createUpdateSql = (item, tab) => {
 			return tempStr += 'name = "'+item.name+'", bndId = '+item.bndId+' WHERE id = '+item.id
 		case 'EStations':
 			return tempStr += 'name = "'+item.name+'", lat = '+item.lat+', long = '+item.long+' WHERE id = '+item.id
+		case 'Items':
+			return tempStr += 'aval = '+item.aval+', estId = '+item.estId+', bndId = '+item.bndId+', modId = '+item.modId+' WHERE id = '+item.id
 	}
 }
