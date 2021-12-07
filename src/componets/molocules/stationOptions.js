@@ -1,0 +1,1 @@
+export { ChooseStation } from '../../../src/componets/atoms/mapStation'

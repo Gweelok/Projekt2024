@@ -117,7 +117,50 @@ const vacuums = async () => {
 		(txObj,error) => console.log("db truncation error: " + error))
 }
 
+export const getClosestEst = async (lat, long,getTest) => {
+	const latlow = lat-0.2
+	const lathih = lat+0.2
+	const longlow = long-0.2
+	const longhih = long+0.2
+	await db.transaction(tx => {
+			tx.executeSql(
+				'SELECT * FROM EStations WHERE lat BETWEEN '+latlow+' AND '+lathih+' AND long BETWEEN '+longlow+' AND '+longhih+' LIMIT 5',
+				null,
+				(_, { rows: { _array } }) => {
+				getTest(_array)
+			})},
+		(txObj,error) => {console.log("db closest est error: " + error)},
+		(txObj, results) => {console.log("db closest est success: "+results)},
+	)
+}
 
+export const getDataGroup = async (theid,setData,tempTable = table) => {
+	await db.transaction(tx => {
+		tx.executeSql(
+				"SELECT * FROM "+tempTable+" WHERE "+theid,
+				null,
+				(_, { rows: { _array } }) => {
+					setData(_array)
+				})
+			}
+		),
+	(txObj, error) => {console.log('DB group Specific Error: ', error)},
+	(txObj, success) => {console.log('group data gotten', success)}
+}
+
+export const getSpecificItem = async (tempTable = table, setData,id) => {
+	await db.transaction(tx => {
+		tx.executeSql(
+				specificItemSql(tempTable,id),
+				null,
+				(_, { rows: { _array } }) => {
+				setData(_array)
+			})
+		},
+		(txObj, error) => {console.log('DB Specific Item Error: ', error)},
+		(_txObj, success) => {console.log('specific item gotten', success)}
+	)
+}
 
 
 // main object that'll be used
@@ -177,7 +220,6 @@ async function applyExtraData (data) {
 
 
 
-
 //#############			For creating sql strings 		#################
 const createInsertSql = (props, tab) => {
 	var tempStr = 'INSERT INTO ' 
@@ -214,9 +256,9 @@ const createInsertSql = (props, tab) => {
 			)
 			return tempStr.slice(0,-1)
 		case 'Items':
-			tempStr += tab + ' (id, aval, estId, bndId, modId) VALUES '
+			tempStr += tab + ' (id, aval, estId, catId, proId, bndId, modId) VALUES '
 			props.forEach(prop =>{
-				tempStr += '('+prop.id+','+prop.aval+','+prop.estId+','+prop.bndId+','+prop.modId+'),' 
+				tempStr += '('+prop.id+','+prop.aval+','+prop.estId+','+prop.catId+','+prop.proId+','+prop.bndId+','+prop.modId+'),' 
 				console.log(prop)}
 			)
 			return tempStr.slice(0,-1)
@@ -237,7 +279,7 @@ const createTableSql = (tab) => {
 		case 'EStations':
 			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name TEXT NOT NULL, lat DECIMAL(15,10) NOT NULL, long DECIMAL(15,10) NOT NULL)'
 		case 'Items':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, aval INTEGER NOT NULL, estId INTEGER NOT NULL, bndId INTEGER NOT NULL, modId INTEGER)'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, aval INTEGER NOT NULL, estId INTEGER NOT NULL, catId INTEGER NOT NULL, proId INTEGER NOT NULL, bndId INTEGER, modId INTEGER)'
 	}
 }
 
@@ -255,6 +297,22 @@ const createUpdateSql = (item, tab) => {
 		case 'EStations':
 			return tempStr += 'name = "'+item.name+'", lat = '+item.lat+', long = '+item.long+' WHERE id = '+item.id
 		case 'Items':
-			return tempStr += 'aval = '+item.aval+', estId = '+item.estId+', bndId = '+item.bndId+', modId = '+item.modId+' WHERE id = '+item.id
+			return tempStr += 'aval = '+item.aval+', estId = '+item.estId+', catId = '+item.catId+', proId = '+item.proId+', bndId = '+item.bndId+', modId = '+item.modId+' WHERE id = '+item.id
 	}
+}
+
+const specificItemSql = (table,id) => {
+	var strItem = "SELECT cat.id, cat.name AS CatName, pro.id, pro.name AS ProName, pro.catId"
+	switch (table) {
+		case 'Products':
+			strItem += " FROM Catagories AS cat JOIN Products AS pro ON cat.id = pro.catId WHERE pro.id = "+id
+			break
+		case 'Brands':
+			strItem += ", bnd.id AS bndId, bnd.name AS bndName FROM Catagories AS cat LEFT JOIN Products AS pro ON cat.id = pro.catId LEFT JOIN Brands AS bnd ON pro.id = bnd.proId WHERE bnd.id = "+id
+			break
+		case 'Models':
+			strItem += ", bnd.id AS bndId, bnd.name AS bndName, mod.id AS modId, mod.name AS modName FROM Catagories AS cat LEFT JOIN Products AS pro ON cat.id = pro.catId LEFT JOIN Brands AS bnd ON pro.id = bnd.proId LEFT JOIN Models AS mod ON bnd.id = mod.bndId WHERE mod.id = "+id
+			break
+	}
+	return strItem
 }

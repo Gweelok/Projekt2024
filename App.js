@@ -2,28 +2,29 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Location from 'expo-location'
 
 // sqlite database
-import { database, createTestData } from './src/utils/Database'
+import { database, createTestData, getSpecificItem } from './src/utils/Database'
 
 // import from files
-import { Map } from './src/utils/Map'
+import { Render } from './RenderData'
+import { navStyle } from './Stylesheet'
+import { ChooseStation } from './src/componets/molocules/stationOptions'
+import { LandingPage } from './src/componets/atoms/landingPage'
+import { RegisterItem } from './src/componets/atoms/registerItem'
+import { ChooseCatagories,ChooseProducts, ChooseModels, ChooseBrands } from './src/componets/molocules/registerOptions'
 
-
-//const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands' ]
 
 console.log('start');
 const Stack = createNativeStackNavigator()
-var status = 'Waiting...'
 
 // Main function that everything runs in
 export default function App() {
 	const [data, setData] = useState([])
-	const [errorMsg, setErrorMsg] = useState(null);
-/*
-	const [place, setPlace] = useState({choice: "", id: 2, name: "Dummy 2", lat: 57.121, long: 53.887})
+	const [place, setPlace] = useState({choice: "data", id: 2, name: "Dummy 2", lat: 57.121, long: 53.887})
 	const getPlace = useMemo (() => createPlace(place),[place])
+
+//	useLocation('status',setErrorMsg)
 
 	function createPlace(item) {
 		console.log('place created');
@@ -43,21 +44,11 @@ export default function App() {
 		console.log(temp);
 		return temp
 	}
-*/
+
 	useEffect( () => {
 		console.log('useEffect start');
-//		Rewuest permission to get location
-		(async () => {
-			let { status } = await Location.requestForegroundPermissionsAsync();
-			if (status !== 'granted') {
-				setErrorMsg('Permission to access location was denied');
-				return;
-			} else {
-				setErrorMsg(status)
-			}} 
-		)()
-/*
-		database.setTable('Models')
+		const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands', 'Items' ]
+		database.setTable(tableList[5])
 		try {
 			database.getTable()
 			switch (getPlace.choice) {
@@ -106,91 +97,89 @@ export default function App() {
 			console.warn(error)
 		}
 	},[getPlace])
-*/
-	},[])
 
-	
-	if (errorMsg === 'granted') {
-		status = errorMsg
-	}
-	console.log(status);
+//	},[])
+
 
 	//setPlace()
 //			<Render data = {data}/>
+
 	return (
-		<NavigationContainer>
+		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">
 				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview' }} />
-				<Stack.Screen name="Details" component={DetailsScreen} />
+				<Stack.Screen name="Stations" component={StationsScreen} />
+				<Stack.Screen name="Thanks" component={ThanksScreen}/>
+				<Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Catagories' }} />
+				<Stack.Screen name="Pro" component={ProScreen} options={{ title: 'Products' }} />
+				<Stack.Screen name="Bnd" component={BndScreen} options={{ title: 'Brands' }} />
+				<Stack.Screen name="Mod" component={ModScreen} options={{ title: 'Models' }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
+
+
+	//Screens
+	// eslint-disable-next-line react/prop-types
+	function LandingScreen({ navigation }) {
+		return (
+			<SafeAreaView style={{ flex: 1 }}>
+				<LandingPage/>
+				<Render data = {data}/>
+				<RegisterItem navigation = {navigation} navplace={'Cat'}/>
+			</SafeAreaView>
+		)
+	}
+	
+	// eslint-disable-next-line react/prop-types
+	function StationsScreen({navigation,route}) {
+		return (
+			<View style={{ flex: 1, alignItems: 'center' }}>
+				<ChooseStation places={data} navigation={navigation} route={route}/>
+			</View>
+		);
+	}
+
+	function CatScreen({navigation}){
+		return (
+			<SafeAreaView style={{flex:1}}>
+				<ChooseCatagories navigation = {navigation}/>
+			</SafeAreaView>
+		)
+	}
+
+	function ProScreen({navigation,route}){
+		return (
+			<SafeAreaView style={{flex:1}}>
+				<ChooseProducts route={route} navigation = {navigation}/>
+			</SafeAreaView>
+		)
+	}
+
+	function BndScreen({navigation,route}){
+		return (
+			<SafeAreaView style={{flex:1}}>
+				<ChooseBrands route={route} navigation = {navigation}/>
+			</SafeAreaView>
+		)
+	}
+
+	function ModScreen({navigation,route}){
+		return (
+			<SafeAreaView style={{flex:1}}>
+				<ChooseModels route = {route} navigation = {navigation}/>
+			</SafeAreaView>
+		)
+	}
+
+	function ThanksScreen({navigation,route}) {
+		const {name,distance} = route.params
+		return (
+			<View style={{flex:1,alignItems: 'center',justifyContent: 'center'}}>
+				<Text>thanks {name}</Text>
+				<Text>Distance between you and station: {distance}</Text>
+			</View>
+		)
+	}
 }
-
-
-//Screens
-function LandingScreen({ navigation }) {
-	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<LandingPage/>
-			<RegisterItem navigation = {navigation}/>
-		</SafeAreaView>
-	)
-}
-
-function DetailsScreen({route,navigation}) {
-	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Map route= {route}/>
-		</View>
-	);
-}
-
-
-
-// Components
-
-// Donia code
-// Used the "Dashboard" and "ItemButton" function created by Sebastian to create a identical "LandingPage" page and "RegisterItem" button.
-const LandingPage = () => {
-	return(
-		<View style={styles.container}>
-			<ScrollView>
-				<Text>
-					LandingPage 
-				</Text>
-			</ScrollView>
-		</View>
-	);
-};
-
-const RegisterItem = ( {navigation} ) => {
-	const [isButton, isSetButton] = useState(true);
-	return(
-		<View style ={styles.footer}>
-			<Button
-				color="#4cac6a"
-				onPress={() => {
-					navigation.navigate('Details', { status: status } )
-					isSetButton(!isButton);				
-					// If button is pressed: Redirect to "registrering item"
-				}}
-				
-				title={isButton ? "+ \nRegister item" : "\nRegistering item"}
-			/>
-		</View>
-	);
-};
-
-//		backgroundColor: '#fff',
-// Stylesheet like CSS
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		marginTop :20,
-		alignItems: 'center',
-		justifyContent: 'center',
-	}, footer: {
-		height: 50,
-	},
-});
+//				<ChooStation/>

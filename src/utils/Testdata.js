@@ -10,6 +10,16 @@ export const EStations = [
 		name: 'Enghavevej',
 		lat: 55.661750, 
 		long: 12.540685
+	},{
+		id: 3,
+		name: 'Enghavevej2',
+		lat: 55.651750, 
+		long: 12.550685
+	},{
+		id: 4,
+		name: 'You are here',
+		lat: 55.6619942,
+		long: 12.5407234
 	}
 ]
 
@@ -18,6 +28,8 @@ export const Items = [
 		id: 1,
 		aval: 1,
 		estId: 1,
+		catId: 1,
+		proId: 1,
 		bndId: 1,
 		modId: 1
 	},
@@ -25,6 +37,8 @@ export const Items = [
 		id: 2,
 		aval: 1,
 		estId: 1,
+		catId: 3,
+		proId: 2,
 		bndId: 5,
 		modId: 2
 	},
@@ -32,7 +46,9 @@ export const Items = [
 		id: 3,
 		aval: 0,
 		estId: 2,
-		bndId: 400,
+		catId: 4,
+		proId: 1,
+		bndId: null,
 		modId: null
 	}
 ]
@@ -40,7 +56,7 @@ export const Items = [
 export const Catagories = [
 	{
 		id: 1,
-		name: 'Hi-fi eqipment'
+		name: 'Hi-fi equipment'
 	},
 	{
 		id: 2,
