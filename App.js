@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, Button, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // sqlite database
-import { database, createTestData, getSpecificItem } from './src/utils/Database'
+import { database, createTestData } from './src/utils/Database'
 
 // import from files
 import { Render } from './RenderData'
@@ -108,12 +108,12 @@ export default function App() {
 		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">
 				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview' }} />
-				<Stack.Screen name="Stations" component={StationsScreen} />
-				<Stack.Screen name="Thanks" component={ThanksScreen}/>
 				<Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Catagories' }} />
 				<Stack.Screen name="Pro" component={ProScreen} options={{ title: 'Products' }} />
 				<Stack.Screen name="Bnd" component={BndScreen} options={{ title: 'Brands' }} />
 				<Stack.Screen name="Mod" component={ModScreen} options={{ title: 'Models' }} />
+				<Stack.Screen name="Stations" component={StationsScreen} />
+				<Stack.Screen name="Thanks" component={ThanksScreen} options={{ headerShown: false }} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
@@ -135,7 +135,7 @@ export default function App() {
 	function StationsScreen({navigation,route}) {
 		return (
 			<View style={{ flex: 1, alignItems: 'center' }}>
-				<ChooseStation places={data} navigation={navigation} route={route}/>
+				<ChooseStation navigation={navigation} route={route}/>
 			</View>
 		);
 	}
@@ -173,11 +173,12 @@ export default function App() {
 	}
 
 	function ThanksScreen({navigation,route}) {
-		const {name,distance} = route.params
+		const {estId} = route.params
+		setTimeout(()=>navigation.navigate('Home'), 3000);
 		return (
 			<View style={{flex:1,alignItems: 'center',justifyContent: 'center'}}>
-				<Text>thanks {name}</Text>
-				<Text>Distance between you and station: {distance}</Text>
+				<Text style={{fontSize: 23}}>Thank You</Text>
+				<Text style={{fontSize: 15}}>You have registered an item on Station: {estId}</Text>
 			</View>
 		)
 	}

@@ -302,16 +302,16 @@ const createUpdateSql = (item, tab) => {
 }
 
 const specificItemSql = (table,id) => {
-	var strItem = "SELECT cat.id, cat.name AS CatName, pro.id, pro.name AS ProName, pro.catId"
+	var strItem = "SELECT cat.id AS catId, cat.name AS CatName, pro.id AS proId, pro.name AS ProName"
 	switch (table) {
 		case 'Products':
 			strItem += " FROM Catagories AS cat JOIN Products AS pro ON cat.id = pro.catId WHERE pro.id = "+id
 			break
 		case 'Brands':
-			strItem += ", bnd.id AS bndId, bnd.name AS bndName FROM Catagories AS cat LEFT JOIN Products AS pro ON cat.id = pro.catId LEFT JOIN Brands AS bnd ON pro.id = bnd.proId WHERE bnd.id = "+id
+			strItem += ", bnd.id AS bndId, bnd.name AS BndName FROM Catagories AS cat LEFT JOIN Products AS pro ON cat.id = pro.catId LEFT JOIN Brands AS bnd ON pro.id = bnd.proId WHERE bnd.id = "+id
 			break
 		case 'Models':
-			strItem += ", bnd.id AS bndId, bnd.name AS bndName, mod.id AS modId, mod.name AS modName FROM Catagories AS cat LEFT JOIN Products AS pro ON cat.id = pro.catId LEFT JOIN Brands AS bnd ON pro.id = bnd.proId LEFT JOIN Models AS mod ON bnd.id = mod.bndId WHERE mod.id = "+id
+			strItem += ", bnd.id AS bndId, bnd.name AS BndName, mod.id AS modId, mod.name AS ModName FROM Catagories AS cat LEFT JOIN Products AS pro ON cat.id = pro.catId LEFT JOIN Brands AS bnd ON pro.id = bnd.proId LEFT JOIN Models AS mod ON bnd.id = mod.bndId WHERE mod.id = "+id
 			break
 	}
 	return strItem

@@ -19,7 +19,7 @@ export const RegisterItem = ( {navigation, navplace,id = tempid, name = tempname
 					// If button is pressed: Redirect to "registrering item"
 				}}
 				
-				title={"+ \nRegister item"}
+				title={navplace == 'Stations' ? "Next":"+ \nRegister item"}
 			/>
 		</View>
 	);

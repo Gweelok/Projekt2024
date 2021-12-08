@@ -115,9 +115,11 @@ export const RegRender = ({data,navigation,db,rid}) => {
 				style={styles.renderRegister} 
 				onPress= {() => {
 					console.log(navplace)
-					if (navplace == 'Stations') 
-						{ navigation.navigate('Stations', {id:id, name:db})}
-					navigation.navigate(navplace, {reg:id})
+					if (navplace == 'Stations') {
+						navigation.navigate('Stations', {id: id, name: db}) 
+					} else {
+						navigation.navigate(navplace, {reg:id})
+					}
 				}
 			}>
 				<Text style={{fontSize: 18,marginLeft: "10%"}}>{name}</Text>

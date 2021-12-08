@@ -3,16 +3,17 @@ import { TouchableOpacity, Text, View, FlatList } from 'react-native';
 import * as Location from 'expo-location'
 
 import { styles } from '../../../Stylesheet'
-import { getClosestEst, database } from '../../../src/utils/Database'
+import { getClosestEst, getSpecificItem, database } from '../../../src/utils/Database'
 import MapView, { Marker } from 'react-native-maps'
 
 
 
-export const ChooseStation = ({places,navigation,route}) => {
+export const ChooseStation = ({navigation,route}) => {
 	const [dist,setDist] = useState([{ distance: '?', name: '',id:9 }])
 	const [selected,setSelected] = useState(0)
+	const [item,setItem] = useState(null)
 	const [location,setLocation] = useState({latitude: 0.000000, longitude: 0.000000, latitudeDelta: 0.01, longitudeDelta: 0.01});
-	const MARKER_DATA = tempdata.concat(places)
+	const [MARKER_DATA,set_MARKER_DATA] = useState(tempdata)
 	const { id, name } = route.params
 	
 	useEffect( () => {
@@ -41,6 +42,9 @@ export const ChooseStation = ({places,navigation,route}) => {
 			// calculate the result
 //			console.log(c*r);
 			let sorteddata = tempdata.sort((a,b) => { return a.distance - b.distance})
+
+			getSpecificItem(name,setItem,id)
+
 			setSelected(sorteddata[0].id)
 			setDist(sorteddata)
 			setLocation({latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01})
@@ -64,11 +68,12 @@ export const ChooseStation = ({places,navigation,route}) => {
 //			let loc = await Location.getLastKnownPositionAsync({});
 			let loc = await Location.getCurrentPositionAsync({});
 			setCurrLocation(loc);
+			database.getData(set_MARKER_DATA,'EStations')
 			getClosestEst(loc.coords.latitude,loc.coords.longitude,setData)
 		})();
 		const timer = setTimeout(() => domath(data,templocation), 1000);
 		return () => clearTimeout(timer);
-	},[])
+	},[id, name])
 
 
 	function renderItem ({item}) {
@@ -100,7 +105,7 @@ export const ChooseStation = ({places,navigation,route}) => {
 				coordinate={{
 					latitude: marker.lat,
 					longitude: marker.long}}
-					onPress={ () => { } }
+					onPress={ () => { setSelected(marker.id) } }
 /*			
 //					{getClosestEst(e.nativeEvent.coordinate.latitude,e.nativeEvent.coordinate.longitude,getTest)}
 //					{console.log(e.nativeEvent)}
@@ -121,7 +126,9 @@ export const ChooseStation = ({places,navigation,route}) => {
 				style={styles.chooseStyle}
 				onPress={() => {
 					// eslint-disable-next-line react/prop-types
-					navigation.navigate('Thanks',{estId: selected,})			
+					// Item (id , aval , estId , catId , proId , bndId , modId )
+					database.insertData({id: Math.floor(Math.random() * (10000 - 1 + 1) + 1), aval: 1, estId: selected, catId: item[0].catId, proId: item[0].proId, bndId: typeof item[0].bndId !== 'undefined' ? item[0].bndId : null, modId: typeof item[0].modId !== 'undefined' ? item[0].modId : null},'Items')
+					setTimeout(() => navigation.navigate('Thanks',{estId: selected,}),2000)			
 					// If button is pressed: Redirect to "registrering item"
 				}}
 				>
