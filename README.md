@@ -235,3 +235,16 @@ When that is done, if you're done with the branch use the command, to delete you
 git branch -d <name here>
 ```
 or in source control. And that should be it, if there's any merge conflicts then it should be easy to see what to keep and what not to keep if using vscode.
+					
+# Troubleshooting 
+
+On mac when running application (using expo start), you might recieve the error: 
+```
+Error: EMFILE: too many open files, watch
+```
+To solve this, you need to install watchman:
+```
+brew update
+brew install watchman
+```
+					
