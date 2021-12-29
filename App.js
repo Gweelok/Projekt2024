@@ -60,7 +60,7 @@ export default function App() {
 					database.getData(setData)
 					break;
 				case ("data"):
-					if (getPlace.length < 1 && test == 1) {
+					if (test == 1) {
 						console.log('test data inserted from data section')
 						test = 0
 						createTestData()
