@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+
 // sqlite database
 import { database, createTestData } from './src/utils/Database'
 
@@ -13,10 +14,11 @@ import { ChooseStation } from './src/componets/molocules/stationOptions'
 import { LandingPage } from './src/componets/atoms/landingPage'
 import { RegisterItem } from './src/componets/atoms/registerItem'
 import { ChooseCatagories,ChooseProducts, ChooseModels, ChooseBrands } from './src/componets/molocules/registerOptions'
-
+import { DashboardScreen} from './src/screens/dashboardScreen'
 
 console.log('start');
 const Stack = createNativeStackNavigator()
+var test = 1
 
 // Main function that everything runs in
 export default function App() {
@@ -58,6 +60,11 @@ export default function App() {
 					database.getData(setData)
 					break;
 				case ("data"):
+					if (getPlace.length < 1 && test == 1) {
+						console.log('test data inserted from data section')
+						test = 0
+						createTestData()
+					}
 					database.getData(setData)
 					break;
 				case ("specific"):
@@ -108,6 +115,7 @@ export default function App() {
 		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">
 				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview' }} />
+				<Stack.Screen name="Dash" component={DashboardScreen} options={{ title: 'Dashboard' }} />
 				<Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Catagories' }} />
 				<Stack.Screen name="Pro" component={ProScreen} options={{ title: 'Products' }} />
 				<Stack.Screen name="Bnd" component={BndScreen} options={{ title: 'Brands' }} />
@@ -123,8 +131,8 @@ export default function App() {
 	// eslint-disable-next-line react/prop-types
 	function LandingScreen({ navigation }) {
 		return (
-			<SafeAreaView style={{ flex: 1 }}>
-				<LandingPage/>
+			<SafeAreaView style={{ flex: 1, backgroundColor: 'Blue' }}>
+				<LandingPage navigation = {navigation}/>
 				<Render data = {data}/>
 				<RegisterItem navigation = {navigation} navplace={'Cat'}/>
 			</SafeAreaView>
@@ -134,9 +142,9 @@ export default function App() {
 	// eslint-disable-next-line react/prop-types
 	function StationsScreen({navigation,route}) {
 		return (
-			<View style={{ flex: 1, alignItems: 'center' }}>
+			<SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
 				<ChooseStation navigation={navigation} route={route}/>
-			</View>
+			</SafeAreaView>
 		);
 	}
 
@@ -176,10 +184,10 @@ export default function App() {
 		const {estId} = route.params
 		setTimeout(()=>navigation.navigate('Home'), 3000);
 		return (
-			<View style={{flex:1,alignItems: 'center',justifyContent: 'center'}}>
+			<SafeAreaView style={{flex:1,alignItems: 'center',justifyContent: 'center'}}>
 				<Text style={{fontSize: 23}}>Thank You</Text>
 				<Text style={{fontSize: 15}}>You have registered an item on Station: {estId}</Text>
-			</View>
+			</SafeAreaView>
 		)
 	}
 }
