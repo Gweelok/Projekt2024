@@ -18,11 +18,11 @@ import { DashboardScreen} from './src/screens/dashboardScreen'
 
 console.log('start');
 const Stack = createNativeStackNavigator()
-var test = 1
 
 // Main function that everything runs in
 export default function App() {
 	const [data, setData] = useState([])
+	const [test,setTest] = useState(1)
 	const [place, setPlace] = useState({choice: "data", id: 2, name: "Dummy 2", lat: 57.121, long: 53.887})
 	const getPlace = useMemo (() => createPlace(place),[place])
 
@@ -60,11 +60,6 @@ export default function App() {
 					database.getData(setData)
 					break;
 				case ("data"):
-					if (test == 1) {
-						console.log('test data inserted from data section')
-						test = 0
-						createTestData()
-					}
 					database.getData(setData)
 					break;
 				case ("specific"):
@@ -79,15 +74,13 @@ export default function App() {
 					database.getData(setData)
 					break;
 				// utility functions
-				case ("table"):
-					database.getTable()
-					break
 				case ("drop"):
 					database.dropData()
-					setData([])
+					database.getData(setData)
 					break;
 				case ("dropall"):
 					database.dropAll()
+					database.getData(setData)
 					break
 				case ("vacuum"):
 					database.vacuums()
@@ -96,14 +89,21 @@ export default function App() {
 				//###### only run once ######
 				case ("testdata"):
 					createTestData()
+					database.getData(setData)
 					break
 				default:
 					console.log('error: not a possible action');
 			}
+
+			if (test == 1) {
+				console.log('test data inserted from data section')
+				setTest(0)
+				createTestData()
+			}
 		} catch (error) {
 			console.warn(error)
 		}
-	},[getPlace])
+	},[getPlace, test])
 
 //	},[])
 
