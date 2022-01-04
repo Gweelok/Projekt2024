@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -22,7 +22,7 @@ const Stack = createNativeStackNavigator()
 // Main function that everything runs in
 export default function App() {
 	const [data, setData] = useState([])
-	const [test,setTest] = useState(1)
+	const [test, setTest] = useState(0)
 	const [place, setPlace] = useState({choice: "data", id: 2, name: "Dummy 2", lat: 57.121, long: 53.887})
 	const getPlace = useMemo (() => createPlace(place),[place])
 
@@ -94,16 +94,10 @@ export default function App() {
 				default:
 					console.log('error: not a possible action');
 			}
-
-			if (test == 1) {
-				console.log('test data inserted from data section')
-				setTest(0)
-				createTestData()
-			}
 		} catch (error) {
 			console.warn(error)
 		}
-	},[getPlace, test])
+	},[getPlace])
 
 //	},[])
 
@@ -114,7 +108,11 @@ export default function App() {
 	return (
 		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">
-				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview' }} />
+				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview', headerRight:() => ( <Button
+						onPress={() => {test ? setPlace({choice: "dropall"}) : setPlace({choice: "testdata"}); setTest(!test)}}
+						title={test ? "Done" : "TEST!"}
+						color="#00cc00"
+						/>) }} />
 				<Stack.Screen name="Dash" component={DashboardScreen} options={{ title: 'Dashboard' }} />
 				<Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Catagories' }} />
 				<Stack.Screen name="Pro" component={ProScreen} options={{ title: 'Products' }} />

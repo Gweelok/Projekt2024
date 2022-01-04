@@ -710,12 +710,12 @@ export const Brands = [
 	},
 	{
 		id: 99,
-		proId: 27,
+		proId: 26,
 		name: 'Xbox'
 	},
 	{
 		id: 100,
-		proId: 28,
+		proId: 26,
 		name: 'PlayStation'
 	},
 ]
