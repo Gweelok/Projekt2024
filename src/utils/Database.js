@@ -186,15 +186,17 @@ export const database = {
 export const createTestData = async () => {
 	setXlsx(applyExtraData)
 }
-
+ 
 async function applyExtraData (data) {
+	let mobileBrands = Array.from(new Set(data.map(item => item.LITE_1)))
+
+	for (let i = 0; i < mobileBrands.length; i++) {
+		//products: smartphone 18
+		Brands.push({id: Brands.length+1, proId: 18, name: mobileBrands[i]})
+	}
+
 	for (let i = 0; i < data.length; i++) {
-	//products: smartphone 18
-		let knowBrand = Brands.findIndex(prop => prop.name ===data[i].LITE_1)
-		if (knowBrand == -1) {
-			Brands.push({id: Brands.length+1, proId: 18, name: data[i].LITE_1})
-			knowBrand = Brands.length	
-		}
+		let knowBrand = Brands.findIndex(prop => prop.name ===data[i].LITE_1 && prop.proId === 18)
 		Models.push({id: Models.length+1, bndId: knowBrand+1, name: data[i].LITE_2})
 	}
 

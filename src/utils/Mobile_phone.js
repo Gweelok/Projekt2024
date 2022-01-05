@@ -57,12 +57,6 @@ export const setXlsx = async (setData) => {
 	}
 }
 
-export const getBrands = props => {
-	const unique = [...new Set(props.map(item => item.LITE_1))]
-	console.log(unique);
-	return unique
-}
-
 
 // eslint-disable-next-line react/prop-types
 export const RenderMobile = ({data}) => {
