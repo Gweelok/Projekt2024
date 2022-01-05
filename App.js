@@ -110,8 +110,8 @@ export default function App() {
 			<Stack.Navigator initialRouteName="Home">
 				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview', headerRight:() => ( <Button
 						onPress={() => {test ? setPlace({choice: "dropall"}) : setPlace({choice: "testdata"}); setTest(!test)}}
-						title={test ? "Done" : "TEST!"}
-						color="#00cc00"
+						title={test ? "Drop" : "TEST!"}
+						color="#4cad6a"
 						/>) }} />
 				<Stack.Screen name="Dash" component={DashboardScreen} options={{ title: 'Dashboard' }} />
 				<Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Catagories' }} />
