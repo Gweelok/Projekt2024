@@ -12,14 +12,19 @@ export const EStations = [
 		long: 12.540685
 	},{
 		id: 3,
-		name: 'Enghavevej2',
-		lat: 55.651750, 
-		long: 12.550685
+		name: 'Jaegervej',
+		lat: 55.591917, 
+		long: 12.660587
 	},{
 		id: 4,
-		name: 'You are here',
-		lat: 55.6619942,
-		long: 12.5407234
+		name: 'Kloevervej',
+		lat: 55.763909, 
+		long: 12.493574
+	}, {
+		id: 5,
+		name: 'Hvidovrevej',
+		lat: 55.640954, 
+		long: 12.477766
 	}
 ]
 

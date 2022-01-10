@@ -49,6 +49,24 @@ export const ChooseStation = ({navigation,route}) => {
 			setDist(sorteddata)
 			setLocation({latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01})
 		}
+		function domMathNoPermission () {
+			//setSelected(data[0].id)
+			setSelected(999)
+			data.sort((a, b) => {
+				let fa = a.name.toLowerCase(), fb = b.name.toLowerCase();
+				
+				if (fa < fb) {
+					return -1;
+				}
+				if (fa > fb) {
+					return 1;
+				}
+				return 0;
+			});
+			setDist(data)
+			set_MARKER_DATA(data)
+			setLocation({latitude: 56.242319, longitude: 10.559465, latitudeDelta: 3.5, longitudeDelta: 3.5})
+		}
 
 		function setCurrLocation(prop) {
 			templocation = prop
@@ -62,17 +80,20 @@ export const ChooseStation = ({navigation,route}) => {
 			let { status } = await Location.requestForegroundPermissionsAsync();
 			if (status !== 'granted') {
 				console.log('Permission to access location was denied');
-				return;
-			}
-			console.log('status good');
-//			let loc = await Location.getLastKnownPositionAsync({});
-			let loc = await Location.getCurrentPositionAsync({});
-			setCurrLocation(loc);
-			database.getData(set_MARKER_DATA,'EStations')
-			getClosestEst(loc.coords.latitude,loc.coords.longitude,setData)
-		})();
+				database.getData(setData,'EStations')
+		const timer = setTimeout(() => domMathNoPermission(), 1000);
+		return () => clearTimeout(timer);
+			} else {
+				console.log('status good');
+//				let loc = await Location.getLastKnownPositionAsync({});
+				let loc = await Location.getCurrentPositionAsync({});
+				setCurrLocation(loc);
+				database.getData(set_MARKER_DATA,'EStations')
+				getClosestEst(loc.coords.latitude,loc.coords.longitude,setData)
 		const timer = setTimeout(() => domath(data,templocation), 1000);
 		return () => clearTimeout(timer);
+			}
+		})();
 	},[id, name])
 
 
