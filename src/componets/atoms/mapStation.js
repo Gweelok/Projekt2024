@@ -183,7 +183,9 @@ export const ChooseStation = ({navigation,route}) => {
 	)
 }
 
-//	Directions API, that we'll test later on
+//	Directions API, from google api
+//	Hasn't been implemented as it's a pay-to-use API, and therefore not suitable for prototype testing
+//	code should work when API is paid for
 	/*	<MapViewDirections
 			origin={coordinates[1]}
 			destination={coordinates[0]}
