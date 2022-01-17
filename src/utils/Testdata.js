@@ -1,30 +1,40 @@
 export const EStations = [
 	{
 		id: 1,
-		name: 'Faxe Ladeplads',
+		name: 'Toldbodvej',
+		city: 'Faxe Ladeplads',
 		lat: 55.216944, 
-		long: 12.161667
+		long: 12.161667,
+		country: 'DK'
 	},
 	{
 		id: 2,
 		name: 'Enghavevej',
+		city: 'København',
 		lat: 55.661750, 
-		long: 12.540685
+		long: 12.540685,
+		country: 'DK'
 	},{
 		id: 3,
 		name: 'Jaegervej',
+		city: 'Dragoer',
 		lat: 55.591917, 
-		long: 12.660587
+		long: 12.660587,
+		country: 'DK'
 	},{
 		id: 4,
 		name: 'Kloevervej',
+		city: 'Kongens Lyngby',
 		lat: 55.763909, 
-		long: 12.493574
+		long: 12.493574,
+		country: 'DK'
 	}, {
 		id: 5,
 		name: 'Hvidovrevej',
+		city: 'Hvidovre',
 		lat: 55.640954, 
-		long: 12.477766
+		long: 12.477766,
+		country: 'DK'
 	}
 ]
 

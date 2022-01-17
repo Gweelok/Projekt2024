@@ -1,14 +1,14 @@
 import React from 'react';
 import { TouchableOpacity ,FlatList, Text, View } from 'react-native';
 
-import { styles } from './Stylesheet'
+import { styles } from '../../src/styles/Stylesheet'
 
 
 //				Render of database
 // eslint-disable-next-line react/prop-types
 export const Render = ({data}) => {
 	// eslint-disable-next-line react/prop-types
-	const Item = ({ name, id, lat, long, catId, modId, bndId, estId, proId, aval }) => {
+	const Item = ({ name, id, lat, long, catId, modId, bndId, estId, proId, country, city, aval }) => {
 		//console.log(description + " "+ title);
 		if (estId != null){
 			return (
@@ -48,6 +48,7 @@ export const Render = ({data}) => {
 				<View>
 					<Text>Name: {name}, Id: {id}</Text>
 					<Text>Latitude: {lat}, Longitude: {long}</Text>
+					<Text>Country: {country}, City: {city}</Text>
 					<Text/>
 				</View>
 			)
@@ -72,6 +73,8 @@ export const Render = ({data}) => {
 				bndId = {item.bndId || null}
 				estId = {item.estId || null}
 				proId = {item.proId || null}
+				country = {item.country}
+				city = {item.city}
 				aval = {item.aval}
 		/>
 	);

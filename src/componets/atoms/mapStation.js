@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from 'react';
-import { TouchableOpacity, Text, View, FlatList } from 'react-native';
+import { TouchableOpacity, Text, FlatList, ToastAndroid } from 'react-native';
 import * as Location from 'expo-location'
 
-import { styles } from '../../../Stylesheet'
-import { getClosestEst, getSpecificItem, database } from '../../../src/utils/Database'
+import { styles } from '../../../src/styles/Stylesheet'
+import { getCountryEst, getSpecificItem, database } from '../../../src/utils/Database'
 import MapView, { Marker } from 'react-native-maps'
 
 
@@ -11,9 +11,9 @@ import MapView, { Marker } from 'react-native-maps'
 export const ChooseStation = ({navigation,route}) => {
 	const [dist,setDist] = useState([{ distance: '?', name: '',id:9 }])
 	const [selected,setSelected] = useState(0)
-	const [item,setItem] = useState(null)
-	const [location,setLocation] = useState({latitude: 0.000000, longitude: 0.000000, latitudeDelta: 0.01, longitudeDelta: 0.01});
-	const [MARKER_DATA,set_MARKER_DATA] = useState(tempdata)
+	const [registeritem,setRegisterItem] = useState(null)
+	const [location,setLocation] = useState({latitude: 0.000000, longitude: 0.000000, latitudeDelta: 200.01, longitudeDelta: 200.01});
+	const [MARKER_DATA,set_MARKER_DATA] = useState([])
 	const { id, name } = route.params
 	
 	useEffect( () => {
@@ -27,31 +27,34 @@ export const ChooseStation = ({navigation,route}) => {
 						let dlon = data[i].long - location.coords.longitude;
 						let dlat = data[i].lat - location.coords.latitude;
 			//			console.log(dlat +' '+dlon)
+
 						let a = Math.pow(Math.sin(dlat / 2), 2)
 						+ Math.cos(location.coords.latitude) * Math.cos(data[i].lat)
 						* Math.pow(Math.sin(dlon / 2),2);
 			//			console.log(a);
+
 						let c = 2 * Math.asin(Math.sqrt(a));
 			//			console.log(c);
+
 						// Radius of earth in kilometers. Use 3956
 						// for miles
 						let r = 6371;
-						tempdata.push({distance: c*r, name: data[i].name, id: data[i].id})
+						tempdata.push({distance: c*r, name: data[i].name, city: data[i].city, id: data[i].id, lat: data[i].lat, long: data[i].long})
 					}
 			
 			// calculate the result
 //			console.log(c*r);
 			let sorteddata = tempdata.sort((a,b) => { return a.distance - b.distance})
 
-			getSpecificItem(name,setItem,id)
 
 			setSelected(sorteddata[0].id)
 			setDist(sorteddata)
-			setLocation({latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01})
+			setLocation({latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 1.01, longitudeDelta: 1.01})
+			getSpecificItem(name,setRegisterItem,id)
 		}
 		function domMathNoPermission () {
 			//setSelected(data[0].id)
-			setSelected(999)
+			setSelected(null)
 			data.sort((a, b) => {
 				let fa = a.name.toLowerCase(), fb = b.name.toLowerCase();
 				
@@ -66,6 +69,7 @@ export const ChooseStation = ({navigation,route}) => {
 			setDist(data)
 			set_MARKER_DATA(data)
 			setLocation({latitude: 56.242319, longitude: 10.559465, latitudeDelta: 3.5, longitudeDelta: 3.5})
+			getSpecificItem(name,setRegisterItem,id)
 		}
 
 		function setCurrLocation(prop) {
@@ -81,7 +85,7 @@ export const ChooseStation = ({navigation,route}) => {
 			if (status !== 'granted') {
 				console.log('Permission to access location was denied');
 				database.getData(setData,'EStations')
-		const timer = setTimeout(() => domMathNoPermission(), 1000);
+		const timer = setTimeout(() => domMathNoPermission(), 200);
 		return () => clearTimeout(timer);
 			} else {
 				console.log('status good');
@@ -89,8 +93,8 @@ export const ChooseStation = ({navigation,route}) => {
 				let loc = await Location.getCurrentPositionAsync({});
 				setCurrLocation(loc);
 				database.getData(set_MARKER_DATA,'EStations')
-				getClosestEst(loc.coords.latitude,loc.coords.longitude,setData)
-		const timer = setTimeout(() => domath(data,templocation), 1000);
+				getCountryEst('DK',setData)
+		const timer = setTimeout(() => domath(data,templocation), 200);
 		return () => clearTimeout(timer);
 			}
 		})();
@@ -101,10 +105,18 @@ export const ChooseStation = ({navigation,route}) => {
 		return (
 			<TouchableOpacity
 				style={selected == item.id ? styles.currEstStyle : styles.listEstStyle}
-				onPress={() => {setSelected(item.id)}}>
-				<Text>{Math.ceil(item.distance)} m</Text>
+				onPress={() => {
+						if (selected != item.id) {
+							setSelected(item.id)
+							setLocation({latitude: item.lat, longitude: item.long, latitudeDelta: 1.01, longitudeDelta: 1.01})
+						} else {
+							setSelected(null)	
+						}
+//					selected != item.id ? setSelected(item.id) : setSelected(null)
+				}}>
+				<Text>{Math.ceil(item.distance)||'NaN'} m</Text>
 				<Text style = {{fontSize: 24}}>{item.name}</Text>
-				<Text>Not implemented yet</Text>
+				<Text>{item.city}</Text>
 			</TouchableOpacity >
 		)
 	}
@@ -126,11 +138,19 @@ export const ChooseStation = ({navigation,route}) => {
 				coordinate={{
 					latitude: marker.lat,
 					longitude: marker.long}}
-					onPress={ () => { setSelected(marker.id) } }
+					onPress={ () => { 
+						if (selected != marker.id) {
+							setSelected(marker.id)
+							setLocation({latitude: marker.lat, longitude: marker.long, latitudeDelta: 1.01, longitudeDelta: 1.01})
+						} else {
+							setSelected(null)	
+						}
+//						selected != marker.id ? setSelected(marker.id) : setSelected(null) 
+					} }
 /*			
-//					{getClosestEst(e.nativeEvent.coordinate.latitude,e.nativeEvent.coordinate.longitude,getTest)}
+//					{getCountryEst(e.nativeEvent.coordinate.latitude,e.nativeEvent.coordinate.longitude,getTest)}
 //					{console.log(e.nativeEvent)}
-//					{getClosestEst(location.latitude,location.longitude)}}
+//					{getCountryEst(location.latitude,location.longitude)}}
 */				
 				/>
 			))}
@@ -148,7 +168,11 @@ export const ChooseStation = ({navigation,route}) => {
 				onPress={() => {
 					// eslint-disable-next-line react/prop-types
 					// Item (id , aval , estId , catId , proId , bndId , modId )
-					database.insertData({id: Math.floor(Math.random() * (10000 - 1 + 1) + 1), aval: 1, estId: selected, catId: item[0].catId, proId: item[0].proId, bndId: typeof item[0].bndId !== 'undefined' ? item[0].bndId : null, modId: typeof item[0].modId !== 'undefined' ? item[0].modId : null},'Items')
+					if (selected == null) { 
+						ToastAndroid.showWithGravity("Venligst vælt en station", ToastAndroid.LONG, ToastAndroid.CENTER);
+						return
+					}
+					database.insertData({id: Math.floor(Math.random() * (10000 - 1 + 1) + 1), aval: 1, estId: selected, catId: registeritem[0].catId, proId: registeritem[0].proId, bndId: typeof registeritem[0].bndId !== 'undefined' ? registeritem[0].bndId : null, modId: typeof registeritem[0].modId !== 'undefined' ? registeritem[0].modId : null},'Items')
 					setTimeout(() => navigation.navigate('Thanks',{estId: selected,}),2000)			
 					// If button is pressed: Redirect to "registrering item"
 				}}
@@ -158,8 +182,6 @@ export const ChooseStation = ({navigation,route}) => {
 		</>
 	)
 }
-
-const tempdata = []
 
 //	Directions API, that we'll test later on
 	/*	<MapViewDirections

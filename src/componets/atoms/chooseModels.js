@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { getDataGroup } from '../../../src/utils/Database'
 
 // import from files
-import { RegRender } from '../../../RenderData'
+import { RegRender } from '../../../src/utils/RenderData'
 import { RegisterItem } from './registerItem'
 
 

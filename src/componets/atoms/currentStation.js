@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Text, View } from 'react-native';
 import * as Location from 'expo-location'
 
-import { styles } from '../../../Stylesheet'
+import { styles } from '../../../src/styles/Stylesheet'
 import { getClosestEst } from '../../../src/utils/Database'
 
 

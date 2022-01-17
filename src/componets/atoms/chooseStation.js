@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { styles } from '../../../Stylesheet'
+import { styles } from '../../../src/styles/Stylesheet'
 
 
 export const ChooStation = () => {

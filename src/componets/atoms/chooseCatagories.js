@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { database } from '../../../src/utils/Database'
 
 // import from files
-import { RegRender } from '../../../RenderData'
+import { RegRender } from '../../../src/utils/RenderData'
 
 
 export const ChooseCatagories = ({navigation}) => {

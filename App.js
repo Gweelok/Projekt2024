@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 // sqlite database
-import { database, createTestData } from './src/utils/Database'
+import { dropAll, createTestData, database } from './src/utils/Database'
 
 // import from files
-import { Render } from './RenderData'
-import { navStyle } from './Stylesheet'
+import { navStyle } from './src/styles/Stylesheet'
 import { ChooseStation } from './src/componets/molocules/stationOptions'
 import { LandingPage } from './src/componets/atoms/landingPage'
 import { RegisterItem } from './src/componets/atoms/registerItem'
@@ -21,95 +20,20 @@ const Stack = createNativeStackNavigator()
 
 // Main function that everything runs in
 export default function App() {
-	const [data, setData] = useState([])
 	const [test, setTest] = useState(0)
-	const [place, setPlace] = useState({choice: "data", id: 2, name: "Dummy 2", lat: 57.121, long: 53.887})
-	const getPlace = useMemo (() => createPlace(place),[place])
-
-//	useLocation('status',setErrorMsg)
-
-	function createPlace(item) {
-		console.log('place created');
-		let temp = item
-//			Different  
-//			{
-//				choice: 
-//				name: 
-//				id: 
-//				lat: 
-//				long: 
-//				catId:
-//				modId:
-//				bndId:
-//			}
-			
-		console.log(temp);
-		return temp
-	}
-
 	useEffect( () => {
-		console.log('useEffect start');
-		const tableList = [ 'EStations', 'Catagories', 'Products', 'Models', 'Brands', 'Items' ]
-		database.setTable(tableList[5])
-		try {
-			database.getTable()
-			switch (getPlace.choice) {
-				// crud functions
-				case ("insert"):
-					database.insertData(getPlace);
-					database.getData(setData)
-					break;
-				case ("data"):
-					database.getData(setData)
-					break;
-				case ("specific"):
-					database.getSpecificData(getPlace.id,setData)
-					break
-				case ("update"):
-					database.updateData(getPlace)
-					database.getData(setData)
-					break;
-				case ("delete"):
-					database.deleteData(getPlace.id)
-					database.getData(setData)
-					break;
-				// utility functions
-				case ("drop"):
-					database.dropData()
-					database.getData(setData)
-					break;
-				case ("dropall"):
-					database.dropAll()
-					database.getData(setData)
-					break
-				case ("vacuum"):
-					database.vacuums()
-					break
-				// test data
-				//###### only run once ######
-				case ("testdata"):
-					createTestData()
-					database.getData(setData)
-					break
-				default:
-					console.log('error: not a possible action');
-			}
-		} catch (error) {
-			console.warn(error)
+		function showdata (data) {
+			console.log(data);
 		}
-	},[getPlace])
+		database.getData(showdata,'Items')
+	},[])
 
-//	},[])
-
-
-	//setPlace()
-//			<Render data = {data}/>
 
 	return (
 		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">
 				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview', headerRight:() => ( <Button
-						onPress={() => {test ? setPlace({choice: "dropall"}) : setPlace({choice: "testdata"}); setTest(!test)}}
+						onPress={() => {test ? dropAll() : createTestData(); setTest(!test)}}
 						title={test ? "Drop" : "TEST!"}
 						color="#4cad6a"
 						/>) }} />
@@ -131,7 +55,6 @@ export default function App() {
 		return (
 			<SafeAreaView style={{ flex: 1, backgroundColor: 'Blue' }}>
 				<LandingPage navigation = {navigation}/>
-				<Render data = {data}/>
 				<RegisterItem navigation = {navigation} navplace={'Cat'}/>
 			</SafeAreaView>
 		)

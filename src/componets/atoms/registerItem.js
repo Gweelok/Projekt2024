@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button, View } from 'react-native';
 
-import { styles } from '../../../Stylesheet'
+import { styles } from '../../../src/styles/Stylesheet'
 
 var tempid = null
 var tempname = null

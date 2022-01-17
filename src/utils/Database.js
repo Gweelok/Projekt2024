@@ -117,20 +117,16 @@ const vacuums = async () => {
 		(txObj,error) => console.log("db truncation error: " + error))
 }
 
-export const getClosestEst = async (lat, long,getTest) => {
-	const latlow = lat-0.2
-	const lathih = lat+0.2
-	const longlow = long-0.2
-	const longhih = long+0.2
+export const getCountryEst = async (country,getTest) => {
 	await db.transaction(tx => {
 			tx.executeSql(
-				'SELECT * FROM EStations WHERE lat BETWEEN '+latlow+' AND '+lathih+' AND long BETWEEN '+longlow+' AND '+longhih+' LIMIT 5',
-				null,
+				'SELECT * FROM EStations WHERE country = ?',
+				[country],
 				(_, { rows: { _array } }) => {
 				getTest(_array)
 			})},
-		(txObj,error) => {console.log("db closest est error: " + error)},
-		(txObj, results) => {console.log("db closest est success: "+results)},
+		(txObj,error) => {console.log("db country est error: " + error)},
+		(txObj, results) => {console.log("db country est success: "+results)},
 	)
 }
 
@@ -251,9 +247,9 @@ const createInsertSql = (props, tab) => {
 			)
 			return tempStr.slice(0,-1)
 		case 'EStations':
-			tempStr += tab + ' (id, name, lat, long) VALUES '
-			props.forEach(prop =>{
-				tempStr += '('+prop.id+',"'+prop.name+'",'+prop.lat+','+prop.long+'),' 
+			tempStr += tab + ' (id, name, city, lat, long, country) VALUES '
+			props.forEach(prop =>{ 
+				tempStr += '('+prop.id+',"'+prop.name+'", "'+prop.city+'",'+prop.lat+','+prop.long+', "'+prop.country+'"),'
 				console.log(prop)}
 			)
 			return tempStr.slice(0,-1)
@@ -279,7 +275,7 @@ const createTableSql = (tab) => {
 		case 'Models':
 			return tempStr += tab + ' (id INTEGER PRIMARY KEY, bndId INTEGER NOT NULL, name TEXT NOT NULL)'
 		case 'EStations':
-			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name TEXT NOT NULL, lat DECIMAL(15,10) NOT NULL, long DECIMAL(15,10) NOT NULL)'
+			return tempStr += tab + ' (id INTEGER PRIMARY KEY, name TEXT NOT NULL, city TEXT NOT NULL, lat DECIMAL(15,10) NOT NULL, long DECIMAL(15,10) NOT NULL, country TEXT NOT NULL)'
 		case 'Items':
 			return tempStr += tab + ' (id INTEGER PRIMARY KEY, aval INTEGER NOT NULL, estId INTEGER NOT NULL, catId INTEGER NOT NULL, proId INTEGER NOT NULL, bndId INTEGER, modId INTEGER)'
 	}
@@ -297,7 +293,7 @@ const createUpdateSql = (item, tab) => {
 		case 'Models':
 			return tempStr += 'name = "'+item.name+'", bndId = '+item.bndId+' WHERE id = '+item.id
 		case 'EStations':
-			return tempStr += 'name = "'+item.name+'", lat = '+item.lat+', long = '+item.long+' WHERE id = '+item.id
+			return tempStr += 'name = "'+item.name+'", city = "'+item.city+'", lat = '+item.lat+', long = '+item.long+', country = "'+item.country+'" WHERE id = '+item.id
 		case 'Items':
 			return tempStr += 'aval = '+item.aval+', estId = '+item.estId+', catId = '+item.catId+', proId = '+item.proId+', bndId = '+item.bndId+', modId = '+item.modId+' WHERE id = '+item.id
 	}

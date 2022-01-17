@@ -1,10 +1,9 @@
 // Donia code
 // Used the "Dashboard" and "ItemButton" function created by Sebastian to create a identical "LandingPage" page and "RegisterItem" button.
 import React from 'react'
-import { View, ScrollView, Text, Button } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
+import { View, ScrollView, Button } from 'react-native'
 
-import { styles } from '../../../Stylesheet'
+import { styles } from '../../../src/styles/Stylesheet'
 
 export const LandingPage = ({navigation}) => {
 	return(
