@@ -199,8 +199,22 @@ export const ChooseStation = ({navigation,route}) => {
 	)
 }
 
+<<<<<<< HEAD
 const getLocation = async () => {
 	const loc = await Location.getCurrentPositionAsync({})
 	return loc.coords
 }
 
+=======
+//	Directions API, from google api
+//	Hasn't been implemented as it's a pay-to-use API, and therefore not suitable for prototype testing
+//	code should work when API is paid for
+	/*	<MapViewDirections
+			origin={coordinates[1]}
+			destination={coordinates[0]}
+			strokeWidth = {2}
+			apikey={GOOGLE_MAPS_APIKEY}
+			strokeColor="hotpink"
+		/>
+	*/
+>>>>>>> 94482bba4208af9a27975b5fd94ce699e5839af7
