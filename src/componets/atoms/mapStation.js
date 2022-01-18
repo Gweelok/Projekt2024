@@ -2,11 +2,17 @@ import React, {useEffect,useState} from 'react';
 import { TouchableOpacity, Text, FlatList, ToastAndroid } from 'react-native';
 import * as Location from 'expo-location'
 
+// Directions API, that we'll test later on
+// can't be used as of now, as you'd need to pay to use this API, 
+// if this package and the code in mapview then it should just work
+
+// import MapViewDirections from 'react-native-maps-directions';
+
 import { styles } from '../../../src/styles/Stylesheet'
 import { getCountryEst, getSpecificItem, database } from '../../../src/utils/Database'
 import MapView, { Marker } from 'react-native-maps'
 
-
+const GOOGLE_MAPS_APIKEY = 'AIzaSyCa-v2pdBDYM0UxXB0qN9_Bv0UFmD9NgJo';
 
 export const ChooseStation = ({navigation,route}) => {
 	const [dist,setDist] = useState([{ distance: '?', name: '',id:9 }])
@@ -154,6 +160,16 @@ export const ChooseStation = ({navigation,route}) => {
 */				
 				/>
 			))}
+{/*	
+				<MapViewDirections
+					origin={getLocation}
+					destination={location}
+					strokeWidth = {3}
+					apikey={GOOGLE_MAPS_APIKEY}
+					strokeColor="hotpink"
+					mode="WALKING"
+				/>
+*/}
 			</MapView>
 
 			{dist && (
@@ -183,12 +199,8 @@ export const ChooseStation = ({navigation,route}) => {
 	)
 }
 
-//	Directions API, that we'll test later on
-	/*	<MapViewDirections
-			origin={coordinates[1]}
-			destination={coordinates[0]}
-			strokeWidth = {2}
-			apikey={GOOGLE_MAPS_APIKEY}
-			strokeColor="hotpink"
-		/>
-	*/
+const getLocation = async () => {
+	const loc = await Location.getCurrentPositionAsync({})
+	return loc.coords
+}
+
