@@ -4,32 +4,11 @@ import { DefaultTheme } from '@react-navigation/native'
 //		backgroundColor: '#fff',
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
-	container: {
+	landingPageStyle: {
 		flex: 1,
 		marginTop :20,
 		alignItems: 'center',
 		justifyContent: 'center',
-	}, 
-	footer: {
-		height: 50,
-	}, 
-	mapViewBox: {
-		marginTop:40,
-		width: 145 *2,
-		height: 140*3,
-		borderColor:'black',
-		borderBottomWidth:5,
-		borderTopWidth:5,
-		borderLeftWidth:5,
-		borderRightWidth:5,
-		borderRadius: 10,
-		borderWidth: 1,
-	}, 
-	currEstStyle: {
-		marginTop:10,
-		width: 170 *2,
-		height: 80,
-		backgroundColor: '#4cad6a'
 	}, 
 	mapStyle: {
 		marginTop:40,
@@ -37,33 +16,38 @@ export const styles = StyleSheet.create({
 		height: 120*3,
 		borderRadius: 10,
 		borderWidth: 1,
-	}, 
-	listEstStyle: {
-		marginTop:10,
-		width: 170 *2,
-		height: 80,
-		backgroundColor: '#f3f3f3'
-	}, 
-	chooseStyle: {
-		marginBottom:10,
-		width: 190 *2,
-		height: 60,
-		backgroundColor: '#f4940a',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},renderRegister: {
-		height: 65,
-		justifyContent: 'center',
+	},
+	seperatorStyle:	{
+		height: 1,
+		width: "100%",
+		backgroundColor: "#CED0CE",
 	}
-});
+})
 
-//		borderColor:'#5cdb7e',
-//		borderBottomWidth:2,
-//		borderTopWidth:2,
-//		borderLeftWidth:2,
-//		borderRightWidth:2,
-//		borderRadius: 10,
-//		borderWidth: 1,
+const regRenderStyle = {height: 65}
+const stationListStyle = { width: 170 *2, height: 80 }
+const cornerStyle = { borderRadius: 5 }
+const chooseStyle = { marginBottom:10, width: 190 *2 }
+
+const bigFont = { fontSize: 35 }
+const midFont = { fontSize: 24 }
+
+const greenColor = {backgroundColor: "#4cac6a"}
+const yellowColor = {backgroundColor: '#f4940a',}
+const greyColor = {backgroundColor: '#f3f3f3'}
+
+
+export const elementsStyles = {
+	regRenderStyle,
+	stationListStyle,
+	cornerStyle,
+	chooseStyle,
+	bigFont,
+	midFont,
+	greenColor,
+	yellowColor,
+	greyColor,
+}
 
 export const navStyle = {
 	...DefaultTheme,
@@ -73,14 +57,3 @@ export const navStyle = {
   },
 }
 
-//	SquareShapeView: {
-//		width: 120,
-//		height: 120,
-//		backgroundColor: '#00BCD4'
-//	},
-//	RectangleShapeView: {	 
-//		marginTop: 20,
-//		width: 120 * 2,
-//		height: 120,
-//		backgroundColor: '#FFC107'
-//	}

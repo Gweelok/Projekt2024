@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text, Button } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { Text, Button } from 'react-native-elements'
 
 // sqlite database
 import { dropAll, createTestData, database } from './src/utils/Database'
 
 // import from files
-import { navStyle } from './src/styles/Stylesheet'
+import { navStyle,elementsStyles } from './src/styles/Stylesheet'
 import { ChooseStation } from './src/componets/molocules/stationOptions'
 import { LandingPage } from './src/componets/atoms/landingPage'
 import { RegisterItem } from './src/componets/atoms/registerItem'
@@ -32,11 +33,12 @@ export default function App() {
 	return (
 		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">
-				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview', headerRight:() => ( <Button
-						onPress={() => {test ? dropAll() : createTestData(); setTest(!test)}}
+				<Stack.Screen name="Home" component={LandingScreen} options={{ title: 'Overview', headerRight:() => ( 
+					<Button
+						buttonStyle={elementsStyles.greenColor}
 						title={test ? "Drop" : "TEST!"}
-						color="#4cad6a"
-						/>) }} />
+						onPress={() => {test ? dropAll() : createTestData(); setTest(!test)}}
+					/>)}}/>
 				<Stack.Screen name="Dash" component={DashboardScreen} options={{ title: 'Dashboard' }} />
 				<Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Catagories' }} />
 				<Stack.Screen name="Pro" component={ProScreen} options={{ title: 'Products' }} />
@@ -53,7 +55,7 @@ export default function App() {
 	// eslint-disable-next-line react/prop-types
 	function LandingScreen({ navigation }) {
 		return (
-			<SafeAreaView style={{ flex: 1, backgroundColor: 'Blue' }}>
+			<SafeAreaView style={{ flex: 1 }}>
 				<LandingPage navigation = {navigation}/>
 				<RegisterItem navigation = {navigation} navplace={'Cat'}/>
 			</SafeAreaView>
@@ -112,4 +114,3 @@ export default function App() {
 		)
 	}
 }
-//				<ChooStation/>

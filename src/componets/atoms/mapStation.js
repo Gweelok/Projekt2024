@@ -1,18 +1,21 @@
 import React, {useEffect,useState} from 'react';
-import { TouchableOpacity, Text, FlatList, ToastAndroid } from 'react-native';
+import { FlatList, ToastAndroid, View } from 'react-native';
 import * as Location from 'expo-location'
+
+import { Button, ListItem } from 'react-native-elements'
 
 // Directions API, that we'll test later on
 // can't be used as of now, as you'd need to pay to use this API, 
-// if this package and the code in mapview then it should just work
+// if this package, a Google API key and the code in mapview then it should just work
 
 // import MapViewDirections from 'react-native-maps-directions';
 
-import { styles } from '../../../src/styles/Stylesheet'
+import { styles, elementsStyles } from '../../../src/styles/Stylesheet'
 import { getCountryEst, getSpecificItem, database } from '../../../src/utils/Database'
 import MapView, { Marker } from 'react-native-maps'
 
-const GOOGLE_MAPS_APIKEY = 'AIzaSyCa-v2pdBDYM0UxXB0qN9_Bv0UFmD9NgJo';
+//
+// const GOOGLE_MAPS_APIKEY = '...';
 
 export const ChooseStation = ({navigation,route}) => {
 	const [dist,setDist] = useState([{ distance: '?', name: '',id:9 }])
@@ -30,23 +33,23 @@ export const ChooseStation = ({navigation,route}) => {
 			var tempdata = []
 			console.log('start domath');
 			for (let i = 0; i < data.length; i++){
-						let dlon = data[i].long - location.coords.longitude;
-						let dlat = data[i].lat - location.coords.latitude;
-			//			console.log(dlat +' '+dlon)
+					let dlon = data[i].long - location.coords.longitude;
+					let dlat = data[i].lat - location.coords.latitude;
+			//		console.log(dlat +' '+dlon)
 
-						let a = Math.pow(Math.sin(dlat / 2), 2)
-						+ Math.cos(location.coords.latitude) * Math.cos(data[i].lat)
-						* Math.pow(Math.sin(dlon / 2),2);
-			//			console.log(a);
+					let a = Math.pow(Math.sin(dlat / 2), 2)
+					+ Math.cos(location.coords.latitude) * Math.cos(data[i].lat)
+					* Math.pow(Math.sin(dlon / 2),2);
+			//		console.log(a);
 
-						let c = 2 * Math.asin(Math.sqrt(a));
-			//			console.log(c);
+					let c = 2 * Math.asin(Math.sqrt(a));
+			//		console.log(c);
 
-						// Radius of earth in kilometers. Use 3956
-						// for miles
-						let r = 6371;
-						tempdata.push({distance: c*r, name: data[i].name, city: data[i].city, id: data[i].id, lat: data[i].lat, long: data[i].long})
-					}
+					// Radius of earth in kilometers. Use 3956
+					// for miles
+					let r = 6371;
+					tempdata.push({distance: c*r, name: data[i].name, city: data[i].city, id: data[i].id, lat: data[i].lat, long: data[i].long})
+				}
 			
 			// calculate the result
 //			console.log(c*r);
@@ -106,8 +109,8 @@ export const ChooseStation = ({navigation,route}) => {
 		})();
 	},[id, name])
 
-
 	function renderItem ({item}) {
+/*
 		return (
 			<TouchableOpacity
 				style={selected == item.id ? styles.currEstStyle : styles.listEstStyle}
@@ -125,8 +128,34 @@ export const ChooseStation = ({navigation,route}) => {
 				<Text>{item.city}</Text>
 			</TouchableOpacity >
 		)
-	}
+*/
 
+		return (
+			<>
+				<View style={{height: 15}}/>
+				<ListItem
+					containerStyle={selected == item.id ? 
+					{ ...elementsStyles.stationListStyle, ...elementsStyles.greenColor, ...elementsStyles.cornerStyle} : 
+					{ ...elementsStyles.stationListStyle, ...elementsStyles.greyColor, ...elementsStyles.cornerStyle}}
+					onPress={()=>{
+						if (selected != item.id) {
+							setSelected(item.id)
+							setLocation({latitude: item.lat, longitude: item.long, latitudeDelta: 1.01, longitudeDelta: 1.01})
+						} else {
+							setSelected(null)	
+						}
+//					selected != item.id ? setSelected(item.id) : setSelected(null)
+					}}
+				>
+					<ListItem.Content>
+						<ListItem.Subtitle>{Math.ceil(item.distance)||'NaN'} m</ListItem.Subtitle>
+						<ListItem.Title style={elementsStyles.midFont}>{item.name}</ListItem.Title>
+						<ListItem.Subtitle>By: {item.city}</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+			</>
+		)
+	}
 
 	return (
 		<>
@@ -151,15 +180,10 @@ export const ChooseStation = ({navigation,route}) => {
 						} else {
 							setSelected(null)	
 						}
-//						selected != marker.id ? setSelected(marker.id) : setSelected(null) 
 					} }
-/*			
-//					{getCountryEst(e.nativeEvent.coordinate.latitude,e.nativeEvent.coordinate.longitude,getTest)}
-//					{console.log(e.nativeEvent)}
-//					{getCountryEst(location.latitude,location.longitude)}}
-*/				
 				/>
 			))}
+
 {/*	
 				<MapViewDirections
 					origin={getLocation}
@@ -170,6 +194,7 @@ export const ChooseStation = ({navigation,route}) => {
 					mode="WALKING"
 				/>
 */}
+
 			</MapView>
 
 			{dist && (
@@ -179,9 +204,12 @@ export const ChooseStation = ({navigation,route}) => {
 					keyExtractor={(item) => item.id.toString()}
 				/>
 			)}
-			<TouchableOpacity 
-				style={styles.chooseStyle}
-				onPress={() => {
+			<Button
+				title={'Choose'}
+				containerStyle={elementsStyles.chooseStyle}
+				buttonStyle={{...elementsStyles.cornerStyle, ...elementsStyles.yellowColor}}
+				titleStyle={elementsStyles.bigFont}
+				onPress={()=>{
 					// eslint-disable-next-line react/prop-types
 					// Item (id , aval , estId , catId , proId , bndId , modId )
 					if (selected == null) { 
@@ -192,29 +220,22 @@ export const ChooseStation = ({navigation,route}) => {
 					setTimeout(() => navigation.navigate('Thanks',{estId: selected,}),2000)			
 					// If button is pressed: Redirect to "registrering item"
 				}}
-				>
-				<Text style={{fontSize: 35}}>choose</Text>
-			</TouchableOpacity>
+			/>
 		</>
 	)
 }
-
-<<<<<<< HEAD
-const getLocation = async () => {
-	const loc = await Location.getCurrentPositionAsync({})
-	return loc.coords
-}
-
-=======
-//	Directions API, from google api
-//	Hasn't been implemented as it's a pay-to-use API, and therefore not suitable for prototype testing
-//	code should work when API is paid for
-	/*	<MapViewDirections
-			origin={coordinates[1]}
-			destination={coordinates[0]}
-			strokeWidth = {2}
-			apikey={GOOGLE_MAPS_APIKEY}
-			strokeColor="hotpink"
-		/>
-	*/
->>>>>>> 94482bba4208af9a27975b5fd94ce699e5839af7
+//			<TouchableOpacity 
+//				style={styles.chooseStyle}
+//				onPress={() => {
+//					// eslint-disable-next-line react/prop-types
+//					// Item (id , aval , estId , catId , proId , bndId , modId )
+//					if (selected == null) { 
+//						ToastAndroid.showWithGravity("Venligst vælt en station", ToastAndroid.LONG, ToastAndroid.CENTER);
+//						return
+//					}
+//					database.insertData({id: Math.floor(Math.random() * (10000 - 1 + 1) + 1), aval: 1, estId: selected, catId: registeritem[0].catId, proId: registeritem[0].proId, bndId: typeof registeritem[0].bndId !== 'undefined' ? registeritem[0].bndId : null, modId: typeof registeritem[0].modId !== 'undefined' ? registeritem[0].modId : null},'Items')
+//					setTimeout(() => navigation.navigate('Thanks',{estId: selected,}),2000)			
+//					// If button is pressed: Redirect to "registrering item"
+//			}}>
+//				<Text style={{fontSize: 35}}>choose</Text>
+//			</TouchableOpacity>

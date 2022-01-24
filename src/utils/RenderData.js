@@ -1,8 +1,8 @@
 import React from 'react';
-import { TouchableOpacity ,FlatList, Text, View } from 'react-native';
+import { FlatList, View, SafeAreaView } from 'react-native';
+import { Text, ListItem } from 'react-native-elements'
 
-import { styles } from '../../src/styles/Stylesheet'
-
+import { styles, elementsStyles } from '../../src/styles/Stylesheet'
 
 //				Render of database
 // eslint-disable-next-line react/prop-types
@@ -95,24 +95,20 @@ export const Render = ({data}) => {
 
 const renderSeparator = () => {
 	return (
-		<View
-			style={{
-			height: 1,
-			width: "100%",
-			backgroundColor: "#CED0CE",
-		}}/>
+		<View style={styles.seperatorStyle}/>
 	)
 }
 
 export const RegRender = ({data,navigation,db,rid}) => {
 	const tableList = [ 'Cat', 'Pro', 'Bnd', 'Mod', 'Stations' ]
+	const navplace = tableList[rid]
 
-	const renderName = ( {item} ) => (
+/*
+	const renderData = ( {item} ) => (
 		<Item name = {item.name} id = {item.id}/>
 	);
 
 	const Item = ({name,id}) => {
-		const navplace = tableList[rid]
 		return (
 			<TouchableOpacity 
 				style={styles.renderRegister} 
@@ -129,18 +125,36 @@ export const RegRender = ({data,navigation,db,rid}) => {
 			</TouchableOpacity >
 		)
 	}
+*/
+	
+	const renderItem = ({ item }) => (
+		<ListItem
+			containerStyle={elementsStyles.regRenderStyle} 
+			onPress={()=>{
+				console.log(navplace)
+				if (navplace == 'Stations') {
+					navigation.navigate('Stations', {id: item.id, name: db}) 
+				} else {
+					navigation.navigate(navplace, {reg:item.id})
+				}
+			}
+		}>
+			<ListItem.Content>
+				<ListItem.Title>{item.name}</ListItem.Title>
+			</ListItem.Content>
+		</ListItem>
+	)
 
 	return (
-		<View style={{flex:1}}>
-			{data && (
-				<FlatList
-					data={data}
-					ItemSeparatorComponent={renderSeparator}
-					renderItem={renderName}
-					keyExtractor={(item) => item.id.toString()}
-					ListFooterComponent={renderSeparator}
-				/>
-			)}
-		</View>
+		<SafeAreaView style={{flex:1}}>
+			<FlatList
+				data={data}
+				renderItem={renderItem}
+				keyExtractor={(item) => item.id.toString()}
+				ItemSeparatorComponent={renderSeparator}
+				ListFooterComponent={renderSeparator}
+
+			/>
+		</SafeAreaView>
 	)
 }
