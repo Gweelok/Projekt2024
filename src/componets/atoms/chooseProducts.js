@@ -1,3 +1,8 @@
+/**
+ * choose products
+ * screen where you choose which type of product you want to register
+ * **/
+
 import React, { useState, useEffect, useMemo } from 'react';
 
 // sqlite database

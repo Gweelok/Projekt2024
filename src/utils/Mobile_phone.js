@@ -1,3 +1,9 @@
+/**
+ * Mobile data
+ * function that adds mobile database into test data, it's confusing...
+ * theres also a render function to see what data was what
+ * **/
+
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 

@@ -1,8 +1,18 @@
+/**
+ *  MAIN FILE
+ * 	Where navigation between the different views happen
+ *  There's also a temporary button that inports testdata,
+ * 	just in case you need to restart database
+ * 
+ *  not implemented but wished i did: redux, or any other way to store values between screens
+ * **/
+
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// base style import
 import { Text, Button } from 'react-native-elements'
 
 // sqlite database
@@ -21,6 +31,8 @@ const Stack = createNativeStackNavigator()
 
 // Main function that everything runs in
 export default function App() {
+
+// hook that gets and sets test data for resting
 	const [test, setTest] = useState(0)
 	useEffect( () => {
 		function showdata (data) {
@@ -30,6 +42,7 @@ export default function App() {
 	},[])
 
 
+// Main navigation of all the views
 	return (
 		<NavigationContainer theme={navStyle}>
 			<Stack.Navigator initialRouteName="Home">

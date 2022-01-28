@@ -1,3 +1,8 @@
+/**
+ * Stylesheet
+ * front end, easy access to be changed here
+ * **/
+
 import { StyleSheet } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native'
 

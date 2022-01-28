@@ -1,3 +1,14 @@
+/**
+ * MapView component
+ * where all map components are, they're intertwined so it's not easily separetable.
+ * ChooseStation gets and sets all markers, sorts em and calculates distance
+ * in the render par there are 3 parts
+ * 1st part: mapview where all markers are shown
+ * 2nd part: List of all markers sorted by distance from you
+ * 3rd part: button that submits the item
+ * **/
+
+
 import React, {useEffect,useState} from 'react';
 import { FlatList, ToastAndroid, View } from 'react-native';
 import * as Location from 'expo-location'

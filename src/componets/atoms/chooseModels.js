@@ -1,3 +1,8 @@
+/**
+ * choose models
+ * screen where you choose which type of model you want to register
+ * **/
+
 import React, { useState, useEffect, useMemo } from 'react';
 
 // sqlite database

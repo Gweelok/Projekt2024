@@ -1,3 +1,10 @@
+/**
+ * Render data
+ * function that takes data and displays it,
+ * the function Render is for test data
+ * RegRender is for rendering data in the register item part
+ * **/
+
 import React from 'react';
 import { FlatList, View, SafeAreaView } from 'react-native';
 import { Text, ListItem } from 'react-native-elements'

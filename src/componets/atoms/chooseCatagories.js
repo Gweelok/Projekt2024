@@ -1,3 +1,8 @@
+/**
+ * choose catagories
+ * screen where you choose which type of catagory you want to register
+ * **/
+
 import React, { useState, useEffect } from 'react';
 
 // sqlite database

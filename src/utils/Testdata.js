@@ -1,3 +1,8 @@
+/**
+ * Test Data 
+ * can be changed, but if a new element is added/removed then you have to change Database.js
+ * **/
+
 export const EStations = [
 	{
 		id: 1,
