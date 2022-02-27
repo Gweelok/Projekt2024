@@ -34,6 +34,8 @@ import {
   ChooseBrands,
 } from "./src/componets/molocules/registerOptions";
 import { DashboardScreen } from "./src/screens/dashboardScreen";
+import { ProductScreen } from "./src/screens/productScreen";
+import { View } from "react-native-ui-lib";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -62,7 +64,7 @@ export default function App() {
             title: "Overview",
             headerRight: () => (
               <Button
-                buttonStyle={elementsStyles.greenColor}
+                buttonStyle={elementsStyles.buttonStyles}
                 title={test ? "Drop" : "TEST!"}
                 onPress={() => {
                   test ? dropAll() : createTestData();
@@ -76,6 +78,11 @@ export default function App() {
           name="Dash"
           component={DashboardScreen}
           options={{ title: "Dashboard" }}
+        />
+        <Stack.Screen
+          name="Products"
+          component={ProductScreen}
+          options={{ title: "Products" }}
         />
         <Stack.Screen
           name="Cat"
@@ -113,19 +120,33 @@ export default function App() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <LandingPage navigation={navigation} />
-        <Button
-          icon={{
-            name: "bar-chart",
-            size: 25,
-            color: "white",
-          }}
-          buttonStyle={elementsStyles.greenColor}
-          title="Your statistics"
-          onPress={() => {
-            navigation.navigate("Dash");
-          }}
-        />
-        <RegisterItem navigation={navigation} navplace={"Cat"} />
+        <View style={elementsStyles.buttonsWrapper}>
+          <Button
+            icon={{
+              name: "bar-chart",
+              size: 25,
+              color: "white",
+            }}
+            buttonStyle={elementsStyles.buttonStyles}
+            title={"Your \n statistics"}
+            onPress={() => {
+              navigation.navigate("Dash");
+            }}
+          />
+          <RegisterItem navigation={navigation} navplace={"Cat"} />
+          <Button
+            icon={{
+              name: "flag",
+              size: 25,
+              color: "white",
+            }}
+            buttonStyle={elementsStyles.productButtonStyles}
+            title={"Products"}
+            onPress={() => {
+              navigation.navigate("Products");
+            }}
+          />
+        </View>
       </SafeAreaView>
     );
   }
