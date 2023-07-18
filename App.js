@@ -35,6 +35,7 @@ import {
 } from "./src/componets/molocules/registerOptions";
 import { DashboardScreen } from "./src/screens/dashboardScreen";
 import { ProductScreen } from "./src/screens/productScreen";
+import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
 
 console.log("start");
@@ -56,7 +57,11 @@ export default function App() {
   // Main navigation of all the views
   return (
     <NavigationContainer theme={navStyle}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="SignUp">
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpScreen}
+        />
         <Stack.Screen
           name="Home"
           component={LandingScreen}
