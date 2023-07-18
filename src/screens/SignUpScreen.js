@@ -1,41 +1,71 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput , Pressable } from 'react-native';
+import { View, Text, StyleSheet, TextInput , Pressable , Alert} from 'react-native';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+  const [emailCheck,setEmailCheck]=useState(true); //to check if email is correct
+  const [isValid, setIsValid] = useState(false); // to check on both email and password
+  const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
+
+  //To check on password 
+  const CheckPassword = (text) => {
+    onChangePassword(text);
+    setPasswordCheck(text.length >= 8); // it must be at least 8 chars
+  };
+  // To check on email
+  const validateEmail = (text) => {
+    //  to check if the input contains "@" and "."
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(text);
+  };
+
+
+  //Check on both 
+  const handleSubmit = () => {
+    const isValidEmail = validateEmail(email);
+    if (isValidEmail && passwordCheck) {
+          navigation.navigate('Home')
+    } else {
+          Alert.alert('Invalid Email or Password');
+    }
+  };
   let Header='Opret bruger';
   return (
     
-    <View>
+    <View style={SignUpStyles.signupstyle}>
       <Text style={SignUpStyles.headerText}>{Header}</Text>
        <TextInput
+         placeholder="E-mail"
         value={email}
         onChangeText={onChangeEmail}
-        placeholder={'E-mail'}
-        keyboardType={'email-address'}
+        keyboardType="email-address"
+        autoCapitalize="none"
         clearButtonMode={"always"}  
         style={SignUpStyles.inputBox}
       />
       <TextInput
         style={SignUpStyles.inputBox}
         value={password}
-        onChangeText={onChangePassword}
+        onChangeText={CheckPassword}
         placeholder={'Kodeord'}
         keyboardType={'default'}
         secureTextEntry={true}
       />
-      <Pressable onPress={() => navigation.navigate('Home')} style={SignUpStyles.container_Primary}>
+      { //Check on the password
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> Min 8 Tegn </Text>
+      }
+      <Pressable onPress={handleSubmit} style={SignUpStyles.container_Primary}>
             <Text style={SignUpStyles.buttonText}>{Header}</Text>
         </Pressable>
         
-         <Pressable onPress={() => navigation.navigate('Home')} style={SignUpStyles.buttonfb}>
+         <Pressable onPress={handleSubmit} style={SignUpStyles.buttonfb}>
           <View style={SignUpStyles.container}>
             <Text style={SignUpStyles.buttonText}> Continue with FaceBook</Text>
           </View>
         </Pressable>
 
-         <Pressable onPress={() => navigation.navigate('Home')}  style={SignUpStyles.buttongoogle}>
+         <Pressable onPress={handleSubmit}  style={SignUpStyles.buttongoogle}>
           <View style={SignUpStyles.container}>
             <Text style={SignUpStyles.buttonText}> Continue with Google</Text>
           </View>
@@ -48,6 +78,12 @@ const SignUpScreen = ({ navigation }) => {
   );
 }
 const SignUpStyles = StyleSheet.create({
+    signupstyle:{
+        aliginItems : 'center',
+        flex: 1,
+        backgroundColor: '#E2F4DE',
+      },
+
 buttonfb: {
     backgroundColor: '#4765A9',
     fontSize: 22,
@@ -98,8 +134,9 @@ buttonfb: {
     borderWidth: 2,
   },
   text_Tertiary: {
+    margin:2, 
     color : "#07A0A2",
-     textAlign: 'center',
+    textAlign: 'center',
     fontSize: 15,
   },
   buttonText: {
