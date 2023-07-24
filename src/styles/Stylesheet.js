@@ -53,7 +53,6 @@ export const styles = StyleSheet.create({
     marginLeft:40, 
     color: Primarycolor1,
     fontFamily: 'space-grotesk-bold',
-
     },
 
   //Links 
@@ -96,15 +95,12 @@ export const styles = StyleSheet.create({
     borderWidth : 4, 
     backgroundColor: Primarycolor3,
     flexDirection: 'row',
-    postion :"relative",
-
   },
   //Text for both menuitem and boxlink
   menuItem_text :
   {
-    //fontFamily : 'SpaceGrotesk',
+    fontFamily: 'space-grotesk-bold',
     color: Primarycolor1, 
-    fontWeight : "bold",
     fontSize: 20, 
   },
   menuItem_arrow:
@@ -253,18 +249,16 @@ export const Buttons = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
   },
-  Icon_buttons: {
+  iconContainerRight: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
     backgroundColor: Primarycolor1,
-    width: 32,
-    height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  closeIcon: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
+  Icon:
+  {
+    color : Primarycolor3,
   },
-  
+ 
 });
 
