@@ -44,27 +44,28 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 30,
     marginLeft:40, 
+    fontFamily: 'space-grotesk',
   },
   Header_Primarycolor1  : {
     fontSize: 35,
-    fontWeight: 'bold',
     marginBottom: 50,
     marginTop: 40,
     marginLeft:40, 
     color: Primarycolor1,
-    //fontFamily : 'SpaceGrotesk'
-  },
+    fontFamily: 'space-grotesk-bold',
+
+    },
 
   //Links 
   link :{
     color: Primarycolor1,
     textDecorationLine: 'underline',
     textAlign: 'center',   
-     //fontFamily : 'SpaceGrotesk',
+    fontFamily: 'space-grotesk',
   },
   //paragraph 
   paragraph_text : {
-    //fontFamily : 'SpaceGrotesk',
+    fontFamily: 'space-grotesk',
     color: Primarycolor1,
     fontSize: 16, 
   },
@@ -78,7 +79,7 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
-    //fontFamily : 'SpaceGrotesk',
+    fontFamily: 'space-grotesk',
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor3,
     alignSelf: 'stretch'

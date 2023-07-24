@@ -37,6 +37,8 @@ import { DashboardScreen } from "./src/screens/dashboardScreen";
 import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
+import { useFonts } from 'expo-font';
+
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -54,6 +56,17 @@ export default function App() {
     //createTestData();
   }, []);
 
+  //Loading the font 
+  const [fontsLoaded] = useFonts({
+    'space-grotesk': require('./assets/fonts/SpaceGrotesk-Regular.ttf'),
+    'space-grotesk-bold': require('./assets/fonts/SpaceGrotesk-Bold.ttf'),
+
+  });
+
+  if (!fontsLoaded) {
+    // Font is not yet loaded, return null or a loading screen
+    return null;
+  }
   // Main navigation of all the views
   return (
     <NavigationContainer theme={navStyle}>
