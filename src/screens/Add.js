@@ -1,13 +1,16 @@
-import { View, Text} from 'react-native';
+import { View, Text , SafeAreaView } from 'react-native';
 import { styles,Backgroundstyle} from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import React from 'react';
+import { ChooseCatagories} from "../componets/atoms/chooseCatagories";
 
 
 const Add = ({ navigation }) => {
 return (
     <View style={Backgroundstyle.interactive_screens}> 
-        <Text style={styles.Header_Primarycolor1}> Add page </Text>
+        <SafeAreaView style={{ flex: 1 }}>
+        <ChooseCatagories navigation={navigation} />
+      </SafeAreaView>
         <Navigationbar navigation={navigation}/>
     </View>
 );

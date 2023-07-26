@@ -32,6 +32,7 @@ const createStaticBoolean = () => {
 
 //Static Data members
 const Home = createStaticBoolean();
+Home.setStaticBoolean(true);
 const Map = createStaticBoolean();
 const Add = createStaticBoolean();
 const Stats = createStaticBoolean();
@@ -91,7 +92,7 @@ const Navigationbar = ({ navigation }) => {
 
       <Pressable onPress={() => handlePress('home')}>
       { //check which icon will load
-      Home.getStaticBoolean() ? <Fontisto name="home" size={26} color={Primarycolor1} />  :  <MaterialCommunityIcons name="home-outline" size={30} color={Primarycolor1}/>
+      Home.getStaticBoolean() ? <Fontisto name="home" size={24} color={Primarycolor1} />  :  <MaterialCommunityIcons name="home-outline" size={30} color={Primarycolor1}/>
       }
       </Pressable>
 

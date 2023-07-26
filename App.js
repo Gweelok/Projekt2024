@@ -25,8 +25,6 @@ import {
   marginBottom,
 } from "./src/styles/Stylesheet";
 import { ChooseStation } from "./src/componets/molocules/stationOptions";
-import { LandingPage } from "./src/componets/atoms/landingPage";
-import { RegisterItem } from "./src/componets/atoms/registerItem";
 import {
   ChooseCatagories,
   ChooseProducts,
@@ -38,8 +36,6 @@ import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
 import { useFonts } from 'expo-font';
-import Navigationbar from './src/componets/Navigationbar'
-
 //importing pages for navigation 
 import Home from "./src/screens/Home";
 import Map from "./src/screens/Map";
@@ -95,7 +91,6 @@ export default function App() {
           name="Map"
           component={Map}
         />
-        
         <Stack.Screen
           name="Profile"
           component={Profile}
@@ -109,37 +104,11 @@ export default function App() {
           component={Add}
         />
         <Stack.Screen
-          name="Home"
-          component={LandingScreen}
-          options={{
-            title: "Overview",
-            headerRight: () => (
-              <Button
-                buttonStyle={elementsStyles.buttonStyles}
-                title={test ? "Drop" : "TEST!"}
-                onPress={() => {
-                  test ? dropAll() : createTestData();
-                  setTest(!test);
-                }}
-              />
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="Dash"
-          component={DashboardScreen}
-          options={{ title: "Dashboard" }}
-        />
-        <Stack.Screen
           name="Products"
           component={ProductScreen}
           options={{ title: "Products" }}
         />
-        <Stack.Screen
-          name="Cat"
-          component={CatScreen}
-          options={{ title: "Catagories" }}
-        />
+        
         <Stack.Screen
           name="Pro"
           component={ProScreen}
@@ -166,56 +135,13 @@ export default function App() {
   );
 
   //Screens
-  // eslint-disable-next-line react/prop-types
-  function LandingScreen({ navigation }) {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <LandingPage navigation={navigation} />
-        <View style={elementsStyles.buttonsWrapper}>
-          <Button
-            icon={{
-              name: "bar-chart",
-              size: 25,
-              color: "white",
-            }}
-            buttonStyle={elementsStyles.buttonStyles}
-            title={"Your \n statistics"}
-            onPress={() => {
-              navigation.navigate("Dash");
-            }}
-          />
-          <RegisterItem navigation={navigation} navplace={"Cat"} />
-          <Button
-            icon={{
-              name: "flag",
-              size: 25,
-              color: "white",
-            }}
-            buttonStyle={elementsStyles.productButtonStyles}
-            title={"Products"}
-            onPress={() => {
-              navigation.navigate("Products");
-            }}
-          />
-          <Navigationbar navigation={navigation}/>
-        </View>
-      </SafeAreaView>
-    );
-  }
+ 
 
   // eslint-disable-next-line react/prop-types
   function StationsScreen({ navigation, route }) {
     return (
       <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
         <ChooseStation navigation={navigation} route={route} />
-      </SafeAreaView>
-    );
-  }
-
-  function CatScreen({ navigation }) {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ChooseCatagories navigation={navigation} />
       </SafeAreaView>
     );
   }
