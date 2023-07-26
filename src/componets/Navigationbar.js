@@ -69,6 +69,7 @@ const Navigationbar = ({ navigation }) => {
       falseall();
       Add.setStaticBoolean(true);
       navigation.navigate('Add')
+      
     }
     else if (iconName=='stats')
     {

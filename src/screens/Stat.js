@@ -9,8 +9,7 @@ return (
     <View style={Backgroundstyle.interactive_screens}> 
         <Text style={styles.Header_Primarycolor1}> stats page </Text>
         <Navigationbar navigation={navigation}/>
-    </View>
-    
+    </View>  
 );
 }
 

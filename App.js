@@ -95,6 +95,7 @@ export default function App() {
           name="Map"
           component={Map}
         />
+        
         <Stack.Screen
           name="Profile"
           component={Profile}

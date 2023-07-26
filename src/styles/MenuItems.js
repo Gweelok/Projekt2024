@@ -5,7 +5,6 @@ import {
     styles,
   } from "./Stylesheet";
 export const MenuItems = ({msg}) => {
-    
     return (
     <View style={styles.menuItem}>
         <Text style={styles.menuItem_text}> {msg}  </Text>

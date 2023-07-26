@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/AntDesign'; // Replace with the appr
 import {
     Buttons,
   } from "./Stylesheet";
-  
 export const GoBackButton = () => {
     return (
     <View style={Buttons.iconContainerRight}>

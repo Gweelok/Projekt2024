@@ -13,7 +13,6 @@ export const Primarycolor2= "#dae2e0"; //lightgreen
 export const Primarycolor3= "#fff"; // White
 
 
-
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
   landingPageStyle: {

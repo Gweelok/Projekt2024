@@ -10,7 +10,6 @@ return (
         <Text style={styles.Header_Primarycolor1}> Add page </Text>
         <Navigationbar navigation={navigation}/>
     </View>
-    
 );
 }
 
