@@ -8,9 +8,11 @@ import { DefaultTheme } from "@react-navigation/native";
 
 //		backgroundColor: '#fff',
 //Main colors
-const Primarycolor1= "#1c4b3d"; // DarkGreen
-const Primarycolor2= "#dae2e0"; //lightgreen
-const Primarycolor3= "#fff"; // White
+export const Primarycolor1= "#1c4b3d"; // DarkGreen
+export const Primarycolor2= "#dae2e0"; //lightgreen
+export const Primarycolor3= "#fff"; // White
+
+
 
 // Stylesheet like CSS
 export const styles = StyleSheet.create({

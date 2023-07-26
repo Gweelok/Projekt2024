@@ -5,6 +5,7 @@ import {
     styles,
   } from "./Stylesheet";
 export const BoxLink = ({msg}) => {
+    
     return (
     <View style={styles.boxlink}>
         <Text style={styles.menuItem_text}> {msg}  </Text>

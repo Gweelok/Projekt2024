@@ -38,10 +38,22 @@ import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
 import { useFonts } from 'expo-font';
+import Navigationbar from './src/componets/Navigationbar'
+
+//importing pages for navigation 
+import Home from "./src/screens/Home";
+import Map from "./src/screens/Map";
+import Profile from "./src/screens/Profile";
+import Add from "./src/screens/Add";
+import Stat from "./src/screens/Stat";
+
 
 
 console.log("start");
 const Stack = createNativeStackNavigator();
+
+
+
 
 // Main function that everything runs in
 export default function App() {
@@ -74,6 +86,26 @@ export default function App() {
         <Stack.Screen
           name="SignUp"
           component={SignUpScreen}
+        />
+        <Stack.Screen
+          name="Homepage"
+          component={Home}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+        />
+        <Stack.Screen
+          name="Stats"
+          component={Stat}
+        />
+        <Stack.Screen
+          name="Add"
+          component={Add}
         />
         <Stack.Screen
           name="Home"
@@ -164,6 +196,7 @@ export default function App() {
               navigation.navigate("Products");
             }}
           />
+          <Navigationbar navigation={navigation}/>
         </View>
       </SafeAreaView>
     );
