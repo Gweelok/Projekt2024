@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput , Pressable , Alert} from 'react-native';
+import { styles, Backgroundstyle} from '../styles/Stylesheet';
+import Navigationbar from '../componets/Navigationbar';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-  const [emailCheck,setEmailCheck]=useState(true); //to check if email is correct
-  const [isValid, setIsValid] = useState(false); // to check on both email and password
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
 
   //To check on password 
@@ -25,7 +25,7 @@ const SignUpScreen = ({ navigation }) => {
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-          navigation.navigate('Home')
+          navigation.navigate('Homepage')
     } else {
           Alert.alert('Invalid Email or Password');
     }
@@ -33,8 +33,8 @@ const SignUpScreen = ({ navigation }) => {
   let Header='Opret bruger';
   return (
     
-    <View style={SignUpStyles.signupstyle}>
-      <Text style={SignUpStyles.headerText}>{Header}</Text>
+    <View style={Backgroundstyle.informationScreens}>
+      <Text style={styles.Header_Primarycolor1}>{Header}</Text>
        <TextInput
          placeholder="E-mail"
         value={email}
@@ -64,7 +64,7 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={SignUpStyles.buttonText}> Continue with FaceBook</Text>
           </View>
         </Pressable>
-
+      
          <Pressable onPress={handleSubmit}  style={SignUpStyles.buttongoogle}>
           <View style={SignUpStyles.container}>
             <Text style={SignUpStyles.buttonText}> Continue with Google</Text>
@@ -75,6 +75,7 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={SignUpStyles.text_Tertiary}> Har du allerede en burger?</Text>
         </Pressable>
     </View>
+    
   );
 }
 const SignUpStyles = StyleSheet.create({
@@ -152,3 +153,4 @@ buttonfb: {
 });
 
 export default SignUpScreen;
+
