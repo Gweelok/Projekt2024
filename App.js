@@ -25,8 +25,6 @@ import {
   marginBottom,
 } from "./src/styles/Stylesheet";
 import { ChooseStation } from "./src/componets/molocules/stationOptions";
-import { LandingPage } from "./src/componets/atoms/landingPage";
-import { RegisterItem } from "./src/componets/atoms/registerItem";
 import {
   ChooseCatagories,
   ChooseProducts,
@@ -35,10 +33,23 @@ import {
 } from "./src/componets/molocules/registerOptions";
 import { DashboardScreen } from "./src/screens/dashboardScreen";
 import { ProductScreen } from "./src/screens/productScreen";
+import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
+import { useFonts } from 'expo-font';
+//importing pages for navigation 
+import Home from "./src/screens/Home";
+import Map from "./src/screens/Map";
+import Profile from "./src/screens/Profile";
+import Add from "./src/screens/Add";
+import Stat from "./src/screens/Stat";
+
+
 
 console.log("start");
 const Stack = createNativeStackNavigator();
+
+
+
 
 // Main function that everything runs in
 export default function App() {
@@ -53,42 +64,51 @@ export default function App() {
     //createTestData();
   }, []);
 
+  //Loading the font 
+  const [fontsLoaded] = useFonts({
+    'space-grotesk': require('./assets/fonts/SpaceGrotesk-Regular.ttf'),
+    'space-grotesk-bold': require('./assets/fonts/SpaceGrotesk-Bold.ttf'),
+
+  });
+
+  if (!fontsLoaded) {
+    // Font is not yet loaded, return null or a loading screen
+    return null;
+  }
   // Main navigation of all the views
   return (
     <NavigationContainer theme={navStyle}>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen
-          name="Home"
-          component={LandingScreen}
-          options={{
-            title: "Overview",
-            headerRight: () => (
-              <Button
-                buttonStyle={elementsStyles.buttonStyles}
-                title={test ? "Drop" : "TEST!"}
-                onPress={() => {
-                  test ? dropAll() : createTestData();
-                  setTest(!test);
-                }}
-              />
-            ),
-          }}
+          name="SignUp"
+          component={SignUpScreen}
         />
         <Stack.Screen
-          name="Dash"
-          component={DashboardScreen}
-          options={{ title: "Dashboard" }}
+          name="Homepage"
+          component={Home}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+        />
+        <Stack.Screen
+          name="Stats"
+          component={Stat}
+        />
+        <Stack.Screen
+          name="Add"
+          component={Add}
         />
         <Stack.Screen
           name="Products"
           component={ProductScreen}
           options={{ title: "Products" }}
         />
-        <Stack.Screen
-          name="Cat"
-          component={CatScreen}
-          options={{ title: "Catagories" }}
-        />
+        
         <Stack.Screen
           name="Pro"
           component={ProScreen}
@@ -115,55 +135,13 @@ export default function App() {
   );
 
   //Screens
-  // eslint-disable-next-line react/prop-types
-  function LandingScreen({ navigation }) {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <LandingPage navigation={navigation} />
-        <View style={elementsStyles.buttonsWrapper}>
-          <Button
-            icon={{
-              name: "bar-chart",
-              size: 25,
-              color: "white",
-            }}
-            buttonStyle={elementsStyles.buttonStyles}
-            title={"Your \n statistics"}
-            onPress={() => {
-              navigation.navigate("Dash");
-            }}
-          />
-          <RegisterItem navigation={navigation} navplace={"Cat"} />
-          <Button
-            icon={{
-              name: "flag",
-              size: 25,
-              color: "white",
-            }}
-            buttonStyle={elementsStyles.productButtonStyles}
-            title={"Products"}
-            onPress={() => {
-              navigation.navigate("Products");
-            }}
-          />
-        </View>
-      </SafeAreaView>
-    );
-  }
+ 
 
   // eslint-disable-next-line react/prop-types
   function StationsScreen({ navigation, route }) {
     return (
       <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
         <ChooseStation navigation={navigation} route={route} />
-      </SafeAreaView>
-    );
-  }
-
-  function CatScreen({ navigation }) {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ChooseCatagories navigation={navigation} />
       </SafeAreaView>
     );
   }
