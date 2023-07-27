@@ -41,19 +41,13 @@ export const styles = StyleSheet.create({
   //Headlines
   Header : {
     fontSize: 35,
-    fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 30,
     marginLeft:40, 
-    fontFamily: 'space-grotesk',
+    fontFamily: 'space-grotesk-bold',
   },
   Header_Primarycolor1  : {
-    fontSize: 35,
-    marginBottom: 50,
-    marginTop: 40,
-    marginLeft:40, 
     color: Primarycolor1,
-    fontFamily: 'space-grotesk-bold',
     },
 
   //Links 
@@ -262,4 +256,3 @@ export const Buttons = StyleSheet.create({
   },
  
 });
-

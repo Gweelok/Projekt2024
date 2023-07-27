@@ -34,7 +34,7 @@ const SignUpScreen = ({ navigation }) => {
   return (
     
     <View style={Backgroundstyle.informationScreens}>
-      <Text style={styles.Header_Primarycolor1}>{Header}</Text>
+      <Text style={[styles.Header_Primarycolor1, styles.Header]}>{Header}</Text>
        <TextInput
          placeholder="E-mail"
         value={email}
@@ -153,4 +153,3 @@ buttonfb: {
 });
 
 export default SignUpScreen;
-

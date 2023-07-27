@@ -11,77 +11,48 @@ import {
   Primarycolor2,
 } from "../styles/Stylesheet";
 
-
-//  Replicating the static idea in c++ because without it seems like they make their own copies
-const createStaticBoolean = () => {
-  let staticBoolean = false;
-
-  const setStaticBoolean = (value) => {
-    staticBoolean = value;
+//Page_names 
+const PAGE_NAMES = {
+  HOME: 'home',
+  MAP: 'map',
+  ADD: 'add',
+  STATS: 'stats',
+  PROFILE: 'profile',
   };
 
-  const getStaticBoolean = () => {
-    return staticBoolean;
-  };
-
-  return {
-    setStaticBoolean,
-    getStaticBoolean,
-  };
-};
-
-//Static Data members
-const Home = createStaticBoolean();
-Home.setStaticBoolean(true);
-const Map = createStaticBoolean();
-const Add = createStaticBoolean();
-const Stats = createStaticBoolean();
-const Profile = createStaticBoolean();
+  //Selected page 
+var selected =PAGE_NAMES.HOME;
 
 
 const Navigationbar = ({ navigation }) => {
 
-  // function to reset the values so i could know which one are selected
-  const falseall =()=> {
-    Home.setStaticBoolean(false);
-    Map.setStaticBoolean(false);
-    Add.setStaticBoolean(false);
-    Stats.setStaticBoolean(false);
-    Profile.setStaticBoolean(false);
-  }
 
   //handles when clicked on icons 
-  // will need to be updated later on as rn those pages aren't implemented
   const handlePress = (iconName) => {
-    if (iconName=='home')
+    if (iconName==PAGE_NAMES.HOME)
     {
-      falseall();
-      Home.setStaticBoolean(true);
+      selected =PAGE_NAMES.HOME
       navigation.navigate('Homepage')
     }
-    else if (iconName=='map')
+    else if (iconName==PAGE_NAMES.MAP)
     {
-      falseall();
-      Map.setStaticBoolean(true);
+     selected =PAGE_NAMES.MAP
       navigation.navigate('Map')
     }
-    else if (iconName=='add')
+    else if (iconName==PAGE_NAMES.ADD)
     {
-      falseall();
-      Add.setStaticBoolean(true);
+      selected =PAGE_NAMES.ADD
       navigation.navigate('Add')
       
     }
-    else if (iconName=='stats')
+    else if (iconName==PAGE_NAMES.STATS)
     {
-      falseall();
-      Stats.setStaticBoolean(true);
+      selected =PAGE_NAMES.STATS
       navigation.navigate('Stats')
     }
-    else if (iconName=='profile')
+    else if (iconName==PAGE_NAMES.PROFILE)
     {
-      falseall();
-      Profile.setStaticBoolean(true);
+      selected =PAGE_NAMES.PROFILE
       navigation.navigate('Profile')
     }
     
@@ -90,35 +61,35 @@ const Navigationbar = ({ navigation }) => {
   return (
     <View style={styles.tabBarStyle}>
 
-      <Pressable onPress={() => handlePress('home')}>
+      <Pressable onPress={() => handlePress(PAGE_NAMES.HOME)}>
       { //check which icon will load
-      Home.getStaticBoolean() ? <Fontisto name="home" size={24} color={Primarycolor1} />  :  <MaterialCommunityIcons name="home-outline" size={30} color={Primarycolor1}/>
+     (selected==PAGE_NAMES.HOME) ? <Fontisto name="home" size={24} color={Primarycolor1} />  :  <MaterialCommunityIcons name="home-outline" size={30} color={Primarycolor1}/>
       }
       </Pressable>
 
-      <Pressable onPress={() => handlePress('map')}>
+      <Pressable onPress={() => handlePress(PAGE_NAMES.MAP)}>
       { //check which icon will load
-      Map.getStaticBoolean() ? <Fontisto name="map-marker-alt" size={24} color={Primarycolor1} />   :  <Feather name="map-pin" size={24} color={Primarycolor1}/>
-      }
-      </Pressable>
-
-
-      <Pressable onPress={() => handlePress('add')}>
-      { //check which icon will load
-      Add.getStaticBoolean() ? <AntDesign name="pluscircle" size={24} color={Primarycolor1}/>    : <AntDesign name="pluscircleo" size={24} color={Primarycolor1} />
+      (selected==PAGE_NAMES.MAP) ? <Fontisto name="map-marker-alt" size={24} color={Primarycolor1} />   :  <Feather name="map-pin" size={24} color={Primarycolor1}/>
       }
       </Pressable>
 
 
-      <Pressable onPress={() => handlePress('stats')}>
+      <Pressable onPress={() => handlePress(PAGE_NAMES.ADD)}>
       { //check which icon will load
-      Stats.getStaticBoolean() ? <Ionicons name="stats-chart-sharp" size={22} color={Primarycolor1} /> : <Ionicons name="stats-chart-outline" size={24} color={Primarycolor1} />
+     (selected==PAGE_NAMES.ADD)  ? <AntDesign name="pluscircle" size={24} color={Primarycolor1}/>    : <AntDesign name="pluscircleo" size={24} color={Primarycolor1} />
       }
       </Pressable>
 
-      <Pressable onPress={() => handlePress('profile')}>
+
+      <Pressable onPress={() => handlePress(PAGE_NAMES.STATS)}>
       { //check which icon will load
-      Profile.getStaticBoolean() ? <Ionicons name="person-circle-sharp" size={24} color={Primarycolor1}/> : <Ionicons name="person-circle-outline" size={24} color={Primarycolor1} /> 
+       (selected==PAGE_NAMES.STATS)  ? <Ionicons name="stats-chart-sharp" size={22} color={Primarycolor1} /> : <Ionicons name="stats-chart-outline" size={24} color={Primarycolor1} />
+      }
+      </Pressable>
+
+      <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
+      { //check which icon will load
+      (selected==PAGE_NAMES.PROFILE)  ? <Ionicons name="person-circle-sharp" size={24} color={Primarycolor1}/> : <Ionicons name="person-circle-outline" size={24} color={Primarycolor1} /> 
       }
       </Pressable>
     </View>
@@ -146,6 +117,3 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 })
-
-
-
