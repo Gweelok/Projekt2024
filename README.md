@@ -247,4 +247,9 @@ To solve this, you need to install watchman:
 brew update
 brew install watchman
 ```
-					
+
+If running the app using Expo Go gives you this error: 
+```
+Uncaught Error: java.net.SocketTimeoutException: failed to connect to...
+```
+It means that you are not accessing the same IP address as your computer. 
