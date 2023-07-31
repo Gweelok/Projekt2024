@@ -41,13 +41,19 @@ export const styles = StyleSheet.create({
   //Headlines
   Header : {
     fontSize: 35,
+    fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 30,
     marginLeft:40, 
-    fontFamily: 'space-grotesk-bold',
+    fontFamily: 'space-grotesk',
   },
   Header_Primarycolor1  : {
+    fontSize: 35,
+    marginBottom: 50,
+    marginTop: 40,
+    marginLeft:40, 
     color: Primarycolor1,
+    fontFamily: 'space-grotesk-bold',
     },
 
   //Links 
@@ -65,7 +71,7 @@ export const styles = StyleSheet.create({
   },
   //Input box
   inputBox: {
-    height: 40,
+    height: 45,
     width :'90%',
     marginLeft: "auto",
     marginRight: "auto",
@@ -76,7 +82,8 @@ export const styles = StyleSheet.create({
     fontFamily: 'space-grotesk',
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor3,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    flexDirection : "row",
   },
   //Menu items
   menuItem :
@@ -215,13 +222,20 @@ export const Buttons = StyleSheet.create({
     marginBottom : 20, 
     justifyContent: 'center',
   },
+  
+  //used for continue with facebook and with continue with google
+  SocialMediabuttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 15,
+  },
   main_button: {
     padding: 10,
     width :'90%',
     marginLeft: "auto",
     marginRight:"auto",
-    backgroundColor: '#0F5202',
-    borderColor: '#0F5202',
+    backgroundColor: Primarycolor1,
+    borderColor: Primarycolor1,
     borderWidth: 2,
   },
   main_buttonText: {
@@ -235,7 +249,7 @@ export const Buttons = StyleSheet.create({
     width :'90%',
     marginLeft: "auto",
     marginRight:"auto",
-    backgroundColor: '#fff',
+    backgroundColor: Primarycolor3,
     borderColor: Primarycolor1,
     borderWidth: 4,
   },

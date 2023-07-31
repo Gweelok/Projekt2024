@@ -63,7 +63,7 @@ const Navigationbar = ({ navigation }) => {
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.HOME)}>
       { //check which icon will load
-     (selected==PAGE_NAMES.HOME) ? <Fontisto name="home" size={24} color={Primarycolor1} />  :  <MaterialCommunityIcons name="home-outline" size={30} color={Primarycolor1}/>
+     (selected==PAGE_NAMES.HOME) ? <Ionicons name="ios-home-sharp" size={24} color={Primarycolor1} />  :  <Ionicons name="ios-home-outline" size={24} color={Primarycolor1} />
       }
       </Pressable>
 

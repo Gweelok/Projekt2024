@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput , Pressable , Alert} from 'react-native';
-import { styles, Backgroundstyle} from '../styles/Stylesheet';
-import Navigationbar from '../componets/Navigationbar';
+import { View, Text, StyleSheet, TextInput , Pressable , Alert } from 'react-native';
+import { styles,
+   Backgroundstyle,
+   Primarycolor2,
+   Buttons,
+   Primarycolor1,
+  } 
+   from '../styles/Stylesheet';
+   import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
+
 
 const SignUpScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
+  const [showPassword, setShowPassword] = useState(false);
 
   //To check on password 
   const CheckPassword = (text) => {
@@ -30,11 +38,16 @@ const SignUpScreen = ({ navigation }) => {
           Alert.alert('Invalid Email or Password');
     }
   };
+  //check if pass should be shown
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   let Header='Opret bruger';
   return (
     
     <View style={Backgroundstyle.informationScreens}>
-      <Text style={[styles.Header_Primarycolor1, styles.Header]}>{Header}</Text>
+      <Text style={styles.Header_Primarycolor1}>{Header}</Text>
        <TextInput
          placeholder="E-mail"
         value={email}
@@ -42,109 +55,62 @@ const SignUpScreen = ({ navigation }) => {
         keyboardType="email-address"
         autoCapitalize="none"
         clearButtonMode={"always"}  
-        style={SignUpStyles.inputBox}
+        style={styles.inputBox}
       />
+
+      <View style={styles.inputBox }>
       <TextInput
-        style={SignUpStyles.inputBox}
         value={password}
         onChangeText={CheckPassword}
         placeholder={'Kodeord'}
         keyboardType={'default'}
-        secureTextEntry={true}
+        secureTextEntry={!showPassword}
+        style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
       />
+      <Ionicons
+        name={showPassword ? 'ios-eye-off' : 'ios-eye'}
+        size={18}
+        color={Primarycolor1}
+        style={styles.Icon_container}
+        onPress={togglePasswordVisibility}
+      />
+      </View>
       { //Check on the password
-      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> Min 8 Tegn </Text>
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> min. otte tegn </Text>
       }
-      <Pressable onPress={handleSubmit} style={SignUpStyles.container_Primary}>
-            <Text style={SignUpStyles.buttonText}>{Header}</Text>
+      <Pressable onPress={handleSubmit} style={Buttons.main_button}>
+            <Text style={Buttons.main_buttonText}>{Header}</Text>
         </Pressable>
         
-         <Pressable onPress={handleSubmit} style={SignUpStyles.buttonfb}>
+         <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
           <View style={SignUpStyles.container}>
-            <Text style={SignUpStyles.buttonText}> Continue with FaceBook</Text>
+            <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
       
-         <Pressable onPress={handleSubmit}  style={SignUpStyles.buttongoogle}>
+         <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
           <View style={SignUpStyles.container}>
-            <Text style={SignUpStyles.buttonText}> Continue with Google</Text>
+            <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
 
         <Pressable onPress={() => {}}>
-            <Text style={SignUpStyles.text_Tertiary}> Har du allerede en burger?</Text>
+            <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
         </Pressable>
     </View>
     
   );
 }
 const SignUpStyles = StyleSheet.create({
-    signupstyle:{
-        aliginItems : 'center',
-        flex: 1,
-        backgroundColor: '#E2F4DE',
-      },
-
-buttonfb: {
-    backgroundColor: '#4765A9',
-    fontSize: 22,
-    padding: 10,
-    width :'70%',
-    marginVertical: 20,
-    margin: '15%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttongoogle: {
-    backgroundColor: '#F41616',
-    fontSize: 22,
-    padding: 10,
-    width :'50%',
-    marginVertical: 20,
-    margin: '25%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerText: {
-    padding: 70,
-    fontSize: 30,
-    color: '#0F5202',
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  inputBox: {
-    height: 40,
-    width :'90%',
-    margin: 12,
-    borderWidth: 4,
-    padding: 10,
-    fontSize: 16,
-    borderColor: '#0F5202',
-    backgroundColor: 'white',
-    alignSelf: 'stretch'
-  },
-  container_Primary: {
-    fontSize: 22,
-    padding: 10,
-    height: 45,
-    width :'90%',
-    marginVertical: 20,
-    margin: 12,
-    backgroundColor: '#0F5202',
-    borderColor: '#0F5202',
-    borderWidth: 2,
-  },
+    
+ 
   text_Tertiary: {
-    margin:2, 
+    marginBottom: 10, 
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
   },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 15,
-  },
+  
    container: {
     flexDirection: 'row',
     alignItems: 'center',
