@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, Dimensions} from 'react-native';
-import {Primarycolor1} from "../../styles/Stylesheet";
+import {Primarycolor1} from "../../../styles/Stylesheet";
 import {Feather} from "@expo/vector-icons";
 
 const SearchBox = ({ onChangeText, value }) => {

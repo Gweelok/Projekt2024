@@ -1,7 +1,7 @@
 import { styles ,Backgroundstyle} from '../../styles/Stylesheet';
 import Navigationbar from '../../componets/Navigationbar';
 import React from 'react';
-import StationsMap from "./StationsMap";
+import StationsMap from "./mapDisplay/StationsMap";
 import {View} from "react-native";
 
 

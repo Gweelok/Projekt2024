@@ -5,7 +5,7 @@ class CustomMarkerView extends React.Component {
     render() {
         return (
             <View>
-                <Image source={require('../../../assets/images/marker_bg.jpg')} style={styles.image}/>
+                <Image source={require('../../../../assets/images/marker_bg.jpg')} style={styles.image}/>
             </View>
         );
     }

@@ -47,7 +47,7 @@ import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
-import StationDetailScreen from "./src/screens/map/StationDetailScreen";
+import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
@@ -179,6 +179,7 @@ export default function App() {
         <Stack.Screen
             name="StationDetails"
             component={StationDetailScreen}
+            options={{ headerShown: false }} // hides the header
         />
         <Stack.Screen
           name="Thanks"

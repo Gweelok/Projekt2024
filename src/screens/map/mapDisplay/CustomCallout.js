@@ -1,6 +1,6 @@
 import React from "react";
 import {View, Text, StyleSheet} from "react-native";
-import {Primarycolor1} from "../../styles/Stylesheet";
+import {Primarycolor1} from "../../../styles/Stylesheet";
 import {AntDesign} from "@expo/vector-icons";
 
 class CustomCallout extends React.Component {
