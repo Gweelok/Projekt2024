@@ -3,68 +3,37 @@ import MapView, {Callout, Marker} from 'react-native-maps';
 import {StyleSheet, View} from 'react-native';
 import SearchBox from "./SearchBox";
 import CustomCallout from "./CustomCallout";
-import CustomMarkerView from "./CustomMarkerView";
-import {Primarycolor1} from "../../../styles/Stylesheet";
 
 const CopenhagenLocations = [
     // todo  get stations from server database
     {
         id: 1,
         name: 'Tivoli Gardens',
-        address: "address",
+        address: "Vesterbrogade 3, 1630 København V",
         latitude: 55.6737,
         longitude: 12.5685
     },
     {
         id: 2,
         name: 'The Little Mermaid',
-        address: "address",
+        address: "Langelinie, 2100 København Ø",
         latitude: 55.6926,
         longitude: 12.5993
     },
     {
         id: 4,
         name: 'Rosenborg Castle',
-        address: "address",
+        address: "Øster Voldgade 4A, 1350 København",
         latitude: 55.6867,
         longitude: 12.5783
     },
     {
         id: 5,
         name: 'Amalienborg Palace',
-        address: "address",
+        address: "Amalienborg Slotsplads 5, 1257 København K, Amalienborg Slotsplads",
         latitude: 55.6846,
         longitude: 12.5949
-    },
-    {
-        id: 7,
-        name: 'Round Tower',
-        address: "address",
-        latitude: 55.6816,
-        longitude: 12.5753
-    },
-    {
-        id: 8,
-        name: 'The National Museum',
-        address: "address",
-        latitude: 55.6761,
-        longitude: 12.5763
-    },
-    {
-        id: 9,
-        name: 'The Black Diamond',
-        address: "address",
-        latitude: 55.6783,
-        longitude: 12.6032
-    },
-    {
-        id: 10,
-        name: 'Frederik\'s Church',
-        address: "address",
-        latitude: 55.6840,
-        longitude: 12.5905
-    },
-
+    }
 ];
 
 const StationsMap = ({navigation}) => {

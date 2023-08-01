@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native';
 import {Primarycolor1} from "../../../styles/Stylesheet";
 
 const { width } = Dimensions.get('window');
-const buttonWidth = width * 0.9; // 设置按钮宽度为屏幕宽度的90%
+const buttonWidth = width * 0.9;
 
 
 const PrimaryColorButton = ({ onPress, titleText }) => {

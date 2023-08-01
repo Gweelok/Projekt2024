@@ -11,7 +11,7 @@ class CustomCallout extends React.Component {
             <View style={styles.rowContainer}>
                 <View style={styles.columnContainer}>
                     <Text style={styles.locationName}>{currentLocation.name}</Text>
-                    <Text style={styles.locationAddress}>Address: {currentLocation.address}</Text>
+                    <Text style={styles.locationAddress}>{currentLocation.address}</Text>
                 </View>
                 <View style={styles.Icon_container}>
                     <AntDesign style={{justifyContent: 'center'}} name="right" size={26} color={Primarycolor1}/>
@@ -29,20 +29,24 @@ const styles = StyleSheet.create({
     },
     columnContainer: {
         flexDirection: 'column',
-        marginLeft: 8,
-        marginBottom: 5,
-        marginTop: 5,
+        marginLeft: 5,
+        marginBottom: 3,
+        marginTop: 3,
         marginRight: 5,
     },
     locationName: {
         fontSize: 16,
         fontWeight: 'bold',
         fontFamily: 'space-grotesk-bold',
+        flexWrap: 'wrap',
+        maxWidth: 300,
     },
     locationAddress: {
-        marginTop: -5,
-        fontSize: 14,
+        flexWrap: 'wrap',
+        marginBottom:1,
+        fontSize: 13,
         fontFamily: 'space-grotesk',
+        maxWidth: 300,
     },
 });
 

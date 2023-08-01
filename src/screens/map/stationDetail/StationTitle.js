@@ -13,19 +13,19 @@ const StationTitle = ({ title, description }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 30,
+        marginLeft: 20,
         alignItems: 'center',
         justifyContent: 'center',
     },
     title: {
-        fontSize: 30, // 可根据需要调整标题字号
+        fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         color : Primarycolor1,
         fontFamily: 'space-grotesk-bold',
     },
     description: {
-        fontSize: 18, // 可根据需要调整说明字号
+        fontSize: 15,
         textAlign: 'center',
         color : Primarycolor1,
         fontFamily: 'space-grotesk',

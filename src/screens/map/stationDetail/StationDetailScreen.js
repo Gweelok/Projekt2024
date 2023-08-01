@@ -1,6 +1,6 @@
 import Navigationbar from '../../../componets/Navigationbar';
 import React from 'react';
-import {StyleSheet, StatusBar, Image, View, Dimensions} from "react-native";
+import {StyleSheet, StatusBar, Image, View, Dimensions, Platform, Linking, ScrollView} from "react-native";
 import BackButton from "./BackButton";
 import StationTitle from "./StationTitle";
 import {Backgroundstyle} from "../../../styles/Stylesheet";
@@ -12,30 +12,55 @@ const imageSize = width * 0.85;
 
 const StationDetailScreen = ({ route, navigation }) => {
     const {stationDetail} = route.params;
+
+    const openMap = async (latitude, longitude, label = 'MyLabel') => {
+        const browserUrl = `https://www.google.com/maps/dir/?api=1&origin=&destination=${latitude},${longitude}&travelmode=driving`;
+
+        if (Platform.OS === 'android') {
+            // Android open google map first, in driving mode, if google map is not available, then open map in browser.
+            return Linking.openURL(browserUrl);
+        } else if (Platform.OS === 'ios') {
+            const url = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
+            Linking.canOpenURL(url).then(supported => {
+                if (supported) {
+                    return Linking.openURL(url);
+                } else {
+                    return Linking.openURL(browserUrl);
+                }
+            });
+        }
+    };
+
+    const openStationDirectionPage = () => {
+        openMap(stationDetail.latitude, stationDetail.longitude, stationDetail.name);
+    };
+
     return (
-        <View style={Backgroundstyle.interactive_screens}>
-            <View style={styles.backButtonContainer}>
-                <BackButton navigation={navigation} />
-            </View>
-            <View style={styles.titleContainer}>
-                <StationTitle title={stationDetail.name} description={stationDetail.address} //todo get title and description from backend
-                />
-            </View>
-            <View style={styles.imageContainer}>
-                <Image
-                    source={require('../../../../assets/images/cph.jpg')} //todo get image from backend
-                    style={styles.image}
-                />
-            </View>
+        <View  style={Backgroundstyle.interactive_screens}>
+            <ScrollView>
+                <View style={styles.backButtonContainer}>
+                    <BackButton navigation={navigation} />
+                </View>
+                <View style={styles.titleContainer}>
+                    <StationTitle title={stationDetail.name} description={stationDetail.address} //todo get title and description from backend
+                    />
+                </View>
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require('../../../../assets/images/cph.jpg')} //todo get image from backend
+                        style={styles.image}
+                    />
+                </View>
 
-            <View style={styles.buttonContainer}>
-                <PrimaryColorButton onPress={() => { /* todo */ }} titleText="Vis vej" />
-            </View>
+                <View style={styles.buttonContainer}>
+                    <PrimaryColorButton onPress={() => { openStationDirectionPage() }} titleText="Vis vej" />
+                </View>
 
-            <View style={styles.buttonContainer2}>
-                <WhiteColorButton onPress={() => { /* todo */ }} titleText="Vis produkter" />
-            </View>
+                <View style={styles.buttonContainer2}>
+                    <WhiteColorButton onPress={() => { /* todo */ }} titleText="Vis produkter" />
+                </View>
 
+            </ScrollView>
             <Navigationbar navigation={navigation} />
         </View>
     );
@@ -45,8 +70,8 @@ const StationDetailScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     backButtonContainer: {
         position: 'absolute',
-        left: 30,
-        top: StatusBar.currentHeight + 30,
+        left: 20,
+        top: StatusBar.currentHeight + 20,
     },
     titleContainer: {
         marginTop: StatusBar.currentHeight + 40,

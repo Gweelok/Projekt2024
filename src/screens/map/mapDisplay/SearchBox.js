@@ -12,7 +12,7 @@ const SearchBox = ({ onChangeText, value }) => {
                 onChangeText={onChangeText}
                 value={value}
             />
-            <Feather style={styles.searchIcon} name="search" size={24} color="black" />
+            <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
         </View>
     );
 };
