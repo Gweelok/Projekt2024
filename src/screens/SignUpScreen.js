@@ -47,7 +47,7 @@ const SignUpScreen = ({ navigation }) => {
   return (
     
     <View style={Backgroundstyle.informationScreens}>
-      <Text style={styles.Header_Primarycolor1}>{Header}</Text>
+      <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
        <TextInput
          placeholder="E-mail"
         value={email}
@@ -58,7 +58,7 @@ const SignUpScreen = ({ navigation }) => {
         style={styles.inputBox}
       />
 
-      <View style={styles.inputBox }>
+      <View style={[styles.inputBox , {flexDirection:"row"}]}>
       <TextInput
         value={password}
         onChangeText={CheckPassword}
