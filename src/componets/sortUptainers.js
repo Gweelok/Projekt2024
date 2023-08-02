@@ -1,27 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
+import { View } from 'react-native';
+import * as Location from 'expo-location';
 import Uptainer from './Uptainer';
 
 
-const DUMMY_UPTAINERS = [
-  {
-    name: "Uptainer1",
-    location: {
-    latitude: 37.78925,
-    longitude: -122.4324,
-    }
-  },
-  {
-    name: "Uptainer2",
-    location: {
-    latitude: 37.78989,
-    longitude: -122.4123,
-    }
-  }
-];
-
-const sortUptainers = () => {
+const SortUptainers = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
 
@@ -69,26 +52,39 @@ const sortUptainers = () => {
 
   // Fetch user location on component mount
   useEffect(() => {
-    Geolocation.getCurrentPosition(
-      position => {
-        setUserLocation(position.coords);
-      },
-      error => console.log('Error getting user location:', error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+    const fetchUserLocation = async () => {
+      try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status === 'granted') {
+          const location = await Location.getCurrentPositionAsync({
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 1000,
+          });
+          setUserLocation(location.coords);
+        } else {
+          console.log('Permission to access location was denied');
+        }
+      } catch (error) {
+        console.log('Error getting user location:', error);
+      }
+    };
+
+    fetchUserLocation();
   }, []);
 
   // Whenever the userLocation or Uptainers list changes, update the sortedUptainers state
   useEffect(() => {
     if (userLocation) {
-      const sortedList = sortUptainersByDistance(userLocation, DUMMY_UPTAINERS);
+      const sortedList = sortUptainersByDistance(userLocation, Uptainer); 
       setSortedUptainers(sortedList);
     }
   }, [userLocation]);
+
   return (
     <View>
       {/* Display the list of sorted uptainers using the Uptainer component */}
-      {sortedUptainers.map(uptainer => (
+      {sortedUptainers.map((uptainer) => (
         <Uptainer
           key={uptainer.name}
           name={uptainer.name}
@@ -100,4 +96,5 @@ const sortUptainers = () => {
   );
 };
 
-export default sortUptainers;
+export default SortUptainers;
+
