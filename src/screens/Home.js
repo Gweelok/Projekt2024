@@ -4,6 +4,9 @@ import Navigationbar from '../componets/Navigationbar';
 import React, { useState } from 'react';
 import Uptainer from '../componets/Uptainer';
 import { BoxLink } from '../styles/BoxLink';
+import * as Location from "expo-location";
+import SortUptainers from "../componets/sortUptainers";
+
 
 ///Asumming i have data
 const photo = [
@@ -24,21 +27,25 @@ const UptainerData = [
       name: 'Valby',
       location: 'Allegrade',
       photos: photo,
+      latitude: 55.6666,
+      longitude: 12.1000,
     },
 
   {
     name: 'Norrebo',
     location: 'ved fatka',
     photos: photo,
+    latitude: 55.6666,
+    longitude: 12.2000,
   },
   {
       name: 'Norrebo',
       location: 'ved fatka',
       photos: photo,
+      latitude: 55.6666,
+      longitude: 12.3000,
     },
   ];
-import React from 'react';
-import * as Location from "expo-location";
 
   const renderUptainers = () => {
     // Create a new array without the first element
@@ -79,6 +86,8 @@ return (
       />
       <ScrollView style={{marginBottom:60,}}>
       <Uptainer name={UptainerData[0].name} location={UptainerData[0].location} data={UptainerData[0].photos} />
+      <SortUptainers />
+      <Uptainer name={UptainerData[0].name} location={UptainerData[0].location} data={UptainerData[0].photos} />
        <BoxLink msg="Hvordan funger UPDROPP?"/>
        {renderUptainers()}
       </ScrollView>
@@ -95,3 +104,4 @@ const style=StyleSheet.create({
         marginTop:10,
     }
 })
+

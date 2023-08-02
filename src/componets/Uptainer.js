@@ -3,8 +3,27 @@ import { styles , Primarycolor1 } from '../styles/Stylesheet';
 import React from 'react';
 
 
-
-const Uptainer = ({ name,location , data }) => {
+const Uptainer = ({ name, location, data }) => {
+//   const UptainerData = [
+//   {
+//     id: '1',
+//     name: 'Valby',
+//     location: '55.6666, 12.3000',
+//     imageSource: 'https://via.placeholder.com/200x200',
+//   },
+//   {
+//     id: '2',
+//     name: 'Norrebro',
+//     location: '55.6666, 12.1000',
+//     imageSource: 'https://via.placeholder.com/200x200',
+//   },
+//   {
+//     id: '3',
+//     name: 'Norrebro',
+//     location: '55.6666, 12.000',
+//     imageSource: 'https://via.placeholder.com/200x200',
+//   },
+// ]
 
 return (
     <View> 
