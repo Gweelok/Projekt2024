@@ -57,6 +57,7 @@ const UptainerData = [
     ));
   };
 
+  
 
 
 
@@ -73,6 +74,10 @@ const Home = ({ navigation }) => {
 
     const [search, onChangeSearch] = useState('');
 
+    const handle = () => {
+      navigation.navigate('Info');
+    };
+
 return (
     <View style={Backgroundstyle.interactive_screens}>
             <TextInput
@@ -85,10 +90,9 @@ return (
         style={[styles.inputBox , style.searchbar]}
       />
       <ScrollView style={{marginBottom:60,}}>
-      <Uptainer name={UptainerData[0].name} location={UptainerData[0].location} data={UptainerData[0].photos} />
       <SortUptainers />
       <Uptainer name={UptainerData[0].name} location={UptainerData[0].location} data={UptainerData[0].photos} />
-       <BoxLink msg="Hvordan funger UPDROPP?"/>
+       <BoxLink msg="Hvordan funger UPDROPP?" onPress={handle}/>
        {renderUptainers()}
       </ScrollView>
     <Navigationbar navigation={navigation}/>
