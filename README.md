@@ -122,6 +122,7 @@ git push --set-upstream origin main
 ```
 to set where your commits go, after that when you want to push your commits to the github just go to Source Control and press ... and choose push.
 
+
 ## And that's it
 And that should be it, i hope, just remember to "pull" every time you open up the project, just to make sure there's no problems.
 
@@ -236,6 +237,9 @@ git branch -d <name here>
 ```
 or in source control. And that should be it, if there's any merge conflicts then it should be easy to see what to keep and what not to keep if using vscode.
 					
+## Git practice you should follow - Rebase
+https://docs.google.com/document/d/12mwrght5QEvpEBXpcRvna5ymurbfKNVBtF0zebospcY/edit?usp=sharing
+
 # Troubleshooting 
 
 On mac when running application (using expo start), you might recieve the error: 
