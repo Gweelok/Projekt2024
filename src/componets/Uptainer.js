@@ -24,9 +24,6 @@ const Uptainer = ({ name, location, data }) => {
 //     imageSource: 'https://via.placeholder.com/200x200',
 //   },
 // ]
-const Data1 = data.slice(0,6);
-const Data2= data.slice(6,12);
-
 
 return (
     <View> 
