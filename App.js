@@ -42,7 +42,6 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
-import Infopage from "./src/screens/Infopage";
 
 
 
@@ -109,10 +108,6 @@ export default function App() {
           name="Add"
           component={Add}
           options={{animation : "none"}}
-        />
-        <Stack.Screen
-          name="Info"
-          component={Infopage}
         />
         <Stack.Screen
           name="Products"
