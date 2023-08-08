@@ -42,6 +42,7 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
+import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 
 
 
@@ -77,61 +78,69 @@ export default function App() {
   }
   // Main navigation of all the views
   return (
+    <LanguageProvider>
     <NavigationContainer theme={navStyle}>
       <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen
           name="SignUp"
           component={SignUpScreen}
+          options={{animation : "none"}}
         />
         <Stack.Screen
           name="Homepage"
           component={Home}
+          options={{animation : "none"}}
         />
         <Stack.Screen
           name="Map"
           component={Map}
+          options={{animation : "none"}}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{animation : "none"}}
         />
         <Stack.Screen
           name="Stats"
           component={Stat}
+          options={{animation : "none"}}
         />
         <Stack.Screen
           name="Add"
           component={Add}
+          options={{animation : "none"}}
         />
         <Stack.Screen
           name="Products"
           component={ProductScreen}
-          options={{ title: "Products" }}
+          options={{ title: "Products", animation : "none"}}
         />
         
         <Stack.Screen
           name="Pro"
           component={ProScreen}
-          options={{ title: "Products" }}
+          options={{ title: "Products" , animation : "none"}}
         />
         <Stack.Screen
           name="Bnd"
           component={BndScreen}
-          options={{ title: "Brands" }}
+          options={{ title: "Brands" , animation : "none" }}
         />
         <Stack.Screen
           name="Mod"
           component={ModScreen}
-          options={{ title: "Models" }}
+          options={{ title: "Models" , animation : "none" }}
         />
         <Stack.Screen name="Stations" component={StationsScreen} />
         <Stack.Screen
           name="Thanks"
           component={ThanksScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false , animation : "none"}}
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </LanguageProvider>
   );
 
   //Screens
