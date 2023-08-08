@@ -69,7 +69,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     'space-grotesk': require('./assets/fonts/SpaceGrotesk-Regular.ttf'),
     'space-grotesk-bold': require('./assets/fonts/SpaceGrotesk-Bold.ttf'),
-
+    'space-grotesk-Medium': require('./assets/fonts/SpaceGrotesk-Medium.ttf'),
   });
 
   if (!fontsLoaded) {

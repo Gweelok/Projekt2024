@@ -209,7 +209,7 @@ export const Buttons = StyleSheet.create({
     backgroundColor: '#F41616',
     fontSize: 22,
     padding: 10,
-    width :'50%',
+    width :'52%',
     marginLeft: "auto",
     marginRight:"auto",
     marginBottom : 20, 
@@ -228,6 +228,8 @@ export const Buttons = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk-Medium',
+    
   },
   secondary_button:
   {
@@ -243,6 +245,7 @@ export const Buttons = StyleSheet.create({
     color: Primarycolor1,
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk-Medium',
   },
   iconContainerRight: {
     position: 'absolute',
@@ -260,5 +263,6 @@ export const Buttons = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk-Medium',
   },
 });

@@ -110,6 +110,8 @@ const SignUpStyles = StyleSheet.create({
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk',
+
   },
   
    container: {
