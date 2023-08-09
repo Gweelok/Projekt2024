@@ -36,13 +36,14 @@ import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
 import { useFonts } from 'expo-font';
-//importing pages for navigation 
+//importing pages for navigation
 import Home from "./src/screens/Home";
 import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
 import Info from "./src/screens/Info";
+import ArticlePage from "./src/screens/article/ArticlePage";
 
 
 console.log("start");
@@ -64,7 +65,7 @@ export default function App() {
     //createTestData();
   }, []);
 
-  //Loading the font 
+  //Loading the font
   const [fontsLoaded] = useFonts({
     'space-grotesk': require('./assets/fonts/SpaceGrotesk-Regular.ttf'),
     'space-grotesk-bold': require('./assets/fonts/SpaceGrotesk-Bold.ttf'),
@@ -91,8 +92,8 @@ export default function App() {
         />
         <Stack.Screen
           name="Infopage"
-          component={Info}
-          options={{animation : "none"}}
+          component={ArticlePage}
+          options={{ headerShown: false, animation : "none" }}
         />
         <Stack.Screen
           name="Map"
@@ -119,7 +120,7 @@ export default function App() {
           component={ProductScreen}
           options={{ title: "Products", animation : "none"}}
         />
-        
+
         <Stack.Screen
           name="Pro"
           component={ProScreen}
@@ -146,7 +147,7 @@ export default function App() {
   );
 
   //Screens
- 
+
 
   // eslint-disable-next-line react/prop-types
   function StationsScreen({ navigation, route }) {
