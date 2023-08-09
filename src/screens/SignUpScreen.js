@@ -33,7 +33,7 @@ const SignUpScreen = ({ navigation }) => {
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-          navigation.navigate('Homepage')
+          navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
     } else {
           Alert.alert('Invalid Email or Password');
     }
