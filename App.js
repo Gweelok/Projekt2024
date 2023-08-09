@@ -42,6 +42,7 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
+import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 
 
@@ -80,7 +81,13 @@ export default function App() {
   return (
     <LanguageProvider>
     <NavigationContainer theme={navStyle}>
-      <Stack.Navigator initialRouteName="SignUp">
+      <Stack.Navigator initialRouteName="Landingscreen">
+      <Stack.Screen
+          name="Landingscreen"
+          component={LandingScreen}
+          options={{animation : "none"}}
+        />
+
         <Stack.Screen
           name="SignUp"
           component={SignUpScreen}

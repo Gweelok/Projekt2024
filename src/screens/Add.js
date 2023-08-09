@@ -20,10 +20,6 @@ return (
         <ChooseCatagories navigation={navigation} />
       </SafeAreaView>
       <Text>Current Language: {currentLanguage}</Text>
-      <View style={{marginBottom:60}} >
-      <Button  title="English" onPress={() => setLanguage('en')}/>
-      <Button title="Danish" onPress={() => setLanguage('da')} />
-      </View>
         <Navigationbar navigation={navigation}/>
      
     </View>
