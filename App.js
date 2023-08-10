@@ -42,7 +42,7 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
-
+import Info from "./src/screens/Info";
 
 
 console.log("start");
@@ -87,6 +87,11 @@ export default function App() {
         <Stack.Screen
           name="Homepage"
           component={Home}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Infopage"
+          component={Info}
           options={{animation : "none"}}
         />
         <Stack.Screen
