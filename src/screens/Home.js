@@ -1,5 +1,6 @@
 import { View, Text} from 'react-native';
 import { styles , Backgroundstyle} from '../styles/Stylesheet';
+import {BoxLink} from '../styles/BoxLink';
 import Navigationbar from '../componets/Navigationbar';
 import React from 'react';
 import * as Location from "expo-location";
@@ -14,10 +15,15 @@ const Home = ({ navigation }) => {
         }
       };
 
+      const navigatetoinfo = () => {
+              navigation.navigate('Infopage')
+      }
+
 
 return (
     <View style={Backgroundstyle.interactive_screens}> 
         <Text style={styles.Header_Primarycolor1}> Home page </Text>
+        <BoxLink msg="Hvordann fungerer Updropp" onPress={navigatetoinfo}/>
         <Navigationbar navigation={navigation}/>
     </View>
 );
