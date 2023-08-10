@@ -1,9 +1,11 @@
-import { View, Text, Image , FlatList ,StyleSheet } from 'react-native';
+import { View, Text, Image , FlatList ,StyleSheet, TouchableOpacity } from 'react-native';
 import { styles , Primarycolor1 } from '../styles/Stylesheet';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Uptainer = ({ name, location, data }) => {
+    const navigation = useNavigation();
 //   const UptainerData = [
 //   {
 //     id: '1',
@@ -35,9 +37,11 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:5, marginTop:5,}}
       renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => navigation.navigate('DetailView', {data: item })}>
         <View style={styling.item}>
             <Image source={{ uri: item.imageSource }} style={styling.image} />
         </View>
+        </TouchableOpacity>
       )}
     />
      <FlatList
@@ -46,9 +50,11 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:10, marginTop:5,}}
       renderItem={({ item }) => (
+        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', {data: item })}>
         <View style={styling.item}>
             <Image source={{ uri: item.imageSource }} style={styling.image} />
         </View>
+        </TouchableOpacity>
       )}
     />
     </View>

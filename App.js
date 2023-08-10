@@ -42,6 +42,7 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
+import DetailView from "./src/screens/DetailView"
 
 
 
@@ -89,6 +90,9 @@ export default function App() {
           component={Home}
           options={{animation : "none"}}
         />
+        <Stack.Screen 
+          name="DetailView"
+          component={DetailView} />
         <Stack.Screen
           name="Map"
           component={Map}
