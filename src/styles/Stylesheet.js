@@ -96,7 +96,8 @@ export const styles = StyleSheet.create({
   {
     fontFamily: 'space-grotesk-bold',
     color: Primarycolor1, 
-    fontSize: 20, 
+    fontSize: 20,
+    marginRight:"auto" 
   },
   menuItem_arrow:
   {
@@ -125,6 +126,7 @@ export const styles = StyleSheet.create({
   {
     flex: 1,
     alignItems: 'center',
+    justifyContent:"center",
   }
 
 });
