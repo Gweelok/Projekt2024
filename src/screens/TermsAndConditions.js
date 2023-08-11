@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Backgroundstyle, styles, Buttons, Primarycolor1 } from '../styles/Stylesheet';
+import { Backgroundstyle, styles, Buttons } from '../styles/Stylesheet';
 
 const TermsAndConditions = ({ navigation }) => {
   return (
@@ -14,12 +14,12 @@ const TermsAndConditions = ({ navigation }) => {
         <Text style={styles.paragraph_text}>3. Personal data shared will be protected.</Text>
       </View>
       <TouchableOpacity 
-        style={[Buttons.main_button, { backgroundColor: Primarycolor1, marginBottom: 10 }]}
+        style={[Buttons.main_button, { marginBottom: 10 }]}
         onPress={() => navigation.navigate('ProfileCreated')}>
         <Text style={Buttons.main_buttonText}>Accept</Text>
       </TouchableOpacity>
       <TouchableOpacity 
-        style={[Buttons.secondary_button, { borderColor: Primarycolor1, backgroundColor: '#f3f3f3' }]}
+        style={[Buttons.secondary_button]}
         onPress={() => navigation.goBack()}>
         <Text style={Buttons.secondary_buttonText}>Decline</Text>
       </TouchableOpacity>
@@ -28,4 +28,3 @@ const TermsAndConditions = ({ navigation }) => {
 }
 
 export default TermsAndConditions;
-
