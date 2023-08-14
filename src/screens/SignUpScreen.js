@@ -8,6 +8,7 @@ import { styles,
   } 
    from '../styles/Stylesheet';
    import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
+   import { useLanguage, t } from '../Languages/LanguageHandler'; // Import 'useLanguage' and 't'
 
 
 const SignUpScreen = ({ navigation }) => {
@@ -15,6 +16,7 @@ const SignUpScreen = ({ navigation }) => {
   const [password, onChangePassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
   const [showPassword, setShowPassword] = useState(false);
+  const { currentLanguage } = useLanguage();
 
   //To check on password 
   const CheckPassword = (text) => {
@@ -43,11 +45,12 @@ const SignUpScreen = ({ navigation }) => {
     setShowPassword((prevState) => !prevState);
   };
 
-  let Header='Opret bruger';
+
   return (
     
     <View style={Backgroundstyle.informationScreens}>
-      <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
+      <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
+
        <TextInput
          placeholder="E-mail"
         value={email}
@@ -62,11 +65,12 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         value={password}
         onChangeText={CheckPassword}
-        placeholder={'Kodeord'}
+        placeholder={t('SignUpScreen.password', currentLanguage)}
         keyboardType={'default'}
         secureTextEntry={!showPassword}
         style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
       />
+
       <Ionicons
         name={showPassword ? 'ios-eye-off' : 'ios-eye'}
         size={18}
@@ -75,11 +79,14 @@ const SignUpScreen = ({ navigation }) => {
         onPress={togglePasswordVisibility}
       />
       </View>
+
       { //Check on the password
-      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> min. otte tegn </Text>
+
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.passwordmsg', currentLanguage)} </Text>
       }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
-            <Text style={Buttons.main_buttonText}>{Header}</Text>
+            <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
+
         </Pressable>
         
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
@@ -95,7 +102,8 @@ const SignUpScreen = ({ navigation }) => {
         </Pressable>
 
         <Pressable onPress={() => {}}>
-            <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
+            <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.LogInLink', currentLanguage)}</Text>
+
         </Pressable>
     </View>
     
@@ -109,6 +117,8 @@ const SignUpStyles = StyleSheet.create({
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk',
+
   },
   
    container: {
