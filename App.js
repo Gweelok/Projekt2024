@@ -42,6 +42,8 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
+import TermsAndConditions from "./src/screens/TermsAndConditions";
+import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import Info from "./src/screens/Info";
@@ -114,6 +116,16 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+        name="TermsAndConditions"
+        component={TermsAndConditions}
+        options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="ProfileCreated"
+          component={ProfileCreated}
           options={{animation : "none"}}
         />
         <Stack.Screen
