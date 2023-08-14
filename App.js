@@ -48,6 +48,7 @@ import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import Info from "./src/screens/Info";
 import ArticlePage from "./src/screens/article/ArticlePage";
+import LogoutConfirmation from "./src/screens/LogoutConfirmation";
 
 
 
@@ -164,6 +165,11 @@ export default function App() {
           name="Thanks"
           component={ThanksScreen}
           options={{ headerShown: false , animation : "none"}}
+        />
+        <Stack.Screen
+          name = "LogoutConfirmation"
+          component={LogoutConfirmation}
+          options={{animation : "none"}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -14,6 +14,15 @@ export default {
         Termsandcond : "Terms and Conditions",
         continue : "Continue",
 
-    }
+    },
+    LogoutConfirmation: {
+        confirmMessage: "Are you sure you want to log out?",
+        logoutButton: "Log Out",
+        cancelButton: "Cancel"
+    },
+    Profile: {
+        logout: "Log Out"
+    },
+    
   };
   

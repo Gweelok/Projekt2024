@@ -14,6 +14,15 @@ export default {
         Termsandcond : "brugervilkår",
         continue : "Fortsæt",
 
-    }
+    },
+    LogoutConfirmation: {
+      confirmMessage: "Er du sikker på at du vil logge ud?",
+      logoutButton: "Log ud",
+      cancelButton: "Annullér"
+    },
+    Profile: {
+      logout: "Log ud"
+    },
+
     };
   

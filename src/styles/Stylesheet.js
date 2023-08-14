@@ -48,6 +48,9 @@ export const styles = StyleSheet.create({
   },
   Header_Primarycolor1  : {
     color: Primarycolor1,
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 10,
     },
 
   //Links 
@@ -175,17 +178,17 @@ export const navStyle = {
 export const Backgroundstyle = StyleSheet.create({
 
   informationScreens:{
-    aliginItems : 'center',
+    alignItems : 'center',
     flex: 1,
     backgroundColor: Primarycolor2,
   },
   interactive_screens:{
-    aliginItems : 'center',
+    alignItems : 'center',
     flex: 1,
     backgroundColor: Primarycolor3,
   },
   message_Screens :{
-    aliginItems : 'center',
+    alignItems : 'center',
     flex: 1,
     backgroundColor: Primarycolor1,
   },
