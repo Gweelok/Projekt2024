@@ -44,8 +44,11 @@ import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
+import LandingScreen from "./src/screens/LandingScreen"
+import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import Info from "./src/screens/Info";
 import ArticlePage from "./src/screens/article/ArticlePage";
+
 
 
 console.log("start");
@@ -71,7 +74,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     'space-grotesk': require('./assets/fonts/SpaceGrotesk-Regular.ttf'),
     'space-grotesk-bold': require('./assets/fonts/SpaceGrotesk-Bold.ttf'),
-
+    'space-grotesk-Medium': require('./assets/fonts/SpaceGrotesk-Medium.ttf'),
   });
 
   if (!fontsLoaded) {
@@ -80,8 +83,15 @@ export default function App() {
   }
   // Main navigation of all the views
   return (
+    <LanguageProvider>
     <NavigationContainer theme={navStyle}>
-      <Stack.Navigator initialRouteName="SignUp">
+      <Stack.Navigator initialRouteName="Landingscreen">
+      <Stack.Screen
+          name="Landingscreen"
+          component={LandingScreen}
+          options={{animation : "none"}}
+        />
+
         <Stack.Screen
           name="SignUp"
           component={SignUpScreen}
@@ -96,6 +106,7 @@ export default function App() {
           name="Infopage"
           component={ArticlePage}
           options={{ headerShown: false, animation : "none" }}
+
         />
         <Stack.Screen
           name="Map"
@@ -156,6 +167,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </LanguageProvider>
   );
 
   //Screens
