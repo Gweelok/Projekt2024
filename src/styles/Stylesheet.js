@@ -96,7 +96,8 @@ export const styles = StyleSheet.create({
   {
     fontFamily: 'space-grotesk-bold',
     color: Primarycolor1, 
-    fontSize: 20, 
+    fontSize: 20,
+    marginRight:"auto" 
   },
   menuItem_arrow:
   {
@@ -112,13 +113,20 @@ export const styles = StyleSheet.create({
   //Box_Link
   boxlink :
   {
-    width :'95%',
-    marginBottom :15,
+    width: '90%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 15,
     padding: 10,
-    borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
     flexDirection: 'row',
-    postion :"relative",
+    minHeight: 80,
+  },
+  boxlinkContainer :
+  {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent:"center",
   }
 
 });

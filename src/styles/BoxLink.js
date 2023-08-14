@@ -9,7 +9,9 @@ export const BoxLink = ({msg , onPress}) => {
     <View>
         <Pressable onPress={onPress}>
     <View style={styles.boxlink}>
+        <View style={styles.boxlinkContainer}>
         <Text style={styles.menuItem_text}> {msg}  </Text>
+        </View>
             <View style={styles.Icon_container}>
                 <AntDesign name="right" size={30} style={styles.menuItem_arrow}/>
             </View>
