@@ -96,8 +96,7 @@ export const styles = StyleSheet.create({
   {
     fontFamily: 'space-grotesk-bold',
     color: Primarycolor1, 
-    fontSize: 20,
-    marginRight:"auto" 
+    fontSize: 20, 
   },
   menuItem_arrow:
   {
@@ -113,11 +112,10 @@ export const styles = StyleSheet.create({
   //Box_Link
   boxlink :
   {
-    width: '90%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 15,
+    width :'95%',
+    marginBottom :15,
     padding: 10,
+    borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
     flexDirection: 'row',
     minHeight: 80,
@@ -237,7 +235,7 @@ export const Buttons = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
     fontFamily: 'space-grotesk-Medium',
-    
+
   },
   secondary_button:
   {

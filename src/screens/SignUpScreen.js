@@ -12,6 +12,7 @@ import { styles,
    import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
    import {firebaseAurth} from '../utils/Firebase';
 
+import GlobalStyle from "../styles/GlobalStyle";
 
 const SignUpScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
@@ -66,7 +67,7 @@ const SignUpScreen = ({ navigation }) => {
       signUp();
       navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
     } else {
-      Alert.alert('Invalid Email or Password');
+          Alert.alert('Invalid Email or Password');
     }
   };
   //check if pass should be shown
@@ -74,10 +75,12 @@ const SignUpScreen = ({ navigation }) => {
     setShowPassword((prevState) => !prevState);
   };
 
-
+  let Header='Opret bruger';
   return (
 
     <View style={Backgroundstyle.informationScreens}>
+        <View style={GlobalStyle.BodyWrapper}>
+        <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
        <TextInput
@@ -86,7 +89,7 @@ const SignUpScreen = ({ navigation }) => {
         onChangeText={onChangeEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-        clearButtonMode={"always"}
+        clearButtonMode={"always"}  
         style={styles.inputBox}
       />
 
@@ -94,12 +97,11 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         value={password}
         onChangeText={CheckPassword}
-        placeholder={t('SignUpScreen.password', currentLanguage)}
+        placeholder={'Kodeord'}
         keyboardType={'default'}
         secureTextEntry={!showPassword}
         style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
       />
-
       <Ionicons
         name={showPassword ? 'ios-eye-off' : 'ios-eye'}
         size={18}
@@ -108,54 +110,48 @@ const SignUpScreen = ({ navigation }) => {
         onPress={togglePasswordVisibility}
       />
       </View>
-
       { //Check on the password
-
-      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.passwordmsg', currentLanguage)} </Text>
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> min. otte tegn </Text>
       }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
-            <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
-
+            <Text style={Buttons.main_buttonText}>{Header}</Text>
         </Pressable>
-
+        
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
           <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
-
+      
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
           <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
 
-        <Pressable onPress={() => {
-                navigation.navigate('Sign in')
-        }}>
-            <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.LogInLink', currentLanguage)}</Text>
+        <Pressable onPress={() => {}}>
+            <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
         </Pressable>
+    </View>
     </View>
 
   );
 }
 const SignUpStyles = StyleSheet.create({
-
-
+    
+ 
   text_Tertiary: {
-    marginBottom: 10,
+    marginBottom: 10, 
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
-    fontFamily: 'space-grotesk',
-
   },
-
-   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
+  
+  //  container: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  // },
+  
 });
 
 export default SignUpScreen;
