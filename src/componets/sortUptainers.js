@@ -2,6 +2,57 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as Location from 'expo-location';
 import Uptainer from './Uptainer';
+import { BoxLink } from "../styles/BoxLink";
+
+
+///Asumming i have data
+const photo = [
+  { id: "1", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "2", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "3", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "4", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "5", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "6", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "7", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "8", imageSource: "https://via.placeholder.com/200x200" },
+  { id: "9", imageSource: "https://via.placeholder.com/200x200" },
+  // Add more image URLs as needed
+];
+
+const uptainersList = [
+  {
+    name: "Valby",
+    location: "Allegrade",
+    photos: photo,
+    latitude: 55.6666,
+    longitude: 12.1,
+  },
+
+  {
+    name: "Valby 2",
+    location: "ved fatka",
+    photos: photo,
+    latitude: 55.6666,
+    longitude: 12.2,
+  },
+  {
+    name: "Norrebo",
+    location: "ved fatka",
+    photos: photo,
+    latitude: 55.6666,
+    longitude: 12.3,
+  },
+{
+  name: "Norrebo 2",
+  location: "Allegrade",
+  photos: photo,
+  latitude: 55.6666,
+  longitude: 12.4,
+},
+];
+
+
+
 
 
 const SortUptainers = () => {
@@ -76,22 +127,43 @@ const SortUptainers = () => {
   // Whenever the userLocation or Uptainers list changes, update the sortedUptainers state
   useEffect(() => {
     if (userLocation) {
-      const sortedList = sortUptainersByDistance(userLocation, Uptainer); 
+      const sortedList = sortUptainersByDistance(userLocation, uptainersList);
       setSortedUptainers(sortedList);
     }
-  }, [userLocation]);
+  }, [userLocation, uptainersList]);
+
+
+  //fn to help in rendering
+  const renderUptainers = () => {
+    // Create a new array without the first element
+    const slicedUptainerData = sortedUptainers.slice(1);
+  
+    // rendering the rest of the Uptainer components
+    return slicedUptainerData.map((item, index) => (
+      <Uptainer
+        key={index + 1}
+        name={item.name}
+        location={item.location}
+        data={item.photos}
+      />
+    ));
+    
+
+  };
 
   return (
     <View>
       {/* Display the list of sorted uptainers using the Uptainer component */}
-      {sortedUptainers.map((uptainer) => (
+      {sortedUptainers[0] && (
         <Uptainer
-          key={uptainer.name}
-          name={uptainer.name}
-          location={uptainer.location}
-          data={uptainer.data}
+          name={sortedUptainers[0].name}
+          location={sortedUptainers[0].location}
+          data={sortedUptainers[0].photos}
         />
-      ))}
+      )}
+        <BoxLink msg="Hvordan funger UPDROPP?"/>
+        {renderUptainers()}
+     
     </View>
   );
 };

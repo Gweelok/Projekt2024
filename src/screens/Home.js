@@ -1,65 +1,14 @@
-import { View, TextInput, ScrollView, StyleSheet } from "react-native";
-import { styles, Backgroundstyle } from "../styles/Stylesheet";
+import { View, TextInput, ScrollView, StyleSheet , Dimensions} from "react-native";
+import { Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
-import Uptainer from "../componets/Uptainer";
-import { BoxLink } from "../styles/BoxLink";
 import * as Location from "expo-location";
 import SortUptainers from "../componets/sortUptainers";
+import {Feather} from "@expo/vector-icons";
 
-///Asumming i have data
-const photo = [
-  { id: "1", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "2", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "3", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "4", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "5", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "6", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "7", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "8", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "9", imageSource: "https://via.placeholder.com/200x200" },
-  // Add more image URLs as needed
-];
 
-const UptainerData = [
-  {
-    name: "Valby",
-    location: "Allegrade",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.1,
-  },
 
-  {
-    name: "Norrebo",
-    location: "ved fatka",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.2,
-  },
-  {
-    name: "Norrebo",
-    location: "ved fatka",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.3,
-  },
-];
 
-const renderUptainers = () => {
-  // Create a new array without the first element
-  const slicedUptainerData = UptainerData.slice(1);
-
-  // rendering the rest of the Uptainer components
-  return slicedUptainerData.map((item, index) => (
-    <Uptainer
-      key={index + 1}
-      name={item.name}
-      location={item.location}
-      data={item.photos}
-    />
-  ));
-};
 
 const Home = ({ navigation }) => {
   const startBackgroundTracking = async () => {
@@ -71,36 +20,22 @@ const Home = ({ navigation }) => {
 
   const [search, onChangeSearch] = useState("");
 
-  const handleImagePress = () => {
-    navigation.navigate('DetailView'); 
-  };
+  
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <TextInput
-        placeholder="search"
-        value={search}
-        onChangeText={onChangeSearch}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        clearButtonMode={"always"}
-        style={[styles.inputBox, style.searchbar]}
-      />
+
+       <View style={styles.container}>
+            <TextInput
+                style={styles.input}
+                placeholder="Search"
+                onChangeText={onChangeSearch}
+                value={search}
+            />
+            <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
+        </View>
       <ScrollView style={{ marginBottom: 60 }}>
-        <Uptainer
-          name={UptainerData[0].name}
-          location={UptainerData[0].location}
-          data={UptainerData[0].photos}
-          navigation={navigation}
-        />
         <SortUptainers />
-        <Uptainer
-          name={UptainerData[0].name}
-          location={UptainerData[0].location}
-          data={UptainerData[0].photos}
-        />
-        <BoxLink msg="Hvordan funger UPDROPP?" />
-        {renderUptainers()}
       </ScrollView>
       <Navigationbar navigation={navigation} />
     </View>
@@ -109,8 +44,25 @@ const Home = ({ navigation }) => {
 
 export default Home;
 
-const style = StyleSheet.create({
-  searchbar: {
-    marginTop: 10,
-  },
+const styles = StyleSheet.create({
+    searchIcon: {
+        position: 'absolute',
+        right: 10,
+        top: '50%',
+        transform: [{ translateY: -12 }],
+    },
+    container: {
+        marginTop: 15,
+        width:  Dimensions.get('window').width * 0.9,
+        marginLeft : "auto",
+        marginRight:"auto",
+        backgroundColor: '#fff',
+        marginBottom: 15,
+    },
+    input: {
+        height: 40,
+        borderColor: Primarycolor1,
+        borderWidth: 3,
+        paddingHorizontal: 10,
+    },
 });
