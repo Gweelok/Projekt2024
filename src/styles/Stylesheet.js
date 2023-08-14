@@ -264,5 +264,6 @@ export const Buttons = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
     fontFamily: 'space-grotesk-Medium',
+
   },
 });
