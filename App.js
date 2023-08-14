@@ -44,6 +44,7 @@ import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
+import Info from "./src/screens/Info";
 
 
 
