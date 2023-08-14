@@ -8,7 +8,7 @@ import { styles,
   } 
    from '../styles/Stylesheet';
    import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
-
+import GlobalStyle from "../styles/GlobalStyle";
 
 const SignUpScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
@@ -45,9 +45,9 @@ const SignUpScreen = ({ navigation }) => {
 
   let Header='Opret bruger';
   return (
-    
     <View style={Backgroundstyle.informationScreens}>
-      <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
+        <View style={GlobalStyle.BodyWrapper}>
+        <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
        <TextInput
          placeholder="E-mail"
         value={email}
@@ -83,13 +83,13 @@ const SignUpScreen = ({ navigation }) => {
         </Pressable>
         
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
-          <View style={SignUpStyles.container}>
+          <View>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
       
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
-          <View style={SignUpStyles.container}>
+          <View>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
@@ -98,7 +98,8 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
         </Pressable>
     </View>
-    
+    </View>
+
   );
 }
 const SignUpStyles = StyleSheet.create({
@@ -111,10 +112,10 @@ const SignUpStyles = StyleSheet.create({
     fontSize: 15,
   },
   
-   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+  //  container: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  // },
   
 });
 

@@ -43,7 +43,6 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    marginLeft:40, 
     fontFamily: 'space-grotesk-bold',
   },
   Header_Primarycolor1  : {
@@ -209,11 +208,9 @@ export const Buttons = StyleSheet.create({
     backgroundColor: '#F41616',
     fontSize: 22,
     padding: 10,
-    width :'50%',
     marginLeft: "auto",
     marginRight:"auto",
     marginBottom : 20, 
-    justifyContent: 'center',
   },
   main_button: {
     padding: 10,
