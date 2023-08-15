@@ -9,6 +9,8 @@ import { styles,
    from '../styles/Stylesheet';
    import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
    import { useLanguage, t } from '../Languages/LanguageHandler'; // Import 'useLanguage' and 't'
+   import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+   import {firebaseAurth} from '../utils/Firebase';
 
 
 const SignUpScreen = ({ navigation }) => {
@@ -17,6 +19,7 @@ const SignUpScreen = ({ navigation }) => {
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
   const [showPassword, setShowPassword] = useState(false);
   const { currentLanguage } = useLanguage();
+  const auth = firebaseAurth; // reuse from firebase.js
 
   //To check on password 
   const CheckPassword = (text) => {
@@ -30,12 +33,39 @@ const SignUpScreen = ({ navigation }) => {
     return emailRegex.test(text);
   };
 
+//Firebase signin function
+  const signIn = async () => { 
+    try {
+      const response = await  signInWithEmailAndPassword(auth ,email, password);
+      console.log(response);
+      navigation.navigate('Homepage')
+    } catch (error) {
+      console.log(error);
+      alert('Sign in failed' + error.message);
+    } finally {
+      console.log('finally');      
+    }
+  };
+  //Firebase signup function
+  const signUp = async () => { 
+    try {
+      const response = await  createUserWithEmailAndPassword(auth ,email, password);
+      console.log(response);
+      navigation.navigate('Homepage')
+    } catch (error) {
+      console.log(error);
+      alert('Sign up failed' + error.message);
+    } finally {
+      console.log('finally');
+    }
+  };
 
   //Check on both 
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
           navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
+          signUp();
     } else {
           Alert.alert('Invalid Email or Password');
     }
@@ -101,7 +131,7 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </Pressable>
 
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={signIn}>
             <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.LogInLink', currentLanguage)}</Text>
 
         </Pressable>

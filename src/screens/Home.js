@@ -16,12 +16,20 @@ import {Feather} from "@expo/vector-icons";
 
 
 const Home = ({ navigation }) => {
-  const startBackgroundTracking = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status == "granted") {
-      await Location.requestBackgroundPermissionsAsync();
+  //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
+  console.log("start current useeffect");
+  (async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log("Permission to access location was denied");
+
+    } else {
+      console.log("status good");
+      //				let loc = await Location.getLastKnownPositionAsync({});
+      let loc = await Location.getCurrentPositionAsync({});
+ 
     }
-  };
+  })();
 
 
   const [search, onChangeSearch] = useState("");
