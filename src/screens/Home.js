@@ -1,50 +1,70 @@
-import { View, Text} from 'react-native';
-import { styles , Backgroundstyle} from '../styles/Stylesheet';
-import {BoxLink} from '../styles/BoxLink';
-import Navigationbar from '../componets/Navigationbar';
-import React from 'react';
+import { View, TextInput, ScrollView, StyleSheet , Dimensions} from "react-native";
+import { Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
+import Navigationbar from "../componets/Navigationbar";
+import React, { useState } from "react";
 import * as Location from "expo-location";
+import SortUptainers from "../componets/sortUptainers";
+import {Feather} from "@expo/vector-icons";
+
+
+
+
 
 const Home = ({ navigation }) => {
+  const startBackgroundTracking = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status == "granted") {
+      await Location.requestBackgroundPermissionsAsync();
+    }
+  };
 
+  const [search, onChangeSearch] = useState("");
 
-    const startBackgroundTracking = async () => {
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status == "granted") {
-          await Location.requestBackgroundPermissionsAsync();
-        }
-      };
+  
 
-    const navigatetoinfo = () => {
-        // todo all the below data should get from server
-        navigation.navigate('Infopage', {
-            title: "Five Uptainers are set to open in Kobenhavn area this year",
-            content: [
-                "Have you alwavs wanted to blog but are without a clue when it comes to doing so? Thispiece will provide basic" +
-                " blogging information that can really help distinguish your blog frorthe competition, There is no reason to be scared!" +
-                " Thanks to today's expanding technologyblogging is getting   easier all the time, You can pick up some great advice " +
-                "from this articlewhich will prepare you to start blogging with confidence and effectivenest.",
-                "Start your mailing list right away. The sooner you begin, the more time you wrill have to growyour list." +
-                "This list will help you increase your revenue as time goes on. It is a serious mistak.to delay starting" +
-                " your mailing list.",
-                "Stay on top of what your competition is up to and then ensure you're always the " +
-                "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking",
-                "Stay on top of what your competition is up to and then ensure you're always the " +
-                "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking",
-                "Stay on top of what your competition is up to and then ensure you're always the " +
-                "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking"
-            ]
-        });
-    };
-
-
-    return (
+  return (
     <View style={Backgroundstyle.interactive_screens}>
-        <Text style={styles.Header_Primarycolor1}> Home page </Text>
-        <BoxLink msg="Hvordann fungerer UPDROPP?" onPress={navigatetoinfo}/>
-        <Navigationbar navigation={navigation}/>
-    </View>
-);
-}
 
+       <View style={styles.container}>
+            <TextInput
+                style={styles.input}
+                placeholder="Search"
+                onChangeText={onChangeSearch}
+                value={search}
+            />
+            <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
+        </View>
+      <ScrollView style={{ marginBottom: 60 }}>
+        <SortUptainers />
+      </ScrollView>
+      <Navigationbar navigation={navigation} />
+
+    </View>
+  );
+};
+
+export default Home;
+
+const styles = StyleSheet.create({
+    searchIcon: {
+        position: 'absolute',
+        right: 10,
+        top: '50%',
+        transform: [{ translateY: -12 }],
+    },
+    container: {
+        marginTop: 15,
+        width:  Dimensions.get('window').width * 0.9,
+        marginLeft : "auto",
+        marginRight:"auto",
+        backgroundColor: '#fff',
+        marginBottom: 15,
+    },
+    input: {
+        height: 40,
+        borderColor: Primarycolor1,
+        borderWidth: 3,
+        paddingHorizontal: 10,
+    },
+});
 export default Home;

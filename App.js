@@ -42,14 +42,13 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
+import DetailView from "./src/screens/DetailView"
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import Info from "./src/screens/Info";
 import ArticlePage from "./src/screens/article/ArticlePage";
-
-
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -102,6 +101,9 @@ export default function App() {
           component={Home}
           options={{animation : "none"}}
         />
+        <Stack.Screen 
+          name="DetailView"
+          component={DetailView} />
         <Stack.Screen
           name="Infopage"
           component={ArticlePage}
