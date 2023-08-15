@@ -51,7 +51,6 @@ const SignUpScreen = ({ navigation }) => {
     try {
       const response = await  createUserWithEmailAndPassword(auth ,email, password);
       console.log(response);
-      navigation.navigate('Homepage')
     } catch (error) {
       console.log(error);
       alert('Sign up failed' + error.message);
@@ -64,10 +63,10 @@ const SignUpScreen = ({ navigation }) => {
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-          navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
-          signUp();
+      signUp();
+      navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
     } else {
-          Alert.alert('Invalid Email or Password');
+      Alert.alert('Invalid Email or Password');
     }
   };
   //check if pass should be shown
