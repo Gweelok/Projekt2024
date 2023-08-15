@@ -65,7 +65,7 @@ async function createSeedData() {
         /***** Create *******/
         /********************/
 
-async function createUptainer(data) {
+export async function createUptainer(data) {
     const newUptainerKey = push(ref(db, paths.uptainers)).key;
     const uptainerData = {
         uptainerId: newUptainerKey,
@@ -82,21 +82,21 @@ async function createUptainer(data) {
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
 
-async function createBrand(name) {
+export async function createBrand(name) {
     const newBrandKey = push(ref(db, paths.brands)).key;
     const brandData = {
         brandName: name,
     };
     await writeToDatabase(paths.brands + '/' + newBrandKey, brandData);
 }
-async function createCategory(name) {
+export async function createCategory(name) {
     const newCategoryKey = push(ref(db, paths.categories)).key;
     const categoryData = {
         categoryName: name,
     };
     await writeToDatabase(paths.categories + '/' + newCategoryKey, categoryData);
 }
-async function createModel(data, brand) {
+export async function createModel(data, brand) {
     const newModelKey = push(ref(db, paths.models)).key;
     const modelData = {
         modelName: data.name,
@@ -106,7 +106,7 @@ async function createModel(data, brand) {
 }
 
 
-async function createItem(item, categories, products, brands, uptainers, models) {
+export async function createItem(item, categories, products, brands, uptainers, models) {
     const categoryId1 = categories.find(category => category.categoryName === item.categoryId);
     const productId1 = products.find(product => product.productName === item.productId);
     const brandId1 = brands.find(brand => brand.brandName === item.brandId);
@@ -128,7 +128,7 @@ async function createItem(item, categories, products, brands, uptainers, models)
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
 
-async function createProduct(data) {
+export async function createProduct(data) {
     const newProductKey = push(ref(db, paths.products)).key;
     const productData = {
         productId: newProductKey,
@@ -148,7 +148,6 @@ function writeToDatabase(refPath, data) {
     }
 
 }
-
 
 
         /********************/
@@ -260,30 +259,6 @@ export async function getAllUptainers() {
         return [];
     }
 }
-export async function getAllModels() {
-    const db = firebaseGetDB;
-    const reference = ref(db, '/models');
-
-    try {
-        const snapshot = await get(reference);
-        const models = [];
-        snapshot.forEach((childSnapshot) => {
-            const modelId = childSnapshot.key;
-            const modelName = childSnapshot.val().modelName;
-            const brandId = childSnapshot.val().brandId;
-            models.push({
-                modelId: modelId,
-                modelName: modelName,
-                brandId: brandId
-            });
-        });
-        return models;
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        return [];
-    }
-}
-
 export async function getUptainerById(uptainerId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/uptainers/${uptainerId}`);
@@ -314,8 +289,53 @@ export async function getUptainerById(uptainerId) {
         return null;
     }
 }
+export async function getAllModels() {
+    const db = firebaseGetDB;
+    const reference = ref(db, '/models');
 
-export async function  getAllProducts() {
+    try {
+        const snapshot = await get(reference);
+        const models = [];
+        snapshot.forEach((childSnapshot) => {
+            const modelId = childSnapshot.key;
+            const modelName = childSnapshot.val().modelName;
+            const brandId = childSnapshot.val().brandId;
+            models.push({
+                modelId: modelId,
+                modelName: modelName,
+                brandId: brandId
+            });
+        });
+        return models;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return [];
+    }
+}
+export async function getModelById(modelId) {
+    const db = firebaseGetDB;
+    const reference = ref(db, `/models/${modelId}`);
+
+    try {
+        const snapshot = await get(reference);
+        const modelData = snapshot.val();
+
+        if (modelData) {
+            return {
+                modelId,
+                modelName: modelData.modelName,
+                brandId: modelData.brandId
+            };
+        } else {
+            console.log(`Model with ID ${modelId} not found.`);
+            return null;
+        }
+    } catch (error) {
+        console.error(`Error fetching data for model with ID ${modelId}:`, error);
+        return null;
+    }
+}
+export async function getAllProducts() {
     const db = firebaseGetDB;
     const reference = ref(db, '/products');
 
@@ -338,12 +358,99 @@ export async function  getAllProducts() {
         return [];
     }
 }
+export async function getProductById(productId) {
+    const db = firebaseGetDB;
+    const reference = ref(db, `/products/${productId}`);
+
+    try {
+        const snapshot = await get(reference);
+        const productData = snapshot.val();
+        
+        if (productData) {
+            return {
+                productId,
+                productName: productData.productName,
+                co2Footprint: productData.co2Footprint
+            };
+        } else {
+            console.log(`Product with ID ${productId} not found.`);
+            return null;
+        }
+    } catch (error) {
+        console.error(`Error fetching data for product with ID ${productId}:`, error);
+        return null;
+    }
+}
+export async function getAllItems() {
+    const db = firebaseGetDB;
+    const reference = ref(db, '/items');
+
+    try {
+        const snapshot = await get(reference);
+        const items = [];
+        snapshot.forEach((childSnapshot) => {
+            const itemId = childSnapshot.key;
+            const itemproduct = childSnapshot.val().itemproduct;
+            const itemBrand = childSnapshot.val().itemBrand;
+            const itemModel = childSnapshot.val().itemModel;
+            const itemCategory = childSnapshot.val().itemCategory;
+            const itemImage = childSnapshot.val().itemImage;
+            const itemDescription = childSnapshot.val().itemDescription;
+            const itemcondition = childSnapshot.val().itemcondition;
+            const itemUptainer = childSnapshot.val().itemUptainer;
+            items.push({
+                itemId: itemId,
+                itemproduct: itemproduct,
+                itemBrand: itemBrand,
+                itemModel: itemModel,
+                itemCategory: itemCategory,
+                itemImage: itemImage,
+                itemDescription: itemDescription,
+                itemcondition: itemcondition,
+                itemUptainer: itemUptainer
+            });
+        });
+        return items;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return [];
+    }
+}
+export async function getItemById(itemId) {
+    const db = firebaseGetDB;
+    const reference = ref(db, `/items/${itemId}`);
+
+    try {
+        const snapshot = await get(reference);
+        const itemData = snapshot.val();
+
+        if (itemData) {
+            return {
+                itemId,
+                itemproduct: itemData.itemproduct,
+                itemBrand: itemData.itemBrand,
+                itemModel: itemData.itemModel,
+                itemCategory: itemData.itemCategory,
+                itemImage: itemData.itemImage,
+                itemDescription: itemData.itemDescription,
+                itemcondition: itemData.itemcondition,
+                itemUptainer: itemData.itemUptainer
+            };
+        } else {
+            console.log(`Item with ID ${itemId} not found.`);
+            return null;
+        }
+    } catch (error) {
+        console.error(`Error fetching data for item with ID ${itemId}:`, error);
+        return null;
+    }
+}
 
 
     /********************/
     /***** Delete *******/
     /********************/
-// Delete has not been tested yet
+
 export function deleteCategoryById(categoryId) {
     const reference = ref(db, `/categories/${categoryId}`);
     try {
@@ -371,7 +478,6 @@ export function deleteUptainerById(uptainerId) {
         console.error(`Error deleting uptainer with ID ${uptainerId}:`, error);
     }
 }
-// Delete an item by its itemId
 export function deleteItemById(itemId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
@@ -381,8 +487,6 @@ export function deleteItemById(itemId) {
         console.error(`Error deleting item with ID ${itemId}:`, error);
     }
 }
-
-// Delete a model by its modelId
 export function deleteModelById(modelId) {
     const reference = ref(db, `/models/${modelId}`);
     try {
@@ -396,7 +500,7 @@ export function deleteModelById(modelId) {
         /**********************/
         /****** Update ********/
         /**********************/
-    // Update has not been tested yet
+
 export function updateModelById(modelId, newData) {
     const reference = ref(db, `/models/${modelId}`);
     try {
