@@ -29,9 +29,6 @@ const Home = ({ navigation }) => {
 
 
 
- 
-
-
   return (
     <View style={Backgroundstyle.interactive_screens}>
 
@@ -54,7 +51,7 @@ const Home = ({ navigation }) => {
 };
 
 
-export default Home;
+
 
 
 const styles = StyleSheet.create({
@@ -79,4 +76,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
 });
+export default Home;
 
