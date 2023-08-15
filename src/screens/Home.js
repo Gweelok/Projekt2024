@@ -38,6 +38,7 @@ const Home = ({ navigation }) => {
         <SortUptainers />
       </ScrollView>
       <Navigationbar navigation={navigation} />
+
     </View>
   );
 };
@@ -66,3 +67,4 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
 });
+export default Home;

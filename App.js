@@ -36,15 +36,19 @@ import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen"
 import { View } from "react-native-ui-lib";
 import { useFonts } from 'expo-font';
-//importing pages for navigation 
+//importing pages for navigation
 import Home from "./src/screens/Home";
 import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
 import DetailView from "./src/screens/DetailView"
-
-
+import TermsAndConditions from "./src/screens/TermsAndConditions";
+import ProfileCreated from "./src/screens/ProfileCreated";
+import LandingScreen from "./src/screens/LandingScreen"
+import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
+import Info from "./src/screens/Info";
+import ArticlePage from "./src/screens/article/ArticlePage";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -65,11 +69,11 @@ export default function App() {
     //createTestData();
   }, []);
 
-  //Loading the font 
+  //Loading the font
   const [fontsLoaded] = useFonts({
     'space-grotesk': require('./assets/fonts/SpaceGrotesk-Regular.ttf'),
     'space-grotesk-bold': require('./assets/fonts/SpaceGrotesk-Bold.ttf'),
-
+    'space-grotesk-Medium': require('./assets/fonts/SpaceGrotesk-Medium.ttf'),
   });
 
   if (!fontsLoaded) {
@@ -78,8 +82,15 @@ export default function App() {
   }
   // Main navigation of all the views
   return (
+    <LanguageProvider>
     <NavigationContainer theme={navStyle}>
-      <Stack.Navigator initialRouteName="SignUp">
+      <Stack.Navigator initialRouteName="Landingscreen">
+      <Stack.Screen
+          name="Landingscreen"
+          component={LandingScreen}
+          options={{animation : "none"}}
+        />
+
         <Stack.Screen
           name="SignUp"
           component={SignUpScreen}
@@ -94,6 +105,12 @@ export default function App() {
           name="DetailView"
           component={DetailView} />
         <Stack.Screen
+          name="Infopage"
+          component={ArticlePage}
+          options={{ headerShown: false, animation : "none" }}
+
+        />
+        <Stack.Screen
           name="Map"
           component={Map}
           options={{animation : "none"}}
@@ -101,6 +118,16 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+        name="TermsAndConditions"
+        component={TermsAndConditions}
+        options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="ProfileCreated"
+          component={ProfileCreated}
           options={{animation : "none"}}
         />
         <Stack.Screen
@@ -118,7 +145,7 @@ export default function App() {
           component={ProductScreen}
           options={{ title: "Products", animation : "none"}}
         />
-        
+
         <Stack.Screen
           name="Pro"
           component={ProScreen}
@@ -142,10 +169,11 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </LanguageProvider>
   );
 
   //Screens
- 
+
 
   // eslint-disable-next-line react/prop-types
   function StationsScreen({ navigation, route }) {

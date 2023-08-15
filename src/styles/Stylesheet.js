@@ -96,7 +96,8 @@ export const styles = StyleSheet.create({
   {
     fontFamily: 'space-grotesk-bold',
     color: Primarycolor1, 
-    fontSize: 20, 
+    fontSize: 20,
+    marginRight:"auto" 
   },
   menuItem_arrow:
   {
@@ -112,13 +113,20 @@ export const styles = StyleSheet.create({
   //Box_Link
   boxlink :
   {
-    width :'95%',
-    marginBottom :15,
+    width: '90%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 15,
     padding: 10,
-    borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
     flexDirection: 'row',
-    postion :"relative",
+    minHeight: 80,
+  },
+  boxlinkContainer :
+  {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent:"center",
   }
 
 });
@@ -209,7 +217,7 @@ export const Buttons = StyleSheet.create({
     backgroundColor: '#F41616',
     fontSize: 22,
     padding: 10,
-    width :'50%',
+    width :'52%',
     marginLeft: "auto",
     marginRight:"auto",
     marginBottom : 20, 
@@ -228,6 +236,8 @@ export const Buttons = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk-Medium',
+    
   },
   secondary_button:
   {
@@ -243,6 +253,7 @@ export const Buttons = StyleSheet.create({
     color: Primarycolor1,
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk-Medium',
   },
   iconContainerRight: {
     position: 'absolute',
@@ -260,5 +271,7 @@ export const Buttons = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'space-grotesk-Medium',
+
   },
 });
