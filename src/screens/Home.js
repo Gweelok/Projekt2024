@@ -10,6 +10,11 @@ import {Feather} from "@expo/vector-icons";
 
 
 
+
+
+
+
+
 const Home = ({ navigation }) => {
   const startBackgroundTracking = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -18,12 +23,15 @@ const Home = ({ navigation }) => {
     }
   };
 
+
   const [search, onChangeSearch] = useState("");
+
 
 
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
+
 
        <View style={styles.container}>
             <TextInput
@@ -35,13 +43,16 @@ const Home = ({ navigation }) => {
             <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
         </View>
       <ScrollView style={{ marginBottom: 60 }}>
-        <SortUptainers />
+        <SortUptainers navigation={navigation} />
       </ScrollView>
       <Navigationbar navigation={navigation} />
-
     </View>
   );
 };
+
+
+
+
 
 const styles = StyleSheet.create({
     searchIcon: {
@@ -66,3 +77,4 @@ const styles = StyleSheet.create({
     },
 });
 export default Home;
+

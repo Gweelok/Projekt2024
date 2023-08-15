@@ -7,7 +7,7 @@ export default {
     },
     LandingScreen :
     {
-        LanguageSelector : 'English' ,
+        LanguageSelector : 'Danish' ,
         Header : "Welcome to Updropp",
         Intro : "A lot of the earth's raw materials are used to produce electronics. Updropp turns waste into resources, and reduces the need for extraction of new resources.",
         Littlemsg:"By pressing continue, you accept our",
