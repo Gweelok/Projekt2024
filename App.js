@@ -42,6 +42,7 @@ import Map from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
+import DetailView from "./src/screens/DetailView"
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen"
@@ -49,7 +50,7 @@ import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandle
 import Info from "./src/screens/Info";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import LogoutConfirmation from "./src/screens/LogoutConfirmation";
-
+//import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 
 console.log("start");
@@ -70,6 +71,9 @@ export default function App() {
     //dropAll();
     //createTestData();
   }, []);
+  
+  //FirebaseSeed data here:
+  //seedCheck(); //uncomment to seed data(only works if DB is empty)
 
   //Loading the font
   const [fontsLoaded] = useFonts({
@@ -103,6 +107,9 @@ export default function App() {
           component={Home}
           options={{animation : "none"}}
         />
+        <Stack.Screen 
+          name="DetailView"
+          component={DetailView} />
         <Stack.Screen
           name="Infopage"
           component={ArticlePage}

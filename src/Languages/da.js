@@ -7,7 +7,7 @@ export default {
     },
     LandingScreen :
     {
-        LanguageSelector : 'Danish' ,
+        LanguageSelector : 'English' ,
         Header : "Velkommen til Updropp",
         Intro : "Der bruges en masse af jordens råmaterialer på at producere elektronik. Updropp gør affald til ressourcer, og formindsker behovet for udvinding af nye ressourcer.",
         Littlemsg : "Ved at trykke fortsæt accepterer du vores",

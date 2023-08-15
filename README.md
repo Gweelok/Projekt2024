@@ -129,71 +129,126 @@ And that should be it, i hope, just remember to "pull" every time you open up th
 
 
 # Databases and you
-To make use of the database i've implemented you'll want to import verying you're gonna need, which is done by writing this line with the other imports:
-```
-import { database } from './utility/database'
-```
-To access a database you HAVE to run the function:
-```
-setTable( < name of table here > )
-```
-On the database there's some built in functions that are already accessable, to access them you'll want to start each function with 
-```
-database.<function name>
-```
-Actions you can do include:
-* "insertData(<object with data>)" inserts data into the table with the given data in item
-* "getData(<data setting function>)" selects all data from the table and puts them into the function that you give it
-* "getSpecificData(<id>, <data setting function>)" selects a specific data determined by the id you give it and selects said data and sets it with the function you give it
-* "updateData(<object with data>)" updates the data with the same id as the one you give it
-* "deleteData(<id>)" deletes a datapoint with the same id 
-* "getTable()" creates and sets the table if there is none
-* "dropData" which deletes all data in a given table
-* "vacuums" cleans up database file
+## How to Use Firebase Functions in React Native
 
-If you want some quick data to work with you can import the "TestData" function and run it once.
+Welcome to the guide on effectively using Firebase functions in your React Native app. Below, you'll find a comprehensive list of functions available in the repository, along with examples on how to use them. Let's dive in!
 
-## to create your own sql action
-To do any actions on the database you first need to start a transaction, and then give it the sql string you'd want it to execute, this is done with:
-```
-<variable name here>.transaction(tx => {
-			tx.executeSql(
-				<sql you'd want to run>,
-				[<input(s)>],
-				<what happens when it's successful>, 
-				<what happens when it's unsuccessful>
-			)
-		}
-	)
-```
-In the success or error state i'll give you some sql text which isn't too relevant for us and the result, to access the result, one very efffective way i've learned is by doing th following:
-```
-(txObj, results/error) => { <your code here> }
+### Function Descriptions
+
+Each function's purpose is briefly described to help you understand its role in your app.
+
+```javascript
+// Import functions from the repo
+import {
+  // ... (all imports)
+} from './repo';
 ```
 
-Remember, the results you get from the database are formatted like this:
+#### Retrieve Data
+
+Retrieve data from the database using functions like `getAllCategories()` or `getCategoryById(categoryId)`.
+
+```javascript
+// Retrieve all categories
+const allCategories = await getAllCategories();
+
+// Retrieve a specific category by its ID
+const category = await getCategoryById('categoryId');
 ```
-{
-  insertId,
-  rowsAffected,
-  rows: {
-    length,
-    item(),
-    _array,
-  },
-}
+
+#### Create Data
+
+Create new records in the database using functions like `createUptainer(data)`. Refer to the function comments or documentation for parameter details.
+
+```javascript
+// Example data for a new uptainer
+const newUptainerData = {
+  // ... (uptainer properties)
+};
+
+// Create a new uptainer
+await createUptainer(newUptainerData);
 ```
-it also comes with some prebuild functions:
-* insertId -- The row ID of the row that the SQL statement inserted into the database, if a row was inserted.
-* rowsAffected -- The number of rows that were changed by the SQL statement.
-* rows.length -- The number of rows returned by the query.
-* rows.item(number) -- rows.item(index) returns the row with the given index. If there is no such row, returns null.
-* rows.array -- The actual array of rows returned by the query. Can be used directly instead of getting rows through rows.item().
-This means that if you want to access a specific item (which would be formatted as an item) you would run the line:
+
+#### Delete Data
+
+Remove records from the database using delete functions like `deleteCategoryById(categoryId)`.
+
+```javascript
+// Delete a category by its ID
+await deleteCategoryById('categoryId');
 ```
-results.rows.item(<number>)
+
+#### Update Data
+
+Modify existing data using update functions such as `updateModelById(modelId, newData)`.
+
+```javascript
+// Example updated model data
+const updatedModelData = {
+  // ... (updated model properties)
+};
+
+// Update a model by its ID
+await updateModelById('modelId', updatedModelData);
 ```
-that should be everything you'd need to know if you want to work with sql, best of luck.
+
+#### Async Operations
+
+Firebase operations are asynchronous. Handle async operations properly using `async/await` or `.then()` as shown in the examples above. Ensure you handle errors that might occur during these operations.
+
+### All functions can that can be called
+
+Find more examples below on how to use various functions:
+
+```javascript
+/Create
+createUptainer(data) 
+createCategory(name)
+createBrand(name)
+createProduct(data)
+
+//Get
+getAllCategories()
+getCategoryById(categoryId)
+getAllBrands()
+getBrandById(brandId)
+getAllUptainers()
+getUptainerById(uptainerId)
+getAllModels()
+getModelById(modelId)
+getAllProducts()
+getAllItems()
+getItemById(itemId)
+
+//Delete
+deleteCategoryById(categoryId)
+deleteBrandById(brandId)
+deleteUptainerById(uptainerId)
+deleteItemById(itemId)
+deleteModelById(modelId)
+
+//Update
+updateModelById(modelId, newData)
+updateUptainerById(uptainerId, newData)
+updateItemById(itemId, newData)
+updateBrandById(brandId, newData)
+updateCategoryById(categoryId, newData)
+updateProductById(productId, newData)
+
+```
+
+### Common Mistakes and Tips
+
+Avoid common mistakes and improve your experience with these tips:
+
+- Double-check function parameters using provided examples and comments.
+- Always handle async operations using proper error handling mechanisms.
+- Import migt be wrong, ether adresse or function thats beeing called.
+- Calling after the wrong ID, troubleshoot by console.log it
+- Collaborate and provide feedback on this guide to enhance its usefulness.
+
+
 # Branching and you: the best way to avoid error in code when lots of people code
 Something important that i grievously forgot is to talk about branches, a very practical system that helps avoid code error that might occur when more than one person is working on code and they're not coordinating.
 
