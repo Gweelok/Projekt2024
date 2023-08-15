@@ -14,17 +14,17 @@ const LogoutConfirmation = ({ navigation }) => {
       </Text>
 
       <TouchableOpacity 
-        style={[Buttons.secondary_button, { marginTop: 20, marginBottom: 10 }]}
+        style={[Buttons.main_button, { marginTop: 20, marginBottom: 10 }]}
         onPress={() => navigation.navigate('SignIn')}>
-        <Text style={Buttons.secondary_buttonText}>
+        <Text style={Buttons.main_buttonText}>
         {t('LogoutConfirmation.logoutButton', currentLanguage)}
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
-        style={ Buttons.main_button}
+        style={ Buttons.secondary_button }
         onPress={() => navigation.navigate('Profile')}>
-        <Text style={Buttons.main_buttonText}>
+        <Text style={Buttons.secondary_buttonText}>
         {t('LogoutConfirmation.cancelButton', currentLanguage)}        
         </Text>
       </TouchableOpacity>
