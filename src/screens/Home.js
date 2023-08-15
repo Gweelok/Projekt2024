@@ -20,7 +20,7 @@ const Home = ({ navigation }) => {
 
   const [search, onChangeSearch] = useState("");
 
-  
+
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
@@ -42,8 +42,6 @@ const Home = ({ navigation }) => {
     </View>
   );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
     searchIcon: {
