@@ -5,6 +5,8 @@ import Uptainer from './Uptainer';
 import { BoxLink } from "../styles/BoxLink";
 
 
+
+
 ///Asumming i have data
 const photo = [
   { id: "1", imageSource: "https://via.placeholder.com/200x200" },
@@ -19,6 +21,7 @@ const photo = [
   // Add more image URLs as needed
 ];
 
+
 const uptainersList = [
   {
     name: "Valby",
@@ -27,6 +30,7 @@ const uptainersList = [
     latitude: 55.6666,
     longitude: 12.1,
   },
+
 
   {
     name: "Valby 2",
@@ -55,9 +59,19 @@ const uptainersList = [
 
 
 
-const SortUptainers = () => {
+
+
+
+
+
+
+
+
+
+const SortUptainers = ({navigation}) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
+
 
   // Function to calculate distance between two points.
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -73,10 +87,12 @@ const SortUptainers = () => {
     return distance; // Return the calculated distance
   };
 
+
   // Helper function to convert degrees to radians
   const deg2rad = (angle) => {
     return angle * (Math.PI / 180);
   };
+
 
   // Function to sort the Uptainers list by distance based on the user's location
   const sortUptainersByDistance = (userLocation, uptainersList) => {
@@ -88,6 +104,7 @@ const SortUptainers = () => {
         a.longitude
       );
 
+
       const distanceB = calculateDistance(
         userLocation.latitude,
         userLocation.longitude,
@@ -95,11 +112,14 @@ const SortUptainers = () => {
         b.longitude
       );
 
+
       return distanceA - distanceB;
     });
 
+
     return sortedList;
   };
+
 
   // Fetch user location on component mount
   useEffect(() => {
@@ -121,8 +141,10 @@ const SortUptainers = () => {
       }
     };
 
+
     fetchUserLocation();
   }, []);
+
 
   // Whenever the userLocation or Uptainers list changes, update the sortedUptainers state
   useEffect(() => {
@@ -133,11 +155,13 @@ const SortUptainers = () => {
   }, [userLocation, uptainersList]);
 
 
+
+
   //fn to help in rendering
   const renderUptainers = () => {
     // Create a new array without the first element
     const slicedUptainerData = sortedUptainers.slice(1);
-  
+ 
     // rendering the rest of the Uptainer components
     return slicedUptainerData.map((item, index) => (
       <Uptainer
@@ -147,9 +171,37 @@ const SortUptainers = () => {
         data={item.photos}
       />
     ));
-    
+   
+
 
   };
+
+
+
+
+  //Navigation to info page
+  const navigatetoinfo = () => {
+    // todo all the below data should get from server
+    navigation.navigate('Infopage', {
+        title: "Five Uptainers are set to open in Kobenhavn area this year",
+        content: [
+            "Have you alwavs wanted to blog but are without a clue when it comes to doing so? Thispiece will provide basic" +
+            " blogging information that can really help distinguish your blog frorthe competition, There is no reason to be scared!" +
+            " Thanks to today's expanding technologyblogging is getting   easier all the time, You can pick up some great advice " +
+            "from this articlewhich will prepare you to start blogging with confidence and effectivenest.",
+            "Start your mailing list right away. The sooner you begin, the more time you wrill have to growyour list." +
+            "This list will help you increase your revenue as time goes on. It is a serious mistak.to delay starting" +
+            " your mailing list.",
+            "Stay on top of what your competition is up to and then ensure you're always the " +
+            "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking",
+            "Stay on top of what your competition is up to and then ensure you're always the " +
+            "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking",
+            "Stay on top of what your competition is up to and then ensure you're always the " +
+            "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking"
+        ]
+    });
+};
+
 
   return (
     <View>
@@ -161,12 +213,12 @@ const SortUptainers = () => {
           data={sortedUptainers[0].photos}
         />
       )}
-        <BoxLink msg="Hvordan funger UPDROPP?"/>
+        <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
         {renderUptainers()}
      
     </View>
   );
 };
 
-export default SortUptainers;
 
+export default SortUptainers;
