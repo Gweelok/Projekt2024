@@ -5,7 +5,7 @@ import { styles,
    Primarycolor2,
    Buttons,
    Primarycolor1,
-  }
+  } 
    from '../styles/Stylesheet';
    import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
    import { useLanguage, t } from '../Languages/LanguageHandler'; // Import 'useLanguage' and 't'
@@ -22,7 +22,7 @@ const SignUpScreen = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
   const auth = firebaseAurth; // reuse from firebase.js
 
-  //To check on password
+  //To check on password 
   const CheckPassword = (text) => {
     onChangePassword(text);
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
@@ -34,38 +34,12 @@ const SignUpScreen = ({ navigation }) => {
     return emailRegex.test(text);
   };
 
-//Firebase signin function
-  const signIn = async () => {
-    try {
-      const response = await  signInWithEmailAndPassword(auth ,email, password);
-      console.log(response);
-      navigation.navigate('Homepage')
-    } catch (error) {
-      console.log(error);
-      alert('Sign in failed' + error.message);
-    } finally {
-      console.log('finally');
-    }
-  };
-  //Firebase signup function
-  const signUp = async () => {
-    try {
-      const response = await  createUserWithEmailAndPassword(auth ,email, password);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      alert('Sign up failed' + error.message);
-    } finally {
-      console.log('finally');
-    }
-  };
 
-  //Check on both
+  //Check on both 
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-      signUp();
-      navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
+          navigation.navigate('Homepage')
     } else {
           Alert.alert('Invalid Email or Password');
     }
@@ -133,8 +107,7 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
         </Pressable>
     </View>
-    </View>
-
+    
   );
 }
 const SignUpStyles = StyleSheet.create({
@@ -147,10 +120,10 @@ const SignUpStyles = StyleSheet.create({
     fontSize: 15,
   },
   
-  //  container: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  // },
+   container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   
 });
 
