@@ -54,7 +54,6 @@ const SignUpScreen = ({ navigation }) => {
 
     <View style={Backgroundstyle.informationScreens}>
         <View style={GlobalStyle.BodyWrapper}>
-        <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
        <TextInput
@@ -106,13 +105,12 @@ const SignUpScreen = ({ navigation }) => {
         <Pressable onPress={() => {}}>
             <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
         </Pressable>
+        </View>
     </View>
-    
   );
 }
 const SignUpStyles = StyleSheet.create({
-    
- 
+
   text_Tertiary: {
     marginBottom: 10, 
     color : "#07A0A2",
