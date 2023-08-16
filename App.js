@@ -48,6 +48,7 @@ import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import Info from "./src/screens/Info";
+import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
@@ -99,6 +100,11 @@ export default function App() {
           name="SignUp"
           component={SignUpScreen}
           options={{animation : "none"}}
+        />
+        <Stack.Screen
+            name="Sign in"
+            component={SignIn}
+            options={{animation : "none", headerLeft: null}}
         />
         <Stack.Screen
           name="Homepage"
@@ -228,3 +234,4 @@ export default function App() {
     );
   }
 }
+

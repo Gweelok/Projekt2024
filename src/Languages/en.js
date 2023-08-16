@@ -14,6 +14,11 @@ export default {
         Termsandcond : "Terms and Conditions",
         continue : "Continue",
 
-    }
+    },
+    SignInScreen : {
+        Headline: "Sign in",
+        Button: "Sign in",
+        ForgetPwHint:"Forgot your password?",
+        SignUpHint:  "Don't have a user? Sign up.",
+    },
   };
-  
