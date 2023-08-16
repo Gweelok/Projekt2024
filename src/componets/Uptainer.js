@@ -2,6 +2,7 @@ import { View, Text, Image , FlatList ,StyleSheet, TouchableOpacity } from 'reac
 import { styles , Primarycolor1 } from '../styles/Stylesheet';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { FirebaseStorage } from '../utils/Firebase';
 
 
 const Uptainer = ({ name, location, data }) => {

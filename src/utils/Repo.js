@@ -1,6 +1,7 @@
 import { ref, push, set, get, remove, update} from "firebase/database";
 import { firebaseGetDB } from './Firebase';
 import { categories, brands, stationData, products, items, models } from './SeedData';
+import { getDownloadURL, getStorage } from "firebase/storage";
 
 const db = firebaseGetDB;
 
@@ -240,6 +241,7 @@ export async function getBrandById(brandId) {
         return null;
     }
 }
+
 export async function getAllUptainers() {
     const db = firebaseGetDB;
     const reference = ref(db, '/uptainers');
@@ -247,10 +249,22 @@ export async function getAllUptainers() {
     try {
         const snapshot = await get(reference);
         const uptainers = [];
-
+        
         snapshot.forEach((childSnapshot) => {
             const uptainerData = childSnapshot.val();
-            uptainers.push(uptainerData);
+            const uptainer = {
+                uptainerId: uptainerData.uptainerId,
+                uptainerName: uptainerData.uptainerName,
+                uptainerQR: uptainerData.uptainerQR,
+                uptainerStreet: uptainerData.uptainerStreet,
+                uptainerZip: uptainerData.uptainerZip,
+                uptainerCity: uptainerData.uptainerCity,
+                uptainerImage: uptainerData.uptainer,
+                uptainerDescription: uptainerData.uptainerDescription,
+                uptainerLatitude: parseFloat(uptainerData.uptainerLat),
+                uptainerLongitude: parseFloat(uptainerData.uptainerLong),
+            };
+            uptainers.push(uptainer);
         });
 
         return uptainers;
@@ -269,7 +283,7 @@ export async function getUptainerById(uptainerId) {
         
         if (uptainerData) {
             return {
-                uptainerId: uptainerData.uptainerId,
+                uptainerId,
                 uptainerName: uptainerData.uptainerName,
                 uptainerQR: uptainerData.uptainerQR,
                 uptainerStreet: uptainerData.uptainerStreet,

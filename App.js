@@ -49,7 +49,7 @@ import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import Info from "./src/screens/Info";
 import ArticlePage from "./src/screens/article/ArticlePage";
-//import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
+import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -71,7 +71,12 @@ export default function App() {
   }, []);
   
   //FirebaseSeed data here:
-  //seedCheck(); //uncomment to seed data(only works if DB is empty)
+  var doneTheStuff;
+  if (!doneTheStuff) {
+    doneTheStuff = true;
+    seedCheck(); //seed data(only works if DB is empty)
+  }
+  
 
   //Loading the font
   const [fontsLoaded] = useFonts({

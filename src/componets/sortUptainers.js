@@ -3,74 +3,16 @@ import { View } from 'react-native';
 import * as Location from 'expo-location';
 import Uptainer from './Uptainer';
 import { BoxLink } from "../styles/BoxLink";
-
-
-
-
-///Asumming i have data
-const photo = [
-  { id: "1", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "2", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "3", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "4", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "5", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "6", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "7", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "8", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "9", imageSource: "https://via.placeholder.com/200x200" },
-  // Add more image URLs as needed
-];
-
-
-const uptainersList = [
-  {
-    name: "Valby",
-    location: "Allegrade",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.1,
-  },
-
-
-  {
-    name: "Valby 2",
-    location: "ved fatka",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.2,
-  },
-  {
-    name: "Norrebo",
-    location: "ved fatka",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.3,
-  },
-{
-  name: "Norrebo 2",
-  location: "Allegrade",
-  photos: photo,
-  latitude: 55.6666,
-  longitude: 12.4,
-},
-];
-
-
-
-
-
-
-
-
-
-
-
-
+import {getAllUptainers} from '../utils/Repo'
 
 
 const SortUptainers = ({navigation}) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
+  const [uptainersList, setUptainerList] = useState([]);
+  console.log("list: ",uptainersList)
+
+  console.log("sorted: ",sortedUptainers)
 
 
   // Function to calculate distance between two points.
@@ -146,6 +88,22 @@ const SortUptainers = ({navigation}) => {
   }, []);
 
 
+  useEffect(() => {
+    const fetchUptainerList = async () => {
+      try {
+        const uptainerList = await getAllUptainers();
+        
+        setUptainerList(uptainerList)
+      } catch (error) {
+        console.log('Error getting user location:', error);
+      }
+    };
+
+
+    fetchUptainerList();
+  }, []);
+
+
   // Whenever the userLocation or Uptainers list changes, update the sortedUptainers state
   useEffect(() => {
     if (userLocation) {
@@ -160,20 +118,23 @@ const SortUptainers = ({navigation}) => {
   //fn to help in rendering
   const renderUptainers = () => {
     // Create a new array without the first element
-    const slicedUptainerData = sortedUptainers.slice(1);
+    let slicedUptainerData = "";
+    if(userLocation){
+      slicedUptainerData = sortedUptainers.slice(1);
+    }else{
+      slicedUptainerData = uptainersList.slice(1)
+    }
+    
  
     // rendering the rest of the Uptainer components
     return slicedUptainerData.map((item, index) => (
       <Uptainer
         key={index + 1}
-        name={item.name}
-        location={item.location}
-        data={item.photos}
+        name={item.uptainerName}
+        location={item.uptainerLatitude}
+        data={"gs://updropp-40d5b.appspot.com/"+item.uptainerImage}
       />
     ));
-   
-
-
   };
 
 
@@ -200,17 +161,23 @@ const SortUptainers = ({navigation}) => {
             "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking"
         ]
     });
-};
+  };
 
-
+  let test = "";
+  if(userLocation){
+    test = sortedUptainers;
+  }else{
+    test = uptainersList;
+  }
   return (
+    
     <View>
       {/* Display the list of sorted uptainers using the Uptainer component */}
       {sortedUptainers[0] && (
         <Uptainer
-          name={sortedUptainers[0].name}
-          location={sortedUptainers[0].location}
-          data={sortedUptainers[0].photos}
+          name={test[0].uptainerName}
+          location={test[0].uptainerStreet}
+          data={"gs://updropp-40d5b.appspot.com/"+test[0].uptainerImage}
         />
       )}
         <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
