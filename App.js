@@ -38,7 +38,7 @@ import { View } from "react-native-ui-lib";
 import { useFonts } from 'expo-font';
 //importing pages for navigation
 import Home from "./src/screens/Home";
-import Map from "./src/screens/Map";
+import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
@@ -47,7 +47,9 @@ import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen"
 import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
+import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
 import Info from "./src/screens/Info";
+import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import LogoutConfirmation from "./src/screens/LogoutConfirmation";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
@@ -103,6 +105,11 @@ export default function App() {
           options={{animation : "none"}}
         />
         <Stack.Screen
+            name="Sign in"
+            component={SignIn}
+            options={{animation : "none", headerLeft: null}}
+        />
+        <Stack.Screen
           name="Homepage"
           component={Home}
           options={{animation : "none"}}
@@ -119,7 +126,7 @@ export default function App() {
         <Stack.Screen
           name="Map"
           component={Map}
-          options={{animation : "none"}}
+          options={{animation : "none", headerShown: false}}
         />
         <Stack.Screen
           name="Profile"
@@ -167,7 +174,15 @@ export default function App() {
           component={ModScreen}
           options={{ title: "Models" , animation : "none" }}
         />
-        <Stack.Screen name="Stations" component={StationsScreen} />
+        <Stack.Screen
+            name="Stations"
+            component={StationsScreen}
+        />
+        <Stack.Screen
+            name="StationDetails"
+            component={StationDetailScreen}
+            options={{ headerShown: false }} // hides the header
+        />
         <Stack.Screen
           name="Thanks"
           component={ThanksScreen}
@@ -235,3 +250,4 @@ export default function App() {
     );
   }
 }
+

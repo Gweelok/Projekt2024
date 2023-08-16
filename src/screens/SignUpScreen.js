@@ -5,7 +5,7 @@ import { styles,
    Primarycolor2,
    Buttons,
    Primarycolor1,
-  } 
+  }
    from '../styles/Stylesheet';
    import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
    import { useLanguage, t } from '../Languages/LanguageHandler'; // Import 'useLanguage' and 't'
@@ -21,7 +21,7 @@ const SignUpScreen = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
   const auth = firebaseAurth; // reuse from firebase.js
 
-  //To check on password 
+  //To check on password
   const CheckPassword = (text) => {
     onChangePassword(text);
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
@@ -34,7 +34,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
 //Firebase signin function
-  const signIn = async () => { 
+  const signIn = async () => {
     try {
       const response = await  signInWithEmailAndPassword(auth ,email, password);
       console.log(response);
@@ -43,15 +43,14 @@ const SignUpScreen = ({ navigation }) => {
       console.log(error);
       alert('Sign in failed' + error.message);
     } finally {
-      console.log('finally');      
+      console.log('finally');
     }
   };
   //Firebase signup function
-  const signUp = async () => { 
+  const signUp = async () => {
     try {
       const response = await  createUserWithEmailAndPassword(auth ,email, password);
       console.log(response);
-      navigation.navigate('Homepage')
     } catch (error) {
       console.log(error);
       alert('Sign up failed' + error.message);
@@ -60,14 +59,14 @@ const SignUpScreen = ({ navigation }) => {
     }
   };
 
-  //Check on both 
+  //Check on both
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-          navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
-          signUp();
+      signUp();
+      navigation.navigate('TermsAndConditions') // Navigates to Terms and Conditions page
     } else {
-          Alert.alert('Invalid Email or Password');
+      Alert.alert('Invalid Email or Password');
     }
   };
   //check if pass should be shown
@@ -77,7 +76,7 @@ const SignUpScreen = ({ navigation }) => {
 
 
   return (
-    
+
     <View style={Backgroundstyle.informationScreens}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
@@ -87,7 +86,7 @@ const SignUpScreen = ({ navigation }) => {
         onChangeText={onChangeEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-        clearButtonMode={"always"}  
+        clearButtonMode={"always"}
         style={styles.inputBox}
       />
 
@@ -118,44 +117,45 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
         </Pressable>
-        
+
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
           <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
-      
+
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
           <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
 
-        <Pressable onPress={signIn}>
+        <Pressable onPress={() => {
+                navigation.navigate('Sign in')
+        }}>
             <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.LogInLink', currentLanguage)}</Text>
-
         </Pressable>
     </View>
-    
+
   );
 }
 const SignUpStyles = StyleSheet.create({
-    
- 
+
+
   text_Tertiary: {
-    marginBottom: 10, 
+    marginBottom: 10,
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
     fontFamily: 'space-grotesk',
 
   },
-  
+
    container: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  
+
 });
 
 export default SignUpScreen;

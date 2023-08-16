@@ -23,6 +23,10 @@ export default {
     Profile: {
         logout: "Log Out"
     },
-    
+    SignInScreen : {
+        Headline: "Sign in",
+        Button: "Sign in",
+        ForgetPwHint:"Forgot your password?",
+        SignUpHint:  "Don't have a user? Sign up.",
+    },
   };
-  

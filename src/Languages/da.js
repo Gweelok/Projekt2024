@@ -23,6 +23,10 @@ export default {
     Profile: {
       logout: "Log ud"
     },
-
+    SignInScreen : {
+        Headline: "Log ind",
+        Button: "Log ind",
+        ForgetPwHint: "Glemt dit kodeord?",
+        SignUpHint: "Har du ikke en bruger? Opret her.",
+    },
     };
-  
