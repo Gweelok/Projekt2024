@@ -1,33 +1,36 @@
 import { View, Text, Image , FlatList ,StyleSheet, TouchableOpacity } from 'react-native';
 import { styles , Primarycolor1 } from '../styles/Stylesheet';
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { FirebaseStorage } from '../utils/Firebase';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getItemsInUptainer } from '../utils/Repo';
 
 
-const Uptainer = ({ name, location, data }) => {
-    const navigation = useNavigation();
-//   const UptainerData = [
-//   {
-//     id: '1',
-//     name: 'Valby',
-//     location: '55.6666, 12.3000',
-//     imageSource: 'https://via.placeholder.com/200x200',
-//   },
-//   {
-//     id: '2',
-//     name: 'Norrebro',
-//     location: '55.6666, 12.1000',
-//     imageSource: 'https://via.placeholder.com/200x200',
-//   },
-//   {
-//     id: '3',
-//     name: 'Norrebro',
-//     location: '55.6666, 12.000',
-//     imageSource: 'https://via.placeholder.com/200x200',
-//   },
-// ]
+const Uptainer = ({id, name, location, data1}) => {
+  //const [imageUrl, setImageUrl] = useState(null);
+  const [data, setData] = useState([]);
+  const navigation = useNavigation();
 
+  useEffect(() => {
+    const fetchItemList = async () => {
+      const storage = getStorage();
+      const test = await getItemsInUptainer(id); // Assuming 'id' is defined somewhere
+      const updatedData = [];
+      for (const item of test) {
+        const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
+      try {
+          const url = await getDownloadURL(pathReference);
+          updatedData.push({ ...item, imageUrl: url });
+        } catch (error) {
+          console.log('Errors while downloading => ', error);
+          updatedData.push({ ...item, imageUrl: 'https://via.placeholder.com/200x200' });
+        }
+      }
+      setData(updatedData);
+      };
+      fetchItemList();
+    }, []);
+    
 return (
     <View> 
       <Text style={styles.menuItem_text}> {name}</Text>
@@ -38,9 +41,9 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:5, marginTop:5,}}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('DetailView', {data: item })}>
+        <TouchableOpacity onPress={() => navigation.navigate('DetailView', {data: item.itemId })}>
         <View style={styling.item}>
-            <Image source={{ uri: item.imageSource }} style={styling.image} />
+            <Image source={{ uri: item.imageUrl }} style={styling.image} />
         </View>
         </TouchableOpacity>
       )}
@@ -51,9 +54,9 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:10, marginTop:5,}}
       renderItem={({ item }) => (
-        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', {data: item })}>
+        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', {data: item.itemId })}>
         <View style={styling.item}>
-            <Image source={{ uri: item.imageSource }} style={styling.image} />
+            <Image source={{ uri: item.imageUrl }} style={styling.image} />
         </View>
         </TouchableOpacity>
       )}

@@ -1,7 +1,6 @@
-import { ref, push, set, get, remove, update} from "firebase/database";
+import { ref, push, set, get, remove, update, orderByChild, equalTo, query} from "firebase/database";
 import { firebaseGetDB } from './Firebase';
 import { categories, brands, stationData, products, items, models } from './SeedData';
-import { getDownloadURL, getStorage } from "firebase/storage";
 
 const db = firebaseGetDB;
 
@@ -259,7 +258,7 @@ export async function getAllUptainers() {
                 uptainerStreet: uptainerData.uptainerStreet,
                 uptainerZip: uptainerData.uptainerZip,
                 uptainerCity: uptainerData.uptainerCity,
-                uptainerImage: uptainerData.uptainer,
+                uptainerImage: uptainerData.uptainerImage,
                 uptainerDescription: uptainerData.uptainerDescription,
                 uptainerLatitude: parseFloat(uptainerData.uptainerLat),
                 uptainerLongitude: parseFloat(uptainerData.uptainerLong),
@@ -349,6 +348,19 @@ export async function getModelById(modelId) {
         return null;
     }
 }
+export async function getItemsInUptainer(uptainerId) {
+    
+    try {
+        const items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId);
+        return items;
+
+    } catch (error) {
+      // Handle error
+      console.error('Error fetching items:', error);
+      throw error;
+    }
+  }
+
 export async function getAllProducts() {
     const db = firebaseGetDB;
     const reference = ref(db, '/products');

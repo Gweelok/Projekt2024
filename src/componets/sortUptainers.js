@@ -3,16 +3,15 @@ import { View } from 'react-native';
 import * as Location from 'expo-location';
 import Uptainer from './Uptainer';
 import { BoxLink } from "../styles/BoxLink";
-import {getAllUptainers} from '../utils/Repo'
+import {getAllUptainers, getItemsInUptainer} from '../utils/Repo'
 
 
 const SortUptainers = ({navigation}) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
-  console.log("list: ",uptainersList)
-
-  console.log("sorted: ",sortedUptainers)
+  const [itemByUptainer, setitemByUptainer] = useState([]);
+  //console.log('itemByUptainer', itemByUptainer);
 
 
   // Function to calculate distance between two points.
@@ -98,9 +97,27 @@ const SortUptainers = ({navigation}) => {
         console.log('Error getting user location:', error);
       }
     };
-
-
     fetchUptainerList();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchItemList = async () => {
+      try {
+        const itemsByUptainer = {};
+  
+        await Promise.all(uptainersList.map(async (item) => {
+          const itemsInUptainer = await getItemsInUptainer(item.uptainerId);
+          itemsByUptainer[item.uptainerId] = itemsInUptainer;
+        }));
+  
+        setitemByUptainer(itemsByUptainer);
+      } catch (error) {
+        console.log('Error fetching items:', error);
+      }
+    };
+  
+    fetchItemList();
   }, []);
 
 
@@ -113,31 +130,32 @@ const SortUptainers = ({navigation}) => {
   }, [userLocation, uptainersList]);
 
 
-
+  
 
   //fn to help in rendering
   const renderUptainers = () => {
     // Create a new array without the first element
     let slicedUptainerData = "";
-    if(userLocation){
-      slicedUptainerData = sortedUptainers.slice(1);
-    }else{
-      slicedUptainerData = uptainersList.slice(1)
-    }
-    
+  if (userLocation) {
+    slicedUptainerData = sortedUptainers.slice(1);
+  } else {
+    slicedUptainerData = uptainersList.slice(1)
+  }
+
  
     // rendering the rest of the Uptainer components
-    return slicedUptainerData.map((item, index) => (
+    return slicedUptainerData.map((item) => (
       <Uptainer
-        key={index + 1}
+        key={item.uptainerId}
+        id={item.uptainerId}
         name={item.uptainerName}
-        location={item.uptainerLatitude}
-        data={"gs://updropp-40d5b.appspot.com/"+item.uptainerImage}
+        location={item.uptainerStreet}
+        data={itemByUptainer[item.uptainerId]}
       />
     ));
   };
 
-
+ 
 
 
   //Navigation to info page
@@ -175,9 +193,11 @@ const SortUptainers = ({navigation}) => {
       {/* Display the list of sorted uptainers using the Uptainer component */}
       {sortedUptainers[0] && (
         <Uptainer
+          key={test[0].uptainerId}
+          id={test[0].uptainerId}
           name={test[0].uptainerName}
           location={test[0].uptainerStreet}
-          data={"gs://updropp-40d5b.appspot.com/"+test[0].uptainerImage}
+          data={itemByUptainer[test[0].uptainerId]}//needs to be product img
         />
       )}
         <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
@@ -186,6 +206,4 @@ const SortUptainers = ({navigation}) => {
     </View>
   );
 };
-
-
 export default SortUptainers;
