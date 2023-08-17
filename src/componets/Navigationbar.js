@@ -1,17 +1,17 @@
 //imports
 import { StyleSheet, View, Pressable } from 'react-native';
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { Feather } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
-import { Ionicons } from '@expo/vector-icons'; 
-import { Fontisto } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 import {
   Primarycolor1,
   Primarycolor2,
 } from "../styles/Stylesheet";
 
-//Page_names 
+//Page_names
 const PAGE_NAMES = {
   HOME: 'home',
   MAP: 'map',
@@ -20,14 +20,14 @@ const PAGE_NAMES = {
   PROFILE: 'profile',
   };
 
-  //Selected page 
+  //Selected page
 var selected =PAGE_NAMES.HOME;
 
 
 const Navigationbar = ({ navigation }) => {
 
 
-  //handles when clicked on icons 
+  //handles when clicked on icons
   const handlePress = (iconName) => {
     if (iconName==PAGE_NAMES.HOME)
     {
@@ -43,7 +43,7 @@ const Navigationbar = ({ navigation }) => {
     {
       selected =PAGE_NAMES.ADD
       navigation.navigate('Add')
-      
+
     }
     else if (iconName==PAGE_NAMES.STATS)
     {
@@ -55,7 +55,7 @@ const Navigationbar = ({ navigation }) => {
       selected =PAGE_NAMES.PROFILE
       navigation.navigate('Profile')
     }
-    
+
   }
 
   return (
@@ -89,7 +89,7 @@ const Navigationbar = ({ navigation }) => {
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
       { //check which icon will load
-      (selected==PAGE_NAMES.PROFILE)  ? <Ionicons name="person-circle-sharp" size={24} color={Primarycolor1}/> : <Ionicons name="person-circle-outline" size={24} color={Primarycolor1} /> 
+      (selected==PAGE_NAMES.PROFILE)  ? <Ionicons name="person-circle-sharp" size={24} color={Primarycolor1}/> : <Ionicons name="person-circle-outline" size={24} color={Primarycolor1} />
       }
       </Pressable>
     </View>
