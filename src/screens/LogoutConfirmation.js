@@ -1,11 +1,23 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles, Backgroundstyle, Buttons } from '../styles/Stylesheet';
-import { useLanguage, t } from '../Languages/LanguageHandler'; 
+import { useLanguage, t } from '../Languages/LanguageHandler';
+import { firebaseAurth } from '../utils/Firebase';
+import { signOut } from "firebase/auth";
 
 
 const LogoutConfirmation = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
+
+  const handleLogout = () => {
+    signOut(firebaseAurth) 
+      .then(() => {
+        navigation.navigate("Sign in");  
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
@@ -15,7 +27,7 @@ const LogoutConfirmation = ({ navigation }) => {
 
       <TouchableOpacity 
         style={[Buttons.main_button, { marginTop: 20, marginBottom: 10 }]}
-        onPress={() => navigation.navigate('SignIn')}>
+        onPress={handleLogout}>
         <Text style={Buttons.main_buttonText}>
         {t('LogoutConfirmation.logoutButton', currentLanguage)}
         </Text>
