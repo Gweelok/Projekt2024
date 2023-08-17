@@ -8,10 +8,9 @@ import { DefaultTheme } from "@react-navigation/native";
 
 //		backgroundColor: '#fff',
 //Main colors
-export const Primarycolor1= "#1c4b3d"; // DarkGreen
-export const Primarycolor2= "#dae2e0"; //lightgreen
-export const Primarycolor3= "#fff"; // White
-
+export const Primarycolor1 = "#1c4b3d"; // DarkGreen
+export const Primarycolor2 = "#dae2e0"; //lightgreen
+export const Primarycolor3 = "#fff"; // White
 
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
@@ -39,96 +38,103 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   //Headlines
-  Header : {
+  Header: {
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    marginLeft:40, 
-    fontFamily: 'space-grotesk-bold',
+    marginLeft: 40,
+    fontFamily: "space-grotesk-bold",
   },
-  Header_Primarycolor1  : {
+  Header_Primarycolor1: {
     color: Primarycolor1,
-    },
+  },
 
-  //Links 
-  link :{
+  //Links
+  link: {
     color: Primarycolor1,
-    textDecorationLine: 'underline',
-    textAlign: 'center',   
-    fontFamily: 'space-grotesk',
+    textDecorationLine: "underline",
+    textAlign: "center",
+    fontFamily: "space-grotesk",
   },
-  //paragraph 
-  paragraph_text : {
-    fontFamily: 'space-grotesk',
+  //paragraph
+  paragraph_text: {
+    fontFamily: "space-grotesk",
     color: Primarycolor1,
-    fontSize: 16, 
+    fontSize: 16,
   },
   //Input box
   inputBox: {
     height: 45,
-    width :'90%',
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom :15,
+    marginBottom: 15,
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
-    fontFamily: 'space-grotesk',
+    fontFamily: "space-grotesk",
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor3,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
   //Menu items
-  menuItem :
-  {
-    width :'90%',
+  menuItem: {
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom :15,
+    marginBottom: 15,
     padding: 10,
     borderColor: Primarycolor1,
-    borderWidth : 4, 
+    borderWidth: 4,
     backgroundColor: Primarycolor3,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   //Text for both menuitem and boxlink
-  menuItem_text :
-  {
-    fontFamily: 'space-grotesk-bold',
-    color: Primarycolor1, 
+  menuItem_text: {
+    fontFamily: "space-grotesk-bold",
+    color: Primarycolor1,
     fontSize: 20,
-    marginRight:"auto" 
+    marginRight: "auto",
   },
-  menuItem_arrow:
-  {
-    color : Primarycolor1,
+  menuItem_arrow: {
+    color: Primarycolor1,
   },
-  Icon_container:
-  {
-   justifyContent : "center",
-    marginLeft : "auto",
-    alignItems : "center",
+  Icon_container: {
+    justifyContent: "center",
+    marginLeft: "auto",
+    alignItems: "center",
   },
 
   //Box_Link
-  boxlink :
-  {
-    width: '90%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+  boxlink: {
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
     marginBottom: 15,
     padding: 10,
     backgroundColor: Primarycolor2,
-    flexDirection: 'row',
+    flexDirection: "row",
     minHeight: 80,
   },
-  boxlinkContainer :
-  {
+  boxlinkContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent:"center",
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
+//Profile styles
+export const profileStyles = StyleSheet.create({
+  profileIcon: {
+    marginRight: "auto",
+    marginLeft: "auto",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "90%",
+    marginBottom: 15,
+    padding: 10,
+    color: Primarycolor1,
+  },
 });
 
 const regRenderStyle = { height: 65 };
@@ -177,101 +183,94 @@ export const navStyle = {
   },
 };
 
-
-
-//Background styles 
+//Background styles
 export const Backgroundstyle = StyleSheet.create({
-
-  informationScreens:{
-    aliginItems : 'center',
+  informationScreens: {
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor2,
   },
-  interactive_screens:{
-    aliginItems : 'center',
+  interactive_screens: {
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
-  message_Screens :{
-    aliginItems : 'center',
+  message_Screens: {
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
 });
 
-//Background styles 
+//Background styles
 export const Buttons = StyleSheet.create({
   buttonfb: {
-    backgroundColor: '#4765A9',
+    backgroundColor: "#4765A9",
     fontSize: 22,
     padding: 10,
-    width :'70%',
+    width: "70%",
     margin: 30,
     marginLeft: "auto",
-    marginRight:"auto",
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection : "row",
+    marginRight: "auto",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   buttongoogle: {
-    backgroundColor: '#F41616',
+    backgroundColor: "#F41616",
     fontSize: 22,
     padding: 10,
-    width :'52%',
+    width: "52%",
     marginLeft: "auto",
-    marginRight:"auto",
-    marginBottom : 20, 
-    justifyContent: 'center',
+    marginRight: "auto",
+    marginBottom: 20,
+    justifyContent: "center",
   },
   main_button: {
     padding: 10,
-    width :'90%',
+    width: "90%",
     marginLeft: "auto",
-    marginRight:"auto",
+    marginRight: "auto",
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
     borderWidth: 2,
   },
   main_buttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 15,
-    fontFamily: 'space-grotesk-Medium',
-    
+    fontFamily: "space-grotesk-Medium",
   },
-  secondary_button:
-  {
+  secondary_button: {
     padding: 7,
-    width :'90%',
+    width: "90%",
     marginLeft: "auto",
-    marginRight:"auto",
+    marginRight: "auto",
     backgroundColor: Primarycolor3,
     borderColor: Primarycolor1,
     borderWidth: 4,
   },
   secondary_buttonText: {
     color: Primarycolor1,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 15,
-    fontFamily: 'space-grotesk-Medium',
+    fontFamily: "space-grotesk-Medium",
   },
   iconContainerRight: {
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     right: 20,
     backgroundColor: Primarycolor1,
   },
-  Icon:
-  {
-    color : Primarycolor3,
+  Icon: {
+    color: Primarycolor3,
   },
 
- //used for continue with facebook and with continue with google
+  //used for continue with facebook and with continue with google
   SocialMediabuttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 15,
-    fontFamily: 'space-grotesk-Medium',
-
+    fontFamily: "space-grotesk-Medium",
   },
 });
