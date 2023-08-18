@@ -38,7 +38,7 @@ import { View } from "react-native-ui-lib";
 import { useFonts } from "expo-font";
 //importing pages for navigation
 import Home from "./src/screens/Home";
-import Map from "./src/screens/Map";
+import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
 import ContactUs from "./src/screens/profilePages/ContactUs";
 import DataPolicy from "./src/screens/profilePages/DataPolicy";
@@ -50,16 +50,16 @@ import Stat from "./src/screens/Stat";
 import DetailView from "./src/screens/DetailView";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
-import LandingScreen from "./src/screens/LandingScreen";
-import {
-  useLanguage,
-  LanguageProvider,
-  t,
-} from "./src/Languages/LanguageHandler";
+import LandingScreen from "./src/screens/LandingScreen"
+import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
+import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
-//import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
+import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
+import LogoutConfirmation from "./src/screens/LogoutConfirmation";
+
+
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -78,7 +78,12 @@ export default function App() {
   }, []);
 
   //FirebaseSeed data here:
-  //seedCheck(); //uncomment to seed data(only works if DB is empty)
+  var doneTheStuff;
+  if (!doneTheStuff) {
+    doneTheStuff = true;
+    seedCheck(); //seed data(only works if DB is empty)
+  }
+  
 
   //Loading the font
   const [fontsLoaded] = useFonts({
@@ -101,7 +106,6 @@ export default function App() {
             component={LandingScreen}
             options={{ animation: "none" }}
           />
-
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
@@ -110,30 +114,32 @@ export default function App() {
           <Stack.Screen
             name="Sign in"
             component={SignIn}
-            options={{ animation: "none", headerLeft: null }}
-          />
-          <Stack.Screen
-            name="Homepage"
-            component={Home}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen name="DetailView" component={DetailView} />
-          <Stack.Screen
-            name="Infopage"
-            component={ArticlePage}
-            options={{ headerShown: false, animation: "none" }}
-          />
-          <Stack.Screen
-            name="Map"
-            component={Map}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
+            options={{animation : "none", headerLeft: null}}
+        />
+        <Stack.Screen
+          name="Homepage"
+          component={Home}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen 
+          name="DetailView"
+          component={DetailView} />
+        <Stack.Screen
+          name="Infopage"
+          component={ArticlePage}
+          options={{ headerShown: false, animation : "none" }}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{animation : "none", headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
             name="ContactUs"
             component={ContactUs}
             options={{ animation: "none" }}
@@ -141,11 +147,6 @@ export default function App() {
           <Stack.Screen
             name="DataPolicy"
             component={DataPolicy}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="LogOut"
-            component={LogOut}
             options={{ animation: "none" }}
           />
           <Stack.Screen
@@ -158,55 +159,68 @@ export default function App() {
             component={MySettings}
             options={{ animation: "none" }}
           />
-          <Stack.Screen
-            name="TermsAndConditions"
-            component={TermsAndConditions}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="ProfileCreated"
-            component={ProfileCreated}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Stats"
-            component={Stat}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Add"
-            component={Add}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Products"
-            component={ProductScreen}
-            options={{ title: "Products", animation: "none" }}
-          />
+        <Stack.Screen
+        name="TermsAndConditions"
+        component={TermsAndConditions}
+        options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="ProfileCreated"
+          component={ProfileCreated}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Stats"
+          component={Stat}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Add"
+          component={Add}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Products"
+          component={ProductScreen}
+          options={{ title: "Products", animation : "none"}}
+        />
 
-          <Stack.Screen
-            name="Pro"
-            component={ProScreen}
-            options={{ title: "Products", animation: "none" }}
-          />
-          <Stack.Screen
-            name="Bnd"
-            component={BndScreen}
-            options={{ title: "Brands", animation: "none" }}
-          />
-          <Stack.Screen
-            name="Mod"
-            component={ModScreen}
-            options={{ title: "Models", animation: "none" }}
-          />
-          <Stack.Screen name="Stations" component={StationsScreen} />
-          <Stack.Screen
-            name="Thanks"
-            component={ThanksScreen}
-            options={{ headerShown: false, animation: "none" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+        <Stack.Screen
+          name="Pro"
+          component={ProScreen}
+          options={{ title: "Products" , animation : "none"}}
+        />
+        <Stack.Screen
+          name="Bnd"
+          component={BndScreen}
+          options={{ title: "Brands" , animation : "none" }}
+        />
+        <Stack.Screen
+          name="Mod"
+          component={ModScreen}
+          options={{ title: "Models" , animation : "none" }}
+        />
+        <Stack.Screen
+            name="Stations"
+            component={StationsScreen}
+        />
+        <Stack.Screen
+            name="StationDetails"
+            component={StationDetailScreen}
+            options={{ headerShown: false }} // hides the header
+        />
+        <Stack.Screen
+          name="Thanks"
+          component={ThanksScreen}
+          options={{ headerShown: false , animation : "none"}}
+        />
+        <Stack.Screen
+          name = "LogoutConfirmation"
+          component={LogoutConfirmation}
+          options={{animation : "none"}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
     </LanguageProvider>
   );
 

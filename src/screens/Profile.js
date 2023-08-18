@@ -50,9 +50,9 @@ const Profile = ({ navigation }) => {
         />
       </View>
       <View>
-        <MenuItems
-          msg={t("ProfileScreen.LogOut", currentLanguage)}
-          onPress={() => navigation.navigate("LogOut")}
+        <MenuItems 
+          msg={t("Profile.logout", currentLanguage)}
+          onPress={() => navigation.navigate('LogoutConfirmation')}
         />
       </View>
       <Navigationbar navigation={navigation} />

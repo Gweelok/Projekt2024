@@ -47,7 +47,10 @@ export const styles = StyleSheet.create({
   },
   Header_Primarycolor1: {
     color: Primarycolor1,
-  },
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 10,
+    },
 
   //Links
   link: {
@@ -107,21 +110,24 @@ export const styles = StyleSheet.create({
 
   //Box_Link
   boxlink: {
-    width: "90%",
+    width: "95%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 15,
     padding: 10,
+    borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
     flexDirection: "row",
     minHeight: 80,
-  },
+    position: "relative",
+},
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
 });
+
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
@@ -185,18 +191,18 @@ export const navStyle = {
 
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
-  informationScreens: {
-    aliginItems: "center",
+informationScreens: {
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor2,
   },
   interactive_screens: {
-    aliginItems: "center",
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
   message_Screens: {
-    aliginItems: "center",
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
