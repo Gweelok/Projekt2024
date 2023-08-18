@@ -6,30 +6,32 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getItemsInUptainer } from '../utils/Repo';
 
 
-const Uptainer = ({id, name, location, data1}) => {
-  //const [imageUrl, setImageUrl] = useState(null);
-  const [data, setData] = useState([]);
+const Uptainer = ({id, name, location}) => {
   const navigation = useNavigation();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
-      const test = await getItemsInUptainer(id); // Assuming 'id' is defined somewhere
-      const updatedData = [];
-      for (const item of test) {
-        const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
       try {
-          const url = await getDownloadURL(pathReference);
-          updatedData.push({ ...item, imageUrl: url });
-        } catch (error) {
-          console.log('Errors while downloading => ', error);
-          updatedData.push({ ...item, imageUrl: 'https://via.placeholder.com/200x200' });
-        }
+        const items = await getItemsInUptainer(id); // Assuming 'id' is defined somewhere
+        const updatedData = await Promise.all(items.map(async (item) => {
+          const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
+          try {
+            const url = await getDownloadURL(pathReference);
+            return { ...item, imageUrl: url };
+          } catch (error) {
+            console.log('Error while downloading image => ', error);
+            return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
+          }
+        }));
+        setData(updatedData);
+      } catch (error) {
+        console.log('Error while fetching items => ', error);
       }
-      setData(updatedData);
-      };
-      fetchItemList();
-    }, []);
+    };
+    fetchItemList();
+  }, []);
     
 return (
     <View> 
