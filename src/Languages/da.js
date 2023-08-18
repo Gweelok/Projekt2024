@@ -15,6 +15,14 @@ export default {
         continue : "Fortsæt",
 
     },
+    LogoutConfirmation: {
+      confirmMessage: "Er du sikker på at du vil logge ud?",
+      logoutButton: "Log ud",
+      cancelButton: "Annullér"
+    },
+    Profile: {
+      logout: "Log ud"
+    },
     SignInScreen : {
         Headline: "Log ind",
         Button: "Log ind",
