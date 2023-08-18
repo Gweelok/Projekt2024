@@ -192,17 +192,17 @@ export const navStyle = {
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
 informationScreens: {
-    alignItems: "center",
+    aliginItems : "center",
     flex: 1,
     backgroundColor: Primarycolor2,
   },
   interactive_screens: {
-    alignItems: "center",
+    aliginItems : "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
   message_Screens: {
-    alignItems: "center",
+    aliginItems : "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
