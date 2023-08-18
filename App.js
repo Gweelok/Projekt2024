@@ -40,6 +40,11 @@ import { useFonts } from "expo-font";
 import Home from "./src/screens/Home";
 import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
+import ContactUs from "./src/screens/profilePages/ContactUs";
+import DataPolicy from "./src/screens/profilePages/DataPolicy";
+import LogOut from "./src/screens/profilePages/LogOut";
+import MyDrafts from "./src/screens/profilePages/MyDrafts";
+import MySettings from "./src/screens/profilePages/MySettings";
 import Add from "./src/screens/Add";
 import Stat from "./src/screens/Stat";
 import DetailView from "./src/screens/DetailView";
@@ -59,6 +64,9 @@ import PrivacyPolicy from "./src/screens/PrivacyPolicy";
 import UptainerDetails from "./src/screens/UptainerDetails";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
+import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
+import LogoutConfirmation from "./src/screens/LogoutConfirmation";
+
 console.log("start");
 const Stack = createNativeStackNavigator();
 
@@ -76,7 +84,12 @@ export default function App() {
   }, []);
 
   //FirebaseSeed data here:
-  //seedCheck(); //uncomment to seed data(only works if DB is empty)
+  var doneTheStuff;
+  if (!doneTheStuff) {
+    doneTheStuff = true;
+    seedCheck(); //seed data(only works if DB is empty)
+  }
+  
 
   //Loading the font
   const [fontsLoaded] = useFonts({
@@ -99,7 +112,6 @@ export default function App() {
             component={LandingScreen}
             options={{ animation: "none" }}
           />
-
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
@@ -108,82 +120,112 @@ export default function App() {
           <Stack.Screen
             name="Sign in"
             component={SignIn}
-            options={{ animation: "none", headerLeft: null }}
-          />
-          <Stack.Screen
-            name="Homepage"
-            component={Home}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen name="DetailView" component={DetailView} />
-          <Stack.Screen
-            name="Infopage"
-            component={ArticlePage}
-            options={{ headerShown: false, animation: "none" }}
-          />
-          <Stack.Screen
-            name="Map"
-            component={Map}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="TermsAndConditions"
-            component={TermsAndConditions}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="ProfileCreated"
-            component={ProfileCreated}
+            options={{animation : "none", headerLeft: null}}
+        />
+        <Stack.Screen
+          name="Homepage"
+          component={Home}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen 
+          name="DetailView"
+          component={DetailView} />
+        <Stack.Screen
+          name="Infopage"
+          component={ArticlePage}
+          options={{ headerShown: false, animation : "none" }}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{animation : "none", headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+            name="ContactUs"
+            component={ContactUs}
             options={{ animation: "none" }}
           />
           <Stack.Screen
-            name="Stats"
-            component={Stat}
+            name="DataPolicy"
+            component={DataPolicy}
             options={{ animation: "none" }}
           />
           <Stack.Screen
-            name="Add"
-            component={Add}
+            name="MyDrafts"
+            component={MyDrafts}
             options={{ animation: "none" }}
           />
           <Stack.Screen
-            name="Products"
-            component={ProductScreen}
-            options={{ title: "Products", animation: "none" }}
+            name="MySettings"
+            component={MySettings}
+            options={{ animation: "none" }}
           />
+        <Stack.Screen
+        name="TermsAndConditions"
+        component={TermsAndConditions}
+        options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="ProfileCreated"
+          component={ProfileCreated}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Stats"
+          component={Stat}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Add"
+          component={Add}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Products"
+          component={ProductScreen}
+          options={{ title: "Products", animation : "none"}}
+        />
 
-          <Stack.Screen
-            name="Pro"
-            component={ProScreen}
-            options={{ title: "Products", animation: "none" }}
-          />
-          <Stack.Screen
-            name="Bnd"
-            component={BndScreen}
-            options={{ title: "Brands", animation: "none" }}
-          />
-          <Stack.Screen
-            name="Mod"
-            component={ModScreen}
-            options={{ title: "Models", animation: "none" }}
-          />
-          <Stack.Screen name="Stations" component={StationsScreen} />
-          <Stack.Screen
+        <Stack.Screen
+          name="Pro"
+          component={ProScreen}
+          options={{ title: "Products" , animation : "none"}}
+        />
+        <Stack.Screen
+          name="Bnd"
+          component={BndScreen}
+          options={{ title: "Brands" , animation : "none" }}
+        />
+        <Stack.Screen
+          name="Mod"
+          component={ModScreen}
+          options={{ title: "Models" , animation : "none" }}
+        />
+        <Stack.Screen
+            name="Stations"
+            component={StationsScreen}
+        />
+        <Stack.Screen
             name="StationDetails"
             component={StationDetailScreen}
             options={{ headerShown: false }} // hides the header
-          />
-          <Stack.Screen
-            name="Thanks"
-            component={ThanksScreen}
-            options={{ headerShown: false, animation: "none" }}
-          />
-          <Stack.Screen
+        />
+        <Stack.Screen
+          name="Thanks"
+          component={ThanksScreen}
+          options={{ headerShown: false , animation : "none"}}
+        />
+        <Stack.Screen
+          name = "LogoutConfirmation"
+          component={LogoutConfirmation}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
             name="PrivacyPolicy"
             component={PrivacyPolicy}
             options={{ headerShown: true, animation: "none" }}
@@ -193,8 +235,8 @@ export default function App() {
             component={UptainerDetails}
             options={{ headerShown: true, animation: "none" }}
           />
-        </Stack.Navigator>
-      </NavigationContainer>
+      </Stack.Navigator>
+    </NavigationContainer>
     </LanguageProvider>
   );
 
@@ -239,8 +281,7 @@ export default function App() {
     setTimeout(() => navigation.navigate("Home"), 3000);
     return (
       <SafeAreaView
-        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-      >
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 23 }}>Thank You</Text>
         <Text style={{ fontSize: 15 }}>
           You have registered an item on Station: {estId}

@@ -1,4 +1,4 @@
-import { ref, push, set, get, remove, update} from "firebase/database";
+import { ref, push, set, get, remove, update, orderByChild, equalTo, query} from "firebase/database";
 import { firebaseGetDB } from './Firebase';
 import { categories, brands, stationData, products, items, models } from './SeedData';
 
@@ -240,6 +240,7 @@ export async function getBrandById(brandId) {
         return null;
     }
 }
+
 export async function getAllUptainers() {
     const db = firebaseGetDB;
     const reference = ref(db, '/uptainers');
@@ -247,10 +248,22 @@ export async function getAllUptainers() {
     try {
         const snapshot = await get(reference);
         const uptainers = [];
-
+        
         snapshot.forEach((childSnapshot) => {
             const uptainerData = childSnapshot.val();
-            uptainers.push(uptainerData);
+            const uptainer = {
+                uptainerId: uptainerData.uptainerId,
+                uptainerName: uptainerData.uptainerName,
+                uptainerQR: uptainerData.uptainerQR,
+                uptainerStreet: uptainerData.uptainerStreet,
+                uptainerZip: uptainerData.uptainerZip,
+                uptainerCity: uptainerData.uptainerCity,
+                uptainerImage: uptainerData.uptainerImage,
+                uptainerDescription: uptainerData.uptainerDescription,
+                uptainerLatitude: parseFloat(uptainerData.uptainerLat),
+                uptainerLongitude: parseFloat(uptainerData.uptainerLong),
+            };
+            uptainers.push(uptainer);
         });
 
         return uptainers;
@@ -269,7 +282,7 @@ export async function getUptainerById(uptainerId) {
         
         if (uptainerData) {
             return {
-                uptainerId: uptainerData.uptainerId,
+                uptainerId,
                 uptainerName: uptainerData.uptainerName,
                 uptainerQR: uptainerData.uptainerQR,
                 uptainerStreet: uptainerData.uptainerStreet,
@@ -335,6 +348,19 @@ export async function getModelById(modelId) {
         return null;
     }
 }
+export async function getItemsInUptainer(uptainerId) {
+    
+    try {
+        const items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId);
+        return items;
+
+    } catch (error) {
+      // Handle error
+      console.error('Error fetching items:', error);
+      throw error;
+    }
+  }
+
 export async function getAllProducts() {
     const db = firebaseGetDB;
     const reference = ref(db, '/products');

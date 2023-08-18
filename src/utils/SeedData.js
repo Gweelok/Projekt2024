@@ -44,7 +44,7 @@ export const categories = [
         uptainerStreet: "Vigerslev Allé 124",
         uptainerZip: "2500",
         uptainerCity: "Valby",
-        uptainerImage: "UPT2.jpg",
+        uptainerImage: "UPT3.jpg",
         uptainerDescription: "I nærheden af COOP 365",
         uptainerLat: "5.566.131.743.680.190",
         uptainerLong: "1.250.583.269.168.790",

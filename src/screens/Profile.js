@@ -1,45 +1,68 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { styles, Backgroundstyle } from "../styles/Stylesheet";
-import Navigationbar from "../componets/Navigationbar";
+
 import React from "react";
-import { windowWidth } from "../utils/Dimensions";
+import { View, Text } from "react-native";
+import PropTypes from "prop-types";
+import { styles, Backgroundstyle, profileStyles } from "../styles/Stylesheet";
+import Navigationbar from "../componets/Navigationbar";
 import { Ionicons } from "@expo/vector-icons";
+import { t, useLanguage } from "../Languages/LanguageHandler";
+import MenuItems from "../styles/MenuItems";
 
 const Profile = ({ navigation }) => {
+  const { currentLanguage, setLanguage } = useLanguage();
+
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <View style={{ padding: 20 }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PrivacyPolicy")}
-          style={{
-            borderWidth: 3,
-            borderColor: styles.menuItem.borderColor,
-            padding: 20,
-            width: windowWidth / 1.1,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <Text
-            style={{
-              color: styles.menuItem.borderColor,
-              fontSize: 16,
-              fontWeight: "900",
-            }}
-          >
-            Data Policy
-          </Text>
-          <Ionicons
-            name="chevron-forward"
-            color={styles.menuItem.borderColor}
-            size={20}
-          />
-        </TouchableOpacity>
+      <View style={profileStyles.profileIcon}>
+        <Ionicons
+          style={styles.Header_Primarycolor1}
+          name="person-circle-outline"
+          size={150}
+        />
+        <Text
+          msg={t("ProfileScreen.ProfilePage", currentLanguage)}
+          onPress={() => navigation.navigate("ProfilePage")}
+          style={styles.Header_Primarycolor1}>
+          Edit Profile
+        </Text>
       </View>
-
+      <View>
+        <MenuItems
+          msg={t("ProfileScreen.MySettings", currentLanguage)}
+          onPress={() => navigation.navigate("MySettings")}
+        />
+      </View>
+      <View>
+        <MenuItems
+          msg={t("ProfileScreen.MyDrafts", currentLanguage)}
+          onPress={() => navigation.navigate("MyDrafts")}
+        />
+      </View>
+      <View>
+        <MenuItems
+          msg={t("ProfileScreen.DataPolicy", currentLanguage)}
+          onPress={() => navigation.navigate("DataPolicy")}
+        />
+      </View>
+      <View>
+        <MenuItems
+          msg={t("ProfileScreen.ContactUs", currentLanguage)}
+          onPress={() => navigation.navigate("ContactUs")}
+        />
+      </View>
+      <View>
+        <MenuItems 
+          msg={t("Profile.logout", currentLanguage)}
+          onPress={() => navigation.navigate('LogoutConfirmation')}
+        />
+      </View>
       <Navigationbar navigation={navigation} />
     </View>
   );
+};
+
+Profile.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default Profile;
