@@ -34,4 +34,9 @@ export default {
         DataPolicy: "Datapolitik",
         ContactUs: "Kontakt os",
   },
+    CustomInput:{
+        hint: "valgfri",
+    }
+
     };
+

@@ -6,11 +6,12 @@ import { styles,
    Buttons,
    Primarycolor1,
   }
-   from '../styles/Stylesheet';
-   import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
-   import { useLanguage, t } from '../Languages/LanguageHandler'; // Import 'useLanguage' and 't'
-   import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-   import {firebaseAurth} from '../utils/Firebase';
+  from '../styles/Stylesheet';
+import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
+import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
+import CustomInput from "../componets/atoms/CustomInput";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+import {firebaseAurth} from '../utils/Firebase';
 
 import GlobalStyle from "../styles/GlobalStyle";
 
@@ -58,15 +59,14 @@ const SignUpScreen = ({ navigation }) => {
         <View style={GlobalStyle.BodyWrapper}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
-       <TextInput
-         placeholder="E-mail"
-        value={email}
-        onChangeText={onChangeEmail}
+    <CustomInput
+        placeholder="E-mail"
         keyboardType="email-address"
         autoCapitalize="none"
-        clearButtonMode={"always"}
-        style={styles.inputBox}
-      />
+        clearButtonMode="always"
+        showStar={false}
+        value={email}
+        onChangeText={onChangeEmail}/>
 
       <View style={[styles.inputBox , {flexDirection:"row"}]}>
       <TextInput

@@ -34,4 +34,9 @@ export default {
         DataPolicy: "Data Policy",
         ContactUs: "Contact Us",
     },
+    CustomInput:{
+        hint: "optional",
+    }
+
   };
+
