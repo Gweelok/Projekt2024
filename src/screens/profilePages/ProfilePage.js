@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const DataPolicy = () => {
+const ProfilePage = () => {
   return (
     <View>
-      <Text>Data policy</Text>
+      <Text>Profile Page</Text>
     </View>
   );
 };
 
-export default DataPolicy;
+export default ProfilePage;
