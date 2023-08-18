@@ -56,6 +56,7 @@ import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import PrivacyPolicy from "./src/screens/PrivacyPolicy";
+import UptainerDetails from "./src/screens/UptainerDetails";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 console.log("start");
@@ -185,6 +186,11 @@ export default function App() {
           <Stack.Screen
             name="PrivacyPolicy"
             component={PrivacyPolicy}
+            options={{ headerShown: true, animation: "none" }}
+          />
+          <Stack.Screen
+            name="UptainerDetails"
+            component={UptainerDetails}
             options={{ headerShown: true, animation: "none" }}
           />
         </Stack.Navigator>
