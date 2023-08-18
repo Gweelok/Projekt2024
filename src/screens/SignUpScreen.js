@@ -49,7 +49,9 @@ const SignUpScreen = ({ navigation }) => {
     setShowPassword((prevState) => !prevState);
   };
 
+
   let Header='Opret bruger';
+
   return (
 
     <View style={Backgroundstyle.informationScreens}>

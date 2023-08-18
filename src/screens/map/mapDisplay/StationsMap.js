@@ -8,31 +8,24 @@ const CopenhagenLocations = [
     // todo  get stations from server database
     {
         id: 1,
-        name: 'Tivoli Gardens',
-        address: "Vesterbrogade 3, 1630 København V",
-        latitude: 55.6737,
-        longitude: 12.5685
+        name: 'KU Lighthouse',
+        address: "Tagensvej 16A, 2200 København",
+        latitude: 55.697733214205,
+        longitude:  12.559954477291
     },
     {
         id: 2,
-        name: 'The Little Mermaid',
-        address: "Langelinie, 2100 København Ø",
-        latitude: 55.6926,
-        longitude: 12.5993
+        name: 'COOP 365',
+        address: "Vigerslev Allé 124, 2500 København",
+        latitude: 55.661102,
+        longitude: 12.505218
     },
     {
         id: 4,
         name: 'Rosenborg Castle',
-        address: "Øster Voldgade 4A, 1350 København",
+        address: "Stockflethsvej 2, 2000 København",
         latitude: 55.6867,
         longitude: 12.5783
-    },
-    {
-        id: 5,
-        name: 'Amalienborg Palace',
-        address: "Amalienborg Slotsplads 5, 1257 København K, Amalienborg Slotsplads",
-        latitude: 55.6846,
-        longitude: 12.5949
     }
 ];
 
