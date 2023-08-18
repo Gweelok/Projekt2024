@@ -15,6 +15,14 @@ export default {
         continue : "Continue",
 
     },
+    LogoutConfirmation: {
+        confirmMessage: "Are you sure you want to log out?",
+        logoutButton: "Log Out",
+        cancelButton: "Cancel"
+    },
+    Profile: {
+        logout: "Log Out"
+    },
     SignInScreen : {
         Headline: "Sign in",
         Button: "Sign in",

@@ -51,7 +51,9 @@ import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailSc
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
+import LogoutConfirmation from "./src/screens/LogoutConfirmation";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
+
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -185,6 +187,11 @@ export default function App() {
           name="Thanks"
           component={ThanksScreen}
           options={{ headerShown: false , animation : "none"}}
+        />
+        <Stack.Screen
+          name = "LogoutConfirmation"
+          component={LogoutConfirmation}
+          options={{animation : "none"}}
         />
       </Stack.Navigator>
     </NavigationContainer>
