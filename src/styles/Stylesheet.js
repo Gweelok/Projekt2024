@@ -196,7 +196,8 @@ export const Backgroundstyle = StyleSheet.create({
     backgroundColor: Primarycolor2,
   },
   interactive_screens: {
-    aliginItems: "center",
+    paddingTop: 50,
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
