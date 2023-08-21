@@ -50,16 +50,22 @@ import Stat from "./src/screens/Stat";
 import DetailView from "./src/screens/DetailView";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
-import LandingScreen from "./src/screens/LandingScreen"
-import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
+import LandingScreen from "./src/screens/LandingScreen";
+import {
+  useLanguage,
+  LanguageProvider,
+  t,
+} from "./src/Languages/LanguageHandler";
 import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
+import PrivacyPolicy from "./src/screens/PrivacyPolicy";
+import UptainerDetails from "./src/screens/UptainerDetails";
+//import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
+
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import LogoutConfirmation from "./src/screens/LogoutConfirmation";
-
-
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -219,6 +225,16 @@ export default function App() {
           component={LogoutConfirmation}
           options={{animation : "none"}}
         />
+        <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+            options={{ headerShown: true, animation: "none" }}
+          />
+          <Stack.Screen
+            name="UptainerDetails"
+            component={UptainerDetails}
+            options={{ headerShown: true, animation: "none" }}
+          />
       </Stack.Navigator>
     </NavigationContainer>
     </LanguageProvider>

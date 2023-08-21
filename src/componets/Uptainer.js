@@ -1,3 +1,4 @@
+
 import { View, Text, Image , FlatList ,StyleSheet, TouchableOpacity } from 'react-native';
 import { styles , Primarycolor1 } from '../styles/Stylesheet';
 import { React, useEffect, useState } from 'react';
@@ -35,8 +36,17 @@ const Uptainer = ({id, name, location}) => {
     
 return (
     <View> 
-      <Text style={styles.menuItem_text}> {name}</Text>
-        <Text style={{fontSize :18 , color :Primarycolor1}}> {location}</Text>
+       <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("UptainerDetails", {
+            name: name,
+            location: location,
+          })
+        }
+      >
+        <Text style={styles.menuItem_text}> {name}</Text>
+        <Text style={{ fontSize: 18, color: Primarycolor1 }}> {location}</Text>
+      </TouchableOpacity>
         <FlatList
       horizontal={true}
       data={data}
@@ -64,21 +74,21 @@ return (
       )}
     />
     </View>
-);
-}
+  );
+};
 const styling = StyleSheet.create({
-    item: {
-      width: 100, // Set the width of each item
-      height: 100,
-      margin: 5,
-      borderRadius: 10,
-      overflow: 'hidden',
-    },
-    image: {
-      width: '100%',
-      height: '100%',
-      resizeMode: 'cover',
-    },
-  });
+  item: {
+    width: 100, // Set the width of each item
+    height: 100,
+    margin: 5,
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+});
 
 export default Uptainer;
