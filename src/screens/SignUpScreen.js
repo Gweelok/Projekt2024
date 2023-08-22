@@ -5,7 +5,7 @@ import { styles,
    Primarycolor2,
    Buttons,
    Primarycolor1,
-  } 
+  }
    from '../styles/Stylesheet';
    import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
    import { useLanguage, t } from '../Languages/LanguageHandler'; // Import 'useLanguage' and 't'
@@ -22,7 +22,7 @@ const SignUpScreen = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
   const auth = firebaseAurth; // reuse from firebase.js
 
-  //To check on password 
+  //To check on password
   const CheckPassword = (text) => {
     onChangePassword(text);
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
@@ -35,7 +35,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
 
-  //Check on both 
+  //Check on both
   const handleSubmit = () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
@@ -64,7 +64,7 @@ const SignUpScreen = ({ navigation }) => {
         onChangeText={onChangeEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-        clearButtonMode={"always"}  
+        clearButtonMode={"always"}
         style={styles.inputBox}
       />
 
@@ -72,7 +72,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         value={password}
         onChangeText={CheckPassword}
-        placeholder={'Kodeord'}
+        placeholder={t('SignUpScreen.password', currentLanguage)}
         keyboardType={'default'}
         secureTextEntry={!showPassword}
         style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
@@ -86,26 +86,28 @@ const SignUpScreen = ({ navigation }) => {
       />
       </View>
       { //Check on the password
-      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> min. otte tegn </Text>
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.passwordmsg', currentLanguage)} </Text>
       }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
-            <Text style={Buttons.main_buttonText}>{Header}</Text>
+            <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
         </Pressable>
-        
+
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
           <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
-      
+
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
           <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
 
-        <Pressable onPress={() => {}}>
-            <Text style={SignUpStyles.text_Tertiary}> Har du allerede en bruger</Text>
+        <Pressable onPress={() => {
+            navigation.navigate('Sign in')
+        }}>
+            <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.LogInLink', currentLanguage)}</Text>
         </Pressable>
         </View>
     </View>
@@ -114,17 +116,17 @@ const SignUpScreen = ({ navigation }) => {
 const SignUpStyles = StyleSheet.create({
 
   text_Tertiary: {
-    marginBottom: 10, 
+    marginBottom: 10,
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
   },
-  
+
    container: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  
+
 });
 
 export default SignUpScreen;
