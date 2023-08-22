@@ -40,9 +40,10 @@ import { useFonts } from "expo-font";
 import Home from "./src/screens/Home";
 import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
+import ProfilePage from './src/screens/profilePages/ProfilePage';
 import ContactUs from "./src/screens/profilePages/ContactUs";
 import DataPolicy from "./src/screens/profilePages/DataPolicy";
-import LogOut from "./src/screens/profilePages/LogOut";
+import LogoutConfirmation from "./src/screens/profilePages/LogoutConfirmation";
 import MyDrafts from "./src/screens/profilePages/MyDrafts";
 import MySettings from "./src/screens/profilePages/MySettings";
 import Add from "./src/screens/Add";
@@ -60,13 +61,10 @@ import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailSc
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
-import PrivacyPolicy from "./src/screens/PrivacyPolicy";
 import UptainerDetails from "./src/screens/UptainerDetails";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
-import LogoutConfirmation from "./src/screens/LogoutConfirmation";
-
 console.log("start");
 const Stack = createNativeStackNavigator();
 
@@ -144,6 +142,11 @@ export default function App() {
           name="Profile"
           component={Profile}
           options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="ProfilePage"
+          component={ProfilePage}
+          options={{ title: 'Edit Profile' }}
         />
         <Stack.Screen
             name="ContactUs"
@@ -225,11 +228,6 @@ export default function App() {
           component={LogoutConfirmation}
           options={{animation : "none"}}
         />
-        <Stack.Screen
-            name="PrivacyPolicy"
-            component={PrivacyPolicy}
-            options={{ headerShown: true, animation: "none" }}
-          />
           <Stack.Screen
             name="UptainerDetails"
             component={UptainerDetails}
