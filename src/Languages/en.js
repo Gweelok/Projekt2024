@@ -34,9 +34,11 @@ export default {
         DataPolicy: "Data Policy",
         ContactUs: "Contact Us",
     },
+    UpdroppForm: {
+        title: "Updropp",
+    },
     CustomInput:{
         hint: "optional",
     }
 
   };
-

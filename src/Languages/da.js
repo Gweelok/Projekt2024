@@ -34,6 +34,9 @@ export default {
         DataPolicy: "Datapolitik",
         ContactUs: "Kontakt os",
   },
+    UpdroppForm: {
+        title: "Updropp",
+    },
     CustomInput:{
         hint: "valgfri",
     }

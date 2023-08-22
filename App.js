@@ -89,7 +89,7 @@ export default function App() {
     doneTheStuff = true;
     seedCheck(); //seed data(only works if DB is empty)
   }
-  
+
 
   //Loading the font
   const [fontsLoaded] = useFonts({
@@ -127,7 +127,7 @@ export default function App() {
           component={Home}
           options={{animation : "none"}}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name="DetailView"
           component={DetailView} />
         <Stack.Screen
@@ -183,7 +183,7 @@ export default function App() {
         <Stack.Screen
           name="Add"
           component={Add}
-          options={{animation : "none"}}
+          options={{animation : "none", headerShown: false}}
         />
         <Stack.Screen
           name="Products"
