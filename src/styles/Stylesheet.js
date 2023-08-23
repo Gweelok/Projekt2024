@@ -43,7 +43,6 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    marginLeft: 40,
     fontFamily: "space-grotesk-bold",
   },
   Header_Primarycolor1  : {
@@ -104,20 +103,23 @@ export const styles = StyleSheet.create({
   },
   Icon_container:
   {
-   // justifyContent : "center",
+   justifyContent : "center",
     // marginLeft : "auto",
-    // alignItems : "center",
+    alignItems : "center",
   },
 
   //Box_Link
   boxlink :
   {
+    paddingBottom: 10,
+    paddingTop: 10,
     marginBottom :15,
-    padding: 10,
+    // padding: 10,
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
     flexDirection: 'row',
     alignItems: "center",
+
   }
 
 });

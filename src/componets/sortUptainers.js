@@ -137,7 +137,7 @@ const SortUptainers = ({navigation}) => {
       // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
-    
+
     <View>
       {/* Display the list of sorted uptainers using the Uptainer component */}
       {sortedUptainers[0] && (
@@ -149,7 +149,8 @@ const SortUptainers = ({navigation}) => {
         />
       )}
       {/* Display BoxLink component */}
-      <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
+
+      <BoxLink  msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
       {renderUptainers()}
      
     </View>

@@ -48,7 +48,7 @@ return (
             </Pressable> 
         </View>
 
-        <Text style={[styles.Header_Primarycolor1,styles.Header,{textAlign: 'center'}]}>{t('LandingScreen.Header', currentLanguage)}</Text>
+        <Text style={[styles.Header_Primarycolor1,styles.Header, {textAlign:'center'}]}>{t('LandingScreen.Header', currentLanguage)}</Text>
 
         <Text style={styling.Intro}>{t('LandingScreen.Intro', currentLanguage)}</Text>
 

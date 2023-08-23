@@ -7,10 +7,9 @@ import {
 import GlobalStyle from "./GlobalStyle";
 export const BoxLink = ({msg , onPress}) => {
     return (
-        <View style={GlobalStyle.BodyWrapper}>
         <Pressable onPress={onPress}>
     <View style={styles.boxlink}>
-        <View style={styles.boxlinkContainer}>
+        <View>
         <Text style={styles.menuItem_text}> {msg}  </Text>
         </View>
             <View style={styles.Icon_container}>
@@ -18,6 +17,5 @@ export const BoxLink = ({msg , onPress}) => {
             </View>
             </View>
             </Pressable>
-        </View>
     )
 };

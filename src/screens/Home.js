@@ -39,6 +39,7 @@ const Home = ({ navigation }) => {
 
 
   return (
+
     <View style={Backgroundstyle.interactive_screens}>
         <View style={GlobalStyle.BodyWrapper}>
 
@@ -51,9 +52,11 @@ const Home = ({ navigation }) => {
             />
             <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
         </View>
-      <ScrollView>
-        <SortUptainers navigation={navigation} />
-      </ScrollView>
+        <View style={{flex: 1}}>
+            <ScrollView contentContainerStyle={{ padding: 0 }}>
+                <SortUptainers navigation={navigation} />
+            </ScrollView>
+        </View>
       <Navigationbar navigation={navigation} />
      </View>
     </View>
@@ -73,9 +76,10 @@ const styles = StyleSheet.create({
     },
     container: {
         marginTop: 15,
-        width:  Dimensions.get('window').width * 0.9,
+        // width:  Dimensions.get('window').width * 0.9,
         backgroundColor: '#fff',
         marginBottom: 15,
+        width: '100%',
     },
     input: {
         height: 40,

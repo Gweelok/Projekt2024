@@ -17,11 +17,13 @@ const Add = ({ navigation }) => {
 
 return (
     <View style={Backgroundstyle.interactive_screens}>
+        <View style={GlobalStyle.BodyWrapper}>
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, width: '100%'}}>
             <ChooseCatagories navigation={navigation} />
       </View>
       <Text>Current Language: {currentLanguage}</Text>
+        </View>
         <Navigationbar navigation={navigation}/>
     </View>
 );

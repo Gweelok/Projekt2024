@@ -7,7 +7,8 @@ import { styles,
 }
     from '../styles/Stylesheet';
 import { Ionicons } from '@expo/vector-icons';
-import {t, useLanguage} from "../Languages/LanguageHandler"; // or any other icon library you prefer
+import {t, useLanguage} from "../Languages/LanguageHandler";
+import GlobalStyle from "../styles/GlobalStyle"; // or any other icon library you prefer
 
 
 const SignIn = ({ navigation }) => {
@@ -49,6 +50,7 @@ const SignIn = ({ navigation }) => {
     return (
 
         <View style={Backgroundstyle.informationScreens}>
+            <View style={GlobalStyle.BodyWrapper}>
             <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
             <TextInput
                 placeholder="E-mail"
@@ -95,7 +97,7 @@ const SignIn = ({ navigation }) => {
             </Pressable>
 
             <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
-                <View style={SignUpStyles.container}>
+                <View>
                     <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
                 </View>
             </Pressable>
@@ -106,6 +108,7 @@ const SignIn = ({ navigation }) => {
                 <Text style={SignUpStyles.text_Tertiary}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
             </Pressable>
         </View>
+        </View>
 
     );
 }
@@ -114,7 +117,6 @@ const SignUpStyles = StyleSheet.create({
     text_forget_pw:{
         marginTop: 10,
         color : "#07A0A2",
-        textAlign: 'center',
         fontSize: 15,
     },
 

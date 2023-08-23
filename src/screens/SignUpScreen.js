@@ -93,13 +93,13 @@ const SignUpScreen = ({ navigation }) => {
         </Pressable>
         
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
-          <View style={SignUpStyles.container}>
+          <View>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
       
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
-          <View style={SignUpStyles.container}>
+          <View>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
@@ -122,10 +122,6 @@ const SignUpStyles = StyleSheet.create({
     fontSize: 15,
   },
 
-   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
 
 });
 
