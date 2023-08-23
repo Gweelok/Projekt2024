@@ -1,91 +1,29 @@
+import {getAllUptainers, getItemsInUptainer} from '../utils/Repo'
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import * as Location from 'expo-location';
-import Uptainer from './Uptainer';
 import { BoxLink } from "../styles/BoxLink";
-
-
-
-
-///Asumming i have data
-const photo = [
-  { id: "1", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "2", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "3", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "4", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "5", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "6", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "7", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "8", imageSource: "https://via.placeholder.com/200x200" },
-  { id: "9", imageSource: "https://via.placeholder.com/200x200" },
-  // Add more image URLs as needed
-];
-
-
-const uptainersList = [
-  {
-    name: "Valby",
-    location: "Allegrade",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.1,
-  },
-
-
-  {
-    name: "Valby 2",
-    location: "ved fatka",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.2,
-  },
-  {
-    name: "Norrebo",
-    location: "ved fatka",
-    photos: photo,
-    latitude: 55.6666,
-    longitude: 12.3,
-  },
-{
-  name: "Norrebo 2",
-  location: "Allegrade",
-  photos: photo,
-  latitude: 55.6666,
-  longitude: 12.4,
-},
-];
-
-
-
-
-
-
-
-
-
-
-
-
+import * as Location from 'expo-location';
+import { View } from 'react-native';
+import Uptainer from './Uptainer';
 
 
 const SortUptainers = ({navigation}) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
+  const [uptainersList, setUptainerList] = useState([]);
 
 
   // Function to calculate distance between two points.
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  const calculateDistance = ({ latitude: lat1, longitude: lon1 }, { latitude: lat2, longitude: lon2 }) => {
     const R = 6371; // Radius of the Earth in kilometers
     const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lon2 - lon1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = R * c; // Distance in kilometers
     return distance; // Return the calculated distance
-  };
+};
 
 
   // Helper function to convert degrees to radians
@@ -96,35 +34,31 @@ const SortUptainers = ({navigation}) => {
 
   // Function to sort the Uptainers list by distance based on the user's location
   const sortUptainersByDistance = (userLocation, uptainersList) => {
+
+    // Destructure latitude and longitude from userLocation
+    const { latitude, longitude } = userLocation; 
+
+    // Sort uptainersList by distance from userLocation
     const sortedList = uptainersList.slice().sort((a, b) => {
-      const distanceA = calculateDistance(
-        userLocation.latitude,
-        userLocation.longitude,
-        a.latitude,
-        a.longitude
-      );
-
-
-      const distanceB = calculateDistance(
-        userLocation.latitude,
-        userLocation.longitude,
-        b.latitude,
-        b.longitude
-      );
-
-
+      const distanceA = calculateDistance({ latitude, longitude }, a);
+      const distanceB = calculateDistance({ latitude, longitude }, b);
       return distanceA - distanceB;
     });
-
-
+  
     return sortedList;
   };
 
 
-  // Fetch user location on component mount
+  // Fetch user location and Uptainers list from the server
   useEffect(() => {
-    const fetchUserLocation = async () => {
+    const fetchData = async () => {
       try {
+
+        // Fetch the list of uptainers
+        const uptainerList = await getAllUptainers();
+        setUptainerList(uptainerList);
+  
+        // Request user's location permissions and get their current position
         const { status } = await Location.requestForegroundPermissionsAsync();
         if (status === 'granted') {
           const location = await Location.getCurrentPositionAsync({
@@ -137,13 +71,13 @@ const SortUptainers = ({navigation}) => {
           console.log('Permission to access location was denied');
         }
       } catch (error) {
-        console.log('Error getting user location:', error);
+        console.log('Error:', error);
       }
     };
-
-
-    fetchUserLocation();
+  
+    fetchData();// Fetch data when component mounts
   }, []);
+
 
 
   // Whenever the userLocation or Uptainers list changes, update the sortedUptainers state
@@ -155,33 +89,32 @@ const SortUptainers = ({navigation}) => {
   }, [userLocation, uptainersList]);
 
 
+  
 
-
-  //fn to help in rendering
+  // Function to render list of Uptainers
   const renderUptainers = () => {
     // Create a new array without the first element
-    const slicedUptainerData = sortedUptainers.slice(1);
+    const displayedUptainers = userLocation ? sortedUptainers.slice(1) : uptainersList.slice(1);
+
  
-    // rendering the rest of the Uptainer components
-    return slicedUptainerData.map((item, index) => (
+    // Render Uptainer components
+    return displayedUptainers.map((item) => (
       <Uptainer
-        key={index + 1}
-        name={item.name}
-        location={item.location}
-        data={item.photos}
+        key={item.uptainerId}
+        id={item.uptainerId}
+        name={item.uptainerName}
+        location={item.uptainerStreet}
       />
     ));
-   
-
-
   };
 
+ 
 
 
-
-  //Navigation to info page
+  // Navigation function to info page
   const navigatetoinfo = () => {
     // todo all the below data should get from server
+    // Navigate to InfoPage with predefined content
     navigation.navigate('Infopage', {
         title: "Five Uptainers are set to open in Kobenhavn area this year",
         content: [
@@ -200,25 +133,26 @@ const SortUptainers = ({navigation}) => {
             "leader of thepack They are your rivals so you must follow their blogs, as well Remember, yourcompetitors are probabhy looking"
         ]
     });
-};
-
-
+  };
+      // Determine the list of uptainers to use for rendering
+  const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
+    
     <View>
       {/* Display the list of sorted uptainers using the Uptainer component */}
       {sortedUptainers[0] && (
         <Uptainer
-          name={sortedUptainers[0].name}
-          location={sortedUptainers[0].location}
-          data={sortedUptainers[0].photos}
+            key={uptainerList[0].uptainerId}
+            id={uptainerList[0].uptainerId}
+            name={uptainerList[0].uptainerName}
+            location={uptainerList[0].uptainerStreet}
         />
       )}
-        <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
-        {renderUptainers()}
+      {/* Display BoxLink component */}
+      <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
+      {renderUptainers()}
      
     </View>
   );
 };
-
-
 export default SortUptainers;

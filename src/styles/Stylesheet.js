@@ -18,6 +18,8 @@ export const styles = StyleSheet.create({
   landingPageStyle: {
     flex: 1,
     marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   mapStyle: {
     marginTop: 40,
@@ -41,7 +43,8 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    fontFamily: 'space-grotesk-bold',
+    marginLeft: 40,
+    fontFamily: "space-grotesk-bold",
   },
   Header_Primarycolor1  : {
     color: Primarycolor1,
@@ -89,11 +92,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   //Text for both menuitem and boxlink
-  menuItem_text :
-  {
-    fontFamily: 'space-grotesk-bold',
-    color: Primarycolor1, 
-    fontSize: 20, 
+  menuItem_text: {
+    fontFamily: "space-grotesk-bold",
+    color: Primarycolor1,
+    fontSize: 20,
+    marginRight: "auto",
   },
   menuItem_arrow:
   {
