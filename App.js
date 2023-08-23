@@ -51,17 +51,16 @@ import DetailView from "./src/screens/DetailView";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen";
-import {
-  useLanguage,
-  LanguageProvider,
-  t,
-} from "./src/Languages/LanguageHandler";
+import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import PrivacyPolicy from "./src/screens/PrivacyPolicy";
 import UptainerDetails from "./src/screens/UptainerDetails";
+import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
+import Notifications from "./src/screens/ProfileSetings/Notifications";
+
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
@@ -145,12 +144,13 @@ export default function App() {
           component={Profile}
           options={{animation : "none"}}
         />
-        <Stack.Screen
-            name="ContactUs"
-            component={ContactUs}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
+            <Stack.Screen
+                name="ContactUs"
+                component={ContactUs}
+                options={{ animation: "none" }}
+            />
+
+            <Stack.Screen
             name="DataPolicy"
             component={DataPolicy}
             options={{ animation: "none" }}
@@ -165,6 +165,17 @@ export default function App() {
             component={MySettings}
             options={{ animation: "none" }}
           />
+
+        <Stack.Screen
+            name="AccountSettings"
+            component={AccountSettings}
+            options={{animation : "none"}}
+        />
+        <Stack.Screen
+            name="Notifications"
+            component={Notifications}
+            options={{animation : "none"}}
+        />
         <Stack.Screen
         name="TermsAndConditions"
         component={TermsAndConditions}
