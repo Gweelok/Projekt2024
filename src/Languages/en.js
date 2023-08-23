@@ -36,6 +36,9 @@ export default {
         ContactUs: "Contact Us",
     },
 
+    UpdroppForm: {
+        title: "Updropp",
+    },
     CustomInput:{
         hint: "optional",
     },
