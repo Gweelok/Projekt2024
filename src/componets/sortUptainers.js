@@ -1,4 +1,4 @@
-import {getAllUptainers, getItemsInUptainer} from '../utils/Repo'
+import {getAllUptainers, GetCurrentUser} from '../utils/Repo'
 import React, { useEffect, useState } from 'react';
 import { BoxLink } from "../styles/BoxLink";
 import * as Location from 'expo-location';
@@ -11,6 +11,7 @@ const SortUptainers = ({navigation}) => {
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
 
+ 
 
   // Function to calculate distance between two points.
   const calculateDistance = ({ latitude: lat1, longitude: lon1 }, { latitude: lat2, longitude: lon2 }) => {
@@ -22,6 +23,7 @@ const SortUptainers = ({navigation}) => {
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = R * c; // Distance in kilometers
+    
     return distance; // Return the calculated distance
 };
 
@@ -47,16 +49,29 @@ const SortUptainers = ({navigation}) => {
   
     return sortedList;
   };
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      // Fetch the list of uptainers
+      const uptainerList = await getAllUptainers();
+      setUptainerList(uptainerList);
+      
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
+  fetchData();// Fetch data when component mounts
+}, []);
 
+const test = GetCurrentUser();
+      console.log("asd: ",test)
   // Fetch user location and Uptainers list from the server
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
-
-        // Fetch the list of uptainers
-        const uptainerList = await getAllUptainers();
-        setUptainerList(uptainerList);
+        
   
         // Request user's location permissions and get their current position
         const { status } = await Location.requestForegroundPermissionsAsync();

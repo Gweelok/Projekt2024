@@ -1,7 +1,9 @@
-import { ref, push, set, get, remove, update, orderByChild, equalTo, query} from "firebase/database";
-import { firebaseGetDB } from './Firebase';
+import { ref, push, set, get, remove, update} from "firebase/database";
+import { firebaseGetDB, firebaseAurth } from './Firebase';
 import { categories, brands, stationData, products, items, models } from './SeedData';
+import { deleteUser, updateProfile, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
 
+const auth = firebaseAurth;
 const db = firebaseGetDB;
 
 const paths = {
@@ -244,8 +246,9 @@ export async function getBrandById(brandId) {
 export async function getAllUptainers() {
     const db = firebaseGetDB;
     const reference = ref(db, '/uptainers');
-
+    
     try {
+        
         const snapshot = await get(reference);
         const uptainers = [];
         
@@ -265,7 +268,6 @@ export async function getAllUptainers() {
             };
             uptainers.push(uptainer);
         });
-
         return uptainers;
     } catch (error) {
         console.error("Error fetching uptainer data:", error);
@@ -471,8 +473,30 @@ export async function getItemById(itemId) {
         return null;
     }
 }
+export function GetCurrentUser() {
+    try
+    {
+        const user = auth.currentUser;
+        if (user) {
+            console.log(user);
+            return user;
+        } else {
+            console.log("No user found");
+            return null;
+        }
+    }
+    catch (error) {
+        console.error(`Error fetching user:`, error);
+        console.log('No user found, user might not be logged in');
+        return null;
+    }
+    
+    
+}
 
+export function createUser(){
 
+}
     /********************/
     /***** Delete *******/
     /********************/
@@ -521,6 +545,23 @@ export function deleteModelById(modelId) {
     } catch (error) {
         console.error(`Error deleting model with ID ${modelId}:`, error);
     }
+}
+export function deleteProductById(productId) {
+    const reference = ref(db, `/products/${productId}`);
+    try {
+        remove(reference);
+        console.log(`Product with ID ${productId} deleted successfully.`);
+    } catch (error) {
+        console.error(`Error deleting product with ID ${productId}:`, error);
+    }
+}
+export function deleteUserById() {
+    deleteUser(GetCurrentUser()).then(() => {
+        // User deleted.
+      }).catch((error) => {
+        // An error ocurred
+        console.error(`Error deleting user:`, error);
+      });
 }
 
         /**********************/
@@ -586,3 +627,17 @@ export function updateProductById(productId, newData) {
         console.error(`Error updating product with ID ${productId}:`, error);
     }
 }   
+// ToDo find user data and implement it to the function
+export function updateUserData(){
+updateProfile(GetCurrentUser, {
+  displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+}).then(() => {
+  // Profile updated!
+  // ...
+}).catch((error) => {
+  // An error occurred
+  console.error(`Error updating user data:`, error);
+  // ...
+});
+}
+

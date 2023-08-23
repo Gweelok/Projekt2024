@@ -10,8 +10,8 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
 import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-import {firebaseAurth} from '../utils/Firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { firebaseAurth } from '../utils/Firebase';
 
 import GlobalStyle from "../styles/GlobalStyle";
 
@@ -21,7 +21,6 @@ const SignUpScreen = ({ navigation }) => {
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
   const [showPassword, setShowPassword] = useState(false);
   const { currentLanguage } = useLanguage();
-  const auth = firebaseAurth; // reuse from firebase.js
 
   //To check on password
   const CheckPassword = (text) => {
@@ -35,12 +34,23 @@ const SignUpScreen = ({ navigation }) => {
     return emailRegex.test(text);
   };
 
-
+const signUp = async () => {
+    try {
+      const response = await  createUserWithEmailAndPassword(firebaseAurth ,email, password);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      alert('Sign up failed' + error.message);
+    } finally {
+      console.log('finally');
+    }
+  };
   //Check on both
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-          navigation.navigate('Homepage')
+      signUp();
+      navigation.navigate('Homepage')
     } else {
           Alert.alert('Invalid Email or Password');
     }
