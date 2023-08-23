@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     marginBottom: 10,
-    },
+  },
 
   //Links
   link: {
@@ -120,14 +120,13 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     minHeight: 80,
     position: "relative",
-},
+  },
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
 });
-
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
@@ -136,9 +135,8 @@ export const profileStyles = StyleSheet.create({
     marginLeft: "auto",
     justifyContent: "center",
     alignItems: "center",
-    width: "90%",
-    marginBottom: 15,
-    padding: 10,
+    marginBottom: 10,
+    padding: 5,
     color: Primarycolor1,
   },
 });
@@ -191,18 +189,22 @@ export const navStyle = {
 
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
-informationScreens: {
-    alignItems : "center",
+  informationScreens: {
+    aliginItems: "center",
+
     flex: 1,
     backgroundColor: Primarycolor2,
   },
   interactive_screens: {
-    alignItems : "center",
+    paddingTop: 50,
+    alignItems: "center",
+
     flex: 1,
     backgroundColor: Primarycolor3,
   },
   message_Screens: {
-    alignItems : "center",
+    aliginItems: "center",
+
     flex: 1,
     backgroundColor: Primarycolor1,
   },
