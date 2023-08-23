@@ -7,6 +7,9 @@ import { styles,
 import { Octicons } from '@expo/vector-icons'; 
 import React  from 'react';
 import { useLanguage, t } from '../Languages/LanguageHandler';
+import ReuseSvg from '../componets/svg-components/ReuseSvg';
+
+
 
 
 
@@ -45,9 +48,10 @@ return (
                 <Text style={Buttons.secondary_buttonText}>{t('LandingScreen.LanguageSelector', currentLanguage)}</Text>
             </Pressable> 
         </View>
-
+       
         <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('LandingScreen.Header', currentLanguage)}</Text> 
-
+        <ReuseSvg style={{marginBottom:30,alignItems:"center"}}/>
+        
         <Text style={styling.Intro}>{t('LandingScreen.Intro', currentLanguage)}</Text>
 
         <Text style={styling.Intro}>
