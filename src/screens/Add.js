@@ -4,6 +4,7 @@ import Navigationbar from '../componets/Navigationbar';
 import React from 'react';
 import { ChooseCatagories} from "../componets/atoms/chooseCatagories";
 import { useLanguage, t } from '../Languages/LanguageHandler';
+import GlobalStyle from "../styles/GlobalStyle";
 
 
 
@@ -16,12 +17,12 @@ const Add = ({ navigation }) => {
 
 return (
     <View style={Backgroundstyle.interactive_screens}>
-        <SafeAreaView style={{ flex: 1 }}>
-        <ChooseCatagories navigation={navigation} />
-      </SafeAreaView>
+
+        <View style={{ flex: 1 }}>
+            <ChooseCatagories navigation={navigation} />
+      </View>
       <Text>Current Language: {currentLanguage}</Text>
         <Navigationbar navigation={navigation}/>
-     
     </View>
 );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { Backgroundstyle, Primarycolor3 } from '../styles/Stylesheet';
+import GlobalStyle from "../styles/GlobalStyle";
 
 const ProfileCreated = ({ navigation }) => {
   const opacityAnim = useRef(new Animated.Value(0)).current;  // opacity animation
@@ -24,6 +25,7 @@ const ProfileCreated = ({ navigation }) => {
 
   return (
     <View style={[Backgroundstyle.message_Screens, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
+      <View style={GlobalStyle.BodyWrapper}>
       <View style={{
         width: 50,
         height: 50,
@@ -43,6 +45,7 @@ const ProfileCreated = ({ navigation }) => {
         Profile Created Successfully!
       </Text>
     </View>
+      </View>
   );
 }
 

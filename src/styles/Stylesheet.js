@@ -18,8 +18,6 @@ export const styles = StyleSheet.create({
   landingPageStyle: {
     flex: 1,
     marginTop: 20,
-    alignItems: "center",
-    justifyContent: "center",
   },
   mapStyle: {
     marginTop: 40,
@@ -43,7 +41,6 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    marginLeft:40, 
     fontFamily: 'space-grotesk-bold',
   },
   Header_Primarycolor1  : {
@@ -104,21 +101,20 @@ export const styles = StyleSheet.create({
   },
   Icon_container:
   {
-   justifyContent : "center",
-    marginLeft : "auto",
-    alignItems : "center",
+   // justifyContent : "center",
+    // marginLeft : "auto",
+    // alignItems : "center",
   },
 
   //Box_Link
   boxlink :
   {
-    width :'95%',
     marginBottom :15,
     padding: 10,
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
     flexDirection: 'row',
-    postion :"relative",
+    alignItems: "center",
   }
 
 });

@@ -4,9 +4,10 @@ import { AntDesign } from '@expo/vector-icons';
 import {
     styles,
   } from "./Stylesheet";
+import GlobalStyle from "./GlobalStyle";
 export const BoxLink = ({msg , onPress}) => {
     return (
-    <View>
+        <View style={GlobalStyle.BodyWrapper}>
         <Pressable onPress={onPress}>
     <View style={styles.boxlink}>
         <View style={styles.boxlinkContainer}>
@@ -17,6 +18,6 @@ export const BoxLink = ({msg , onPress}) => {
             </View>
             </View>
             </Pressable>
-    </View>
+        </View>
     )
 };

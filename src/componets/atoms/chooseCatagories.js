@@ -21,6 +21,7 @@ export const ChooseCatagories = ({navigation}) => {
 
 	return (
 		<>
+
 			<RegRender data = {data} navigation = {navigation} db = 'Catagories' rid={1}/>
 		</>
 	)

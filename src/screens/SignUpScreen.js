@@ -97,9 +97,7 @@ const SignUpScreen = ({ navigation }) => {
         </Pressable>
       
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
-          <View style={SignUpStyles.container}>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
-          </View>
         </Pressable>
 
         <Pressable onPress={() => {}}>
@@ -117,12 +115,6 @@ const SignUpStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
   },
-  
-   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  
 });
 
 export default SignUpScreen;
