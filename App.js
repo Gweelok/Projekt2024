@@ -218,20 +218,9 @@ export default function App() {
             options={{ animation: "none" }}
           />
           <Stack.Screen
-            name="PrivacyPolicy"
-            component={PrivacyPolicy}
-            options={{ headerShown: true, animation: "none" }}
-          />
-          <Stack.Screen
             name="UptainerDetails"
             component={UptainerDetails}
             options={{ headerShown: true, animation: "none" }}
-          />
-
-          <Stack.Screen
-            name="LogoutConfirmation"
-            component={LogoutConfirmation}
-            options={{ animation: "none" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
