@@ -52,16 +52,15 @@ import DetailView from "./src/screens/DetailView";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen";
-import {
-  useLanguage,
-  LanguageProvider,
-  t,
-} from "./src/Languages/LanguageHandler";
+import { useLanguage, LanguageProvider, t } from './src/Languages/LanguageHandler';
 import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import UptainerDetails from "./src/screens/UptainerDetails";
+import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
+import Notifications from "./src/screens/ProfileSetings/Notifications";
+
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
@@ -117,35 +116,37 @@ export default function App() {
           <Stack.Screen
             name="Sign in"
             component={SignIn}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Homepage"
-            component={Home}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen name="DetailView" component={DetailView} />
-          <Stack.Screen
-            name="Infopage"
-            component={ArticlePage}
-            options={{ headerShown: false, animation: "none" }}
-          />
-          <Stack.Screen
-            name="Map"
-            component={Map}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="ContactUs"
-            component={ContactUs}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
+            options={{animation : "none", headerLeft: null}}
+        />
+        <Stack.Screen
+          name="Homepage"
+          component={Home}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="DetailView"
+          component={DetailView} />
+        <Stack.Screen
+          name="Infopage"
+          component={ArticlePage}
+          options={{ headerShown: false, animation : "none" }}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{animation : "none", headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+           name="ContactUs"
+           component={ContactUs}
+           options={{ animation: "none" }}
+         />
+         <Stack.Screen
             name="DataPolicy"
             component={DataPolicy}
             options={{ animation: "none" }}
@@ -160,32 +161,41 @@ export default function App() {
             component={MySettings}
             options={{ animation: "none" }}
           />
-          <Stack.Screen
+        <Stack.Screen
+            name="AccountSettings"
+            component={AccountSettings}
+            options={{animation : "none"}}
+        />
+        <Stack.Screen
+            name="Notifications"
+            component={Notifications}
+            options={{animation : "none"}}
+        />
+        <Stack.Screen
             name="TermsAndConditions"
             component={TermsAndConditions}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="ProfileCreated"
-            component={ProfileCreated}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Stats"
-            component={Stat}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Add"
-            component={Add}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Products"
-            component={ProductScreen}
-            options={{ title: "Products", animation: "none" }}
-          />
-
+            options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="ProfileCreated"
+          component={ProfileCreated}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Stats"
+          component={Stat}
+          options={{animation : "none"}}
+        />
+        <Stack.Screen
+          name="Add"
+          component={Add}
+          options={{animation : "none", headerShown: false}}
+        />
+        <Stack.Screen
+          name="Products"
+          component={ProductScreen}
+          options={{ title: "Products", animation : "none"}}
+        />
           <Stack.Screen
             name="Pro"
             component={ProScreen}

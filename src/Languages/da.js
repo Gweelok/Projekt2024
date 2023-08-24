@@ -27,6 +27,7 @@ export default {
         ForgetPwHint: "Glemt dit kodeord?",
         SignUpHint: "Har du ikke en bruger? Opret her.",
     },
+
     ProfileScreen: {
         ProfilePage: "Rediger profil",
         MySettings: "Mine indstillinger",
@@ -34,4 +35,27 @@ export default {
         DataPolicy: "Datapolitik",
         ContactUs: "Kontakt os",
   },
-    };
+
+    UpdroppForm: {
+        title: "Updropp",
+    },
+    CustomInput:{
+        hint: "valgfri",
+    },
+
+
+
+
+    NotificationsScreen : {
+        Header: "Notifikationer",
+    },
+    AccountSettingsScreen : {
+        Header: "Kontoindstillinger",
+    },
+    MySettingsScreen : {
+        Header: "Mine indstillinger",
+    },
+
+}
+
+

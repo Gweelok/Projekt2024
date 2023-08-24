@@ -9,7 +9,7 @@ import { t, useLanguage } from "../Languages/LanguageHandler";
 import MenuItems from "../styles/MenuItems";
 
 const Profile = ({ navigation }) => {
-  const { currentLanguage, setLanguage } = useLanguage();
+  const { currentLanguage } = useLanguage();
 
   return (
     <View style={Backgroundstyle.interactive_screens}>

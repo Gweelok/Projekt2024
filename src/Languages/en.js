@@ -27,11 +27,32 @@ export default {
         ForgetPwHint:"Forgot your password?",
         SignUpHint:  "Don't have a user? Sign up.",
     },
+
     ProfileScreen: {
         ProfilePage: "Edit Profile",
         MySettings: "My Settings",
         MyDrafts: "My Drafts",
         DataPolicy: "Data Policy",
         ContactUs: "Contact Us",
+    },
+
+    UpdroppForm: {
+        title: "Updropp",
+    },
+    CustomInput:{
+        hint: "optional",
+    },
+
+
+
+
+    NotificationsScreen : {
+        Header: "Notifications",
+    },
+    AccountSettingsScreen : {
+        Header: "Account Settings",
+    },
+    MySettingsScreen : {
+        Header: "My Settings",
     },
   };
