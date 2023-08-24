@@ -10,8 +10,7 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
 import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { firebaseAurth } from '../utils/Firebase';
+import { createUser } from '../utils/Repo';
 
 import GlobalStyle from "../styles/GlobalStyle";
 
@@ -34,22 +33,11 @@ const SignUpScreen = ({ navigation }) => {
     return emailRegex.test(text);
   };
 
-const signUp = async () => {
-    try {
-      const response = await  createUserWithEmailAndPassword(firebaseAurth ,email, password);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      alert('Sign up failed' + error.message);
-    } finally {
-      console.log('finally');
-    }
-  };
   //Check on both
   const handleSubmit = async () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-      signUp();
+      await  createUser(email, password);
       navigation.navigate('Homepage')
     } else {
           Alert.alert('Invalid Email or Password');

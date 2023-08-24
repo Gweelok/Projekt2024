@@ -1,4 +1,4 @@
-import {getAllUptainers, GetCurrentUser} from '../utils/Repo'
+import {getAllUptainers} from '../utils/Repo'
 import React, { useEffect, useState } from 'react';
 import { BoxLink } from "../styles/BoxLink";
 import * as Location from 'expo-location';
@@ -64,8 +64,7 @@ useEffect(() => {
   fetchData();// Fetch data when component mounts
 }, []);
 
-const test = GetCurrentUser();
-      console.log("asd: ",test)
+
   // Fetch user location and Uptainers list from the server
   useEffect(() => {
     
