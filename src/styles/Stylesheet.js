@@ -3,8 +3,11 @@
  * front end, easy access to be changed here
  * **/
 
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 //		backgroundColor: '#fff',
 //Main colors
@@ -50,7 +53,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     marginBottom: 10,
-    },
+  },
 
   //Links
   link: {
@@ -120,14 +123,13 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     minHeight: 80,
     position: "relative",
-},
+  },
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
 });
-
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
@@ -191,18 +193,18 @@ export const navStyle = {
 
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
-informationScreens: {
-    aliginItems : "center",
+  informationScreens: {
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor2,
   },
   interactive_screens: {
-    aliginItems : "center",
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
   message_Screens: {
-    aliginItems : "center",
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
@@ -278,5 +280,39 @@ export const Buttons = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
+  },
+});
+
+export const UploadImage = StyleSheet.create({
+  UploadImageContainer: {
+    padding: windowHeight / 12,
+    // backgroundColor: "red",
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+    height: windowHeight / 4.5,
+  },
+  UploadDescription: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  imageSize: {
+    padding: 50,
+    // backgroundColor: "red",
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+    height: windowHeight / 4.5,
+  },
+  cancelIcon: {
+    position: "absolute",
+    zIndex: 999,
+    // top: 20,
+  },
+  uploadText: {
+    marginLeft: 10,
+    color: Primarycolor1,
+    fontWeight: "700",
+    fontSize: 17,
   },
 });
