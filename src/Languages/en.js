@@ -43,9 +43,6 @@ export default {
         hint: "optional",
     },
 
-
-
-
     NotificationsScreen : {
         Header: "Notifications",
     },
@@ -55,4 +52,8 @@ export default {
     MySettingsScreen : {
         Header: "My Settings",
     },
+    CategoryDropdown: {
+        selectCategory: "Category",
+    }
+    
   };

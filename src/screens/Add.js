@@ -3,6 +3,7 @@ import {Backgroundstyle, Primarycolor1} from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import React from 'react';
 import {t, useLanguage} from "../Languages/LanguageHandler";
+import CategoryDropdown from './form/CategoryDropdown';
 
 const Add = ({navigation}) => {
     const {currentLanguage, setLanguage} = useLanguage();
@@ -23,7 +24,7 @@ const Add = ({navigation}) => {
                     <Text>Image upload. </Text>
                 </View>
                 <View style={[AddStyles.marginView,]}>
-                    <Text>Category dropdown</Text>
+                <CategoryDropdown />
                 </View>
                 <View style={[AddStyles.marginView,]}>
                     <Text>Product dropdown</Text>
