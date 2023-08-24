@@ -207,6 +207,7 @@ createUptainer(data)
 createCategory(name)
 createBrand(name)
 createProduct(data)
+createUser(email, password, name = "John Doe") //if there is no name, the name is john doe
 
 //Get
 getAllCategories()
@@ -220,6 +221,7 @@ getModelById(modelId)
 getAllProducts()
 getAllItems()
 getItemById(itemId)
+getCurrentUser()
 
 //Delete
 deleteCategoryById(categoryId)
@@ -227,6 +229,7 @@ deleteBrandById(brandId)
 deleteUptainerById(uptainerId)
 deleteItemById(itemId)
 deleteModelById(modelId)
+deleteUserById //working on it
 
 //Update
 updateModelById(modelId, newData)
@@ -235,6 +238,7 @@ updateItemById(itemId, newData)
 updateBrandById(brandId, newData)
 updateCategoryById(categoryId, newData)
 updateProductById(productId, newData)
+updateUserData//working on it
 
 ```
 
