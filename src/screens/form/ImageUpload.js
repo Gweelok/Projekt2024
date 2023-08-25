@@ -10,7 +10,10 @@ import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
-import { Primarycolor1, UploadImage } from "../../styles/Stylesheet";
+import { Primarycolor1 } from "../../styles/Stylesheet";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const ImageUpload = () => {
   const [image, setImage] = useState(null);
@@ -43,12 +46,12 @@ const ImageUpload = () => {
       {!image ? (
         <TouchableOpacity
           onPress={pickImage}
-          style={UploadImage.UploadImageContainer}
+          style={UploadImageStyle.UploadImageContainer}
         >
-          <View style={UploadImage.UploadDescription}>
+          <View style={UploadImageStyle.UploadDescription}>
             <Ionicons name="images-outline" size={30} color={Primarycolor1} />
 
-            <Text style={UploadImage.uploadText}>
+            <Text style={UploadImageStyle.uploadText}>
               {t("UpdroppForm.uploadText", currentLanguage)}
             </Text>
           </View>
@@ -62,9 +65,9 @@ const ImageUpload = () => {
             name="close-outline"
             size={30}
             color="white"
-            style={UploadImage.cancelIcon}
+            style={UploadImageStyle.cancelIcon}
           />
-          <Image source={{ uri: image }} style={UploadImage.imageSize} />
+          <Image source={{ uri: image }} style={UploadImageStyle.imageSize} />
         </View>
       )}
     </View>
@@ -72,3 +75,37 @@ const ImageUpload = () => {
 };
 
 export default ImageUpload;
+
+const UploadImageStyle = StyleSheet.create({
+  UploadImageContainer: {
+    padding: windowHeight / 12,
+    // backgroundColor: "red",
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+    height: windowHeight / 4.5,
+  },
+  UploadDescription: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  imageSize: {
+    padding: 50,
+    // backgroundColor: "red",
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+    height: windowHeight / 4.5,
+  },
+  cancelIcon: {
+    position: "absolute",
+    zIndex: 999,
+    // top: 20,
+  },
+  uploadText: {
+    marginLeft: 10,
+    color: Primarycolor1,
+    fontWeight: "700",
+    fontSize: 17,
+  },
+});

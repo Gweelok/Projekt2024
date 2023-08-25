@@ -6,9 +6,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
 //		backgroundColor: '#fff',
 //Main colors
 export const Primarycolor1 = "#1c4b3d"; // DarkGreen
@@ -280,39 +277,5 @@ export const Buttons = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
-  },
-});
-
-export const UploadImage = StyleSheet.create({
-  UploadImageContainer: {
-    padding: windowHeight / 12,
-    // backgroundColor: "red",
-    borderWidth: 3,
-    borderColor: Primarycolor1,
-    height: windowHeight / 4.5,
-  },
-  UploadDescription: {
-    flexDirection: "row",
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-  },
-  imageSize: {
-    padding: 50,
-    // backgroundColor: "red",
-    borderWidth: 3,
-    borderColor: Primarycolor1,
-    height: windowHeight / 4.5,
-  },
-  cancelIcon: {
-    position: "absolute",
-    zIndex: 999,
-    // top: 20,
-  },
-  uploadText: {
-    marginLeft: 10,
-    color: Primarycolor1,
-    fontWeight: "700",
-    fontSize: 17,
   },
 });
