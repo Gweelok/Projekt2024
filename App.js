@@ -68,9 +68,8 @@ import Notifications from "./src/screens/ProfileSetings/Notifications";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
-import LogoutConfirmation from "./src/screens/LogoutConfirmation";
 import QRScanner from "./src/screens/form/QRScanner";
-
+import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -245,7 +244,6 @@ export default function App() {
             name="PrivacyPolicy"
             component={PrivacyPolicy}
             options={{ headerShown: true, animation: "none" }}
-
           />
           <Stack.Screen
             name="UptainerDetails"
