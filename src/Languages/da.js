@@ -43,9 +43,6 @@ export default {
         hint: "valgfri",
     },
 
-
-
-
     NotificationsScreen : {
         Header: "Notifikationer",
     },
@@ -55,9 +52,15 @@ export default {
     MySettingsScreen : {
         Header: "Mine indstillinger",
     },
+
     MyDraftsScreen : {
         Header: "Mine Kladder",
     },
+
+    CategoryDropdown: {
+        selectCategory: "Kategori",
+    }
+
 
 }
 

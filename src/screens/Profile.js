@@ -15,7 +15,7 @@ const Profile = ({ navigation }) => {
     <View style={Backgroundstyle.interactive_screens}>
       <View style={profileStyles.profileIcon}>
         <Ionicons
-          style={styles.Header_Primarycolor1}
+          style={profileStyles.profileIcon}
           name="person-circle-outline"
           size={150}
         />
@@ -51,9 +51,9 @@ const Profile = ({ navigation }) => {
         />
       </View>
       <View>
-        <MenuItems 
+        <MenuItems
           msg={t("Profile.logout", currentLanguage)}
-          onPress={() => navigation.navigate('LogoutConfirmation')}
+          onPress={() => navigation.navigate("LogoutConfirmation")}
         />
       </View>
       <Navigationbar navigation={navigation} />
