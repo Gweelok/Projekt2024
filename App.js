@@ -40,9 +40,10 @@ import { useFonts } from "expo-font";
 import Home from "./src/screens/Home";
 import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
+import ProfilePage from "./src/screens/profilePages/ProfilePage";
 import ContactUs from "./src/screens/profilePages/ContactUs";
 import DataPolicy from "./src/screens/profilePages/DataPolicy";
-import LogOut from "./src/screens/profilePages/LogOut";
+import LogoutConfirmation from "./src/screens/profilePages/LogoutConfirmation";
 import MyDrafts from "./src/screens/profilePages/MyDrafts";
 import MySettings from "./src/screens/profilePages/MySettings";
 import Add from "./src/screens/Add";
@@ -56,7 +57,6 @@ import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailSc
 import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
-import PrivacyPolicy from "./src/screens/PrivacyPolicy";
 import UptainerDetails from "./src/screens/UptainerDetails";
 import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
 import Notifications from "./src/screens/ProfileSetings/Notifications";
@@ -64,8 +64,6 @@ import Notifications from "./src/screens/ProfileSetings/Notifications";
 //import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
-import LogoutConfirmation from "./src/screens/LogoutConfirmation";
-
 console.log("start");
 const Stack = createNativeStackNavigator();
 
@@ -89,7 +87,6 @@ export default function App() {
     seedCheck(); //seed data(only works if DB is empty)
   }
 
-
   //Loading the font
   const [fontsLoaded] = useFonts({
     "space-grotesk": require("./assets/fonts/SpaceGrotesk-Regular.ttf"),
@@ -109,12 +106,12 @@ export default function App() {
           <Stack.Screen
             name="Landingscreen"
             component={LandingScreen}
-            options={{ animation: "none" }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
-            options={{ animation: "none" }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="Sign in"
@@ -144,13 +141,12 @@ export default function App() {
           component={Profile}
           options={{animation : "none"}}
         />
-            <Stack.Screen
-                name="ContactUs"
-                component={ContactUs}
-                options={{ animation: "none" }}
-            />
-
-            <Stack.Screen
+        <Stack.Screen
+           name="ContactUs"
+           component={ContactUs}
+           options={{ animation: "none" }}
+         />
+         <Stack.Screen
             name="DataPolicy"
             component={DataPolicy}
             options={{ animation: "none" }}
@@ -165,7 +161,6 @@ export default function App() {
             component={MySettings}
             options={{ animation: "none" }}
           />
-
         <Stack.Screen
             name="AccountSettings"
             component={AccountSettings}
@@ -177,9 +172,9 @@ export default function App() {
             options={{animation : "none"}}
         />
         <Stack.Screen
-        name="TermsAndConditions"
-        component={TermsAndConditions}
-        options={{animation : "none"}}
+            name="TermsAndConditions"
+            component={TermsAndConditions}
+            options={{animation : "none"}}
         />
         <Stack.Screen
           name="ProfileCreated"
@@ -201,53 +196,44 @@ export default function App() {
           component={ProductScreen}
           options={{ title: "Products", animation : "none"}}
         />
-
-        <Stack.Screen
-          name="Pro"
-          component={ProScreen}
-          options={{ title: "Products" , animation : "none"}}
-        />
-        <Stack.Screen
-          name="Bnd"
-          component={BndScreen}
-          options={{ title: "Brands" , animation : "none" }}
-        />
-        <Stack.Screen
-          name="Mod"
-          component={ModScreen}
-          options={{ title: "Models" , animation : "none" }}
-        />
-        <Stack.Screen
-            name="Stations"
-            component={StationsScreen}
-        />
-        <Stack.Screen
+          <Stack.Screen
+            name="Pro"
+            component={ProScreen}
+            options={{ title: "Products", animation: "none" }}
+          />
+          <Stack.Screen
+            name="Bnd"
+            component={BndScreen}
+            options={{ title: "Brands", animation: "none" }}
+          />
+          <Stack.Screen
+            name="Mod"
+            component={ModScreen}
+            options={{ title: "Models", animation: "none" }}
+          />
+          <Stack.Screen name="Stations" component={StationsScreen} />
+          <Stack.Screen
             name="StationDetails"
             component={StationDetailScreen}
             options={{ headerShown: false }} // hides the header
-        />
-        <Stack.Screen
-          name="Thanks"
-          component={ThanksScreen}
-          options={{ headerShown: false , animation : "none"}}
-        />
-        <Stack.Screen
-          name = "LogoutConfirmation"
-          component={LogoutConfirmation}
-          options={{animation : "none"}}
-        />
-        <Stack.Screen
-            name="PrivacyPolicy"
-            component={PrivacyPolicy}
-            options={{ headerShown: true, animation: "none" }}
+          />
+          <Stack.Screen
+            name="Thanks"
+            component={ThanksScreen}
+            options={{ headerShown: false, animation: "none" }}
+          />
+          <Stack.Screen
+            name="LogoutConfirmation"
+            component={LogoutConfirmation}
+            options={{ animation: "none" }}
           />
           <Stack.Screen
             name="UptainerDetails"
             component={UptainerDetails}
             options={{ headerShown: true, animation: "none" }}
           />
-      </Stack.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator>
+      </NavigationContainer>
     </LanguageProvider>
   );
 
