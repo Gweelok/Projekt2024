@@ -55,4 +55,7 @@ export default {
     MySettingsScreen : {
         Header: "My Settings",
     },
+    MyDraftsScreen : {
+      Header: "My Drafts",
+    },
   };

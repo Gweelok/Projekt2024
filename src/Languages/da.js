@@ -55,6 +55,9 @@ export default {
     MySettingsScreen : {
         Header: "Mine indstillinger",
     },
+    MyDraftsScreen : {
+        Header: "Mine Kladder",
+    },
 
 }
 
