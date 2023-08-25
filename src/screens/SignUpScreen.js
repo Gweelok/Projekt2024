@@ -57,14 +57,17 @@ const SignUpScreen = ({ navigation }) => {
         <View style={GlobalStyle.BodyWrapper}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
-    <CustomInput
-        placeholder="E-mail"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        clearButtonMode="always"
-        showStar={false}
-        value={email}
-        onChangeText={onChangeEmail}/>
+      <CustomInput showStar={false}>
+        <TextInput
+          placeholder="E-mail"
+          value={email}
+          onChangeText={onChangeEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          clearButtonMode={"always"}
+          style={styles.inputBox}
+        />
+      </CustomInput>
 
       <View style={[styles.inputBox , {flexDirection:"row"}]}>
       <TextInput
