@@ -11,6 +11,7 @@ import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
+import ImageUpload from "./form/ImageUpload";
 import CategoryDropdown from './form/CategoryDropdown';
 
 const Add = ({ navigation }) => {
@@ -30,8 +31,9 @@ const Add = ({ navigation }) => {
                 2. put all the components in the folder screens/form/, which is designed to
                 put all the files related to this page.
                 */}
-        <View style={[AddStyles.marginView]}>
-          <Text>Image upload. </Text>
+
+        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+          <ImageUpload />
         </View>
         <View style={[AddStyles.marginView,]}>
            <CategoryDropdown />
@@ -79,6 +81,7 @@ const Add = ({ navigation }) => {
               {t("UpdroppForm.scanLaterButton", currentLanguage)}
             </Text>
           </Pressable>
+
         </View>
       </ScrollView>
 
@@ -110,6 +113,7 @@ const AddStyles = StyleSheet.create({
     color: Primarycolor1,
     fontWeight: "500",
   },
+
 });
 
 export default Add;
