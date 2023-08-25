@@ -41,6 +41,8 @@ export default {
     title: "Updropp",
     informativeText:
       "For at updroppe genstanden skal du scanne QR-koden på Uptaineren ved aflevering. Hvis du har udfyldt oplysningerne uden at være med Uptaineren, kan du gemme en kladde ved at trykke 'Scan senere'",
+    scanLaterButton: "SCAN SENERE",
+    scanButton: "UPDROPP",
   },
   CustomInput: {
     hint: "valgfri",
