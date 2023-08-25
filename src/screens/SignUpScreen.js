@@ -10,8 +10,7 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
 import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-import {firebaseAurth} from '../utils/Firebase';
+import { createUser } from '../utils/Repo';
 
 import GlobalStyle from "../styles/GlobalStyle";
 
@@ -21,7 +20,6 @@ const SignUpScreen = ({ navigation }) => {
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
   const [showPassword, setShowPassword] = useState(false);
   const { currentLanguage } = useLanguage();
-  const auth = firebaseAurth; // reuse from firebase.js
 
   //To check on password
   const CheckPassword = (text) => {
@@ -35,12 +33,12 @@ const SignUpScreen = ({ navigation }) => {
     return emailRegex.test(text);
   };
 
-
   //Check on both
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isValidEmail = validateEmail(email);
     if (isValidEmail && passwordCheck) {
-          navigation.navigate('Homepage')
+      await  createUser(email, password);
+      navigation.navigate('Homepage')
     } else {
           Alert.alert('Invalid Email or Password');
     }
@@ -59,14 +57,17 @@ const SignUpScreen = ({ navigation }) => {
         <View style={GlobalStyle.BodyWrapper}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
-    <CustomInput
-        placeholder="E-mail"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        clearButtonMode="always"
-        showStar={false}
-        value={email}
-        onChangeText={onChangeEmail}/>
+      <CustomInput showStar={false}>
+        <TextInput
+          placeholder="E-mail"
+          value={email}
+          onChangeText={onChangeEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          clearButtonMode={"always"}
+          style={styles.inputBox}
+        />
+      </CustomInput>
 
       <View style={[styles.inputBox , {flexDirection:"row"}]}>
       <TextInput

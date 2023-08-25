@@ -37,6 +37,7 @@ export default {
     ContactUs: "Kontakt os",
   },
 
+
   UpdroppForm: {
     title: "Updropp",
     uploadText: "Tilføj billede",
@@ -54,4 +55,7 @@ export default {
   MySettingsScreen: {
     Header: "Mine indstillinger",
   },
+     CategoryDropdown: {
+        selectCategory: "Kategori",
+    }
 };

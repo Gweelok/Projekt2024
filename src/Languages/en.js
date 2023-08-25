@@ -54,4 +54,8 @@ export default {
   MySettingsScreen: {
     Header: "My Settings",
   },
+     CategoryDropdown: {
+        selectCategory: "Category",
+    }
 };
+
