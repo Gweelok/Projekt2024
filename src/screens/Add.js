@@ -5,8 +5,9 @@ import {
   Button,
   ScrollView,
   StyleSheet,
+  Pressable,
 } from "react-native";
-import { Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
+import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
@@ -30,6 +31,7 @@ const Add = ({ navigation }) => {
                 2. put all the components in the folder screens/form/, which is designed to
                 put all the files related to this page.
                 */}
+
         <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
           <ImageUpload />
         </View>
@@ -48,17 +50,38 @@ const Add = ({ navigation }) => {
         <View style={[AddStyles.marginView]}>
           <Text>Condition dropdown</Text>
         </View>
-        <View style={[AddStyles.marginView]}>
+        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
           <Text>Description field</Text>
         </View>
-        <View style={[AddStyles.marginView]}>
-          <Text>Informative text</Text>
+        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+          <Text style={[AddStyles.informativeText]}>
+            {t("UpdroppForm.informativeText", currentLanguage)}
+          </Text>
+        </View>
+        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("QRScanner");
+            }}
+            style={[Buttons.main_button, { borderWidth: 1, width: "100%" }]}
+          >
+            <Text style={Buttons.main_buttonText}>
+              {t("UpdroppForm.scanButton", currentLanguage)}
+            </Text>
+          </Pressable>
         </View>
         <View style={[AddStyles.marginView]}>
-          <Text>Button: "UPDROPP"</Text>
-        </View>
-        <View style={[AddStyles.marginView]}>
-          <Text>Button: "SCAN SENERE"</Text>
+          <Pressable
+            style={[
+              Buttons.secondary_button,
+              { borderWidth: 2, width: "100%" },
+            ]}
+          >
+            <Text style={Buttons.secondary_buttonText}>
+              {t("UpdroppForm.scanLaterButton", currentLanguage)}
+            </Text>
+          </Pressable>
+
         </View>
       </ScrollView>
 
@@ -85,6 +108,12 @@ const AddStyles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 8,
   },
+  informativeText: {
+    fontSize: 15,
+    color: Primarycolor1,
+    fontWeight: "500",
+  },
+
 });
 
 export default Add;
