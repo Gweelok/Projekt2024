@@ -3,6 +3,7 @@ import {Backgroundstyle, Primarycolor1} from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import React from 'react';
 import {t, useLanguage} from "../Languages/LanguageHandler";
+import DescriptionField from "./form/DescriptionField";
 
 const Add = ({navigation}) => {
     const {currentLanguage, setLanguage} = useLanguage();
@@ -37,8 +38,8 @@ const Add = ({navigation}) => {
                 <View style={[AddStyles.marginView,]}>
                     <Text>Condition dropdown</Text>
                 </View>
-                <View style={[AddStyles.marginView,]}>
-                    <Text>Description field</Text>
+                <View style={[AddStyles.marginView, ]}>
+                    <DescriptionField />
                 </View>
                 <View style={[AddStyles.marginView,]}>
                     <Text>Informative text</Text>
@@ -73,7 +74,6 @@ const AddStyles = StyleSheet.create({
     marginView: {
         marginLeft: 8,
         marginRight: 8,
-
     },
 
 });

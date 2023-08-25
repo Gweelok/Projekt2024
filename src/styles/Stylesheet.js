@@ -279,4 +279,21 @@ export const Buttons = StyleSheet.create({
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
+
 });
+
+//Description file
+export const descriptionFieldStyles = StyleSheet.create({
+  dscLabel: {
+    fontFamily: "space-grotesk-Medium",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginLeft: 10,
+  },
+  dscInput: {
+    ...styles.inputBox,
+    alignItems: 'center',
+    height: 100,
+  },
+})

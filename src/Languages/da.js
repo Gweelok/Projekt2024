@@ -56,6 +56,10 @@ export default {
         Header: "Mine indstillinger",
     },
 
+    DescriptionField : {
+        label: "Beskrivelse"
+    },
+
 }
 
 

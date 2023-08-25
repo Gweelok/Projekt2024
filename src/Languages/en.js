@@ -43,6 +43,10 @@ export default {
         hint: "optional",
     },
 
+    DescriptionField : {
+        label: "Description"
+    },
+
 
 
 
