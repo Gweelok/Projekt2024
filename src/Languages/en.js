@@ -48,13 +48,18 @@ export default {
     hint: "optional",
   },
 
-  NotificationsScreen: {
-    Header: "Notifications",
-  },
-  AccountSettingsScreen: {
-    Header: "Account Settings",
-  },
-  MySettingsScreen: {
-    Header: "My Settings",
-  },
-};
+
+    NotificationsScreen : {
+        Header: "Notifications",
+    },
+    AccountSettingsScreen : {
+        Header: "Account Settings",
+    },
+    MySettingsScreen : {
+        Header: "My Settings",
+    },
+    CategoryDropdown: {
+        selectCategory: "Category",
+    }
+    
+  };

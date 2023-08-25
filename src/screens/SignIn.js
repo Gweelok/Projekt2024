@@ -8,6 +8,7 @@ import { styles,
     from '../styles/Stylesheet';
 import { Ionicons } from '@expo/vector-icons';
 import {t, useLanguage} from "../Languages/LanguageHandler"; // or any other icon library you prefer
+import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
 
 
 const SignIn = ({ navigation }) => {
@@ -35,6 +36,7 @@ const SignIn = ({ navigation }) => {
     const handleSubmit = () => {
         const isValidEmail = validateEmail(email);
         if (isValidEmail && passwordCheck) {
+            signInUser(email, password);
             navigation.navigate('Homepage')
         } else {
             Alert.alert('Invalid Email or Password');

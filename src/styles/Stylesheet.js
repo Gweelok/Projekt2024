@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     marginBottom: 10,
-    },
+  },
 
   //Links
   link: {
@@ -120,14 +120,13 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     minHeight: 80,
     position: "relative",
-},
+  },
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
 });
-
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
@@ -136,9 +135,8 @@ export const profileStyles = StyleSheet.create({
     marginLeft: "auto",
     justifyContent: "center",
     alignItems: "center",
-    width: "90%",
-    marginBottom: 15,
-    padding: 10,
+    marginBottom: 10,
+    padding: 5,
     color: Primarycolor1,
   },
 });
@@ -191,18 +189,20 @@ export const navStyle = {
 
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
-informationScreens: {
-    aliginItems : "center",
+  informationScreens: {
+    aliginItems: "center",
+    paddingTop: 50,
     flex: 1,
     backgroundColor: Primarycolor2,
   },
   interactive_screens: {
-    aliginItems : "center",
+    paddingTop: 50,
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
   message_Screens: {
-    aliginItems : "center",
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
@@ -278,5 +278,30 @@ export const Buttons = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
+  },
+});
+// Dropdown
+export const dropdownStyles = StyleSheet.create({
+  dropdownContainer: {
+      ...styles.inputBox,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: 55,
+  },
+  dropdownText: {
+      ...styles.menuItem_text,
+      flex: 0, 
+      marginRight: 5,
+  },
+  dropdownList: {
+      borderWidth: 4,
+      borderColor: Primarycolor1,
+      marginTop: 0,
+  },
+  dropdownListItem: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: Primarycolor1,
   },
 });
