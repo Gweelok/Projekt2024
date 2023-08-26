@@ -1,6 +1,6 @@
 import * as React from "react"
 import Svg, { G, Path } from "react-native-svg"
-import { View } from "react-native-ui-lib";
+import { View } from "react-native";
 const ReuseSvg = (props) => (
   <View {...props}>
   <Svg
