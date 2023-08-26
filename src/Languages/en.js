@@ -28,31 +28,36 @@ export default {
         SignUpHint:  "Don't have a user? Sign up.",
     },
 
-    ProfileScreen: {
-        ProfilePage: "Edit Profile",
-        MySettings: "My Settings",
-        MyDrafts: "My Drafts",
-        DataPolicy: "Data Policy",
-        ContactUs: "Contact Us",
-    },
+  ProfileScreen: {
+    ProfilePage: "Edit Profile",
+    MySettings: "My Settings",
+    MyDrafts: "My Drafts",
+    DataPolicy: "Data Policy",
+    ContactUs: "Contact Us",
+  },
 
-    UpdroppForm: {
-        title: "Updropp",
-    },
-    CustomInput:{
-        hint: "optional",
-    },
+  UpdroppForm: {
+    title: "Updropp",
+    uploadText: "Add image",
+    imformativeText:
+      "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
+    scanLaterButton: "SCAN LATER",
+    scanButton: "UPDROPP",
+  },
+  CustomInput: {
+    hint: "optional",
+  },
 
-
-
-
-    NotificationsScreen : {
-        Header: "Notifications",
-    },
-    AccountSettingsScreen : {
-        Header: "Account Settings",
-    },
-    MySettingsScreen : {
-        Header: "My Settings",
-    },
-  };
+  NotificationsScreen: {
+    Header: "Notifications",
+  },
+  AccountSettingsScreen: {
+    Header: "Account Settings",
+  },
+  MySettingsScreen: {
+    Header: "My Settings",
+  },
+  CategoryDropdown: {
+    selectCategory: "Category",
+  },
+};

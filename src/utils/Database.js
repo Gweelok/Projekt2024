@@ -35,8 +35,8 @@ const getData = async (setDataFunc, tempTable = table) => {
 				setDataFunc(_array)
 			})
 		},
-		(txObj, error) => {console.log('DB Select All Error: ', error)},
-		(_txObj, success) => {console.log('data gotten', success)}
+		//(txObj, error) => {console.log('DB Select All Error: ', error)},
+		//(_txObj, success) => {console.log('data gotten', success)}
 	)
 }
 
