@@ -21,7 +21,7 @@ const LandingScreen = ({ navigation }) => {
   // for multi language
     const { currentLanguage, setLanguage } = useLanguage();
     const [currentSlide,setCurrentSlide] = useState(0);
-    const components = [<Welcome number={1}/>,<Welcome/>,<Welcome/>,<Welcome number={4}/>,<Problem/>];
+    const components = [<Welcome number={1}/>,<Problem/>];
   //Fn to navigate to the Signup Screen
 //   const SignUp = () => {
           
