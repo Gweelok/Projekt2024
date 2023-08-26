@@ -1,11 +1,11 @@
-import { View, Text , StyleSheet ,Pressable } from 'react-native';
+import { View, Text , StyleSheet ,Pressable,BackHandler,Alert } from 'react-native';
 import { styles,
     Backgroundstyle,
     Primarycolor1,
     Buttons,
 } from '../styles/Stylesheet';
 import { Octicons } from '@expo/vector-icons'; 
-import React, { useState }  from 'react';
+import React, { useState,useEffect }  from 'react';
 import { useLanguage, t } from '../Languages/LanguageHandler';
 import Welcome from '../componets/LandingScreen/Welcome';
 import Problem from '../componets/LandingScreen/Problem';
@@ -48,7 +48,26 @@ const LanguageSelector = () => {
     }
 
 }; 
+useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
 
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
 
 return (
