@@ -20,12 +20,12 @@ const Problem = () => {
       </Text>
       <View style={styling.svgContainer}>
         <TreesSvg />
-        <Octicons name="arrow-right" size={50} />
+        <Octicons name="arrow-right" size={30} />
         <PlantSvg />
-        <Octicons name="arrow-right" size={50} />
+        <Octicons name="arrow-right" size={30} />
         <SaleSvg />
       </View>
-      <Text style={styling.Intro}>
+      <Text style={[styling.Intro,{marginTop:20}]}>
         {t("ProblemComponent.Body",currentLanguage)}
       </Text>
     </View>
@@ -36,14 +36,16 @@ const styling = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    borderColor:"red",
+    borderWidth:1,
+    
   },
   Intro: {
     color: Primarycolor1,
     fontFamily: "space-grotesk",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "90%",
-    marginBottom: 15,
+    marginLeft:"auto" ,
+    marginRight:"auto",
+    marginBottom: 20,
   },
 });
 export default Problem;

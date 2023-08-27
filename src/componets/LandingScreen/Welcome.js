@@ -7,7 +7,7 @@ import { styles,
   Primarycolor1,
   Buttons,
 } from '../../styles/Stylesheet';
-const Welcome = ({number}) =>{
+const Welcome = () =>{
   const { currentLanguage } = useLanguage();
 
   return <View> 
@@ -18,7 +18,7 @@ const Welcome = ({number}) =>{
 
   <Text style={styling.Intro}>
        <Text>{t('LandingScreen.Littlemsg', currentLanguage)}</Text>
-      <Text style={{color:"#07A0A2"}}> {t('LandingScreen.Termsandcond', currentLanguage)} {number}</Text> 
+      <Text style={{color:"#07A0A2"}}> {t('LandingScreen.Termsandcond', currentLanguage)}</Text> 
    </Text>     
 </View>
 }
