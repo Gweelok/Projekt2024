@@ -10,7 +10,7 @@ import { styles,
 const Welcome = () =>{
   const { currentLanguage } = useLanguage();
 
-  return <View> 
+  return <View style={{flex:1}}> 
     <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('LandingScreen.Header', currentLanguage)}</Text> 
   <ReuseSvg style={{marginBottom:30,alignItems:"center"}}/>
   

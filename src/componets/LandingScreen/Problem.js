@@ -14,7 +14,7 @@ import {
 const Problem = () => {
   const { currentLanguage } = useLanguage();
   return (
-    <View>
+    <View style={{flex:1}}>
       <Text style={[styles.Header_Primarycolor1, styles.Header]}>
         {t("ProblemComponent.Header",currentLanguage)}
       </Text>
@@ -36,8 +36,7 @@ const styling = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderColor:"red",
-    borderWidth:1,
+    marginVertical:"20%"
     
   },
   Intro: {

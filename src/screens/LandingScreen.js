@@ -24,7 +24,7 @@ const LandingScreen = ({ navigation }) => {
     const components = [<Welcome />,<Problem/>];
     const backButton = currentSlide === 0 ? null : (    
     <Pressable onPress={()=>setCurrentSlide(currentSlide-1)} >
-    <Octicons name="arrow-left" size={30} color={"grey"}/>
+    <Octicons name="arrow-left" size={40} style={{color:"grey",opacity:0.5}}/>
     </Pressable>);
 
   function nextSlideAndSignUp(){
@@ -57,10 +57,10 @@ return (
                 <Text style={Buttons.secondary_buttonText}>{t('LandingScreen.LanguageSelector', currentLanguage)}</Text>
         </Pressable> 
         </View>
-       <View style={{flex:1}}>{components[currentSlide]}</View>
+ {/* add components in ```components``` in order to show them */}
+       <View style={{flex:1,padding:20}}>{components[currentSlide]}</View>
        
-     <Pressable onPress={nextSlideAndSignUp} style={[Buttons.main_button,{borderColor:"red",
-        borderWidth:2}]}>
+     <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
         <Text style={Buttons.main_buttonText}>{t('LandingScreen.continue', currentLanguage)}</Text>
     </Pressable> 
 
@@ -87,6 +87,7 @@ const styling=StyleSheet.create({
         justifyContent : "center",
         marginLeft : "auto",
         marginRight :"auto",
+        marginTop:30
       },
       languageSelector:{
         backgroundColor: Primarycolor3,
@@ -97,10 +98,8 @@ const styling=StyleSheet.create({
         marginLeft:"auto"
       },
       topBar:{
-        
+        paddingLeft:15,
         flexDirection:"row",
-        borderColor:"red",
-        borderWidth:1,
         alignItems:"center"
     }
 
