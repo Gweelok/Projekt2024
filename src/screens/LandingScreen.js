@@ -1,10 +1,10 @@
-import { View, Text , StyleSheet ,Pressable,BackHandler,Alert } from 'react-native';
+import { View, Text , StyleSheet ,Pressable,BackHandler,Alert,TouchableOpacity } from 'react-native';
 import { styles,
     Backgroundstyle,
     Primarycolor1,
-    Buttons,Primarycolor2,Primarycolor3
+    Buttons,Primarycolor2,Primarycolor3,main_button,
 } from '../styles/Stylesheet';
-import { Octicons } from '@expo/vector-icons'; 
+import { Ionicons ,Octicons } from '@expo/vector-icons'; 
 import React, { useState,useEffect }  from 'react';
 import { useLanguage, t } from '../Languages/LanguageHandler';
 import Welcome from '../componets/LandingScreen/Welcome';
@@ -23,9 +23,10 @@ const LandingScreen = ({ navigation }) => {
     const [currentSlide,setCurrentSlide] = useState(0);
     const components = [<Welcome />,<Problem/>];
     const backButton = currentSlide === 0 ? null : (    
-    <Pressable onPress={()=>setCurrentSlide(currentSlide-1)} >
-    <Octicons name="arrow-left" size={40} style={{color:"grey",opacity:0.5}}/>
-    </Pressable>);
+    <TouchableOpacity onPress={()=>setCurrentSlide(currentSlide-1)} style={styling.backButton}>
+    <Octicons name="chevron-left" size={20} style={{color:"white"}}/>
+    </TouchableOpacity>);
+   
 
   function nextSlideAndSignUp(){
     if(currentSlide+2>components.length){
@@ -101,6 +102,13 @@ const styling=StyleSheet.create({
         paddingLeft:15,
         flexDirection:"row",
         alignItems:"center"
-    }
+    },
+    backButton: {
+        backgroundColor: "#1c4b3d",
+        width: 40,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+      },
 
 })
