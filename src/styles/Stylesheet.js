@@ -3,7 +3,7 @@
  * front end, easy access to be changed here
  * **/
 
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
 
 //		backgroundColor: '#fff',
