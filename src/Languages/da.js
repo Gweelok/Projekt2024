@@ -8,7 +8,8 @@ export default {
   LandingScreen: {
     LanguageSelector: "English",
     Header: "Velkommen til Updropp",
-    Intro: "Updropp gør affald til ressourcer, ved at muliggøre direkte genbrug og mobilisering af elektronik i lokalsamfundet.",
+    Intro:
+      "Updropp gør affald til ressourcer, ved at muliggøre direkte genbrug og mobilisering af elektronik i lokalsamfundet.",
     Littlemsg: "Ved at trykke fortsæt accepterer du vores",
     Termsandcond: "brugervilkår",
     continue: "Fortsæt",
@@ -59,5 +60,9 @@ export default {
   },
   CategoryDropdown: {
     selectCategory: "Kategori",
+  },
+  ProblemComponent: {
+    Header: "Problemet",
+    Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
   },
 };
