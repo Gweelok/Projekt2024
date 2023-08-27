@@ -13,6 +13,7 @@ import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import ImageUpload from "./form/ImageUpload";
 import CategoryDropdown from './form/CategoryDropdown';
+import CustomInput from "../componets/atoms/CustomInput";
 
 const Add = ({ navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
@@ -33,7 +34,9 @@ const Add = ({ navigation }) => {
                 */}
 
         <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
-          <ImageUpload />
+          <CustomInput showStar={false}>
+            <ImageUpload />
+          </CustomInput>
         </View>
         <View style={[AddStyles.marginView,]}>
            <CategoryDropdown />
@@ -81,7 +84,6 @@ const Add = ({ navigation }) => {
               {t("UpdroppForm.scanLaterButton", currentLanguage)}
             </Text>
           </Pressable>
-
         </View>
       </ScrollView>
 
@@ -113,7 +115,6 @@ const AddStyles = StyleSheet.create({
     color: Primarycolor1,
     fontWeight: "500",
   },
-
 });
 
 export default Add;
