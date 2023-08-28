@@ -13,6 +13,7 @@ import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
+import ImageUpload from "./form/ImageUpload";
 
 const Add = ({ navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
