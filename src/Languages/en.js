@@ -48,6 +48,16 @@ export default {
     hint: "optional",
   },
 
+
+    MyDraftsScreen : {
+      Header: "My Drafts",
+    },
+
+    CategoryDropdown: {
+        selectCategory: "Category",
+    },
+    
+
   NotificationsScreen: {
     Header: "Notifications",
   },
@@ -57,9 +67,7 @@ export default {
   MySettingsScreen: {
     Header: "My Settings",
   },
-  CategoryDropdown: {
-    selectCategory: "Category",
-  },
+
   ProblemComponent: {
     Header: "The Problem",
     Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",

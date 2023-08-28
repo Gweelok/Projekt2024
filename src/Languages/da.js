@@ -29,6 +29,33 @@ export default {
     SignUpHint: "Har du ikke en bruger? Opret her.",
   },
 
+
+
+    CustomInput:{
+        hint: "valgfri",
+    },
+
+    NotificationsScreen : {
+        Header: "Notifikationer",
+    },
+    AccountSettingsScreen : {
+        Header: "Kontoindstillinger",
+    },
+    MySettingsScreen : {
+        Header: "Mine indstillinger",
+    },
+
+    MyDraftsScreen : {
+        Header: "Mine Kladder",
+    },
+
+    CategoryDropdown: {
+        selectCategory: "Kategori",
+    },
+
+
+
+
   ProfileScreen: {
     ProfilePage: "Rediger profil",
     MySettings: "Mine indstillinger",
@@ -36,6 +63,7 @@ export default {
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
   },
+
 
   UpdroppForm: {
     title: "Updropp",
@@ -45,22 +73,7 @@ export default {
     scanLaterButton: "SCAN SENERE",
     scanButton: "UPDROPP",
   },
-  CustomInput: {
-    hint: "valgfri",
-  },
 
-  NotificationsScreen: {
-    Header: "Notifikationer",
-  },
-  AccountSettingsScreen: {
-    Header: "Kontoindstillinger",
-  },
-  MySettingsScreen: {
-    Header: "Mine indstillinger",
-  },
-  CategoryDropdown: {
-    selectCategory: "Kategori",
-  },
   ProblemComponent: {
     Header: "Problemet",
     Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
