@@ -190,7 +190,6 @@ export const navStyle = {
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
   informationScreens: {
-    aliginItems: "center",
     paddingTop: 50,
     flex: 1,
     backgroundColor: Primarycolor2,

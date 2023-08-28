@@ -15,9 +15,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // base style import
 import { Text, Button } from "react-native-elements";
 
-// sqlite database
-import { dropAll, createTestData, database } from "./src/utils/Database";
-
 // import from files
 import {
   navStyle,
@@ -65,8 +62,6 @@ import UptainerDetails from "./src/screens/UptainerDetails";
 import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
 import Notifications from "./src/screens/ProfileSetings/Notifications";
 
-//import { seedCheck } from "./src/utils/FirebaseSeed"; //uncomment to seed data(only works if DB is empty)
-
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
@@ -77,15 +72,6 @@ const Stack = createNativeStackNavigator();
 // Main function that everything runs in
 export default function App() {
   // hook that gets and sets test data for resting
-  const [test, setTest] = useState(0);
-  useEffect(() => {
-    function showdata(data) {
-      console.log(data);
-    }
-    database.getData(showdata, "Items");
-    //dropAll();
-    //createTestData();
-  }, []);
 
   //FirebaseSeed data here:
   var doneTheStuff;
@@ -109,7 +95,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <NavigationContainer theme={navStyle}>
-        <Stack.Navigator initialRouteName="Landingscreen">
+        <Stack.Navigator initialRouteName="Homepage">
           <Stack.Screen
             name="Landingscreen"
             component={LandingScreen}
