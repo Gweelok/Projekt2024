@@ -280,28 +280,37 @@ export const Buttons = StyleSheet.create({
     fontFamily: "space-grotesk-Medium",
   },
 });
-// Dropdown
-export const dropdownStyles = StyleSheet.create({
-  dropdownContainer: {
-      ...styles.inputBox,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      height: 55,
+
+// Category dropdown
+export const categoryDropdownContainer = {
+  container: {
+      flexDirection: "column",
   },
+  validationErrorText: {
+    color: "red"
+},
   dropdownText: {
-      ...styles.menuItem_text,
-      flex: 0, 
+      fontFamily: "space-grotesk",
+      fontSize: 16,
       marginRight: 5,
+      // flexGrow: 1,
   },
+  dropdownButton: {
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+},
   dropdownList: {
-      borderWidth: 4,
+      borderWidth: 3,
       borderColor: Primarycolor1,
-      marginTop: 0,
   },
   dropdownListItem: {
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: Primarycolor1,
+      backgroundColor: Primarycolor3, 
   },
-});
+};
