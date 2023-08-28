@@ -7,8 +7,7 @@ import { styles,
 import { Octicons } from '@expo/vector-icons'; 
 import React  from 'react';
 import { useLanguage, t } from '../Languages/LanguageHandler';
-
-
+import { firebaseAurth } from '../utils/Firebase';
 
 
 
@@ -19,7 +18,13 @@ const LandingScreen = ({ navigation }) => {
 
   //Fn to navigate to the Signup Screen
   const SignUp = () => {
-          navigation.navigate('SignUp')
+    if (firebaseAurth.currentUser !== null) {
+        console.log('User is logged in');
+        navigation.navigate('Homepage');
+    } else {
+        navigation.navigate('SignUp')
+    }
+          
   }; 
 
 

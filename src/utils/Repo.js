@@ -606,12 +606,13 @@ export function updateProductById(productId, newData) {
 /****************/
 export function signInUser(email, password){
     signInWithEmailAndPassword(firebaseAurth, email, password)
-        .then(() => {
-            //navigation.navigate(‘Dashboard’);
-        })
-        .catch((err) => {
-            alert(err);
-        });
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log('User logged in:', user);
+    })
+    .catch((error) => {
+      alert('sign in failed: ' + error.message);
+    });
 }
     
 export async function createUser(email, password, name = "John Doe") {
@@ -633,7 +634,7 @@ export async function createUser(email, password, name = "John Doe") {
       }
     } catch (error) {
       console.error("Error creating user:", error);
-      alert(error.message);
+      alert('sign in failed: ' + error.message);
     }
   }
 
