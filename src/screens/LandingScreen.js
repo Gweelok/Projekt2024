@@ -7,11 +7,11 @@ import { styles,
 import { Ionicons ,Octicons } from '@expo/vector-icons'; 
 import React, { useState,useEffect }  from 'react';
 import { useLanguage, t } from '../Languages/LanguageHandler';
+
+import { firebaseAurth } from '../utils/Firebase';
+
 import Welcome from '../componets/LandingScreen/Welcome';
 import Problem from '../componets/LandingScreen/Problem';
-
-
-
 
 
 
@@ -37,6 +37,21 @@ const LandingScreen = ({ navigation }) => {
         setCurrentSlide(previousState=>previousState+1)
     }
   }
+
+
+  //Fn to navigate to the Signup Screen
+  const SignUp = () => {
+    if (firebaseAurth.currentUser !== null) {
+        console.log('User is logged in');
+        navigation.navigate('Homepage');
+    } else {
+        navigation.navigate('SignUp')
+    }
+          
+  }; 
+
+
+//Fn to change to langauge and display correct language 
 
 const LanguageSelector = () => {
     if (currentLanguage=='en')
