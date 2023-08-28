@@ -11,7 +11,6 @@ import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import ImageUpload from "./form/ImageUpload";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 
@@ -37,9 +36,10 @@ const Add = ({ navigation }) => {
           <CustomInput showStar={false}>
             <ImageUpload />
           </CustomInput>
+
         </View>
-        <View style={[AddStyles.marginView,]}>
-           <CategoryDropdown />
+        <View style={[AddStyles.marginView]}>
+          <CategoryDropdown />
         </View>
         <View style={[AddStyles.marginView]}>
           <Text>Product dropdown</Text>
