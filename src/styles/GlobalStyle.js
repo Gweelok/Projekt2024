@@ -6,6 +6,6 @@ export default StyleSheet.create({
         flex: 1,
         paddingHorizontal: '10%',
         alignItems: "center",
-        width: '100%',
+        width: '100%'
     },
 });
