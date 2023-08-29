@@ -9,7 +9,8 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons';
 import {t, useLanguage} from "../Languages/LanguageHandler";
 import GlobalStyle from "../styles/GlobalStyle"; // or any other icon library you prefer
-
+import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
+import { firebaseAurth } from '../utils/Firebase';
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');
@@ -24,21 +25,15 @@ const SignIn = ({ navigation }) => {
         onChangePassword(text);
         setPasswordCheck(text.length >= 8); // it must be at least 8 chars
     };
-    // To check on email
-    const validateEmail = (text) => {
-        //  to check if the input contains "@" and "."
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(text);
-    };
-
-
     //Check on both
     const handleSubmit = () => {
-        const isValidEmail = validateEmail(email);
-        if (isValidEmail && passwordCheck) {
-            navigation.navigate('Homepage')
+        if (passwordCheck) {
+            signInUser(email, password);
+            if(firebaseAurth.currentUser !== null) {
+                navigation.navigate('Homepage')
+            }
         } else {
-            Alert.alert('Invalid Email or Password');
+            Alert.alert('Password');
         }
     };
     //check if pass should be shown

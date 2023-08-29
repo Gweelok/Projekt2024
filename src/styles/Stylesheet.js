@@ -3,7 +3,7 @@
  * front end, easy access to be changed here
  * **/
 
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
 
 //		backgroundColor: '#fff',
@@ -48,6 +48,10 @@ export const styles = StyleSheet.create({
   Header_Primarycolor1  : {
     color: Primarycolor1,
     },
+//     fontSize: 16,
+//     marginTop: 10,
+//     marginBottom: 10,
+//   },
 
   //Links 
   link :{
@@ -117,11 +121,26 @@ export const styles = StyleSheet.create({
     // padding: 10,
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
-    flexDirection: 'row',
+    flexDirection: "row",
+    minHeight: 80,
+    position: "relative",
+  },
+  boxlinkContainer: {
+    flex: 1,
     alignItems: "center",
+  },
 
-  }
-
+//Profile styles
+export const profileStyles = StyleSheet.create({
+  profileIcon: {
+    marginRight: "auto",
+    marginLeft: "auto",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+    padding: 5,
+    color: Primarycolor1,
+  },
 });
 
 const regRenderStyle = { height: 65 };
@@ -174,19 +193,20 @@ export const navStyle = {
 
 //Background styles 
 export const Backgroundstyle = StyleSheet.create({
-
-  informationScreens:{
-    aliginItems : 'center',
+  informationScreens: {
+    paddingTop: 50,
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor2,
   },
-  interactive_screens:{
-    aliginItems : 'center',
+  interactive_screens: {
+    paddingTop: 50,
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
-  message_Screens :{
-    aliginItems : 'center',
+  message_Screens: {
+    aliginItems: "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
@@ -262,4 +282,50 @@ export const Buttons = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
   },
+
+}
+);
+export const HeaderText =StyleSheet.create({
+     Header:{
+      fontSize: 30,
+      marginBottom: 10,
+      marginTop: 10,
+      marginLeft: 30,
+      fontFamily: "space-grotesk-Medium",
+       color: Primarycolor1,
+     },
+    Header_Primarycolor1: {
+  color: Primarycolor1,
+      fontSize: 12,
+      marginTop: 10,
+      marginBottom: 10,
+}
+
+
 });
+// Dropdown
+export const dropdownStyles = StyleSheet.create({
+  dropdownContainer: {
+      ...styles.inputBox,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: 55,
+  },
+  dropdownText: {
+      ...styles.menuItem_text,
+      flex: 0, 
+      marginRight: 5,
+  },
+  dropdownList: {
+      borderWidth: 4,
+      borderColor: Primarycolor1,
+      marginTop: 0,
+  },
+  dropdownListItem: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: Primarycolor1,
+  },
+});
+

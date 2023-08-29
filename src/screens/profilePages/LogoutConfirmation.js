@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { styles, Backgroundstyle, Buttons } from '../styles/Stylesheet';
-import { useLanguage, t } from '../Languages/LanguageHandler';
-import { firebaseAurth } from '../utils/Firebase';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { styles, Backgroundstyle, Buttons } from "../../styles/Stylesheet";
+import { useLanguage, t } from "../../Languages/LanguageHandler";
+import { firebaseAurth } from "../../utils/Firebase";
 import { signOut } from "firebase/auth";
 
 
@@ -22,22 +22,22 @@ const LogoutConfirmation = ({ navigation }) => {
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <Text style={styles.Header_Primarycolor1}>
-        {t('LogoutConfirmation.confirmMessage', currentLanguage)}
+        {t("LogoutConfirmation.confirmMessage", currentLanguage)}
       </Text>
 
       <TouchableOpacity 
         style={[Buttons.main_button, { marginTop: 20, marginBottom: 10 }]}
         onPress={handleLogout}>
         <Text style={Buttons.main_buttonText}>
-        {t('LogoutConfirmation.logoutButton', currentLanguage)}
+        {t("LogoutConfirmation.logoutButton", currentLanguage)}
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
         style={ Buttons.secondary_button }
-        onPress={() => navigation.navigate('Profile')}>
+        onPress={() => navigation.navigate("Profile")}>
         <Text style={Buttons.secondary_buttonText}>
-        {t('LogoutConfirmation.cancelButton', currentLanguage)}        
+        {t("LogoutConfirmation.cancelButton", currentLanguage)}        
         </Text>
       </TouchableOpacity>
     </View>

@@ -1,17 +1,22 @@
-import { ref, push, set, get, remove, update, orderByChild, equalTo, query} from "firebase/database";
-import { firebaseGetDB } from './Firebase';
-import { categories, brands, stationData, products, items, models } from './SeedData';
+import { get, ref, push, set, update, remove } from "firebase/database";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { firebaseGetDB, firebaseAurth } from "./Firebase";
+import { categories, brands, stationData, products, items, models } from "./SeedData";
 
 const db = firebaseGetDB;
 
 const paths = {
-    uptainers:  'uptainers',
-    brands:     'brands',
-    categories: 'categories',
-    models:     'models',
-    items:      'items',
-    products:   'products',
-};
+    uptainers: "uptainers",
+    brands: "brands",
+    categories: "categories",
+    models: "models",
+    items: "items",
+    products: "products",
+    users: "users",
+  };
 
 export async function seedCheck() {
     try {
@@ -244,8 +249,9 @@ export async function getBrandById(brandId) {
 export async function getAllUptainers() {
     const db = firebaseGetDB;
     const reference = ref(db, '/uptainers');
-
+    
     try {
+        
         const snapshot = await get(reference);
         const uptainers = [];
         
@@ -265,7 +271,6 @@ export async function getAllUptainers() {
             };
             uptainers.push(uptainer);
         });
-
         return uptainers;
     } catch (error) {
         console.error("Error fetching uptainer data:", error);
@@ -472,7 +477,6 @@ export async function getItemById(itemId) {
     }
 }
 
-
     /********************/
     /***** Delete *******/
     /********************/
@@ -520,6 +524,15 @@ export function deleteModelById(modelId) {
         console.log(`Model with ID ${modelId} deleted successfully.`);
     } catch (error) {
         console.error(`Error deleting model with ID ${modelId}:`, error);
+    }
+}
+export function deleteProductById(productId) {
+    const reference = ref(db, `/products/${productId}`);
+    try {
+        remove(reference);
+        console.log(`Product with ID ${productId} deleted successfully.`);
+    } catch (error) {
+        console.error(`Error deleting product with ID ${productId}:`, error);
     }
 }
 
@@ -586,3 +599,100 @@ export function updateProductById(productId, newData) {
         console.error(`Error updating product with ID ${productId}:`, error);
     }
 }   
+
+
+/****************/
+/***** Auth *****/
+/****************/
+export function signInUser(email, password){
+    signInWithEmailAndPassword(firebaseAurth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log('User logged in:', user);
+    })
+    .catch((error) => {
+      alert('sign in failed: ' + error.message);
+    });
+}
+    
+export async function createUser(email, password, name = "John Doe") {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        firebaseAurth,
+        email,
+        password
+      );
+  
+      if (userCredential) {
+        const userData = {
+          name: name,
+          email: email,
+          uuid: userCredential.user.uid,
+        };
+        await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
+        //navigation.navigate(‘Dashboard’);
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+      alert('sign in failed: ' + error.message);
+    }
+  }
+
+export async function getCurrentUser() {
+  try {
+    const user = [];
+    const id = firebaseAurth.currentUser.uid;
+    const reference = ref(db, paths.users);
+
+    const snapshot = await get(reference);
+    snapshot.forEach((child) => {
+      if (id === child.val().uuid) {
+        user.push({
+          id,
+          name: child.val().name,
+          email: child.val().email,
+        });
+      }
+    });
+
+    return user;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return [];
+  }
+}
+// ToDo find user data and implement it to the function
+/*
+export function updateUserData() {
+    const currentUser = GetCurrentUser();
+    if (currentUser.length > 0) {
+      const { id } = currentUser[0];
+      updateProfile(id, {
+        displayName: "Jane Q. User",
+        photoURL: "https://example.com/jane-q-user/profile.jpg",
+      })
+        .then(() => {
+          // Profile updated!
+          // ...
+        })
+        .catch((error) => {
+          // An error occurred
+          console.error("Error updating user data:", error);
+          // ...
+        });
+    }
+  }
+  
+  export function deleteUserById() {
+    const currentUser = GetCurrentUser();
+    if (currentUser.length > 0) {
+      deleteUser(currentUser[0].id)
+        .then(() => {
+          // User deleted.
+        })
+        .catch((error) => {
+          // An error occurred
+          console.error("Error deleting user:", error);
+        });
+    }
+  }*/
