@@ -12,6 +12,8 @@ import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import CategoryDropdown from './form/CategoryDropdown';
+import CustomInput from "../componets/atoms/CustomInput";
+import ImageUpload from "./form/ImageUpload";
 
 const Add = ({ navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
@@ -31,8 +33,11 @@ const Add = ({ navigation }) => {
                 put all the files related to this page.
                 */}
 
-        <View style={[AddStyles.marginView]}>
-          <Text>Image Upload</Text>
+        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+          <CustomInput showStar={false}>
+            <ImageUpload />
+          </CustomInput>
+
         </View>
         <View style={[AddStyles.marginView]}>
           <CategoryDropdown />
@@ -111,7 +116,6 @@ const AddStyles = StyleSheet.create({
     color: Primarycolor1,
     fontWeight: "500",
   },
-
 });
 
 export default Add;

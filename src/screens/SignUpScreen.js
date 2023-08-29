@@ -10,7 +10,8 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
 import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
-import { createUser } from '../utils/Repo';
+import { createUser} from '../utils/Repo';
+import { firebaseAurth } from '../utils/Firebase';
 
 import GlobalStyle from "../styles/GlobalStyle";
 
@@ -26,22 +27,17 @@ const SignUpScreen = ({ navigation }) => {
     onChangePassword(text);
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
   };
-  // To check on email
-  const validateEmail = (text) => {
-    //  to check if the input contains "@" and "."
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(text);
-  };
 
   //Check on both
   const handleSubmit = async () => {
-    const isValidEmail = validateEmail(email);
-    if (isValidEmail && passwordCheck) {
+    if (passwordCheck) {
       await  createUser(email, password);
-      navigation.navigate('Homepage')
+      if(firebaseAurth.currentUser !== null) {
+        navigation.navigate('Homepage')
+      }
     } else {
-          Alert.alert('Invalid Email or Password');
-    }
+      Alert.alert('Password');
+  }
   };
   //check if pass should be shown
   const togglePasswordVisibility = () => {

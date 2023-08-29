@@ -190,7 +190,6 @@ export const navStyle = {
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
   informationScreens: {
-    aliginItems: "center",
     paddingTop: 50,
     flex: 1,
     backgroundColor: Primarycolor2,
@@ -279,4 +278,24 @@ export const Buttons = StyleSheet.create({
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
+
+}
+);
+export const HeaderText =StyleSheet.create({
+     Header:{
+      fontSize: 30,
+      marginBottom: 10,
+      marginTop: 10,
+      marginLeft: 30,
+      fontFamily: "space-grotesk-Medium",
+       color: Primarycolor1,
+     },
+    Header_Primarycolor1: {
+  color: Primarycolor1,
+      fontSize: 12,
+      marginTop: 10,
+      marginBottom: 10,
+}
+
+
 });

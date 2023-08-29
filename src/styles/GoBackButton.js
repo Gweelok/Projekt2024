@@ -7,7 +7,7 @@ import {
 export const GoBackButton = () => {
     return (
     <View style={Buttons.iconContainerRight}>
-        <Icon size={30} name="close" style={Buttons.Icon} /> 
+        <Icon size={30} name="left" style={Buttons.Icon} />
     </View>
     )
 };
