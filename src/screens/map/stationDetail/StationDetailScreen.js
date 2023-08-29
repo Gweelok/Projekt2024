@@ -6,7 +6,6 @@ import StationTitle from "./StationTitle";
 import {Backgroundstyle} from "../../../styles/Stylesheet";
 import PrimaryColorButton from "./PrimaryColorButton";
 import WhiteColorButton from "./WhiteColorButton";
-import GlobalStyle from "../../../styles/GlobalStyle";
 
 const { width } = Dimensions.get('window');
 const imageSize = width * 0.85;
@@ -38,12 +37,11 @@ const StationDetailScreen = ({ route, navigation }) => {
 
     return (
         <View  style={Backgroundstyle.interactive_screens}>
+            <ScrollView>
                 <View style={styles.backButtonContainer}>
                     <BackButton navigation={navigation} />
                 </View>
-            <View style={GlobalStyle.BodyWrapper}>
-
-            <View style={styles.titleContainer}>
+                <View style={styles.titleContainer}>
                     <StationTitle title={stationDetail.name} description={stationDetail.address} //todo get title and description from backend
                     />
                 </View>
@@ -62,8 +60,8 @@ const StationDetailScreen = ({ route, navigation }) => {
                     <WhiteColorButton onPress={() => { /* todo */ }} titleText="Vis produkter" />
                 </View>
 
+            </ScrollView>
             <Navigationbar navigation={navigation} />
-        </View>
         </View>
     );
 }
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     imageContainer: {
-        // alignItems: 'center',
+        alignItems: 'center',
         marginTop: 50,
     },
     image: {
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     buttonContainer2: {
-        // alignItems: 'center',
+        alignItems: 'center',
         marginTop: 20,
     },
 });

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -8,11 +7,10 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-import { Backgroundstyle, Buttons, Primarycolor1, styles } from "../styles/Stylesheet";
+import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import { ChooseCatagories} from "../componets/atoms/chooseCatagories";
+import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import GlobalStyle from "../styles/GlobalStyle";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
@@ -90,15 +88,7 @@ const Add = ({ navigation }) => {
         </View>
       </ScrollView>
 
-return (
-    <View style={Backgroundstyle.interactive_screens}>
-        <View style={GlobalStyle.BodyWrapper}>
-            <View style={{ flex: 1, width: "100%"}}>
-                <ChooseCatagories navigation={navigation} />
-            </View>
-            <Text>Current Language: {currentLanguage}</Text>
-       </View>
-        <Navigationbar navigation={navigation}/>
+      <Navigationbar navigation={navigation} />
     </View>
   );
 };

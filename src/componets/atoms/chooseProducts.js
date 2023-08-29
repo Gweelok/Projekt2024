@@ -10,8 +10,6 @@ import { getDataGroup } from '../../../src/utils/Database'
 
 // import from files
 import { RegRender } from '../../../src/utils/RenderData'
-import { View } from 'react-native';
-import GlobalStyle from "../../styles/GlobalStyle";
 
 
 export const ChooseProducts = ({route,navigation}) => {
@@ -25,11 +23,9 @@ export const ChooseProducts = ({route,navigation}) => {
 	},[getId])
 
 	return (
-		<View style={GlobalStyle.BodyWrapper}>
-			<View style={{ flex: 1, width: '100%' }}>
+		<>
 			<RegRender data = {data} navigation = {navigation} db='Products' rid={2}/>
-		</View>
-		</View>
+		</>
 	)
 }
 
