@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native"; 
-import { categoryDropdownContainer } from "../../styles/Stylesheet"; 
+import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
 
@@ -63,5 +63,38 @@ const CategoryDropdown = ({ onCategorySelect }) => {
         </View>
     );
 }
+// Category dropdown styles
+const categoryDropdownContainer = {
+    container: {
+        flexDirection: "column",
+    },
+    validationErrorText: {
+        color: "red"
+    },
+    dropdownText: {
+        fontFamily: "space-grotesk",
+        fontSize: 16,
+        marginRight: 5,
+        // flexGrow: 1,
+    },
+    dropdownButton: {
+        borderWidth: 3,
+        borderColor: Primarycolor1,
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    dropdownList: {
+        borderWidth: 3,
+        borderColor: Primarycolor1,
+    },
+    dropdownListItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: Primarycolor1,
+        backgroundColor: Primarycolor3, 
+    },
+};
 
 export default CategoryDropdown;

@@ -280,37 +280,3 @@ export const Buttons = StyleSheet.create({
     fontFamily: "space-grotesk-Medium",
   },
 });
-
-// Category dropdown
-export const categoryDropdownContainer = {
-  container: {
-      flexDirection: "column",
-  },
-  validationErrorText: {
-    color: "red"
-},
-  dropdownText: {
-      fontFamily: "space-grotesk",
-      fontSize: 16,
-      marginRight: 5,
-      // flexGrow: 1,
-  },
-  dropdownButton: {
-    borderWidth: 3,
-    borderColor: Primarycolor1,
-    padding: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-},
-  dropdownList: {
-      borderWidth: 3,
-      borderColor: Primarycolor1,
-  },
-  dropdownListItem: {
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: Primarycolor1,
-      backgroundColor: Primarycolor3, 
-  },
-};
