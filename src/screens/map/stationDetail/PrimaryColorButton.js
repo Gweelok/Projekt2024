@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Dimensions} from 'react-native';
 import {Primarycolor1} from "../../../styles/Stylesheet";
+import GlobalStyle from "../../../styles/GlobalStyle";
 
 const { width } = Dimensions.get('window');
 const buttonWidth = width * 0.9;

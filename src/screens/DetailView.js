@@ -6,6 +6,7 @@ import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const DetailViews = ({ navigation }) => {
   const handlePress = () => {
@@ -27,11 +28,11 @@ const DetailViews = ({ navigation }) => {
           style={DetailView.arrow}
         />
       </TouchableOpacity>
-      <View style={DetailView.container}>
+      <View style={GlobalStyle.BodyWrapper}>
         <Image source={{ uri: imageUrl }} style={DetailView.image} />
         <View style={DetailView.infoContainer}>
 
-          <View style={DetailView.leftInfo}>
+          <View style={[DetailView.leftInfo, { marginRight: 15 }]}>
             <Text style={DetailView.product}>SomeProduct</Text>
             <Text style={DetailView.brand}>SomeBrand</Text>
           </View>
@@ -60,11 +61,7 @@ const DetailViews = ({ navigation }) => {
   );
 };
 const DetailView = StyleSheet.create({
-  container: {
-    paddingTop: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   image: {
     height: 300,
     width: 300,
@@ -91,7 +88,6 @@ const DetailView = StyleSheet.create({
     width: "80%",
     height: 50,
     justifyContent: "center",
-    alignItems: "center",
     marginBottom: 10,
     textDecorationLine: 'underline'
 
@@ -111,8 +107,7 @@ const DetailView = StyleSheet.create({
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    width: "80%",
+    width: "100%",
     marginTop: 10,
   },
   leftInfo: {
@@ -123,14 +118,12 @@ const DetailView = StyleSheet.create({
   },
   location: {
     color: Primarycolor1,
-    textAlign: "right",
     textDecorationLine: "underline",
     marginTop: 5,
     fontSize: 12,
   },
   locationContainer: {
     flexDirection: "row",
-    alignItems: "center",
   },
 });
 

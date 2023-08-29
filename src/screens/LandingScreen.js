@@ -7,6 +7,7 @@ import { styles,
 import { Ionicons ,Octicons } from '@expo/vector-icons'; 
 import React, { useState,useEffect }  from 'react';
 import { useLanguage, t } from '../Languages/LanguageHandler';
+import GlobalStyle from "../styles/GlobalStyle";
 
 import { firebaseAurth } from '../utils/Firebase';
 
@@ -66,26 +67,39 @@ const LanguageSelector = () => {
 }; 
 
 return (
-    <View style={Backgroundstyle.informationScreens}> 
-        <View style={styling.topBar}>
-        { backButton }
-        <Pressable onPress={LanguageSelector} style={styling.languageSelector}>
+    <View style={Backgroundstyle.informationScreens}>
+        <View style={GlobalStyle.BodyWrapper}>
+        <View style={{marginLeft : "auto", width:'25%'}}>
+            <Pressable onPress={LanguageSelector} style={[Buttons.secondary_button,{padding:5}]}>
                 <Text style={Buttons.secondary_buttonText}>{t('LandingScreen.LanguageSelector', currentLanguage)}</Text>
         </Pressable> 
         </View>
- {/* add components in ```components``` in order to show them */}
+        <Text style={[styles.Header_Primarycolor1,styles.Header, {textAlign:"center"}]}>
+          {t("LandingScreen.Header", currentLanguage)}
+        </Text>
+
+        <Text style={styling.Intro}>
+          {t("LandingScreen.Intro", currentLanguage)}
+        </Text>
+
+        <Text style={styling.Intro}>
+             <Text>{t("LandingScreen.Littlemsg", currentLanguage)}</Text>
+            <Text style={{color:"#07A0A2"}}>
+              {t("LandingScreen.Termsandcond", currentLanguage)} 
+            </Text> 
+         </Text>     
+//        <Pressable onPress={SignUp} style={Buttons.main_button}>
        <View style={{flex:1,padding:20}}>{components[currentSlide]}</View>
-       
-     <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
-        <Text style={Buttons.main_buttonText}>{t('LandingScreen.continue', currentLanguage)}</Text>
+       <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
+        <Text style={Buttons.main_buttonText}>{t("LandingScreen.continue", currentLanguage)}</Text>
     </Pressable> 
 
     <View style={styling.tabBarStyle}>
     {components.map((element,index)=><Octicons key={index} name={`dot${index===currentSlide?"-fill":""}`} size={24} color={Primarycolor1} />)}
     </View>
-        
-    </View>
-    
+        </View>
+        </View>
+
     );
 }
 
@@ -93,17 +107,21 @@ return (
 export default LandingScreen;
 //     <Image source={require('./my-icon.png')} />
 const styling=StyleSheet.create({
+    Intro: {
+        color: Primarycolor1,
+        fontFamily: "space-grotesk",
+        marginBottom: 15,
+    },
     tabBarStyle: {
         bottom: 0,
         elevation: 0,
         height: 60,
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         justifyContent : "center",
         marginLeft : "auto",
         marginRight :"auto",
-        marginTop:30
+        marginTop: 30
       },
       languageSelector:{
         backgroundColor: Primarycolor3,

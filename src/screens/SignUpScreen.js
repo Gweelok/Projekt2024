@@ -22,11 +22,17 @@ const SignUpScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { currentLanguage } = useLanguage();
 
-  //To check on password
+  //To check on password 
   const CheckPassword = (text) => {
     onChangePassword(text);
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
   };
+
+  //Check on both 
+//   const handleSubmit = () => {
+//     const isValidEmail = validateEmail(email);
+//     if (isValidEmail && passwordCheck) {
+//           navigation.navigate('Homepage')
 
   //Check on both
   const handleSubmit = async () => {
@@ -81,20 +87,20 @@ const SignUpScreen = ({ navigation }) => {
       />
       </View>
       { //Check on the password
-      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.passwordmsg', currentLanguage)} </Text>
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> min. otte tegn </Text>
       }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
-            <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
+            <Text style={Buttons.main_buttonText}>{Header}</Text>
         </Pressable>
-
+        
          <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
-          <View style={SignUpStyles.container}>
+          <View>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
           </View>
         </Pressable>
-
+      
          <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
-          <View style={SignUpStyles.container}>
+          <View>
             <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
           </View>
         </Pressable>
@@ -111,16 +117,12 @@ const SignUpScreen = ({ navigation }) => {
 const SignUpStyles = StyleSheet.create({
 
   text_Tertiary: {
-    marginBottom: 10,
+    marginBottom: 10, 
     color : "#07A0A2",
     textAlign: 'center',
     fontSize: 15,
   },
 
-   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
 
 });
 
