@@ -5,20 +5,16 @@ import React, { useState } from "react";
 import * as Location from "expo-location";
 import SortUptainers from "../componets/sortUptainers";
 import {Feather} from "@expo/vector-icons";
-
-
-
-
-
-
-
-
+import { firebaseAurth } from '../utils/Firebase';
 
 
 const Home = ({ navigation }) => {
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect");
   (async () => {
+    if (firebaseAurth.currentUser === null) {
+        navigation.navigate('Landingscreen')
+    }
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       console.log("Permission to access location was denied");
@@ -31,11 +27,7 @@ const Home = ({ navigation }) => {
     }
   })();
 
-
   const [search, onChangeSearch] = useState("");
-
-
-
 
   return (
     <View style={Backgroundstyle.interactive_screens}>

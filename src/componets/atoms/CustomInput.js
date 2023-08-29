@@ -1,34 +1,38 @@
 import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
-import { styles }  from '../../styles/Stylesheet';
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 
-const CustomInput = ({ showStar, ...props }) => {
-    const { currentLanguage, setLanguage } = useLanguage();
+// This component is used to wrap the input component and show the hint text "optional"
+// you need to set whether show the hint by passing the prop "showStar"
+// you can also set the margin of the hint text by passing the prop "optionalMarginXXX".
+// You can also set the font size of the hint text by passing the prop "optionalFontSize".
 
-    return (
-        <View style={customInputStyles.container}>
-            <TextInput
-                style={styles.inputBox}
-                {...props}
-            />
-            {showStar && <Text style={customInputStyles.star}>{t("CustomInput.hint", currentLanguage)}</Text>}
-        </View>
-    );
+const CustomInput = ({children, showStar,
+                       optionalMarginTop=5,
+                       optionalMarginLeft = 10,
+                       optionalFontSize = 14,
+                     optionalMarginBottom = 10,}) => {
+  const {currentLanguage} = useLanguage();
+
+  return (
+    <View style={customInputStyles.container}>
+      {children}
+      {showStar && <Text style={{
+        fontSize: optionalFontSize,
+        marginTop: optionalMarginTop,
+        marginLeft: optionalMarginLeft,
+        marginBottom: optionalMarginBottom,
+      }}>{t("CustomInput.hint", currentLanguage)}</Text>}
+    </View>
+  );
 };
 
 const customInputStyles = StyleSheet.create({
-    container: {
-        width: "100%",
-        flexDirection: 'column',  // Changed from 'row' to 'column'
-    },
-    star: {
-        paddingLeft:20,
-        fontSize: 14,
-        marginTop: -15,            // Optional: Add some margin at the top
-        marginBottom:10,
-    },
+  container: {
+    width: "100%",
+    flexDirection: 'column',
+  },
 });
 
 export default CustomInput;
