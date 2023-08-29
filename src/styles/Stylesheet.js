@@ -299,29 +299,3 @@ export const HeaderText =StyleSheet.create({
 
 
 });
-// Dropdown
-export const dropdownStyles = StyleSheet.create({
-  dropdownContainer: {
-      ...styles.inputBox,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      height: 55,
-  },
-  dropdownText: {
-      ...styles.menuItem_text,
-      flex: 0, 
-      marginRight: 5,
-  },
-  dropdownList: {
-      borderWidth: 4,
-      borderColor: Primarycolor1,
-      marginTop: 0,
-  },
-  dropdownListItem: {
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: Primarycolor1,
-  },
-});
-

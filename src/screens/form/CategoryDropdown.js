@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native"; 
-import { styles, dropdownStyles } from "../../styles/Stylesheet"; 
+import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
 
@@ -10,6 +10,7 @@ const CategoryDropdown = ({ onCategorySelect }) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isValidationError, setIsValidationError] = useState(false);
 
+    // Add firebase logic here, instead of dummy data
     const categories = ["Electronics", "Phones", "TV's", "Computers", "Clocks"];
 
     const handleCategorySelect = (category) => {
@@ -22,9 +23,9 @@ const CategoryDropdown = ({ onCategorySelect }) => {
     }
 
     return (
-        <View style={{ ...styles.container, flexDirection: "column" }}>
+        <View style={categoryDropdownContainer.container}>
             <TouchableOpacity 
-                style={dropdownStyles.dropdownContainer}
+                style={categoryDropdownContainer.dropdownButton}
                 onPress={() => {
                     setIsOpen(!isOpen);
                     if (!selectedCategory) {
@@ -32,34 +33,68 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                     }
                 }}
             >
-                <Text style={dropdownStyles.dropdownText}>
+                <Text style={categoryDropdownContainer.dropdownText}>
                     {selectedCategory ? selectedCategory : 
                     t("CategoryDropdown.selectCategory", currentLanguage)}
                 </Text>
                 <AntDesign 
-                    name={isOpen ? "up" : "down"} 
+                    name={isOpen ? "caretup" : "caretdown"} 
                     size={20}
-                    style={styles.menuItem_arrow}
                 />
             </TouchableOpacity>
 
             {isOpen && (
-                <View style={dropdownStyles.dropdownList}>
+                <View style={categoryDropdownContainer.dropdownList}>
                     {categories.map(category => (
                         <TouchableOpacity 
                             key={category} 
                             onPress={() => handleCategorySelect(category)}
-                            style={dropdownStyles.dropdownListItem}
+                            style={categoryDropdownContainer.dropdownListItem}
                         >
-                            <Text style={dropdownStyles.dropdownText}>{category}</Text>
+                            <Text style={categoryDropdownContainer.dropdownText}>{category}</Text>
                         </TouchableOpacity>
                     ))}
                 </View>
             )}
 
-        {isValidationError && !selectedCategory && <Text style={{ color: "red" }}>This field is required</Text>}
+            {isValidationError && !selectedCategory && 
+                <Text style={categoryDropdownContainer.validationErrorText}>This field is required</Text>
+            }
         </View>
     );
 }
+// Category dropdown styles
+const categoryDropdownContainer = {
+    container: {
+        flexDirection: "column",
+    },
+    validationErrorText: {
+        color: "red"
+    },
+    dropdownText: {
+        fontFamily: "space-grotesk",
+        fontSize: 16,
+        marginRight: 5,
+        // flexGrow: 1,
+    },
+    dropdownButton: {
+        borderWidth: 3,
+        borderColor: Primarycolor1,
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    dropdownList: {
+        borderWidth: 3,
+        borderColor: Primarycolor1,
+    },
+    dropdownListItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: Primarycolor1,
+        backgroundColor: Primarycolor3, 
+    },
+};
 
 export default CategoryDropdown;
