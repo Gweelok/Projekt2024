@@ -18,7 +18,7 @@ import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
 
 const Add = ({ navigation }) => {
-  const { currentLanguage, setLanguage } = useLanguage();
+    const {currentLanguage, setLanguage} = useLanguage();
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
@@ -90,16 +90,6 @@ const Add = ({ navigation }) => {
         </View>
       </ScrollView>
 
-return (
-    <View style={Backgroundstyle.interactive_screens}>
-        <View style={GlobalStyle.BodyWrapper}>
-            <View style={{ flex: 1, width: "100%"}}>
-                <ChooseCatagories navigation={navigation} />
-            </View>
-            <Text>Current Language: {currentLanguage}</Text>
-       </View>
-        <Navigationbar navigation={navigation}/>
-    </View>
   );
 };
 
