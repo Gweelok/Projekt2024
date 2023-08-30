@@ -131,7 +131,7 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={Profile}
-            options={{ animation: "none" }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="ContactUs"
@@ -178,7 +178,7 @@ export default function App() {
           <Stack.Screen
             name="Stats"
             component={Stat}
-            options={{ animation: "none" }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="Add"
@@ -288,8 +288,7 @@ export default function App() {
     setTimeout(() => navigation.navigate("Home"), 3000);
     return (
       <SafeAreaView
-        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-      >
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 23 }}>Thank You</Text>
         <Text style={{ fontSize: 15 }}>
           You have registered an item on Station: {estId}
