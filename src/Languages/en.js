@@ -76,6 +76,10 @@ export default {
     selectModel: "Model",
   },
 
+    ConditionDropdown: {
+      "selectCondition": "Condition"
+    },
+
   NotificationsScreen: {
     Header: "Notifications",
   },

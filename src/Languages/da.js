@@ -67,6 +67,10 @@ export default {
     selectModel: "Model",
   },
 
+  ConditionDropdown: {
+    "selectCondition": "Stand"
+  },
+
   ProfileScreen: {
     ProfilePage: "Rediger profil",
     MySettings: "Mine indstillinger",
