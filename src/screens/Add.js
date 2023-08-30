@@ -11,20 +11,23 @@ import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
+import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
 import DescriptionField from "./form/DescriptionField";
 
-const Add = ({navigation}) => {
-    const {currentLanguage, setLanguage} = useLanguage();
+const Add = ({ navigation }) => {
+  const { currentLanguage, setLanguage } = useLanguage();
 
-    return (
-        <View style={Backgroundstyle.interactive_screens}>
-            <ScrollView style={AddStyles.container}>
-                <Text style={AddStyles.header }>{t("UpdroppForm.title", currentLanguage)}</Text>
+  return (
+    <View style={Backgroundstyle.interactive_screens}>
+      <ScrollView style={AddStyles.container}>
+        <Text style={AddStyles.header}>
+          {t("UpdroppForm.title", currentLanguage)}
+        </Text>
 
-                {/* replace following View with your own component.
+        {/* replace following View with your own component.
                 1. You should not delete the styles.marginView, if you want to add new style,
                 create a new style in Stylesheet and add it after styles.marginView in the list.
                 an example: style={[styles.marginView, styles.imageUploadStyle]}
@@ -36,8 +39,8 @@ const Add = ({navigation}) => {
           <CustomInput showStar={false}>
             <ImageUpload />
           </CustomInput>
-
         </View>
+
         <View style={[AddStyles.marginView]}>
           <CategoryDropdown />
         </View>
@@ -87,10 +90,10 @@ const Add = ({navigation}) => {
         </View>
       </ScrollView>
 
-            <Navigationbar navigation={navigation}/>
-        </View>
-    );
-}
+      <Navigationbar navigation={navigation} />
+    </View>
+  );
+};
 
 const AddStyles = StyleSheet.create({
   container: {
@@ -116,6 +119,5 @@ const AddStyles = StyleSheet.create({
     fontWeight: "500",
   },
 });
-
 
 export default Add;
