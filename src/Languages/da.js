@@ -56,6 +56,16 @@ export default {
         Header: "Mine indstillinger",
     },
 
+    MyDraftsScreen : {
+        Header: "Mine Kladder",
+    },
+
+    CategoryDropdown: {
+        selectCategory: "Kategori",
+    },
+
+
+
     DescriptionField : {
         label: "Beskrivelse"
     },

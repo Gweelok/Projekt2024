@@ -48,6 +48,13 @@ export default {
     },
 
 
+    MyDraftsScreen : {
+      Header: "My Drafts",
+    },
+
+    CategoryDropdown: {
+        selectCategory: "Category",
+    },
 
 
     NotificationsScreen : {

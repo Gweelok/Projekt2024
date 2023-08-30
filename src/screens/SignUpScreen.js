@@ -10,8 +10,8 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
 import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-import {firebaseAurth} from '../utils/Firebase';
+import { createUser} from '../utils/Repo';
+import { firebaseAurth } from '../utils/Firebase';
 
 import GlobalStyle from "../styles/GlobalStyle";
 
@@ -21,29 +21,23 @@ const SignUpScreen = ({ navigation }) => {
   const [passwordCheck, setPasswordCheck] = useState('true'); // to check on password
   const [showPassword, setShowPassword] = useState(false);
   const { currentLanguage } = useLanguage();
-  const auth = firebaseAurth; // reuse from firebase.js
 
   //To check on password
   const CheckPassword = (text) => {
     onChangePassword(text);
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
   };
-  // To check on email
-  const validateEmail = (text) => {
-    //  to check if the input contains "@" and "."
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(text);
-  };
-
 
   //Check on both
-  const handleSubmit = () => {
-    const isValidEmail = validateEmail(email);
-    if (isValidEmail && passwordCheck) {
-          navigation.navigate('Homepage')
+  const handleSubmit = async () => {
+    if (passwordCheck) {
+      await  createUser(email, password);
+      if(firebaseAurth.currentUser !== null) {
+        navigation.navigate('Homepage')
+      }
     } else {
-          Alert.alert('Invalid Email or Password');
-    }
+      Alert.alert('Password');
+  }
   };
   //check if pass should be shown
   const togglePasswordVisibility = () => {
@@ -59,14 +53,15 @@ const SignUpScreen = ({ navigation }) => {
         <View style={GlobalStyle.BodyWrapper}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
 
-    <CustomInput
+      <TextInput
         placeholder="E-mail"
+        value={email}
+        onChangeText={onChangeEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-        clearButtonMode="always"
-        showStar={false}
-        value={email}
-        onChangeText={onChangeEmail}/>
+        clearButtonMode={"always"}
+        style={styles.inputBox}
+      />
 
       <View style={[styles.inputBox , {flexDirection:"row"}]}>
       <TextInput
