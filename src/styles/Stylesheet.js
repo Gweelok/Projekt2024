@@ -236,6 +236,7 @@ export const Buttons = StyleSheet.create({
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: 15, // Adjust the margin to lower the header
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
     borderWidth: 2,
@@ -285,7 +286,7 @@ export const HeaderText =StyleSheet.create({
      Header:{
       fontSize: 30,
       marginBottom: 10,
-      marginTop: 10,
+      marginTop: 15,
       marginLeft: 30,
       fontFamily: "space-grotesk-Medium",
        color: Primarycolor1,

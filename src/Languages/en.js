@@ -83,4 +83,10 @@ export default {
     Header: "The Problem",
     Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",
   },
+    QrScannerScreen: {
+        Scan: "Scan to Updropp",
+        Header: "Place the QR-code inside the frame to read it" ,
+        Bottom: "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
+
+    },
 };

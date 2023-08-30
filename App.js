@@ -130,7 +130,7 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={Profile}
-            options={{ animation: "none" }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="ContactUs"
@@ -187,7 +187,7 @@ export default function App() {
           <Stack.Screen
             name="QRScanner"
             component={QRScanner}
-            options={{ animation: "none", headerShown: true }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="Products"
