@@ -114,7 +114,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingTop: 10,
         marginBottom: 15,
-        // padding: 10,
+        padding: 10,
         borderColor: Primarycolor1,
         backgroundColor: Primarycolor2,
         flexDirection: "row",
@@ -227,9 +227,6 @@ export const Buttons = StyleSheet.create({
     backgroundColor: '#F41616',
     fontSize: 22,
     padding: 10,
-    width :'50%',
-    marginLeft: "auto",
-    marginRight:"auto",
     marginBottom : 20,
 
   },

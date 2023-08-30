@@ -11,6 +11,7 @@ import {
   Primarycolor1,
   Buttons,
 } from "../../styles/Stylesheet";
+import GlobalStyle from "../../styles/GlobalStyle";
 const Problem = () => {
   const { currentLanguage } = useLanguage();
   return (
@@ -18,6 +19,7 @@ const Problem = () => {
       <Text style={[styles.Header_Primarycolor1, styles.Header]}>
         {t("ProblemComponent.Header",currentLanguage)}
       </Text>
+      <View style={GlobalStyle.BodyWrapper}>
       <View style={styling.svgContainer}>
         <TreesSvg />
         <Octicons name="arrow-right" size={30} />
@@ -28,6 +30,7 @@ const Problem = () => {
       <Text style={[styling.Intro,{marginTop:20}]}>
         {t("ProblemComponent.Body",currentLanguage)}
       </Text>
+    </View>
     </View>
   );
 };

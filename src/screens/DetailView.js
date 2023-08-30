@@ -5,7 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
+import { Primarycolor1 } from "../styles/Stylesheet";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const DetailViews = ({ navigation }) => {
   const handlePress = () => {
@@ -88,7 +89,7 @@ const DetailView = StyleSheet.create({
   },
   TagButton: {
     backgroundColor: Primarycolor1,
-    width: "80%",
+    width: "100%",
     height: 50,
     justifyContent: "center",
     alignItems: "center",
