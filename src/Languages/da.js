@@ -53,7 +53,17 @@ export default {
         selectCategory: "Kategori",
     },
 
+    ProductDropdown: {
+      "selectProduct": "Produkt"
+    },
 
+    BrandDropdown: {
+      "selectBrand": "Mærke"
+    },
+
+    ModelDropdown: {
+      "selectModel": "Model"
+    },
 
 
   ProfileScreen: {
