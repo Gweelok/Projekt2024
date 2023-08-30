@@ -100,12 +100,20 @@ export default function App() {
           <Stack.Screen
             name="Landingscreen"
             component={LandingScreen}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="Sign in"
@@ -131,7 +139,11 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={Profile}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="ContactUs"
@@ -178,12 +190,20 @@ export default function App() {
           <Stack.Screen
             name="Stats"
             component={Stat}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="Add"
             component={Add}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="QRScanner"
