@@ -7,17 +7,23 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
 
-const DetailViews = ({ navigation }) => {
+const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, itemBrand and itemproduct (itemName?) from UptainerDetails screen
+  const details = route.params;
+  const itemDescription = details.itemDescription;
+  const itemBrand = details.itemBrand;
+  const itemproduct = details.itemproduct;
+  const imageUrl = details.imageUrl;
+  console.log(details);
+  
   const handlePress = () => {
     navigation.goBack();
   };
 
   const displayTextValue =
-    "This is some DUMMY_TEXT which later on will have to be replaced with actual data.";
+    itemDescription; // displays item description
   const TagButton = "Tag";
 
-  const imageUrl = "https://via.placeholder.com/200x200";
-
+  
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <TouchableOpacity onPress={handlePress}>
@@ -27,13 +33,13 @@ const DetailViews = ({ navigation }) => {
           style={DetailView.arrow}
         />
       </TouchableOpacity>
-      <View style={DetailView.container}>
-        <Image source={{ uri: imageUrl }} style={DetailView.image} />
+      <View style={DetailView.container}> 
+        <Image source={{ uri: imageUrl }} style={DetailView.image} /> 
         <View style={DetailView.infoContainer}>
 
           <View style={DetailView.leftInfo}>
-            <Text style={DetailView.product}>SomeProduct</Text>
-            <Text style={DetailView.brand}>SomeBrand</Text>
+            <Text style={DetailView.product}>{itemproduct}</Text> 
+            <Text style={DetailView.brand}>{itemBrand}</Text>
           </View>
 
           <View style={DetailView.rightInfo}>

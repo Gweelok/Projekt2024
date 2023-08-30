@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
 
 
 
-  return (
+  return (  //54. sor varazsolja elo a home pagen az uptainereket
     <View style={Backgroundstyle.interactive_screens}>
 
 
@@ -49,9 +49,9 @@ const Home = ({ navigation }) => {
                 value={search}
             />
             <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
-        </View>
+        </View> 
       <ScrollView style={{ marginBottom: 60 }}>
-        <SortUptainers navigation={navigation} />
+        <SortUptainers navigation={navigation} />    
       </ScrollView>
       <Navigationbar navigation={navigation} />
     </View>
