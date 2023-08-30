@@ -14,6 +14,7 @@ import { t, useLanguage } from "../Languages/LanguageHandler";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
+import DescriptionField from "./form/DescriptionField";
 
 const Add = ({navigation}) => {
     const {currentLanguage, setLanguage} = useLanguage();
@@ -53,7 +54,7 @@ const Add = ({navigation}) => {
           <Text>Condition dropdown</Text>
         </View>
         <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
-          <Text>Description field</Text>
+          <DescriptionField />
         </View>
         <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
           <Text style={[AddStyles.informativeText]}>

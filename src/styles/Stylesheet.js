@@ -309,11 +309,13 @@ export const descriptionFieldStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 10,
-    marginLeft: 10,
   },
   dscInput: {
     ...styles.inputBox,
     alignItems: 'center',
+    width: '100%',
     height: 100,
+    fontFamily: "space-grotesk",
+    borderWidth: 3,
   },
 })

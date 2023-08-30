@@ -3,6 +3,7 @@ import React from 'react';
 import { useLanguage, t } from '../../Languages/LanguageHandler';
 import { AddStyles } from '../Add';
 import { descriptionFieldStyles, Backgroundstyle } from "../../styles/Stylesheet";
+import CustomInput from "../../componets/atoms/CustomInput";
 
 
 const DescriptionField = ({ label }) => {
@@ -11,10 +12,12 @@ const DescriptionField = ({ label }) => {
     return (
         <View style={Backgroundstyle.interactive_screens}>
         <Text style={descriptionFieldStyles.dscLabel}> {label} {t('DescriptionField.label', currentLanguage)}</Text>
+            <CustomInput showStar={false}>
             <TextInput
                 style={descriptionFieldStyles.dscInput}
                 multiline={true}
             ></TextInput>
+                </CustomInput>
         </View>
     );
 }
