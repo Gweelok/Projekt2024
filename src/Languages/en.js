@@ -40,7 +40,7 @@ export default {
   UpdroppForm: {
     title: "Updropp",
     uploadText: "Add image",
-    imformativeText:
+    informativeText:
       "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
     scanLaterButton: "SCAN LATER",
     scanButton: "UPDROPP",
