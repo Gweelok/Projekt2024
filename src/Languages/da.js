@@ -29,42 +29,39 @@ export default {
     SignUpHint: "Har du ikke en bruger? Opret her.",
   },
 
+  CustomInput: {
+    hint: "valgfri",
+  },
 
+  NotificationsScreen: {
+    Header: "Notifikationer",
+  },
+  AccountSettingsScreen: {
+    Header: "Kontoindstillinger",
+  },
+  MySettingsScreen: {
+    Header: "Mine indstillinger",
+  },
 
-    CustomInput:{
-        hint: "valgfri",
-    },
+  MyDraftsScreen: {
+    Header: "Mine Kladder",
+  },
 
-    NotificationsScreen : {
-        Header: "Notifikationer",
-    },
-    AccountSettingsScreen : {
-        Header: "Kontoindstillinger",
-    },
-    MySettingsScreen : {
-        Header: "Mine indstillinger",
-    },
+  CategoryDropdown: {
+    selectCategory: "Kategori",
+  },
 
-    MyDraftsScreen : {
-        Header: "Mine Kladder",
-    },
+  ProductDropdown: {
+    selectProduct: "Produkt",
+  },
 
-    CategoryDropdown: {
-        selectCategory: "Kategori",
-    },
+  BrandDropdown: {
+    selectBrand: "Mærke",
+  },
 
-    ProductDropdown: {
-      "selectProduct": "Produkt"
-    },
-
-    BrandDropdown: {
-      "selectBrand": "Mærke"
-    },
-
-    ModelDropdown: {
-      "selectModel": "Model"
-    },
-
+  ModelDropdown: {
+    selectModel: "Model",
+  },
 
   ProfileScreen: {
     ProfilePage: "Rediger profil",
@@ -74,7 +71,6 @@ export default {
     ContactUs: "Kontakt os",
   },
 
-
   UpdroppForm: {
     title: "Updropp",
     uploadText: "Tilføj billede",
@@ -82,6 +78,9 @@ export default {
       "For at updroppe genstanden skal du scanne QR-koden på Uptaineren ved aflevering. Hvis du har udfyldt oplysningerne uden at være med Uptaineren, kan du gemme en kladde ved at trykke 'Scan senere'",
     scanLaterButton: "SCAN SENERE",
     scanButton: "UPDROPP",
+    addDraft: "Tilføj kladde",
+    viewUptainers: "Se nærmeste Uptainer",
+    draftSavedtext: "Din kladde er nu gemt",
   },
 
   ProblemComponent: {
