@@ -89,6 +89,25 @@ return (
         </TouchableOpacity>
       )}
     />
+            <FlatList
+      horizontal={true}
+      data={data}
+      keyExtractor={(item) => item.id}
+      style={{marginBottom:10, marginTop:5,}}
+      renderItem={({ item }) => (
+        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', { //added brand, product, url, description parameters so they are passed to detail view
+          data: item.itemId, 
+          itemDescription: item.itemDescription, 
+          itemBrand: item.itemBrand, 
+          itemproduct: item.itemproduct, 
+          imageUrl: item.imageUrl,
+          })}>
+        <View style={styling.item}>
+            <Image source={{ uri: item.imageUrl }} style={styling.image} />
+        </View>
+        </TouchableOpacity>
+      )}
+    />
   
     </View>
   );
