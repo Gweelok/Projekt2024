@@ -15,7 +15,6 @@ import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
-import DescriptionField from "./form/DescriptionField";
 
 const Add = ({ navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
