@@ -8,9 +8,9 @@ import { DefaultTheme } from "@react-navigation/native";
 
 //		backgroundColor: '#fff',
 //Main colors
-export const Primarycolor1= "#1c4b3d"; // DarkGreen
-export const Primarycolor2= "#dae2e0"; //lightgreen
-export const Primarycolor3= "#fff"; // White
+export const Primarycolor1 = "#1c4b3d"; // DarkGreen
+export const Primarycolor2 = "#dae2e0"; //lightgreen
+export const Primarycolor3 = "#fff"; // White
 
 
 // Stylesheet like CSS
@@ -39,40 +39,39 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   //Headlines
-  Header: {
+  Header : {
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
     fontFamily: "space-grotesk-bold",
   },
-  Header_Primarycolor1: {
-    color: Primarycolor1,
-  },
-//     fontSize: 16,
-//     marginTop: 10,
-//     marginBottom: 10,
-//   },
-
-  //Links 
-  link: {
-    color: Primarycolor1,
-    textDecorationLine: 'underline',
-    textAlign: 'center',
-    fontFamily: 'space-grotesk',
-  },
-  //paragraph 
-  paragraph_text: {
-    fontFamily: 'space-grotesk',
+  Header_Primarycolor1  : {
     color: Primarycolor1,
     fontSize: 16,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+
+  //Links
+  link: {
+    color: Primarycolor1,
+    textDecorationLine: "underline",
+    textAlign: "center",
+    fontFamily: "space-grotesk",
+  },
+  //paragraph
+  paragraph_text: {
+    fontFamily: "space-grotesk",
+    color: Primarycolor1,
+    fontSize: 16, 
   },
   //Input box
   inputBox: {
     height: 45,
-    width: '90%',
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 15,
+    marginBottom :15,
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
@@ -82,18 +81,17 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   //Menu items
-  menuItem:
-      {
-        width: '90%',
-        marginLeft: "auto",
-        marginRight: "auto",
-        marginBottom: 15,
-        padding: 10,
-        borderColor: Primarycolor1,
-        borderWidth: 4,
-        backgroundColor: Primarycolor3,
-        flexDirection: 'row',
-      },
+  menuItem: {
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: 15,
+    padding: 10,
+    borderColor: Primarycolor1,
+    borderWidth: 4,
+    backgroundColor: Primarycolor3,
+    flexDirection: "row",
+  },
   //Text for both menuitem and boxlink
   menuItem_text: {
     fontFamily: "space-grotesk-bold",
@@ -101,16 +99,14 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginRight: "auto",
   },
-  menuItem_arrow:
-      {
-        color: Primarycolor1,
-      },
-  Icon_container:
-      {
-        justifyContent: "center",
-        // marginLeft : "auto",
-        alignItems: "center",
-      },
+  menuItem_arrow: {
+    color: Primarycolor1,
+  },
+  Icon_container: {
+    justifyContent: "center",
+    marginLeft: "auto",
+    alignItems: "center",
+  },
 
   //Box_Link
   boxlink:
@@ -130,6 +126,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
 //Profile styles
 export const profileStyles = StyleSheet.create({
   profileIcon: {

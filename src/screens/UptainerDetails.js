@@ -11,7 +11,6 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
-import GlobalStyle from "../styles/GlobalStyle";
 
 const dummyImages = [
   {
@@ -40,9 +39,7 @@ const UptainerDetails = ({ navigation, route }) => {
   console.log("item, item");
 
   return (
-      <View style={GlobalStyle.BodyWrapper}>
-
-      <View style={styles.container}>
+    <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
@@ -85,12 +82,13 @@ const UptainerDetails = ({ navigation, route }) => {
             <TouchableOpacity
               key={i}
               style={{
-                // marginLeft: 6,
+                marginLeft: 6,
                 marginBottom: 20,
-                // alignContent: "center",
-                // alignItems: "center",
-                // alignSelf: "center",
-                // justifyContent: "center",
+                marginRight: 20,
+                alignContent: "center",
+                alignItems: "center",
+                alignSelf: "center",
+                justifyContent: "center",
               }}
               onPress={() => navigation.navigate("DetailView")}
             >
@@ -113,7 +111,6 @@ const UptainerDetails = ({ navigation, route }) => {
       </ScrollView>
       <Navigationbar navigation={navigation} />
     </View>
-      </View>
   );
 };
 

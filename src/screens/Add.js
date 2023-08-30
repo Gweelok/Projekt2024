@@ -16,9 +16,15 @@ import GlobalStyle from "../styles/GlobalStyle";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
+import ProductDropdown from './form/ProductDropdown';
+import BrandDropdown from './form/BrandDropdown';
+import ModelDropdown from './form/ModelDropdown';
 
 const Add = ({ navigation }) => {
-    const {currentLanguage, setLanguage} = useLanguage();
+  const { currentLanguage, setLanguage } = useLanguage();
+  const [category, setCategory] = useState(null);
+  const [product, setProduct] = useState(null);
+  const [brand, setBrand] = useState(null);
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
@@ -90,6 +96,8 @@ const Add = ({ navigation }) => {
         </View>
       </ScrollView>
 
+      <Navigationbar navigation={navigation} />
+    </View>
   );
 };
 

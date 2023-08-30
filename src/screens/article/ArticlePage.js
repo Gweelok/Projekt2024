@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import GlobalStyle from "../../styles/GlobalStyle";
 
 const ArticlePage = ({ route }) => {
     const { title, content } = route.params;
@@ -17,8 +16,6 @@ const ArticlePage = ({ route }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <View style={GlobalStyle.BodyWrapper}>
-
             <Image
                 // todo the image should get from server
                 source={require('../../../assets/images/cph.jpg')}
@@ -29,17 +26,16 @@ const ArticlePage = ({ route }) => {
             {content.map((paragraph, index) => (
                 <Text key={index} style={styles.content}>{"  " +paragraph}</Text>
             ))}
-            </View>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
+        flex: 1,
     },
     title: {
-        // marginHorizontal:20,
+        marginHorizontal:20,
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 25,
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
     },
     content: {
         marginTop: 10,
-        // marginHorizontal: 20,
+        marginHorizontal: 20,
         fontSize: 16,
     },
 });
