@@ -60,7 +60,18 @@ export default {
     CategoryDropdown: {
         selectCategory: "Category",
     },
-    
+
+    ProductDropdown: {
+      "selectProduct": "Product"
+    },
+
+    BrandDropdown: {
+      "selectBrand": "Brand"
+    },
+
+    ModelDropdown: {
+      "selectModel": "Model"
+    },
 
   NotificationsScreen: {
     Header: "Notifications",

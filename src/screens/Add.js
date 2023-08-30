@@ -9,15 +9,21 @@ import {
 } from "react-native";
 import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React from "react";
+import React, { useState } from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
+import ProductDropdown from './form/ProductDropdown';
+import BrandDropdown from './form/BrandDropdown';
+import ModelDropdown from './form/ModelDropdown';
 
 const Add = ({ navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
+  const [category, setCategory] = useState(null);
+  const [product, setProduct] = useState(null);
+  const [brand, setBrand] = useState(null);
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
@@ -41,16 +47,16 @@ const Add = ({ navigation }) => {
         </View>
 
         <View style={[AddStyles.marginView]}>
-          <CategoryDropdown />
+          <CategoryDropdown onCategorySelect={setCategory} />
         </View>
         <View style={[AddStyles.marginView]}>
-          <Text>Product dropdown</Text>
+          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
         </View>
         <View style={[AddStyles.marginView]}>
-          <Text>Brand dropdown</Text>
+          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand} />
         </View>
         <View style={[AddStyles.marginView]}>
-          <Text>Model dropdown</Text>
+          <ModelDropdown brandSelected={!!brand} />
         </View>
         <View style={[AddStyles.marginView]}>
           <Text>Condition dropdown</Text>
