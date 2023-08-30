@@ -11,7 +11,7 @@ const Uptainer = ({id, name, location}) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => {  //!!!!Azt hisszuk ezt tolti be a kepeket a home pagen!!!!
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
@@ -38,7 +38,8 @@ return (
     <View> 
        <TouchableOpacity
         onPress={() =>
-          navigation.navigate("UptainerDetails", {
+          navigation.navigate("UptainerDetails", { // added id so UptainerDetails gets it
+            id: id,
             name: name,
             location: location,
           })
@@ -53,26 +54,20 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:5, marginTop:5,}}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('DetailView', {data: item.itemId })}>
+        <TouchableOpacity onPress={() => navigation.navigate('DetailView', { //added brand, product, url, description parameters so they are passed to detail view
+          data: item.itemId, 
+          itemDescription: item.itemDescription, 
+          itemBrand: item.itemBrand, 
+          itemproduct: item.itemproduct, 
+          imageUrl: item.imageUrl,
+          })}>
         <View style={styling.item}>
             <Image source={{ uri: item.imageUrl }} style={styling.image} />
         </View>
         </TouchableOpacity>
       )}
     />
-     <FlatList
-      horizontal={true}
-      data={data}
-      keyExtractor={(item) => item.id}
-      style={{marginBottom:10, marginTop:5,}}
-      renderItem={({ item }) => (
-        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', {data: item.itemId })}>
-        <View style={styling.item}>
-            <Image source={{ uri: item.imageUrl }} style={styling.image} />
-        </View>
-        </TouchableOpacity>
-      )}
-    />
+  
     </View>
   );
 };
