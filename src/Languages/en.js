@@ -96,7 +96,11 @@ export default {
   },
   SolutionComponent:{
     Header: "The solution",
-    Body:"Our Uptainers help old electronics to a new life in another citizens homes."
+    Body:"Our Uptainers help old electronics to a new life in another citizens homes.",
+    Bottom:{
+      firstHalf:"Use Phase",
+      secondHalf:"New Use Phase",
+    }
   },
     QrScannerScreen: {
         Scan: "Scan to Updropp",

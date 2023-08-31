@@ -5,9 +5,9 @@ import HouseSvg from "./House";
 import { Primarycolor1 } from "../../styles/Stylesheet";
 const HousePhoneTextSvg = ({showPhone, textUnderHouse}) =>{
     return <View style={styling.container}>
-        <PhoneSvg style={styling.phone}/>
+        {showPhone?<PhoneSvg style={styling.phone}/>:null}
         <HouseSvg/>
-        <Text style={styling.text}>{textUnderHouse} dummy text</Text>
+        <Text style={styling.text}>{textUnderHouse}</Text>
     </View>
 };
 const styling = StyleSheet.create({
@@ -17,13 +17,13 @@ const styling = StyleSheet.create({
     },
     text:{
         color:Primarycolor1,
-        fontFamily: 'space-grotesk',
+        fontFamily: 'space-grotesk-bold',
         marginTop:10
     },
     phone:{
         position:"absolute",
-        top:"-55%",
-        left:"-5%",
+        top:-45,
+        left:-15,
     }
 })
 export default HousePhoneTextSvg;

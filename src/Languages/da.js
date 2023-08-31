@@ -97,7 +97,11 @@ export default {
   },
   SolutionComponent:{
     Header: "Løsningen",
-    Body:"Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem."
+    Body:"Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem.",
+    Bottom:{
+      firstHalf:"Brugsfase",
+      secondHalf:"Ny Brugsfase",
+    }
   },
   QrScannerScreen: {
     Scan: "Scan for at Updroppe",
@@ -105,5 +109,6 @@ export default {
     Bottom: "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
 
   },
+
 
 };

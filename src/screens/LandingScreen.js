@@ -18,6 +18,7 @@ import ReuseSvg from '../componets/svg-components/ReuseSvg';
 import PlantSvg from '../componets/svg-components/PlantSvg';
 import CompletePlantSvg from '../componets/svg-components/CompletePlantSvg';
 import HousePhoneTextSvg from '../componets/svg-components/HousePhoneTextSvg';
+import CompleteHousePhoneTextSvg from '../componets/svg-components/CompleteHousePhoneTextSvg';
 
 
 
@@ -46,7 +47,7 @@ const LandingScreen = ({ navigation }) => {
   },
   {
     top: t('SolutionComponent.Header', currentLanguage),
-    image: <HousePhoneTextSvg/>,
+    image: <CompleteHousePhoneTextSvg/>,
     bottom: t('SolutionComponent.Body', currentLanguage),
     
   }
