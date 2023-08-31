@@ -95,11 +95,11 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:10, marginTop:5,}}
       renderItem={({ item }) => (
-        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', { //added brand, product, url, description parameters so they are passed to detail view
+        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', { //added brandName, productName, url, description parameters so they are passed to detail view
           data: item.itemId, 
           itemDescription: item.itemDescription, 
-          itemBrand: item.itemBrand, 
-          itemproduct: item.itemproduct, 
+          brandName: item.brandName,  
+          productName: item.productName, 
           imageUrl: item.imageUrl,
           })}>
         <View style={styling.item}>
