@@ -17,6 +17,7 @@ import Customize from '../componets/LandingScreen/Customize';
 import ReuseSvg from '../componets/svg-components/ReuseSvg';
 import PlantSvg from '../componets/svg-components/PlantSvg';
 import CompletePlantSvg from '../componets/svg-components/CompletePlantSvg';
+import HousePhoneTextSvg from '../componets/svg-components/HousePhoneTextSvg';
 
 
 
@@ -41,6 +42,12 @@ const LandingScreen = ({ navigation }) => {
     top: t('ProblemComponent.Header', currentLanguage),
     image: <CompletePlantSvg/>,
     bottom: t('ProblemComponent.Body', currentLanguage),
+    
+  },
+  {
+    top: t('SolutionComponent.Header', currentLanguage),
+    image: <HousePhoneTextSvg/>,
+    bottom: t('SolutionComponent.Body', currentLanguage),
     
   }
 ]

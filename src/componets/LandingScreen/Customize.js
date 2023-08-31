@@ -14,7 +14,7 @@ const styling = StyleSheet.create({
         color:Primarycolor1
     },
     imageContainer:{
-        flex:1,
+        flex:3,
         alignItems:"center",
         justifyContent:"center",
         marginBottom:30
@@ -22,7 +22,10 @@ const styling = StyleSheet.create({
     bottom:{
         color:Primarycolor1,
         fontFamily: 'space-grotesk-bold',
-        paddingHorizontal:20
+        paddingHorizontal:20,
+        flex:2,
+        alignItems:"center",
+        justifyContent:"center"
     }
 })
 export default Customize;
