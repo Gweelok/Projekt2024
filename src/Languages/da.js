@@ -45,6 +45,10 @@ export default {
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
+    closeButtonTitle: "Slette kladde",
+    closeButtonAsking: "Er du sikker på at du vil slette denne kladde?",
+    closeButtonAnswerYes: "Ja",
+    closeButtonAnswerNo: "Nej",
   },
 
   CategoryDropdown: {
