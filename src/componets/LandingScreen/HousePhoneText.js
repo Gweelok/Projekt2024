@@ -1,9 +1,13 @@
 import React from "react";
 import {View,Text,StyleSheet} from "react-native";
-import PhoneSvg from "./Phone";
-import HouseSvg from "./House";
+import PhoneSvg from "../svg-components/Phone";
+import HouseSvg from "../svg-components/House";
 import { Primarycolor1 } from "../../styles/Stylesheet";
-const HousePhoneTextSvg = ({showPhone, textUnderHouse}) =>{
+const HousePhoneText = ({showPhone, textUnderHouse}) =>{
+    //created a container that has the svgs of : phone,house and text
+    //conditional dispay the phone svg depending on instructions of parrent component;
+    //display text from parent component;
+    //this is actually half currently of CompleteHousePhoneText component
     return <View style={styling.container}>
         {showPhone?<PhoneSvg style={styling.phone}/>:null}
         <HouseSvg/>
@@ -26,4 +30,4 @@ const styling = StyleSheet.create({
         left:-15,
     }
 })
-export default HousePhoneTextSvg;
+export default HousePhoneText;
