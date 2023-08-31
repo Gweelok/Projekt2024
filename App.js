@@ -65,6 +65,7 @@ import Notifications from "./src/screens/ProfileSetings/Notifications";
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
+import ProductSaved from "./src/screens/form/ProductSaved";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -235,6 +236,11 @@ export default function App() {
             name="UptainerDetails"
             component={UptainerDetails}
             options={{ headerShown: true, animation: "none" }}
+          />
+          <Stack.Screen
+            name="ProductSaved"
+            component={ProductSaved}
+            options={{ animation: "none", headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

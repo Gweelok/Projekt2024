@@ -82,6 +82,9 @@ export default {
       "For at updroppe genstanden skal du scanne QR-koden på Uptaineren ved aflevering. Hvis du har udfyldt oplysningerne uden at være med Uptaineren, kan du gemme en kladde ved at trykke 'Scan senere'",
     scanLaterButton: "SCAN SENERE",
     scanButton: "UPDROPP",
+    addDraft: "Tilføj kladde",
+    viewUptainers: "Se nærmeste Uptainer",
+    draftSavedtext: "Din kladde er nu gemt",
   },
 
   ProblemComponent: {

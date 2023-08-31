@@ -11,12 +11,12 @@ import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import CategoryDropdown from './form/CategoryDropdown';
+import CategoryDropdown from "./form/CategoryDropdown";
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
-import ProductDropdown from './form/ProductDropdown';
-import BrandDropdown from './form/BrandDropdown';
-import ModelDropdown from './form/ModelDropdown';
+import ProductDropdown from "./form/ProductDropdown";
+import BrandDropdown from "./form/BrandDropdown";
+import ModelDropdown from "./form/ModelDropdown";
 
 const Add = ({ navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
@@ -43,13 +43,15 @@ const Add = ({ navigation }) => {
           <CustomInput showStar={false}>
             <ImageUpload />
           </CustomInput>
-
         </View>
         <View style={[AddStyles.marginView]}>
           <CategoryDropdown onCategorySelect={setCategory} />
         </View>
         <View style={[AddStyles.marginView]}>
-          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
+          <ProductDropdown
+            categorySelected={!!category}
+            onProductSelect={setProduct}
+          />
         </View>
         <View style={[AddStyles.marginView]}>
           <BrandDropdown productSelected={!!product} onBrandSelect={setBrand} />
@@ -86,12 +88,16 @@ const Add = ({ navigation }) => {
               Buttons.secondary_button,
               { borderWidth: 2, width: "100%" },
             ]}
+            onPress={() => {
+              navigation.navigate("ProductSaved");
+            }}
           >
             <Text style={Buttons.secondary_buttonText}>
               {t("UpdroppForm.scanLaterButton", currentLanguage)}
             </Text>
           </Pressable>
         </View>
+        <View style={[{ marginTop: 50, minHeight: 200, marginBottom: 100 }]} />
       </ScrollView>
 
       <Navigationbar navigation={navigation} />
