@@ -65,6 +65,7 @@ import Notifications from "./src/screens/ProfileSetings/Notifications";
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
+import ProductSaved from "./src/screens/form/ProductSaved";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -99,12 +100,20 @@ export default function App() {
           <Stack.Screen
             name="Landingscreen"
             component={LandingScreen}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="Sign in"
@@ -130,7 +139,11 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={Profile}
-            options={{ animation: "none" }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="ContactUs"
@@ -146,7 +159,7 @@ export default function App() {
           <Stack.Screen
             name="MyDrafts"
             component={MyDrafts}
-            options={{ animation: "none", headerShown: false }}
+            options={{ animation: "none", headerShown: true }}
           />
           <Stack.Screen
             name="MySettings"
@@ -177,17 +190,25 @@ export default function App() {
           <Stack.Screen
             name="Stats"
             component={Stat}
-            options={{ animation: "none" }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="Add"
             component={Add}
-            options={{ animation: "none", headerShown: false }}
+            options={{
+              animation: "none",
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
           <Stack.Screen
             name="QRScanner"
             component={QRScanner}
-            options={{ animation: "none", headerShown: true }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="Products"
@@ -236,6 +257,11 @@ export default function App() {
             component={UptainerDetails}
             options={{ headerShown: true, animation: "none" }}
           />
+          <Stack.Screen
+            name="ProductSaved"
+            component={ProductSaved}
+            options={{ animation: "none", headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
@@ -282,8 +308,7 @@ export default function App() {
     setTimeout(() => navigation.navigate("Home"), 3000);
     return (
       <SafeAreaView
-        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-      >
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 23 }}>Thank You</Text>
         <Text style={{ fontSize: 15 }}>
           You have registered an item on Station: {estId}

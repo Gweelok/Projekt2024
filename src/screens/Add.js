@@ -7,22 +7,25 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
+import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React, { useState } from "react";
-import { t, useLanguage } from "../Languages/LanguageHandler";
+import React, {useState} from "react";
+import {t, useLanguage} from "../Languages/LanguageHandler";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
 import ProductDropdown from './form/ProductDropdown';
 import BrandDropdown from './form/BrandDropdown';
 import ModelDropdown from './form/ModelDropdown';
+import ConditionDropdown from "./form/ConditionDropdown";
 
-const Add = ({ navigation }) => {
-  const { currentLanguage, setLanguage } = useLanguage();
+const Add = ({navigation}) => {
+  const {currentLanguage, setLanguage} = useLanguage();
   const [category, setCategory] = useState(null);
   const [product, setProduct] = useState(null);
   const [brand, setBrand] = useState(null);
+  // you can fetch the final result of condition field through here
+  const [condition, setCondition] = useState(null);
 
   return (
       <View style={Backgroundstyle.interactive_screens}>
@@ -100,22 +103,12 @@ const Add = ({ navigation }) => {
 };
 
 const AddStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 50,
-    paddingHorizontal: 15,
-  },
   header: {
     fontFamily: "space-grotesk-bold",
     fontSize: 35,
     color: Primarycolor1,
     fontWeight: "bold",
     marginBottom: 20,
-  },
-  marginView: {
-    marginLeft: 8,
-    marginRight: 8,
   },
   informativeText: {
     fontSize: 15,

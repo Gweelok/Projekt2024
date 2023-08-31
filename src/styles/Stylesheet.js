@@ -283,7 +283,7 @@ export const HeaderText =StyleSheet.create({
      Header:{
       fontSize: 30,
       marginBottom: 10,
-      marginTop: 10,
+      marginTop: 15,
       marginLeft: 30,
       fontFamily: "space-grotesk-Medium",
        color: Primarycolor1,
