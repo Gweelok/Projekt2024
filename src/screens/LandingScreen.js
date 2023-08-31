@@ -1,4 +1,4 @@
-import { View, Text , StyleSheet ,Pressable,BackHandler,Alert,TouchableOpacity } from 'react-native';
+import { View, Text , StyleSheet ,Pressable,BackHandler,Alert,TouchableOpacity, SafeAreaView } from 'react-native';
 import { styles,
     Backgroundstyle,
     Primarycolor1,
@@ -12,7 +12,11 @@ import { firebaseAurth } from '../utils/Firebase';
 
 import Welcome from '../componets/LandingScreen/Welcome';
 import Problem from '../componets/LandingScreen/Problem';
-
+import Solution from '../componets/LandingScreen/Solution';
+import Customize from '../componets/LandingScreen/Customize';
+import ReuseSvg from '../componets/svg-components/ReuseSvg';
+import PlantSvg from '../componets/svg-components/PlantSvg';
+import CompletePlantSvg from '../componets/svg-components/CompletePlantSvg';
 
 
 
@@ -21,19 +25,32 @@ const LandingScreen = ({ navigation }) => {
   // for multi language
     const { currentLanguage, setLanguage } = useLanguage();
     const [currentSlide,setCurrentSlide] = useState(0);
-    const components = [<Welcome />,<Problem/>];
+    const components = [<Welcome />,<Problem/>,<Solution/>];
     const backButton = currentSlide === 0 ? null : (    
     <TouchableOpacity onPress={()=>setCurrentSlide(currentSlide-1)} style={styling.backButton}>
     <Octicons name="chevron-left" size={20} style={{color:"white"}}/>
     </TouchableOpacity>);
    
+   const data = [{
+    top: t('LandingScreen.Header', currentLanguage),
+    image: <ReuseSvg/>,
+    bottom: t('LandingScreen.Intro', currentLanguage),
+    
+  },
+  {
+    top: t('ProblemComponent.Header', currentLanguage),
+    image: <CompletePlantSvg/>,
+    bottom: t('ProblemComponent.Body', currentLanguage),
+    
+  }
+]
 
   function nextSlideAndSignUp(){
     if(currentSlide+2>components.length){
         
         navigation.navigate('SignUp');
         
-    }else{
+    }else{  
         setCurrentSlide(previousState=>previousState+1)
     }
   }
@@ -66,7 +83,7 @@ const LanguageSelector = () => {
 }; 
 
 return (
-    <View style={Backgroundstyle.informationScreens}> 
+    <SafeAreaView style={Backgroundstyle.informationScreens}> 
         <View style={styling.topBar}>
         { backButton }
         <Pressable onPress={LanguageSelector} style={styling.languageSelector}>
@@ -74,7 +91,8 @@ return (
         </Pressable> 
         </View>
  {/* add components in ```components``` in order to show them */}
-       <View style={{flex:1,padding:20}}>{components[currentSlide]}</View>
+       {/* <View style={{flex:1,paddingBottom:30}}>{components[currentSlide]}</View> */}
+       <View style={{flex:1,paddingHorizontal:20,paddingVertical:30}}>{<Customize {...data[currentSlide]}/>}</View>
        
      <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
         <Text style={Buttons.main_buttonText}>{t('LandingScreen.continue', currentLanguage)}</Text>
@@ -84,7 +102,7 @@ return (
     {components.map((element,index)=><Octicons key={index} name={`dot${index===currentSlide?"-fill":""}`} size={24} color={Primarycolor1} />)}
     </View>
         
-    </View>
+    </SafeAreaView>
     
     );
 }

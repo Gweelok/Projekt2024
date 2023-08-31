@@ -7,9 +7,7 @@ import PlantSvg from "../svg-components/PlantSvg";
 import SaleSvg from "../svg-components/SaleSvg";
 import {
   styles,
-  Backgroundstyle,
-  Primarycolor1,
-  Buttons,
+  Primarycolor1,  
 } from "../../styles/Stylesheet";
 const Problem = () => {
   const { currentLanguage } = useLanguage();

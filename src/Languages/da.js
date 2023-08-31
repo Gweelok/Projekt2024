@@ -88,4 +88,8 @@ export default {
     Header: "Problemet",
     Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
   },
+  SolutionComponent:{
+    Header: "Løsningen",
+    Body:"Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem."
+  }
 };
