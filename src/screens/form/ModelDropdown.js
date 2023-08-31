@@ -3,14 +3,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
-import { models } from "../../utils/SeedData";
+//import { models } from "../../utils/SeedData";
 
 const ModelDropdown = ({ onModelSelect, brandSelected }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState(null);
 
-
+    const models = ['test','test1'];
 
     const handleModelSelect = (model) => {
         setSelectedModel(model);
