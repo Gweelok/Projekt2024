@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
+//import { products } from "../../utils/SeedData";
 
 const ProductDropdown = ({ onProductSelect, categorySelected }) => {
     const { currentLanguage } = useLanguage();
@@ -10,8 +11,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isValidationError, setIsValidationError] = useState(false);
 
-    // Dummy products, replace with actual data
-    const products = ["iPhone", "Samsung TV", "Dell Laptop", "Wall Clock", "iPad"];
+    const products = ['Test, Test1'];
 
     const handleProductSelect = (product) => {
         setSelectedProduct(product);
