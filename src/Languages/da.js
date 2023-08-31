@@ -95,17 +95,15 @@ export default {
     Header: "Problemet",
     Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
   },
-<<<<<<< HEAD
   SolutionComponent:{
     Header: "Løsningen",
     Body:"Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem."
-  }
-=======
+  },
   QrScannerScreen: {
     Scan: "Scan for at Updroppe",
     Header: "Placér QR-koden inden for rammen for at aflæse" ,
     Bottom: "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
 
   },
->>>>>>> main
+
 };
