@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
 import { useEffect, useState } from 'react';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getItemsInUptainer, getUptainerById } from '../utils/Repo';
+import { getItemsInUptainer, getUptainerById, getProductById, getBrandById} from '../utils/Repo';
 
 
 const windowWidth = Dimensions.get("window").width;
@@ -23,6 +23,7 @@ const UptainerDetails = ({ navigation, route }) => {
   const item = route.params;
   console.log("item:", item);
   const [data, setData] = useState([]);
+  const [uptainerImageUrl, setUptainerImageUrl] = useState(''); // New state for Uptainer image URL
 
   useEffect(() => {  //Fetches items in the uptainer 
     const fetchItemList = async () => {
@@ -31,25 +32,50 @@ const UptainerDetails = ({ navigation, route }) => {
         const items = await getItemsInUptainer(item.id); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
         const updatedData = await Promise.all(items.map(async (item) => {
           const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
+          const product = await getProductById(item.itemproduct);
+          const brand = await getBrandById(item.itemBrand);
+          
+          
           try {
             const url = await getDownloadURL(pathReference);
-            return { ...item, imageUrl: url };
+            console.log(url);
+            
+            return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName,};
           } catch (error) {
             console.log('Error while downloading image => ', error);
             return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
           }
         }));
         setData(updatedData); // updates data property with the fetched data from db
-        console.log(data);
       } catch (error) {
         console.log('Error while fetching items => ', error);
       }
     };
     fetchItemList();
-  }, []); 
+  }, []);
 
-  const currentUptainer = getUptainerById(item.id); // Gets current uptainer so the image URL can be extracted
-  console.log(getUptainerById(item.id));
+  useEffect(() => {
+    const fetchUptainerImage = async () => {
+      const imageUrl = await getUptainerImageUrl();
+      setUptainerImageUrl(imageUrl);
+    };
+    fetchUptainerImage();
+  }, []);
+
+async function getUptainerImageUrl() { //get uptainerUrl from database
+    const storage = getStorage();
+    try {
+        const currentUptainer = await getUptainerById(item.id);
+        console.log(currentUptainer);
+        const uptainerPathReference = ref(storage, currentUptainer.uptainerImage);
+        return await getDownloadURL(uptainerPathReference);
+        
+    } catch (error) {
+        console.log('Error while getting Uptainer Image URL => ', error);
+        return 'https://via.placeholder.com/200x200';
+    }
+}
+  
 
   return (
     <View style={styles.container}>
@@ -67,7 +93,7 @@ const UptainerDetails = ({ navigation, route }) => {
           <ImageBackground
             style={styles.detailsImage}
             source={{
-              uri: currentUptainer.uptainerImage,  // current uptainer main pic (seemingly not in the db? instead url its a filename)
+              uri: uptainerImageUrl,  // current uptainer main pic 
             }}
           >
             <TouchableOpacity
@@ -106,8 +132,10 @@ const UptainerDetails = ({ navigation, route }) => {
               onPress={() => navigation.navigate("DetailView", {
                 itemDescription: cur.itemDescription,
                 imageUrl: cur.imageUrl,
-                itemBrand: cur.itemBrand,
-                itemproduct: cur.itemproduct,
+                productName: cur.productName,
+                brandName: cur.brandName,
+                
+
               }
               )}
             >
@@ -117,7 +145,7 @@ const UptainerDetails = ({ navigation, route }) => {
                   uri: cur?.imageUrl,
                 }}
               />
-              <Text style={{ fontWeight: "600" }}>{cur.itemproduct /*This should be the name of the item but we cant fin it. ??maybe itemproduct??*/} </Text> 
+              <Text style={{ fontWeight: "600" }}>{cur.productName} </Text> 
             </TouchableOpacity>
           ))}
         </View>

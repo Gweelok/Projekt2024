@@ -4,23 +4,26 @@ import { styles , Primarycolor1 } from '../styles/Stylesheet';
 import { React, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getItemsInUptainer } from '../utils/Repo';
+import { getItemsInUptainer, getProductById, getBrandById } from '../utils/Repo';
 
 
 const Uptainer = ({id, name, location}) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
-  useEffect(() => {  //!!!!Azt hisszuk ezt tolti be a kepeket a home pagen!!!!
+  useEffect(() => {  
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
         const items = await getItemsInUptainer(id); // Assuming 'id' is defined somewhere
         const updatedData = await Promise.all(items.map(async (item) => {
           const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
+          const product = await getProductById(item.itemproduct);
+          const brand = await getBrandById(item.itemBrand);
+
           try {
             const url = await getDownloadURL(pathReference);
-            return { ...item, imageUrl: url };
+            return { ...item, imageUrl: url, productName: product.productName, brandName: brand.brandName };
           } catch (error) {
             console.log('Error while downloading image => ', error);
             return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
@@ -54,11 +57,11 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:5, marginTop:5,}}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('DetailView', { //added brand, product, url, description parameters so they are passed to detail view
+        <TouchableOpacity onPress={() => navigation.navigate('DetailView', { //added brandName, productName, url, description parameters so they are passed to detail view
           data: item.itemId, 
           itemDescription: item.itemDescription, 
-          itemBrand: item.itemBrand, 
-          itemproduct: item.itemproduct, 
+          brandName: item.brandName, 
+          productName: item.productName, 
           imageUrl: item.imageUrl,
           })}>
         <View style={styling.item}>
@@ -73,11 +76,11 @@ return (
       keyExtractor={(item) => item.id}
       style={{marginBottom:10, marginTop:5,}}
       renderItem={({ item }) => (
-        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', { //added brand, product, url, description parameters so they are passed to detail view
+        <TouchableOpacity  onPress={() => navigation.navigate('DetailView', { //added brandName, productName, url, description parameters so they are passed to detail view
           data: item.itemId, 
           itemDescription: item.itemDescription, 
-          itemBrand: item.itemBrand, 
-          itemproduct: item.itemproduct, 
+          brandName: item.brandName,  
+          productName: item.productName, 
           imageUrl: item.imageUrl,
           })}>
         <View style={styling.item}>

@@ -7,13 +7,16 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
 
-const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, itemBrand and itemproduct (itemName?) from UptainerDetails screen
+const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
   const itemDescription = details.itemDescription;
-  const itemBrand = details.itemBrand;
-  const itemproduct = details.itemproduct;
+  const brandName = details.brandName;
+  const productName = details.productName;
   const imageUrl = details.imageUrl;
-  console.log(details);
+  
+
+   
+  
   
   const handlePress = () => {
     navigation.goBack();
@@ -38,8 +41,8 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
         <View style={DetailView.infoContainer}>
 
           <View style={DetailView.leftInfo}>
-            <Text style={DetailView.product}>{itemproduct}</Text> 
-            <Text style={DetailView.brand}>{itemBrand}</Text>
+            <Text style={DetailView.product}>{productName}</Text> 
+            <Text style={DetailView.brand}>{brandName}</Text>
           </View>
 
           <View style={DetailView.rightInfo}>
