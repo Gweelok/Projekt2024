@@ -14,7 +14,7 @@ import Navigationbar from "../componets/Navigationbar";
 import { useEffect, useState } from 'react';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getItemsInUptainer, getUptainerById, getProductById, getBrandById} from '../utils/Repo';
-
+import GlobalStyle from "../styles/GlobalStyle";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -78,6 +78,7 @@ async function getUptainerImageUrl() { //get uptainerUrl from database
   
 
   return (
+    // <View style={GlobalStyle.BodyWrapper}>
     <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -158,6 +159,7 @@ async function getUptainerImageUrl() { //get uptainerUrl from database
       </ScrollView>
       <Navigationbar navigation={navigation} />
     </View>
+     // </View>
   );
 };
 
