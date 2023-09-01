@@ -19,6 +19,7 @@ import ProductDropdown from './form/ProductDropdown';
 import BrandDropdown from './form/BrandDropdown';
 import ModelDropdown from './form/ModelDropdown';
 import ConditionDropdown from "./form/ConditionDropdown";
+import { BadgeContext } from "./form/BadgeContext";
 
 const Add = ({navigation}) => {
   const {currentLanguage, setLanguage} = useLanguage();
@@ -27,6 +28,7 @@ const Add = ({navigation}) => {
   const [brand, setBrand] = useState(null);
   // you can fetch the final result of condition field through here
   const [condition, setCondition] = useState(null);
+  const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
 
   return (
     <View>
@@ -91,6 +93,7 @@ const Add = ({navigation}) => {
             onPress={() => {
               //createItemDraft("productId", "brandId", "modelId", "categoryId", "itemImage", "itemDescription", "itemCondition", "uptainerId", "userId")
               navigation.navigate("ProductSaved");
+              setBadgeCount(prevCount => prevCount + 1);
             }}
           >
             <Text style={Buttons.secondary_buttonText}>
@@ -101,7 +104,7 @@ const Add = ({navigation}) => {
           <View style={{marginBottom: 120}}/>
         </View>
       </ScrollView>
-      <Navigationbar navigation={navigation}/>
+      <Navigationbar navigation={navigation} badgeCount={badgeCount}/>
     </View>
   );
 };
