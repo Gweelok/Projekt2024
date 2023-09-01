@@ -4,13 +4,12 @@ import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 
-const ConditionDropdown = ({ onConditionSelect }) => {
+const ConditionDropdown = ({ onConditionSelect, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedCondition, setSelectedCondition] = useState(null);
+    const [selectedCondition, setSelectedCondition] = useState(data);
     const [isValidationError, setIsValidationError] = useState(false);
-    const ITEM_HEIGHT = 39; 
-
+    const ITEM_HEIGHT = 39;
   // Dummy products, replace with actual data
   const products = ["Mint Condition", "Good Condition", "Fair Condition", "Poor Condition", "Broken"];
 

@@ -15,8 +15,8 @@ import { Primarycolor1 } from "../../styles/Stylesheet";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ImageUpload = () => {
-  const [image, setImage] = useState(null);
+const ImageUpload = ({data}) => {
+  const [image, setImage] = useState(data ||null);
 
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
 
