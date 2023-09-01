@@ -7,12 +7,14 @@ import Navigationbar from "../componets/Navigationbar";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import MenuItems from "../styles/MenuItems";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const Profile = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
+        <View style={GlobalStyle.BodyWrapper}>
       <View style={profileStyles.profileIcon}>
         <Ionicons
           style={profileStyles.profileIcon}
@@ -58,6 +60,7 @@ const Profile = ({ navigation }) => {
       </View>
       <Navigationbar navigation={navigation} />
     </View>
+      </View>
   );
 };
 
