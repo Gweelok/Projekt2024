@@ -4,6 +4,7 @@ import { BoxLink } from "../styles/BoxLink";
 import * as Location from 'expo-location';
 import { View } from 'react-native';
 import Uptainer from './Uptainer';
+import GlobalStyle from "../styles/GlobalStyle";
 
 
 const SortUptainers = ({navigation}) => {
@@ -163,7 +164,8 @@ useEffect(() => {
         />
       )}
       {/* Display BoxLink component */}
-      <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo}/>
+
+      <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo} style={GlobalStyle.BodyWrapper}/>
       {renderUptainers()}
      
     </View>
