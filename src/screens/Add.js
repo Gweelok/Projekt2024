@@ -28,77 +28,77 @@ const Add = ({navigation}) => {
   const [condition, setCondition] = useState(null);
 
   return (
-      <View style={Backgroundstyle.interactive_screens}>
-        <ScrollView style={AddStyles.container}>
+    <View>
+      <ScrollView>
+        <View style={{
+          paddingTop: 50,
+          flex: 1,
+          backgroundColor: Primarycolor3,
+          marginHorizontal: 30,
+        }}>
+
           <Text style={AddStyles.header}>
             {t("UpdroppForm.title", currentLanguage)}
           </Text>
 
-          {/* replace following View with your own component.
-                1. You should not delete the styles.marginView, if you want to add new style,
-                create a new style in Stylesheet and add it after styles.marginView in the list.
-                an example: style={[styles.marginView, styles.imageUploadStyle]}
-                2. put all the components in the folder screens/form/, which is designed to
-                put all the files related to this page.
-                */}
-
-          <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+          <View style={[{marginBottom: 20}]}>
             <CustomInput showStar={false}>
-              <ImageUpload />
+              <ImageUpload/>
             </CustomInput>
+          </View>
 
-          </View>
-          <View style={[AddStyles.marginView]}>
-            <CategoryDropdown onCategorySelect={setCategory} />
-          </View>
-          <View style={[AddStyles.marginView]}>
-            <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
-          </View>
-          <View style={[AddStyles.marginView]}>
-            <BrandDropdown productSelected={!!product} onBrandSelect={setBrand} />
-          </View>
-          <View style={[AddStyles.marginView]}>
-            <ModelDropdown brandSelected={!!brand} />
-          </View>
-          <View style={[AddStyles.marginView]}>
-            <Text>Condition dropdown</Text>
-          </View>
-          <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+          <CategoryDropdown onCategorySelect={setCategory}/>
+
+          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
+
+          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand}/>
+
+          <ModelDropdown brandSelected={!!brand}/>
+
+          <ConditionDropdown onConditionSelect={setCondition}/>
+
+          <View style={ {marginBottom: 20}}>
             <Text>Description field</Text>
           </View>
-          <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+
+          <View style={{marginBottom: 20}}>
             <Text style={[AddStyles.informativeText]}>
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-          <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
+
+          <View style={{marginBottom: 20}}>
             <Pressable
-                onPress={() => {
-                  navigation.navigate("QRScanner");
-                }}
-                style={[Buttons.main_button, { borderWidth: 1, width: "100%" }]}
+              onPress={() => {
+                navigation.navigate("QRScanner");
+              }}
+              style={[Buttons.main_button, {borderWidth: 1, width: "100%"}]}
             >
               <Text style={Buttons.main_buttonText}>
                 {t("UpdroppForm.scanButton", currentLanguage)}
               </Text>
             </Pressable>
           </View>
-          <View style={[AddStyles.marginView]}>
-            <Pressable
-                style={[
-                  Buttons.secondary_button,
-                  { borderWidth: 2, width: "100%" },
-                ]}
-            >
-              <Text style={Buttons.secondary_buttonText}>
-                {t("UpdroppForm.scanLaterButton", currentLanguage)}
-              </Text>
-            </Pressable>
-          </View>
-        </ScrollView>
 
-        <Navigationbar navigation={navigation} />
-      </View>
+          <Pressable
+            style={[
+              Buttons.secondary_button,
+              {borderWidth: 2, width: "100%"},
+            ]}
+            onPress={() => {
+              navigation.navigate("ProductSaved");
+            }}
+          >
+            <Text style={Buttons.secondary_buttonText}>
+              {t("UpdroppForm.scanLaterButton", currentLanguage)}
+            </Text>
+          </Pressable>
+
+          <View style={{marginBottom: 120}}/>
+        </View>
+      </ScrollView>
+      <Navigationbar navigation={navigation}/>
+    </View>
   );
 };
 
