@@ -56,7 +56,6 @@ export default {
         label: "Beskrivelse"
     },
 
-
     CategoryDropdown: {
         selectCategory: "Kategori",
     },
@@ -65,17 +64,19 @@ export default {
     selectProduct: "Produkt",
   },
 
-  BrandDropdown: {
-    selectBrand: "Mærke",
-  },
+    BrandDropdown: {
+      "selectBrand": "Mærke"
+    },
 
-  ModelDropdown: {
-    selectModel: "Model",
-  },
+
+    ModelDropdown: {
+      selectModel: "Model"
+    },
 
   ConditionDropdown: {
     "selectCondition": "Stand"
   },
+
 
   ProfileScreen: {
     ProfilePage: "Rediger profil",
