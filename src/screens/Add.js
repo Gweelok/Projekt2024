@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
+import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React, {useState} from "react";
 import {t, useLanguage} from "../Languages/LanguageHandler";
@@ -59,7 +59,9 @@ const Add = ({navigation}) => {
           <ConditionDropdown onConditionSelect={setCondition}/>
 
           <View style={ {marginBottom: 20}}>
-            <Text>Description field</Text>
+            <CustomInput showStar={false}>
+            <DescriptionField />
+            </CustomInput>
           </View>
 
           <View style={{marginBottom: 20}}>

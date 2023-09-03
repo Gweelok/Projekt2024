@@ -1,17 +1,16 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput } from 'react-native';
 import React from 'react';
 import { useLanguage, t } from '../../Languages/LanguageHandler';
-import { AddStyles } from '../Add';
-import { descriptionFieldStyles, Backgroundstyle } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3,} from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 
 
-const DescriptionField = ({ label }) => {
+const DescriptionField = () => {
     const { currentLanguage } = useLanguage();
 
     return (
-        <View style={Backgroundstyle.interactive_screens}>
-        <Text style={descriptionFieldStyles.dscLabel}> {label} {t('DescriptionField.label', currentLanguage)}</Text>
+        <View style={{marginTop: 20}}>
+        <Text style={descriptionFieldStyles.dscLabel}> {t('DescriptionField.label', currentLanguage)}</Text>
             <CustomInput showStar={false}>
             <TextInput
                 style={descriptionFieldStyles.dscInput}
@@ -22,6 +21,26 @@ const DescriptionField = ({ label }) => {
     );
 }
 
+const descriptionFieldStyles = {
+    dscLabel: {
+        fontFamily: "space-grotesk-Medium",
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 10,
+        marginRight: 'auto'
+    },
+    dscInput: {
+        alignItems: 'center',
+        height: 100,
+        fontFamily: "space-grotesk",
+        borderWidth: 3,
+        borderColor: Primarycolor1,
+        backgroundColor: Primarycolor3,
+        padding: 10,
+    },
+};
 
 export default DescriptionField;
+
+
 
