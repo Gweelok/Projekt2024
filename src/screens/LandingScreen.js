@@ -12,6 +12,8 @@ import { firebaseAurth } from '../utils/Firebase';
 
 import Welcome from '../componets/LandingScreen/Welcome';
 import Problem from '../componets/LandingScreen/Problem';
+import GlobalStyle from "../styles/GlobalStyle";
+import globalStyle from "../styles/GlobalStyle";
 
 
 
@@ -71,22 +73,23 @@ return (
         { backButton }
         <Pressable onPress={LanguageSelector} style={styling.languageSelector}>
                 <Text style={Buttons.secondary_buttonText}>{t('LandingScreen.LanguageSelector', currentLanguage)}</Text>
-        </Pressable> 
+        </Pressable>
         </View>
  {/* add components in ```components``` in order to show them */}
-       <View style={{flex:1,padding:20}}>{components[currentSlide]}</View>
-       
-     <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
+<View style={GlobalStyle.BodyWrapper}>
+        <View style={{flex:1}}>{components[currentSlide]}</View>
+        <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
         <Text style={Buttons.main_buttonText}>{t('LandingScreen.continue', currentLanguage)}</Text>
-    </Pressable> 
-
+    </Pressable>
     <View style={styling.tabBarStyle}>
     {components.map((element,index)=><Octicons key={index} name={`dot${index===currentSlide?"-fill":""}`} size={24} color={Primarycolor1} />)}
     </View>
-        
+</View>
     </View>
-    
-    );
+
+
+
+);
 }
 
 
@@ -101,8 +104,8 @@ const styling=StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent : "center",
-        marginLeft : "auto",
-        marginRight :"auto",
+        // marginLeft : "auto",
+        // marginRight :"auto",
         marginTop:30
       },
       languageSelector:{
@@ -114,9 +117,11 @@ const styling=StyleSheet.create({
         marginLeft:"auto"
       },
       topBar:{
-        paddingLeft:15,
+        // paddingLeft:15,
         flexDirection:"row",
-        alignItems:"center"
+        alignItems:"center",
+        marginLeft: "auto",
+        marginRight: 10,
     },
     backButton: {
         backgroundColor: "#1c4b3d",

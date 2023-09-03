@@ -9,87 +9,96 @@ import {
 } from "react-native";
 import { Backgroundstyle, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React from "react";
-import { t, useLanguage } from "../Languages/LanguageHandler";
+import React, {useState} from "react";
+import {t, useLanguage} from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
+import ProductDropdown from './form/ProductDropdown';
+import BrandDropdown from './form/BrandDropdown';
+import ModelDropdown from './form/ModelDropdown';
+import ConditionDropdown from "./form/ConditionDropdown";
 
-const Add = ({ navigation }) => {
-  const { currentLanguage, setLanguage } = useLanguage();
+const Add = ({navigation}) => {
+  const {currentLanguage, setLanguage} = useLanguage();
+  const [category, setCategory] = useState(null);
+  const [product, setProduct] = useState(null);
+  const [brand, setBrand] = useState(null);
+  // you can fetch the final result of condition field through here
+  const [condition, setCondition] = useState(null);
 
   return (
-    <View style={Backgroundstyle.interactive_screens}>
-      <ScrollView style={AddStyles.container}>
-        <Text style={AddStyles.header}>
-          {t("UpdroppForm.title", currentLanguage)}
-        </Text>
+    <View>
+      <ScrollView>
+        <View style={{
+          paddingTop: 50,
+          flex: 1,
+          backgroundColor: Primarycolor3,
+          marginHorizontal: 30,
+        }}>
 
-        {/* replace following View with your own component.
-                1. You should not delete the styles.marginView, if you want to add new style,
-                create a new style in Stylesheet and add it after styles.marginView in the list.
-                an example: style={[styles.marginView, styles.imageUploadStyle]}
-                2. put all the components in the folder screens/form/, which is designed to
-                put all the files related to this page.
-                */}
-
-        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
-          <CustomInput showStar={false}>
-            <ImageUpload />
-          </CustomInput>
-        </View>
-
-        <View style={[AddStyles.marginView]}>
-          <CategoryDropdown />
-        </View>
-        <View style={[AddStyles.marginView]}>
-          <Text>Product dropdown</Text>
-        </View>
-        <View style={[AddStyles.marginView]}>
-          <Text>Brand dropdown</Text>
-        </View>
-        <View style={[AddStyles.marginView]}>
-          <Text>Model dropdown</Text>
-        </View>
-        <View style={[AddStyles.marginView]}>
-          <Text>Condition dropdown</Text>
-        </View>
-        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
-          <DescriptionField />
-        </View>
-        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
-          <Text style={[AddStyles.informativeText]}>
-            {t("UpdroppForm.informativeText", currentLanguage)}
+          <Text style={AddStyles.header}>
+            {t("UpdroppForm.title", currentLanguage)}
           </Text>
-        </View>
-        <View style={[AddStyles.marginView, { marginBottom: 20 }]}>
-          <Pressable
-            onPress={() => {
-              navigation.navigate("QRScanner");
-            }}
-            style={[Buttons.main_button, { borderWidth: 1, width: "100%" }]}
-          >
-            <Text style={Buttons.main_buttonText}>
-              {t("UpdroppForm.scanButton", currentLanguage)}
+
+          <View style={[{marginBottom: 20}]}>
+            <CustomInput showStar={false}>
+              <ImageUpload/>
+            </CustomInput>
+          </View>
+
+          <CategoryDropdown onCategorySelect={setCategory}/>
+
+          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
+
+          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand}/>
+
+          <ModelDropdown brandSelected={!!brand}/>
+
+          <ConditionDropdown onConditionSelect={setCondition}/>
+
+          <View style={ {marginBottom: 20}}>
+            <Text>Description field</Text>
+          </View>
+
+          <View style={{marginBottom: 20}}>
+            <Text style={[AddStyles.informativeText]}>
+              {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
-          </Pressable>
-        </View>
-        <View style={[AddStyles.marginView]}>
+          </View>
+
+          <View style={{marginBottom: 20}}>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("QRScanner");
+              }}
+              style={[Buttons.main_button, {borderWidth: 1, width: "100%"}]}
+            >
+              <Text style={Buttons.main_buttonText}>
+                {t("UpdroppForm.scanButton", currentLanguage)}
+              </Text>
+            </Pressable>
+          </View>
+
           <Pressable
             style={[
               Buttons.secondary_button,
-              { borderWidth: 2, width: "100%" },
+              {borderWidth: 2, width: "100%"},
             ]}
+            onPress={() => {
+              navigation.navigate("ProductSaved");
+            }}
           >
             <Text style={Buttons.secondary_buttonText}>
               {t("UpdroppForm.scanLaterButton", currentLanguage)}
             </Text>
           </Pressable>
+
+          <View style={{marginBottom: 120}}/>
         </View>
       </ScrollView>
-
-      <Navigationbar navigation={navigation} />
+      <Navigationbar navigation={navigation}/>
     </View>
   );
 };

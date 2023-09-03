@@ -12,6 +12,7 @@ export const Primarycolor1 = "#1c4b3d"; // DarkGreen
 export const Primarycolor2 = "#dae2e0"; //lightgreen
 export const Primarycolor3 = "#fff"; // White
 
+
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
   landingPageStyle: {
@@ -38,14 +39,13 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   //Headlines
-  Header: {
+  Header : {
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    marginLeft: 40,
     fontFamily: "space-grotesk-bold",
   },
-  Header_Primarycolor1: {
+  Header_Primarycolor1  : {
     color: Primarycolor1,
     fontSize: 16,
     marginTop: 10,
@@ -75,10 +75,10 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
-    fontFamily: "space-grotesk",
+    fontFamily: 'space-grotesk',
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor3,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
   //Menu items
   menuItem: {
@@ -109,18 +109,18 @@ export const styles = StyleSheet.create({
   },
 
   //Box_Link
-  boxlink: {
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 15,
-    padding: 10,
-    borderColor: Primarycolor1,
-    backgroundColor: Primarycolor2,
-    flexDirection: "row",
-    minHeight: 80,
-    position: "relative",
-  },
+  boxlink:
+      {
+        paddingBottom: 10,
+        paddingTop: 10,
+        marginBottom: 15,
+        padding: 10,
+        borderColor: Primarycolor1,
+        backgroundColor: Primarycolor2,
+        flexDirection: "row",
+        minHeight: 80,
+        position: "relative",
+      },
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
@@ -187,10 +187,13 @@ export const navStyle = {
   },
 };
 
+
+
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
   informationScreens: {
     paddingTop: 50,
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor2,
   },
@@ -213,27 +216,24 @@ export const Buttons = StyleSheet.create({
     backgroundColor: "#4765A9",
     fontSize: 22,
     padding: 10,
-    width: "70%",
+    width :'70%',
     margin: 30,
     marginLeft: "auto",
-    marginRight: "auto",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
+    marginRight:"auto",
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection : "row",
   },
   buttongoogle: {
-    backgroundColor: "#F41616",
+    backgroundColor: '#F41616',
     fontSize: 22,
     padding: 10,
-    width: "52%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 20,
-    justifyContent: "center",
+    marginBottom : 20,
+
   },
   main_button: {
     padding: 10,
-    width: "90%",
+    width :'90%',
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: Primarycolor1,
@@ -241,14 +241,15 @@ export const Buttons = StyleSheet.create({
     borderWidth: 2,
   },
   main_buttonText: {
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
-  secondary_button: {
+  secondary_button:
+  {
     padding: 7,
-    width: "90%",
+    width :'90%',
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: Primarycolor3,
@@ -257,53 +258,36 @@ export const Buttons = StyleSheet.create({
   },
   secondary_buttonText: {
     color: Primarycolor1,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
   iconContainerRight: {
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     right: 20,
     backgroundColor: Primarycolor1,
   },
-  Icon: {
-    color: Primarycolor3,
+  Icon:
+  {
+    color : Primarycolor3,
   },
 
-  //used for continue with facebook and with continue with google
+ //used for continue with facebook and with continue with google
   SocialMediabuttonText: {
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
-});
 
-//Description file
-export const descriptionFieldStyles = StyleSheet.create({
-  dscLabel: {
-    fontFamily: "space-grotesk-Medium",
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-    marginLeft: 10,
-  },
-  dscInput: {
-    ...styles.inputBox,
-      alignItems: 'center',
-      width: '100%',
-      height: 100,
-      fontFamily: "space-grotesk",
-      borderWidth: 3,
-  },
-});
-
+}
+);
 export const HeaderText =StyleSheet.create({
      Header:{
       fontSize: 30,
       marginBottom: 10,
-      marginTop: 10,
+      marginTop: 15,
       marginLeft: 30,
       fontFamily: "space-grotesk-Medium",
        color: Primarycolor1,
@@ -314,8 +298,9 @@ export const HeaderText =StyleSheet.create({
       marginTop: 10,
       marginBottom: 10,
 }
-});
 
+
+});
 // Dropdown
 export const dropdownStyles = StyleSheet.create({
   dropdownContainer: {
@@ -327,7 +312,7 @@ export const dropdownStyles = StyleSheet.create({
   },
   dropdownText: {
       ...styles.menuItem_text,
-      flex: 0, 
+      flex: 0,
       marginRight: 5,
   },
   dropdownList: {
@@ -341,3 +326,4 @@ export const dropdownStyles = StyleSheet.create({
       borderBottomColor: Primarycolor1,
   },
 });
+

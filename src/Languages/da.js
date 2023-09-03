@@ -45,18 +45,37 @@ export default {
         Header: "Mine indstillinger",
     },
 
+  MyDraftsScreen: {
+    Header: "Mine Kladder",
+    closeButtonTitle: "Slette kladde",
+    closeButtonAsking: "Er du sikker på at du vil slette denne kladde?",
+    closeButtonAnswerYes: "Ja",
+    closeButtonAnswerNo: "Nej",
+  },
     DescriptionField : {
         label: "Beskrivelse"
     },
 
-    MyDraftsScreen : {
-        Header: "Mine Kladder",
-    },
 
     CategoryDropdown: {
         selectCategory: "Kategori",
     },
 
+  ProductDropdown: {
+    selectProduct: "Produkt",
+  },
+
+  BrandDropdown: {
+    selectBrand: "Mærke",
+  },
+
+  ModelDropdown: {
+    selectModel: "Model",
+  },
+
+  ConditionDropdown: {
+    "selectCondition": "Stand"
+  },
 
   ProfileScreen: {
     ProfilePage: "Rediger profil",
@@ -74,10 +93,19 @@ export default {
       "For at updroppe genstanden skal du scanne QR-koden på Uptaineren ved aflevering. Hvis du har udfyldt oplysningerne uden at være med Uptaineren, kan du gemme en kladde ved at trykke 'Scan senere'",
     scanLaterButton: "SCAN SENERE",
     scanButton: "UPDROPP",
+    addDraft: "Tilføj kladde",
+    viewUptainers: "Se nærmeste Uptainer",
+    draftSavedtext: "Din kladde er nu gemt",
   },
 
   ProblemComponent: {
     Header: "Problemet",
     Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
+  },
+  QrScannerScreen: {
+    Scan: "Scan for at Updroppe",
+    Header: "Placér QR-koden inden for rammen for at aflæse" ,
+    Bottom: "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
+
   },
 };
