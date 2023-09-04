@@ -68,7 +68,7 @@ export default {
   },
 
   ConditionDropdown: {
-    "selectCondition": "Stand"
+    selectCondition: "Stand",
   },
 
   ProfileScreen: {
@@ -97,8 +97,11 @@ export default {
   },
   QrScannerScreen: {
     Scan: "Scan for at Updroppe",
-    Header: "Placér QR-koden inden for rammen for at aflæse" ,
-    Bottom: "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
-
+    Header: "Placér QR-koden inden for rammen for at aflæse",
+    Bottom:
+      "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
+  },
+  ProductUpdroppedAlert: {
+    productUpdropped: "Produktet er nu Updroppet",
   },
 };

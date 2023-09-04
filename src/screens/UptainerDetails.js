@@ -12,6 +12,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
 import GlobalStyle from "../styles/GlobalStyle";
+import ProductAlert from "../componets/ProductAlert";
 
 const dummyImages = [
   {
@@ -40,79 +41,83 @@ const UptainerDetails = ({ navigation, route }) => {
   console.log("item, item");
 
   return (
-      // <View style={GlobalStyle.BodyWrapper}>
+    // <View style={GlobalStyle.BodyWrapper}>
 
-        <View style={styles.container}>
-          <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ padding: 10 }}
+    <View style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ padding: 10 }}
+      >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="chevron-back" color="white" size={20} />
+        </TouchableOpacity>
+        <View>
+          <ImageBackground
+            style={styles.detailsImage}
+            source={{
+              uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+            }}
           >
             <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate("Map")}
+              style={styles.productLocation}
             >
-              <Ionicons name="chevron-back" color="white" size={20} />
+              <Text style={styles.productAddress}>
+                {item.name} /{"\n"}
+                {item.location}
+              </Text>
+              <Ionicons name="chevron-forward" color="white" size={30} />
             </TouchableOpacity>
-            <View>
-              <ImageBackground
-                  style={styles.detailsImage}
-                  source={{
-                    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-                  }}
-              >
-                <TouchableOpacity
-                    onPress={() => navigation.navigate("Map")}
-                    style={styles.productLocation}
-                >
-                  <Text style={styles.productAddress}>
-                    {item.name} /{"\n"}
-                    {item.location}
-                  </Text>
-                  <Ionicons name="chevron-forward" color="white" size={30} />
-                </TouchableOpacity>
-              </ImageBackground>
-            </View>
-            <View
-                style={{
-                  flexDirection: "row",
-                  marginTop: 50,
-                  width: windowWidth,
-                  flexWrap: "wrap",
-                }}
-            >
-              {dummyImages?.map((cur, i) => (
-                  <TouchableOpacity
-                      key={i}
-                      style={{
-                        marginLeft: 6,
-                        marginBottom: 20,
-                        alignContent: "center",
-                        alignItems: "center",
-                        alignSelf: "center",
-                        justifyContent: "center",
-                      }}
-                      onPress={() => navigation.navigate("DetailView")}
-                  >
-                    <Image
-                        style={styles.moreProductsImage}
-                        source={{
-                          uri: cur?.uri,
-                        }}
-                    />
-                    <Text style={{ fontWeight: "600" }}>Dummy Text</Text>
-                  </TouchableOpacity>
-              ))}
-            </View>
-            <View
-                style={[
-                  styles.section,
-                  { marginTop: 50, minHeight: 200, marginBottom: 100 },
-                ]}
-            />
-          </ScrollView>
-          <Navigationbar navigation={navigation} />
+          </ImageBackground>
         </View>
-      // </View>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 50,
+            width: windowWidth,
+            flexWrap: "wrap",
+          }}
+        >
+          {dummyImages?.map((cur, i) => (
+            <TouchableOpacity
+              key={i}
+              style={{
+                marginLeft: 6,
+                marginBottom: 20,
+                alignContent: "center",
+                alignItems: "center",
+                alignSelf: "center",
+                justifyContent: "center",
+              }}
+              onPress={() => navigation.navigate("DetailView")}
+            >
+              <Image
+                style={styles.moreProductsImage}
+                source={{
+                  uri: cur?.uri,
+                }}
+              />
+              <Text style={{ fontWeight: "600" }}>Dummy Text</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View
+          style={[
+            styles.section,
+            { marginTop: 50, minHeight: 200, marginBottom: 100 },
+          ]}
+        />
+      </ScrollView>
+
+      {/* This ProductAlert component is dependent on the uploading of a product to the database */}
+      {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
+      <ProductAlert />
+      <Navigationbar navigation={navigation} />
+    </View>
+    // </View>
   );
 };
 
