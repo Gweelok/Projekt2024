@@ -21,7 +21,6 @@ const windowHeight = Dimensions.get("window").height;
 
 const UptainerDetails = ({ navigation, route }) => {
   const item = route.params;
-  console.log("item:", item);
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(''); // New state for Uptainer image URL
 
@@ -38,7 +37,6 @@ const UptainerDetails = ({ navigation, route }) => {
           
           try {
             const url = await getDownloadURL(pathReference);
-            console.log(url);
             
             return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName,};
           } catch (error) {
@@ -66,7 +64,6 @@ async function getUptainerImageUrl() { //get uptainerUrl from database
     const storage = getStorage();
     try {
         const currentUptainer = await getUptainerById(item.id);
-        console.log(currentUptainer);
         const uptainerPathReference = ref(storage, currentUptainer.uptainerImage);
         return await getDownloadURL(uptainerPathReference);
         
