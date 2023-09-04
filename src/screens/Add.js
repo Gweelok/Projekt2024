@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Pressable,
+  Alert
 } from "react-native";
 import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
@@ -18,6 +19,37 @@ import ProductDropdown from './form/ProductDropdown';
 import BrandDropdown from './form/BrandDropdown';
 import ModelDropdown from './form/ModelDropdown';
 import ConditionDropdown from "./form/ConditionDropdown";
+import  { firebaseApp, firebaseDB } from '../utils/Firebase';
+
+
+const ProductDetailScreen = ({ route }) => {
+  const { productId, userId } = route.params;
+
+  const connectProductToUser = async () => {
+    try {
+      // Add a reference to the user's document
+      const userDocRef = firebaseDB.collection('users').doc(userId);
+
+      // Add the product ID to the user's document
+      await userDocRef.update({
+        products: firebaseApp.firestore.FieldValue.arrayUnion(productId),
+      });
+
+      Alert.alert('Success', 'Product connected to user successfully');
+    } catch (error) {
+      console.error('Error connecting product to user:', error);
+      Alert.alert('Error', 'Failed to connect product to user');
+    }
+  };
+
+  return (
+    <View>
+      {/* Product details */}
+      {/* Display product details here */}
+      <Button title="Connect Product to User" onPress={connectProductToUser} />
+    </View>
+  );
+};
 
 const Add = ({navigation}) => {
   const {currentLanguage, setLanguage} = useLanguage();
