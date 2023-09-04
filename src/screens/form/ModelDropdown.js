@@ -5,12 +5,13 @@ import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
 //import { models } from "../../utils/SeedData";
 
+
 const ModelDropdown = ({ onModelSelect, brandSelected }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState(null);
 
-    const models = ['test','test1'];
+    const models = ["iPhone 14", "Playstation 3", "Nokia 6600", "Samsung s22"];
 
     const handleModelSelect = (model) => {
         setSelectedModel(model);

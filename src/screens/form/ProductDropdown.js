@@ -11,7 +11,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isValidationError, setIsValidationError] = useState(false);
 
-    const products = ['Test, Test1'];
+    const products = ["Vaccuum", "Tablet", "PC", "TV", "Roomba"];
 
     const handleProductSelect = (product) => {
         setSelectedProduct(product);
