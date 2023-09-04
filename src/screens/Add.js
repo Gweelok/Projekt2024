@@ -89,6 +89,7 @@ const Add = ({navigation}) => {
               {borderWidth: 2, width: "100%"},
             ]}
             onPress={() => {
+              //createItemDraft("productId", "brandId", "modelId", "categoryId", "itemImage", "itemDescription", "itemCondition", "uptainerId", "userId")
               navigation.navigate("ProductSaved");
             }}
           >
