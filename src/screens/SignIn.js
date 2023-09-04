@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {t, useLanguage} from "../Languages/LanguageHandler"; // or any other icon library you prefer
 import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
 import { firebaseAurth } from '../utils/Firebase';
+import GlobalStyle from "../styles/GlobalStyle";
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');
@@ -44,6 +45,7 @@ const SignIn = ({ navigation }) => {
     return (
 
         <View style={Backgroundstyle.informationScreens}>
+            <View style={GlobalStyle.BodyWrapper}>
             <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
             <TextInput
                 placeholder="E-mail"
@@ -101,7 +103,7 @@ const SignIn = ({ navigation }) => {
                 <Text style={SignUpStyles.text_Tertiary}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
             </Pressable>
         </View>
-
+        </View>
     );
 }
 

@@ -11,6 +11,7 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const dummyImages = [
   {
@@ -39,78 +40,79 @@ const UptainerDetails = ({ navigation, route }) => {
   console.log("item, item");
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 10 }}
-      >
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Ionicons name="chevron-back" color="white" size={20} />
-        </TouchableOpacity>
-        <View>
-          <ImageBackground
-            style={styles.detailsImage}
-            source={{
-              uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-            }}
+      // <View style={GlobalStyle.BodyWrapper}>
+
+        <View style={styles.container}>
+          <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ padding: 10 }}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate("Map")}
-              style={styles.productLocation}
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
             >
-              <Text style={styles.productAddress}>
-                {item.name} /{"\n"}
-                {item.location}
-              </Text>
-              <Ionicons name="chevron-forward" color="white" size={30} />
+              <Ionicons name="chevron-back" color="white" size={20} />
             </TouchableOpacity>
-          </ImageBackground>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: 50,
-            width: windowWidth,
-            flexWrap: "wrap",
-            padding: 10,
-          }}
-        >
-          {dummyImages?.map((cur, i) => (
-            <TouchableOpacity
-              key={i}
-              style={{
-                marginLeft: 6,
-                marginBottom: 20,
-                marginRight: 20,
-                alignContent: "center",
-                alignItems: "center",
-                alignSelf: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => navigation.navigate("DetailView")}
-            >
-              <Image
-                style={styles.moreProductsImage}
-                source={{
-                  uri: cur?.uri,
+            <View>
+              <ImageBackground
+                  style={styles.detailsImage}
+                  source={{
+                    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+                  }}
+              >
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Map")}
+                    style={styles.productLocation}
+                >
+                  <Text style={styles.productAddress}>
+                    {item.name} /{"\n"}
+                    {item.location}
+                  </Text>
+                  <Ionicons name="chevron-forward" color="white" size={30} />
+                </TouchableOpacity>
+              </ImageBackground>
+            </View>
+            <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 50,
+                  width: windowWidth,
+                  flexWrap: "wrap",
                 }}
-              />
-              <Text style={{ fontWeight: "600" }}>Dummy Text</Text>
-            </TouchableOpacity>
-          ))}
+            >
+              {dummyImages?.map((cur, i) => (
+                  <TouchableOpacity
+                      key={i}
+                      style={{
+                        marginLeft: 6,
+                        marginBottom: 20,
+                        alignContent: "center",
+                        alignItems: "center",
+                        alignSelf: "center",
+                        justifyContent: "center",
+                      }}
+                      onPress={() => navigation.navigate("DetailView")}
+                  >
+                    <Image
+                        style={styles.moreProductsImage}
+                        source={{
+                          uri: cur?.uri,
+                        }}
+                    />
+                    <Text style={{ fontWeight: "600" }}>Dummy Text</Text>
+                  </TouchableOpacity>
+              ))}
+            </View>
+            <View
+                style={[
+                  styles.section,
+                  { marginTop: 50, minHeight: 200, marginBottom: 100 },
+                ]}
+            />
+          </ScrollView>
+          <Navigationbar navigation={navigation} />
         </View>
-        <View
-          style={[
-            styles.section,
-            { marginTop: 50, minHeight: 200, marginBottom: 100 },
-          ]}
-        />
-      </ScrollView>
-      <Navigationbar navigation={navigation} />
-    </View>
+      // </View>
   );
 };
 

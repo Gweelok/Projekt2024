@@ -41,9 +41,6 @@ const Add = ({navigation}) => {
             {t("UpdroppForm.title", currentLanguage)}
           </Text>
 
-          {/* 1. replace following View with your own component.
-              2. put all the components in the folder screens/form/, which is designed to put all the files related to this page.*/}
-
           <View style={[{marginBottom: 20}]}>
             <CustomInput showStar={false}>
               <ImageUpload/>
@@ -60,7 +57,7 @@ const Add = ({navigation}) => {
 
           <ConditionDropdown onConditionSelect={setCondition}/>
 
-          <View style={[AddStyles.marginView, {marginBottom: 20}]}>
+          <View style={ {marginBottom: 20}}>
             <Text>Description field</Text>
           </View>
 
