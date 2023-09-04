@@ -11,6 +11,7 @@ import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/
 import Navigationbar from "../componets/Navigationbar";
 import React, {useState} from "react";
 import {t, useLanguage} from "../Languages/LanguageHandler";
+import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
@@ -58,7 +59,9 @@ const Add = ({navigation}) => {
           <ConditionDropdown onConditionSelect={setCondition}/>
 
           <View style={ {marginBottom: 20}}>
-            <Text>Description field</Text>
+            <CustomInput showStar={false}>
+            <DescriptionField />
+            </CustomInput>
           </View>
 
           <View style={{marginBottom: 20}}>
@@ -103,12 +106,22 @@ const Add = ({navigation}) => {
 };
 
 const AddStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 50,
+    paddingHorizontal: 15,
+  },
   header: {
     fontFamily: "space-grotesk-bold",
     fontSize: 35,
     color: Primarycolor1,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  marginView: {
+    marginLeft: 8,
+    marginRight: 8,
   },
   informativeText: {
     fontSize: 15,
