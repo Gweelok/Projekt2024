@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
   paragraph_text: {
     fontFamily: "space-grotesk",
     color: Primarycolor1,
-    fontSize: 16, 
+    fontSize: 16,
   },
   //Input box
   inputBox: {
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom :15,
+    marginBottom: 15,
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
@@ -124,6 +124,7 @@ export const styles = StyleSheet.create({
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
 });
 
@@ -188,7 +189,7 @@ export const navStyle = {
 
 
 
-//Background styles 
+//Background styles
 export const Backgroundstyle = StyleSheet.create({
   informationScreens: {
     paddingTop: 50,
@@ -209,10 +210,10 @@ export const Backgroundstyle = StyleSheet.create({
   },
 });
 
-//Background styles 
+//Background styles
 export const Buttons = StyleSheet.create({
   buttonfb: {
-    backgroundColor: '#4765A9',
+    backgroundColor: "#4765A9",
     fontSize: 22,
     padding: 10,
     width :'70%',
@@ -234,7 +235,7 @@ export const Buttons = StyleSheet.create({
     padding: 10,
     width :'90%',
     marginLeft: "auto",
-    marginRight:"auto",
+    marginRight: "auto",
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
     borderWidth: 2,
@@ -243,13 +244,14 @@ export const Buttons = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: "space-grotesk-Medium",
   },
   secondary_button:
   {
     padding: 7,
     width :'90%',
     marginLeft: "auto",
-    marginRight:"auto",
+    marginRight: "auto",
     backgroundColor: Primarycolor3,
     borderColor: Primarycolor1,
     borderWidth: 4,
@@ -258,6 +260,7 @@ export const Buttons = StyleSheet.create({
     color: Primarycolor1,
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: "space-grotesk-Medium",
   },
   iconContainerRight: {
     position: 'absolute',
@@ -275,6 +278,7 @@ export const Buttons = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: "space-grotesk-Medium",
   },
 
 }
@@ -308,7 +312,7 @@ export const dropdownStyles = StyleSheet.create({
   },
   dropdownText: {
       ...styles.menuItem_text,
-      flex: 0, 
+      flex: 0,
       marginRight: 5,
   },
   dropdownList: {

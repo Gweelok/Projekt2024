@@ -29,19 +29,21 @@ export default {
     SignUpHint: "Har du ikke en bruger? Opret her.",
   },
 
-  CustomInput: {
-    hint: "valgfri",
-  },
 
-  NotificationsScreen: {
-    Header: "Notifikationer",
-  },
-  AccountSettingsScreen: {
-    Header: "Kontoindstillinger",
-  },
-  MySettingsScreen: {
-    Header: "Mine indstillinger",
-  },
+
+    CustomInput:{
+        hint: "valgfri",
+    },
+
+    NotificationsScreen : {
+        Header: "Notifikationer",
+    },
+    AccountSettingsScreen : {
+        Header: "Kontoindstillinger",
+    },
+    MySettingsScreen : {
+        Header: "Mine indstillinger",
+    },
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -50,26 +52,31 @@ export default {
     closeButtonAnswerYes: "Ja",
     closeButtonAnswerNo: "Nej",
   },
+    DescriptionField : {
+        label: "Beskrivelse"
+    },
 
-  CategoryDropdown: {
-    selectCategory: "Kategori",
-  },
+    CategoryDropdown: {
+        selectCategory: "Kategori",
+    },
 
   ProductDropdown: {
     selectProduct: "Produkt",
   },
 
-  BrandDropdown: {
-    selectBrand: "Mærke",
-  },
+    BrandDropdown: {
+      "selectBrand": "Mærke"
+    },
 
-  ModelDropdown: {
-    selectModel: "Model",
-  },
+
+    ModelDropdown: {
+      selectModel: "Model"
+    },
 
   ConditionDropdown: {
     selectCondition: "Stand",
   },
+
 
   ProfileScreen: {
     ProfilePage: "Rediger profil",
@@ -78,6 +85,7 @@ export default {
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
   },
+
 
   UpdroppForm: {
     title: "Updropp",

@@ -11,6 +11,7 @@ import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/
 import Navigationbar from "../componets/Navigationbar";
 import React, {useState} from "react";
 import {t, useLanguage} from "../Languages/LanguageHandler";
+import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
 import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
@@ -18,6 +19,7 @@ import ProductDropdown from './form/ProductDropdown';
 import BrandDropdown from './form/BrandDropdown';
 import ModelDropdown from './form/ModelDropdown';
 import ConditionDropdown from "./form/ConditionDropdown";
+import { BadgeContext } from "./form/BadgeContext";
 
 const Add = ({navigation}) => {
   const {currentLanguage, setLanguage} = useLanguage();
@@ -26,6 +28,7 @@ const Add = ({navigation}) => {
   const [brand, setBrand] = useState(null);
   // you can fetch the final result of condition field through here
   const [condition, setCondition] = useState(null);
+  const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
 
   return (
     <View>
@@ -58,7 +61,9 @@ const Add = ({navigation}) => {
           <ConditionDropdown onConditionSelect={setCondition}/>
 
           <View style={ {marginBottom: 20}}>
-            <Text>Description field</Text>
+            <CustomInput showStar={false}>
+            <DescriptionField />
+            </CustomInput>
           </View>
 
           <View style={{marginBottom: 20}}>
@@ -86,7 +91,9 @@ const Add = ({navigation}) => {
               {borderWidth: 2, width: "100%"},
             ]}
             onPress={() => {
+              //createItemDraft("productId", "brandId", "modelId", "categoryId", "itemImage", "itemDescription", "itemCondition", "uptainerId", "userId")
               navigation.navigate("ProductSaved");
+              setBadgeCount(prevCount => prevCount + 1);
             }}
           >
             <Text style={Buttons.secondary_buttonText}>
@@ -97,18 +104,28 @@ const Add = ({navigation}) => {
           <View style={{marginBottom: 120}}/>
         </View>
       </ScrollView>
-      <Navigationbar navigation={navigation}/>
+      <Navigationbar navigation={navigation} badgeCount={badgeCount}/>
     </View>
   );
 };
 
 const AddStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 50,
+    paddingHorizontal: 15,
+  },
   header: {
     fontFamily: "space-grotesk-bold",
     fontSize: 35,
     color: Primarycolor1,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  marginView: {
+    marginLeft: 8,
+    marginRight: 8,
   },
   informativeText: {
     fontSize: 15,
