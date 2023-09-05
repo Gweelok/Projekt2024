@@ -4,6 +4,9 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>we would like user location to see and update which Station they're closest to, for the ease of the user</string>
+    <string>This app would like to save images to your device.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app would like to save images to your device.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
