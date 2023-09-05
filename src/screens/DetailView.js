@@ -5,19 +5,29 @@ import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
+import { Primarycolor1 } from "../styles/Stylesheet";
+import GlobalStyle from "../styles/GlobalStyle";
 
-const DetailViews = ({ navigation }) => {
+const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
+  const details = route.params;
+  const itemDescription = details.itemDescription;
+  const brandName = details.brandName;
+  const productName = details.productName;
+  const imageUrl = details.imageUrl;
+  
+
+   
+  
+  
   const handlePress = () => {
     navigation.goBack();
   };
 
   const displayTextValue =
-    "This is some DUMMY_TEXT which later on will have to be replaced with actual data.";
+    itemDescription; // displays item description
   const TagButton = "Tag";
 
-  const imageUrl = "https://via.placeholder.com/200x200";
-
+  
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <TouchableOpacity onPress={handlePress}>
@@ -27,13 +37,13 @@ const DetailViews = ({ navigation }) => {
           style={DetailView.arrow}
         />
       </TouchableOpacity>
-      <View style={DetailView.container}>
-        <Image source={{ uri: imageUrl }} style={DetailView.image} />
+      <View style={DetailView.container}> 
+        <Image source={{ uri: imageUrl }} style={DetailView.image} /> 
         <View style={DetailView.infoContainer}>
 
           <View style={DetailView.leftInfo}>
-            <Text style={DetailView.product}>SomeProduct</Text>
-            <Text style={DetailView.brand}>SomeBrand</Text>
+            <Text style={DetailView.product}>{productName}</Text> 
+            <Text style={DetailView.brand}>{brandName}</Text>
           </View>
 
           <View style={DetailView.rightInfo}>
@@ -88,7 +98,7 @@ const DetailView = StyleSheet.create({
   },
   TagButton: {
     backgroundColor: Primarycolor1,
-    width: "80%",
+    width: "100%",
     height: 50,
     justifyContent: "center",
     alignItems: "center",

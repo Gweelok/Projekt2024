@@ -45,19 +45,24 @@ async function createSeedData() {
     await Promise.all(products.map(product => createProduct(product)));
 
     const brandList     = await getAllBrands();
-    const categoryList  = await getAllCategories();
-    const uptainerList  = await getAllUptainers();
-    const productList   = await getAllProducts();
+    //const categoryList  = await getAllCategories();
+    //const uptainerList  = await getAllUptainers();
+    //const productList   = await getAllProducts();
 
     console.log("Creating models");
     await Promise.all(models.map(model => createModel(model, brandList[0].brandId)));
 
-    const modelsList = await getAllModels();
+    //const modelsList = await getAllModels();
 
     console.log("Creating items");
     items.forEach((item, index) => {
         try {
-            createItem(item, categoryList, productList, brandList, uptainerList, modelsList);
+            const categoryId = categories.find(category => category.categoryName === item.categoryId);
+            const productId = products.find(product => product.productName === item.productId);
+            const brandId = brands.find(brand => brand.brandName === item.brandId);
+            const modelId = models.find(model => model.modelName === item.modelId);
+            const uptainerId = stationData.find(stationData => stationData.uptainerName === item.UptainerId);
+            createItemSeedata(item, categoryId, productId, brandId, modelId, uptainerId);
         } catch (error) {
             console.error(`Error creating item at index ${index}:`, error);
             console.log("Problematic item:", item);
@@ -111,24 +116,20 @@ export async function createModel(data, brand) {
 }
 
 
-export async function createItem(item, categories, products, brands, uptainers, models) {
-    const categoryId1 = categories.find(category => category.categoryName === item.categoryId);
-    const productId1 = products.find(product => product.productName === item.productId);
-    const brandId1 = brands.find(brand => brand.brandName === item.brandId);
-    const modelId1 = models.find(model => model.modelName === item.modelId);
-    const uptainerId1 = uptainers.find(stationData => stationData.uptainerName === item.UptainerId);
+export async function createItemSeedata(item, categories, products, brands, uptainers, models) {
+    
 
     const newItemKey = push(ref(db, paths.items)).key;
     const itemData = {
         itemId: newItemKey,
-        itemproduct: productId1.productId,
-        itemBrand: brandId1.brandId,
-        itemModel: modelId1.modelId,
-        itemCategory: categoryId1.categoryId,
+        itemproduct: products,
+        itemBrand: brands,
+        itemModel: models,
+        itemCategory: categories,
         itemImage: item.itemImage,
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
-        itemUptainer: uptainerId1.uptainerId,
+        itemUptainer: uptainers,
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
@@ -141,6 +142,25 @@ export async function createProduct(data) {
         co2Footprint: data.co2Footprint,
     };
     await writeToDatabase(paths.products + '/' + newProductKey, productData);
+}
+
+export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition, uptainerId, userId) {
+    const newItemKey = push(ref(db, paths.items)).key;
+    const itemData = {
+        itemId: newItemKey,
+        itemproduct: productId,
+        itemBrand: brandId,
+        itemModel: modelId,
+        itemCategory: categoryId,
+        itemImage: itemImage,
+        itemDescription: itemDescription,
+        itemcondition: itemCondition,
+        itemUptainer: "Draft",
+        itemUser: userId,
+        itemTaken: false,
+    };
+    await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+
 }
 
 function writeToDatabase(refPath, data) {
@@ -354,9 +374,12 @@ export async function getModelById(modelId) {
     }
 }
 export async function getItemsInUptainer(uptainerId) {
-    
+    let items = [];
     try {
-        const items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId);
+        // TODO doesnt filter out itemTaken yet should be with this when data in DB is corret
+        // items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId && item.itemTaken === false);  
+        items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId);
+        
         return items;
 
     } catch (error) {
@@ -472,9 +495,15 @@ export async function getItemById(itemId) {
             return null;
         }
     } catch (error) {
-        console.error(`Error fetching data for item with ID ${itemId}:`, error);
+        console.error(`Error fetching data for item with ID ${itemId}: `, error);
         return null;
     }
+}
+export async function getDraftFromUser(userId) {
+    const itemList = await getAllItems()
+    itemList.find(item => item.itemUser === userId && item.itemUptainer === "Draft")
+    ///not tested yet
+    return itemList
 }
 
     /********************/
@@ -569,6 +598,15 @@ export function updateItemById(itemId, newData) {
         console.error(`Error updating item with ID ${itemId}:`, error);
     }
 }
+export function updateItemfromDraft(itemId, uptainerId) {
+    const reference = ref(db, `/items/${itemId}`);
+    try {
+        update(reference, {itemUptainer: uptainerId});
+        console.log(`Item with ID ${itemId} updated successfully.`);
+    } catch (error) {
+        console.error(`Error updating item with ID ${itemId}:`, error);
+    }
+}
 
 export function updateBrandById(brandId, newData) {
     const reference = ref(db, `/brands/${brandId}`);
@@ -598,7 +636,16 @@ export function updateProductById(productId, newData) {
     } catch (error) {
         console.error(`Error updating product with ID ${productId}:`, error);
     }
-}   
+}
+export function updateItemToTaken(itemId){
+    const reference = ref(db, `/items/${itemId}`);
+    try {
+        update(reference, {itemTaken: true});
+        console.log(`Item with ID ${itemId} updated successfully.`);
+    } catch (error) {
+        console.error(`Error updating item with ID ${itemId}:`, error);
+    }
+}
 
 
 /****************/
@@ -661,6 +708,7 @@ export async function getCurrentUser() {
     return [];
   }
 }
+
 // ToDo find user data and implement it to the function
 /*
 export function updateUserData() {

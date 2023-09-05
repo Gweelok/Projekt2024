@@ -6,6 +6,7 @@ import * as Location from "expo-location";
 import SortUptainers from "../componets/sortUptainers";
 import {Feather} from "@expo/vector-icons";
 import { firebaseAurth } from '../utils/Firebase';
+import GlobalStyle from "../styles/GlobalStyle";
 
 
 const Home = ({ navigation }) => {
@@ -31,7 +32,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={Backgroundstyle.interactive_screens}>
-
+    <View style={GlobalStyle.BodyWrapper}>
 
        <View style={styles.container}>
             <TextInput
@@ -41,11 +42,12 @@ const Home = ({ navigation }) => {
                 value={search}
             />
             <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
-        </View>
+        </View> 
       <ScrollView style={{ marginBottom: 60 }}>
-        <SortUptainers navigation={navigation} />
+        <SortUptainers navigation={navigation} />    
       </ScrollView>
       <Navigationbar navigation={navigation} />
+    </View>
     </View>
   );
 };
@@ -63,9 +65,10 @@ const styles = StyleSheet.create({
     },
     container: {
         marginTop: 15,
-        width:  Dimensions.get('window').width * 0.9,
-        marginLeft : "auto",
-        marginRight:"auto",
+        width: '100%',
+        // width:  Dimensions.get('window').width * 0.9,
+        // marginLeft : "auto",
+        // marginRight:"auto",
         backgroundColor: '#fff',
         marginBottom: 15,
     },
