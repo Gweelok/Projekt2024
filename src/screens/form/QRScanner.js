@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { Text, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome"; // Import the icon library you want to use
-
+import Icon from 'react-native-vector-icons/AntDesign';
+import {styles} from "../../styles/Stylesheet";
 const QRScanner = () => {
     const navigation = useNavigation();
     const { currentLanguage } = useLanguage();
@@ -13,7 +13,7 @@ const QRScanner = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container2}>
             <View style={styles.header}>
                 {/* Header Text */}
                 <Text style={styles.headline}>
@@ -46,67 +46,5 @@ const QRScanner = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "white", // White background
-    },
-    header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingVertical: 10, // Added padding to lower the header slightly
-        paddingHorizontal: 5,
-        backgroundColor: "white", // White background
-        marginTop: 15, // Adjust the margin to lower the header
-    },
-    closeButton: {
-        backgroundColor: "darkgreen",
-        padding: 5, // Decreased padding to make the button smaller
-        borderRadius: 5,
-    },
-    closeButtonIcon: {
-        color: "white", // White text color
-    },
-    headline: {
-        fontSize: 24,
-        fontWeight: "bold",
-        color: "darkgreen", // Dark green text color
-    },
-    content: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    qrScannerFrame: {
-        width: 320,
-        height: 320,
-        justifyContent: "center",
-        alignItems: "center",
-        marginBottom: 10,
-        //  backgroundColor: "darkgreen", // Dark green background for border
-        borderRadius: 10, // Rounded corners
-        position: "relative",
-        // overflow: "hidden", // Hide overflow from dashed border
-    },
-    dashedBorder: {
-        width: "100%",
-        height: "100%",
-        borderColor: "darkgreen", // Dark green border color
-        borderWidth: 5, // Increase line thickness as needed
-        borderStyle: "dashed", // Dashed line style
-        borderRadius: 12, // Increase radius for larger dashes
-        marginTop: 20, // Adjust the space between dashes
-        borderSpacing: 90, // Adjust the space between dashes
-    },
-    instruction: {
-        fontSize: 16,
-        textAlign: "center",
-        marginHorizontal: 20,
-        marginTop: 10,
-        marginBottom: 10,
-        color: "darkgreen", // Dark green text color
-    },
-});
 
 export default QRScanner;
