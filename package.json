@@ -39,7 +39,7 @@
     "react-native-mime-types": "^2.3.0",
     "react-native-permissions": "^3.9.0",
     "react-native-qrcode-svg": "^6.2.0",
-    "react-native-reanimated": ">=3.3.0",
+    "react-native-reanimated": "^3.4.2",
     "react-native-safe-area-context": ">=4.6.4",
     "react-native-screens": ">=3.22.1",
     "react-native-share": "^9.4.0",
