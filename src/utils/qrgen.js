@@ -1,10 +1,10 @@
 import React from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import { View } from 'react-native';
-import { getItemById } from './Repo';
+import { brands } from './SeedData';
 
-const ItemQRCode = ({ itemId }) => {
-  const qrData = JSON.stringify(itemId); // Encode item data as JSON string
+const ItemQRCode = ({ brands }) => {
+  const qrData = JSON.stringify(brands); // Encode item data as JSON string
 
   return (
     <View>
