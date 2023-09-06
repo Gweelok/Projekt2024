@@ -91,6 +91,14 @@ export default {
     Header: "The Problem",
     Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",
   },
+  SolutionComponent:{
+    Header: "The solution",
+    Body:"Our Uptainers help old electronics to a new life in another citizens homes.",
+    Bottom:{
+      firstHalf:"Use Phase",
+      secondHalf:"New Use Phase",
+    }
+  },
     QrScannerScreen: {
         Scan: "Scan to Updropp",
         Header: "Place the QR-code inside the frame to read it" ,
