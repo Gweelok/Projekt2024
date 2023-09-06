@@ -1,11 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Linking } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome"; // Import the icon library you want to use
 import { RNCamera } from 'react-native-camera';
 import ItemQRCode from "../../utils/qrgen";
 import QRCode from 'react-native-qrcode-svg';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+
+
+
 
 
 
@@ -16,10 +20,7 @@ const QRScanner = () => {
     const handlePress = () => {
         navigation.goBack();
 
-    const handleQRCodeRead =({ItemQRCode}) => {
-        console.log('Scan data', ItemQRCode );
-    
-    }
+
 }
     
   
@@ -44,15 +45,8 @@ const QRScanner = () => {
 
                 {/* QR Code Scanner Frame */}
                 {/* You would integrate the QR code scanner library here */}
-                <View style={styles.qrScannerFrame}>
-                <View>
-                <RNCamera
-                    style={{ flex: 1 }}
-                    onBarCodeRead={handleQRCodeRead}
-                    captureAudio={false}
-                />
-                </View>
-
+                <View style={styles.qrScannerFrame}>                  
+               
                     <View style={styles.dashedBorder}></View>
                 </View>
 
