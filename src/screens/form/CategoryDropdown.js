@@ -8,7 +8,6 @@ const CategoryDropdown = ({ onCategorySelect }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [isValidationError, setIsValidationError] = useState(false);
 
     // Add firebase logic here, instead of dummy data
     const categories = ["Electronics", "Phones", "TV's", "Computers", "Clocks"];
@@ -16,7 +15,6 @@ const CategoryDropdown = ({ onCategorySelect }) => {
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
         setIsOpen(false);
-        setIsValidationError(false); 
         if (onCategorySelect) {
             onCategorySelect(category);
         }
@@ -28,9 +26,6 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                 style={categoryDropdownContainer.dropdownButton}
                 onPress={() => {
                     setIsOpen(!isOpen);
-                    if (!selectedCategory) {
-                        setIsValidationError(true);
-                    }
                 }}
             >
                 <Text style={categoryDropdownContainer.dropdownText}>
@@ -57,9 +52,7 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                 </View>
             )}
 
-            {/*{isValidationError && !selectedCategory && */}
-            {/*    <Text style={categoryDropdownContainer.validationErrorText}>This field is required</Text>*/}
-            {/*}*/}
+
         </View>
     );
 }

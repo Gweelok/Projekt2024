@@ -57,10 +57,6 @@ const ConditionDropdown = ({ onConditionSelect }) => {
                     ))}
                 </View>
             )}
-
-            {isValidationError && !selectedCondition &&
-                <Text style={conditionDropdownContainer.validationErrorText}>This field is required</Text>
-            }
         </View>
     );
 }

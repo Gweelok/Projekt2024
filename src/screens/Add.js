@@ -61,9 +61,7 @@ const Add = ({navigation}) => {
           <ConditionDropdown onConditionSelect={setCondition}/>
 
           <View style={ {marginBottom: 20}}>
-            <CustomInput showStar={false}>
             <DescriptionField />
-            </CustomInput>
           </View>
 
           <View style={{marginBottom: 20}}>
