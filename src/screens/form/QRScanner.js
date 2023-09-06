@@ -16,14 +16,13 @@ const QRScanner = () => {
     const handlePress = () => {
         navigation.goBack();
 
-    const handleQRCodeRead = ({ ItemQRCode }) => {
-        console.log('Scanned QR Code Data:', ItemQRCode);
-
-        }
+    const handleQRCodeRead =({ItemQRCode}) => {
+        console.log('Scan data', ItemQRCode );
     
-            
-    };
-
+    }
+}
+    
+  
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -46,12 +45,13 @@ const QRScanner = () => {
                 {/* QR Code Scanner Frame */}
                 {/* You would integrate the QR code scanner library here */}
                 <View style={styles.qrScannerFrame}>
-
+                <View>
                 <RNCamera
                     style={{ flex: 1 }}
                     onBarCodeRead={handleQRCodeRead}
                     captureAudio={false}
                 />
+                </View>
 
                     <View style={styles.dashedBorder}></View>
                 </View>
