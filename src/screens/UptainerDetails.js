@@ -20,6 +20,7 @@ import {
   getBrandById,
 } from "../utils/Repo";
 import GlobalStyle from "../styles/GlobalStyle";
+import ProductAlert from "../componets/ProductAlert";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -180,6 +181,10 @@ const UptainerDetails = ({ navigation, route }) => {
           ]}
         />
       </ScrollView>
+
+      {/* This ProductAlert component is dependent on the uploading of a product to the database */}
+      {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
+      <ProductAlert />
       <Navigationbar navigation={navigation} />
     </View>
     // </View>
