@@ -57,9 +57,9 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                 </View>
             )}
 
-            {isValidationError && !selectedCategory && 
-                <Text style={categoryDropdownContainer.validationErrorText}>This field is required</Text>
-            }
+            {/*{isValidationError && !selectedCategory && */}
+            {/*    <Text style={categoryDropdownContainer.validationErrorText}>This field is required</Text>*/}
+            {/*}*/}
         </View>
     );
 }

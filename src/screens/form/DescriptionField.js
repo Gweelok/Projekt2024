@@ -10,12 +10,14 @@ const DescriptionField = () => {
 
     return (
         <View style={{marginTop: 20}}>
-        <Text style={descriptionFieldStyles.dscLabel}> {t('DescriptionField.label', currentLanguage)}</Text>
-            <CustomInput showStar={false}>
+
+            <Text style={descriptionFieldStyles.dscLabel}> {t('DescriptionField.label', currentLanguage)}</Text>
+            <CustomInput showStar={true} optionalMarginBottom>
             <TextInput
                 style={descriptionFieldStyles.dscInput}
                 multiline={true}
-            ></TextInput>
+                clearButtonMode={"always"}
+            />
                 </CustomInput>
         </View>
     );

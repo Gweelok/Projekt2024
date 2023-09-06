@@ -62,9 +62,9 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
                 </View>
             )}
 
-            {isValidationError && !selectedProduct && 
-                <Text style={productDropdownContainer.validationErrorText}>This field is required</Text>
-            }
+            {/*{isValidationError && !selectedProduct && */}
+            {/*    <Text style={productDropdownContainer.validationErrorText}>This field is required</Text>*/}
+            {/*}*/}
         </View>
     );
 }
