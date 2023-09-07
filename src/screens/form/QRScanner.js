@@ -4,7 +4,8 @@ import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { generateQRCode } from '../../utils/QRCodeGenerator';
+import { generateQRCode } from '../../utils/QRCodeGenerator'; // Import the QR code generator
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
 const QRScanner = () => {
     const navigation = useNavigation();
@@ -37,7 +38,7 @@ const QRScanner = () => {
         setText(data);
         const scannedQRCode = generateQRCode(data); // Generate QR code for scanned data
         setScannedQRCode(scannedQRCode); // Set the generated QR code for display
-        console.log('Type: ' + type + '\nData: ' + data)
+        console.log('Type: ' + type + '\nData: ' + data);
     };
 
     // Function to handle the "Scan again?" button press
@@ -45,6 +46,24 @@ const QRScanner = () => {
         setScanned(false); // Reset the scanned state
         setText('Not yet scanned'); // Reset the scanned text
         setScannedQRCode(null); // Clear the scanned QR code
+    };
+
+    // Function to save the scanned QR code
+    const handleSaveCode = async () => {
+        if (scannedQRCode) {
+            // Convert the scanned QR code to a string
+            const qrCodeString = JSON.stringify(scannedQRCode);
+    
+            // Save the scanned QR code to AsyncStorage as a string
+            try {
+                await AsyncStorage.setItem('scannedQRCode', qrCodeString);
+                console.log('Scanned QR code saved:', qrCodeString);
+            } catch (error) {
+                console.error('Error saving scanned QR code:', error);
+            }
+        } else {
+            console.warn('No QR code scanned to save.');
+        }
     };
 
     return (
@@ -88,9 +107,15 @@ const QRScanner = () => {
                     </View>
                 )}
 
-                {scanned && (
-                    <Button title={'Scan again?'} onPress={handleScanAgain} color='darkgreen' />
-                )}
+                {/* Save Code Button */}
+                <Button title={'Save Code'} onPress={handleSaveCode} color='darkgreen' />
+
+                {/* Buttons container */}
+                <View style={styles.buttonsContainer}>
+                    {scanned && (
+                        <Button title={'Scan again?'} onPress={handleScanAgain} color='darkgreen' />
+                    )}
+                </View>
 
                 {/* Instruction for Non-Uptainers */}
                 <Text style={styles.instruction}>
@@ -164,7 +189,9 @@ const styles = StyleSheet.create({
         width: 100, // Adjust the width as needed
         height: 200, // Adjust the height as needed
         marginTop: 10,
-        
+    },
+    buttonsContainer: {
+        marginTop: 20,
         
         
     },
