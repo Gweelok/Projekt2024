@@ -78,7 +78,7 @@ return (
             <Text style={styles.maintext}>{text}</Text>
 
             {scanned && (
-                <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />
+                <Button title={'Scan again?'} onPress={() => setScanned(false)} color='darkgreen' />
             )}
 
             {/* Instruction for Non-Uptainers */}
