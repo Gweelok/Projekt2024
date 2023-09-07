@@ -79,6 +79,9 @@ export default {
   ConditionDropdown: {
     selectCondition: "Condition",
   },
+    ProductDropdown: {
+        selectProduct: "Product",
+    },
 
   NotificationsScreen: {
     Header: "Notifications",
