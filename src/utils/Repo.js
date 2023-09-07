@@ -5,6 +5,7 @@ import {
 } from "firebase/auth";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
 import { categories, brands, stationData, products, items, models } from "./SeedData";
+import { generateQRCode } from './QRCodeGenerator'; // Import the QR code generator
 
 const db = firebaseGetDB;
 
@@ -77,10 +78,10 @@ async function createSeedData() {
 
 export async function createUptainer(data) {
     const newUptainerKey = push(ref(db, paths.uptainers)).key;
+    const uptainerQRCode = generateQRCode(data.uptainerQR);
     const uptainerData = {
         uptainerId: newUptainerKey,
         uptainerName: data.uptainerName,
-        uptainerQR: data.uptainerQR,
         uptainerStreet: data.uptainerStreet,
         uptainerZip: data.uptainerZip,
         uptainerCity: data.uptainerCity,
@@ -88,6 +89,8 @@ export async function createUptainer(data) {
         uptainerDescription: data.uptainerDescription,
         uptainerLat: data.uptainerLat,
         uptainerLong: data.uptainerLong,
+        uptainerQR: uptainerQRCode, // Use the generated QR code
+        
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
@@ -120,6 +123,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
     
 
     const newItemKey = push(ref(db, paths.items)).key;
+    const itemQRCode = generateQRCode(item.itemQR);
     const itemData = {
         itemId: newItemKey,
         itemproduct: products,
@@ -130,6 +134,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
+        itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
