@@ -100,4 +100,17 @@ export default {
     Bottom:
       "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
   },
+  
+  SolutionComponent:{
+    Header: "The solution",
+    Body:"Our Uptainers help old electronics to a new life in another citizens homes.",
+    Bottom:{
+      firstHalf:"Use Phase",
+      secondHalf:"New Use Phase",
+    }
+  },
+
+  ProductUpdroppedAlert: {
+    productUpdropped: "The product has now been Updropped",
+  },
 };
