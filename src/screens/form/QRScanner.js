@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Button, Alert } from "react-native"; // Import Alert from React Native
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -53,13 +53,33 @@ const QRScanner = () => {
         if (scannedQRCode) {
             // Convert the scanned QR code to a string
             const qrCodeString = JSON.stringify(scannedQRCode);
-    
+
             // Save the scanned QR code to AsyncStorage as a string
             try {
                 await AsyncStorage.setItem('scannedQRCode', qrCodeString);
                 console.log('Scanned QR code saved:', qrCodeString);
+
+                // Show a success alert
+                Alert.alert('Success', 'QR Code saved successfully!', [
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            // Optionally, navigate or perform other actions after saving
+                        },
+                    },
+                ]);
             } catch (error) {
                 console.error('Error saving scanned QR code:', error);
+
+                // Show an error alert
+                Alert.alert('Error', 'An error occurred while saving the QR Code.', [
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            // Optionally, handle the error or retry the operation
+                        },
+                    },
+                ]);
             }
         } else {
             console.warn('No QR code scanned to save.');
@@ -192,8 +212,6 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         marginTop: 20,
-        
-        
     },
 });
 
