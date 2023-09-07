@@ -31,10 +31,7 @@ const SignUpScreen = ({ navigation }) => {
   //Check on both
   const handleSubmit = async () => {
     if (passwordCheck) {
-      await  createUser(email, password);
-      if(firebaseAurth.currentUser !== null) {
-        navigation.navigate('Homepage')
-      }
+      await createUser(email, password, navigation);
     } else {
       Alert.alert('Password');
   }

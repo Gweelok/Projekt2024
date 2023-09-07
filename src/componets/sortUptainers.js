@@ -155,7 +155,7 @@ useEffect(() => {
     
     <View>
       {/* Display the list of sorted uptainers using the Uptainer component */}
-      {sortedUptainers[0] && (
+      {uptainerList[0] && (
         <Uptainer
             key={uptainerList[0].uptainerId}
             id={uptainerList[0].uptainerId}
