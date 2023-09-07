@@ -129,7 +129,6 @@ export const styles = StyleSheet.create({
   badgeContainer: {
     position: "absolute",
     backgroundColor: Primarycolor1,
-    borderRadius: 0,
     width: 30,
     height: 30,
     justifyContent: "center",
@@ -150,14 +149,13 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 10, // Added padding to lower the header slightly
-    paddingHorizontal: 5,
+    paddingHorizontal: 20,
     backgroundColor: "white", // White background
     marginTop: 15, // Adjust the margin to lower the header
   },
   closeButton: {
     backgroundColor: Primarycolor1,
-    padding: 5, // Decreased padding to make the button smaller
-    borderRadius: 5,
+    padding: 3, // Decreased padding to make the button smaller
   },
   closeButtonIcon: {
     color: "white", // White text color
@@ -173,11 +171,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   qrScannerFrame: {
-    width: 320,
-    height: 320,
+    width: 315,
+    height: 315,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 20,
     //  backgroundColor: "darkgreen", // Dark green background for border
     borderRadius: 10, // Rounded corners
     position: "relative",
@@ -194,8 +192,8 @@ export const styles = StyleSheet.create({
     borderSpacing: 90, // Adjust the space between dashes
   },
   instruction: {
-    fontSize: 16,
-    textAlign: "center",
+    fontSize: 18,
+    //textAlign: "center",
     marginHorizontal: 20,
     marginTop: 10,
     marginBottom: 10,

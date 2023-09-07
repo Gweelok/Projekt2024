@@ -4,6 +4,7 @@ import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from 'react-native-vector-icons/AntDesign';
 import {styles} from "../../styles/Stylesheet";
+import GlobalStyle from "../../styles/GlobalStyle";
 const QRScanner = () => {
     const navigation = useNavigation();
     const { currentLanguage } = useLanguage();
@@ -13,8 +14,8 @@ const QRScanner = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container2}>
-            <View style={styles.header}>
+        <SafeAreaView style={[styles.container2]}>
+            <View style={[styles.header]}>
                 {/* Header Text */}
                 <Text style={styles.headline}>
                     {t("QrScannerScreen.Scan", currentLanguage)}
