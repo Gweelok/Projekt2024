@@ -4,9 +4,19 @@
   <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
+
+  
+
+
+
   <!-- These require runtime permissions on M -->
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-feature android:name="android.hardware.camera" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission-group.CAMERA" />
+  <uses-permission android:name="android.permission-group.MICROPHONE" />
   <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
   <!-- END OPTIONAL PERMISSIONS -->
   <application
@@ -18,7 +28,8 @@
     android:requestLegacyExternalStorage="true"    
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
-    android:name="android.permission.CAMERA"
+ 
+    
 
     
   >

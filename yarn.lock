@@ -2942,7 +2942,7 @@
   resolved "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@react-native-async-storage/async-storage@^1.18.1":
+"@react-native-async-storage/async-storage@^1.13.4", "@react-native-async-storage/async-storage@^1.18.1":
   version "1.19.2"
   resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.19.2.tgz"
   integrity sha512-7jTQKbT3BdhFHQMnfElsLeeyVqNICv72lPKbeNHnNgLP9eH3+Yk1GFMWWb7A8qRMYianSmwmx1cYofNe9H9hLQ==
@@ -6492,6 +6492,13 @@ expo-asset@~8.9.1:
     md5-file "^3.2.3"
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
+
+expo-barcode-scanner@^12.5.3:
+  version "12.5.3"
+  resolved "https://registry.npmjs.org/expo-barcode-scanner/-/expo-barcode-scanner-12.5.3.tgz"
+  integrity sha512-aIeTiOUzPdngTIhZHhM1mOMx9CPtmYEtEkK8pAgyua3NiAKgsUN8z8bpiQWuZTrxSaqkU8fG1zGOk9E4VnNwyA==
+  dependencies:
+    expo-image-loader "~4.3.0"
 
 expo-cli@>=6.3.10:
   version "6.3.11"
@@ -12015,7 +12022,7 @@ react-is@^18.0.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-native-camera@^4.2.1:
+react-native-camera@^4.2.1, react-native-camera@>=1.0.2:
   version "4.2.1"
   resolved "https://registry.npmjs.org/react-native-camera/-/react-native-camera-4.2.1.tgz"
   integrity sha512-+Vkql24PFYQfsPRznJCvPwJQfyzCnjlcww/iZ4Ej80bgivKjL9eU0IMQIXp4yi6XCrKi4voWXxIDPMupQZKeIQ==
@@ -12074,10 +12081,24 @@ react-native-mime-types@^2.3.0:
   dependencies:
     mime-db "~1.37.0"
 
+react-native-permissions@^2.0.2:
+  version "2.2.2"
+  resolved "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-2.2.2.tgz"
+  integrity sha512-ihf4shQDSX5Oo9ChQXb9kr13mmyyNem5MaEvOpr3dCjhBOBWyEMztXm9/uPK1Qg5PsNpaYLa1KpcPZDCw87LXg==
+
 react-native-permissions@^3.9.0:
   version "3.9.0"
   resolved "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-3.9.0.tgz"
   integrity sha512-Z+PAx1Dld6ckQ4YecY+HvoKysbBBBLQEhawIOpPKZ8n2Pj+jy6KogRIAL00AaE2P76dEdPh6HGkWCDfR4k2siQ==
+
+react-native-qrcode-scanner@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.npmjs.org/react-native-qrcode-scanner/-/react-native-qrcode-scanner-1.5.5.tgz"
+  integrity sha512-il79uStkFqUvofqXJQfOL30qgQyU17MUKxj7IGHv6oT2OxIY/vutTwuPPDbsivtv0yTMHP4dGx/79oys4eAuNw==
+  dependencies:
+    "@react-native-async-storage/async-storage" "^1.13.4"
+    prop-types "^15.5.10"
+    react-native-permissions "^2.0.2"
 
 react-native-qrcode-svg@^6.2.0:
   version "6.2.0"
@@ -12231,7 +12252,7 @@ react-native-vision-camera@^3.0.0, react-native-vision-camera@>=2.9.4:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.3"
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>= 0.64.3", react-native@>=0.14.0, react-native@>=0.52.0, react-native@>=0.59.0, react-native@>=0.63.3, react-native@>=0.63.4, react-native@>=0.64.1, react-native@>=0.72.1:
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>= 0.64.3", react-native@>=0.14.0, react-native@>=0.52.0, react-native@>=0.59.0, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.4, react-native@>=0.64.1, react-native@>=0.72.1:
   version "0.72.1"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.1.tgz"
   integrity sha512-O9cIVD++kt2XQl0XLCUGUgwSKr8xp+yo0ho5QK6KYWJrCFnnvQLTKL0+HD0rZUcuqFfGknHQJh3h0moQO2EMDg==
@@ -12301,7 +12322,7 @@ react-side-effect@^1.1.0:
   dependencies:
     shallowequal "^1.0.1"
 
-react@*, "react@^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^16.13.1, "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 17.0.1", react@>=15.0.0, react@>=16.13.1, react@>=16.3.0, react@>=16.8, react@>=17.0.0, react@>=17.0.1, react@>=18.2.0, react@18.2.0:
+react@*, "react@^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^16.13.1, "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 17.0.1", react@>=15.0.0, react@>=16.13.1, react@>=16.3.0, react@>=16.8, react@>=16.8.6, react@>=17.0.0, react@>=17.0.1, react@>=18.2.0, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
