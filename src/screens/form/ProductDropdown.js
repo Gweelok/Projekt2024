@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native"; 
+import { View, Text, TouchableOpacity, ScrollView } from "react-native"; 
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
@@ -10,6 +10,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isValidationError, setIsValidationError] = useState(false);
+    const ITEM_HEIGHT = 39;
 
     const products = ["Vaccuum", "Tablet", "PC", "TV", "Roomba"];
 
@@ -49,7 +50,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
             </TouchableOpacity>
 
             {isOpen && (
-                <View style={productDropdownContainer.dropdownList}>
+                <ScrollView style={[productDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {products.map(product => (
                         <TouchableOpacity 
                             key={product} 
@@ -59,7 +60,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
                             <Text style={productDropdownContainer.dropdownText}>{product}</Text>
                         </TouchableOpacity>
                     ))}
-                </View>
+                </ScrollView>
             )}
 
             {isValidationError && !selectedProduct && 

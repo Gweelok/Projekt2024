@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native"; 
+import { View, Text, TouchableOpacity, ScrollView } from "react-native"; 
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
@@ -10,6 +10,7 @@ const CategoryDropdown = ({ onCategorySelect }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isValidationError, setIsValidationError] = useState(false);
+    const ITEM_HEIGHT = 40;
 
 
 
@@ -44,8 +45,8 @@ const CategoryDropdown = ({ onCategorySelect }) => {
             </TouchableOpacity>
 
             {isOpen && (
-                <View style={categoryDropdownContainer.dropdownList}>
-                    {categories.map(category => (
+            <ScrollView style={[categoryDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
+            {categories.map(category => (
                         <TouchableOpacity 
                             key={category} 
                             onPress={() => handleCategorySelect(category)}
@@ -54,7 +55,7 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                             <Text style={categoryDropdownContainer.dropdownText}>{category}</Text>
                         </TouchableOpacity>
                     ))}
-                </View>
+            </ScrollView>
             )}
 
             {isValidationError && !selectedCategory && 
