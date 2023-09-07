@@ -66,12 +66,15 @@ import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is em
 import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
+import { BadgeContext } from "./src/screens/form/BadgeContext"
 
 console.log("start");
 const Stack = createNativeStackNavigator();
 
 // Main function that everything runs in
 export default function App() {
+  // The notification badge for drafts
+  const [badgeCount, setBadgeCount] = useState(0); 
   // hook that gets and sets test data for resting
 
   //FirebaseSeed data here:
@@ -94,6 +97,7 @@ export default function App() {
   }
   // Main navigation of all the views
   return (
+    <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
     <LanguageProvider>
       <NavigationContainer theme={navStyle}>
         <Stack.Navigator initialRouteName="Homepage">
@@ -265,6 +269,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
+    </BadgeContext.Provider>
   );
 
   //Screens

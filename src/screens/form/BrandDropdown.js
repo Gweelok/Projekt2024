@@ -3,14 +3,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
+import { brands } from "../../utils/SeedData";
 
 const BrandDropdown = ({ onBrandSelect, productSelected }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(null);
 
-    // Dummy brands, replace with actual data
-    const brands = ["Apple", "Samsung", "Dell", "Casio", "Lenovo"];
+   
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
