@@ -9,7 +9,7 @@ export default {
     LanguageSelector: "Danish",
     Header: "Welcome to Updropp",
     Intro:
-      "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
+        "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
     Littlemsg: "By pressing continue, you accept our",
     Termsandcond: "Terms and Conditions",
     continue: "Continue",
@@ -41,7 +41,7 @@ export default {
     title: "Updropp",
     uploadText: "Add image",
     informativeText:
-      "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
+        "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
     scanLaterButton: "SCAN LATER",
     scanButton: "UPDROPP",
     addDraft: "Add draft",
@@ -65,8 +65,8 @@ export default {
   },
 
   CategoryDropdown: {
-        selectCategory: "Category",
-    },
+    selectCategory: "Category",
+  },
 
   BrandDropdown: {
     selectBrand: "Brand",
@@ -79,9 +79,9 @@ export default {
   ConditionDropdown: {
     selectCondition: "Condition",
   },
-    ProductDropdown: {
-        selectProduct: "Product",
-    },
+  ProductDropdown: {
+    selectProduct: "Product",
+  },
 
   NotificationsScreen: {
     Header: "Notifications",
@@ -101,17 +101,17 @@ export default {
     Scan: "Scan to Updropp",
     Header: "Place the QR-code inside the frame to read it",
     Bottom:
-      "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
+        "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
   },
 
-  SolutionComponent:{
+  SolutionComponent: {
     Header: "The solution",
-    Body:"Our Uptainers help old electronics to a new life in another citizens homes.",
-    Bottom:{
-      firstHalf:"Use Phase",
-      secondHalf:"New Use Phase",
+    Body: "Our Uptainers help old electronics to a new life in another citizens homes.",
+    Bottom: {
+      firstHalf: "Use Phase",
+      secondHalf: "New Use Phase",
     }
   },
-
-    },
 };
+
+

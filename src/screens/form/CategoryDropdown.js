@@ -52,9 +52,7 @@ const CategoryDropdown = ({ onCategorySelect }) => {
           ))}
         </View>
       )}
-
-
-        </View>
+    </View>
     );
 }
 // Category dropdown styles

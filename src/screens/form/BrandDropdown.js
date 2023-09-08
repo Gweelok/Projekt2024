@@ -4,6 +4,7 @@ import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
 import { brands } from "../../utils/SeedData";
+import CustomInput from "../../componets/atoms/CustomInput 2";
 
 const BrandDropdown = ({ onBrandSelect, productSelected }) => {
     const { currentLanguage } = useLanguage();
@@ -21,8 +22,10 @@ const BrandDropdown = ({ onBrandSelect, productSelected }) => {
     }
 
     return (
+        <CustomInput showStar={true} optionalMarginBottom={1}>
+
         <View style={brandDropdownContainer.container}>
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={[
                   brandDropdownContainer.dropdownButton,
                   !productSelected && brandDropdownContainer.disabled
@@ -42,7 +45,6 @@ const BrandDropdown = ({ onBrandSelect, productSelected }) => {
                     size={20}
                 />
             </TouchableOpacity>
-
             {isOpen && (
                 <View style={brandDropdownContainer.dropdownList}>
                     {brands.map(brand => (
@@ -53,10 +55,12 @@ const BrandDropdown = ({ onBrandSelect, productSelected }) => {
                         >
                             <Text style={brandDropdownContainer.dropdownText}>{brand}</Text>
                         </TouchableOpacity>
-                    ))}
+
+                        ))}
                 </View>
-            )}
+                )}
         </View>
+     </CustomInput>
     );
 }
 
