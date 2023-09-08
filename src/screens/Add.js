@@ -21,6 +21,7 @@ import ModelDropdown from './form/ModelDropdown';
 import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 
+
 const Add = ({navigation}) => {
   const {currentLanguage, setLanguage} = useLanguage();
   const [category, setCategory] = useState(null);

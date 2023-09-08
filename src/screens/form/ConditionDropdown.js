@@ -44,22 +44,27 @@ const ConditionDropdown = ({ onConditionSelect }) => {
                 />
             </TouchableOpacity>
 
-            {isOpen && (
-                <View style={conditionDropdownContainer.dropdownList}>
-                    {products.map(product => (
-                        <TouchableOpacity
-                            key={product}
-                            onPress={() => handleConditionSelect(product)}
-                            style={conditionDropdownContainer.dropdownListItem}
-                        >
-                            <Text style={conditionDropdownContainer.dropdownText}>{product}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </View>
-            )}
+      {isOpen && (
+        <View style={conditionDropdownContainer.dropdownList}>
+          {products.map((product) => (
+            <TouchableOpacity
+              key={product}
+              onPress={() => handleConditionSelect(product)}
+              style={conditionDropdownContainer.dropdownListItem}>
+              <Text style={conditionDropdownContainer.dropdownText}>
+                {product}
+              </Text>
+            </TouchableOpacity>
+          ))}
         </View>
-    );
-}
+      )}
+
+      {isValidationError && !selectedCondition && (
+        <Text style={conditionDropdownContainer.validationErrorText}></Text>
+      )}
+    </View>
+  );
+};
 
 const conditionDropdownContainer = {
     container: {

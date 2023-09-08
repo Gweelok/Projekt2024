@@ -18,7 +18,7 @@ const CategoryDropdown = ({ onCategorySelect }) => {
         if (onCategorySelect) {
             onCategorySelect(category);
         }
-    }
+    };
 
     return (
         <View style={categoryDropdownContainer.container}>
@@ -38,19 +38,20 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                 />
             </TouchableOpacity>
 
-            {isOpen && (
-                <View style={categoryDropdownContainer.dropdownList}>
-                    {categories.map(category => (
-                        <TouchableOpacity 
-                            key={category} 
-                            onPress={() => handleCategorySelect(category)}
-                            style={categoryDropdownContainer.dropdownListItem}
-                        >
-                            <Text style={categoryDropdownContainer.dropdownText}>{category}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </View>
-            )}
+      {isOpen && (
+        <View style={categoryDropdownContainer.dropdownList}>
+          {categories.map((category) => (
+            <TouchableOpacity
+              key={category}
+              onPress={() => handleCategorySelect(category)}
+              style={categoryDropdownContainer.dropdownListItem}>
+              <Text style={categoryDropdownContainer.dropdownText}>
+                {category}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
 
 
         </View>
@@ -58,36 +59,36 @@ const CategoryDropdown = ({ onCategorySelect }) => {
 }
 // Category dropdown styles
 const categoryDropdownContainer = {
-    container: {
-        flexDirection: "column",
-    },
-    validationErrorText: {
-        color: "red"
-    },
-    dropdownText: {
-        fontFamily: "space-grotesk",
-        fontSize: 16,
-        marginRight: 5,
-        // flexGrow: 1,
-    },
-    dropdownButton: {
-        borderWidth: 3,
-        borderColor: Primarycolor1,
-        padding: 10,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    dropdownList: {
-        borderWidth: 3,
-        borderColor: Primarycolor1,
-    },
-    dropdownListItem: {
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: Primarycolor1,
-        backgroundColor: Primarycolor3, 
-    },
+  container: {
+    flexDirection: "column",
+  },
+  validationErrorText: {
+    color: "red",
+  },
+  dropdownText: {
+    fontFamily: "space-grotesk",
+    fontSize: 16,
+    marginRight: 5,
+    // flexGrow: 1,
+  },
+  dropdownButton: {
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  dropdownList: {
+    borderWidth: 3,
+    borderColor: Primarycolor1,
+  },
+  dropdownListItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Primarycolor1,
+    backgroundColor: Primarycolor3,
+  },
 };
 
 export default CategoryDropdown;
