@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 
 const ConditionDropdown = ({ onConditionSelect }) => {
-  const { currentLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedCondition, setSelectedCondition] = useState(null);
-  const [isValidationError, setIsValidationError] = useState(false);
+    const { currentLanguage } = useLanguage();
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedCondition, setSelectedCondition] = useState(null);
+    const [isValidationError, setIsValidationError] = useState(false);
+    const ITEM_HEIGHT = 39; 
 
   // Dummy products, replace with actual data
   const products = [
@@ -56,7 +57,23 @@ const ConditionDropdown = ({ onConditionSelect }) => {
                 {product}
               </Text>
             </TouchableOpacity>
-          ))}
+            {isOpen && (
+                <ScrollView style={[conditionDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
+                    {products.map(product => (
+                        <TouchableOpacity
+                            key={product}
+                            onPress={() => handleConditionSelect(product)}
+                            style={conditionDropdownContainer.dropdownListItem}
+                        >
+                            <Text style={conditionDropdownContainer.dropdownText}>{product}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            )}
+
+            {isValidationError && !selectedCondition &&
+                <Text style={conditionDropdownContainer.validationErrorText}>This field is required</Text>
+            }
         </View>
       )}
 

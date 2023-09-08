@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native"; 
+import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
-
 import { AntDesign } from "@expo/vector-icons";
 //import { products } from "../../utils/SeedData";
 
 const ProductDropdown = ({ onProductSelect, categorySelected }) => {
-  const { currentLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isValidationError, setIsValidationError] = useState(false);
+    const { currentLanguage } = useLanguage();
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isValidationError, setIsValidationError] = useState(false);
+    const ITEM_HEIGHT = 39;
 
   const products = ["Vaccuum", "Tablet", "PC", "TV", "Roomba"];
 
@@ -24,17 +24,47 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
   };
 
   return (
-    <View style={productDropdownContainer.container}>
-      <TouchableOpacity
-        style={[
-          productDropdownContainer.dropdownButton,
-          !categorySelected && productDropdownContainer.disabled,
-        ]}
-        onPress={() => {
-          if (categorySelected) {
-            setIsOpen(!isOpen);
-            if (!selectedProduct) {
-              setIsValidationError(true);
+        <View style={productDropdownContainer.container}>
+            <TouchableOpacity 
+                style={[
+                  productDropdownContainer.dropdownButton,
+                  !categorySelected && productDropdownContainer.disabled
+                ]}
+                onPress={() => {
+                    if (categorySelected) {
+                        setIsOpen(!isOpen);
+                        if (!selectedProduct) {
+                            setIsValidationError(true);
+                        }
+                    }
+                }}
+                disabled={!categorySelected}
+            >
+                <Text style={productDropdownContainer.dropdownText}>
+                    {selectedProduct || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
+                </Text>
+                <AntDesign 
+                    name={isOpen ? "caretup" : "caretdown"} 
+                    size={20}
+                />
+            </TouchableOpacity>
+
+            {isOpen && (
+                <ScrollView style={[productDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
+                    {products.map(product => (
+                        <TouchableOpacity 
+                            key={product} 
+                            onPress={() => handleProductSelect(product)}
+                            style={productDropdownContainer.dropdownListItem}
+                        >
+                            <Text style={productDropdownContainer.dropdownText}>{product}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            )}
+
+            {isValidationError && !selectedProduct && 
+                <Text style={productDropdownContainer.validationErrorText}>This field is required</Text>
             }
           }
         }}
