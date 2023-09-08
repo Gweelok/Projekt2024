@@ -1,32 +1,33 @@
 export default {
-    SignUpScreen : {
-        Signup: 'Sign up',
-        password : "Password",
-        passwordmsg :"min. eight characters",
-        LogInLink : "Already have an account? Log in"
-    },
-    LandingScreen : {
-        LanguageSelector : 'Danish' ,
-        Header : "Welcome to Updropp",
-        Intro : "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
-        Littlemsg:"By pressing continue, you accept our",
-        Termsandcond : "Terms and Conditions",
-        continue : "Continue",
-    },
-    LogoutConfirmation: {
-        confirmMessage: "Are you sure you want to log out?",
-        logoutButton: "Log Out",
-        cancelButton: "Cancel"
-    },
-    Profile: {
-        logout: "Log Out"
-    },
-    SignInScreen : {
-        Headline: "Sign in",
-        Button: "Sign in",
-        ForgetPwHint:"Forgot your password?",
-        SignUpHint:  "Don't have a user? Sign up.",
-    },
+  SignUpScreen: {
+    Signup: "Sign up",
+    password: "Password",
+    passwordmsg: "min. eight characters",
+    LogInLink: "Already have an account? Log in",
+  },
+  LandingScreen: {
+    LanguageSelector: "Danish",
+    Header: "Welcome to Updropp",
+    Intro:
+      "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
+    Littlemsg: "By pressing continue, you accept our",
+    Termsandcond: "Terms and Conditions",
+    continue: "Continue",
+  },
+  LogoutConfirmation: {
+    confirmMessage: "Are you sure you want to log out?",
+    logoutButton: "Log Out",
+    cancelButton: "Cancel",
+  },
+  Profile: {
+    logout: "Log Out",
+  },
+  SignInScreen: {
+    Headline: "Sign in",
+    Button: "Sign in",
+    ForgetPwHint: "Forgot your password?",
+    SignUpHint: "Don't have a user? Sign up.",
+  },
 
   ProfileScreen: {
     ProfilePage: "Edit Profile",
@@ -39,18 +40,21 @@ export default {
   UpdroppForm: {
     title: "Updropp",
     uploadText: "Add image",
-    imformativeText:
+    informativeText:
       "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
     scanLaterButton: "SCAN LATER",
     scanButton: "UPDROPP",
+    addDraft: "Add draft",
+    viewUptainers: "View Uptainers nearby",
+    draftSavedtext: "Your draft is now saved",
   },
   CustomInput: {
     hint: "optional",
   },
 
-    DescriptionField : {
-        label: "Description"
-    },
+  DescriptionField: {
+    label: "Description",
+  },
 
   MyDraftsScreen: {
     Header: "My Drafts",
@@ -60,10 +64,9 @@ export default {
     closeButtonAnswerNo: "No",
   },
 
-    CategoryDropdown: {
-        selectCategory: "Category",
-    },
-    
+  CategoryDropdown: {
+    selectCategory: "Category",
+  },
 
   BrandDropdown: {
     selectBrand: "Brand",
