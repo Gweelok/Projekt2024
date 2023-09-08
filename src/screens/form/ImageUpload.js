@@ -23,7 +23,7 @@ const ImageUpload = () => {
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       //   allowsEditing: true,
       //   aspect: [4, 3],
       quality: 1,
@@ -101,6 +101,8 @@ const UploadImageStyle = StyleSheet.create({
     position: "absolute",
     zIndex: 999,
     // top: 20,
+    opacity: 0.7,
+    backgroundColor: Primarycolor1,
   },
   uploadText: {
     marginLeft: 10,
