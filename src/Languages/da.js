@@ -29,21 +29,19 @@ export default {
     SignUpHint: "Har du ikke en bruger? Opret her.",
   },
 
+  CustomInput: {
+    hint: "valgfri",
+  },
 
-
-    CustomInput:{
-        hint: "valgfri",
-    },
-
-    NotificationsScreen : {
-        Header: "Notifikationer",
-    },
-    AccountSettingsScreen : {
-        Header: "Kontoindstillinger",
-    },
-    MySettingsScreen : {
-        Header: "Mine indstillinger",
-    },
+  NotificationsScreen: {
+    Header: "Notifikationer",
+  },
+  AccountSettingsScreen: {
+    Header: "Kontoindstillinger",
+  },
+  MySettingsScreen: {
+    Header: "Mine indstillinger",
+  },
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -52,31 +50,29 @@ export default {
     closeButtonAnswerYes: "Ja",
     closeButtonAnswerNo: "Nej",
   },
-    DescriptionField : {
-        label: "Beskrivelse"
-    },
+  DescriptionField: {
+    label: "Beskrivelse",
+  },
 
-    CategoryDropdown: {
-        selectCategory: "Kategori",
-    },
+  CategoryDropdown: {
+    selectCategory: "Kategori",
+  },
 
   ProductDropdown: {
     selectProduct: "Produkt",
   },
 
-    BrandDropdown: {
-      "selectBrand": "Mærke"
-    },
+  BrandDropdown: {
+    selectBrand: "Mærke",
+  },
 
-
-    ModelDropdown: {
-      selectModel: "Model"
-    },
+  ModelDropdown: {
+    selectModel: "Model",
+  },
 
   ConditionDropdown: {
     selectCondition: "Stand",
   },
-
 
   ProfileScreen: {
     ProfilePage: "Rediger profil",
@@ -85,7 +81,6 @@ export default {
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
   },
-
 
   UpdroppForm: {
     title: "Updropp",
@@ -103,13 +98,13 @@ export default {
     Header: "Problemet",
     Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
   },
-  SolutionComponent:{
+  SolutionComponent: {
     Header: "Løsningen",
-    Body:"Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem.",
-    Bottom:{
-      firstHalf:"Brugsfase",
-      secondHalf:"Ny Brugsfase",
-    }
+    Body: "Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem.",
+    Bottom: {
+      firstHalf: "Brugsfase",
+      secondHalf: "Ny Brugsfase",
+    },
   },
   QrScannerScreen: {
     Scan: "Scan for at Updroppe",
@@ -120,6 +115,13 @@ export default {
   ProductUpdroppedAlert: {
     productUpdropped: "Produktet er nu Updroppet",
   },
-
-
+  SolutionTimeline: {
+    Header: "Løsningen",
+    Body: "På den måde forlænger vi elektronikkens levetid og styrker den cirkulære økonomi",
+    Bottom: {
+      first: "0 ar",
+      second: "5 ar",
+      third: "10 ar",
+    },
+  },
 };

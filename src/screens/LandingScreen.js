@@ -29,6 +29,7 @@ import CompletePlantSvg from "../componets/svg-components/CompletePlantSvg";
 import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhoneText";
 import GlobalStyle from "../styles/GlobalStyle";
 import globalStyle from "../styles/GlobalStyle";
+import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language
@@ -61,6 +62,11 @@ const LandingScreen = ({ navigation }) => {
       top: t("SolutionComponent.Header", currentLanguage),
       image: <CompleteHousePhoneText />,
       bottom: t("SolutionComponent.Body", currentLanguage),
+    },
+    {
+      top: t("SolutionTimeline.Header", currentLanguage),
+      image: <CompleteTimelineSvg />,
+      bottom: t("SolutionTimeline.Body", currentLanguage),
     },
   ];
 
