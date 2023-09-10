@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native"; 
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 //import { products } from "../../utils/SeedData";
 
 const ProductDropdown = ({ onProductSelect, categorySelected }) => {
-    const { currentLanguage } = useLanguage();
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null);
-    const [isValidationError, setIsValidationError] = useState(false);
-    const ITEM_HEIGHT = 39;
+  const { currentLanguage } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isValidationError, setIsValidationError] = useState(false);
+  const ITEM_HEIGHT = 39;
 
   const products = ["Vaccuum", "Tablet", "PC", "TV", "Roomba"];
 
@@ -24,8 +24,8 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
   };
 
   return (
-        <View style={productDropdownContainer.container}>
-            <TouchableOpacity 
+    <View style={productDropdownContainer.container}>
+      {/* <TouchableOpacity 
                 style={[
                   productDropdownContainer.dropdownButton,
                   !categorySelected && productDropdownContainer.disabled
@@ -95,7 +95,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
 
       {isValidationError && !selectedProduct && (
         <Text style={productDropdownContainer.validationErrorText}></Text>
-      )}
+      )} */}
     </View>
   );
 };

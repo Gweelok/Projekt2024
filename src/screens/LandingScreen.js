@@ -151,11 +151,10 @@ const styling = StyleSheet.create({
     marginLeft: "auto",
   },
   topBar: {
-    // paddingLeft:15,
     flexDirection: "row",
-    alignItems: "center",
-    marginLeft: "auto",
-    marginRight: 10,
+    alignSelf: "stretch",
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
   backButton: {
     backgroundColor: "#1c4b3d",
