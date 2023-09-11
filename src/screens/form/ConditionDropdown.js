@@ -12,13 +12,7 @@ const ConditionDropdown = ({ onConditionSelect }) => {
     const ITEM_HEIGHT = 39; 
 
   // Dummy products, replace with actual data
-  const products = [
-    "Mint Condition",
-    "Good Condition",
-    "Fair Condition",
-    "Poor Condition",
-    "Broken",
-  ];
+  const products = ["Mint Condition", "Good Condition", "Fair Condition", "Poor Condition", "Broken"];
 
   const handleConditionSelect = (condition) => {
     setSelectedCondition(condition);
@@ -47,17 +41,6 @@ const ConditionDropdown = ({ onConditionSelect }) => {
       </TouchableOpacity>
 
       {isOpen && (
-        <View style={conditionDropdownContainer.dropdownList}>
-          {products.map((product) => (
-            <TouchableOpacity
-              key={product}
-              onPress={() => handleConditionSelect(product)}
-              style={conditionDropdownContainer.dropdownListItem}>
-              <Text style={conditionDropdownContainer.dropdownText}>
-                {product}
-              </Text>
-            </TouchableOpacity>
-            {isOpen && (
                 <ScrollView style={[conditionDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {products.map(product => (
                         <TouchableOpacity
@@ -70,12 +53,6 @@ const ConditionDropdown = ({ onConditionSelect }) => {
                     ))}
                 </ScrollView>
             )}
-
-            {isValidationError && !selectedCondition &&
-                <Text style={conditionDropdownContainer.validationErrorText}>This field is required</Text>
-            }
-        </View>
-      )}
 
       {isValidationError && !selectedCondition && (
         <Text style={conditionDropdownContainer.validationErrorText}></Text>
