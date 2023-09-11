@@ -11,108 +11,183 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
+import { useEffect, useState } from "react";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import {
+  getItemsInUptainer,
+  getUptainerById,
+  getProductById,
+  getBrandById,
+} from "../utils/Repo";
 import GlobalStyle from "../styles/GlobalStyle";
-
-const dummyImages = [
-  {
-    id: 1,
-    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-  },
-  {
-    id: 2,
-    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-  },
-  {
-    id: 3,
-    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-  },
-  {
-    id: 4,
-    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-  },
-];
+import ProductAlert from "../componets/ProductAlert";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const UptainerDetails = ({ navigation, route }) => {
   const item = route.params;
-  console.log("item, item");
+  const [data, setData] = useState([]);
+  const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
+
+  useEffect(() => {
+    //Fetches items in the uptainer
+    const fetchItemList = async () => {
+      const storage = getStorage();
+      try {
+        const items = await getItemsInUptainer(item.id); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
+        const updatedData = await Promise.all(
+          items.map(async (item) => {
+            const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
+            const product = await getProductById(item.itemproduct);
+            const brand = await getBrandById(item.itemBrand);
+
+            try {
+              const url = await getDownloadURL(pathReference);
+
+              return {
+                ...item,
+                imageUrl: url,
+                productName: product.productName,
+                brandName: brand.brandName,
+              };
+            } catch (error) {
+              console.log("Error while downloading image => ", error);
+              return {
+                ...item,
+                imageUrl: "https://via.placeholder.com/200x200",
+              };
+            }
+          })
+        );
+        setData(updatedData); // updates data property with the fetched data from db
+      } catch (error) {
+        console.log("Error while fetching items => ", error);
+      }
+    };
+    fetchItemList();
+  }, []);
+
+  useEffect(() => {
+    const fetchUptainerImage = async () => {
+      const imageUrl = await getUptainerImageUrl();
+      setUptainerImageUrl(imageUrl);
+    };
+    fetchUptainerImage();
+  }, []);
+
+  async function getUptainerImageUrl() {
+    //get uptainerUrl from database
+    const storage = getStorage();
+    try {
+      const currentUptainer = await getUptainerById(item.id);
+      const uptainerPathReference = ref(storage, currentUptainer.uptainerImage);
+      return await getDownloadURL(uptainerPathReference);
+    } catch (error) {
+      console.log("Error while getting Uptainer Image URL => ", error);
+      return "https://via.placeholder.com/200x200";
+    }
+  }
 
   return (
-      // <View style={GlobalStyle.BodyWrapper}>
-
-        <View style={styles.container}>
-          <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ padding: 10 }}
+    // <View style={GlobalStyle.BodyWrapper}>
+    <View style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ padding: 10 }}
+      >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="chevron-back" color="white" size={20} />
+        </TouchableOpacity>
+        <View>
+          <ImageBackground
+            style={styles.detailsImage}
+            source={{
+              uri: uptainerImageUrl, // current uptainer main pic
+            }}
           >
             <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate("Map")}
+              style={styles.productLocation}
             >
-              <Ionicons name="chevron-back" color="white" size={20} />
+              <Text style={styles.productAddress}>
+                {item.name} /{"\n"}
+                {item.location}
+              </Text>
+              <Ionicons name="chevron-forward" color="white" size={30} />
             </TouchableOpacity>
-            <View>
-              <ImageBackground
-                  style={styles.detailsImage}
-                  source={{
-                    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-                  }}
-              >
-                <TouchableOpacity
-                    onPress={() => navigation.navigate("Map")}
-                    style={styles.productLocation}
-                >
-                  <Text style={styles.productAddress}>
-                    {item.name} /{"\n"}
-                    {item.location}
-                  </Text>
-                  <Ionicons name="chevron-forward" color="white" size={30} />
-                </TouchableOpacity>
-              </ImageBackground>
-            </View>
-            <View
-                style={{
-                  flexDirection: "row",
-                  marginTop: 50,
-                  width: windowWidth,
-                  flexWrap: "wrap",
-                }}
-            >
-              {dummyImages?.map((cur, i) => (
-                  <TouchableOpacity
-                      key={i}
-                      style={{
-                        marginLeft: 6,
-                        marginBottom: 20,
-                        alignContent: "center",
-                        alignItems: "center",
-                        alignSelf: "center",
-                        justifyContent: "center",
-                      }}
-                      onPress={() => navigation.navigate("DetailView")}
-                  >
-                    <Image
-                        style={styles.moreProductsImage}
-                        source={{
-                          uri: cur?.uri,
-                        }}
-                    />
-                    <Text style={{ fontWeight: "600" }}>Dummy Text</Text>
-                  </TouchableOpacity>
-              ))}
-            </View>
-            <View
-                style={[
-                  styles.section,
-                  { marginTop: 50, minHeight: 200, marginBottom: 100 },
-                ]}
-            />
-          </ScrollView>
-          <Navigationbar navigation={navigation} />
+          </ImageBackground>
         </View>
-      // </View>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 50,
+            width: windowWidth,
+            flexWrap: "wrap",
+            padding: 10,
+          }}
+        >
+          {data?.map(
+            (
+              cur,
+              i // loads item images contained in the uptainer to the screen
+            ) => (
+              <TouchableOpacity
+                key={i}
+                style={{
+                  marginLeft: 6,
+                  marginBottom: 20,
+                  marginRight: 20,
+                  alignContent: "center",
+                  alignItems: "center",
+                  alignSelf: "center",
+                  justifyContent: "center",
+                }}
+                onPress={() =>
+                  navigation.navigate("DetailView", {
+                    itemDescription: cur.itemDescription,
+                    imageUrl: cur.imageUrl,
+                    productName: cur.productName,
+                    brandName: cur.brandName,
+                  })
+                }
+              >
+                <Image
+                  style={styles.moreProductsImage}
+                  source={{
+                    uri: cur?.imageUrl,
+                  }}
+                />
+                <Text
+                  style={{
+                    fontWeight: "600",
+                    width: windowWidth / 2.7,
+                    textAlign: "center",
+                  }}
+                >
+                  {cur.productName}{" "}
+                </Text>
+              </TouchableOpacity>
+            )
+          )}
+        </View>
+        <View
+          style={[
+            styles.section,
+            { marginTop: 50, minHeight: 200, marginBottom: 100 },
+          ]}
+        />
+      </ScrollView>
+
+      {/* This ProductAlert component is dependent on the uploading of a product to the database */}
+      {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
+      <ProductAlert />
+      <Navigationbar navigation={navigation} />
+    </View>
+    // </View>
   );
 };
 

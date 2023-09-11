@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ActivityIndicator,} from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome"; // Import the icon library you want to use
@@ -7,10 +7,21 @@ import Icon from "react-native-vector-icons/FontAwesome"; // Import the icon lib
 const QRScanner = () => {
     const navigation = useNavigation();
     const { currentLanguage } = useLanguage();
+    const [loading, setLoading] = useState(false);
 
     const handlePress = () => {
         navigation.goBack();
     };
+
+    // Placeholder function to simulate scanning a QR code.
+  const handleQRScan = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("UptainerDetails", { itemData: "Sample Scanned Data" }); 
+    }, 3000); // waits for 3 seconds
+  };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,17 +44,21 @@ const QRScanner = () => {
 
                 {/* QR Code Scanner Frame */}
                 {/* You would integrate the QR code scanner library here */}
-                <View style={styles.qrScannerFrame}>
-                    <View style={styles.dashedBorder}></View>
-                </View>
-
-                {/* Instruction for Non-Uptainers */}
-                <Text style={styles.instruction}>
-                    {t("QrScannerScreen.Bottom", currentLanguage)}
-                </Text>
-            </View>
-        </SafeAreaView>
-    );
+                {loading ? (
+                <ActivityIndicator size="large" color="darkgreen" />
+                 ) : (
+                    <>
+                        <TouchableOpacity style={styles.qrScannerFrame} onPress={handleQRScan}>
+                        <View style={styles.dashedBorder}></View>
+                        </TouchableOpacity>
+                        <Text style={styles.instruction}>
+                        {t("QrScannerScreen.Bottom", currentLanguage)}
+                        </Text>
+                    </>
+                )}
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
