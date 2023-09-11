@@ -28,10 +28,7 @@ const SignIn = ({ navigation }) => {
     //Check on both
     const handleSubmit = () => {
         if (passwordCheck) {
-            signInUser(email, password);
-            if(firebaseAurth.currentUser !== null) {
-                navigation.navigate('Homepage')
-            }
+            signInUser(email, password, navigation);
         } else {
             Alert.alert('Password');
         }
