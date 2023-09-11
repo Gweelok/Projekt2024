@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Button, Alert } from "react-native"; // Import Alert from React Native
+
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -10,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 const QRScanner = () => {
     const navigation = useNavigation();
     const { currentLanguage } = useLanguage();
+    const [loading, setLoading] = useState(false);
 
     const handlePress = () => {
         navigation.goBack();
@@ -86,6 +88,16 @@ const QRScanner = () => {
         }
     };
 
+    // Placeholder function to simulate scanning a QR code.
+  const handleQRScan = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("UptainerDetails", { itemData: "Sample Scanned Data" }); 
+    }, 3000); // waits for 3 seconds
+  };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -144,6 +156,7 @@ const QRScanner = () => {
             </View>
         </SafeAreaView>
     );
+
 };
 
 const styles = StyleSheet.create({

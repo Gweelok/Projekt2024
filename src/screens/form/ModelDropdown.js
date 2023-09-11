@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native"; 
+import { View, Text, TouchableOpacity, ScrollView } from "react-native"; 
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons"; 
@@ -10,6 +10,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState(null);
+    const ITEM_HEIGHT = 31;
 
     const models = ["iPhone 14", "Playstation 3", "Nokia 6600", "Samsung s22"];
 
@@ -45,7 +46,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected }) => {
             </TouchableOpacity>
 
             {isOpen && (
-                <View style={modelDropdownContainer.dropdownList}>
+                <ScrollView style={[modelDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {models.map(model => (
                         <TouchableOpacity 
                             key={model} 
@@ -55,7 +56,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected }) => {
                             <Text style={modelDropdownContainer.dropdownText}>{model}</Text>
                         </TouchableOpacity>
                     ))}
-                </View>
+                </ScrollView>
             )}
         </View>
     );
