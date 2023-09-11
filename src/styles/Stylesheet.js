@@ -5,6 +5,7 @@
 
 import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
+import {inline} from "react-native-web/src/exports/StyleSheet/compiler";
 
 //		backgroundColor: '#fff',
 //Main colors
@@ -171,32 +172,35 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   qrScannerFrame: {
-    width: 315,
-    height: 315,
+    width: 250,
+    height: 400,
     justifyContent: "center",
-    alignItems: "center",
+   // alignItems: "center",
     marginBottom: 20,
     //  backgroundColor: "darkgreen", // Dark green background for border
     borderRadius: 10, // Rounded corners
     position: "relative",
-    // overflow: "hidden", // Hide overflow from dashed border
+   //  overflow: "hidden", // Hide overflow from dashed border
   },
   dashedBorder: {
     width: "100%",
     height: "100%",
-    borderColor: Primarycolor1, // Dark green border color
+    borderColor: "white", // Dark green border color
     borderWidth: 5, // Increase line thickness as needed
     borderStyle: "dashed", // Dashed line style
     borderRadius: 12, // Increase radius for larger dashes
     marginTop: 20, // Adjust the space between dashes
     borderSpacing: 90, // Adjust the space between dashes
   },
+  buttonsContainer: {
+    display: "flex",
+  },
   instruction: {
     fontSize: 18,
     //textAlign: "center",
     marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 5,
     color: Primarycolor1, // Dark green text color
   },
 });
