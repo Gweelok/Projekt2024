@@ -48,8 +48,8 @@ return (
           })
         }
       >
-        <Text style={styles.menuItem_text}> {name}</Text>
-        <Text style={{ fontSize: 18, color: Primarycolor1 }}> {location}</Text>
+        <Text style={styles.menuItem_text}>{name}</Text>
+        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{location}</Text>
       </TouchableOpacity>
         <FlatList
       horizontal={true}
