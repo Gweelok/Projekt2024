@@ -33,12 +33,12 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
 
         <Image source={{ uri: props.image }} style={styles.draftImage}/>
         <View style={styles.draftContent}>
-          <Text style={styles.category}>{props.category}</Text>
-          <View style={{flexDirection: "row"}}>
-            <Text style={styles.brand}>{props.brand}</Text>
-            {props.model && (
-              <Text style={[styles.brand, {marginLeft: 0}]}>
-                {","} {props.model}
+          <Text style={styles.category}>{props.categoryName}</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.brand}>{props.brandName}</Text>
+            {props.modelName && (
+              <Text style={[styles.brand, { marginLeft: 0 }]}>
+                {","} {props.modelName}
               </Text>
             )}
           </View>
@@ -48,9 +48,9 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
               {fontStyle: "normal", marginBottom: 10, fontWeight: "700"},
             ]}
           >
-            {props.condition}
+            {props.itemcondition}
           </Text>
-          <Text style={styles.description}>{props.description}</Text>
+          <Text style={styles.description}>{props.itemDescription}</Text>
         </View>
       </TouchableOpacity>
       <View
