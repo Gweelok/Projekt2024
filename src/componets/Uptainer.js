@@ -57,9 +57,11 @@ const Uptainer = ({id, name, location}) => {
             name: name,
             location: location,
           })
-        }>
-        <Text style={styles.menuItem_text}> {name}</Text>
-        <Text style={{ fontSize: 18, color: Primarycolor1 }}> {location}</Text>
+        }
+      >
+        <Text style={styles.menuItem_text}>{name}</Text>
+        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{location}</Text>
+
       </TouchableOpacity>
 
       <FlatList
