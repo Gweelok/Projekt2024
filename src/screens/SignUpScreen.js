@@ -29,10 +29,6 @@ const SignUpScreen = ({ navigation }) => {
   const handleSubmit = () => {
     if (passwordCheck) {
       navigation.navigate("TermsAndConditions", { email, password });
-      // await  createUser(email, password);
-      // if(firebaseAurth.currentUser !== null) {
-      //   navigation.navigate('Homepage')
-      // }
     } else {
       Alert.alert("Password");
   }

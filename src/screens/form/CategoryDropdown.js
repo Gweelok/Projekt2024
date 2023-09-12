@@ -56,21 +56,6 @@ const CategoryDropdown = ({ onCategorySelect }) => {
             </ScrollView>
             )}
 
-      {isOpen && (
-        <View style={categoryDropdownContainer.dropdownList}>
-          {categories.map((category) => (
-            <TouchableOpacity
-              key={category}
-              onPress={() => handleCategorySelect(category)}
-              style={categoryDropdownContainer.dropdownListItem}>
-              <Text style={categoryDropdownContainer.dropdownText}>
-                {category}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      )}
-
       {isValidationError && !selectedCategory && (
         <Text style={categoryDropdownContainer.validationErrorText}></Text>
       )}

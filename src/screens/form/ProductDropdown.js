@@ -62,37 +62,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
                     ))}
                 </ScrollView>
             )}
-
-            {isValidationError && !selectedProduct && 
-                <Text style={productDropdownContainer.validationErrorText}>This field is required</Text>
-            }
-          }
-        }}
-        disabled={!categorySelected}>
-        <Text style={productDropdownContainer.dropdownText}>
-          {selectedProduct ||
-            (!categorySelected
-              ? t("ProductDropdown.selectProduct", currentLanguage)
-              : "Product")}
-        </Text>
-        <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
-      </TouchableOpacity>
-
-      {isOpen && (
-        <View style={productDropdownContainer.dropdownList}>
-          {products.map((product) => (
-            <TouchableOpacity
-              key={product}
-              onPress={() => handleProductSelect(product)}
-              style={productDropdownContainer.dropdownListItem}>
-              <Text style={productDropdownContainer.dropdownText}>
-                {product}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      )}
-
+            
       {isValidationError && !selectedProduct && (
         <Text style={productDropdownContainer.validationErrorText}></Text>
       )} */}

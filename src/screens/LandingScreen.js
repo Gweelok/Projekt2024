@@ -35,6 +35,7 @@ const LandingScreen = ({ navigation }) => {
   // for multi language
   const { currentLanguage, setLanguage } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const[userLogged,setUserLogged]= useState(false)
   const backButton =
     currentSlide === 0 ? null : (
       <TouchableOpacity
@@ -79,14 +80,16 @@ const LandingScreen = ({ navigation }) => {
   }
 
   //Fn to navigate to the Signup Screern
-  const SignUp = () => {
-    if (firebaseAurth.currentUser !== null) {
-      console.log("User is logged in");
-      navigation.navigate("Homepage");
+  onAuthStateChanged(firebaseAurth, async (user) => {
+    if (user) {
+      setUserLogged(true)
     } else {
-      navigation.navigate("SignUp");
+      setUserLogged(false)
     }
-  };
+  });
+  if(userLogged){
+    navigation.navigate('Homepage')
+  }
 
   //Fn to change to langauge and display correct language
 
