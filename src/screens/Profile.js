@@ -8,10 +8,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import MenuItems from "../styles/MenuItems";
 import GlobalStyle from "../styles/GlobalStyle";
+import {BadgeContext} from "./form/BadgeContext";
 
 const Profile = ({ navigation }) => {
-  const { currentLanguage } = useLanguage();
-
+    const { currentLanguage } = useLanguage();
+    const { badgeCount } = React.useContext(BadgeContext);
   return (
     <View style={Backgroundstyle.interactive_screens}>
         <View style={GlobalStyle.BodyWrapper}>
@@ -34,12 +35,13 @@ const Profile = ({ navigation }) => {
           onPress={() => navigation.navigate("MySettings")}
         />
       </View>
-      <View>
-        <MenuItems
-          msg={t("ProfileScreen.MyDrafts", currentLanguage)}
-          onPress={() => navigation.navigate("MyDrafts")}
-        />
-      </View>
+            <View>
+                <MenuItems
+                    msg={t("ProfileScreen.MyDrafts", currentLanguage)}
+                    badge={badgeCount > 0 ? badgeCount : null} // Pass the badge as a prop
+                    onPress={() => navigation.navigate("MyDrafts")}
+                />
+            </View>
       <View>
         <MenuItems
           msg={t("ProfileScreen.DataPolicy", currentLanguage)}
