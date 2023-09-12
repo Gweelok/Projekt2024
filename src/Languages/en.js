@@ -64,9 +64,10 @@ export default {
     closeButtonAnswerNo: "No",
   },
 
-  CategoryDropdown: {
-    selectCategory: "Category",
-  },
+    CategoryDropdown: {
+        selectCategory: "Category",
+    },
+
 
   BrandDropdown: {
     selectBrand: "Brand",
@@ -100,10 +101,16 @@ export default {
   QrScannerScreen: {
     Scan: "Scan to Updropp",
     Header: "Place the QR-code inside the frame to read it",
-    Bottom:
-      "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
+    Bottom: "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
+    Error: "Error",
+    ErrorMsg1: "An error occurred while saving the QR Code.",
+    ScanAgain: "Scan Again?",
+    SaveCode: "Updropp",
+    Success: "Success",
+    QRCodeSavedSuccessfully: "QR Code saved successfully.",
+    OK: "OK",
   },
-  
+
   SolutionComponent:{
     Header: "The solution",
     Body:"Our Uptainers help old electronics to a new life in another citizens homes.",

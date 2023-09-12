@@ -7,10 +7,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import MenuItems from "../styles/MenuItems";
 import GlobalStyle from "../styles/GlobalStyle";
+import {BadgeContext} from "./form/BadgeContext";
 
 const Profile = ({ navigation }) => {
-  const { currentLanguage } = useLanguage();
-
+    const { currentLanguage } = useLanguage();
+    const { badgeCount } = React.useContext(BadgeContext);
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollView

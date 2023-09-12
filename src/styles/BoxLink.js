@@ -11,7 +11,7 @@ export const BoxLink = ({msg , onPress}) => {
         <Pressable onPress={onPress}>
     <View style={styles.boxlink}>
         <View style={GlobalStyle.BodyWrapper}>
-        <Text style={styles.menuItem_text}> {msg}  </Text>
+        <Text style={styles.menuItem_text}>{msg}  </Text>
         </View>
             <View style={styles.Icon_container}>
                 <AntDesign name="right" size={30} style={styles.menuItem_arrow}/>
