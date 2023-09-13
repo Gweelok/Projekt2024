@@ -715,40 +715,65 @@ export async function getCurrentUser() {
 }
 
 // ToDo find user data and implement it to the function
-/*
-export function updateUserData() {
-    const currentUser = GetCurrentUser();
-    if (currentUser.length > 0) {
-      const { id } = currentUser[0];
-      updateProfile(id, {
-        displayName: "Jane Q. User",
-        photoURL: "https://example.com/jane-q-user/profile.jpg",
-      })
-        .then(() => {
-          // Profile updated!
-          // ...
-        })
-        .catch((error) => {
-          // An error occurred
-          console.error("Error updating user data:", error);
-          // ...
-        });
+
+export async function updateAuthData(email, password, phoneNumber) {
+    const user = firebaseAurth.currentUser;
+  
+    if (email && email !== user.email) {
+      await user.updateEmail(email);
+    }
+  
+    if (password) { // Password should always be updated if provided, as we can't retrieve the current password
+      await user.updatePassword(password);
+    }
+  
+    if (phoneNumber && phoneNumber !== user.phoneNumber) {
+      await user.updatePhoneNumber(phoneNumber);
     }
   }
   
-  export function deleteUserById() {
-    const currentUser = GetCurrentUser();
-    if (currentUser.length > 0) {
-      deleteUser(currentUser[0].id)
-        .then(() => {
-          // User deleted.
-        })
-        .catch((error) => {
-          // An error occurred
-          console.error("Error deleting user:", error);
-        });
+  export async function updateDatabaseData(name, profilePic) {
+    const user = firebaseAurth.currentUser;
+    const reference = ref(db, `/users/${user.uid}`);
+    const snapshot = await get(reference);
+    const currentUserData = snapshot.val();
+  
+    if (name && name !== currentUserData.name) {
+      await update(reference, { name: name });
     }
-  }*/
+  
+    if (profilePic && profilePic !== currentUserData.profilePic) {
+      await update(reference, { profilePic: profilePic });
+    }
+  }
+  //add more info if needed
+  export async function updateUserData(email, password, phoneNumber, name, profilePic) {
+    await updateAuthData(email, password, phoneNumber);
+    await updateDatabaseData(name, profilePic);
+  }
+  
+  export async function deleteUser() {
+    console.log("teasdasd");
+    const user = firebaseAurth.currentUser;
+    console.log(user);
+    // Delete the user from Firebase Authentication
+    try {
+      await user.delete();
+      console.log('User deleted from Firebase Authentication');
+    } catch (error) {
+      console.error('Error deleting user from Firebase Authentication:', error);
+      alert('Error', 'Error deleting user from Firebase Authentication: ' + error.message);
+    }
+  
+    // Delete the user from Realtime Database
+    try {
+      await db.ref('users/' + user.uid).remove();
+      console.log('User deleted from Realtime Database');
+    } catch (error) {
+      console.error('Error deleting user from Realtime Database:', error);
+      alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
+    }
+  }
 
 /**************/
 /*** Errors ***/
