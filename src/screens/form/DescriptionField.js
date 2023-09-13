@@ -1,25 +1,29 @@
 import {View, Text, TextInput } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';  // Import useState
 import { useLanguage, t } from '../../Languages/LanguageHandler';
 import { Primarycolor1, Primarycolor3,} from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 
-
-const DescriptionField = () => {
+const DescriptionField = ({ data = '', onInputComplete }) => {
     const { currentLanguage } = useLanguage();
+    const [inputValue, setInputValue] = useState(data); // Create a state to store the input value
 
     return (
-        <View style={{marginTop: 20}}>
+      <View style={{marginTop: 20}}>
+          <Text style={descriptionFieldStyles.dscLabel}>
+              {t('DescriptionField.label', currentLanguage)}
+          </Text>
+          <CustomInput showStar={true} optionalMarginBottom>
 
-            <Text style={descriptionFieldStyles.dscLabel}> {t('DescriptionField.label', currentLanguage)}</Text>
-            <CustomInput showStar={true} optionalMarginBottom>
-            <TextInput
-                style={descriptionFieldStyles.dscInput}
-                multiline={true}
-                clearButtonMode={"always"}
-            />
-                </CustomInput>
-        </View>
+          <TextInput
+            style={descriptionFieldStyles.dscInput}
+            multiline={true}
+            defaultValue={data}
+            onChangeText={text => setInputValue(text)}  // Update the state with the input value
+            onEndEditing={() => onInputComplete && onInputComplete(inputValue)}  // Call the provided function with the input value
+          />
+         </CustomInput>
+      </View>
     );
 }
 
@@ -43,6 +47,3 @@ const descriptionFieldStyles = {
 };
 
 export default DescriptionField;
-
-
-

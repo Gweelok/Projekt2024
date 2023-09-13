@@ -33,7 +33,7 @@ const Navigationbar = ({ navigation }) => {
       navigation.navigate("Map");
     } else if (iconName == PAGE_NAMES.ADD) {
       selected = PAGE_NAMES.ADD;
-      navigation.navigate("Add");
+      navigation.push("Add");
     } else if (iconName == PAGE_NAMES.STATS) {
       selected = PAGE_NAMES.STATS;
       navigation.navigate("Stats");
@@ -115,7 +115,7 @@ const Navigationbar = ({ navigation }) => {
             />
           )
         }
-        {badgeCount > 0 && <Badge count={badgeCount} />} 
+        {badgeCount > 0 && <Badge count={badgeCount} />}
       </View>
       </Pressable>
     </View>

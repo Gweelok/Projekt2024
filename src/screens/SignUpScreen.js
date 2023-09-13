@@ -10,9 +10,6 @@ import { styles,
 import { Ionicons } from '@expo/vector-icons'; // or any other icon library you prefer
 import { useLanguage, t } from '../Languages/LanguageHandler';// Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
-import { createUser} from '../utils/Repo';
-import { firebaseAurth } from '../utils/Firebase';
-
 import GlobalStyle from "../styles/GlobalStyle";
 
 const SignUpScreen = ({ navigation }) => {
@@ -28,15 +25,12 @@ const SignUpScreen = ({ navigation }) => {
     setPasswordCheck(text.length >= 8); // it must be at least 8 chars
   };
 
-  //Check on both
-  const handleSubmit = async () => {
+  //Checks and navigates to Terms and Conditions
+  const handleSubmit = () => {
     if (passwordCheck) {
-      await  createUser(email, password);
-      if(firebaseAurth.currentUser !== null) {
-        navigation.navigate('Homepage')
-      }
+      navigation.navigate("TermsAndConditions", { email, password });
     } else {
-      Alert.alert('Password');
+      Alert.alert("Password");
   }
   };
   //check if pass should be shown

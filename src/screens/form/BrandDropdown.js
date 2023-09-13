@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native"; 
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
-import { AntDesign } from "@expo/vector-icons"; 
+import { AntDesign } from "@expo/vector-icons";
 import { brands } from "../../utils/SeedData";
 import CustomInput from "../../componets/atoms/CustomInput 2";
 
-const BrandDropdown = ({ onBrandSelect, productSelected }) => {
+// data is used to set the initial value of the brand dropdown
+const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedBrand, setSelectedBrand] = useState(null);
+    const [selectedBrand, setSelectedBrand] = useState(data ||null);
+    const ITEM_HEIGHT = 35;
 
-   
+
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
@@ -40,25 +42,24 @@ const BrandDropdown = ({ onBrandSelect, productSelected }) => {
                 <Text style={brandDropdownContainer.dropdownText}>
                     {selectedBrand || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
                 </Text>
-                <AntDesign 
-                    name={isOpen ? "caretup" : "caretdown"} 
+                <AntDesign
+                    name={isOpen ? "caretup" : "caretdown"}
                     size={20}
                 />
             </TouchableOpacity>
             {isOpen && (
-                <View style={brandDropdownContainer.dropdownList}>
+                <ScrollView style={[brandDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {brands.map(brand => (
-                        <TouchableOpacity 
-                            key={brand} 
+                        <TouchableOpacity
+                            key={brand}
                             onPress={() => handleBrandSelect(brand)}
                             style={brandDropdownContainer.dropdownListItem}
                         >
                             <Text style={brandDropdownContainer.dropdownText}>{brand}</Text>
                         </TouchableOpacity>
-
-                        ))}
-                </View>
-                )}
+                    ))}
+                </ScrollView>
+            )}
         </View>
      </CustomInput>
     );
@@ -91,7 +92,7 @@ const brandDropdownContainer = {
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: Primarycolor1,
-        backgroundColor: Primarycolor3, 
+        backgroundColor: Primarycolor3,
     },
     disabled: {
         backgroundColor: "#f0f0f0"
