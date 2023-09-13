@@ -121,6 +121,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         minHeight: 80,
         position: "relative",
+        alignContent: 'center',
+        alignItems:'center'
       },
   boxlinkContainer: {
     flex: 1,
