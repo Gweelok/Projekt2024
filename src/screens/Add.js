@@ -53,13 +53,20 @@ const ProductDetailScreen = ({ route }) => {
   );
 };
 
-const Add = ({navigation}) => {
+const Add = ({route, navigation}) => {
+  const itemData = route.params?.itemData;
+
+  // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
-  const [category, setCategory] = useState(null);
-  const [product, setProduct] = useState(null);
-  const [brand, setBrand] = useState(null);
-  // you can fetch the final result of condition field through here
-  const [condition, setCondition] = useState(null);
+
+  const [image, setImageUrl] = useState(itemData?.image || null);
+  const [category, setCategory] = useState(itemData?.category || null);
+  const [product, setProduct] = useState(itemData?.product || null);
+  const [brand, setBrand] = useState(itemData?.brand || null);
+  const [model, setModel] = useState(itemData?.model || null);
+  const [condition, setCondition] = useState(itemData?.condition || null);
+  const [description, setDescription] = useState(itemData?.description || null);
+
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
 
   return (
@@ -77,25 +84,21 @@ const Add = ({navigation}) => {
           </Text>
 
           <View style={[{marginBottom: 20}]}>
-            <CustomInput showStar={false}>
-              <ImageUpload/>
-            </CustomInput>
+            <ImageUpload data={itemData?.image}/>
           </View>
 
-          <CategoryDropdown onCategorySelect={setCategory}/>
+          <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
 
-          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
+          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct} data={itemData?.product}/>
 
-          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand}/>
+          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand} data={itemData?.brand}/>
 
-          <ModelDropdown brandSelected={!!brand}/>
+          <ModelDropdown brandSelected={!!brand} onModelSelect={setModel}  data = {itemData?.model}/>
 
-          <ConditionDropdown onConditionSelect={setCondition}/>
+          <ConditionDropdown onConditionSelect={setCondition} data = {itemData?.condition}/>
 
           <View style={ {marginBottom: 20}}>
-            <CustomInput showStar={false}>
-            <DescriptionField />
-            </CustomInput>
+            <DescriptionField data={itemData?.description} onInputComplete={setDescription}/>
           </View>
 
           <View style={{marginBottom: 20}}>

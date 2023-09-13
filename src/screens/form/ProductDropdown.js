@@ -5,11 +5,20 @@ import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 //import { products } from "../../utils/SeedData";
 
+<<<<<<< HEAD
 const ProductDropdown = ({ onProductSelect, categorySelected }) => {
   const { currentLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isValidationError, setIsValidationError] = useState(false);
+=======
+// data is used to set the initial value of the dropdown
+const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
+    const { currentLanguage } = useLanguage();
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState( data || null);
+    const [isValidationError, setIsValidationError] = useState(false);
+>>>>>>> main
   const ITEM_HEIGHT = 39;
 
   const products = ["Vaccuum", "Tablet", "PC", "TV", "Roomba"];
@@ -24,8 +33,13 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
   };
 
   return (
+<<<<<<< HEAD
     <View style={productDropdownContainer.container}>
       {/* <TouchableOpacity 
+=======
+        <View style={productDropdownContainer.container}>
+            <TouchableOpacity
+>>>>>>> main
                 style={[
                   productDropdownContainer.dropdownButton,
                   !categorySelected && productDropdownContainer.disabled
@@ -43,8 +57,8 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
                 <Text style={productDropdownContainer.dropdownText}>
                     {selectedProduct || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
                 </Text>
-                <AntDesign 
-                    name={isOpen ? "caretup" : "caretdown"} 
+                <AntDesign
+                    name={isOpen ? "caretup" : "caretdown"}
                     size={20}
                 />
             </TouchableOpacity>
@@ -52,8 +66,8 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
             {isOpen && (
                 <ScrollView style={[productDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {products.map(product => (
-                        <TouchableOpacity 
-                            key={product} 
+                        <TouchableOpacity
+                            key={product}
                             onPress={() => handleProductSelect(product)}
                             style={productDropdownContainer.dropdownListItem}
                         >
@@ -62,7 +76,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected }) => {
                     ))}
                 </ScrollView>
             )}
-            
+
       {isValidationError && !selectedProduct && (
         <Text style={productDropdownContainer.validationErrorText}></Text>
       )} */}
