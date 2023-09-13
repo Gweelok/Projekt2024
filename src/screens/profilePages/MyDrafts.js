@@ -1,12 +1,14 @@
-import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from "react-native";
-import {HeaderText, Primarycolor1} from "../../styles/Stylesheet";
-import {useNavigation} from "@react-navigation/native";
-import {t, useLanguage} from "../../Languages/LanguageHandler";
-import {Ionicons} from "@expo/vector-icons";
-import {GoBackButton} from "../../styles/GoBackButton";
+import { React, useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { HeaderText, Primarycolor1 } from "../../styles/Stylesheet";
+import { useNavigation } from "@react-navigation/native";
+import { t, useLanguage } from "../../Languages/LanguageHandler";
+import { Ionicons } from "@expo/vector-icons";
+import { GoBackButton } from "../../styles/GoBackButton";
 import DraftCard from "../../componets/DraftCard";
-import {ScrollView} from "react-native";
+import { ScrollView } from "react-native";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getBrandById, getCategoryById, getModelById, getProductById, getCurrentUser, getDraftFromUser} from "../../utils/Repo";
 
 // fetch the data from server
 const dummyData = [
@@ -41,13 +43,53 @@ const dummyData = [
     condition: "Very Good",
   },
 ];
+
 const MyDrafts = () => {
   const navigation = useNavigation();
-  const {currentLanguage} = useLanguage();
+  const { currentLanguage } = useLanguage();
+  const [data, setData] = useState([]);
 
   const handlePress = () => {
     navigation.goBack();
   };
+
+useEffect(() => { //Fetches items in the draftcards from the database 
+  const fetchDraftList = async () => {
+    const storage = getStorage();
+    const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
+    
+    try {
+      const drafts = await getDraftFromUser(user.id);// userId is not working so this get all items from database
+      const updatedData = await Promise.all(drafts.map(async (item) => {
+        const pathReference = ref(storage, item.itemImage); //Adjust the path according to your storage structure
+        const product = await getProductById(item.itemproduct);// querying  details for the draft to be displayed 
+        const brand = await getBrandById(item.itemBrand);
+        const category = await getCategoryById(item.itemCategory);
+        const model = await getModelById(item.itemModel);
+        
+        try {
+          const url = await getDownloadURL(pathReference);
+          return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName,  // loading extram params into the objects
+            categoryName: category.itemCategory,
+            modelName: model.modelName, itemDescription: item.itemDescription , itemcondition: item.itemcondition};
+        } catch (error) {
+          console.log('Error while downloading image => ', error);
+          return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
+        }
+      }));
+      setData(updatedData); // updates data property with the fetched data from db
+    } catch (error) {
+      console.log('Error while fetching drafts => ', error);
+    }
+  };
+  fetchDraftList();
+}, []);
+
+
+
+
+
+
 
   return (
     <View>
@@ -68,7 +110,7 @@ const MyDrafts = () => {
         </Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {dummyData.map((cur, i) => (
+        {data.map((cur, i) => (  // instead of dummy data using data
           <DraftCard
             key={i}
             props={cur}
