@@ -83,7 +83,7 @@ const Add = ({route, navigation}) => {
             {t("UpdroppForm.title", currentLanguage)}
           </Text>
 
-          <View style={[{marginBottom: 20}]}>
+          <View style={[{marginBottom: 10}]}>
             <ImageUpload data={itemData?.image}/>
           </View>
 
