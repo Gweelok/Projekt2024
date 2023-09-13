@@ -8,9 +8,7 @@ import { GoBackButton } from "../../styles/GoBackButton";
 import DraftCard from "../../componets/DraftCard";
 import { ScrollView } from "react-native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getDraftFromUser } from '../utils/Repo';
-import { getBrandById, getCategoryById, getModelById, getProductById, getCurrentUser } from "../../utils/Repo";
-
+import { getBrandById, getCategoryById, getModelById, getProductById, getCurrentUser, getDraftFromUser} from "../../utils/Repo";
 
 // fetch the data from server
 const dummyData = [
@@ -45,35 +43,32 @@ const dummyData = [
     condition: "Very Good",
   },
 ];
+
 const MyDrafts = () => {
   const navigation = useNavigation();
-  const {currentLanguage} = useLanguage();
+  const { currentLanguage } = useLanguage();
+  const [data, setData] = useState([]);
 
   const handlePress = () => {
     navigation.goBack();
   };
 
-
-  
-  const [data, setData] = useState([]);
-  
-
-useEffect(() => { //Fetches items in the draftcards
+useEffect(() => { //Fetches items in the draftcards from the database 
   const fetchDraftList = async () => {
     const storage = getStorage();
-    const user = getCurrentUser();
+    const user = getCurrentUser();//firebaseAurth.currentUser; this is not working right now
     try {
-      const drafts = await getDraftFromUser(user.id);// assuming "id" is defined somewhere.
+      const drafts = await getDraftFromUser(user.id);// userId is not working so this get all items from database
       const updatedData = await Promise.all(drafts.map(async (item) => {
         const pathReference = ref(storage, item.itemImage); //Adjust the path according to your storage structure
-        const product = await getProductById(item.itemproduct);
+        const product = await getProductById(item.itemproduct);// querying  details for the draft to be displayed 
         const brand = await getBrandById(item.itemBrand);
         const category = await getCategoryById(item.itemCategory);
         const model = await getModelById(item.itemModel);
         
         try {
           const url = await getDownloadURL(pathReference);
-          return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName, 
+          return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName,  // loading extram params into the objects
             categoryName: category.itemCategory,
             modelName: model.modelName, itemDescription: item.itemDescription , itemcondition: item.itemcondition};
         } catch (error) {
@@ -114,7 +109,7 @@ useEffect(() => { //Fetches items in the draftcards
         </Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {data.map((cur, i) => ( 
+        {data.map((cur, i) => (  // instead of dummy data using data
           <DraftCard
             key={i}
             props={cur}
