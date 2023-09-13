@@ -16,20 +16,6 @@ const Profile = ({ navigation }) => {
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
-        <View style={profileStyles.profileIcon}>
-          <Ionicons
-            style={profileStyles.profileIcon}
-            name="person-circle-outline"
-            size={150}
-          />
-          <Text
-            msg={t("ProfileScreen.ProfilePage", currentLanguage)}
-            onPress={() => navigation.navigate("ProfilePage")}
-            style={styles.Header_Primarycolor1}
-          >
-            Edit Profile
-          </Text>
-        </View>
         <View>
           <MenuItems
             msg={t("ProfileScreen.MySettings", currentLanguage)}

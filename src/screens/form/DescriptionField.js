@@ -13,6 +13,8 @@ const DescriptionField = ({ data = '', onInputComplete }) => {
           <Text style={descriptionFieldStyles.dscLabel}>
               {t('DescriptionField.label', currentLanguage)}
           </Text>
+          <CustomInput showStar={true} optionalMarginBottom>
+
           <TextInput
             style={descriptionFieldStyles.dscInput}
             multiline={true}
@@ -20,6 +22,7 @@ const DescriptionField = ({ data = '', onInputComplete }) => {
             onChangeText={text => setInputValue(text)}  // Update the state with the input value
             onEndEditing={() => onInputComplete && onInputComplete(inputValue)}  // Call the provided function with the input value
           />
+         </CustomInput>
       </View>
     );
 }
