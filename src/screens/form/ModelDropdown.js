@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
+import CustomInput from "../../componets/atoms/CustomInput";
 //import { models } from "../../utils/SeedData";
 
 
@@ -23,6 +24,8 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
     }
 
     return (
+        <CustomInput showStar={true} optionalMarginBottom>
+
         <View style={modelDropdownContainer.container}>
             <TouchableOpacity
                 style={[
@@ -59,6 +62,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                 </ScrollView>
             )}
         </View>
+        </CustomInput>
     );
 }
 
