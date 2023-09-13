@@ -56,9 +56,11 @@ const MyDrafts = () => {
 useEffect(() => { //Fetches items in the draftcards from the database 
   const fetchDraftList = async () => {
     const storage = getStorage();
-    const user = getCurrentUser();//firebaseAurth.currentUser; this is not working right now
+    const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
+    
     try {
       const drafts = await getDraftFromUser(user.id);// userId is not working so this get all items from database
+      console.log("drafts: ", drafts)
       const updatedData = await Promise.all(drafts.map(async (item) => {
         const pathReference = ref(storage, item.itemImage); //Adjust the path according to your storage structure
         const product = await getProductById(item.itemproduct);// querying  details for the draft to be displayed 

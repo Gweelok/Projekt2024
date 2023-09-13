@@ -6,11 +6,12 @@ import * as Location from "expo-location";
 import SortUptainers from "../componets/sortUptainers";
 import {Feather} from "@expo/vector-icons";
 import GlobalStyle from "../styles/GlobalStyle";
+import { firebaseAurth } from "../utils/Firebase";
 
 
 const Home = ({ navigation }) => {
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
-  console.log("start current useeffect");
+  console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
