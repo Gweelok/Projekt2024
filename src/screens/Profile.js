@@ -7,11 +7,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import MenuItems from "../styles/MenuItems";
 import GlobalStyle from "../styles/GlobalStyle";
-import {BadgeContext} from "./form/BadgeContext";
+import { BadgeContext } from "./form/BadgeContext";
 
 const Profile = ({ navigation }) => {
-    const { currentLanguage } = useLanguage();
-    const { badgeCount } = React.useContext(BadgeContext);
+  const { currentLanguage } = useLanguage();
+  const { badgeCount } = React.useContext(BadgeContext);
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollView
@@ -20,20 +20,6 @@ const Profile = ({ navigation }) => {
         }
         showsVerticalScrollIndicator={false}
       >
-        <View style={profileStyles.profileIcon}>
-          <Ionicons
-            style={profileStyles.profileIcon}
-            name="person-circle-outline"
-            size={150}
-          />
-          <Text
-            msg={t("ProfileScreen.ProfilePage", currentLanguage)}
-            onPress={() => navigation.navigate("ProfilePage")}
-            style={styles.Header_Primarycolor1}
-          >
-            Edit Profile
-          </Text>
-        </View>
         <View>
           <MenuItems
             msg={t("ProfileScreen.MySettings", currentLanguage)}
