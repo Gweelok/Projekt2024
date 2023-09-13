@@ -4,22 +4,12 @@ import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 
-<<<<<<< HEAD
-const ConditionDropdown = ({ onConditionSelect }) => {
-  const { currentLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedCondition, setSelectedCondition] = useState(null);
-  const [isValidationError, setIsValidationError] = useState(false);
-  const ITEM_HEIGHT = 39;
-
-=======
 const ConditionDropdown = ({ onConditionSelect, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCondition, setSelectedCondition] = useState(data);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 39;
->>>>>>> main
   // Dummy products, replace with actual data
   const products = ["Mint Condition", "Good Condition", "Fair Condition", "Poor Condition", "Broken"];
 
@@ -34,7 +24,7 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
 
   return (
     <View style={conditionDropdownContainer.container}>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         style={[conditionDropdownContainer.dropdownButton]}
         onPress={() => {
           setIsOpen(!isOpen);
@@ -65,7 +55,7 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
 
       {isValidationError && !selectedCondition && (
         <Text style={conditionDropdownContainer.validationErrorText}></Text>
-      )} */}
+      )}
     </View>
   );
 };
