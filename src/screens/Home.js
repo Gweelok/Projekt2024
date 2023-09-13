@@ -1,4 +1,4 @@
-import { View, TextInput, ScrollView, StyleSheet , Dimensions} from "react-native";
+import { View, TextInput, StyleSheet , Dimensions} from "react-native";
 import { Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
@@ -6,6 +6,7 @@ import * as Location from "expo-location";
 import SortUptainers from "../componets/sortUptainers";
 import {Feather} from "@expo/vector-icons";
 import GlobalStyle from "../styles/GlobalStyle";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 
 const Home = ({ navigation }) => {
@@ -39,9 +40,9 @@ const Home = ({ navigation }) => {
             />
             <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor1} />
         </View> 
-      <ScrollView style={{ marginBottom: 60 }}>
+      <ScrollViewComponent>
         <SortUptainers navigation={navigation} />    
-      </ScrollView>
+      </ScrollViewComponent>
       <Navigationbar navigation={navigation} />
     </View>
     </View>

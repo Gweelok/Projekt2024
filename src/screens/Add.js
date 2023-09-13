@@ -22,6 +22,7 @@ import ModelDropdown from './form/ModelDropdown';
 import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import  { firebaseApp, firebaseDB } from '../utils/Firebase';
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 
 const ProductDetailScreen = ({ route }) => {
@@ -70,8 +71,8 @@ const Add = ({route, navigation}) => {
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
 
   return (
-    <View>
-      <ScrollView>
+    <SafeAreaView>
+      <ScrollViewComponent>
         <View style={{
           paddingTop: 50,
           flex: 1,
@@ -136,11 +137,10 @@ const Add = ({route, navigation}) => {
             </Text>
           </Pressable>
 
-          <View style={{marginBottom: 120}}/>
         </View>
-      </ScrollView>
+      </ScrollViewComponent>
       <Navigationbar navigation={navigation} badgeCount={badgeCount}/>
-    </View>
+    </SafeAreaView>
   );
 };
 

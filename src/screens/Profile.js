@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 import PropTypes from "prop-types";
 import { styles, Backgroundstyle, profileStyles } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
@@ -7,19 +7,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import MenuItems from "../styles/MenuItems";
 import GlobalStyle from "../styles/GlobalStyle";
-import {BadgeContext} from "./form/BadgeContext";
+import { BadgeContext } from "./form/BadgeContext";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 const Profile = ({ navigation }) => {
-    const { currentLanguage } = useLanguage();
-    const { badgeCount } = React.useContext(BadgeContext);
+  const { currentLanguage } = useLanguage();
+  const { badgeCount } = React.useContext(BadgeContext);
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <ScrollView
-        contentContainerStyle={
-          ([GlobalStyle.BodyWrapper], { paddingBottom: 70 })
-        }
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollViewComponent>
         <View style={profileStyles.profileIcon}>
           <Ionicons
             style={profileStyles.profileIcon}
@@ -64,7 +60,7 @@ const Profile = ({ navigation }) => {
             onPress={() => navigation.navigate("LogoutConfirmation")}
           />
         </View>
-      </ScrollView>
+      </ScrollViewComponent>
       <Navigationbar navigation={navigation} />
     </View>
   );

@@ -1,20 +1,22 @@
 import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from "react-native";
-import {HeaderText, Primarycolor1} from "../../styles/Stylesheet";
-import {useNavigation} from "@react-navigation/native";
-import {t, useLanguage} from "../../Languages/LanguageHandler";
-import {Ionicons} from "@expo/vector-icons";
-import {GoBackButton} from "../../styles/GoBackButton";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { HeaderText, Primarycolor1 } from "../../styles/Stylesheet";
+import { useNavigation } from "@react-navigation/native";
+import { t, useLanguage } from "../../Languages/LanguageHandler";
+import { Ionicons } from "@expo/vector-icons";
+import { GoBackButton } from "../../styles/GoBackButton";
 import DraftCard from "../../componets/DraftCard";
-import {ScrollView} from "react-native";
+import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
 // fetch the data from server
 const dummyData = [
   {
     id: 1,
-    image: "https://static.cnbetacdn.com/article/2020/0629/68a35b661ef17ca.jpeg",
+    image:
+      "https://static.cnbetacdn.com/article/2020/0629/68a35b661ef17ca.jpeg",
     category: "Phones",
-    description: "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
+    description:
+      "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
     product: "Mi 14",
     brand: "XiaoMi",
     model: "XiaoMi",
@@ -22,9 +24,11 @@ const dummyData = [
   },
   {
     id: 2,
-    image: "https://images.jingyeqian.com/img/2020/09/14/6373567560115456238144235.jpg",
+    image:
+      "https://images.jingyeqian.com/img/2020/09/14/6373567560115456238144235.jpg",
     category: "Phones",
-    description: "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
+    description:
+      "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
     product: "iPhone",
     brand: "Casio",
     model: "iPhone",
@@ -32,9 +36,11 @@ const dummyData = [
   },
   {
     id: 3,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGtMYyvNU02iAWkULCXf_3A8hiSpBW0arx0J6F5KF2zo2Cl9ZIN_OlryBY5hIh900MRTg&usqp=CAU",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGtMYyvNU02iAWkULCXf_3A8hiSpBW0arx0J6F5KF2zo2Cl9ZIN_OlryBY5hIh900MRTg&usqp=CAU",
     category: "PC",
-    description: "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
+    description:
+      "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
     product: "iPhone",
     brand: "Casio",
     model: "iPhone",
@@ -43,7 +49,7 @@ const dummyData = [
 ];
 const MyDrafts = () => {
   const navigation = useNavigation();
-  const {currentLanguage} = useLanguage();
+  const { currentLanguage } = useLanguage();
 
   const handlePress = () => {
     navigation.goBack();
@@ -51,7 +57,7 @@ const MyDrafts = () => {
 
   return (
     <View>
-      <View style={{flexDirection: "row", alignItems: "center"}}>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
@@ -67,7 +73,7 @@ const MyDrafts = () => {
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollViewComponent>
         {dummyData.map((cur, i) => (
           <DraftCard
             key={i}
@@ -76,7 +82,7 @@ const MyDrafts = () => {
               navigation.navigate("QRScanner");
             }}
             onDraftPress={() => {
-              navigation.push("Add", {itemData: cur});
+              navigation.push("Add", { itemData: cur });
             }}
             onCancelPress={() => {
               console.log("pressed");
@@ -103,8 +109,7 @@ const MyDrafts = () => {
             }}
           />
         ))}
-        <View style={[{marginTop: 50, minHeight: 200, marginBottom: 100}]}/>
-      </ScrollView>
+      </ScrollViewComponent>
     </View>
   );
 };
