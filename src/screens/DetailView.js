@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, Linking } from "react-native";
-import { Backgroundstyle } from "../styles/Stylesheet";
+import { Backgroundstyle, styles } from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
@@ -50,7 +50,7 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
               </View>
             </View>
           </View>
-          <Text style={DetailView.text}>{displayTextValue}</Text>
+          <Text style={[DetailView.text, styles.bodyText]}>{displayTextValue}</Text>
           <TouchableOpacity onPress={""} style={DetailView.TagButton}>
             <Text style={DetailView.Tag}>{TagButton}</Text>
           </TouchableOpacity>
@@ -80,10 +80,9 @@ const DetailView = StyleSheet.create({
   },
   text: {
     paddingTop: 10,
-    width: "70%",
+    width: "80%",
     height: 100,
     borderRadius: 1,
-    paddingHorizontal: 10,
     marginTop: 15,
   },
   arrow: {

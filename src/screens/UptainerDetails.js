@@ -18,6 +18,7 @@ import {
   getProductById,
   getBrandById,
 } from "../utils/Repo";
+import { styles } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ProductAlert from "../componets/ProductAlert";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
@@ -91,29 +92,29 @@ const UptainerDetails = ({ navigation, route }) => {
 
   return (
     // <View style={GlobalStyle.BodyWrapper}>
-    <View style={styles.container}>
+    <View style={style.container}>
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
       >
         <TouchableOpacity
-          style={styles.backButton}
+          style={style.backButton}
           onPress={() => navigation.goBack()}
         >
           <Ionicons name="chevron-back" color="white" size={20} />
         </TouchableOpacity>
         <View>
           <ImageBackground
-            style={styles.detailsImage}
+            style={style.detailsImage}
             source={{
               uri: uptainerImageUrl, // current uptainer main pic
             }}
           >
             <TouchableOpacity
               onPress={() => navigation.navigate("Map")}
-              style={styles.productLocation}
+              style={style.productLocation}
             >
-              <Text style={styles.productAddress}>
+              <Text style={style.productAddress}>
                 {item.name} /{"\n"}
                 {item.location}
               </Text>
@@ -156,17 +157,22 @@ const UptainerDetails = ({ navigation, route }) => {
                 }
               >
                 <Image
-                  style={styles.moreProductsImage}
+                  style={style.moreProductsImage}
                   source={{
                     uri: cur?.imageUrl,
                   }}
                 />
-                <Text
-                  style={{
-                    fontWeight: "600",
-                    width: windowWidth / 2.7,
-                    textAlign: "center",
-                  }}
+                 <Text
+                  style={[
+                    styles.bodyText, 
+                    {
+                    fontWeight: "600", 
+                    width: windowWidth / 2.7
+                  }
+                ]}
+
+
+        
                 >
                   {cur.productName}{" "}
                 </Text>
@@ -188,7 +194,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
 export default UptainerDetails;
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
   },
