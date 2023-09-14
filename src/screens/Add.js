@@ -85,7 +85,7 @@ const Add = ({route, navigation}) => {
           </Text>
 
           <View style={[{marginBottom: 10}]}>
-            <ImageUpload data={itemData?.image}/>
+            <ImageUpload onSelectedImage={setImageUrl} data={itemData?.image} />
           </View>
 
           <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
@@ -110,8 +110,16 @@ const Add = ({route, navigation}) => {
 
           <View style={{marginBottom: 20}}>
             <Pressable
-              onPress={() => {
-                navigation.navigate("QRScanner");
+              onPress={() => { //props for send the draft infor to QR code screen so it can be saved on scan.
+                navigation.navigate("QRScanner" ,{
+                  product: product, 
+                  brand: brand, 
+                  model: model, 
+                  category: category, 
+                  itemImage: image,
+                  itemDescription: description,
+                  itemCondition: condition, 
+                });
               }}
               style={[Buttons.main_button, {borderWidth: 1, width: "100%"}]}
             >
