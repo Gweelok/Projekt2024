@@ -715,7 +715,6 @@ export async function getCurrentUser() {
 }
 
 // ToDo find user data and implement it to the function
-
 export async function updateAuthData(email, password, phoneNumber) {
     const user = firebaseAurth.currentUser;
   
