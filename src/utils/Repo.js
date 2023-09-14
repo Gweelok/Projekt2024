@@ -94,6 +94,23 @@ export async function createUptainer(data) {
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
+export async function createItem(brandId, categoryId, itemDescription, itemImage, itemModel, itemproduct, itemcondition, uptainerQRCode) {
+    const newItemKey = push(ref(db, paths.items)).key;
+    const UptainerId = QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
+    const itemData = {
+        itemId: newItemKey,
+        itemproduct: itemproduct,
+        itemBrand: brandId,
+        itemModel: itemModel,
+        itemCategory: categoryId,
+        itemImage: itemImage,
+        itemDescription: itemDescription,
+        itemcondition: itemcondition,
+        itemUptainer: UptainerId,
+    };
+    await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+}
+
 
 export async function createBrand(name) {
     const newBrandKey = push(ref(db, paths.brands)).key;
@@ -123,7 +140,6 @@ export async function createItemSeedata(item, categories, products, brands, upta
     
 
     const newItemKey = push(ref(db, paths.items)).key;
-    const itemQRCode = generateQRCode(item.itemQR);
     const itemData = {
         itemId: newItemKey,
         itemproduct: products,
@@ -134,7 +150,6 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
-        itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
@@ -149,7 +164,7 @@ export async function createProduct(data) {
     await writeToDatabase(paths.products + '/' + newProductKey, productData);
 }
 
-export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition, uptainerId, userId) {
+export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition, userId = firebaseAurth.currentUser.uid) {
     const newItemKey = push(ref(db, paths.items)).key;
     const itemData = {
         itemId: newItemKey,
@@ -751,10 +766,8 @@ export async function updateAuthData(email, password, phoneNumber) {
     await updateDatabaseData(name, profilePic);
   }
   
-  export async function deleteUser() {
-    console.log("teasdasd");
+  export async function deleteUser(navigation) {
     const user = firebaseAurth.currentUser;
-    console.log(user);
     // Delete the user from Firebase Authentication
     user
         .delete()
@@ -766,11 +779,28 @@ export async function updateAuthData(email, password, phoneNumber) {
     try {
         remove(reference);
         console.log('User deleted from Realtime Database');
+        navigation.navigate("Sign in");
     } catch (error) {
         console.error('Error deleting user from Realtime Database:', error);
         alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
       }
   }
+
+
+/**************/
+/*** Checks ***/
+/**************/
+
+async function QRCodeExists(qrCode) {
+    const uptainerList  = await getAllUptainers();
+    const item = uptainerList.find(uptainer => uptainer.uptainerQR === qrCode);
+    if (item) {
+        return item.uptainerId;
+    } else {
+        alert("QR Code not found, saved to draft instead");
+        return "Draft";
+    }
+}
 
 /**************/
 /*** Errors ***/
