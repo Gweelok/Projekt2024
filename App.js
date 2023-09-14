@@ -81,7 +81,7 @@ export default function App() {
   var doneTheStuff;
   if (!doneTheStuff) {
     doneTheStuff = true;
-    seedCheck(); //seed data(only works if DB is empty)
+    //seedCheck(); //seed data(only works if DB is empty)
   }
 
   //Loading the font
@@ -100,7 +100,7 @@ export default function App() {
     <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
     <LanguageProvider>
       <NavigationContainer theme={navStyle}>
-        <Stack.Navigator initialRouteName="Homepage">
+        <Stack.Navigator initialRouteName="Landingscreen">
           <Stack.Screen
             name="Landingscreen"
             component={LandingScreen}

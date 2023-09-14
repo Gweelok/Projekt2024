@@ -757,22 +757,20 @@ export async function updateAuthData(email, password, phoneNumber) {
     const user = firebaseAurth.currentUser;
     console.log(user);
     // Delete the user from Firebase Authentication
-    try {
-      await user.delete();
-      console.log('User deleted from Firebase Authentication');
-    } catch (error) {
-      console.error('Error deleting user from Firebase Authentication:', error);
-      alert('Error', 'Error deleting user from Firebase Authentication: ' + error.message);
-    }
+    user
+        .delete()
+        .then(() => console.log("User deleted"))
+        .catch((error) => console.log(error));
   
-    // Delete the user from Realtime Database
+    // Delete the user from Realtime Database   
+    const reference = ref(db, 'users/' + user.uid);
     try {
-      await db.ref('users/' + user.uid).remove();
-      console.log('User deleted from Realtime Database');
+        remove(reference);
+        console.log('User deleted from Realtime Database');
     } catch (error) {
-      console.error('Error deleting user from Realtime Database:', error);
-      alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
-    }
+        console.error('Error deleting user from Realtime Database:', error);
+        alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
+      }
   }
 
 /**************/
