@@ -62,8 +62,8 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
         <Text style={categoryDropdownContainer.validationErrorText}></Text>
       )}
     </View>
-  );
-};
+    );
+}
 // Category dropdown styles
 const categoryDropdownContainer = {
   container: {

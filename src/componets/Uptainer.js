@@ -49,7 +49,7 @@ const Uptainer = ({id, name, location}) => {
   }
 
   return (
-    <View> 
+    <View style={{marginBottom:20}}> 
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("UptainerDetails", {

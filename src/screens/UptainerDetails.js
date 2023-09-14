@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  ScrollView,
   Text,
   View,
   TouchableOpacity,
@@ -21,6 +20,7 @@ import {
 } from "../utils/Repo";
 import GlobalStyle from "../styles/GlobalStyle";
 import ProductAlert from "../componets/ProductAlert";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -92,7 +92,7 @@ const UptainerDetails = ({ navigation, route }) => {
   return (
     // <View style={GlobalStyle.BodyWrapper}>
     <View style={styles.container}>
-      <ScrollView
+      <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
       >
@@ -174,13 +174,8 @@ const UptainerDetails = ({ navigation, route }) => {
             )
           )}
         </View>
-        <View
-          style={[
-            styles.section,
-            { marginTop: 50, minHeight: 200, marginBottom: 100 },
-          ]}
-        />
-      </ScrollView>
+      
+      </ScrollViewComponent>
 
       {/* This ProductAlert component is dependent on the uploading of a product to the database */}
       {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
