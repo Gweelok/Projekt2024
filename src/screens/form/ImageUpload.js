@@ -15,18 +15,10 @@ import CustomInput from "../../componets/atoms/CustomInput";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-
 const ImageUpload = ({data, onSelectedImage}) => {
 
-  
   const [image, setImage] = useState(data ||null);
-
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
-  useEffect(() => {
-    console.log('Image state updated:', image);
-}, [image]);
-
-
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,8 +27,6 @@ const ImageUpload = ({data, onSelectedImage}) => {
       //   aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       if (result.assets[0]?.type != "video") {
