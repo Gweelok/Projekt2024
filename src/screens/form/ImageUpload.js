@@ -11,6 +11,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { Primarycolor1 } from "../../styles/Stylesheet";
+import CustomInput from "../../componets/atoms/CustomInput";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -42,6 +43,7 @@ const ImageUpload = ({data}) => {
   const uploadImageToDatabase = async () => {};
 
   return (
+    <CustomInput showStar={true} optionalMarginBottom>
     <View>
       {!image ? (
         <TouchableOpacity
@@ -71,6 +73,7 @@ const ImageUpload = ({data}) => {
         </View>
       )}
     </View>
+    </CustomInput>
   );
 };
 

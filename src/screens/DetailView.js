@@ -7,6 +7,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
@@ -14,10 +15,6 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  
-
-   
-  
   
   const handlePress = () => {
     navigation.goBack();
@@ -30,41 +27,42 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <TouchableOpacity onPress={handlePress}>
-        <Ionicons
-          name="chevron-back-outline"
-          size={36}
-          style={DetailView.arrow}
-        />
-      </TouchableOpacity>
-      <View style={DetailView.container}> 
-        <Image source={{ uri: imageUrl }} style={DetailView.image} /> 
-        <View style={DetailView.infoContainer}>
+      <ScrollViewComponent>
+        <TouchableOpacity onPress={handlePress}>
+          <Ionicons
+            name="chevron-back-outline"
+            size={36}
+            style={DetailView.arrow}
+          />
+        </TouchableOpacity>
+        <View style={DetailView.container}>
+          <Image source={{ uri: imageUrl }} style={DetailView.image} />
+          <View style={DetailView.infoContainer}>
+            <View style={DetailView.leftInfo}>
+              <Text style={DetailView.product}>{productName}</Text>
+              <Text style={DetailView.brand}>{brandName}</Text>
+            </View>
 
-          <View style={DetailView.leftInfo}>
-            <Text style={DetailView.product}>{productName}</Text> 
-            <Text style={DetailView.brand}>{brandName}</Text>
-          </View>
-
-          <View style={DetailView.rightInfo}>
-            <View style={DetailView.locationContainer}>
-              <Ionicons name="location" size={15} color={Primarycolor1} />
-              <Text style={DetailView.location}>Valby - Allegade 25</Text>
+            <View style={DetailView.rightInfo}>
+              <View style={DetailView.locationContainer}>
+                <Ionicons name="location" size={15} color={Primarycolor1} />
+                <Text style={DetailView.location}>Valby - Allegade 25</Text>
+              </View>
             </View>
           </View>
-
+          <Text style={DetailView.text}>{displayTextValue}</Text>
+          <TouchableOpacity onPress={""} style={DetailView.TagButton}>
+            <Text style={DetailView.Tag}>{TagButton}</Text>
+          </TouchableOpacity>
+          <Text
+            style={{ color: Primarycolor1, textDecorationLine: "underline" }}
+            onPress={() => Linking.openURL("")} //
+          >
+            Var produktet ikke i uptaineren?
+          </Text>
         </View>
-        <Text style={DetailView.text}>{displayTextValue}</Text>
-        <TouchableOpacity onPress={""} style={DetailView.TagButton}>
-          <Text style={DetailView.Tag}>{TagButton}</Text>
-        </TouchableOpacity>
-        <Text
-          style={{ color: Primarycolor1, textDecorationLine: 'underline' }}
-          onPress={() => Linking.openURL("")} //
-        >
-          Var produktet ikke i uptaineren?
-        </Text>
-      </View>
+      </ScrollViewComponent>
+
       <Navigationbar navigation={navigation} />
     </View>
   );

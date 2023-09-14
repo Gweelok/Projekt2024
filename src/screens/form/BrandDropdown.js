@@ -4,6 +4,7 @@ import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { brands } from "../../utils/SeedData";
+import CustomInput from "../../componets/atoms/CustomInput 2";
 
 // data is used to set the initial value of the brand dropdown
 const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
@@ -23,6 +24,8 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     }
 
     return (
+        <CustomInput showStar={true} optionalMarginBottom={1}>
+
         <View style={brandDropdownContainer.container}>
             <TouchableOpacity
                 style={[
@@ -44,7 +47,6 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                     size={20}
                 />
             </TouchableOpacity>
-
             {isOpen && (
                 <ScrollView style={[brandDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {brands.map(brand => (
@@ -59,6 +61,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 </ScrollView>
             )}
         </View>
+     </CustomInput>
     );
 }
 

@@ -5,10 +5,10 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-  ScrollView,
 } from "react-native";
 import GlobalStyle from "../../styles/GlobalStyle";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
+import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
 const ArticlePage = ({ route }) => {
   const { title, content } = route.params;
@@ -25,7 +25,7 @@ const ArticlePage = ({ route }) => {
 
   return (
     <StatusBarComponent>
-      <ScrollView>
+      <ScrollViewComponent>
         <View style={GlobalStyle.BodyWrapper}>
           <Image
             // todo the image should get from server
@@ -41,7 +41,7 @@ const ArticlePage = ({ route }) => {
             </Text>
           ))}
         </View>
-      </ScrollView>
+      </ScrollViewComponent>
     </StatusBarComponent>
   );
 };
