@@ -110,14 +110,25 @@ export default {
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",
   },
-
-  SolutionComponent:{
-    Header: "The solution",
+  SolutionComponent: {
+    Header: "The Solution",
     Body: "Our Uptainers help old electronics to a new life in another citizens homes.",
     Bottom: {
       firstHalf: "Use Phase",
       secondHalf: "New Use Phase",
-    }
+    },
+  },
+  ProductUpdroppedAlert: {
+    productUpdropped: "The product has now been Updropped",
+  },
+  SolutionTimeline: {
+    Header: "The Solution",
+    Body: "With this we extend a products lifespan and strengthen the Cirkular Economy",
+    Bottom: {
+      first: "0 years",
+      second: "5 years",
+      third: "10 years",
+    },
   },
 };
 
