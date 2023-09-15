@@ -17,7 +17,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) => {
   const {currentLanguage, setLanguage} = useLanguage();
-
+//below we used the props params to display
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.draftCard} activeOpacity={0.8} onPress={onDraftPress}>
@@ -30,15 +30,15 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
             style={styles.cancelIcon}
           />
         </TouchableOpacity>
-
-        <Image source={{ uri: props.image }} style={styles.draftImage}/>
+        
+        <Image source={{ uri: props.imageUrl }} style={styles.draftImage} />
         <View style={styles.draftContent}>
-          <Text style={styles.category}>{props.category}</Text>
-          <View style={{flexDirection: "row"}}>
-            <Text style={styles.brand}>{props.brand}</Text>
-            {props.model && (
-              <Text style={[styles.brand, {marginLeft: 0}]}>
-                {","} {props.model}
+          <Text style={styles.category}>{props.categoryName}</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.brand}>{props.brandName}</Text>
+            {props.modelName && (
+              <Text style={[styles.brand, { marginLeft: 0 }]}>
+                {","} {props.modelName}
               </Text>
             )}
           </View>
@@ -48,9 +48,9 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
               {fontStyle: "normal", marginBottom: 10, fontWeight: "700"},
             ]}
           >
-            {props.condition}
+            {props.itemcondition}
           </Text>
-          <Text style={styles.description}>{props.description}</Text>
+          <Text style={styles.description}>{props.itemDescription}</Text>
         </View>
       </TouchableOpacity>
       <View

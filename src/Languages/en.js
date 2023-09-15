@@ -9,7 +9,7 @@ export default {
     LanguageSelector: "Danish",
     Header: "Welcome to Updropp",
     Intro:
-      "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
+        "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
     Littlemsg: "By pressing continue, you accept our",
     Termsandcond: "Terms and Conditions",
     continue: "Continue",
@@ -41,7 +41,7 @@ export default {
     title: "Updropp",
     uploadText: "Add image",
     informativeText:
-      "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
+        "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
     scanLaterButton: "SCAN LATER",
     scanButton: "UPDROPP",
     addDraft: "Add draft",
@@ -80,9 +80,9 @@ export default {
   ConditionDropdown: {
     selectCondition: "Condition",
   },
-    ProductDropdown: {
-        selectProduct: "Product",
-    },
+  ProductDropdown: {
+    selectProduct: "Product",
+  },
 
   NotificationsScreen: {
     Header: "Notifications",
@@ -110,17 +110,26 @@ export default {
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",
   },
-
-  SolutionComponent:{
-    Header: "The solution",
-    Body:"Our Uptainers help old electronics to a new life in another citizens homes.",
-    Bottom:{
-      firstHalf:"Use Phase",
-      secondHalf:"New Use Phase",
-    }
+  SolutionComponent: {
+    Header: "The Solution",
+    Body: "Our Uptainers help old electronics to a new life in another citizens homes.",
+    Bottom: {
+      firstHalf: "Use Phase",
+      secondHalf: "New Use Phase",
+    },
   },
-
   ProductUpdroppedAlert: {
     productUpdropped: "The product has now been Updropped",
   },
+  SolutionTimeline: {
+    Header: "The Solution",
+    Body: "With this we extend a products lifespan and strengthen the Cirkular Economy",
+    Bottom: {
+      first: "0 years",
+      second: "5 years",
+      third: "10 years",
+    },
+  },
 };
+
+

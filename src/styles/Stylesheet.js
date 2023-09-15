@@ -121,6 +121,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         minHeight: 80,
         position: "relative",
+        alignContent: 'center',
+        alignItems:'center'
       },
   boxlinkContainer: {
     flex: 1,
@@ -134,7 +136,7 @@ export const styles = StyleSheet.create({
     height: 30,
     justifyContent: "center",
     alignItems: "center", // Adjust spacing as needed
-    marginLeft: 20,
+    marginLeft: 70,
   },
   badgeText: {
     color: "white", // Customize the text color as needed
@@ -277,6 +279,8 @@ export const Backgroundstyle = StyleSheet.create({
   interactive_screens: {
     paddingTop: 50,
     alignItems: "center",
+    marginLeft:"1%",
+    marginRight: "1%",
     flex: 1,
     backgroundColor: Primarycolor3,
   },

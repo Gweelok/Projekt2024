@@ -472,6 +472,7 @@ export async function getAllItems() {
             const itemDescription = childSnapshot.val().itemDescription;
             const itemcondition = childSnapshot.val().itemcondition;
             const itemUptainer = childSnapshot.val().itemUptainer;
+            const itemUser = childSnapshot.val().itemUser;
             items.push({
                 itemId: itemId,
                 itemproduct: itemproduct,
@@ -481,7 +482,8 @@ export async function getAllItems() {
                 itemImage: itemImage,
                 itemDescription: itemDescription,
                 itemcondition: itemcondition,
-                itemUptainer: itemUptainer
+                itemUptainer: itemUptainer,
+                itemUser: itemUser,
             });
         });
         return items;
@@ -521,9 +523,9 @@ export async function getItemById(itemId) {
 }
 export async function getDraftFromUser(userId) {
     const itemList = await getAllItems()
-    itemList.find(item => item.itemUser === userId && item.itemUptainer === "Draft")
+    const draftList = itemList.filter(item => item.itemUser === userId && item.itemUptainer === "Draft")
     ///not tested yet
-    return itemList
+    return draftList
 }
 
     /********************/
@@ -707,22 +709,21 @@ export async function createUser(email, password, navigation ,name = "John Doe")
 
 export async function getCurrentUser() {
   try {
-    const user = [];
+    
     const id = firebaseAurth.currentUser.uid;
     const reference = ref(db, paths.users);
 
     const snapshot = await get(reference);
-    snapshot.forEach((child) => {
-      if (id === child.val().uuid) {
-        user.push({
-          id,
-          name: child.val().name,
-          email: child.val().email,
-        });
-      }
-    });
-
-    return user;
+    const modelData = snapshot.val();
+    
+    
+    if (modelData) {
+        return{
+            id,
+            name: modelData.name,
+            email: modelData.email
+        }
+    }
   } catch (error) {
     authErrors(error);
     return error;

@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
-//import { products } from "../../utils/SeedData";
 
 // data is used to set the initial value of the dropdown
 const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
@@ -13,16 +12,17 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
     const [isValidationError, setIsValidationError] = useState(false);
   const ITEM_HEIGHT = 39;
 
-  const products = ["Vaccuum", "Tablet", "PC", "TV", "Roomba"];
+    // Dummy products, replace with actual data
+    const products = ["iPhone", "Samsung TV", "Dell Laptop", "Wall Clock", "iPad"];
 
-  const handleProductSelect = (product) => {
-    setSelectedProduct(product);
-    setIsOpen(false);
-    setIsValidationError(false);
-    if (onProductSelect) {
-      onProductSelect(product);
-    }
-  };
+    const handleProductSelect = (product) => {
+        setSelectedProduct(product);
+        setIsOpen(false);
+        setIsValidationError(false);
+        if (onProductSelect) {
+            onProductSelect(product);
+        }
+    };
 
   return (
         <View style={productDropdownContainer.container}>
@@ -66,10 +66,10 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
 
       {isValidationError && !selectedProduct && (
         <Text style={productDropdownContainer.validationErrorText}></Text>
-      )}
+      )} 
     </View>
-  );
-};
+    );
+}
 
 const productDropdownContainer = {
   container: {
