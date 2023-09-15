@@ -27,7 +27,7 @@ const Home = ({ navigation }) => {
 
   return (
 
-   <View style={[Backgroundstyle.interactive_screens, { paddingTop: 0 }]}>
+   <View style={[Backgroundstyle.interactive_screens, { paddingTop: 0, }]}>
       <View style={GlobalStyle.BodyWrapper}>
         <View style={styles.container}>
           <TextInput
