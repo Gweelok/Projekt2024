@@ -147,10 +147,10 @@ const UptainerDetails = ({ navigation, route }) => {
                 }}
                 onPress={() =>
                   navigation.navigate("DetailView", {
-                    itemDescription: cur.itemDescription,
-                    imageUrl: cur.imageUrl,
-                    productName: cur.productName,
-                    brandName: cur.brandName,
+                    itemDescription: cur?.itemDescription,
+                    imageUrl: cur?.imageUrl,
+                    productName: cur?.productName,
+                    brandName: cur?.brandName,
                   })
                 }
               >

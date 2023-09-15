@@ -109,7 +109,8 @@ export default {
   QrScannerScreen: {
     Scan: "Scan for at Updroppe",
     Header: "Placér QR-koden inden for rammen for at aflæse",
-    Bottom: "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
+    Bottom:
+      "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
@@ -117,7 +118,6 @@ export default {
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
-
   },
   ProductUpdroppedAlert: {
     productUpdropped: "Produktet er nu Updroppet",
@@ -130,5 +130,9 @@ export default {
       second: "5 ar",
       third: "10 ar",
     },
+  },
+  StationsScreen: {
+    showProduct: "Vis produkter",
+    showWay: "Vis vej",
   },
 };
