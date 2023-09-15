@@ -1,12 +1,13 @@
 import Navigationbar from '../../../componets/Navigationbar';
 import React from 'react';
 import {StyleSheet, StatusBar, Image, View, Dimensions, Platform, Linking, ScrollView} from "react-native";
-import BackButton from "./BackButton";
+import BackButton from '../../../componets/BackButton';
 import StationTitle from "./StationTitle";
 import {Backgroundstyle} from "../../../styles/Stylesheet";
 import PrimaryColorButton from "./PrimaryColorButton";
 import WhiteColorButton from "./WhiteColorButton";
 import GlobalStyle from "../../../styles/GlobalStyle";
+
 
 const { width } = Dimensions.get('window');
 const imageSize = width * 0.85;
@@ -41,7 +42,7 @@ const StationDetailScreen = ({ route, navigation }) => {
             <View style={GlobalStyle.BodyWrapper}>
 
             <View style={styles.backButtonContainer}>
-                <BackButton navigation={navigation} />
+                <BackButton onPress={navigation.goBack}/>
             </View>
 
                 <View style={styles.titleContainer}>
