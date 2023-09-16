@@ -90,7 +90,6 @@ const UptainerDetails = ({ navigation, route }) => {
   }
 
   return (
-    // <View style={GlobalStyle.BodyWrapper}>
     <View style={styles.container}>
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
@@ -114,8 +113,8 @@ const UptainerDetails = ({ navigation, route }) => {
               style={styles.productLocation}
             >
               <Text style={styles.productAddress}>
-                {item.name} /{"\n"}
-                {item.location}
+                {item?.name} /{"\n"}
+                {item?.location}
               </Text>
               <Ionicons name="chevron-forward" color="white" size={30} />
             </TouchableOpacity>
@@ -148,10 +147,10 @@ const UptainerDetails = ({ navigation, route }) => {
                 }}
                 onPress={() =>
                   navigation.navigate("DetailView", {
-                    itemDescription: cur.itemDescription,
-                    imageUrl: cur.imageUrl,
-                    productName: cur.productName,
-                    brandName: cur.brandName,
+                    itemDescription: cur?.itemDescription,
+                    imageUrl: cur?.imageUrl,
+                    productName: cur?.productName,
+                    brandName: cur?.brandName,
                   })
                 }
               >
@@ -168,21 +167,20 @@ const UptainerDetails = ({ navigation, route }) => {
                     textAlign: "center",
                   }}
                 >
-                  {cur.productName}{" "}
+                  {cur?.productName}{" "}
                 </Text>
               </TouchableOpacity>
             )
           )}
         </View>
-      
       </ScrollViewComponent>
 
       {/* This ProductAlert component is dependent on the uploading of a product to the database */}
       {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
-      <ProductAlert />
+
+      {item?.screenFrom == "QRScanner" && <ProductAlert />}
       <Navigationbar navigation={navigation} />
     </View>
-    // </View>
   );
 };
 

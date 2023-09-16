@@ -163,7 +163,7 @@ export default function App() {
           <Stack.Screen
             name="MyDrafts"
             component={MyDrafts}
-            options={{ animation: "none", headerShown: true }}
+            options={{ animation: "none", headerShown: false }}
           />
           <Stack.Screen
             name="MySettings"

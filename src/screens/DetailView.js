@@ -69,9 +69,11 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
 };
 const DetailView = StyleSheet.create({
   container: {
-    paddingTop: 5,
+   // paddingTop: 5,
     justifyContent: "center",
     alignItems: "center",
+    marginRight: "1%",
+    marginLeft: "1%",
   },
   image: {
     height: 300,
@@ -83,15 +85,15 @@ const DetailView = StyleSheet.create({
     width: "70%",
     height: 100,
     borderRadius: 1,
-    paddingHorizontal: 10,
+   // paddingHorizontal: 30,
     marginTop: 15,
+
   },
   arrow: {
-    marginTop: 15,
     height: 42,
     width: 42,
     color: "white",
-    marginLeft: 38,
+    marginLeft: "4%",
     backgroundColor: Primarycolor1,
   },
   TagButton: {
@@ -114,31 +116,39 @@ const DetailView = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 5,
+
   },
 
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    width: "80%",
+    width: "90%",
     marginTop: 10,
+
   },
   leftInfo: {
     alignItems: "flex-start",
+    width:"60%",
   },
   rightInfo: {
-    alignItems: "flex-end",
+   // alignItems: "flex-end",
+    width:"40%",
+
+
   },
   location: {
     color: Primarycolor1,
     textAlign: "right",
     textDecorationLine: "underline",
     marginTop: 5,
+
     fontSize: 12,
   },
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
+
   },
 });
 

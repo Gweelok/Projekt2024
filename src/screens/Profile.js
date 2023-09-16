@@ -26,6 +26,7 @@ const Profile = ({ navigation }) => {
           <MenuItems
             msg={t("ProfileScreen.MyDrafts", currentLanguage)}
             onPress={() => navigation.navigate("MyDrafts")}
+            badge={badgeCount > 0 ? badgeCount : null}
           />
         </View>
         <View>
