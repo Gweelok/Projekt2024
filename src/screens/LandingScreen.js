@@ -28,13 +28,9 @@ import ReuseSvg from "../componets/svg-components/ReuseSvg";
 import CompletePlantSvg from "../componets/svg-components/CompletePlantSvg";
 import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhoneText";
 import GlobalStyle from "../styles/GlobalStyle";
-import globalStyle from "../styles/GlobalStyle";
-<<<<<<< HEAD
 import BackButton from "../componets/BackButton";
-=======
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 import { onAuthStateChanged } from "firebase/auth";
->>>>>>> main
 
 const LandingScreen = ({ navigation }) => {
   // for multi language

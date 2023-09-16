@@ -1,23 +1,7 @@
-<<<<<<< HEAD
-import Navigationbar from '../../../componets/Navigationbar';
 import React from 'react';
+import Navigationbar from '../../../componets/Navigationbar';
 import {StyleSheet, StatusBar, Image, View, Dimensions, Platform, Linking, ScrollView} from "react-native";
 import BackButton from '../../../componets/BackButton';
-=======
-import Navigationbar from "../../../componets/Navigationbar";
-import React from "react";
-import {
-  StyleSheet,
-  StatusBar,
-  Image,
-  View,
-  Dimensions,
-  Platform,
-  Linking,
-  ScrollView,
-} from "react-native";
-import BackButton from "./BackButton";
->>>>>>> main
 import StationTitle from "./StationTitle";
 import { Backgroundstyle } from "../../../styles/Stylesheet";
 import PrimaryColorButton from "./PrimaryColorButton";
@@ -26,12 +10,8 @@ import GlobalStyle from "../../../styles/GlobalStyle";
 import ScrollViewComponent from "../../../componets/atoms/ScrollViewComponent";
 import { t, useLanguage } from "../../../Languages/LanguageHandler";
 
-<<<<<<< HEAD
 
 const { width } = Dimensions.get('window');
-=======
-const { width } = Dimensions.get("window");
->>>>>>> main
 const imageSize = width * 0.85;
 
 const StationDetailScreen = ({ route, navigation }) => {
@@ -58,48 +38,11 @@ const StationDetailScreen = ({ route, navigation }) => {
     }
   };
 
-<<<<<<< HEAD
-    const openStationDirectionPage = () => {
-        openMap(stationDetail.latitude, stationDetail.longitude, stationDetail.name);
-    };
-
-    return (
-        <View  style={Backgroundstyle.interactive_screens}>
-            <View style={GlobalStyle.BodyWrapper}>
-
-            <View style={styles.backButtonContainer}>
-                <BackButton onPress={navigation.goBack}/>
-            </View>
-
-                <View style={styles.titleContainer}>
-                    <StationTitle title={stationDetail.name} description={stationDetail.address} //todo get title and description from backend
-                    />
-                </View>
-                <View style={styles.imageContainer}>
-                    <Image
-                        source={require('../../../../assets/images/cph.jpg')} //todo get image from backend
-                        style={styles.image}
-                    />
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <PrimaryColorButton onPress={() => { openStationDirectionPage() }} titleText="Vis vej" />
-                </View>
-
-                <View style={styles.buttonContainer2}>
-                    <WhiteColorButton onPress={() => { /* todo */ }} titleText="Vis produkter" />
-                </View>
-
-                <Navigationbar navigation={navigation} />
-            </View>
-        </View>
-=======
   const openStationDirectionPage = () => {
     openMap(
       stationDetail.latitude,
       stationDetail.longitude,
       stationDetail.name
->>>>>>> main
     );
   };
 
