@@ -76,16 +76,16 @@ const LandingScreen = ({ navigation }) => {
   }
 
   //Fn to navigate to the Signup Screern
-  // onAuthStateChanged(firebaseAurth, async (user) => {
-  //   if (user) {
-  //     setUserLogged(true)
-  //   } else {
-  //     setUserLogged(false)
-  //   }
-  // });
-  // if(userLogged){
-  //   navigation.navigate('Homepage')
-  // }
+  onAuthStateChanged(firebaseAurth, async (user) => {
+    if (user) {
+      setUserLogged(true)
+    } else {
+      setUserLogged(false)
+    }
+  });
+  if(userLogged){
+    navigation.navigate('Homepage')
+  }
 
   //Fn to change to langauge and display correct language
 
