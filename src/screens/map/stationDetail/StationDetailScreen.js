@@ -51,7 +51,7 @@ const StationDetailScreen = ({ route, navigation }) => {
       <View style={GlobalStyle.BodyWrapper}>
         <ScrollViewComponent>
           <View style={styles.backButtonContainer}>
-            <BackButton navigation={navigation} />
+            <BackButton onPress={navigation.goBack} />
           </View>
           <View style={styles.titleContainer}>
             <StationTitle
