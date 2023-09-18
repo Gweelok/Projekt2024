@@ -1,127 +1,192 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ActivityIndicator,} from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  Button,
+  Alert,
+  Pressable,
+} from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome"; // Import the icon library you want to use
+import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appropriate icon library
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { generateQRCode } from "../../utils/QRCodeGenerator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Buttons, styles } from "../../styles/Stylesheet";
 
 const QRScanner = () => {
-    const navigation = useNavigation();
-    const { currentLanguage } = useLanguage();
-    const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
+  const { currentLanguage } = useLanguage();
+  const [loading, setLoading] = useState(false);
 
-    const handlePress = () => {
-        navigation.goBack();
-    };
+  const screenNavigation = { screenFrom: "QRScanner" };
 
-    // Placeholder function to simulate scanning a QR code.
+  const handlePress = () => {
+    navigation.goBack();
+  };
+
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [text, setText] = useState(); // Initialize scanned text with a default value
+  const [scannedQRCode, setScannedQRCode] = useState(null);
+
+  const askForCameraPermission = async () => {
+    // Made askForCameraPermission an async function
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    setHasPermission(status === "granted");
+  };
+
+  useEffect(() => {
+    askForCameraPermission();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    setText(data);
+    const scannedQRCode = generateQRCode(data);
+    setScannedQRCode(scannedQRCode);
+    console.log("Type: " + type + "\nData: " + data);
+  };
+
+  const handleScanAgain = () => {
+    setScanned(false);
+    //setText('Not yet scanned'); // Reset the scanned text
+    setScannedQRCode(null);
+  };
+
+  const handleSaveCode = async () => {
+    if (scannedQRCode) {
+      const qrCodeString = JSON.stringify(scannedQRCode);
+      try {
+        await AsyncStorage.setItem("scannedQRCode", qrCodeString);
+        console.log("Scanned QR code saved:", qrCodeString);
+
+        Alert.alert(
+          t("QrScannerScreen.Success", currentLanguage),
+          t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
+          [
+            {
+              text: t("QrScannerScreen.OK", currentLanguage),
+              onPress: () => {
+                navigation.navigate("UptainerDetails", screenNavigation);
+
+                // Optionally, navigate or perform other actions after saving
+              },
+            },
+          ]
+        );
+      } catch (error) {
+        console.error("Error saving scanned QR code:", error);
+
+        Alert.alert(
+          t("QrScannerScreen.Error", currentLanguage),
+          t("QrScannerScreen.ErrorMsg1", currentLanguage),
+          [
+            {
+              text: t("QrScannerScreen.OK", currentLanguage),
+              onPress: () => {
+                // Optionally, navigate or perform other actions after saving
+              },
+            },
+          ]
+        );
+      }
+    } else {
+      console.warn("No QR code scanned to save.");
+    }
+  };
+
   const handleQRScan = () => {
     setLoading(true);
 
     setTimeout(() => {
       setLoading(false);
-      navigation.navigate("UptainerDetails", { itemData: "Sample Scanned Data" }); 
-    }, 3000); // waits for 3 seconds
+      navigation.navigate("UptainerDetails", {
+        itemData: "Sample Scanned Data",
+      });
+    }, 3000);
   };
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                {/* Header Text */}
-                <Text style={styles.headline}>
-                    {t("QrScannerScreen.Scan", currentLanguage)}
-                </Text>
-                {/* Close Button */}
-                <TouchableOpacity style={styles.closeButton} onPress={handlePress}>
-                    <Icon size={30} name="close" style={styles.closeButtonIcon} />
-                </TouchableOpacity>
+  return (
+    <SafeAreaView style={styles.container2}>
+      <View style={styles.header}>
+        <Text style={styles.headline}>
+          {t("QrScannerScreen.Scan", currentLanguage)}
+        </Text>
+        <TouchableOpacity style={styles.closeButton} onPress={handlePress}>
+          <Icon size={30} name="close" style={styles.closeButtonIcon} />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.content}>
+        <Text style={styles.instruction}>
+          {t("QrScannerScreen.Header", currentLanguage)}
+        </Text>
+
+        {hasPermission ? (
+          <View style={styles.qrScannerFrame}>
+            <View style={styles.dashedBorder}>
+              <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={{ flex: 1 }}
+              />
             </View>
+          </View>
+        ) : (
+          <Text style={{ margin: 10 }}>No access to the camera</Text>
+        )}
 
-            <View style={styles.content}>
-                {/* Header Instruction */}
-                <Text style={styles.instruction}>
-                    {t("QrScannerScreen.Header", currentLanguage)}
-                </Text>
+        {/*<Text style={styles.maintext}>{text}</Text>*/}
 
-                {/* QR Code Scanner Frame */}
-                {/* You would integrate the QR code scanner library here */}
-                {loading ? (
-                <ActivityIndicator size="large" color="darkgreen" />
-                 ) : (
-                    <>
-                        <TouchableOpacity style={styles.qrScannerFrame} onPress={handleQRScan}>
-                        <View style={styles.dashedBorder}></View>
-                        </TouchableOpacity>
-                        <Text style={styles.instruction}>
-                        {t("QrScannerScreen.Bottom", currentLanguage)}
-                        </Text>
-                    </>
-                )}
+        <View style={styles.buttonsContainer}>
+          {scanned && (
+            <View>
+              <View style={{ marginBottom: 10 }}>
+                <Pressable
+                  onPress={handleSaveCode}
+                  style={[
+                    Buttons.main_button,
+                    {
+                      borderWidth: 1,
+                      width: 220,
+                      marginHorizontal: 60,
+                    },
+                  ]}
+                >
+                  <Text style={Buttons.main_buttonText}>
+                    {t("QrScannerScreen.SaveCode", currentLanguage)}
+                  </Text>
+                </Pressable>
+              </View>
+              <View>
+                <Pressable
+                  onPress={handleScanAgain}
+                  style={[
+                    Buttons.secondary_button,
+                    {
+                      borderWidth: 2,
+                      width: 220,
+                      marginHorizontal: 60,
+                    },
+                  ]}
+                >
+                  <Text style={Buttons.secondary_buttonText}>
+                    {t("QrScannerScreen.ScanAgain", currentLanguage)}
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
+          )}
+        </View>
+
+        <Text style={styles.instruction}>
+          {t("QrScannerScreen.Bottom", currentLanguage)}
+        </Text>
       </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "white", // White background
-    },
-    header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingVertical: 10, // Added padding to lower the header slightly
-        paddingHorizontal: 5,
-        backgroundColor: "white", // White background
-        marginTop: 15, // Adjust the margin to lower the header
-    },
-    closeButton: {
-        backgroundColor: "darkgreen",
-        padding: 5, // Decreased padding to make the button smaller
-        borderRadius: 5,
-    },
-    closeButtonIcon: {
-        color: "white", // White text color
-    },
-    headline: {
-        fontSize: 24,
-        fontWeight: "bold",
-        color: "darkgreen", // Dark green text color
-    },
-    content: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    qrScannerFrame: {
-        width: 320,
-        height: 320,
-        justifyContent: "center",
-        alignItems: "center",
-        marginBottom: 10,
-        //  backgroundColor: "darkgreen", // Dark green background for border
-        borderRadius: 10, // Rounded corners
-        position: "relative",
-        // overflow: "hidden", // Hide overflow from dashed border
-    },
-    dashedBorder: {
-        width: "100%",
-        height: "100%",
-        borderColor: "darkgreen", // Dark green border color
-        borderWidth: 5, // Increase line thickness as needed
-        borderStyle: "dashed", // Dashed line style
-        borderRadius: 12, // Increase radius for larger dashes
-        marginTop: 20, // Adjust the space between dashes
-        borderSpacing: 90, // Adjust the space between dashes
-    },
-    instruction: {
-        fontSize: 16,
-        textAlign: "center",
-        marginHorizontal: 20,
-        marginTop: 10,
-        marginBottom: 10,
-        color: "darkgreen", // Dark green text color
-    },
-});
 
 export default QRScanner;

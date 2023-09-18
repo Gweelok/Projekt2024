@@ -29,11 +29,14 @@ import CompletePlantSvg from "../componets/svg-components/CompletePlantSvg";
 import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhoneText";
 import GlobalStyle from "../styles/GlobalStyle";
 import globalStyle from "../styles/GlobalStyle";
+import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
+import { onAuthStateChanged } from "firebase/auth";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language
   const { currentLanguage, setLanguage } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const[userLogged,setUserLogged]= useState(false)
   const backButton =
     currentSlide === 0 ? null : (
       <TouchableOpacity
@@ -62,6 +65,11 @@ const LandingScreen = ({ navigation }) => {
       image: <CompleteHousePhoneText />,
       bottom: t("SolutionComponent.Body", currentLanguage),
     },
+    {
+      top: t("SolutionTimeline.Header", currentLanguage),
+      image: <CompleteTimelineSvg />,
+      bottom: t("SolutionTimeline.Body", currentLanguage),
+    },
   ];
 
   function nextSlideAndSignUp() {
@@ -73,14 +81,16 @@ const LandingScreen = ({ navigation }) => {
   }
 
   //Fn to navigate to the Signup Screern
-  const SignUp = () => {
-    if (firebaseAurth.currentUser !== null) {
-      console.log("User is logged in");
-      navigation.navigate("Homepage");
+  onAuthStateChanged(firebaseAurth, async (user) => {
+    if (user) {
+      setUserLogged(true)
     } else {
-      navigation.navigate("SignUp");
+      setUserLogged(false)
     }
-  };
+  });
+  if(userLogged){
+    navigation.navigate('Homepage')
+  }
 
   //Fn to change to langauge and display correct language
 
@@ -151,11 +161,10 @@ const styling = StyleSheet.create({
     marginLeft: "auto",
   },
   topBar: {
-    // paddingLeft:15,
     flexDirection: "row",
-    alignItems: "center",
-    marginLeft: "auto",
-    marginRight: 10,
+    alignSelf: "stretch",
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
   backButton: {
     backgroundColor: "#1c4b3d",

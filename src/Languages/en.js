@@ -79,9 +79,9 @@ export default {
   ConditionDropdown: {
     selectCondition: "Condition",
   },
-    ProductDropdown: {
-        selectProduct: "Product",
-    },
+  ProductDropdown: {
+    selectProduct: "Product",
+  },
 
   NotificationsScreen: {
     Header: "Notifications",
@@ -102,18 +102,36 @@ export default {
     Header: "Place the QR-code inside the frame to read it",
     Bottom:
       "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
+    Error: "Error",
+    ErrorMsg1: "An error occurred while saving the QR Code.",
+    ScanAgain: "Scan Again?",
+    SaveCode: "Updropp",
+    Success: "Success",
+    QRCodeSavedSuccessfully: "QR Code saved successfully.",
+    OK: "OK",
   },
-  
-  SolutionComponent:{
-    Header: "The solution",
-    Body:"Our Uptainers help old electronics to a new life in another citizens homes.",
-    Bottom:{
-      firstHalf:"Use Phase",
-      secondHalf:"New Use Phase",
-    }
+  SolutionComponent: {
+    Header: "The Solution",
+    Body: "Our Uptainers help old electronics to a new life in another citizens homes.",
+    Bottom: {
+      firstHalf: "Use Phase",
+      secondHalf: "New Use Phase",
+    },
   },
-
   ProductUpdroppedAlert: {
     productUpdropped: "The product has now been Updropped",
+  },
+  SolutionTimeline: {
+    Header: "The Solution",
+    Body: "With this we extend a products lifespan and strengthen the Cirkular Economy",
+    Bottom: {
+      first: "0 years",
+      second: "5 years",
+      third: "10 years",
+    },
+  },
+  StationsScreen: {
+    showProduct: "Show product",
+    showWay: "Show the way",
   },
 };

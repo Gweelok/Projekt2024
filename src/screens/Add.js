@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Pressable,
+  Alert
 } from "react-native";
 import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
@@ -20,20 +21,65 @@ import BrandDropdown from './form/BrandDropdown';
 import ModelDropdown from './form/ModelDropdown';
 import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
+import  { firebaseApp, firebaseDB } from '../utils/Firebase';
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import {createItemDraft, getCurrentUser} from "../utils/Repo";
 
 
-const Add = ({navigation}) => {
-  const {currentLanguage, setLanguage} = useLanguage();
-  const [category, setCategory] = useState(null);
-  const [product, setProduct] = useState(null);
-  const [brand, setBrand] = useState(null);
-  // you can fetch the final result of condition field through here
-  const [condition, setCondition] = useState(null);
-  const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
+const ProductDetailScreen = ({ route }) => {
+  const { productId, userId } = route.params;
+
+  const connectProductToUser = async () => {
+    try {
+      // Add a reference to the user's document
+      const userDocRef = firebaseDB.collection('users').doc(userId);
+
+      // Add the product ID to the user's document
+      await userDocRef.update({
+        products: firebaseApp.firestore.FieldValue.arrayUnion(productId),
+      });
+
+      Alert.alert('Success', 'Product connected to user successfully');
+    } catch (error) {
+      console.error('Error connecting product to user:', error);
+      Alert.alert('Error', 'Failed to connect product to user');
+    }
+  };
 
   return (
     <View>
-      <ScrollView>
+      {/* Product details */}
+      {/* Display product details here */}
+      <Button title="Connect Product to User" onPress={connectProductToUser} />
+    </View>
+  );
+};
+
+const Add = ({route, navigation}) => {
+  const itemData = route.params?.itemData;
+
+  // you can fetch the final result of all field through here
+  const {currentLanguage, setLanguage} = useLanguage();
+
+  const [image, setImageUrl] = useState(itemData?.image || null);
+  const [category, setCategory] = useState(itemData?.category || null);
+  const [product, setProduct] = useState(itemData?.product || null);
+  const [brand, setBrand] = useState(itemData?.brand || null);
+  const [model, setModel] = useState(itemData?.model || null);
+  const [condition, setCondition] = useState(itemData?.condition || null);
+  const [description, setDescription] = useState(itemData?.description || null);
+
+  const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
+
+  const handleSaveButtonClick = async () => {
+    createItemDraft(product, brand, model, category, image, description, condition);
+    navigation.navigate("ProductSaved");
+    setBadgeCount(prevCount => prevCount + 1);
+  };
+
+  return (
+    <SafeAreaView>
+      <ScrollViewComponent>
         <View style={{
           paddingTop: 50,
           flex: 1,
@@ -45,26 +91,22 @@ const Add = ({navigation}) => {
             {t("UpdroppForm.title", currentLanguage)}
           </Text>
 
-          <View style={[{marginBottom: 20}]}>
-            <CustomInput showStar={false}>
-              <ImageUpload/>
-            </CustomInput>
+          <View style={[{marginBottom: 10}]}>
+            <ImageUpload data={itemData?.image}/>
           </View>
 
-          <CategoryDropdown onCategorySelect={setCategory}/>
+          <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
 
-          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct}/>
+          <ProductDropdown categorySelected={!!category} onProductSelect={setProduct} data={itemData?.product}/>
 
-          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand}/>
+          <BrandDropdown productSelected={!!product} onBrandSelect={setBrand} data={itemData?.brand}/>
 
-          <ModelDropdown brandSelected={!!brand}/>
+          <ModelDropdown brandSelected={!!brand} onModelSelect={setModel}  data = {itemData?.model}/>
 
-          <ConditionDropdown onConditionSelect={setCondition}/>
+          <ConditionDropdown onConditionSelect={setCondition} data = {itemData?.condition}/>
 
           <View style={ {marginBottom: 20}}>
-            <CustomInput showStar={false}>
-            <DescriptionField />
-            </CustomInput>
+            <DescriptionField data={itemData?.description} onInputComplete={setDescription}/>
           </View>
 
           <View style={{marginBottom: 20}}>
@@ -91,22 +133,17 @@ const Add = ({navigation}) => {
               Buttons.secondary_button,
               {borderWidth: 2, width: "100%"},
             ]}
-            onPress={() => {
-              //createItemDraft("productId", "brandId", "modelId", "categoryId", "itemImage", "itemDescription", "itemCondition", "uptainerId", "userId")
-              navigation.navigate("ProductSaved");
-              setBadgeCount(prevCount => prevCount + 1);
-            }}
+            onPress={handleSaveButtonClick}
           >
             <Text style={Buttons.secondary_buttonText}>
               {t("UpdroppForm.scanLaterButton", currentLanguage)}
             </Text>
           </Pressable>
 
-          <View style={{marginBottom: 120}}/>
         </View>
-      </ScrollView>
+      </ScrollViewComponent>
       <Navigationbar navigation={navigation} badgeCount={badgeCount}/>
-    </View>
+    </SafeAreaView>
   );
 };
 

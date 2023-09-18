@@ -1,29 +1,31 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native"; 
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet"; 
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { categories } from "../../utils/SeedData";
 
-const CategoryDropdown = ({ onCategorySelect }) => {
+// data is used to set the initial value of the category dropdown
+const CategoryDropdown = ({ onCategorySelect, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(data||null);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 40;
 
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-    setIsOpen(false);
-    setIsValidationError(false);
-    if (onCategorySelect) {
-      onCategorySelect(category);
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+        setIsOpen(false);
+        setIsValidationError(false);
+        if (onCategorySelect) {
+            onCategorySelect(category);
+        }
     }
-  };
 
     return (
         <View style={categoryDropdownContainer.container}>
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={categoryDropdownContainer.dropdownButton}
                 onPress={() => {
                     setIsOpen(!isOpen);
@@ -33,11 +35,11 @@ const CategoryDropdown = ({ onCategorySelect }) => {
                 }}
             >
                 <Text style={categoryDropdownContainer.dropdownText}>
-                    {selectedCategory ? selectedCategory : 
+                    {selectedCategory ? selectedCategory :
                     t("CategoryDropdown.selectCategory", currentLanguage)}
                 </Text>
-                <AntDesign 
-                    name={isOpen ? "caretup" : "caretdown"} 
+                <AntDesign
+                    name={isOpen ? "caretup" : "caretdown"}
                     size={20}
                 />
             </TouchableOpacity>
@@ -45,8 +47,8 @@ const CategoryDropdown = ({ onCategorySelect }) => {
             {isOpen && (
             <ScrollView style={[categoryDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
             {categories.map(category => (
-                        <TouchableOpacity 
-                            key={category} 
+                        <TouchableOpacity
+                            key={category}
                             onPress={() => handleCategorySelect(category)}
                             style={categoryDropdownContainer.dropdownListItem}
                         >
@@ -60,8 +62,8 @@ const CategoryDropdown = ({ onCategorySelect }) => {
         <Text style={categoryDropdownContainer.validationErrorText}></Text>
       )}
     </View>
-  );
-};
+    );
+}
 // Category dropdown styles
 const categoryDropdownContainer = {
   container: {

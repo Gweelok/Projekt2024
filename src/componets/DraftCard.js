@@ -8,19 +8,19 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { Buttons, Primarycolor1 } from "../styles/Stylesheet";
-import { t, useLanguage } from "../Languages/LanguageHandler";
-import { Ionicons } from "@expo/vector-icons";
+import {Buttons, Primarycolor1} from "../styles/Stylesheet";
+import {t, useLanguage} from "../Languages/LanguageHandler";
+import {Ionicons} from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const DraftCard = ({ props, navigation, onPress, onCancelPress }) => {
-  const { currentLanguage, setLanguage } = useLanguage();
-
+const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) => {
+  const {currentLanguage, setLanguage} = useLanguage();
+//below we used the props params to display
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.draftCard} activeOpacity={0.8}>
+      <TouchableOpacity style={styles.draftCard} activeOpacity={0.8} onPress={onDraftPress}>
         <TouchableOpacity style={styles.cancelIconContainer}>
           <Ionicons
             onPress={onCancelPress}
@@ -30,27 +30,27 @@ const DraftCard = ({ props, navigation, onPress, onCancelPress }) => {
             style={styles.cancelIcon}
           />
         </TouchableOpacity>
-
-        <Image source={props.image} style={styles.draftImage} />
+        
+        <Image source={{ uri: props.imageUrl }} style={styles.draftImage} />
         <View style={styles.draftContent}>
-          <Text style={styles.category}>{props.category}</Text>
+          <Text style={styles.category}>{props.categoryName}</Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.brand}>{props.brand}</Text>
-            {props.model && (
+            <Text style={styles.brand}>{props.brandName}</Text>
+            {props.modelName && (
               <Text style={[styles.brand, { marginLeft: 0 }]}>
-                {","} {props.model}
+                {","} {props.modelName}
               </Text>
             )}
           </View>
           <Text
             style={[
               styles.description,
-              { fontStyle: "normal", marginBottom: 10, fontWeight: "700" },
+              {fontStyle: "normal", marginBottom: 10, fontWeight: "700"},
             ]}
           >
-            {props.condition}
+            {props.itemcondition}
           </Text>
-          <Text style={styles.description}>{props.description}</Text>
+          <Text style={styles.description}>{props.itemDescription}</Text>
         </View>
       </TouchableOpacity>
       <View
@@ -61,13 +61,13 @@ const DraftCard = ({ props, navigation, onPress, onCancelPress }) => {
       >
         <Pressable
           onPress={onPress}
-          style={[Buttons.main_button, { borderWidth: 1, width: "50%" }]}
+          style={[Buttons.main_button, {borderWidth: 1, width: "50%"}]}
         >
           <Text style={Buttons.main_buttonText}>
             {t("UpdroppForm.scanButton", currentLanguage)}
           </Text>
         </Pressable>
-        <View style={{ width: windowWidth / 2.3 }} />
+        <View style={{width: windowWidth / 2.3}}/>
       </View>
     </View>
   );

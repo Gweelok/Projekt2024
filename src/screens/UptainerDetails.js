@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  ScrollView,
   Text,
   View,
   TouchableOpacity,
@@ -21,6 +20,7 @@ import {
 } from "../utils/Repo";
 import GlobalStyle from "../styles/GlobalStyle";
 import ProductAlert from "../componets/ProductAlert";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -90,9 +90,8 @@ const UptainerDetails = ({ navigation, route }) => {
   }
 
   return (
-    // <View style={GlobalStyle.BodyWrapper}>
     <View style={styles.container}>
-      <ScrollView
+      <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
       >
@@ -114,8 +113,8 @@ const UptainerDetails = ({ navigation, route }) => {
               style={styles.productLocation}
             >
               <Text style={styles.productAddress}>
-                {item.name} /{"\n"}
-                {item.location}
+                {item?.name} /{"\n"}
+                {item?.location}
               </Text>
               <Ionicons name="chevron-forward" color="white" size={30} />
             </TouchableOpacity>
@@ -148,10 +147,10 @@ const UptainerDetails = ({ navigation, route }) => {
                 }}
                 onPress={() =>
                   navigation.navigate("DetailView", {
-                    itemDescription: cur.itemDescription,
-                    imageUrl: cur.imageUrl,
-                    productName: cur.productName,
-                    brandName: cur.brandName,
+                    itemDescription: cur?.itemDescription,
+                    imageUrl: cur?.imageUrl,
+                    productName: cur?.productName,
+                    brandName: cur?.brandName,
                   })
                 }
               >
@@ -168,26 +167,20 @@ const UptainerDetails = ({ navigation, route }) => {
                     textAlign: "center",
                   }}
                 >
-                  {cur.productName}{" "}
+                  {cur?.productName}{" "}
                 </Text>
               </TouchableOpacity>
             )
           )}
         </View>
-        <View
-          style={[
-            styles.section,
-            { marginTop: 50, minHeight: 200, marginBottom: 100 },
-          ]}
-        />
-      </ScrollView>
+      </ScrollViewComponent>
 
       {/* This ProductAlert component is dependent on the uploading of a product to the database */}
       {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
-      <ProductAlert />
+
+      {item?.screenFrom == "QRScanner" && <ProductAlert />}
       <Navigationbar navigation={navigation} />
     </View>
-    // </View>
   );
 };
 

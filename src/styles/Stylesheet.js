@@ -5,6 +5,7 @@
 
 import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
+import {inline} from "react-native-web/src/exports/StyleSheet/compiler";
 
 //		backgroundColor: '#fff',
 //Main colors
@@ -120,11 +121,89 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         minHeight: 80,
         position: "relative",
+        alignContent: 'center',
+        alignItems:'center'
       },
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  badgeContainer: {
+    position: "absolute",
+    backgroundColor: Primarycolor1,
+    width: 30,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center", // Adjust spacing as needed
+    marginLeft: 70,
+  },
+  badgeText: {
+    color: "white", // Customize the text color as needed
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  container2: {
+    flex: 1,
+    backgroundColor: "white", // White background
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 10, // Added padding to lower the header slightly
+    paddingHorizontal: 20,
+    backgroundColor: "white", // White background
+    marginTop: 15, // Adjust the margin to lower the header
+  },
+  closeButton: {
+    backgroundColor: Primarycolor1,
+    padding: 3, // Decreased padding to make the button smaller
+  },
+  closeButtonIcon: {
+    color: "white", // White text color
+  },
+  headline: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: Primarycolor1, // Dark green text color
+  },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  qrScannerFrame: {
+    width: 250,
+    height: 400,
+    justifyContent: "center",
+   // alignItems: "center",
+    marginBottom: 20,
+    //  backgroundColor: "darkgreen", // Dark green background for border
+    borderRadius: 10, // Rounded corners
+    position: "relative",
+   //  overflow: "hidden", // Hide overflow from dashed border
+  },
+  dashedBorder: {
+    width: "100%",
+    height: "100%",
+    borderColor: "white", // Dark green border color
+    borderWidth: 5, // Increase line thickness as needed
+    borderStyle: "dashed", // Dashed line style
+    borderRadius: 12, // Increase radius for larger dashes
+    marginTop: 20, // Adjust the space between dashes
+    borderSpacing: 90, // Adjust the space between dashes
+  },
+  buttonsContainer: {
+    display: "flex",
+  },
+  instruction: {
+    fontSize: 18,
+    //textAlign: "center",
+    marginHorizontal: 20,
+    marginTop: 5,
+    marginBottom: 5,
+    color: Primarycolor1, // Dark green text color
   },
 });
 
@@ -200,6 +279,8 @@ export const Backgroundstyle = StyleSheet.create({
   interactive_screens: {
     paddingTop: 50,
     alignItems: "center",
+    marginLeft:"1%",
+    marginRight: "1%",
     flex: 1,
     backgroundColor: Primarycolor3,
   },

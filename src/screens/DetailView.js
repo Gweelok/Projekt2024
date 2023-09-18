@@ -7,6 +7,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
@@ -14,10 +15,6 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  
-
-   
-  
   
   const handlePress = () => {
     navigation.goBack();
@@ -30,50 +27,53 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <TouchableOpacity onPress={handlePress}>
-        <Ionicons
-          name="chevron-back-outline"
-          size={36}
-          style={DetailView.arrow}
-        />
-      </TouchableOpacity>
-      <View style={DetailView.container}> 
-        <Image source={{ uri: imageUrl }} style={DetailView.image} /> 
-        <View style={DetailView.infoContainer}>
+      <ScrollViewComponent>
+        <TouchableOpacity onPress={handlePress}>
+          <Ionicons
+            name="chevron-back-outline"
+            size={36}
+            style={DetailView.arrow}
+          />
+        </TouchableOpacity>
+        <View style={DetailView.container}>
+          <Image source={{ uri: imageUrl }} style={DetailView.image} />
+          <View style={DetailView.infoContainer}>
+            <View style={DetailView.leftInfo}>
+              <Text style={DetailView.product}>{productName}</Text>
+              <Text style={DetailView.brand}>{brandName}</Text>
+            </View>
 
-          <View style={DetailView.leftInfo}>
-            <Text style={DetailView.product}>{productName}</Text> 
-            <Text style={DetailView.brand}>{brandName}</Text>
-          </View>
-
-          <View style={DetailView.rightInfo}>
-            <View style={DetailView.locationContainer}>
-              <Ionicons name="location" size={15} color={Primarycolor1} />
-              <Text style={DetailView.location}>Valby - Allegade 25</Text>
+            <View style={DetailView.rightInfo}>
+              <View style={DetailView.locationContainer}>
+                <Ionicons name="location" size={15} color={Primarycolor1} />
+                <Text style={DetailView.location}>Valby - Allegade 25</Text>
+              </View>
             </View>
           </View>
-
+          <Text style={DetailView.text}>{displayTextValue}</Text>
+          <TouchableOpacity onPress={""} style={DetailView.TagButton}>
+            <Text style={DetailView.Tag}>{TagButton}</Text>
+          </TouchableOpacity>
+          <Text
+            style={{ color: Primarycolor1, textDecorationLine: "underline" }}
+            onPress={() => Linking.openURL("")} //
+          >
+            Var produktet ikke i uptaineren?
+          </Text>
         </View>
-        <Text style={DetailView.text}>{displayTextValue}</Text>
-        <TouchableOpacity onPress={""} style={DetailView.TagButton}>
-          <Text style={DetailView.Tag}>{TagButton}</Text>
-        </TouchableOpacity>
-        <Text
-          style={{ color: Primarycolor1, textDecorationLine: 'underline' }}
-          onPress={() => Linking.openURL("")} //
-        >
-          Var produktet ikke i uptaineren?
-        </Text>
-      </View>
+      </ScrollViewComponent>
+
       <Navigationbar navigation={navigation} />
     </View>
   );
 };
 const DetailView = StyleSheet.create({
   container: {
-    paddingTop: 5,
+   // paddingTop: 5,
     justifyContent: "center",
     alignItems: "center",
+    marginRight: "1%",
+    marginLeft: "1%",
   },
   image: {
     height: 300,
@@ -85,15 +85,15 @@ const DetailView = StyleSheet.create({
     width: "70%",
     height: 100,
     borderRadius: 1,
-    paddingHorizontal: 10,
+   // paddingHorizontal: 30,
     marginTop: 15,
+
   },
   arrow: {
-    marginTop: 15,
     height: 42,
     width: 42,
     color: "white",
-    marginLeft: 38,
+    marginLeft: "4%",
     backgroundColor: Primarycolor1,
   },
   TagButton: {
@@ -116,31 +116,39 @@ const DetailView = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 5,
+
   },
 
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    width: "80%",
+    width: "90%",
     marginTop: 10,
+
   },
   leftInfo: {
     alignItems: "flex-start",
+    width:"60%",
   },
   rightInfo: {
-    alignItems: "flex-end",
+   // alignItems: "flex-end",
+    width:"40%",
+
+
   },
   location: {
     color: Primarycolor1,
     textAlign: "right",
     textDecorationLine: "underline",
     marginTop: 5,
+
     fontSize: 12,
   },
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
+
   },
 });
 
