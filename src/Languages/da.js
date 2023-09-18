@@ -43,36 +43,6 @@ export default {
     Header: "Mine indstillinger",
   },
 
-    CustomInput:{
-        hint: "valgfri",
-    },
-
-    NotificationsScreen : {
-        Header: "Notifikationer",
-    },
-    AccountSettingsScreen : {
-     Header: "Kontoindstillinger",
-      BackButton:"Tilbage",
-      Name: "Navn",
-      Email: "E-mail",
-      Tlf: "Tlf",
-      Submit:"Gem",
-      ChangeCode:"Skift kode",
-      Delete:"Slet konto",
-      Optional:'valgfri',
-      HandleSave: 'Oplysningerne er gemt',
-      HandleDeleteAccount:'Konto er slettet',
-      Language:'Sprog'
-    },
-  DeleteAccount:{
-    Header:'Er du sikker på at du vil slette din konto?',
-    MainButton:'Slet min konto',
-    SecondaryButton:'Annullér',
-  },
-    MySettingsScreen : {
-        Header: "Mine indstillinger",
-    },
-
   MyDraftsScreen: {
     Header: "Mine Kladder",
     closeButtonTitle: "Slette kladde",

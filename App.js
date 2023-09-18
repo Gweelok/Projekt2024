@@ -67,7 +67,6 @@ import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 import { BadgeContext } from "./src/screens/form/BadgeContext"
-import DeleteAccount from "./src/screens/ProfileSetings/deleteAccount";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -176,11 +175,6 @@ export default function App() {
             name="AccountSettings"
             component={AccountSettings}
             options={{ animation: "none" }}
-          />
-          <Stack.Screen
-              name="DeleteAccount"
-              component={DeleteAccount}
-              options={{ animation: "none" }}
           />
           <Stack.Screen
             name="Notifications"
