@@ -59,51 +59,47 @@ const SignUpScreen = ({ navigation }) => {
           <Octicons name="chevron-left" size={20} style={{ color: "white" }} />
         </TouchableOpacity>
       </View>
+
       <View style={GlobalStyle.BodyWrapper}>
         <Text style={[styles.Header_Primarycolor1, styles.Header]}>
           {t("SignUpScreen.Signup", currentLanguage)}
         </Text>
 
-        <TextInput
-          placeholder="E-mail"
-          value={email}
-          onChangeText={onChangeEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          clearButtonMode={"always"}
-          style={styles.inputBox}
-        />
+    <View style={Backgroundstyle.informationScreens}>
+        <View style={GlobalStyle.BodyWrapper}>
+      <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
+      <TextInput
+        placeholder="E-mail"
+        value={email}
+        onChangeText={onChangeEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        clearButtonMode={"always"}
+        style={styles.inputBox}
+      />
 
-        <View style={[styles.inputBox, { flexDirection: "row" }]}>
-          <TextInput
-            value={password}
-            onChangeText={CheckPassword}
-            placeholder={t("SignUpScreen.password", currentLanguage)}
-            keyboardType={"default"}
-            secureTextEntry={!showPassword}
-            style={{ flex: 1, fontSize: 16, fontFamily: "space-grotesk" }}
-          />
-          <Ionicons
-            name={showPassword ? "ios-eye-off" : "ios-eye"}
-            size={18}
-            color={Primarycolor1}
-            style={styles.Icon_container}
-            onPress={togglePasswordVisibility}
-          />
-        </View>
-        {
-          //Check on the password
-          passwordCheck ? null : (
-            <Text style={SignUpStyles.text_Tertiary}>
-              {" "}
-              {t("SignUpScreen.passwordmsg", currentLanguage)}{" "}
-            </Text>
-          )
-        }
-        <Pressable onPress={handleSubmit} style={Buttons.main_button}>
-          <Text style={Buttons.main_buttonText}>
-            {t("SignUpScreen.Signup", currentLanguage)}
-          </Text>
+      <View style={[styles.inputBox , {flexDirection:"row"}]}>
+      <TextInput
+        value={password}
+        onChangeText={CheckPassword}
+        placeholder={t('SignUpScreen.password', currentLanguage)}
+        keyboardType={'default'}
+        secureTextEntry={!showPassword}
+        style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
+      />
+      <Ionicons
+        name={showPassword ? 'ios-eye-off' : 'ios-eye'}
+        size={18}
+        color={Primarycolor1}
+        style={styles.Icon_container}
+        onPress={togglePasswordVisibility}
+      />
+      </View>
+      { //Check on the password
+      passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}> {t('SignUpScreen.passwordmsg', currentLanguage)} </Text>
+      }
+      <Pressable onPress={handleSubmit} style={Buttons.main_button}>
+            <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
         </Pressable>
 
         <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
@@ -135,6 +131,7 @@ const SignUpScreen = ({ navigation }) => {
           </Text>
         </Pressable>
       </View>
+
     </SafeAreaView>
   );
 };
