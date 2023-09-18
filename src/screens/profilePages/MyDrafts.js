@@ -94,7 +94,7 @@ useEffect(() => { //Fetches items in the draftcards from the database
 
 
   return (
-    <View>
+    <View >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <TouchableOpacity
           onPress={() => {
