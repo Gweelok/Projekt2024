@@ -90,7 +90,7 @@ export async function createUptainer(data) {
         uptainerLat: data.uptainerLat,
         uptainerLong: data.uptainerLong,
         uptainerQR: uptainerQRCode, // Use the generated QR code
-        
+
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
@@ -137,7 +137,7 @@ export async function createModel(data, brand) {
 
 
 export async function createItemSeedata(item, categories, products, brands, uptainers, models) {
-    
+
 
     const newItemKey = push(ref(db, paths.items)).key;
     const itemData = {
@@ -164,8 +164,9 @@ export async function createProduct(data) {
     await writeToDatabase(paths.products + '/' + newProductKey, productData);
 }
 
-export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition, userId = firebaseAurth.currentUser.uid) {
+export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition) {
     const newItemKey = push(ref(db, paths.items)).key;
+    const user = await getCurrentUser();
     const itemData = {
         itemId: newItemKey,
         itemproduct: productId,
@@ -176,7 +177,7 @@ export async function createItemDraft(productId, brandId, modelId, categoryId, i
         itemDescription: itemDescription,
         itemcondition: itemCondition,
         itemUptainer: "Draft",
-        itemUser: userId,
+        itemUser: user.id,
         itemTaken: false,
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
@@ -198,7 +199,7 @@ function writeToDatabase(refPath, data) {
         /********************/
         /******* Get ********/
         /********************/
-        
+
 export async function getAllCategories() {
     const db = firebaseGetDB;
     const reference = ref(db, '/categories');
@@ -227,7 +228,7 @@ export async function getCategoryById(categoryId) {
     try {
         const snapshot = await get(reference);
         const categoryData = snapshot.val();
-        
+
         if (categoryData) {
             return {
                 categoryId,
@@ -270,7 +271,7 @@ export async function getBrandById(brandId) {
     try {
         const snapshot = await get(reference);
         const brandData = snapshot.val();
-        
+
         if (brandData) {
             return {
                 brandId,
@@ -289,12 +290,12 @@ export async function getBrandById(brandId) {
 export async function getAllUptainers() {
     const db = firebaseGetDB;
     const reference = ref(db, '/uptainers');
-    
+
     try {
-        
+
         const snapshot = await get(reference);
         const uptainers = [];
-        
+
         snapshot.forEach((childSnapshot) => {
             const uptainerData = childSnapshot.val();
             const uptainer = {
@@ -324,7 +325,7 @@ export async function getUptainerById(uptainerId) {
     try {
         const snapshot = await get(reference);
         const uptainerData = snapshot.val();
-        
+
         if (uptainerData) {
             return {
                 uptainerId,
@@ -397,9 +398,9 @@ export async function getItemsInUptainer(uptainerId) {
     let items = [];
     try {
         // TODO doesnt filter out itemTaken yet should be with this when data in DB is corret
-        // items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId && item.itemTaken === false);  
+        // items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId && item.itemTaken === false);
         items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId);
-        
+
         return items;
 
     } catch (error) {
@@ -439,7 +440,7 @@ export async function getProductById(productId) {
     try {
         const snapshot = await get(reference);
         const productData = snapshot.val();
-        
+
         if (productData) {
             return {
                 productId,
@@ -684,7 +685,7 @@ export function signInUser(email, password, navigation){
         authErrors(error);
     });
 }
-    
+
 export async function createUser(email, password, navigation ,name = "John Doe") {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -692,7 +693,7 @@ export async function createUser(email, password, navigation ,name = "John Doe")
         email,
         password
       );
-  
+
       if (userCredential) {
         const userData = {
           name: name,
@@ -709,14 +710,14 @@ export async function createUser(email, password, navigation ,name = "John Doe")
 
 export async function getCurrentUser() {
   try {
-    
+
     const id = firebaseAurth.currentUser.uid;
     const reference = ref(db, paths.users);
 
     const snapshot = await get(reference);
     const modelData = snapshot.val();
-    
-    
+
+
     if (modelData) {
         return{
             id,
@@ -731,75 +732,38 @@ export async function getCurrentUser() {
 }
 
 // ToDo find user data and implement it to the function
-export async function updateAuthData(email, password, phoneNumber) {
-    const user = firebaseAurth.currentUser;
-  
-    if (email && email !== user.email) {
-      await user.updateEmail(email);
-    }
-  
-    if (password) { // Password should always be updated if provided, as we can't retrieve the current password
-      await user.updatePassword(password);
-    }
-  
-    if (phoneNumber && phoneNumber !== user.phoneNumber) {
-      await user.updatePhoneNumber(phoneNumber);
-    }
-  }
-  
-  export async function updateDatabaseData(name, profilePic) {
-    const user = firebaseAurth.currentUser;
-    const reference = ref(db, `/users/${user.uid}`);
-    const snapshot = await get(reference);
-    const currentUserData = snapshot.val();
-  
-    if (name && name !== currentUserData.name) {
-      await update(reference, { name: name });
-    }
-  
-    if (profilePic && profilePic !== currentUserData.profilePic) {
-      await update(reference, { profilePic: profilePic });
+/*
+export function updateUserData() {
+    const currentUser = GetCurrentUser();
+    if (currentUser.length > 0) {
+      const { id } = currentUser[0];
+      updateProfile(id, {
+        displayName: "Jane Q. User",
+        photoURL: "https://example.com/jane-q-user/profile.jpg",
+      })
+        .then(() => {
+          // Profile updated!
+          // ...
+        })
+        .catch((error) => {
+          // An error occurred
+          console.error("Error updating user data:", error);
+          // ...
+        });
     }
   }
-  //add more info if needed
-  export async function updateUserData(email, password, phoneNumber, name, profilePic) {
-    await updateAuthData(email, password, phoneNumber);
-    await updateDatabaseData(name, profilePic);
-  }
   
-  export async function deleteUser(navigation) {
-    const user = firebaseAurth.currentUser;
-    // Delete the user from Firebase Authentication
-    user
-        .delete()
-        .then(() => console.log("User deleted"))
-        .catch((error) => console.log(error));
-  
-    // Delete the user from Realtime Database   
-    const reference = ref(db, 'users/' + user.uid);
-    try {
-        remove(reference);
-        console.log('User deleted from Realtime Database');
-        navigation.navigate("Sign in");
-    } catch (error) {
-        console.error('Error deleting user from Realtime Database:', error);
-        alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
-      }
-  }
-
-
-/**************/
-/*** Checks ***/
-/**************/
-
-async function QRCodeExists(qrCode) {
-    const uptainerList  = await getAllUptainers();
-    const item = uptainerList.find(uptainer => uptainer.uptainerQR === qrCode);
-    if (item) {
-        return item.uptainerId;
-    } else {
-        alert("QR Code not found, saved to draft instead");
-        return "Draft";
+  export function deleteUserById() {
+    const currentUser = GetCurrentUser();
+    if (currentUser.length > 0) {
+      deleteUser(currentUser[0].id)
+        .then(() => {
+          // User deleted.
+        })
+        .catch((error) => {
+          // An error occurred
+          console.error("Error deleting user:", error);
+        });
     }
 }
 
