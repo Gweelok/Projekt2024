@@ -31,7 +31,6 @@ import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhon
 import GlobalStyle from "../styles/GlobalStyle";
 import globalStyle from "../styles/GlobalStyle";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
-import { onAuthStateChanged } from "firebase/auth";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language
