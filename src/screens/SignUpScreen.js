@@ -131,7 +131,8 @@ const SignUpScreen = ({ navigation }) => {
           </Text>
         </Pressable>
       </View>
-
+    </View>
+      </View>
     </SafeAreaView>
   );
 };
