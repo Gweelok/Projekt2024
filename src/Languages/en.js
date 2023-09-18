@@ -35,6 +35,7 @@ export default {
     MyDrafts: "My Drafts",
     DataPolicy: "Data Policy",
     ContactUs: "Contact Us",
+    Notification: "Notifications",
   },
 
   UpdroppForm: {

@@ -60,7 +60,7 @@ import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import UptainerDetails from "./src/screens/UptainerDetails";
 import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
-import Notifications from "./src/screens/ProfileSetings/Notifications";
+import Notifications from "./src/screens/profilePages/Notifications";
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import QRScanner from "./src/screens/form/QRScanner";
