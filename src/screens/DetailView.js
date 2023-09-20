@@ -1,13 +1,14 @@
-import { View, Text, Image, StyleSheet, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { Backgroundstyle } from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import * as Linking from "expo-linking";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 
 const DetailViews = ({ navigation, route }) => {
@@ -19,6 +20,9 @@ const DetailViews = ({ navigation, route }) => {
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
+  const latitude = details.latitude;
+  const longitude = details.longitude;
+  const name = details.name;
 
   const handlePress = () => {
     navigation.goBack();
@@ -27,6 +31,27 @@ const DetailViews = ({ navigation, route }) => {
   const displayTextValue = itemDescription; // displays item description
   const TagButton = "Tag";
 
+  const openAddressOnMap = () => {
+    const scheme = Platform.select({
+      ios: "maps://0,0?q=",
+      android: "geo:0,0?q=",
+    });
+    const latLng = `${latitude},${longitude}`;
+    const url = Platform.select({
+      ios: `${scheme}${name}@${latLng}`,
+      android: `${scheme}${latLng}(${name})`,
+    });
+    console.log(url);
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.log("Can't handle url: " + url);
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => console.error("An error occurred", err));
+  };
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
@@ -46,10 +71,15 @@ const DetailViews = ({ navigation, route }) => {
             </View>
 
             <View style={DetailView.rightInfo}>
-              <View style={DetailView.locationContainer}>
+              <TouchableOpacity
+                onPress={openAddressOnMap}
+                style={DetailView.locationContainer}
+              >
                 <Ionicons name="location" size={15} color={Primarycolor1} />
-                <Text style={DetailView.location}>Valby - Allegade 25</Text>
-              </View>
+                <Text style={DetailView.location}>
+                  Valby - Allegade 25 (need to implement street coords)
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
           <Text style={DetailView.text}>{displayTextValue}</Text>
