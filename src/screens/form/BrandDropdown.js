@@ -61,7 +61,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 />
             </TouchableOpacity>
             {isOpen && (
-                <ScrollView style={[brandDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
+                <ScrollView style={[brandDropdownContainer.dropdownList]}>
                     {brands.map(brand => (
                         <TouchableOpacity
                         key={brand.brandId}
