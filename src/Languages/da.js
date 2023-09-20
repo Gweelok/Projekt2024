@@ -36,20 +36,7 @@ export default {
   NotificationsScreen: {
     Header: "Notifikationer",
   },
-  AccountSettingsScreen: {
-    Header: "Kontoindstillinger",
-  },
-  MySettingsScreen: {
-    Header: "Mine indstillinger",
-  },
 
-    CustomInput:{
-        hint: "valgfri",
-    },
-
-    NotificationsScreen : {
-        Header: "Notifikationer",
-    },
     AccountSettingsScreen : {
      Header: "Kontoindstillinger",
       BackButton:"Tilbage",
