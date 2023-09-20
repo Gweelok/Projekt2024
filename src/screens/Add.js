@@ -70,7 +70,6 @@ const Add = ({route, navigation}) => {
   const [description, setDescription] = useState(itemData?.description || ""); 
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
-  console.log("description: ", description);
   const handleSaveButtonClick = async () => {
     const help = image;
     

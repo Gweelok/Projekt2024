@@ -23,7 +23,6 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
         const fetchData = async () => {
         try {
           const modelsList = await getAllModels();
-          console.log('modelsList:', modelsList);
         setModels(modelsList);
         } catch (error) {
           console.log('Error:', error);

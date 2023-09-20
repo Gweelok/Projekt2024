@@ -21,7 +21,6 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
       const fetchData = async () => {
       try {
         const productsList = await getAllProducts();
-        console.log('productsList:', selectedProduct);
       setProducts(productsList);
       } catch (error) {
         console.log('Error:', error);
