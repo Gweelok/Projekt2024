@@ -6,14 +6,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { brands } from "../../utils/SeedData";
 import CustomInput from "../../componets/atoms/CustomInput 2";
 
-// data is used to set the initial value of the brand dropdown
 const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedBrand, setSelectedBrand] = useState(data ||null);
+    const [selectedBrand, setSelectedBrand] = useState(data || null);
     const ITEM_HEIGHT = 35;
-
-
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
@@ -21,51 +18,46 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
         if (onBrandSelect) {
             onBrandSelect(brand);
         }
-    }
+    };
 
     return (
         <CustomInput showStar={true} optionalMarginBottom={1}>
-
-        <View style={brandDropdownContainer.container}>
-            <TouchableOpacity
-                style={[
-                  brandDropdownContainer.dropdownButton,
-                  !productSelected && brandDropdownContainer.disabled
-                ]}
-                onPress={() => {
-                    if (productSelected) {
-                        setIsOpen(!isOpen);
-                    }
-                }}
-                disabled={!productSelected}
-            >
-                <Text style={brandDropdownContainer.dropdownText}>
-                    {selectedBrand || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
-                </Text>
-                <AntDesign
-                    name={isOpen ? "caretup" : "caretdown"}
-                    size={20}
-                />
-            </TouchableOpacity>
-            {isOpen && (
-                <ScrollView style={[brandDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
-                    {brands.map(brand => (
-                        <TouchableOpacity
-                            key={brand}
-                            onPress={() => handleBrandSelect(brand)}
-                            style={brandDropdownContainer.dropdownListItem}
-                        >
-                            <Text style={brandDropdownContainer.dropdownText}>{brand}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </ScrollView>
-            )}
-        </View>
-     </CustomInput>
+            <View style={brandDropdownContainer.container}>
+                <TouchableOpacity
+                    style={[
+                        brandDropdownContainer.dropdownButton,
+                        !productSelected && brandDropdownContainer.disabled,
+                    ]}
+                    onPress={() => {
+                        if (productSelected) {
+                            setIsOpen(!isOpen);
+                        }
+                    }}
+                    disabled={!productSelected}
+                >
+                    <Text style={brandDropdownContainer.dropdownText}>
+                        {selectedBrand || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
+                    </Text>
+                    <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+                </TouchableOpacity>
+                {isOpen && (
+                    <ScrollView style={brandDropdownContainer.dropdownList}>
+                        {brands.map((brand) => (
+                            <TouchableOpacity
+                                key={brand}
+                                onPress={() => handleBrandSelect(brand)}
+                                style={brandDropdownContainer.dropdownListItem}
+                            >
+                                <Text style={brandDropdownContainer.dropdownText}>{brand}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                )}
+            </View>
+        </CustomInput>
     );
-}
+};
 
-// Brand dropdown styles
 const brandDropdownContainer = {
     container: {
         flexDirection: "column",
@@ -95,8 +87,8 @@ const brandDropdownContainer = {
         backgroundColor: Primarycolor3,
     },
     disabled: {
-        backgroundColor: "#f0f0f0"
-    }
+        backgroundColor: "#f0f0f0",
+    },
 };
 
 export default BrandDropdown;
