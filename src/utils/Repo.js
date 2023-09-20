@@ -307,8 +307,8 @@ export async function getAllUptainers() {
                 uptainerCity: uptainerData.uptainerCity,
                 uptainerImage: uptainerData.uptainerImage,
                 uptainerDescription: uptainerData.uptainerDescription,
-                uptainerLatitude: parseFloat(uptainerData.uptainerLat),
-                uptainerLongitude: parseFloat(uptainerData.uptainerLong),
+                uptainerLatitude: uptainerData.uptainerLat,
+                uptainerLongitude: uptainerData.uptainerLong,
             };
             uptainers.push(uptainer);
         });
