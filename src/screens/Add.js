@@ -71,9 +71,8 @@ const Add = ({route, navigation}) => {
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
-    const help = image;
     
-    await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, help, description, condition);
+    await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
     navigation.navigate("ProductSaved");
     setBadgeCount(prevCount => prevCount + 1);
   };
