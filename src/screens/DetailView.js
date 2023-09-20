@@ -20,10 +20,8 @@ const DetailViews = ({ navigation, route }) => {
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  const latitude = details.latitude;
-  const longitude = details.longitude;
-  const name = details.name;
-
+  const uptainer = details.uptainer;
+  console.log("uptainer", uptainer);
   const handlePress = () => {
     navigation.goBack();
   };
@@ -36,10 +34,10 @@ const DetailViews = ({ navigation, route }) => {
       ios: "maps://0,0?q=",
       android: "geo:0,0?q=",
     });
-    const latLng = `${latitude},${longitude}`;
+    const latLng = `${uptainer.uptainerLatitude},${uptainer.uptainerLongitude}`;
     const url = Platform.select({
-      ios: `${scheme}${name}@${latLng}`,
-      android: `${scheme}${latLng}(${name})`,
+      ios: `${scheme}${uptainer.name}@${latLng}`,
+      android: `${scheme}${latLng}(${uptainer.name})`,
     });
     console.log(url);
     Linking.canOpenURL(url)
@@ -77,7 +75,7 @@ const DetailViews = ({ navigation, route }) => {
               >
                 <Ionicons name="location" size={15} color={Primarycolor1} />
                 <Text style={DetailView.location}>
-                  Valby - Allegade 25 (need to implement street coords)
+                {uptainer.uptainerCity}, {uptainer.uptainerStreet}, {uptainer.uptainerZip}
                 </Text>
               </TouchableOpacity>
             </View>

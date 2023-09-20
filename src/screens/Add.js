@@ -61,7 +61,7 @@ const Add = ({route, navigation}) => {
   // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
 
-  const [image, setImage] = useState(itemData?.image || ""); 
+  const [image, setImage] = useState(itemData?.imageUrl || ""); 
   const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || null);
@@ -71,7 +71,7 @@ const Add = ({route, navigation}) => {
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
-    
+
     await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
     navigation.navigate("ProductSaved");
     setBadgeCount(prevCount => prevCount + 1);
@@ -106,7 +106,7 @@ const Add = ({route, navigation}) => {
           <ConditionDropdown onConditionSelect={setCondition} data = {itemData?.condition}/>
 
           <View style={ {marginBottom: 20}}>
-            <DescriptionField data={itemData?.description} onInputComplete={setDescription}/>
+            <DescriptionField data={itemData?.itemDescription} onInputComplete={setDescription}/>
           </View>
 
           <View style={{marginBottom: 20}}>
@@ -119,10 +119,10 @@ const Add = ({route, navigation}) => {
             <Pressable
               onPress={() => {
                 navigation.navigate("QRScanner", {
-                  product: product.productName, 
-                  brand: brand.brandName, 
-                  model: model.modelName, 
-                  category: category.categoryName, 
+                  product: product.productId, 
+                  brand: brand.brandId, 
+                  model: model.modelId, 
+                  category: category.categoryId, 
                   condition: condition, 
                   description: description, 
                   image: image

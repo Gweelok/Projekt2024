@@ -117,11 +117,7 @@ useEffect(() => {
     return displayedUptainers.map((item) => (
       <Uptainer
         key={item.uptainerId}
-        id={item.uptainerId}
         uptainerData={item}
-        location={item.uptainerStreet}
-        latitude={item.uptainerLatitude}
-        longitude={item.uptainerLongitude}
       />
     ));
   };
@@ -161,11 +157,7 @@ useEffect(() => {
       {uptainerList[0] && (
         <Uptainer
             key={uptainerList[0].uptainerId}
-            id={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
-            location={uptainerList[0].uptainerStreet}
-            latitude={uptainerList[0].uptainerLatitude}
-            longitude={uptainerList[0].uptainerLongitude}
         />
       )}
       {/* Display BoxLink component */}

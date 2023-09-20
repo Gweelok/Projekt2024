@@ -19,6 +19,7 @@ const MyDrafts = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
+  console.log("data", data);
 
   const handlePress = () => {
     navigation.goBack();
@@ -70,7 +71,17 @@ const MyDrafts = () => {
             key={cur.itemId}
             props={cur}
             onPress={() => {
-              navigation.navigate("QRScanner");
+              //needs to be update in the furture|does not delete the draft from the database
+              navigation.navigate("QRScanner", {
+                  product: cur.product.productId, 
+                  brand: cur.brand.brandId, 
+                  model: cur.model.modelId, 
+                  category: cur.category.categoryId, 
+                  condition: cur.itemcondition, 
+                  description: cur.itemDescription, 
+                  image: cur.imageUrl
+                });
+                
             }}
             onDraftPress={() => {
               navigation.push("Add", { itemData: cur });

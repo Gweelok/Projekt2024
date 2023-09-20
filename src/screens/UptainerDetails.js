@@ -155,6 +155,7 @@ const UptainerDetails = ({ navigation, route }) => {
                     imageUrl: cur?.imageUrl,
                     productName: cur?.productName,
                     brandName: cur?.brandName,
+                    uptainer: uptainer,
                   })
                 }
               >
