@@ -57,7 +57,6 @@ const ProductDetailScreen = ({ route }) => {
 
 const Add = ({route, navigation}) => {
   const itemData = route.params?.itemData;
-  console.log("itemData ",itemData);
 
   // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
