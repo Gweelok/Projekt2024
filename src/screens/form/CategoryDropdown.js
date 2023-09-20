@@ -34,7 +34,8 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
         setIsOpen(false);
         setIsValidationError(false);
         if (onCategorySelect) {
-            onCategorySelect(category);
+          console.log("category", category);
+            onCategorySelect(category.categoryName);
         }
     }
 
@@ -64,7 +65,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
             {categories.map(category => (
                         <TouchableOpacity
                             key={category.categoryId}
-                            onPress={() => handleCategorySelect(category.categoryName)}
+                            onPress={() => handleCategorySelect(category)}
                             style={categoryDropdownContainer.dropdownListItem}
                         >
                             <Text style={categoryDropdownContainer.dropdownText}>{category.categoryName}</Text>

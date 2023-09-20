@@ -105,7 +105,7 @@ export async function createUptainer(data) {
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
-export async function createItem(brandId, categoryId, itemDescription, itemImage, itemModel, itemproduct, itemcondition, uptainerQRCode) {
+export async function createItem(brandId = "", categoryId = "", itemDescription = "", itemImage = "", itemModel = "", itemproduct = "", itemcondition = "", uptainerQRCode = "") {
     const newItemKey = push(ref(db, paths.items)).key;
     const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
     const newImagePath = newItemKey +"."+ fileExtension;
@@ -186,11 +186,11 @@ export async function createProduct(data) {
     await writeToDatabase(paths.products + '/' + newProductKey, productData);
 }
 
-export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition) {
+export async function createItemDraft(productId = "", brandId = "", modelId = "", categoryId = "", itemImage = "", itemDescription = "", itemCondition = "") {
     const newItemKey = push(ref(db, paths.items)).key;
     try {
         const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
-        const newImagePath = paths.Items + newItemKey +"."+ fileExtension;
+        const newImagePath = newItemKey +"."+ fileExtension;
         const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
             console.log("progress: ",v)
             );
@@ -204,7 +204,7 @@ export async function createItemDraft(productId, brandId, modelId, categoryId, i
             itemBrand: brandId,
             itemModel: modelId,
             itemCategory: categoryId,
-            itemImage: newImagePath,
+            itemImage: paths.Items + newImagePath,
             itemDescription: itemDescription,
             itemcondition: itemCondition,
             itemUptainer: "Draft",

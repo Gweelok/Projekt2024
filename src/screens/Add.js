@@ -62,7 +62,7 @@ const Add = ({route, navigation}) => {
   const {currentLanguage, setLanguage} = useLanguage();
 
   const [image, setImage] = useState(itemData?.image || null); //does not work
-  const [category, setCategory] = useState(itemData?.category || null);
+  const [category, setCategory] = useState(itemData?.category.categoryName || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || null);
   const [model, setModel] = useState(itemData?.model || null);
@@ -73,9 +73,8 @@ const Add = ({route, navigation}) => {
 
   const handleSaveButtonClick = async () => {
     const help = image;
-    console.log("save button clicked image : ", image);
-    console.log("s12312312312age123123123123123 : ", help); 
-    await createItemDraft(product, brand, model, category, help, description, condition);
+    console.log("save button clicked image : ", category);
+    await createItemDraft(product, brand, model, category.categoryId, help, description, condition);
     navigation.navigate("ProductSaved");
     setBadgeCount(prevCount => prevCount + 1);
   };
@@ -98,7 +97,7 @@ const Add = ({route, navigation}) => {
             <ImageUpload onImageSelect={setImage} data={itemData?.image}/>
           </View>
 
-          <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
+          <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category.categoryName}/>
 
           <ProductDropdown categorySelected={!!category} onProductSelect={setProduct} data={itemData?.product}/>
 
@@ -121,7 +120,15 @@ const Add = ({route, navigation}) => {
           <View style={{marginBottom: 20}}>
             <Pressable
               onPress={() => {
-                navigation.navigate("QRScanner", {product: product, brand: brand, model: model, category: category, condition: condition, description: description, image: image});
+                navigation.navigate("QRScanner", {
+                  product: product, 
+                  brand: brand, 
+                  model: model, 
+                  category: category, 
+                  condition: condition, 
+                  description: description, 
+                  image: image
+                });
               }}
               style={[Buttons.main_button, {borderWidth: 1, width: "100%"}]}
             >
