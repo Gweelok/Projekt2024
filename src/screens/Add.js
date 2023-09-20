@@ -62,7 +62,7 @@ const Add = ({route, navigation}) => {
   const {currentLanguage, setLanguage} = useLanguage();
 
   const [image, setImage] = useState(itemData?.image || null); //does not work
-  const [category, setCategory] = useState(itemData?.category.categoryName || null);
+  const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || null);
   const [model, setModel] = useState(itemData?.model || null);
@@ -70,10 +70,10 @@ const Add = ({route, navigation}) => {
   const [description, setDescription] = useState(itemData?.description || null); //does not work
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
-
+  console.log("save button clicked image : ", category);
   const handleSaveButtonClick = async () => {
     const help = image;
-    console.log("save button clicked image : ", category);
+    
     await createItemDraft(product, brand, model, category.categoryId, help, description, condition);
     navigation.navigate("ProductSaved");
     setBadgeCount(prevCount => prevCount + 1);
@@ -97,7 +97,7 @@ const Add = ({route, navigation}) => {
             <ImageUpload onImageSelect={setImage} data={itemData?.image}/>
           </View>
 
-          <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category.categoryName}/>
+          <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
 
           <ProductDropdown categorySelected={!!category} onProductSelect={setProduct} data={itemData?.product}/>
 
