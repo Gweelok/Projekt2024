@@ -20,6 +20,7 @@ import { Ionicons, Octicons } from "@expo/vector-icons"; // or any other icon li
 import { useLanguage, t } from "../Languages/LanguageHandler"; // Import 'useLanguage' and 't'
 import CustomInput from "../componets/atoms/CustomInput";
 import GlobalStyle from "../styles/GlobalStyle";
+import BackButton from "../componets/BackButton";
 
 const SignUpScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState("");
@@ -52,12 +53,7 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={Backgroundstyle.informationScreens}>
       <View style={{ alignSelf: "stretch", paddingLeft: 25, paddingTop: 5 }}>
-        <TouchableOpacity
-          style={SignUpStyles.backButton}
-          onPress={navigation.goBack}
-        >
-          <Octicons name="chevron-left" size={20} style={{ color: "white" }} />
-        </TouchableOpacity>
+        <BackButton onPress={navigation.goBack}/>
       </View>
       <View style={GlobalStyle.BodyWrapper}>
         <Text style={[styles.Header_Primarycolor1, styles.Header]}>

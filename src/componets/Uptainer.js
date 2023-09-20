@@ -19,7 +19,6 @@ import {
 const Uptainer = ({ id, name, uptainerData }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
-
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
@@ -67,7 +66,7 @@ const Uptainer = ({ id, name, uptainerData }) => {
   for (let i = 0; i < data.length; i += 2) {
     pairedData.push([data[i], data[i + 1]]);
   }
-
+  
   return (
     <View style={{ marginBottom: 20 }}>
       <TouchableOpacity
@@ -97,6 +96,9 @@ const Uptainer = ({ id, name, uptainerData }) => {
                   brandName: item[0]?.brandName,
                   productName: item[0]?.productName,
                   imageUrl: item[0]?.imageUrl,
+                  longitude: uptainerData.longitude,
+                  latitude: uptainerData.latitude,
+                  name: uptainerData.name
                 })
               }
             >
@@ -117,6 +119,9 @@ const Uptainer = ({ id, name, uptainerData }) => {
                     brandName: item[1]?.brandName,
                     productName: item[1]?.productName,
                     imageUrl: item[1]?.imageUrl,
+                    longitude,
+                    latitude,
+                    name
                   })
                 }
               >

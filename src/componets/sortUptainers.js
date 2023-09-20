@@ -55,6 +55,7 @@ useEffect(() => {
     try {
       // Fetch the list of uptainers
       const uptainerList = await getAllUptainers();
+      
       setUptainerList(uptainerList);
       
     } catch (error) {
@@ -118,7 +119,9 @@ useEffect(() => {
         key={item.uptainerId}
         id={item.uptainerId}
         name={item.uptainerName}
-        uptainerData={item}
+        location={item.uptainerStreet}
+        latitude={item.uptainerLatitude}
+        longitude={item.uptainerLongitude}
       />
     ));
   };
@@ -160,11 +163,11 @@ useEffect(() => {
             key={uptainerList[0].uptainerId}
             id={uptainerList[0].uptainerId}
             name={uptainerList[0].uptainerName}
-            uptainerData={uptainerList[0]}
+            location={uptainerList[0].uptainerStreet}
         />
       )}
       {/* Display BoxLink component */}
-
+    
       <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo} style={GlobalStyle.BodyWrapper}/>
       {renderUptainers()}
      

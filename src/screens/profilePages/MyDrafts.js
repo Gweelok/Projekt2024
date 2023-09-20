@@ -10,6 +10,10 @@ import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { ScrollView } from "react-native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getBrandById, getCategoryById, getModelById, getProductById, getCurrentUser, getDraftFromUser} from "../../utils/Repo";
+import BackButton from "../../componets/BackButton";
+
+// fetch the data from server
+
 
 const MyDrafts = () => {
   const navigation = useNavigation();
@@ -54,18 +58,8 @@ const MyDrafts = () => {
 
   return (
     <View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Ionicons
-            name="chevron-back-outline"
-            size={36}
-            style={DraftStyle.arrow}
-          />
-        </TouchableOpacity>
+      <View style={{ flexDirection: "row", alignItems: "center",paddingLeft:20}}>
+       <BackButton onPress={navigation.goBack}/>
         <Text style={[HeaderText.Header]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>

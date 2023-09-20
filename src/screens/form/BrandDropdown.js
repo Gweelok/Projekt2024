@@ -7,13 +7,12 @@ import CustomInput from "../../componets/atoms/CustomInput 2";
 import { getAllBrands } from "../../utils/Repo";
 
 
-// data is used to set the initial value of the brand dropdown
 const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedBrand, setSelectedBrand] = useState(data ||null);
     const [isValidationError, setIsValidationError] = useState(false);
-    const ITEM_HEIGHT = 40;
+    const [selectedBrand, setSelectedBrand] = useState(data ||null);
+    const ITEM_HEIGHT = 35;
     const [brands, setBrands] = useState(brands);
 
     useEffect(() => {
@@ -28,14 +27,14 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
       
       fetchData();// Fetch data when component mounts
     }, []);
-
+    
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
         setIsOpen(false);
         if (onBrandSelect) {
             onBrandSelect(brand);
         }
-    }
+    };
 
     return (
         <CustomInput showStar={true} optionalMarginBottom={1}>
@@ -54,7 +53,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 disabled={!productSelected}
             >
                 <Text style={brandDropdownContainer.dropdownText}>
-                    {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
+                {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -65,8 +64,8 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 <ScrollView style={[brandDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {brands.map(brand => (
                         <TouchableOpacity
-                            key={brand.brandId}
-                            onPress={() => handleBrandSelect(brand)}
+                        key={brand.brandId}
+                        onPress={() => handleBrandSelect(brand)}
                             style={brandDropdownContainer.dropdownListItem}
                         >
                             <Text style={brandDropdownContainer.dropdownText}>{brand.brandName}</Text>
@@ -77,9 +76,8 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
         </View>
      </CustomInput>
     );
-}
+};
 
-// Brand dropdown styles
 const brandDropdownContainer = {
     container: {
         flexDirection: "column",
@@ -109,8 +107,8 @@ const brandDropdownContainer = {
         backgroundColor: Primarycolor3,
     },
     disabled: {
-        backgroundColor: "#f0f0f0"
-    }
+        backgroundColor: "#f0f0f0",
+    },
 };
 
 export default BrandDropdown;
