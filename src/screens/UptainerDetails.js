@@ -27,7 +27,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const UptainerDetails = ({ navigation, route }) => {
   let uptainer = null;
-  if (!route.params) {
+  if (route.params.uptainerData) {
     uptainer = route.params.uptainerData;
   }else{
     uptainer = route.params;
@@ -88,8 +88,7 @@ const UptainerDetails = ({ navigation, route }) => {
     //get uptainerUrl from database
     const storage = getStorage();
     try {
-      const currentUptainer = await getUptainerById(uptainer.uptainerId);
-      const uptainerPathReference = ref(storage, currentUptainer.uptainerImage);
+      const uptainerPathReference = ref(storage, uptainer.uptainerImage);
       return await getDownloadURL(uptainerPathReference);
     } catch (error) {
       console.log("Error while getting Uptainer Image URL => ", error);
