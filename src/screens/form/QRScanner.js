@@ -70,8 +70,7 @@ const QRScanner = ({route, navigation}) => {
         const value = scannedQRCodeObject.props.value;
         let navDir = "UptainerDetails"
         
-        const uptainer = await getUptainerById(uptainerId);
-        console.log("uptainerId: ",uptainerId);
+        
         try{
           await createItem(
             brandId = itemData?.brand, 
@@ -88,6 +87,7 @@ const QRScanner = ({route, navigation}) => {
           console.log("can not create item. Error: ", error);
         }
         const uptainerId = await getUptainerFromQR(value);
+        const uptainer = await getUptainerById(uptainerId);
         if(!uptainerId){
           navDir = "MyDrafts"
         }
