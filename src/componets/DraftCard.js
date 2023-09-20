@@ -17,6 +17,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) => {
   const {currentLanguage, setLanguage} = useLanguage();
+  console.log("props", props);
 //below we used the props params to display
   return (
     <View style={styles.container}>
@@ -33,12 +34,12 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
         
         <Image source={{ uri: props.imageUrl }} style={styles.draftImage} />
         <View style={styles.draftContent}>
-          <Text style={styles.category}>{props.categoryName}</Text>
+          <Text style={styles.category}>{props.itemCategory}</Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.brand}>{props.brandName}</Text>
-            {props.modelName && (
+            <Text style={styles.brand}>{props.itemBrand}</Text>
+            {props.itemModel && (
               <Text style={[styles.brand, { marginLeft: 0 }]}>
-                {","} {props.modelName}
+                {","} {props.itemModel}
               </Text>
             )}
           </View>

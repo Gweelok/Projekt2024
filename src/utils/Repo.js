@@ -122,6 +122,7 @@ export async function createItem(brandId, categoryId, itemDescription, itemImage
         itemproduct: itemproduct,
         itemBrand: brandId,
         itemModel: itemModel,
+        itemTaken: false,
         itemCategory: categoryId,
         itemImage: newImagePath,
         itemDescription: itemDescription,
@@ -408,7 +409,6 @@ export async function getAllModels() {
 export async function getModelById(modelId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/models/${modelId}`);
-
     try {
         const snapshot = await get(reference);
         const modelData = snapshot.val();
@@ -558,7 +558,9 @@ export async function getItemById(itemId) {
 }
 export async function getDraftFromUser(userId) {
     const itemList = await getAllItems()
+    
     const draftList = itemList.filter(item => item.itemUser === userId && item.itemUptainer === "Draft")
+    console.log("draftList: ",draftList)
     ///not tested yet
     return draftList
 }

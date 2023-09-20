@@ -67,18 +67,20 @@ useEffect(() => { //Fetches items in the draftcards from the database
     
     try {
       const drafts = await getDraftFromUser(user.id);// userId is not working so this get all items from database
+      console.log("drafts: ",drafts);
       const updatedData = await Promise.all(drafts.map(async (item) => {
         const pathReference = ref(storage, item.itemImage); //Adjust the path according to your storage structure
         const product = await getProductById(item.itemproduct);// querying  details for the draft to be displayed 
         const brand = await getBrandById(item.itemBrand);
         const category = await getCategoryById(item.itemCategory);
         const model = await getModelById(item.itemModel);
+        console.log("model: ",model);
         
         try {
           const url = await getDownloadURL(pathReference);
-          return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName,  // loading extram params into the objects
+          return { ...item, imageUrl: url,  productName: product, brandName: brand,  // loading extram params into the objects
             categoryName: category.itemCategory,
-            modelName: model.modelName, itemDescription: item.itemDescription , itemcondition: item.itemcondition};
+            modelName: model, itemDescription: item.itemDescription , itemcondition: item.itemcondition};
         } catch (error) {
           console.log('Error while downloading image => ', error);
           return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
