@@ -3,50 +3,55 @@ import { Backgroundstyle } from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import * as Linking from 'expo-linking';
+import * as Linking from "expo-linking";
+import { t, useLanguage } from "../Languages/LanguageHandler";
 
-const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
+const DetailViews = ({ navigation, route }) => {
+  const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
+
+  // route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
   const itemDescription = details.itemDescription;
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
   const latitude = details.latitude;
-  const longitude = details.longitude
-  const name = details.name
-  console.log(name,"detailView")
+  const longitude = details.longitude;
+  const name = details.name;
+
   const handlePress = () => {
     navigation.goBack();
   };
 
-  const displayTextValue =
-    itemDescription; // displays item description
+  const displayTextValue = itemDescription; // displays item description
   const TagButton = "Tag";
 
   const openAddressOnMap = () => {
-  const scheme = Platform.select({
-    ios: 'maps://0,0?q=',
-    android: 'geo:0,0?q=',
-  });
-  const latLng = `${latitude},${longitude}`;
-  const url = Platform.select({
-    ios: `${scheme}${name}@${latLng}`,
-    android: `${scheme}${latLng}(${name})`,
-  });
-  console.log(url)
-  Linking.canOpenURL(url).then(supported => {
-    if (!supported) {
-      console.log('Can\'t handle url: ' + url);
-    } else {
-      return Linking.openURL(url);
-    }
-  }).catch(err => console.error('An error occurred', err));
-};
+    const scheme = Platform.select({
+      ios: "maps://0,0?q=",
+      android: "geo:0,0?q=",
+    });
+    const latLng = `${latitude},${longitude}`;
+    const url = Platform.select({
+      ios: `${scheme}${name}@${latLng}`,
+      android: `${scheme}${latLng}(${name})`,
+    });
+    console.log(url);
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.log("Can't handle url: " + url);
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => console.error("An error occurred", err));
+  };
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
@@ -66,9 +71,14 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
             </View>
 
             <View style={DetailView.rightInfo}>
-              <TouchableOpacity onPress={openAddressOnMap} style={DetailView.locationContainer}>
+              <TouchableOpacity
+                onPress={openAddressOnMap}
+                style={DetailView.locationContainer}
+              >
                 <Ionicons name="location" size={15} color={Primarycolor1} />
-                <Text style={DetailView.location}>Valby - Allegade 25 (need to implement street coords)</Text>
+                <Text style={DetailView.location}>
+                  Valby - Allegade 25 (need to implement street coords)
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -78,9 +88,9 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
           </TouchableOpacity>
           <Text
             style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-            onPress={() => Linking.openURL("")} //
+            onPress={() => navigation.navigate("ProductIsTakenScreen", details)} //
           >
-            Var produktet ikke i uptaineren?
+            {t("ProductIsTakenScreen.productNotListed", currentLanguage)}
           </Text>
         </View>
       </ScrollViewComponent>
@@ -91,7 +101,7 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
 };
 const DetailView = StyleSheet.create({
   container: {
-   // paddingTop: 5,
+    // paddingTop: 5,
     justifyContent: "center",
     alignItems: "center",
     marginRight: "1%",
@@ -107,9 +117,8 @@ const DetailView = StyleSheet.create({
     width: "70%",
     height: 100,
     borderRadius: 1,
-   // paddingHorizontal: 30,
+    // paddingHorizontal: 30,
     marginTop: 15,
-
   },
   arrow: {
     height: 42,
@@ -125,8 +134,7 @@ const DetailView = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-    textDecorationLine: 'underline'
-
+    textDecorationLine: "underline",
   },
   Tag: {
     color: "white",
@@ -138,7 +146,6 @@ const DetailView = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 5,
-
   },
 
   infoContainer: {
@@ -147,17 +154,14 @@ const DetailView = StyleSheet.create({
     alignItems: "flex-start",
     width: "90%",
     marginTop: 10,
-
   },
   leftInfo: {
     alignItems: "flex-start",
-    width:"60%",
+    width: "60%",
   },
   rightInfo: {
-   // alignItems: "flex-end",
-    width:"40%",
-
-
+    // alignItems: "flex-end",
+    width: "40%",
   },
   location: {
     color: Primarycolor1,
@@ -170,7 +174,6 @@ const DetailView = StyleSheet.create({
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
-
   },
 });
 

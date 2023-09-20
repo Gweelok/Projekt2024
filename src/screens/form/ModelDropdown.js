@@ -6,12 +6,11 @@ import { AntDesign } from "@expo/vector-icons";
 import CustomInput from "../../componets/atoms/CustomInput";
 //import { models } from "../../utils/SeedData";
 
-
 // data is used to set the initial value of the model dropdown
 const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedModel, setSelectedModel] = useState(data||null);
+    const [selectedModel, setSelectedModel] = useState(data || null);
     const ITEM_HEIGHT = 31;
     const models = ["iPhone 14", "Playstation 3", "Nokia 6600", "Samsung s22"];
 
@@ -21,50 +20,46 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
         if (onModelSelect) {
             onModelSelect(model);
         }
-    }
+    };
 
     return (
         <CustomInput showStar={true} optionalMarginBottom>
+            <View style={modelDropdownContainer.container}>
+                <TouchableOpacity
+                    style={[
+                        modelDropdownContainer.dropdownButton,
+                        !brandSelected && modelDropdownContainer.disabled
+                    ]}
+                    onPress={() => {
+                        if (brandSelected) {
+                            setIsOpen(!isOpen);
+                        }
+                    }}
+                    disabled={!brandSelected}
+                >
+                    <Text style={modelDropdownContainer.dropdownText}>
+                        {selectedModel || (!brandSelected ? t("ModelDropdown.selectModel", currentLanguage) : "Model")}
+                    </Text>
+                    <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+                </TouchableOpacity>
 
-        <View style={modelDropdownContainer.container}>
-            <TouchableOpacity
-                style={[
-                  modelDropdownContainer.dropdownButton,
-                  !brandSelected && modelDropdownContainer.disabled
-                ]}
-                onPress={() => {
-                    if (brandSelected) {
-                        setIsOpen(!isOpen);
-                    }
-                }}
-                disabled={!brandSelected}
-            >
-                <Text style={modelDropdownContainer.dropdownText}>
-                    {selectedModel || (!brandSelected ? t("ModelDropdown.selectModel", currentLanguage) : "Model")}
-                </Text>
-                <AntDesign
-                    name={isOpen ? "caretup" : "caretdown"}
-                    size={20}
-                />
-            </TouchableOpacity>
-
-            {isOpen && (
-                <ScrollView style={[modelDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
-                    {models.map(model => (
-                        <TouchableOpacity
-                            key={model}
-                            onPress={() => handleModelSelect(model)}
-                            style={modelDropdownContainer.dropdownListItem}
-                        >
-                            <Text style={modelDropdownContainer.dropdownText}>{model}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </ScrollView>
-            )}
-        </View>
+                {isOpen && (
+                    <ScrollView style={[modelDropdownContainer.dropdownList,]}>
+                        {models.map(model => (
+                            <TouchableOpacity
+                                key={model}
+                                onPress={() => handleModelSelect(model)}
+                                style={modelDropdownContainer.dropdownListItem}
+                            >
+                                <Text style={modelDropdownContainer.dropdownText}>{model}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                )}
+            </View>
         </CustomInput>
     );
-}
+};
 
 const modelDropdownContainer = {
     container: {

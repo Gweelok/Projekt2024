@@ -153,6 +153,7 @@ const AddStyles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: 50,
     paddingHorizontal: 15,
+   display: "flex",
   },
   header: {
     fontFamily: "space-grotesk-bold",

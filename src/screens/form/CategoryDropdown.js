@@ -9,10 +9,9 @@ import { categories } from "../../utils/SeedData";
 const CategoryDropdown = ({ onCategorySelect, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(data||null);
+    const [selectedCategory, setSelectedCategory] = useState(data || null);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 40;
-
 
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
@@ -21,7 +20,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
         if (onCategorySelect) {
             onCategorySelect(category);
         }
-    }
+    };
 
     return (
         <View style={categoryDropdownContainer.container}>
@@ -35,18 +34,14 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                 }}
             >
                 <Text style={categoryDropdownContainer.dropdownText}>
-                    {selectedCategory ? selectedCategory :
-                    t("CategoryDropdown.selectCategory", currentLanguage)}
+                    {selectedCategory ? selectedCategory : t("CategoryDropdown.selectCategory", currentLanguage)}
                 </Text>
-                <AntDesign
-                    name={isOpen ? "caretup" : "caretdown"}
-                    size={20}
-                />
+                <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
             </TouchableOpacity>
 
             {isOpen && (
-            <ScrollView style={[categoryDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
-            {categories.map(category => (
+                <ScrollView style={categoryDropdownContainer.dropdownList}>
+                    {categories.map((category) => (
                         <TouchableOpacity
                             key={category}
                             onPress={() => handleCategorySelect(category)}
@@ -55,15 +50,15 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                             <Text style={categoryDropdownContainer.dropdownText}>{category}</Text>
                         </TouchableOpacity>
                     ))}
-            </ScrollView>
+                </ScrollView>
             )}
 
-      {isValidationError && !selectedCategory && (
-        <Text style={categoryDropdownContainer.validationErrorText}></Text>
-      )}
-    </View>
+            {isValidationError && !selectedCategory && (
+                <Text style={categoryDropdownContainer.validationErrorText}></Text>
+            )}
+        </View>
     );
-}
+};
 // Category dropdown styles
 const categoryDropdownContainer = {
   container: {
@@ -76,7 +71,8 @@ const categoryDropdownContainer = {
     fontFamily: "space-grotesk",
     fontSize: 16,
     marginRight: 5,
-    // flexGrow: 1,
+      //marginBottom:-4,
+     //flexGrow: 1,
   },
   dropdownButton: {
     borderWidth: 3,
