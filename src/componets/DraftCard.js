@@ -17,7 +17,6 @@ const windowHeight = Dimensions.get("window").height;
 
 const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) => {
   const {currentLanguage, setLanguage} = useLanguage();
-  console.log("props", props);
 //below we used the props params to display
   return (
     <View style={styles.container}>
