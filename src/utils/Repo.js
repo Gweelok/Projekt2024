@@ -10,7 +10,7 @@ import {
     listAll,
     ref as ref_storage
   } from "firebase/storage";
-import { firebaseGetDB, firebaseAurth, firebaseStorage } from "./Firebase";
+import { firebaseGetDB, firebaseAurth } from "./Firebase";
 import { categories, brands, stationData, products, items, models } from "./SeedData";
 import { generateQRCode } from './QRCodeGenerator'; // Import the QR code generator
 
@@ -108,7 +108,7 @@ export async function createUptainer(data) {
 export async function createItem(brandId, categoryId, itemDescription, itemImage, itemModel, itemproduct, itemcondition, uptainerQRCode) {
     const newItemKey = push(ref(db, paths.items)).key;
     const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
-    const newImagePath = paths.Items + newItemKey +"."+ fileExtension;
+    const newImagePath = newItemKey +"."+ fileExtension;
     const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
         console.log("progress: ",v)
         );
@@ -124,7 +124,7 @@ export async function createItem(brandId, categoryId, itemDescription, itemImage
         itemModel: itemModel,
         itemTaken: false,
         itemCategory: categoryId,
-        itemImage: newImagePath,
+        itemImage: paths.Items + newImagePath,
         itemDescription: itemDescription,
         itemcondition: itemcondition,
         itemUser: user.id,
