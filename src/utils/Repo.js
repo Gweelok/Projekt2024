@@ -90,10 +90,27 @@ export async function createUptainer(data) {
         uptainerLat: data.uptainerLat,
         uptainerLong: data.uptainerLong,
         uptainerQR: uptainerQRCode, // Use the generated QR code
-        
+
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
+export async function createItem(brandId, categoryId, itemDescription, itemImage, itemModel, itemproduct, itemcondition, uptainerQRCode) {
+    const newItemKey = push(ref(db, paths.items)).key;
+    const UptainerId = QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
+    const itemData = {
+        itemId: newItemKey,
+        itemproduct: itemproduct,
+        itemBrand: brandId,
+        itemModel: itemModel,
+        itemCategory: categoryId,
+        itemImage: itemImage,
+        itemDescription: itemDescription,
+        itemcondition: itemcondition,
+        itemUptainer: UptainerId,
+    };
+    await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+}
+
 
 export async function createBrand(name) {
     const newBrandKey = push(ref(db, paths.brands)).key;
@@ -120,10 +137,9 @@ export async function createModel(data, brand) {
 
 
 export async function createItemSeedata(item, categories, products, brands, uptainers, models) {
-    
+
 
     const newItemKey = push(ref(db, paths.items)).key;
-    const itemQRCode = generateQRCode(item.itemQR);
     const itemData = {
         itemId: newItemKey,
         itemproduct: products,
@@ -134,7 +150,6 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
-        itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
@@ -149,8 +164,9 @@ export async function createProduct(data) {
     await writeToDatabase(paths.products + '/' + newProductKey, productData);
 }
 
-export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition, uptainerId, userId) {
+export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition) {
     const newItemKey = push(ref(db, paths.items)).key;
+    const user = await getCurrentUser();
     const itemData = {
         itemId: newItemKey,
         itemproduct: productId,
@@ -161,7 +177,7 @@ export async function createItemDraft(productId, brandId, modelId, categoryId, i
         itemDescription: itemDescription,
         itemcondition: itemCondition,
         itemUptainer: "Draft",
-        itemUser: userId,
+        itemUser: user.id,
         itemTaken: false,
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
@@ -183,7 +199,7 @@ function writeToDatabase(refPath, data) {
         /********************/
         /******* Get ********/
         /********************/
-        
+
 export async function getAllCategories() {
     const db = firebaseGetDB;
     const reference = ref(db, '/categories');
@@ -212,7 +228,7 @@ export async function getCategoryById(categoryId) {
     try {
         const snapshot = await get(reference);
         const categoryData = snapshot.val();
-        
+
         if (categoryData) {
             return {
                 categoryId,
@@ -255,7 +271,7 @@ export async function getBrandById(brandId) {
     try {
         const snapshot = await get(reference);
         const brandData = snapshot.val();
-        
+
         if (brandData) {
             return {
                 brandId,
@@ -274,12 +290,12 @@ export async function getBrandById(brandId) {
 export async function getAllUptainers() {
     const db = firebaseGetDB;
     const reference = ref(db, '/uptainers');
-    
+
     try {
-        
+
         const snapshot = await get(reference);
         const uptainers = [];
-        
+
         snapshot.forEach((childSnapshot) => {
             const uptainerData = childSnapshot.val();
             const uptainer = {
@@ -309,7 +325,7 @@ export async function getUptainerById(uptainerId) {
     try {
         const snapshot = await get(reference);
         const uptainerData = snapshot.val();
-        
+
         if (uptainerData) {
             return {
                 uptainerId,
@@ -382,9 +398,9 @@ export async function getItemsInUptainer(uptainerId) {
     let items = [];
     try {
         // TODO doesnt filter out itemTaken yet should be with this when data in DB is corret
-        // items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId && item.itemTaken === false);  
+        // items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId && item.itemTaken === false);
         items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId);
-        
+
         return items;
 
     } catch (error) {
@@ -424,7 +440,7 @@ export async function getProductById(productId) {
     try {
         const snapshot = await get(reference);
         const productData = snapshot.val();
-        
+
         if (productData) {
             return {
                 productId,
@@ -669,7 +685,7 @@ export function signInUser(email, password, navigation){
         authErrors(error);
     });
 }
-    
+
 export async function createUser(email, password, navigation ,name = "John Doe") {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -677,7 +693,7 @@ export async function createUser(email, password, navigation ,name = "John Doe")
         email,
         password
       );
-  
+
       if (userCredential) {
         const userData = {
           name: name,
@@ -694,14 +710,14 @@ export async function createUser(email, password, navigation ,name = "John Doe")
 
 export async function getCurrentUser() {
   try {
-    
+
     const id = firebaseAurth.currentUser.uid;
     const reference = ref(db, paths.users);
 
     const snapshot = await get(reference);
     const modelData = snapshot.val();
-    
-    
+
+
     if (modelData) {
         return{
             id,
@@ -749,7 +765,7 @@ export function updateUserData() {
           console.error("Error deleting user:", error);
         });
     }
-  }*/
+}
 
 /**************/
 /*** Errors ***/

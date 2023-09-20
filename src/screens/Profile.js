@@ -26,6 +26,7 @@ const Profile = ({ navigation }) => {
           <MenuItems
             msg={t("ProfileScreen.MyDrafts", currentLanguage)}
             onPress={() => navigation.navigate("MyDrafts")}
+            badge={badgeCount > 0 ? badgeCount : null}
           />
         </View>
         <View>
@@ -38,6 +39,12 @@ const Profile = ({ navigation }) => {
           <MenuItems
             msg={t("ProfileScreen.ContactUs", currentLanguage)}
             onPress={() => navigation.navigate("ContactUs")}
+          />
+        </View>
+        <View>
+          <MenuItems
+            msg={t("ProfileScreen.Notification", currentLanguage)}
+            onPress={() => navigation.navigate("Notifications")}
           />
         </View>
         <View>

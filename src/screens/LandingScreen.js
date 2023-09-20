@@ -22,6 +22,7 @@ import React, { useState, useEffect } from "react";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 
 import { firebaseAurth } from "../utils/Firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 import Customize from "../componets/LandingScreen/Customize";
 import ReuseSvg from "../componets/svg-components/ReuseSvg";
@@ -29,6 +30,7 @@ import CompletePlantSvg from "../componets/svg-components/CompletePlantSvg";
 import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhoneText";
 import GlobalStyle from "../styles/GlobalStyle";
 import globalStyle from "../styles/GlobalStyle";
+import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language
@@ -63,6 +65,11 @@ const LandingScreen = ({ navigation }) => {
       image: <CompleteHousePhoneText />,
       bottom: t("SolutionComponent.Body", currentLanguage),
     },
+    {
+      top: t("SolutionTimeline.Header", currentLanguage),
+      image: <CompleteTimelineSvg />,
+      bottom: t("SolutionTimeline.Body", currentLanguage),
+    },
   ];
 
   function nextSlideAndSignUp() {
@@ -74,7 +81,7 @@ const LandingScreen = ({ navigation }) => {
   }
 
   //Fn to navigate to the Signup Screern
-  onAuthStateChanged(firebaseAurth, async (user) => {
+  onAuthStateChanged(firebaseAurth, (user) => {
     if (user) {
       setUserLogged(true)
     } else {
@@ -154,11 +161,10 @@ const styling = StyleSheet.create({
     marginLeft: "auto",
   },
   topBar: {
-    // paddingLeft:15,
     flexDirection: "row",
-    alignItems: "center",
-    marginLeft: "auto",
-    marginRight: 10,
+    alignSelf: "stretch",
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
   backButton: {
     backgroundColor: "#1c4b3d",

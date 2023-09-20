@@ -66,7 +66,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
 
       {isValidationError && !selectedProduct && (
         <Text style={productDropdownContainer.validationErrorText}></Text>
-      )}
+      )} 
     </View>
     );
 }

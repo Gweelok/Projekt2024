@@ -91,7 +91,6 @@ const UptainerDetails = ({ navigation, route }) => {
   }
 
   return (
-    // <View style={GlobalStyle.BodyWrapper}>
     <View style={style.container}>
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
@@ -149,10 +148,10 @@ const UptainerDetails = ({ navigation, route }) => {
                 }}
                 onPress={() =>
                   navigation.navigate("DetailView", {
-                    itemDescription: cur.itemDescription,
-                    imageUrl: cur.imageUrl,
-                    productName: cur.productName,
-                    brandName: cur.brandName,
+                    itemDescription: cur?.itemDescription,
+                    imageUrl: cur?.imageUrl,
+                    productName: cur?.productName,
+                    brandName: cur?.brandName,
                   })
                 }
               >
@@ -174,21 +173,20 @@ const UptainerDetails = ({ navigation, route }) => {
 
         
                 >
-                  {cur.productName}{" "}
+                  {cur?.productName}{" "}
                 </Text>
               </TouchableOpacity>
             )
           )}
         </View>
-      
       </ScrollViewComponent>
 
       {/* This ProductAlert component is dependent on the uploading of a product to the database */}
       {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
-      <ProductAlert />
+
+      {item?.screenFrom == "QRScanner" && <ProductAlert />}
       <Navigationbar navigation={navigation} />
     </View>
-    // </View>
   );
 };
 

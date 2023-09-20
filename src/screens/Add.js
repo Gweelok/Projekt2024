@@ -23,6 +23,7 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import  { firebaseApp, firebaseDB } from '../utils/Firebase';
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import {createItemDraft, getCurrentUser} from "../utils/Repo";
 
 
 const ProductDetailScreen = ({ route }) => {
@@ -69,6 +70,12 @@ const Add = ({route, navigation}) => {
   const [description, setDescription] = useState(itemData?.description || null);
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
+
+  const handleSaveButtonClick = async () => {
+    createItemDraft(product, brand, model, category, image, description, condition);
+    navigation.navigate("ProductSaved");
+    setBadgeCount(prevCount => prevCount + 1);
+  };
 
   return (
     <SafeAreaView>
@@ -134,11 +141,7 @@ const Add = ({route, navigation}) => {
               Buttons.secondary_button,
               {borderWidth: 2, width: "100%"},
             ]}
-            onPress={() => {
-              //createItemDraft("productId", "brandId", "modelId", "categoryId", "itemImage", "itemDescription", "itemCondition", "uptainerId", "userId")
-              navigation.navigate("ProductSaved");
-              setBadgeCount(prevCount => prevCount + 1);
-            }}
+            onPress={handleSaveButtonClick}
           >
             <Text style={Buttons.secondary_buttonText}>
               {t("UpdroppForm.scanLaterButton", currentLanguage)}
