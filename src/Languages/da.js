@@ -80,6 +80,7 @@ export default {
     MyDrafts: "Mine kladder",
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
+    Notification: "Notfikationer",
   },
 
   UpdroppForm: {
