@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Linking, Pressable } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { Backgroundstyle } from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import * as Linking from 'expo-linking';
 
 const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
@@ -27,9 +28,9 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
     itemDescription; // displays item description
   const TagButton = "Tag";
 
-  const openAddressOnMap = async () => {
+  const openAddressOnMap = () => {
   const scheme = Platform.select({
-    ios: 'maps:0,0?q=',
+    ios: 'maps://0,0?q=',
     android: 'geo:0,0?q=',
   });
   const latLng = `${latitude},${longitude}`;
@@ -37,12 +38,14 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
     ios: `${scheme}${name}@${latLng}`,
     android: `${scheme}${latLng}(${name})`,
   });
-  Linking.canOpenURL(url)
-  .then(message=>{
-    if(message) Linking.openURL(url).catch(e=>console.log(e))
-  })
-  .catch(e=>console.log(e))
-  
+  console.log(url)
+  Linking.canOpenURL(url).then(supported => {
+    if (!supported) {
+      console.log('Can\'t handle url: ' + url);
+    } else {
+      return Linking.openURL(url);
+    }
+  }).catch(err => console.error('An error occurred', err));
 };
   return (
     <View style={Backgroundstyle.interactive_screens}>

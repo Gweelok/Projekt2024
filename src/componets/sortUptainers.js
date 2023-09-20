@@ -155,7 +155,6 @@ useEffect(() => {
   };
       // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
-console.log(uptainerList)
   return (
     
     <View>

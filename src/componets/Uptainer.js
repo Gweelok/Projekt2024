@@ -15,7 +15,7 @@ import {
   getProductById,
   getBrandById,
 } from "../utils/Repo";
-import * as Linking from 'expo-linking';
+
 
 const Uptainer = ({ id, name, location,latitude,longitude }) => {
   const navigation = useNavigation();
