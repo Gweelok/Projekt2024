@@ -8,23 +8,25 @@ import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import { t, useLanguage } from "../Languages/LanguageHandler";
 
-const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
+const DetailViews = ({ navigation, route }) => {
+  const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
+
+  // route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
   const itemDescription = details.itemDescription;
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  
+
   const handlePress = () => {
     navigation.goBack();
   };
 
-  const displayTextValue =
-    itemDescription; // displays item description
+  const displayTextValue = itemDescription; // displays item description
   const TagButton = "Tag";
 
-  
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
@@ -56,9 +58,9 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
           </TouchableOpacity>
           <Text
             style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-            onPress={() => Linking.openURL("")} //
+            onPress={() => navigation.navigate("ProductIsTakenScreen", details)} //
           >
-            Var produktet ikke i uptaineren?
+            {t("ProductIsTakenScreen.productNotListed", currentLanguage)}
           </Text>
         </View>
       </ScrollViewComponent>
@@ -69,7 +71,7 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
 };
 const DetailView = StyleSheet.create({
   container: {
-   // paddingTop: 5,
+    // paddingTop: 5,
     justifyContent: "center",
     alignItems: "center",
     marginRight: "1%",
@@ -85,9 +87,8 @@ const DetailView = StyleSheet.create({
     width: "70%",
     height: 100,
     borderRadius: 1,
-   // paddingHorizontal: 30,
+    // paddingHorizontal: 30,
     marginTop: 15,
-
   },
   arrow: {
     height: 42,
@@ -103,8 +104,7 @@ const DetailView = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-    textDecorationLine: 'underline'
-
+    textDecorationLine: "underline",
   },
   Tag: {
     color: "white",
@@ -116,7 +116,6 @@ const DetailView = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 5,
-
   },
 
   infoContainer: {
@@ -125,17 +124,14 @@ const DetailView = StyleSheet.create({
     alignItems: "flex-start",
     width: "90%",
     marginTop: 10,
-
   },
   leftInfo: {
     alignItems: "flex-start",
-    width:"60%",
+    width: "60%",
   },
   rightInfo: {
-   // alignItems: "flex-end",
-    width:"40%",
-
-
+    // alignItems: "flex-end",
+    width: "40%",
   },
   location: {
     color: Primarycolor1,
@@ -148,7 +144,6 @@ const DetailView = StyleSheet.create({
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
-
   },
 });
 
