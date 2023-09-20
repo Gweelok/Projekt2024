@@ -34,8 +34,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
         setIsOpen(false);
         setIsValidationError(false);
         if (onCategorySelect) {
-          console.log("category", category);
-            onCategorySelect(category.categoryName);
+            onCategorySelect(category);
         }
     }
 
@@ -51,7 +50,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                 }}
             >
                 <Text style={categoryDropdownContainer.dropdownText}>
-                    {selectedCategory ? selectedCategory :
+                    {selectedCategory ? selectedCategory.categoryName :
                     t("CategoryDropdown.selectCategory", currentLanguage)}
                 </Text>
                 <AntDesign
