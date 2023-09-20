@@ -1,70 +1,89 @@
-import { View, Text, Image, StyleSheet, Linking } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
 import { Backgroundstyle } from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
-import React from "react";
-import { TouchableOpacity } from "react-native";
-import { Primarycolor1 } from "../styles/Stylesheet";
-import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import { Primarycolor1 } from "../styles/Stylesheet";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
 
-const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
+const DetailViews = ({ route }) => {
+  const navigation = useNavigation();
   const details = route.params;
   const itemDescription = details.itemDescription;
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  
-  const handlePress = () => {
-    navigation.goBack();
+
+  const [productDetails, setProductDetails] = useState(null);
+
+  const handleTakePress = async () => {
+    // Save the product details to AsyncStorage
+    const product = {
+      itemDescription,
+      brandName,
+      productName,
+      imageUrl,
+    };
+    try {
+      await AsyncStorage.setItem("product", JSON.stringify(product));
+      setProductDetails(product);
+    } catch (error) {
+      console.error("Error saving product to AsyncStorage:", error);
+    }
+
+    // Redirect to the "UptainerDetails" page
+    navigation.navigate("UptainerDetails", { productDetails: product });
   };
 
-  const displayTextValue =
-    itemDescription; // displays item description
+  const displayTextValue = itemDescription;
   const TagButton = "Tag";
 
-  
-  return (
-    <View style={Backgroundstyle.interactive_screens}>
-      <ScrollViewComponent>
-        <TouchableOpacity onPress={handlePress}>
-          <Ionicons
-            name="chevron-back-outline"
-            size={36}
-            style={DetailView.arrow}
-          />
-        </TouchableOpacity>
-        <View style={DetailView.container}>
-          <Image source={{ uri: imageUrl }} style={DetailView.image} />
-          <View style={DetailView.infoContainer}>
-            <View style={DetailView.leftInfo}>
-              <Text style={DetailView.product}>{productName}</Text>
-              <Text style={DetailView.brand}>{brandName}</Text>
-            </View>
+  const screenNavigation = {};
 
-            <View style={DetailView.rightInfo}>
-              <View style={DetailView.locationContainer}>
-                <Ionicons name="location" size={15} color={Primarycolor1} />
-                <Text style={DetailView.location}>Valby - Allegade 25</Text>
+  return (
+      <View style={Backgroundstyle.interactive_screens}>
+        <ScrollViewComponent>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back-outline" size={36} style={DetailView.arrow} />
+          </TouchableOpacity>
+          <View style={DetailView.container}>
+            <Image source={{ uri: imageUrl }} style={DetailView.image} />
+            <View style={DetailView.infoContainer}>
+              <View style={DetailView.leftInfo}>
+                <Text style={DetailView.product}>{productName}</Text>
+                <Text style={DetailView.brand}>{brandName}</Text>
+              </View>
+              <View style={DetailView.rightInfo}>
+                <View style={DetailView.locationContainer}>
+                  <Ionicons name="location" size={15} color={Primarycolor1} />
+                  <Text style={DetailView.location}>Valby - Allegade 25</Text>
+                </View>
               </View>
             </View>
+            <Text style={DetailView.text}>{displayTextValue}</Text>
+            {/* "Take" button that triggers the handleTakePress function */}
+            <TouchableOpacity onPress={handleTakePress} style={DetailView.TagButton}>
+              <Text style={DetailView.Tag}>{TagButton}</Text>
+            </TouchableOpacity>
+            <Text
+                style={{ color: Primarycolor1, textDecorationLine: "underline" }}
+                onPress={() => Linking.openURL("")}
+            >
+              Var produktet ikke i uptaineren?
+            </Text>
           </View>
-          <Text style={DetailView.text}>{displayTextValue}</Text>
-          <TouchableOpacity onPress={""} style={DetailView.TagButton}>
-            <Text style={DetailView.Tag}>{TagButton}</Text>
-          </TouchableOpacity>
-          <Text
-            style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-            onPress={() => Linking.openURL("")} //
-          >
-            Var produktet ikke i uptaineren?
-          </Text>
-        </View>
-      </ScrollViewComponent>
-
-      <Navigationbar navigation={navigation} />
-    </View>
+        </ScrollViewComponent>
+        <Navigationbar navigation={navigation} />
+      </View>
   );
 };
 const DetailView = StyleSheet.create({
