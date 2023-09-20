@@ -70,11 +70,11 @@ const Add = ({route, navigation}) => {
   const [description, setDescription] = useState(itemData?.description || null); //does not work
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
-  console.log("save button clicked image : ", category);
+  console.log("save button clicked image : ", product);
   const handleSaveButtonClick = async () => {
     const help = image;
     
-    await createItemDraft(product, brand, model, category.categoryId, help, description, condition);
+    await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, help, description, condition);
     navigation.navigate("ProductSaved");
     setBadgeCount(prevCount => prevCount + 1);
   };
@@ -121,10 +121,10 @@ const Add = ({route, navigation}) => {
             <Pressable
               onPress={() => {
                 navigation.navigate("QRScanner", {
-                  product: product, 
-                  brand: brand, 
-                  model: model, 
-                  category: category, 
+                  product: product.productId, 
+                  brand: brand.brandId, 
+                  model: model.modelId, 
+                  category: category.categoryId, 
                   condition: condition, 
                   description: description, 
                   image: image

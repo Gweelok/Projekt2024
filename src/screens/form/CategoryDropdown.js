@@ -18,7 +18,6 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
       const fetchData = async () => {
       try {
         const categoriesList = await getAllCategories();
-        console.log('categoriesList:', categoriesList);
       setCategories(categoriesList);
       } catch (error) {
         console.log('Error:', error);

@@ -20,7 +20,6 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
         const fetchData = async () => {
         try {
           const brandsList = await getAllBrands();
-          console.log('brandsList:', brandsList);
         setBrands(brandsList);
         } catch (error) {
           console.log('Error:', error);
@@ -55,7 +54,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 disabled={!productSelected}
             >
                 <Text style={brandDropdownContainer.dropdownText}>
-                    {selectedBrand || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
+                    {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -67,7 +66,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                     {brands.map(brand => (
                         <TouchableOpacity
                             key={brand.brandId}
-                            onPress={() => handleBrandSelect(brand.brandName)}
+                            onPress={() => handleBrandSelect(brand)}
                             style={brandDropdownContainer.dropdownListItem}
                         >
                             <Text style={brandDropdownContainer.dropdownText}>{brand.brandName}</Text>

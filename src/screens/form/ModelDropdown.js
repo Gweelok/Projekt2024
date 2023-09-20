@@ -58,7 +58,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                 disabled={!brandSelected}
             >
                 <Text style={modelDropdownContainer.dropdownText}>
-                    {selectedModel || (!brandSelected ? t("ModelDropdown.selectModel", currentLanguage) : "Model")}
+                    {selectedModel?.modelName || (!brandSelected ? t("ModelDropdown.selectModel", currentLanguage) : "Model")}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -71,7 +71,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                     {models.map(model => (
                         <TouchableOpacity
                             key={model.modelId}
-                            onPress={() => handleModelSelect(model.modelName)}
+                            onPress={() => handleModelSelect(model)}
                             style={modelDropdownContainer.dropdownListItem}
                         >
                             <Text style={modelDropdownContainer.dropdownText}>{model.modelName}</Text>

@@ -21,7 +21,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
       const fetchData = async () => {
       try {
         const productsList = await getAllProducts();
-        console.log('productsList:', productsList);
+        console.log('productsList:', selectedProduct);
       setProducts(productsList);
       } catch (error) {
         console.log('Error:', error);
@@ -32,6 +32,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
   }, []);
 
     const handleProductSelect = (product) => {
+        console.log('productsList:', product);
         setSelectedProduct(product);
         setIsOpen(false);
         setIsValidationError(false);
@@ -58,7 +59,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 disabled={!categorySelected}
             >
                 <Text style={productDropdownContainer.dropdownText}>
-                    {selectedProduct || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
+                    {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -71,7 +72,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                     {products.map(product => (
                         <TouchableOpacity
                             key={product.productId}
-                            onPress={() => handleProductSelect(product.productName)}
+                            onPress={() => handleProductSelect(product)}
                             style={productDropdownContainer.dropdownListItem}
                         >
                             <Text style={productDropdownContainer.dropdownText}>{product.productName}</Text>
