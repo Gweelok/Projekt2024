@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
-import { brands } from "../../utils/SeedData";
 import CustomInput from "../../componets/atoms/CustomInput 2";
+import { getAllBrands } from "../../utils/Repo";
+
 
 // data is used to set the initial value of the brand dropdown
 const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(data ||null);
-    const ITEM_HEIGHT = 35;
+    const [isValidationError, setIsValidationError] = useState(false);
+    const ITEM_HEIGHT = 40;
+    const [brands, setBrands] = useState(brands);
 
-
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+          const brandsList = await getAllBrands();
+          console.log('brandsList:', brandsList);
+        setBrands(brandsList);
+        } catch (error) {
+          console.log('Error:', error);
+        }
+      };
+      
+      fetchData();// Fetch data when component mounts
+    }, []);
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
@@ -51,11 +66,11 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 <ScrollView style={[brandDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {brands.map(brand => (
                         <TouchableOpacity
-                            key={brand}
-                            onPress={() => handleBrandSelect(brand)}
+                            key={brand.brandId}
+                            onPress={() => handleBrandSelect(brand.brandName)}
                             style={brandDropdownContainer.dropdownListItem}
                         >
-                            <Text style={brandDropdownContainer.dropdownText}>{brand}</Text>
+                            <Text style={brandDropdownContainer.dropdownText}>{brand.brandName}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
