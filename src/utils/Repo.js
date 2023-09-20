@@ -257,6 +257,17 @@ function writeToDatabase(refPath, data) {
         /******* Get ********/
         /********************/
 
+export async function getUptainerFromQR(QRcode){
+    const uptainerId = await QRCodeExists(QRcode);
+    if(uptainerId != "Draft")
+    {
+        return uptainerId;
+    }else{
+        return null;
+    }
+}
+
+
 export async function getAllCategories() {
     const db = firebaseGetDB;
     const reference = ref(db, '/categories');
@@ -385,7 +396,7 @@ export async function getUptainerById(uptainerId) {
 
         if (uptainerData) {
             return {
-                uptainerId,
+                uptainerId: uptainerId,
                 uptainerName: uptainerData.uptainerName,
                 uptainerQR: uptainerData.uptainerQR,
                 uptainerStreet: uptainerData.uptainerStreet,

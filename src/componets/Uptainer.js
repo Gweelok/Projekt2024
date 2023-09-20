@@ -16,7 +16,8 @@ import {
   getBrandById,
 } from "../utils/Repo";
 
-const Uptainer = ({ id, name, location }) => {
+const Uptainer = ({ id, name, uptainerData }) => {
+  console.log("UptainerData", uptainerData);
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
@@ -73,14 +74,12 @@ const Uptainer = ({ id, name, location }) => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("UptainerDetails", {
-            id: id,
-            name: name,
-            location: location,
+            uptainerData: uptainerData,
           })
         }
       >
         <Text style={styles.menuItem_text}>{name}</Text>
-        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{location}</Text>
+        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{uptainerData.location}</Text>
       </TouchableOpacity>
 
       <FlatList

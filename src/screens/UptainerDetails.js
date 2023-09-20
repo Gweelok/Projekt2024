@@ -26,7 +26,14 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const UptainerDetails = ({ navigation, route }) => {
-  const item = route.params;
+  let uptainer = null;
+  if (!route.params) {
+    uptainer = route.params.uptainerData;
+  }else{
+    uptainer = route.params;
+  }
+
+  console.log("uptainer",uptainer);
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
 
@@ -35,7 +42,8 @@ const UptainerDetails = ({ navigation, route }) => {
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
-        const items = await getItemsInUptainer(item.id); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
+        const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
+        
         const updatedData = await Promise.all(
           items.map(async (item) => {
             const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
@@ -80,7 +88,7 @@ const UptainerDetails = ({ navigation, route }) => {
     //get uptainerUrl from database
     const storage = getStorage();
     try {
-      const currentUptainer = await getUptainerById(item.id);
+      const currentUptainer = await getUptainerById(uptainer.uptainerId);
       const uptainerPathReference = ref(storage, currentUptainer.uptainerImage);
       return await getDownloadURL(uptainerPathReference);
     } catch (error) {
@@ -113,8 +121,8 @@ const UptainerDetails = ({ navigation, route }) => {
               style={styles.productLocation}
             >
               <Text style={styles.productAddress}>
-                {item?.name} /{"\n"}
-                {item?.location}
+                {uptainer.uptainerName} /{"\n"}
+                {uptainer.uptainerStreet}
               </Text>
               <Ionicons name="chevron-forward" color="white" size={30} />
             </TouchableOpacity>
@@ -178,7 +186,7 @@ const UptainerDetails = ({ navigation, route }) => {
       {/* This ProductAlert component is dependent on the uploading of a product to the database */}
       {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
 
-      {item?.screenFrom == "QRScanner" && <ProductAlert />}
+      {uptainer?.screenFrom == "QRScanner" && <ProductAlert />}
       <Navigationbar navigation={navigation} />
     </View>
   );

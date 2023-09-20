@@ -118,7 +118,7 @@ useEffect(() => {
         key={item.uptainerId}
         id={item.uptainerId}
         name={item.uptainerName}
-        location={item.uptainerStreet}
+        uptainerData={item}
       />
     ));
   };
@@ -160,7 +160,7 @@ useEffect(() => {
             key={uptainerList[0].uptainerId}
             id={uptainerList[0].uptainerId}
             name={uptainerList[0].uptainerName}
-            location={uptainerList[0].uptainerStreet}
+            uptainerData={uptainerList[0]}
         />
       )}
       {/* Display BoxLink component */}

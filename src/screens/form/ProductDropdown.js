@@ -31,7 +31,6 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
   }, []);
 
     const handleProductSelect = (product) => {
-        console.log('productsList:', product);
         setSelectedProduct(product);
         setIsOpen(false);
         setIsValidationError(false);

@@ -14,7 +14,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { generateQRCode } from "../../utils/QRCodeGenerator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Buttons, styles } from "../../styles/Stylesheet";
-import { createItem } from "../../utils/Repo";
+import { createItem, getUptainerFromQR, getUptainerById } from "../../utils/Repo";
 
 const QRScanner = ({route, navigation}) => {
   const itemData = route.params;
@@ -62,21 +62,16 @@ const QRScanner = ({route, navigation}) => {
   const handleSaveCode = async () => {
     if (scannedQRCode) {
       const qrCodeString = JSON.stringify(scannedQRCode);
-      try {
-        console.log("brand: ",itemData?.brand);
-        console.log("category: ",itemData?.category);
-        console.log("description: ",itemData?.description);
-        console.log("image: ",itemData?.image);
-        console.log("model: ",itemData?.model);
-        console.log("product: ",itemData?.product);
-        console.log("condition: ",itemData?.condition);
-        
+      try {        
         
         await AsyncStorage.setItem("scannedQRCode", qrCodeString);
         const scannedQRCodeObject = JSON.parse(qrCodeString);
-        console.log("Scanned QR code saved:", scannedQRCodeObject);
+        console.log("scannedQRCodeObject: ", scannedQRCodeObject);
         const value = scannedQRCodeObject.props.value;
-        console.log("uptainerQRCode: ",value);
+        
+        const uptainerId = await getUptainerFromQR(value);
+        const uptainer = await getUptainerById(uptainerId);
+        console.log("uptainerId: ",uptainerId);
         try{
           await createItem(
             brandId = itemData?.brand, 
@@ -88,6 +83,7 @@ const QRScanner = ({route, navigation}) => {
             itemcondition = itemData?.condition, 
             uptainerQRCode = value
           );
+           
         } catch (error) {
           console.log("can not create item. Error: ", error);
         }
@@ -100,7 +96,7 @@ const QRScanner = ({route, navigation}) => {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
 
-                navigation.navigate("UptainerDetails", screenNavigation);
+                navigation.navigate("UptainerDetails", uptainer);
 
                 // Optionally, navigate or perform other actions after saving
               },
