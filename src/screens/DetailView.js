@@ -10,6 +10,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
+  const details = route.params;
   const itemDescription = details.itemDescription;
   const brandName = details.brandName;
   const productName = details.productName;
