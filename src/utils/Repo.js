@@ -7,7 +7,6 @@ import {
     getStorage,
     uploadBytesResumable,
     getDownloadURL,
-    listAll,
     ref as ref_storage
   } from "firebase/storage";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
@@ -593,7 +592,6 @@ export async function getDraftFromUser(userId) {
     const itemList = await getAllItems()
     
     const draftList = itemList.filter(item => item.itemUser === userId && item.itemUptainer === "Draft")
-    console.log("draftList: ",draftList)
     ///not tested yet
     return draftList
 }
@@ -748,7 +746,6 @@ const uploadToFirebase = async (uri, name, path, onProgress) => {
     const storage = getStorage();
     const imageRef = ref_storage(storage, `${path}${name}`);
     const uploadTask = uploadBytesResumable(imageRef, theBlob);
-    console.log("uploadaToFirebase2")
     return new Promise((resolve, reject) => {
       uploadTask.on(
         "state_changed",

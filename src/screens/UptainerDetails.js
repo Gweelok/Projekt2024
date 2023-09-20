@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getItemsInUptainer,
-  getUptainerById,
   getProductById,
   getBrandById,
 } from "../utils/Repo";
@@ -32,8 +31,6 @@ const UptainerDetails = ({ navigation, route }) => {
   }else{
     uptainer = route.params;
   }
-
-  console.log("uptainer",uptainer);
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
 

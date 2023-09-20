@@ -17,7 +17,6 @@ import {
 } from "../utils/Repo";
 
 const Uptainer = ({ id, name, uptainerData }) => {
-  console.log("UptainerData", uptainerData);
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
