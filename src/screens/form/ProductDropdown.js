@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
+import { getAllProducts } from "../../utils/Repo";
 
 // data is used to set the initial value of the dropdown
 const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
@@ -10,10 +11,25 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState( data || null);
     const [isValidationError, setIsValidationError] = useState(false);
-  const ITEM_HEIGHT = 39;
+    const ITEM_HEIGHT = 39;
+    const [products, setProducts] = useState(products);
 
     // Dummy products, replace with actual data
-    const products = ["iPhone", "Samsung TV", "Dell Laptop", "Wall Clock", "iPad"];
+    //const products = ["iPhone", "Samsung TV", "Dell Laptop", "Wall Clock", "iPad"];
+
+    useEffect(() => {
+      const fetchData = async () => {
+      try {
+        const productsList = await getAllProducts();
+        console.log('productsList:', productsList);
+      setProducts(productsList);
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+    
+    fetchData();// Fetch data when component mounts
+  }, []);
 
     const handleProductSelect = (product) => {
         setSelectedProduct(product);
@@ -54,11 +70,11 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 <ScrollView style={[productDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
                     {products.map(product => (
                         <TouchableOpacity
-                            key={product}
-                            onPress={() => handleProductSelect(product)}
+                            key={product.productId}
+                            onPress={() => handleProductSelect(product.productName)}
                             style={productDropdownContainer.dropdownListItem}
                         >
-                            <Text style={productDropdownContainer.dropdownText}>{product}</Text>
+                            <Text style={productDropdownContainer.dropdownText}>{product.productName}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
