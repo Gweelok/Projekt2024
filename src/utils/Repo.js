@@ -202,13 +202,22 @@ export async function createProduct(data) {
 export async function createItemDraft(productId = "", brandId = "", modelId = "", categoryId = "", itemImage = "", itemDescription = "", itemCondition = "") {
     const newItemKey = push(ref(db, paths.items)).key;
     try {
-        const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
-        const newImagePath = newItemKey +"."+ fileExtension;
-        const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
-            console.log("progress: ",v)
-            );
-        
-        console.log(uploadResp);  
+        let newImagePath = "Default.jpg"
+        if(itemImage != ""){
+            try{
+            const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
+            newImagePath = newItemKey +"."+ fileExtension;
+            const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
+                console.log("progress: ",v)
+                );
+            
+            console.log(uploadResp); 
+            console.log(newImagePath); 
+            } catch (error) {
+                console.log("can not upload image. Error: ", error);
+            }
+
+    } 
         const user = await getCurrentUser();
         
         const itemData = {
