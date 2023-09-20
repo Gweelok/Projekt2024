@@ -10,7 +10,6 @@ import { getAllBrands } from "../../utils/Repo";
 const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-    const [isValidationError, setIsValidationError] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(data ||null);
     const ITEM_HEIGHT = 35;
     const [brands, setBrands] = useState(brands);
