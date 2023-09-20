@@ -57,6 +57,7 @@ const ProductDetailScreen = ({ route }) => {
 
 const Add = ({route, navigation}) => {
   const itemData = route.params?.itemData;
+  console.log("itemData ",itemData);
 
   // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
@@ -92,7 +93,7 @@ const Add = ({route, navigation}) => {
           </Text>
 
           <View style={[{marginBottom: 10}]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.image}/>
+            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl}/>
           </View>
 
           <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
