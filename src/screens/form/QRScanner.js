@@ -68,8 +68,8 @@ const QRScanner = ({route, navigation}) => {
         const scannedQRCodeObject = JSON.parse(qrCodeString);
         console.log("scannedQRCodeObject: ", scannedQRCodeObject);
         const value = scannedQRCodeObject.props.value;
+        let navDir = "UptainerDetails"
         
-        const uptainerId = await getUptainerFromQR(value);
         const uptainer = await getUptainerById(uptainerId);
         console.log("uptainerId: ",uptainerId);
         try{
@@ -87,7 +87,10 @@ const QRScanner = ({route, navigation}) => {
         } catch (error) {
           console.log("can not create item. Error: ", error);
         }
-        
+        const uptainerId = await getUptainerFromQR(value);
+        if(!uptainerId){
+          navDir = "MyDrafts"
+        }
         Alert.alert(
           t("QrScannerScreen.Success", currentLanguage),
           t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
@@ -96,7 +99,7 @@ const QRScanner = ({route, navigation}) => {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
 
-                navigation.navigate("UptainerDetails", uptainer);
+                navigation.navigate(navDir, uptainer);
 
                 // Optionally, navigate or perform other actions after saving
               },
