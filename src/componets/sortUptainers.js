@@ -55,6 +55,7 @@ useEffect(() => {
     try {
       // Fetch the list of uptainers
       const uptainerList = await getAllUptainers();
+      
       setUptainerList(uptainerList);
       
     } catch (error) {
@@ -119,6 +120,8 @@ useEffect(() => {
         id={item.uptainerId}
         name={item.uptainerName}
         location={item.uptainerStreet}
+        latitude={item.uptainerLat}
+        longitude={item.uptainerLong}
       />
     ));
   };
@@ -151,6 +154,7 @@ useEffect(() => {
   };
       // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
+  console.log(uptainerList)
   return (
     
     <View>
@@ -161,10 +165,12 @@ useEffect(() => {
             id={uptainerList[0].uptainerId}
             name={uptainerList[0].uptainerName}
             location={uptainerList[0].uptainerStreet}
+            latitude={uptainerList[0].uptainerLat}
+            longitude={uptainerList[0].uptainerLong}
         />
       )}
       {/* Display BoxLink component */}
-
+    
       <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo} style={GlobalStyle.BodyWrapper}/>
       {renderUptainers()}
      

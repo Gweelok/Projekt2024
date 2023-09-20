@@ -15,6 +15,7 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
+  const openMap = details.openMap;
   const handlePress = () => {
     navigation.goBack();
   };
@@ -24,18 +25,7 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const TagButton = "Tag";
 // openAdressOnMap will take the lat and lng of the container the user will walk to. Label is the name of the container, if not provided,
 // will be named just as Container
-   const openAddressOnMap = ( lat,lng, label = "Container") => {
-    const scheme = Platform.select({
-      ios: 'maps:0,0?q=',
-      android: 'geo:0,0?q=',
-    });
-    const latLng = `${lat},${lng}`;
-    const url = Platform.select({
-      ios: `${scheme}${label}@${latLng}`,
-      android: `${scheme}${latLng}(${label})`,
-    });
-    Linking.openURL(url);
-  };
+   
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
@@ -55,7 +45,7 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
             </View>
 
             <View style={DetailView.rightInfo}>
-              <Pressable onPress={()=>openAddressOnMap(55.676098,12.568337)} style={DetailView.locationContainer}>
+              <Pressable onPress={openMap} style={DetailView.locationContainer}>
                 <Ionicons name="location" size={15} color={Primarycolor1} />
                 <Text style={DetailView.location}>Valby - Allegade 25 (need to implement container coords)</Text>
               </Pressable>
