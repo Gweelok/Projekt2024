@@ -166,7 +166,8 @@ const UptainerDetails = ({ navigation, route }) => {
                     styles.bodyText, 
                     {
                     fontWeight: "600", 
-                    width: windowWidth / 2.7
+                    width: windowWidth / 2.7,
+                    marginTop: 5
                   }
                 ]}
 
