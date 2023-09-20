@@ -19,7 +19,6 @@ const MyDrafts = () => {
   const handlePress = () => {
     navigation.goBack();
   };
-
   useEffect(() => { //Fetches items in the draftcards from the database 
     const fetchDraftList = async () => {
       const storage = getStorage();
@@ -36,9 +35,9 @@ const MyDrafts = () => {
           
           try {
             const url = await getDownloadURL(pathReference);
-            return { ...item, imageUrl: url,  productName: product, brandName: brand,  // loading extram params into the objects
-              categoryName: category.itemCategory,
-              modelName: model, itemDescription: item.itemDescription , itemcondition: item.itemcondition};
+            return { ...item, imageUrl: url,  product: product, brand: brand,  // loading extram params into the objects
+              category: category,
+              model: model, item: item};
           } catch (error) {
             console.log('Error while downloading image => ', error);
             return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
@@ -72,9 +71,9 @@ const MyDrafts = () => {
         </Text>
       </View>
       <ScrollViewComponent>
-        {data.map((cur, i) => (  // instead of dummy data using data
+        {data.map((cur) => (  // instead of dummy data using data
           <DraftCard
-            key={i}
+            key={cur.itemId}
             props={cur}
             onPress={() => {
               navigation.navigate("QRScanner");
