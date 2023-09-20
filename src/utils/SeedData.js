@@ -218,7 +218,7 @@ export const categories = [
         productId: "Speakers",//1
         brandId: "Marshall",//1
         modelId: "Action II",//1
-        itemCondition: 1,//(new)
+        itemCondition: "Mint Condition",//(new)
         itemImage: "product1.jpeg",
         itemDescription: "Great speaker",
         UptainerId: "Det Bæredygtige Forsamlingshus",//1
@@ -227,7 +227,7 @@ export const categories = [
         productId: "Mixer", //9
         brandId: "Kitchen Aid", //32
         modelId: "",
-        itemCondition: 4,   //smaller defects
+        itemCondition: "Good Condition",   //smaller defects
         itemImage: "product2.jpeg",
         itemDescription: "It is running very slowly",
         UptainerId: "Det Bæredygtige Forsamlingshus", //1
@@ -236,7 +236,7 @@ export const categories = [
         productId: "Vacuum cleaner", //14
         brandId: "Dyson", //54
         modelId: "",
-        itemCondition: 3,   //(worn but working)
+        itemCondition: "Fair Condition",   //(worn but working)
         itemImage: "product3.jpeg",
         itemDescription: "It is old but okay",
         UptainerId: "Det Bæredygtige Forsamlingshus", //1
@@ -245,7 +245,7 @@ export const categories = [
         productId: "Keyboard", //22
         brandId: "", 
         modelId: "",
-        itemCondition: 2,   //(good but used)
+        itemCondition: "Good Condition",   //(good but used)
         itemImage: "product4.jpeg",
         itemDescription: "",
         UptainerId: "KU Lighthouse", //2
@@ -254,7 +254,7 @@ export const categories = [
         productId: "Smart tv", //9
         brandId: "Philips", //32
         modelId: "",
-        itemCondition: 2,   //(good but used)
+        itemCondition: "Good Condition",   //(good but used)
         itemImage: "product5.jpeg",
         itemDescription: "I bought a new one",
         UptainerId: "KU Lighthouse", //2
@@ -263,7 +263,7 @@ export const categories = [
         productId: "Headset and Headphones", //9
         brandId: "Sony", //10
         modelId: "",
-        itemCondition: 5,   //(broken)
+        itemCondition: "Broken",   //(broken)
         itemImage: "product6.jpeg",
         itemDescription: "I guess there is a loose connection",
         UptainerId: "KU Lighthouse", //2
@@ -272,7 +272,7 @@ export const categories = [
         productId: "Foodprocessor", //8
         brandId: "Shark Ninja", //31
         modelId: "",
-        itemCondition: 2,   //(Used but good)
+        itemCondition: "Good Condition",   //(Used but good)
         itemImage: "product7.jpeg",
         itemDescription: "Shark Ninja foodprocessor",
         UptainerId: "COOP 365", //3
@@ -281,7 +281,7 @@ export const categories = [
         productId: "Steam mop", //9
         brandId: "Vileda", //32
         modelId: "",
-        itemCondition: 5,   //(broken)
+        itemCondition: "Broken",   //(broken)
         itemImage: "product8.jpeg",
         itemDescription: "It won't steam anymore",
         UptainerId: "COOP 365", //3
@@ -290,7 +290,7 @@ export const categories = [
         productId: "Smartphone", //9
         brandId: "Apple", //32
         modelId: "",
-        itemCondition: 4,   //(smaller defects)
+        itemCondition: "Poor Condition",   //(smaller defects)
         itemImage: "product9.jpeg",
         itemDescription: "Screen is broken",
         UptainerId: "COOP 365", //3

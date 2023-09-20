@@ -35,6 +35,7 @@ export default {
     MyDrafts: "My Drafts",
     DataPolicy: "Data Policy",
     ContactUs: "Contact Us",
+    Notification: "Notifications",
   },
 
   UpdroppForm: {
@@ -88,23 +89,6 @@ export default {
   },
   AccountSettingsScreen: {
     Header: "Account Settings",
-    BackButton:"Back",
-    Name: "Name",
-    Email:"E-mail",
-    Tlf:"Phone number",
-    Submit:"Save",
-    ChangeCode:"change password",
-    Delete:"Delete account",
-    Optional:'optional',
-    HandleSave: 'Information is saved',
-    HandleDeleteAccount:'Account is deleted',
-    Language:'language'
-
-  },
-  DeleteAccount:{
-    Header:'Are you sure you want to delete you account?',
-    MainButton:'Delete my account',
-    SecondaryButton:'Cancel',
   },
   MySettingsScreen: {
     Header: "My Settings",

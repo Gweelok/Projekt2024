@@ -94,6 +94,23 @@ export async function createUptainer(data) {
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
+export async function createItem(brandId, categoryId, itemDescription, itemImage, itemModel, itemproduct, itemcondition, uptainerQRCode) {
+    const newItemKey = push(ref(db, paths.items)).key;
+    const UptainerId = QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
+    const itemData = {
+        itemId: newItemKey,
+        itemproduct: itemproduct,
+        itemBrand: brandId,
+        itemModel: itemModel,
+        itemCategory: categoryId,
+        itemImage: itemImage,
+        itemDescription: itemDescription,
+        itemcondition: itemcondition,
+        itemUptainer: UptainerId,
+    };
+    await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+}
+
 
 export async function createBrand(name) {
     const newBrandKey = push(ref(db, paths.brands)).key;
@@ -123,7 +140,6 @@ export async function createItemSeedata(item, categories, products, brands, upta
 
 
     const newItemKey = push(ref(db, paths.items)).key;
-    const itemQRCode = generateQRCode(item.itemQR);
     const itemData = {
         itemId: newItemKey,
         itemproduct: products,
@@ -134,7 +150,6 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
-        itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
@@ -737,7 +752,7 @@ export function updateUserData() {
         });
     }
   }
-
+  
   export function deleteUserById() {
     const currentUser = GetCurrentUser();
     if (currentUser.length > 0) {
@@ -750,7 +765,7 @@ export function updateUserData() {
           console.error("Error deleting user:", error);
         });
     }
-  }*/
+}
 
 /**************/
 /*** Errors ***/
