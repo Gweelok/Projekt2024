@@ -20,7 +20,6 @@ import * as Linking from 'expo-linking';
 const Uptainer = ({ id, name, location,latitude,longitude }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
-
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
@@ -68,18 +67,7 @@ const Uptainer = ({ id, name, location,latitude,longitude }) => {
   for (let i = 0; i < data.length; i += 2) {
     pairedData.push([data[i], data[i + 1]]);
   }
-  const openAddressOnMap = () => {
-    const scheme = Platform.select({
-      ios: 'maps:0,0?q=',
-      android: 'geo:0,0?q=',
-    });
-    const latLng = `${latitude},${longitude}`;
-    const url = Platform.select({
-      ios: `${scheme}${name}@${latLng}`,
-      android: `${scheme}${latLng}(${name})`,
-    });
-    Linking.openURL(url);
-  };
+  
   return (
     <View style={{ marginBottom: 20 }}>
       <TouchableOpacity
@@ -111,7 +99,9 @@ const Uptainer = ({ id, name, location,latitude,longitude }) => {
                   brandName: item[0]?.brandName,
                   productName: item[0]?.productName,
                   imageUrl: item[0]?.imageUrl,
-                  openMap: openAddressOnMap
+                  longitude,
+                  latitude,
+                  name
                 })
               }
             >
@@ -132,6 +122,9 @@ const Uptainer = ({ id, name, location,latitude,longitude }) => {
                     brandName: item[1]?.brandName,
                     productName: item[1]?.productName,
                     imageUrl: item[1]?.imageUrl,
+                    longitude,
+                    latitude,
+                    name
                   })
                 }
               >

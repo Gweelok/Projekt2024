@@ -15,7 +15,10 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  const openMap = details.openMap;
+  const latitude = details.latitude;
+  const longitude = details.longitude
+  const name = details.name
+  console.log(name,"detailView")
   const handlePress = () => {
     navigation.goBack();
   };
@@ -23,9 +26,24 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const displayTextValue =
     itemDescription; // displays item description
   const TagButton = "Tag";
-// openAdressOnMap will take the lat and lng of the container the user will walk to. Label is the name of the container, if not provided,
-// will be named just as Container
-   
+
+  const openAddressOnMap = async () => {
+  const scheme = Platform.select({
+    ios: 'maps:0,0?q=',
+    android: 'geo:0,0?q=',
+  });
+  const latLng = `${latitude},${longitude}`;
+  const url = Platform.select({
+    ios: `${scheme}${name}@${latLng}`,
+    android: `${scheme}${latLng}(${name})`,
+  });
+  Linking.canOpenURL(url)
+  .then(message=>{
+    if(message) Linking.openURL(url).catch(e=>console.log(e))
+  })
+  .catch(e=>console.log(e))
+  
+};
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
@@ -45,10 +63,10 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
             </View>
 
             <View style={DetailView.rightInfo}>
-              <Pressable onPress={openMap} style={DetailView.locationContainer}>
+              <TouchableOpacity onPress={openAddressOnMap} style={DetailView.locationContainer}>
                 <Ionicons name="location" size={15} color={Primarycolor1} />
-                <Text style={DetailView.location}>Valby - Allegade 25 (need to implement container coords)</Text>
-              </Pressable>
+                <Text style={DetailView.location}>Valby - Allegade 25 (need to implement street coords)</Text>
+              </TouchableOpacity>
             </View>
           </View>
           <Text style={DetailView.text}>{displayTextValue}</Text>

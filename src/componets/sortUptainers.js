@@ -120,8 +120,9 @@ useEffect(() => {
         id={item.uptainerId}
         name={item.uptainerName}
         location={item.uptainerStreet}
-        latitude={item.uptainerLat}
-        longitude={item.uptainerLong}
+        latitude={item.uptainerLatitude}
+        longitude={item.uptainerLongitude}
+        
       />
     ));
   };
@@ -154,7 +155,7 @@ useEffect(() => {
   };
       // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
-  console.log(uptainerList)
+console.log(uptainerList)
   return (
     
     <View>
@@ -165,8 +166,8 @@ useEffect(() => {
             id={uptainerList[0].uptainerId}
             name={uptainerList[0].uptainerName}
             location={uptainerList[0].uptainerStreet}
-            latitude={uptainerList[0].uptainerLat}
-            longitude={uptainerList[0].uptainerLong}
+            latitude={uptainerList[0].uptainerLatitude}
+            longitude={uptainerList[0].uptainerLongitude}
         />
       )}
       {/* Display BoxLink component */}
