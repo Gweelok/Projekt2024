@@ -1,21 +1,20 @@
-import { View, Text, Image, StyleSheet, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Linking, Pressable } from "react-native";
 import { Backgroundstyle } from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { TouchableOpacity } from "react-native";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-
+import * as Location from 'expo-location';
 const DetailViews = ({ navigation, route }) => {// route gets itemDescription, imageUrl, brandName and ProductName  from UptainerDetails screen
   const details = route.params;
   const itemDescription = details.itemDescription;
   const brandName = details.brandName;
   const productName = details.productName;
   const imageUrl = details.imageUrl;
-  
   const handlePress = () => {
     navigation.goBack();
   };
@@ -23,8 +22,20 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
   const displayTextValue =
     itemDescription; // displays item description
   const TagButton = "Tag";
-
-  
+// openAdressOnMap will take the lat and lng of the container the user will walk to. Label is the name of the container, if not provided,
+// will be named just as Container
+   const openAddressOnMap = ( lat,lng, label = "Container") => {
+    const scheme = Platform.select({
+      ios: 'maps:0,0?q=',
+      android: 'geo:0,0?q=',
+    });
+    const latLng = `${lat},${lng}`;
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`,
+    });
+    Linking.openURL(url);
+  };
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <ScrollViewComponent>
@@ -44,10 +55,10 @@ const DetailViews = ({ navigation, route }) => {// route gets itemDescription, i
             </View>
 
             <View style={DetailView.rightInfo}>
-              <View style={DetailView.locationContainer}>
+              <Pressable onPress={()=>openAddressOnMap(55.676098,12.568337)} style={DetailView.locationContainer}>
                 <Ionicons name="location" size={15} color={Primarycolor1} />
-                <Text style={DetailView.location}>Valby - Allegade 25</Text>
-              </View>
+                <Text style={DetailView.location}>Valby - Allegade 25 (need to implement container coords)</Text>
+              </Pressable>
             </View>
           </View>
           <Text style={DetailView.text}>{displayTextValue}</Text>
