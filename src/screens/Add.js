@@ -61,16 +61,16 @@ const Add = ({route, navigation}) => {
   // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
 
-  const [image, setImage] = useState(itemData?.image || null); //does not work
+  const [image, setImage] = useState(itemData?.image || ""); 
   const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || null);
-  const [model, setModel] = useState(itemData?.model || null);
-  const [condition, setCondition] = useState(itemData?.condition || null);
-  const [description, setDescription] = useState(itemData?.description || null); //does not work
+  const [model, setModel] = useState(itemData?.model || "");
+  const [condition, setCondition] = useState(itemData?.condition || "");
+  const [description, setDescription] = useState(itemData?.description || ""); 
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
-  console.log("save button clicked image : ", product);
+  console.log("description: ", description);
   const handleSaveButtonClick = async () => {
     const help = image;
     

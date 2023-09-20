@@ -107,30 +107,43 @@ export async function createUptainer(data) {
 }
 export async function createItem(brandId = "", categoryId = "", itemDescription = "", itemImage = "", itemModel = "", itemproduct = "", itemcondition = "", uptainerQRCode = "") {
     const newItemKey = push(ref(db, paths.items)).key;
-    const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
-    const newImagePath = newItemKey +"."+ fileExtension;
-    const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
-        console.log("progress: ",v)
-        );
+    let newImagePath = "Default.jpg"
+    if(itemImage != ""){
+        try{
+        const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
+        newImagePath = newItemKey +"."+ fileExtension;
+        const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
+            console.log("progress: ",v)
+            );
+        
+        console.log(uploadResp); 
+        console.log(newImagePath); 
+        } catch (error) {
+            console.log("can not upload image. Error: ", error);
+        }
+
+    }
+    try{
+        const user = await getCurrentUser();
+        const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
+        const itemData = {
+            itemId: newItemKey,
+            itemproduct: itemproduct,
+            itemBrand: brandId,
+            itemModel: itemModel,
+            itemTaken: false,
+            itemCategory: categoryId,
+            itemImage: paths.Items + newImagePath,
+            itemDescription: itemDescription,
+            itemcondition: itemcondition,
+            itemUser: user.id,
+            itemUptainer: UptainerId,
+        };
+        await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+    } catch (error) {
+        console.log("can not upload item to DB. Error: ", error);
+    }
     
-    console.log(uploadResp); 
-    console.log(newImagePath); 
-    const user = await getCurrentUser();
-    const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
-    const itemData = {
-        itemId: newItemKey,
-        itemproduct: itemproduct,
-        itemBrand: brandId,
-        itemModel: itemModel,
-        itemTaken: false,
-        itemCategory: categoryId,
-        itemImage: paths.Items + newImagePath,
-        itemDescription: itemDescription,
-        itemcondition: itemcondition,
-        itemUser: user.id,
-        itemUptainer: UptainerId,
-    };
-    await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
 
 

@@ -54,6 +54,7 @@ const QRScanner = ({route, navigation}) => {
 
   const handleScanAgain = () => {
     setScanned(false);
+    console.log("description: ",itemData?.description);
     //setText('Not yet scanned'); // Reset the scanned text
     setScannedQRCode(null);
   };
@@ -70,21 +71,27 @@ const QRScanner = ({route, navigation}) => {
         console.log("product: ",itemData?.product);
         console.log("condition: ",itemData?.condition);
         
+        
         await AsyncStorage.setItem("scannedQRCode", qrCodeString);
         const scannedQRCodeObject = JSON.parse(qrCodeString);
         console.log("Scanned QR code saved:", scannedQRCodeObject);
         const value = scannedQRCodeObject.props.value;
         console.log("uptainerQRCode: ",value);
-        await createItem(
-          brandId = itemData?.brand, 
-          categoryId = itemData?.category, 
-          itemDescription = itemData?.description, 
-          itemImage = itemData?.image, 
-          itemModel = itemData?.model, 
-          itemproduct = itemData?.product,
-          itemcondition = itemData?.condition, 
-          uptainerQRCode = value
-        );
+        try{
+          await createItem(
+            brandId = itemData?.brand, 
+            categoryId = itemData?.category, 
+            itemDescription = itemData?.description, 
+            itemImage = itemData?.image, 
+            itemModel = itemData?.model, 
+            itemproduct = itemData?.product,
+            itemcondition = itemData?.condition, 
+            uptainerQRCode = value
+          );
+        } catch (error) {
+          console.log("can not create item. Error: ", error);
+        }
+        
         Alert.alert(
           t("QrScannerScreen.Success", currentLanguage),
           t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
