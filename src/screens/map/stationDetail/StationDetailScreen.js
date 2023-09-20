@@ -1,16 +1,7 @@
-import Navigationbar from "../../../componets/Navigationbar";
-import React from "react";
-import {
-  StyleSheet,
-  StatusBar,
-  Image,
-  View,
-  Dimensions,
-  Platform,
-  Linking,
-  ScrollView,
-} from "react-native";
-import BackButton from "./BackButton";
+import React from 'react';
+import Navigationbar from '../../../componets/Navigationbar';
+import {StyleSheet, StatusBar, Image, View, Dimensions, Platform, Linking, ScrollView} from "react-native";
+import BackButton from '../../../componets/BackButton';
 import StationTitle from "./StationTitle";
 import { Backgroundstyle } from "../../../styles/Stylesheet";
 import PrimaryColorButton from "./PrimaryColorButton";
@@ -19,7 +10,8 @@ import GlobalStyle from "../../../styles/GlobalStyle";
 import ScrollViewComponent from "../../../componets/atoms/ScrollViewComponent";
 import { t, useLanguage } from "../../../Languages/LanguageHandler";
 
-const { width } = Dimensions.get("window");
+
+const { width } = Dimensions.get('window');
 const imageSize = width * 0.85;
 
 const StationDetailScreen = ({ route, navigation }) => {
@@ -59,7 +51,7 @@ const StationDetailScreen = ({ route, navigation }) => {
       <View style={GlobalStyle.BodyWrapper}>
         <ScrollViewComponent>
           <View style={styles.backButtonContainer}>
-            <BackButton navigation={navigation} />
+            <BackButton onPress={navigation.goBack} />
           </View>
           <View style={styles.titleContainer}>
             <StationTitle
