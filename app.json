@@ -3,31 +3,33 @@
     "name": "retireditems",
     "slug": "retireditems",
     "version": "1.0.0",
-    
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "REASON_FOR_REQUEST",
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       }
     },
-    
     "android": {
-      "permissions" : [
-        "READ_EXTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
         "ACCESS_BACKGROUND_LOCATION"
       ],
-      
       "config": {
         "googleMaps": {
           "apiKey": "REPLACE_FOR_API_KEY"
         }
       }
-    }
+    },
+    "sdkVersion": "49.0.0",
+    "entryPoint": ".vscode\\exponentIndex.js"
   },
-//  "name": "retireditems"
-  "name" : "main",
+  "name": "main",
   "displayName": "retireditems"
 }

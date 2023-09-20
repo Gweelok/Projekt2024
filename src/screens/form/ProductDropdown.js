@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
+import { getAllProducts } from "../../utils/Repo";
 
 const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
     const { currentLanguage } = useLanguage();
@@ -10,8 +11,21 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
     const [selectedProduct, setSelectedProduct] = useState(data || null);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 39;
+    const [products, setProducts] = useState(products);
 
-    const products = ["iPhone", "Samsung TV", "Dell Laptop", "Wall Clock", "iPad"];
+
+    useEffect(() => {
+      const fetchData = async () => {
+      try {
+        const productsList = await getAllProducts();
+      setProducts(productsList);
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+    
+    fetchData();// Fetch data when component mounts
+  }, []);
 
     const handleProductSelect = (product) => {
         setSelectedProduct(product);
@@ -40,7 +54,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 disabled={!categorySelected}
             >
                 <Text style={productDropdownContainer.dropdownText}>
-                    {selectedProduct || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
+                    {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -52,11 +66,11 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 <ScrollView style={productDropdownContainer.dropdownList}>
                     {products.map((product) => (
                         <TouchableOpacity
-                            key={product}
+                            key={product.productId}
                             onPress={() => handleProductSelect(product)}
                             style={productDropdownContainer.dropdownListItem}
                         >
-                            <Text style={productDropdownContainer.dropdownText}>{product}</Text>
+                            <Text style={productDropdownContainer.dropdownText}>{product.productName}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>

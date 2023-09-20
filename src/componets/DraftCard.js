@@ -33,12 +33,12 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
         
         <Image source={{ uri: props.imageUrl }} style={styles.draftImage} />
         <View style={styles.draftContent}>
-          <Text style={styles.category}>{props.categoryName}</Text>
+          <Text style={styles.category}>{props.category.categoryName}</Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.brand}>{props.brandName}</Text>
-            {props.modelName && (
+            <Text style={styles.brand}>{props.brand.brandName}</Text>
+            {props.model.modelName && (
               <Text style={[styles.brand, { marginLeft: 0 }]}>
-                {","} {props.modelName}
+                {","} {props.model.modelName}
               </Text>
             )}
           </View>

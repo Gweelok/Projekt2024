@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
-import { categories } from "../../utils/SeedData";
+import { getAllCategories } from "../../utils/Repo";
 
 // data is used to set the initial value of the category dropdown
 const CategoryDropdown = ({ onCategorySelect, data }) => {
@@ -12,6 +12,20 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
     const [selectedCategory, setSelectedCategory] = useState(data || null);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 40;
+    const [categories, setCategories] = useState(categories);
+
+    useEffect(() => {
+      const fetchData = async () => {
+      try {
+        const categoriesList = await getAllCategories();
+      setCategories(categoriesList);
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+    
+    fetchData();// Fetch data when component mounts
+  }, []);
 
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
@@ -34,7 +48,8 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                 }}
             >
                 <Text style={categoryDropdownContainer.dropdownText}>
-                    {selectedCategory ? selectedCategory : t("CategoryDropdown.selectCategory", currentLanguage)}
+                    {selectedCategory ? selectedCategory.categoryName :
+                    t("CategoryDropdown.selectCategory", currentLanguage)}
                 </Text>
                 <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
             </TouchableOpacity>
@@ -43,11 +58,11 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                 <ScrollView style={categoryDropdownContainer.dropdownList}>
                     {categories.map((category) => (
                         <TouchableOpacity
-                            key={category}
+                            key={category.categoryId}
                             onPress={() => handleCategorySelect(category)}
                             style={categoryDropdownContainer.dropdownListItem}
                         >
-                            <Text style={categoryDropdownContainer.dropdownText}>{category}</Text>
+                            <Text style={categoryDropdownContainer.dropdownText}>{category.categoryName}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
