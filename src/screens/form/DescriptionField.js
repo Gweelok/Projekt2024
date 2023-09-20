@@ -4,7 +4,7 @@ import { useLanguage, t } from '../../Languages/LanguageHandler';
 import { Primarycolor1, Primarycolor3,} from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 
-const DescriptionField = ({ data = '', onInputComplete }) => {
+const DescriptionField = ({ onInputComplete, data = ''}) => {
     const { currentLanguage } = useLanguage();
     const [inputValue, setInputValue] = useState(data); // Create a state to store the input value
 
