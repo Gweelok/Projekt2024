@@ -120,10 +120,10 @@ const Add = ({route, navigation}) => {
             <Pressable
               onPress={() => {
                 navigation.navigate("QRScanner", {
-                  product: product.productId, 
-                  brand: brand.brandId, 
-                  model: model.modelId, 
-                  category: category.categoryId, 
+                  product: product.productName, 
+                  brand: brand.brandName, 
+                  model: model.modelName, 
+                  category: category.categoryName, 
                   condition: condition, 
                   description: description, 
                   image: image
