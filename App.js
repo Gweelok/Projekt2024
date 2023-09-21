@@ -73,6 +73,9 @@ import ThankYouscreen from "./src/screens/Thankyouscreen";
 import {LoaderProvider}from "./src/componets/LoaderContext";
 
 
+import {LoaderProvider}from "./src/componets/LoaderContext";
+
+
 console.log("start");
 const Stack = createNativeStackNavigator();
 
