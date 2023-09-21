@@ -76,19 +76,6 @@ import ChangePassword from "./src/screens/ProfileSetings/ChangePassword";
 
 import {LoaderProvider}from "./src/componets/LoaderContext";
 
-import {LoaderProvider}from "./src/componets/LoaderContext";
-
-
-
-import {LoaderProvider}from "./src/componets/LoaderContext";
-
-
-
-
-
-import {LoaderProvider}from "./src/componets/LoaderContext";
-
-
 console.log("start");
 const Stack = createNativeStackNavigator();
 
