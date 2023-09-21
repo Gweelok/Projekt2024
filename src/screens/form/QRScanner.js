@@ -9,18 +9,20 @@ import {
   Pressable,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
-import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appropriate icon library
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { generateQRCode } from "../../utils/QRCodeGenerator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Buttons, styles } from "../../styles/Stylesheet";
+import { createItem, getUptainerFromQR, getUptainerById } from "../../utils/Repo";
 
-const QRScanner = () => {
-  const navigation = useNavigation();
+const QRScanner = ({route, navigation}) => {
+  const itemData = route.params;
+  console.log("route.params: ", route.params);
+  
   const { currentLanguage } = useLanguage();
   const [loading, setLoading] = useState(false);
-
+  
   const screenNavigation = { screenFrom: "QRScanner" };
 
   const handlePress = () => {
@@ -52,6 +54,7 @@ const QRScanner = () => {
 
   const handleScanAgain = () => {
     setScanned(false);
+    console.log("description: ",itemData?.description);
     //setText('Not yet scanned'); // Reset the scanned text
     setScannedQRCode(null);
   };
@@ -59,10 +62,35 @@ const QRScanner = () => {
   const handleSaveCode = async () => {
     if (scannedQRCode) {
       const qrCodeString = JSON.stringify(scannedQRCode);
-      try {
+      try {        
+        
         await AsyncStorage.setItem("scannedQRCode", qrCodeString);
-        console.log("Scanned QR code saved:", qrCodeString);
-
+        const scannedQRCodeObject = JSON.parse(qrCodeString);
+        console.log("scannedQRCodeObject: ", scannedQRCodeObject);
+        const value = scannedQRCodeObject.props.value;
+        let navDir = "UptainerDetails"
+        
+        
+        try{
+          await createItem(
+            brandId = itemData?.brand, 
+            categoryId = itemData?.category, 
+            itemDescription = itemData?.description, 
+            itemImage = itemData?.image, 
+            itemModel = itemData?.model, 
+            itemproduct = itemData?.product,
+            itemcondition = itemData?.condition, 
+            uptainerQRCode = value
+          );
+           
+        } catch (error) {
+          console.log("can not create item. Error: ", error);
+        }
+        const uptainerId = await getUptainerFromQR(value);
+        const uptainer = await getUptainerById(uptainerId);
+        if(!uptainerId){
+          navDir = "MyDrafts"
+        }
         Alert.alert(
           t("QrScannerScreen.Success", currentLanguage),
           t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
@@ -70,7 +98,8 @@ const QRScanner = () => {
             {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
-                navigation.navigate("UptainerDetails", screenNavigation);
+
+                navigation.navigate(navDir, uptainer);
 
                 // Optionally, navigate or perform other actions after saving
               },

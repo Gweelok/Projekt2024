@@ -16,15 +16,14 @@ import {
   getBrandById,
 } from "../utils/Repo";
 
-const Uptainer = ({ id, name, location }) => {
+const Uptainer = ({ uptainerData }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
-
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
-        const items = await getItemsInUptainer(id); // Assuming 'id' is defined somewhere
+        const items = await getItemsInUptainer(uptainerData.uptainerId); // Assuming 'id' is defined somewhere
         const updatedData = await Promise.all(
           items.map(async (item) => {
             const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
@@ -67,20 +66,18 @@ const Uptainer = ({ id, name, location }) => {
   for (let i = 0; i < data.length; i += 2) {
     pairedData.push([data[i], data[i + 1]]);
   }
-
+  
   return (
     <View style={{ marginBottom: 20 }}>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("UptainerDetails", {
-            id: id,
-            name: name,
-            location: location,
+            uptainerData: uptainerData,
           })
         }
       >
-        <Text style={styles.menuItem_text}>{name}</Text>
-        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{location}</Text>
+        <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
+        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{uptainerData.uptainerStreet}</Text>
       </TouchableOpacity>
 
       <FlatList
@@ -99,6 +96,7 @@ const Uptainer = ({ id, name, location }) => {
                   brandName: item[0]?.brandName,
                   productName: item[0]?.productName,
                   imageUrl: item[0]?.imageUrl,
+                  uptainer: uptainerData,
                 })
               }
             >
@@ -119,6 +117,7 @@ const Uptainer = ({ id, name, location }) => {
                     brandName: item[1]?.brandName,
                     productName: item[1]?.productName,
                     imageUrl: item[1]?.imageUrl,
+                    uptainer: uptainerData,
                   })
                 }
               >
