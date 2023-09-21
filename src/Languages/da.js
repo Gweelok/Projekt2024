@@ -37,7 +37,6 @@ export default {
     Header: "Notifikationer",
   },
 
-
     AccountSettingsScreen : {
      Header: "Kontoindstillinger",
       BackButton:"Tilbage",
@@ -98,7 +97,6 @@ export default {
     MyDrafts: "Mine kladder",
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
-    Notification: "Notfikationer",
   },
 
   UpdroppForm: {

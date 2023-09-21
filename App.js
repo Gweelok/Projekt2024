@@ -60,13 +60,14 @@ import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import UptainerDetails from "./src/screens/UptainerDetails";
 import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
-import Notifications from "./src/screens/profilePages/Notifications";
+import Notifications from "./src/screens/ProfileSetings/Notifications";
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 import { BadgeContext } from "./src/screens/form/BadgeContext"
+import DeleteAccount from "./src/screens/ProfileSetings/deleteAccount";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -81,7 +82,7 @@ export default function App() {
   var doneTheStuff;
   if (!doneTheStuff) {
     doneTheStuff = true;
-    //seedCheck(); //seed data(only works if DB is empty)
+    seedCheck(); //seed data(only works if DB is empty)
   }
 
   //Loading the font
@@ -100,7 +101,7 @@ export default function App() {
     <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
     <LanguageProvider>
       <NavigationContainer theme={navStyle}>
-        <Stack.Navigator initialRouteName="Landingscreen">
+        <Stack.Navigator initialRouteName="Homepage">
           <Stack.Screen
             name="Landingscreen"
             component={LandingScreen}
@@ -175,6 +176,11 @@ export default function App() {
             name="AccountSettings"
             component={AccountSettings}
             options={{ animation: "none" }}
+          />
+          <Stack.Screen
+              name="DeleteAccount"
+              component={DeleteAccount}
+              options={{ animation: "none" }}
           />
           <Stack.Screen
             name="Notifications"

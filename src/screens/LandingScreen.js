@@ -22,7 +22,6 @@ import React, { useState, useEffect } from "react";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 
 import { firebaseAurth } from "../utils/Firebase";
-import { onAuthStateChanged } from "firebase/auth";
 
 import Customize from "../componets/LandingScreen/Customize";
 import ReuseSvg from "../componets/svg-components/ReuseSvg";
@@ -31,6 +30,7 @@ import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhon
 import GlobalStyle from "../styles/GlobalStyle";
 import globalStyle from "../styles/GlobalStyle";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
+import { onAuthStateChanged } from "firebase/auth";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language
@@ -81,7 +81,7 @@ const LandingScreen = ({ navigation }) => {
   }
 
   //Fn to navigate to the Signup Screern
-  onAuthStateChanged(firebaseAurth, (user) => {
+  onAuthStateChanged(firebaseAurth, async (user) => {
     if (user) {
       setUserLogged(true)
     } else {
