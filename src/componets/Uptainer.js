@@ -71,13 +71,13 @@ const Uptainer = ({ id, name, location }) => {
   return (
     <View style={{ marginBottom: 20 }}>
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("UptainerDetails", {
-            id: id,
-            name: name,
-            location: location,
-          })
-        }
+       onPress={() => {
+        navigation.navigate("UptainerDetails", {
+          id: id,
+          name: name,
+          location: location,
+        });
+      }}
       >
         <Text style={styles.menuItem_text}>{name}</Text>
         <Text style={{ fontSize: 18, color: Primarycolor1 }}>{location}</Text>

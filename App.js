@@ -68,6 +68,9 @@ import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 import { BadgeContext } from "./src/screens/form/BadgeContext"
 
+import {LoaderProvider}from "./src/componets/LoaderContext";
+
+
 console.log("start");
 const Stack = createNativeStackNavigator();
 
@@ -97,6 +100,8 @@ export default function App() {
   }
   // Main navigation of all the views
   return (
+    //
+    <LoaderProvider>
     <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
     <LanguageProvider>
       <NavigationContainer theme={navStyle}>
@@ -270,6 +275,7 @@ export default function App() {
       </NavigationContainer>
     </LanguageProvider>
     </BadgeContext.Provider>
+    </LoaderProvider>
   );
 
   //Screens
