@@ -28,7 +28,7 @@ import ReuseSvg from "../componets/svg-components/ReuseSvg";
 import CompletePlantSvg from "../componets/svg-components/CompletePlantSvg";
 import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhoneText";
 import GlobalStyle from "../styles/GlobalStyle";
-import globalStyle from "../styles/GlobalStyle";
+import BackButton from "../componets/BackButton";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -39,12 +39,7 @@ const LandingScreen = ({ navigation }) => {
   const[userLogged,setUserLogged]= useState(false)
   const backButton =
     currentSlide === 0 ? null : (
-      <TouchableOpacity
-        onPress={() => setCurrentSlide(currentSlide - 1)}
-        style={styling.backButton}
-      >
-        <Octicons name="chevron-left" size={20} style={{ color: "white" }} />
-      </TouchableOpacity>
+      <BackButton onPress={()=>setCurrentSlide(currentSlide - 1)}/>
     );
 
   //data to be used that will render on the screen

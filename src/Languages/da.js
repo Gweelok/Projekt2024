@@ -152,4 +152,10 @@ export default {
     showProduct: "Vis produkter",
     showWay: "Vis vej",
   },
+  ProductIsTakenScreen: {
+    apology:
+      "Vi beklager hvis du er gået forgæves efter et produkt som allerede er target. Folk kan komme tage et produkt uden at registrere det. Vil du registere produktet som taget?",
+    takenButton: "Produktet er taget",
+    productNotListed: "Var produktet ikke i Uptaineren?",
+  },
 };

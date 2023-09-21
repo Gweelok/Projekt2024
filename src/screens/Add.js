@@ -61,18 +61,18 @@ const Add = ({route, navigation}) => {
   // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
 
-  const [image, setImageUrl] = useState(itemData?.image || null);
+  const [image, setImage] = useState(itemData?.imageUrl || ""); 
   const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || null);
-  const [model, setModel] = useState(itemData?.model || null);
-  const [condition, setCondition] = useState(itemData?.condition || null);
-  const [description, setDescription] = useState(itemData?.description || null);
+  const [model, setModel] = useState(itemData?.model || "");
+  const [condition, setCondition] = useState(itemData?.condition || "");
+  const [description, setDescription] = useState(itemData?.description || ""); 
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
-
   const handleSaveButtonClick = async () => {
-    createItemDraft(product, brand, model, category, image, description, condition);
+
+    await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
     navigation.navigate("ProductSaved");
     setBadgeCount(prevCount => prevCount + 1);
   };
@@ -92,7 +92,7 @@ const Add = ({route, navigation}) => {
           </Text>
 
           <View style={[{marginBottom: 10}]}>
-            <ImageUpload data={itemData?.image}/>
+            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl}/>
           </View>
 
           <CategoryDropdown onCategorySelect={setCategory} data={ itemData?.category}/>
@@ -106,7 +106,7 @@ const Add = ({route, navigation}) => {
           <ConditionDropdown onConditionSelect={setCondition} data = {itemData?.condition}/>
 
           <View style={ {marginBottom: 20}}>
-            <DescriptionField data={itemData?.description} onInputComplete={setDescription}/>
+            <DescriptionField data={itemData?.itemDescription} onInputComplete={setDescription}/>
           </View>
 
           <View style={{marginBottom: 20}}>
@@ -118,7 +118,15 @@ const Add = ({route, navigation}) => {
           <View style={{marginBottom: 20}}>
             <Pressable
               onPress={() => {
-                navigation.navigate("QRScanner");
+                navigation.navigate("QRScanner", {
+                  product: product.productId, 
+                  brand: brand.brandId, 
+                  model: model.modelId, 
+                  category: category.categoryId, 
+                  condition: condition, 
+                  description: description, 
+                  image: image
+                });
               }}
               style={[Buttons.main_button, {borderWidth: 1, width: "100%"}]}
             >
@@ -153,6 +161,7 @@ const AddStyles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: 50,
     paddingHorizontal: 15,
+   display: "flex",
   },
   header: {
     fontFamily: "space-grotesk-bold",

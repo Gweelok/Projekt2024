@@ -61,7 +61,8 @@
     "rn-fetch-blob": "^0.12.0",
     "sqlite": "^4.2.1",
     "vision-camera-code-scanner": "^0.2.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "expo-linking": "~5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -16,8 +16,9 @@ import CustomInput from "../../componets/atoms/CustomInput";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ImageUpload = ({data}) => {
+const ImageUpload = ({onImageSelect, data}) => {
   const [image, setImage] = useState(data ||null);
+  
 
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
 
@@ -29,9 +30,9 @@ const ImageUpload = ({data}) => {
       //   aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
+    if (onImageSelect) {
+      onImageSelect(result.assets[0]);
+    }
     if (!result.canceled) {
       if (result.assets[0]?.type != "video") {
         setImage(result.assets[0].uri);

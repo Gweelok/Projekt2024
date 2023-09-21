@@ -67,7 +67,11 @@ import QRScanner from "./src/screens/form/QRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 import { BadgeContext } from "./src/screens/form/BadgeContext"
+
 import DeleteAccount from "./src/screens/ProfileSetings/deleteAccount";
+
+import ProductIsTakenScreen from "./src/screens/ProductIsTakenScreen";
+
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -99,182 +103,188 @@ export default function App() {
   // Main navigation of all the views
   return (
     <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
-    <LanguageProvider>
-      <NavigationContainer theme={navStyle}>
-        <Stack.Navigator initialRouteName="Homepage">
-          <Stack.Screen
-            name="Landingscreen"
-            component={LandingScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="SignUp"
-            component={SignUpScreen}
-            options={{
-              animation: "none",
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="Sign in"
-            component={SignIn}
-            options={{ animation: "none", headerLeft: null }}
-          />
-          <Stack.Screen
-            name="Homepage"
-            component={Home}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen name="DetailView" component={DetailView} />
-          <Stack.Screen
-            name="Infopage"
-            component={ArticlePage}
-            options={{ headerShown: false, animation: "none" }}
-          />
-          <Stack.Screen
-            name="Map"
-            component={Map}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{
-              animation: "none",
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="ContactUs"
-            component={ContactUs}
-            options={{ animation: "none" }}
-          />
+      <LanguageProvider>
+        <NavigationContainer theme={navStyle}>
+          <Stack.Navigator initialRouteName="Landingscreen">
+            <Stack.Screen
+              name="Landingscreen"
+              component={LandingScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUpScreen}
+              options={{
+                animation: "none",
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="Sign in"
+              component={SignIn}
+              options={{ animation: "none", headerLeft: null }}
+            />
+            <Stack.Screen
+              name="Homepage"
+              component={Home}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen name="DetailView" component={DetailView} />
+            <Stack.Screen
+              name="Infopage"
+              component={ArticlePage}
+              options={{ headerShown: false, animation: "none" }}
+            />
+            <Stack.Screen
+              name="Map"
+              component={Map}
+              options={{ animation: "none", headerShown: false }}
+            />
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{
+                animation: "none",
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="ContactUs"
+              component={ContactUs}
+              options={{ animation: "none" }}
+            />
 
-          <Stack.Screen
-            name="DataPolicy"
-            component={DataPolicy}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="MyDrafts"
-            component={MyDrafts}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="MySettings"
-            component={MySettings}
-            options={{ animation: "none" }}
-          />
-
-          <Stack.Screen
-            name="AccountSettings"
-            component={AccountSettings}
-            options={{ animation: "none" }}
-          />
+            <Stack.Screen
+              name="DataPolicy"
+              component={DataPolicy}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen
+              name="MyDrafts"
+              component={MyDrafts}
+              options={{ animation: "none", headerShown: false }}
+            />
+            <Stack.Screen
+              name="MySettings"
+              component={MySettings}
+              options={{ animation: "none" }}
+            />
+         
           <Stack.Screen
               name="DeleteAccount"
               component={DeleteAccount}
               options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Notifications"
-            component={Notifications}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="TermsAndConditions"
-            component={TermsAndConditions}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="ProfileCreated"
-            component={ProfileCreated}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="Stats"
-            component={Stat}
-            options={{
-              animation: "none",
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="Add"
-            component={Add}
-            options={{
-              animation: "none",
-              headerShown: false,
-              gestureEnabled: false,
-            }}
-          />
-          <Stack.Screen
-            name="QRScanner"
-            component={QRScanner}
-            options={{ animation: "none", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Products"
-            component={ProductScreen}
-            options={{ title: "Products", animation: "none" }}
-          />
+      
 
-          <Stack.Screen
-            name="Pro"
-            component={ProScreen}
-            options={{ title: "Products", animation: "none" }}
-          />
-          <Stack.Screen
-            name="Bnd"
-            component={BndScreen}
-            options={{ title: "Brands", animation: "none" }}
-          />
-          <Stack.Screen
-            name="Mod"
-            component={ModScreen}
-            options={{ title: "Models", animation: "none" }}
-          />
-          <Stack.Screen name="Stations" component={StationsScreen} />
-          <Stack.Screen
-            name="StationDetails"
-            component={StationDetailScreen}
-            options={{ headerShown: false }} // hides the header
-          />
-          <Stack.Screen
-            name="Thanks"
-            component={ThanksScreen}
-            options={{ headerShown: false, animation: "none" }}
-          />
-          <Stack.Screen
-            name="LogoutConfirmation"
-            component={LogoutConfirmation}
-            options={{ animation: "none" }}
-          />
-          <Stack.Screen
-            name="PrivacyPolicy"
-            component={PrivacyPolicy}
-            options={{ headerShown: true, animation: "none" }}
-          />
-          <Stack.Screen
-            name="UptainerDetails"
-            component={UptainerDetails}
-            options={{ headerShown: true, animation: "none" }}
-          />
-          <Stack.Screen
-            name="ProductSaved"
-            component={ProductSaved}
-            options={{ animation: "none", headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </LanguageProvider>
+            <Stack.Screen
+              name="AccountSettings"
+              component={AccountSettings}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen
+              name="Notifications"
+              component={Notifications}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen
+              name="TermsAndConditions"
+              component={TermsAndConditions}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen
+              name="ProfileCreated"
+              component={ProfileCreated}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen
+              name="Stats"
+              component={Stat}
+              options={{
+                animation: "none",
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="Add"
+              component={Add}
+              options={{
+                animation: "none",
+                headerShown: false,
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="QRScanner"
+              component={QRScanner}
+              options={{ animation: "none", headerShown: false }}
+            />
+            <Stack.Screen
+              name="Products"
+              component={ProductScreen}
+              options={{ title: "Products", animation: "none" }}
+            />
+
+            <Stack.Screen
+              name="Pro"
+              component={ProScreen}
+              options={{ title: "Products", animation: "none" }}
+            />
+            <Stack.Screen
+              name="Bnd"
+              component={BndScreen}
+              options={{ title: "Brands", animation: "none" }}
+            />
+            <Stack.Screen
+              name="Mod"
+              component={ModScreen}
+              options={{ title: "Models", animation: "none" }}
+            />
+            <Stack.Screen name="Stations" component={StationsScreen} />
+            <Stack.Screen
+              name="StationDetails"
+              component={StationDetailScreen}
+              options={{ headerShown: false }} // hides the header
+            />
+            <Stack.Screen
+              name="Thanks"
+              component={ThanksScreen}
+              options={{ headerShown: false, animation: "none" }}
+            />
+            <Stack.Screen
+              name="LogoutConfirmation"
+              component={LogoutConfirmation}
+              options={{ animation: "none" }}
+            />
+            <Stack.Screen
+              name="PrivacyPolicy"
+              component={PrivacyPolicy}
+              options={{ headerShown: true, animation: "none" }}
+            />
+            <Stack.Screen
+              name="UptainerDetails"
+              component={UptainerDetails}
+              options={{ headerShown: true, animation: "none" }}
+            />
+            <Stack.Screen
+              name="ProductSaved"
+              component={ProductSaved}
+              options={{ animation: "none", headerShown: false }}
+            />
+            <Stack.Screen
+              name="ProductIsTakenScreen"
+              component={ProductIsTakenScreen}
+              options={{ animation: "none", headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </LanguageProvider>
     </BadgeContext.Provider>
   );
 
