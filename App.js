@@ -180,8 +180,8 @@ export default function App() {
               name="DeleteAccount"
               component={DeleteAccount}
               options={{ animation: "none" }}
-      
 
+          />
             <Stack.Screen
               name="AccountSettings"
               component={AccountSettings}
