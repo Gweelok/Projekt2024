@@ -70,6 +70,9 @@ import { BadgeContext } from "./src/screens/form/BadgeContext"
 import ProductIsTakenScreen from "./src/screens/ProductIsTakenScreen";
 import ThankYouscreen from "./src/screens/Thankyouscreen";
 
+import {LoaderProvider}from "./src/componets/LoaderContext";
+
+
 console.log("start");
 const Stack = createNativeStackNavigator();
 
@@ -99,6 +102,8 @@ export default function App() {
   }
   // Main navigation of all the views
   return (
+    //
+    <LoaderProvider>
     <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
       <LanguageProvider>
         <NavigationContainer theme={navStyle}>
@@ -283,6 +288,7 @@ export default function App() {
         </NavigationContainer>
       </LanguageProvider>
     </BadgeContext.Provider>
+    </LoaderProvider>
   );
 
   //Screens
