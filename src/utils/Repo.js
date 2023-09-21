@@ -852,18 +852,18 @@ export async function updateAuthData(email, password, phoneNumber) {
 
 
   export function deleteUserById() {
-    const currentUser = GetCurrentUser();
-    if (currentUser.length > 0) {
-      deleteUser(currentUser[0].id)
-        .then(() => {
-          // User deleted.
-        })
-        .catch((error) => {
-          // An error occurred
-          console.error("Error deleting user:", error);
-        });
-    }
- 
+      const currentUser = GetCurrentUser();
+      if (currentUser.length > 0) {
+          deleteUser(currentUser[0].id)
+              .then(() => {
+                  // User deleted.
+              })
+              .catch((error) => {
+                  // An error occurred
+                  console.error("Error deleting user:", error);
+              });
+      }
+  }
   export async function updateDatabaseData(name, profilePic) {
     const user = firebaseAurth.currentUser;
     const reference = ref(db, `/users/${user.uid}`);
