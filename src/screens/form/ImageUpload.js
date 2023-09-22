@@ -80,6 +80,7 @@ const ImageUpload = ({onImageSelect, data}) => {
   };
 };
 
+
 export default ImageUpload;
 
 const UploadImageStyle = StyleSheet.create({
