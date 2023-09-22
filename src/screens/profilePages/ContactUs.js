@@ -13,6 +13,8 @@ import {
   Primarycolor1,
   Primarycolor3,
   Primarycolor2,
+  styles as stylesGlobal,
+  Buttons,
 } from "../../styles/Stylesheet";
 function reducer(state, action) {
   switch (action.type) {
@@ -104,7 +106,7 @@ const ContactUs = () => {
 };
 const styles = StyleSheet.create({
   inputField: {
-    borderColor: "grey",
+    borderColor: Primarycolor1,
     borderWidth: 1,
     paddingVertical: 5,
     paddingLeft: 10,
@@ -126,8 +128,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   formLabel: {
-    fontFamily: "space-grotesk",
-    color: Primarycolor1,
+    ...stylesGlobal.paragraph_text,
   },
   sendButton: {
     alignSelf: "flex-end",
@@ -136,8 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sendButtonText: {
-    fontFamily: "space-grotesk",
-    color: Primarycolor2,
+    ...Buttons.main_buttonText,
   },
 });
 export default ContactUs;
