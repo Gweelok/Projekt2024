@@ -158,4 +158,7 @@ export default {
     takenButton: "Produktet er taget",
     productNotListed: "Var produktet ikke i Uptaineren?",
   },
+  thankYouScreen:{
+    header:'Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren'
+  }
 };

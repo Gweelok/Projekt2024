@@ -71,6 +71,7 @@ import { BadgeContext } from "./src/screens/form/BadgeContext"
 import DeleteAccount from "./src/screens/ProfileSetings/deleteAccount";
 
 import ProductIsTakenScreen from "./src/screens/ProductIsTakenScreen";
+import ThankYouscreen from "./src/screens/Thankyouscreen";
 
 
 console.log("start");
@@ -282,6 +283,12 @@ export default function App() {
               component={ProductIsTakenScreen}
               options={{ animation: "none", headerShown: false }}
             />
+            <Stack.Screen
+              name="ThankYouScreen"
+              component={ThankYouscreen}
+              options={{ animation: "none", headerShown: false }}
+          />
+
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>

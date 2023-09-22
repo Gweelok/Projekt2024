@@ -157,4 +157,7 @@ export default {
     takenButton: "Product has been taken",
     productNotListed: "Couldn't find the product at the Uptainer?",
   },
+  thankYouScreen:{
+    header:'Thanks for informing us. We will check up on this and update the Uptainer'
+  }
 };
