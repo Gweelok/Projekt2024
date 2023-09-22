@@ -1,5 +1,11 @@
 import React, { useReducer } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import * as Linking from "expo-linking";
 function reducer(state, action) {
@@ -38,30 +44,63 @@ const ContactUs = () => {
       .catch((e) => Alert(e));
   }
   return (
-    <View>
-      <Text>{t("ContactUs.Name", currentLanguage)}</Text>
-      <TextInput
-        placeholder={`${t("ContactUs.Name", currentLanguage)}`}
-        value={formInfo.name}
-        onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
-      />
-      <Text>{t("ContactUs.Topic", currentLanguage)}</Text>
-      <TextInput
-        placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
-        value={formInfo.topic}
-        onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
-      />
-      <Text>{t("ContactUs.Message", currentLanguage)}</Text>
-      <TextInput
-        placeholder={`${t("ContactUs.Message", currentLanguage)}`}
-        value={formInfo.message}
-        onChangeText={(e) => dispatch({ type: "change_message", payload: e })}
-      />
-      <TouchableOpacity onPress={sendToEmail}>
-        <Text>{t("ContactUs.SendMessage", currentLanguage)}</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
+        <View style={styles.formSection}>
+          <Text>{t("ContactUs.Name", currentLanguage)}</Text>
+          <TextInput
+            style={styles.inputField}
+            placeholder={`${t("ContactUs.Name", currentLanguage)}`}
+            value={formInfo.name}
+            onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
+          />
+        </View>
+        <View style={styles.formSection}>
+          <Text>{t("ContactUs.Topic", currentLanguage)}</Text>
+          <TextInput
+            style={styles.inputField}
+            placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
+            value={formInfo.topic}
+            onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
+          />
+        </View>
+        <View style={styles.formSection}>
+          <Text>{t("ContactUs.Message", currentLanguage)}</Text>
+          <TextInput
+            multiline
+            textAlignVertical="top"
+            style={[styles.inputField, { minHeight: 150 }]}
+            placeholder={`${t("ContactUs.Message", currentLanguage)}`}
+            value={formInfo.message}
+            onChangeText={(e) =>
+              dispatch({ type: "change_message", payload: e })
+            }
+          />
+        </View>
+        <TouchableOpacity onPress={sendToEmail}>
+          <Text>{t("ContactUs.SendMessage", currentLanguage)}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  inputField: {
+    borderColor: "grey",
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 5,
+    borderColor: "grey",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
+  formContainer: {
+    width: "75%",
+  },
+  formSection: {
+    marginBottom: 20,
+  },
+});
 export default ContactUs;
