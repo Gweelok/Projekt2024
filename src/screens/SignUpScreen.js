@@ -125,7 +125,7 @@ const SignUpScreen = ({ navigation }) => {
             navigation.navigate("Sign in");
           }}
         >
-          <Text style={SignUpStyles.text_Tertiary}>
+          <Text style={styles.link}>
             {" "}
             {t("SignUpScreen.LogInLink", currentLanguage)}
           </Text>
