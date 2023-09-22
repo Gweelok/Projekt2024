@@ -135,4 +135,10 @@ export default {
     showProduct: "Show product",
     showWay: "Show the way",
   },
+  ProductIsTakenScreen: {
+    apology:
+      "We apologize if you have searched in vain for a product that has already been taken. People can come and take without registering this. Do you want to register the product as taken?",
+    takenButton: "Product has been taken",
+    productNotListed: "Couldn't find the product at the Uptainer?",
+  },
 };

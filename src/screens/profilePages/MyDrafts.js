@@ -10,114 +10,78 @@ import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { ScrollView } from "react-native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getBrandById, getCategoryById, getModelById, getProductById, getCurrentUser, getDraftFromUser} from "../../utils/Repo";
+import BackButton from "../../componets/BackButton";
 
 // fetch the data from server
-const dummyData = [
-  {
-    id: 1,
-    image:
-      "https://static.cnbetacdn.com/article/2020/0629/68a35b661ef17ca.jpeg",
-    category: "Phones",
-    description:
-      "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
-    product: "Mi 14",
-    brand: "XiaoMi",
-    model: "XiaoMi",
-    condition: "Very Good",
-  },
-  {
-    id: 2,
-    image:
-      "https://images.jingyeqian.com/img/2020/09/14/6373567560115456238144235.jpg",
-    category: "Phones",
-    description:
-      "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
-    product: "iPhone",
-    brand: "Casio",
-    model: "iPhone",
-    condition: "Very Good",
-  },
-  {
-    id: 3,
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGtMYyvNU02iAWkULCXf_3A8hiSpBW0arx0J6F5KF2zo2Cl9ZIN_OlryBY5hIh900MRTg&usqp=CAU",
-    category: "PC",
-    description:
-      "The phone, abandoned and weathered, shows evident signs of prolonged use.  seen better days before being discarded.",
-    product: "iPhone",
-    brand: "Casio",
-    model: "iPhone",
-    condition: "Very Good",
-  },
-];
+
 
 const MyDrafts = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
+  console.log("data", data);
 
   const handlePress = () => {
     navigation.goBack();
   };
-
-useEffect(() => { //Fetches items in the draftcards from the database 
-  const fetchDraftList = async () => {
-    const storage = getStorage();
-    const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
-    
-    try {
-      const drafts = await getDraftFromUser(user.id);// userId is not working so this get all items from database
-      const updatedData = await Promise.all(drafts.map(async (item) => {
-        const pathReference = ref(storage, item.itemImage); //Adjust the path according to your storage structure
-        const product = await getProductById(item.itemproduct);// querying  details for the draft to be displayed 
-        const brand = await getBrandById(item.itemBrand);
-        const category = await getCategoryById(item.itemCategory);
-        const model = await getModelById(item.itemModel);
-        
-        try {
-          const url = await getDownloadURL(pathReference);
-          return { ...item, imageUrl: url,  productName: product.productName, brandName: brand.brandName,  // loading extram params into the objects
-            categoryName: category.itemCategory,
-            modelName: model.modelName, itemDescription: item.itemDescription , itemcondition: item.itemcondition};
-        } catch (error) {
-          console.log('Error while downloading image => ', error);
-          return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
-        }
-      }));
-      setData(updatedData); // updates data property with the fetched data from db
-    } catch (error) {
-      console.log('Error while fetching drafts => ', error);
-    }
-  };
-  fetchDraftList();
-}, []);
+  useEffect(() => { //Fetches items in the draftcards from the database 
+    const fetchDraftList = async () => {
+      const storage = getStorage();
+      const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
+      
+      try {
+        const drafts = await getDraftFromUser(user.id);// userId is not working so this get all items from database
+        const updatedData = await Promise.all(drafts.map(async (item) => {
+          const pathReference = ref(storage, item.itemImage); //Adjust the path according to your storage structure
+          const product = await getProductById(item.itemproduct);// querying  details for the draft to be displayed 
+          const brand = await getBrandById(item.itemBrand);
+          const category = await getCategoryById(item.itemCategory);
+          const model = await getModelById(item.itemModel);
+          
+          try {
+            const url = await getDownloadURL(pathReference);
+            return { ...item, imageUrl: url,  product: product, brand: brand,  // loading extram params into the objects
+              category: category,
+              model: model, item: item};
+          } catch (error) {
+            console.log('Error while downloading image => ', error);
+            return { ...item, imageUrl: 'https://via.placeholder.com/200x200' };
+          }
+        }));
+        setData(updatedData); // updates data property with the fetched data from db
+      } catch (error) {
+        console.log('Error while fetching drafts => ', error);
+      }
+    };
+    fetchDraftList();
+  }, []);
 
 
   return (
     <View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Ionicons
-            name="chevron-back-outline"
-            size={36}
-            style={DraftStyle.arrow}
-          />
-        </TouchableOpacity>
+      <View style={{ flexDirection: "row", alignItems: "center",paddingLeft:20}}>
+       <BackButton onPress={navigation.goBack}/>
         <Text style={[HeaderText.Header]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>
       <ScrollViewComponent>
-        {data.map((cur, i) => (  // instead of dummy data using data
+        {data.map((cur) => (  // instead of dummy data using data
           <DraftCard
-            key={i}
+            key={cur.itemId}
             props={cur}
             onPress={() => {
-              navigation.navigate("QRScanner");
+              //needs to be update in the furture|does not delete the draft from the database
+              navigation.navigate("QRScanner", {
+                  product: cur.product.productId, 
+                  brand: cur.brand.brandId, 
+                  model: cur.model.modelId, 
+                  category: cur.category.categoryId, 
+                  condition: cur.itemcondition, 
+                  description: cur.itemDescription, 
+                  image: cur.imageUrl
+                });
+                
             }}
             onDraftPress={() => {
               navigation.push("Add", { itemData: cur });
