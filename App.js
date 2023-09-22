@@ -68,6 +68,7 @@ import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 import { BadgeContext } from "./src/screens/form/BadgeContext"
 import ProductIsTakenScreen from "./src/screens/ProductIsTakenScreen";
+import ThankYouscreen from "./src/screens/Thankyouscreen";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -272,6 +273,12 @@ export default function App() {
               component={ProductIsTakenScreen}
               options={{ animation: "none", headerShown: false }}
             />
+            <Stack.Screen
+              name="ThankYouScreen"
+              component={ThankYouscreen}
+              options={{ animation: "none", headerShown: false }}
+          />
+
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>
