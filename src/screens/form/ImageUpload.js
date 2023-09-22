@@ -15,7 +15,6 @@ import CustomInput from "../../componets/atoms/CustomInput";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-const ImageUpload = ({data, onSelectedImage}) => {
 
 const ImageUpload = ({onImageSelect, data}) => {
   const [image, setImage] = useState(data ||null);
@@ -41,11 +40,10 @@ const ImageUpload = ({onImageSelect, data}) => {
         }
       }
     }
-  };
 
   // This function will be called when we want to store the selected image on firebase or database
   const uploadImageToDatabase = async () => {};
-
+  
   return (
     <CustomInput showStar={true} optionalMarginBottom>
     <View>
@@ -78,7 +76,8 @@ const ImageUpload = ({onImageSelect, data}) => {
       )}
     </View>
     </CustomInput>
-  );
+    );
+  };
 };
 
 export default ImageUpload;
