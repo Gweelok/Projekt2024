@@ -142,10 +142,10 @@ export default {
     takenButton: "Produktet er taget",
     productNotListed: "Var produktet ikke i Uptaineren?",
   },
-  ContactUs:{
-    Name:"Navn",
-    Email:"Email",
-    Message:"Besked",
-    SendMessage:"Send Besked"
-  }
+  ContactUs: {
+    Name: "Navn",
+    Topic: "Enme",
+    Message: "Besked",
+    SendMessage: "Send Besked",
+  },
 };

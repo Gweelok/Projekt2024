@@ -141,10 +141,10 @@ export default {
     takenButton: "Product has been taken",
     productNotListed: "Couldn't find the product at the Uptainer?",
   },
-  ContactUs:{
-    Name:"Name",
-    Email:"Email",
-    Message:"Message",
-    SendMessage:"Send Message"
-  }
+  ContactUs: {
+    Name: "Name",
+    Topic: "Topic",
+    Message: "Message",
+    SendMessage: "Send Message",
+  },
 };
