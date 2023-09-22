@@ -146,6 +146,6 @@ export default {
     Name: "Navn",
     Topic: "Enme",
     Message: "Besked",
-    SendMessage: "Send Besked",
+    SendMessage: "SEND BESKEND",
   },
 };
