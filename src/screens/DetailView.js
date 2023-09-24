@@ -132,7 +132,7 @@ const DetailView = StyleSheet.create({
   },
   text: {
     paddingTop: 10,
-    width: "70%",
+    width: "80%",
     height: 100,
     borderRadius: 1,
     marginTop: 15,
