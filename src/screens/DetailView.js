@@ -21,6 +21,9 @@ const DetailViews = ({ navigation, route }) => {
   const productName = details.productName;
   const imageUrl = details.imageUrl;
   const uptainer = details.uptainer;
+  const handleSaveButtonClick = () => {
+    navigation.navigate("ProductSaved");
+  };
   console.log("uptainer", uptainer);
   const handlePress = () => {
     navigation.goBack();
@@ -71,17 +74,19 @@ const DetailViews = ({ navigation, route }) => {
             <View style={DetailView.rightInfo}>
               <TouchableOpacity
                 onPress={openAddressOnMap}
-                style={DetailView.locationContainer}
-              >
+                style={DetailView.locationContainer}>
                 <Ionicons name="location" size={15} color={Primarycolor1} />
                 <Text style={DetailView.location}>
-                {uptainer.uptainerCity}, {uptainer.uptainerStreet}, {uptainer.uptainerZip}
+                  {uptainer.uptainerCity}, {uptainer.uptainerStreet},{" "}
+                  {uptainer.uptainerZip}
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
           <Text style={DetailView.text}>{displayTextValue}</Text>
-          <TouchableOpacity onPress={""} style={DetailView.TagButton}>
+          <TouchableOpacity
+            onPress={handleSaveButtonClick}
+            style={DetailView.TagButton}>
             <Text style={DetailView.Tag}>{TagButton}</Text>
           </TouchableOpacity>
           <Text

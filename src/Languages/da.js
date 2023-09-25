@@ -142,4 +142,9 @@ export default {
     takenButton: "Produktet er taget",
     productNotListed: "Var produktet ikke i Uptaineren?",
   },
+  ProductTakenScreen: {
+    mainText:
+      "Produktet er nu taget. Tak fordi du sparer på Jordens ressourcer",
+    button: "Forside",
+  },
 };
