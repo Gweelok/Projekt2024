@@ -10,7 +10,8 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
     const [selectedCondition, setSelectedCondition] = useState(data);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 39;
-    const conditions = ["Mint Condition", "Good Condition", "Fair Condition", "Poor Condition", "Broken"];
+    //we dont have this data is the database, dont think we need it, wait for task
+    const conditions = ["As new", "Good but used", "Worn but working", "Smaller defects", "Broken"];
 
     const handleConditionSelect = (condition) => {
         setSelectedCondition(condition);

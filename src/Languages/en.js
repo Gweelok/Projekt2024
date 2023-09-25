@@ -141,9 +141,15 @@ export default {
     takenButton: "Product has been taken",
     productNotListed: "Couldn't find the product at the Uptainer?",
   },
+
   ProductTakenScreen: {
     mainText:
       "Product is now taken, thanks for taking care of the earth resources",
     button: "Main page",
+  },
+
+  thankYouScreen: {
+    header:
+      "Thanks for informing us. We will check up on this and update the Uptainer",
   },
 };

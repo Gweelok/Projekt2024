@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 30,
     fontFamily: "space-grotesk-bold",
+    marginLeft: 16,
   },
   Header_Primarycolor1  : {
     color: Primarycolor1,
@@ -52,6 +53,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
+
 
   //Links
   link: {
@@ -205,7 +207,14 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
     color: Primarycolor1, // Dark green text color
   },
+
+  //Headlines and body text 
+  bodyText: {
+    textAlign: "left",
+  },
 });
+
+
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
@@ -310,7 +319,9 @@ export const Buttons = StyleSheet.create({
     fontSize: 22,
     padding: 10,
     marginBottom : 20,
-
+    alignItems: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   main_button: {
     padding: 10,

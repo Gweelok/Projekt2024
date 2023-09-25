@@ -69,6 +69,7 @@ import ProductSaved from "./src/screens/form/ProductSaved";
 import { BadgeContext } from "./src/screens/form/BadgeContext";
 import ProductIsTakenScreen from "./src/screens/ProductIsTakenScreen";
 import ProductTaken from "./src/screens/form/ProductTaken";
+import ThankYouscreen from "./src/screens/Thankyouscreen";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -276,6 +277,11 @@ export default function App() {
             <Stack.Screen
               name="ProductTaken"
               component={ProductTaken}
+              options={{ animation: "none", headerShown: false }}
+            />
+            <Stack.Screen
+              name="ThankYouScreen"
+              component={ThankYouscreen}
               options={{ animation: "none", headerShown: false }}
             />
           </Stack.Navigator>

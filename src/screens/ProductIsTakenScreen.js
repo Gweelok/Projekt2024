@@ -38,7 +38,7 @@ const ProductIsTakenScreen = ({ navigation, route }) => {
           <Text style={styles.apologyText}>
             {t("ProductIsTakenScreen.apology", currentLanguage)}
           </Text>
-          <TouchableOpacity activeOpacity={0.9} style={styles.targetButton}>
+          <TouchableOpacity activeOpacity={0.9} style={styles.targetButton} onPress={()=> navigation.navigate('ThankYouScreen')}>
             <Text style={styles.targetText}>
               {t("ProductIsTakenScreen.takenButton", currentLanguage)}
             </Text>
