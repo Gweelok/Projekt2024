@@ -19,7 +19,6 @@ const MyDrafts = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
-  console.log("data", data);
 
   const handlePress = () => {
     navigation.goBack();
