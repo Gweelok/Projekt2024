@@ -5,7 +5,7 @@ export default StyleSheet.create({
     BodyWrapper: {
         flex: 1,
         paddingHorizontal: '5%',
-        alignItems: "center",
+        // alignItems: "center",
         width: '100%'
     },
 });

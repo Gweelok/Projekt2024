@@ -147,4 +147,8 @@ export default {
     Message: "Message",
     SendMessage: "Send Message",
   },
+  thankYouScreen: {
+    header:
+      "Thanks for informing us. We will check up on this and update the Uptainer",
+  },
 };

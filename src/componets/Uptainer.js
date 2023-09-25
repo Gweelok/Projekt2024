@@ -54,11 +54,6 @@ const Uptainer = ({ uptainerData }) => {
         console.log("Error while fetching items => ", error);
       }
     };
-    // BEFORE:
-    // setData(updatedData);
-    // } catch (error) {
-    //   console.log('Error while fetching items => ', error);
-    // }};
     fetchItemList();
   }, []);
 

@@ -148,4 +148,8 @@ export default {
     Message: "Besked",
     SendMessage: "SEND BESKEND",
   },
+  thankYouScreen: {
+    header:
+      "Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren",
+  },
 };

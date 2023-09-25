@@ -64,9 +64,9 @@ const Add = ({route, navigation}) => {
   const [image, setImage] = useState(itemData?.imageUrl || ""); 
   const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
-  const [brand, setBrand] = useState(itemData?.brand || null);
+  const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
-  const [condition, setCondition] = useState(itemData?.condition || "");
+  const [condition, setCondition] = useState(itemData?.condition || null);
   const [description, setDescription] = useState(itemData?.description || ""); 
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);

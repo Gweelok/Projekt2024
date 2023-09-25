@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
@@ -21,7 +21,6 @@ const ImageUpload = ({onImageSelect, data}) => {
   
 
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
-
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -36,13 +35,15 @@ const ImageUpload = ({onImageSelect, data}) => {
     if (!result.canceled) {
       if (result.assets[0]?.type != "video") {
         setImage(result.assets[0].uri);
+        if (onSelectedImage) {
+          onSelectedImage(result.assets[0].uri);
+        }
       }
     }
-  };
 
   // This function will be called when we want to store the selected image on firebase or database
   const uploadImageToDatabase = async () => {};
-
+  
   return (
     <CustomInput showStar={true} optionalMarginBottom>
     <View>
@@ -75,7 +76,8 @@ const ImageUpload = ({onImageSelect, data}) => {
       )}
     </View>
     </CustomInput>
-  );
+    );
+  };
 };
 
 export default ImageUpload;

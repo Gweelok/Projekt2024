@@ -8,7 +8,7 @@ import {
   Linking,
   Platform,
 } from "react-native";
-import { Backgroundstyle } from "../styles/Stylesheet";
+import {Backgroundstyle} from "../styles/Stylesheet";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
@@ -28,6 +28,7 @@ const DetailViews = ({ navigation, route }) => {
   const [productDetails, setProductDetails] = useState(null);
 
   const handleTakePress = async () => {
+
     const product = {
       itemDescription,
       brandName,
@@ -41,7 +42,13 @@ const DetailViews = ({ navigation, route }) => {
       console.error("Error saving product to AsyncStorage:", error);
     }
 
-    navigation.navigate("UptainerDetails", { productDetails: product });
+    navigation.navigate("QRScanner", {
+      product: productName,
+      brand: brandName,
+      description: itemDescription,
+      image: imageUrl
+    });
+
   };
 
   const displayTextValue = itemDescription;
@@ -125,7 +132,7 @@ const DetailView = StyleSheet.create({
   },
   text: {
     paddingTop: 10,
-    width: "70%",
+    width: "80%",
     height: 100,
     borderRadius: 1,
     marginTop: 15,
