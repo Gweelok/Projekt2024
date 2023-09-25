@@ -16,9 +16,8 @@ import CustomInput from "../../componets/atoms/CustomInput";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ImageUpload = ({onImageSelect, data}) => {
-  const [image, setImage] = useState(data ||null);
-  
+const ImageUpload = ({ onImageSelect, data }) => {
+  const [image, setImage] = useState(data || null);
 
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
   const pickImage = async () => {
@@ -35,49 +34,46 @@ const ImageUpload = ({onImageSelect, data}) => {
     if (!result.canceled) {
       if (result.assets[0]?.type != "video") {
         setImage(result.assets[0].uri);
-        if (onSelectedImage) {
-          onSelectedImage(result.assets[0].uri);
-        }
       }
     }
+  };
 
   // This function will be called when we want to store the selected image on firebase or database
   const uploadImageToDatabase = async () => {};
-  
+
   return (
     <CustomInput showStar={true} optionalMarginBottom>
-    <View>
-      {!image ? (
-        <TouchableOpacity
-          onPress={pickImage}
-          style={UploadImageStyle.UploadImageContainer}
-        >
-          <View style={UploadImageStyle.UploadDescription}>
-            <Ionicons name="images-outline" size={30} color={Primarycolor1} />
+      <View>
+        {!image ? (
+          <TouchableOpacity
+            onPress={pickImage}
+            style={UploadImageStyle.UploadImageContainer}
+          >
+            <View style={UploadImageStyle.UploadDescription}>
+              <Ionicons name="images-outline" size={30} color={Primarycolor1} />
 
-            <Text style={UploadImageStyle.uploadText}>
-              {t("UpdroppForm.uploadText", currentLanguage)}
-            </Text>
+              <Text style={UploadImageStyle.uploadText}>
+                {t("UpdroppForm.uploadText", currentLanguage)}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <View>
+            <Ionicons
+              onPress={() => {
+                setImage(null);
+              }}
+              name="close-outline"
+              size={30}
+              color="white"
+              style={UploadImageStyle.cancelIcon}
+            />
+            <Image source={{ uri: image }} style={UploadImageStyle.imageSize} />
           </View>
-        </TouchableOpacity>
-      ) : (
-        <View>
-          <Ionicons
-            onPress={() => {
-              setImage(null);
-            }}
-            name="close-outline"
-            size={30}
-            color="white"
-            style={UploadImageStyle.cancelIcon}
-          />
-          <Image source={{ uri: image }} style={UploadImageStyle.imageSize} />
-        </View>
-      )}
-    </View>
+        )}
+      </View>
     </CustomInput>
-    );
-  };
+  );
 };
 
 
