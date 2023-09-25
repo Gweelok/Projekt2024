@@ -83,7 +83,7 @@ import {LoaderProvider}from "./src/componets/LoaderContext";
 import {LoaderProvider}from "./src/componets/LoaderContext";
 
 
-import {LoaderProvider}from "./src/componets/LoaderContext";
+
 
 
 console.log("start");
