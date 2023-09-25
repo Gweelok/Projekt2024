@@ -54,66 +54,52 @@ const ContactUs = () => {
   }
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <View style={styles.formContainer}>
-        <View style={styles.formSection}>
-          <Text style={styles.formLabel}>
-            {t("ContactUs.Name", currentLanguage)}
-          </Text>
-          <TextInput
-            style={styles.inputField}
-            placeholder={`${t("ContactUs.Name", currentLanguage)}`}
-            placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
-            value={formInfo.name}
-            onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
-          />
-        </View>
-        <View style={styles.formSection}>
-          <Text style={styles.formLabel}>
-            {t("ContactUs.Topic", currentLanguage)}
-          </Text>
-          <TextInput
-            style={styles.inputField}
-            placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
-            placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
-            value={formInfo.topic}
-            onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
-          />
-        </View>
-        <View style={styles.formSection}>
-          <Text style={styles.formLabel}>
-            {t("ContactUs.Message", currentLanguage)}
-          </Text>
-          <TextInput
-            multiline
-            textAlignVertical="top"
-            style={[styles.inputField, { minHeight: 150 }]}
-            placeholder={`${t("ContactUs.Message", currentLanguage)}`}
-            placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
-            value={formInfo.message}
-            onChangeText={(e) =>
-              dispatch({ type: "change_message", payload: e })
-            }
-          />
-        </View>
-        <TouchableOpacity onPress={sendToEmail} style={styles.sendButton}>
-          <Text style={styles.sendButtonText}>
-            {t("ContactUs.SendMessage", currentLanguage)}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <Text style={styles.formLabel}>
+        {t("ContactUs.Name", currentLanguage)}
+      </Text>
+      <TextInput
+        style={styles.inputField}
+        placeholder={`${t("ContactUs.Name", currentLanguage)}`}
+        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+        value={formInfo.name}
+        onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
+      />
+
+      <Text style={styles.formLabel}>
+        {t("ContactUs.Topic", currentLanguage)}
+      </Text>
+      <TextInput
+        style={styles.inputField}
+        placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
+        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+        value={formInfo.topic}
+        onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
+      />
+
+      <Text style={styles.formLabel}>
+        {t("ContactUs.Message", currentLanguage)}
+      </Text>
+      <TextInput
+        multiline
+        textAlignVertical="top"
+        style={[styles.inputField, { minHeight: 150 }]}
+        placeholder={`${t("ContactUs.Message", currentLanguage)}`}
+        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+        value={formInfo.message}
+        onChangeText={(e) => dispatch({ type: "change_message", payload: e })}
+      />
+
+      <TouchableOpacity onPress={sendToEmail} style={styles.sendButton}>
+        <Text style={styles.sendButtonText}>
+          {t("ContactUs.SendMessage", currentLanguage)}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
 const styles = StyleSheet.create({
   inputField: {
-    borderColor: Primarycolor1,
-    borderWidth: 1,
-    paddingVertical: 5,
-    paddingLeft: 10,
-    borderRadius: 5,
-    borderColor: "grey",
-    fontFamily: "space-grotesk",
-    color: Primarycolor1,
+    ...stylesGlobal.inputBox,
   },
   container: {
     flex: 1,
