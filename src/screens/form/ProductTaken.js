@@ -55,7 +55,7 @@ const ProductTaken = ({ navigation }) => {
                 { borderWidth: 2, width: "100%", marginBottom: 20 },
               ]}
               onPress={() => {
-                navigation.navigate("Home");
+                navigation.navigate("ProductIsTakenScreen");
               }}>
               <Text style={Buttons.secondary_buttonText}>
                 {t("ProductTakenScreen.button", currentLanguage)}

@@ -22,7 +22,7 @@ const DetailViews = ({ navigation, route }) => {
   const imageUrl = details.imageUrl;
   const uptainer = details.uptainer;
   const handleSaveButtonClick = () => {
-    navigation.navigate("ProductSaved");
+    navigation.navigate("ProductTaken");
   };
   console.log("uptainer", uptainer);
   const handlePress = () => {
