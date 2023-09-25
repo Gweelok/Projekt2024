@@ -126,7 +126,16 @@ to set where your commits go, after that when you want to push your commits to t
 ## And that's it
 And that should be it, i hope, just remember to "pull" every time you open up the project, just to make sure there's no problems.
 
+## How to use Loading on screens
 
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
+import useContext
+Create a const to access to the global loading state and its associated setter.
+ const { isLoading, setIsLoading } = useContext(LoaderContext);
+ setIsLoading(true); for where to start the loading
+ setIsLoading(false); where to stop the loading
+ {isLoading && <LoadingScreen isLoaderShow={isLoading} />} in return  for bring in LoadingScreen
 
 # Databases and you
 ## How to Use Firebase Functions in React Native
