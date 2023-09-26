@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext} from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { HeaderText, Primarycolor1 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
@@ -19,14 +19,16 @@ import {
 } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
-
+import { LoaderContext } from "../../componets/LoaderContext"; 
+import LoadingScreen from "../../componets/LoadingScreen";
 // fetch the data from server
 
 const MyDrafts = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
-
+  console.log("data", data);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   const handlePress = () => {
     navigation.goBack();
   };
@@ -34,8 +36,9 @@ const MyDrafts = () => {
     //Fetches items in the draftcards from the database
     const fetchDraftList = async () => {
       const storage = getStorage();
-      const user = await getCurrentUser(); //firebaseAurth.currentUser; this is not working right now
-
+      setIsLoading(true);
+      const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
+      
       try {
         const drafts = await getDraftFromUser(user.id); // userId is not working so this get all items from database
         const updatedData = await Promise.all(
@@ -67,6 +70,7 @@ const MyDrafts = () => {
           })
         );
         setData(updatedData); // updates data property with the fetched data from db
+        setIsLoading(false);
       } catch (error) {
         console.log("Error while fetching drafts => ", error);
       }
@@ -84,6 +88,7 @@ const MyDrafts = () => {
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
       <ScrollViewComponent>
         {data.map(
           (
