@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext} from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { HeaderText, Primarycolor1 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
@@ -11,7 +11,8 @@ import { ScrollView } from "react-native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getBrandById, getCategoryById, getModelById, getProductById, getCurrentUser, getDraftFromUser} from "../../utils/Repo";
 import BackButton from "../../componets/BackButton";
-
+import { LoaderContext } from "../../componets/LoaderContext"; 
+import LoadingScreen from "../../componets/LoadingScreen";
 // fetch the data from server
 
 
@@ -20,13 +21,14 @@ const MyDrafts = () => {
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
   console.log("data", data);
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   const handlePress = () => {
     navigation.goBack();
   };
   useEffect(() => { //Fetches items in the draftcards from the database 
     const fetchDraftList = async () => {
       const storage = getStorage();
+      setIsLoading(true);
       const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
       
       try {
@@ -49,6 +51,7 @@ const MyDrafts = () => {
           }
         }));
         setData(updatedData); // updates data property with the fetched data from db
+        setIsLoading(false);
       } catch (error) {
         console.log('Error while fetching drafts => ', error);
       }
@@ -65,6 +68,7 @@ const MyDrafts = () => {
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
       <ScrollViewComponent>
         {data.map((cur) => (  // instead of dummy data using data
           <DraftCard

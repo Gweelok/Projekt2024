@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
-import { useEffect, useState,} from "react";
+import { useEffect, useState, useContext} from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getItemsInUptainer,
@@ -20,6 +20,9 @@ import {
 import GlobalStyle from "../styles/GlobalStyle";
 import ProductAlert from "../componets/ProductAlert";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -33,7 +36,7 @@ const UptainerDetails = ({ navigation, route }) => {
   }
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   useEffect(() => {
     //Fetches items in the uptainer
     const fetchItemList = async () => {
@@ -66,6 +69,7 @@ const UptainerDetails = ({ navigation, route }) => {
           })
         );
         setData(updatedData); // updates data property with the fetched data from db
+        setIsLoading(false);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
@@ -95,6 +99,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}

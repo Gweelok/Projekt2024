@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { styles, Primarycolor1 } from "../styles/Stylesheet";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext} from "react";
 import { useNavigation } from "@react-navigation/native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -16,9 +16,13 @@ import {
   getBrandById,
 } from "../utils/Repo";
 
+import { LoaderContext } from "../componets/LoaderContext";
+
+
 const Uptainer = ({ uptainerData }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
@@ -70,11 +74,12 @@ const Uptainer = ({ uptainerData }) => {
   return (
     <View style={{ marginBottom: 20 }}>
       <TouchableOpacity
-        onPress={() =>
+        onPress={() =>{
+          setIsLoading(true);
           navigation.navigate("UptainerDetails", {
             uptainerData: uptainerData,
           })
-        }
+        }}
       >
         <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
         <Text style={{ fontSize: 18, color: Primarycolor1 }}>{uptainerData.uptainerStreet}</Text>
