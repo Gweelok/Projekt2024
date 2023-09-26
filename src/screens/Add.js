@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import {Backgroundstyle, Buttons, Primarycolor1, Primarycolor3} from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {t, useLanguage} from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from './form/CategoryDropdown';
@@ -25,6 +25,8 @@ import  { firebaseApp, firebaseDB } from '../utils/Firebase';
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import {createItemDraft, getCurrentUser} from "../utils/Repo";
 
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -57,7 +59,7 @@ const ProductDetailScreen = ({ route }) => {
 
 const Add = ({route, navigation}) => {
   const itemData = route.params?.itemData;
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   // you can fetch the final result of all field through here
   const {currentLanguage, setLanguage} = useLanguage();
 
@@ -71,9 +73,10 @@ const Add = ({route, navigation}) => {
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
-
+    setIsLoading(true);
     await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
     navigation.navigate("ProductSaved");
+    setIsLoading(false);
     setBadgeCount(prevCount => prevCount + 1);
   };
 
@@ -114,7 +117,7 @@ const Add = ({route, navigation}) => {
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-
+          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
           <View style={{marginBottom: 20}}>
             <Pressable
               onPress={() => {
