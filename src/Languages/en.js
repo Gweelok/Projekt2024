@@ -93,6 +93,21 @@ export default {
   MySettingsScreen: {
     Header: "My Settings",
   },
+  ChangePasswordScreen:{
+    Header: "Change Password",
+    SavePassword: "Save Password",
+    CurrentPassword:"Current Password",
+    NewPassword:"New Password",
+    ConfirmPassword:"Confirm New Password",
+    PasswordMatchError:"Current password and new password cannot be the same.",
+    PasswordMismatchError:"New password and current password doesn't match.",
+    PasswordLengthError:"Password must be at least 8 characters long.",
+    UppercaseError:"Password must contain at least one uppercase letter.",
+    LowercaseError:"Password must contain at least one lowercase letter.",
+    NumberError: "Password must contain at least one number.",
+    SpecialCharacterError:"Password must contain at least one special character (!@#$%^&*).",
+    PasswordChanged: "Password changed successfully.",
+  },
 
   ProblemComponent: {
     Header: "The Problem",

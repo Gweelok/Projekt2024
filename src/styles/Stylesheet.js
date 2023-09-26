@@ -44,7 +44,6 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    fontFamily: "space-grotesk-bold",
     marginLeft: 16,
   },
   Header_Primarycolor1  : {
@@ -146,6 +145,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   container2: {
+    top: "5%",
     flex: 1,
     backgroundColor: "white", // White background
   },

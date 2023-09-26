@@ -8,6 +8,7 @@ import {MenuItems} from "../../styles/MenuItems";
 const MYSETTINGSSCREEN = {
     AccountSettings: 'AccountSettings',
     Notifications: 'Notifications',
+    ChangePassword: 'ChangePassword',
 };
 
 const MySettings = ({ navigation }) => {
@@ -18,6 +19,8 @@ const MySettings = ({ navigation }) => {
             navigation.navigate('AccountSettings');
         } else if (selectedOption === MYSETTINGSSCREEN.Notifications) {
             navigation.navigate('Notifications');
+        } else if (selectedOption === MYSETTINGSSCREEN.ChangePassword) {
+            navigation.navigate('ChangePassword');
         }
     };
 
@@ -26,6 +29,7 @@ const MySettings = ({ navigation }) => {
             <Text style={[styles.Header]}>{t('MySettingsScreen.Header', currentLanguage)}</Text>
             <MenuItems msg={t('AccountSettingsScreen.Header', currentLanguage)} onPress={() => handlePress(MYSETTINGSSCREEN.AccountSettings)} />
             <MenuItems msg={t('NotificationsScreen.Header', currentLanguage)} onPress={() => handlePress(MYSETTINGSSCREEN.Notifications)} />
+            <MenuItems msg={t('ChangePasswordScreen.Header', currentLanguage)} onPress={() => handlePress(MYSETTINGSSCREEN.ChangePassword)} />
         </View>
     );
 };

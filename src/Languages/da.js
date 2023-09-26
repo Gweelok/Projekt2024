@@ -42,6 +42,21 @@ export default {
   MySettingsScreen: {
     Header: "Mine indstillinger",
   },
+  ChangePasswordScreen:{
+    Header: "Skift kodeordl",
+    SavePassword: "Gem kodeord",
+    CurrentPassword:"Nuvarende kodeord",
+    NewPassword:"Nyt kodeord",
+    ConfirmPassword:"Bekraft nyt kodeord",
+    PasswordMatchError:"Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
+    PasswordMismatchError:"Ny adgangskode og nuværende adgangskode stemmer ikke overens.",
+    PasswordLengthError:"Adgangskoden skal være på mindst 8 tegn.",
+    UppercaseError:"Adgangskoden skal indeholde mindst ét stort bogstav.",
+    LowercaseError:"Adgangskoden skal indeholde mindst ét lille bogstav.",
+    NumberError: "Kodeord skal indeholde mindst et tal.",
+    SpecialCharacterError:"Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
+    PasswordChanged: "Adgangskoden blev ændret.",
+  },
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
