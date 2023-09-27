@@ -36,12 +36,17 @@ console.log(props);
         <View style={styles.draftContent}>
           <Text style={styles.category}>{props.category?.categoryName}</Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.brand}>{props.brand?.brandName}</Text>
+          <View style={styles.brandModelContainer}>
+            <Text style={styles.brand} numberOfLines={1} ellipsizeMode="tail">
+              {props.brand?.brandName}
+              {props.model?.modelName ? "," : ""}
+            </Text>
             {props.model?.modelName && (
-              <Text style={[styles.brand, { marginLeft: 0 }]}>
-                {","} {props.model?.modelName}
+              <Text style={[styles.brand, { marginLeft: 2 }]} numberOfLines={1} ellipsizeMode="tail">
+               {props.model?.modelName}
               </Text>
             )}
+          </View>
           </View>
           <Text
             style={[
@@ -51,7 +56,10 @@ console.log(props);
           >
             {props.itemcondition}
           </Text>
-          <Text style={styles.description}>{props.itemDescription}</Text>
+          <Text style={styles.description}
+            numberOfLines={3}>
+            {props.itemDescription}
+          </Text>
         </View>
       </TouchableOpacity>
       <View
@@ -116,6 +124,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: Primarycolor1,
     marginBottom: 10,
+  },
+  brandModelContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    maxWidth: windowWidth / 2.4,
   },
   description: {
     fontSize: 14,

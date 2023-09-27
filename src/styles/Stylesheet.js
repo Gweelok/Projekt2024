@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
   },
   //Menu items
   menuItem: {
-    width: "90%",
+    width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 15,

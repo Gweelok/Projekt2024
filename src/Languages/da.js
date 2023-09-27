@@ -36,12 +36,29 @@ export default {
   NotificationsScreen: {
     Header: "Notifikationer",
   },
-  AccountSettingsScreen: {
-    Header: "Kontoindstillinger",
+
+    AccountSettingsScreen : {
+     Header: "Kontoindstillinger",
+      BackButton:"Tilbage",
+      Name: "Navn",
+      Email: "E-mail",
+      Tlf: "Tlf",
+      Submit:"Gem",
+      ChangeCode:"Skift kode",
+      Delete:"Slet konto",
+      Optional:'valgfri',
+      HandleSave: 'Oplysningerne er gemt',
+      HandleDeleteAccount:'Konto er slettet',
+      Language:'Sprog'
+    },
+  DeleteAccount:{
+    Header:'Er du sikker på at du vil slette din konto?',
+    MainButton:'Slet min konto',
+    SecondaryButton:'Annullér',
   },
-  MySettingsScreen: {
-    Header: "Mine indstillinger",
-  },
+    MySettingsScreen : {
+        Header: "Mine indstillinger",
+    },
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -80,7 +97,6 @@ export default {
     MyDrafts: "Mine kladder",
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
-    Notification: "Notfikationer",
   },
 
   UpdroppForm: {
