@@ -76,40 +76,27 @@ const DetailViews = ({ navigation, route }) => {
   };
 
   return (
-
-      <View style={Backgroundstyle.interactive_screens}>
-        <ScrollViewComponent>
-            <BackButton onPress={navigation.goBack}/>
-          <View style={DetailView.container}>
-            <Image source={{ uri: imageUrl }} style={DetailView.image} />
-            <View style={DetailView.infoContainer}>
-              <View style={DetailView.leftInfo}>
-                <Text style={DetailView.product}>{productName}</Text>
-                <Text style={DetailView.brand}>{brandName}</Text>
-              </View>
-              <View style={DetailView.rightInfo}>
-                <TouchableOpacity
-                    onPress={openAddressOnMap}
-                    style={DetailView.locationContainer}
-                >
-                  <Ionicons name="location" size={15} color={Primarycolor1} />
-                  <Text style={DetailView.location}>
-                    {uptainer.uptainerCity}, {uptainer.uptainerStreet}, {uptainer.uptainerZip}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+    <View style={Backgroundstyle.interactive_screens}>
+      <ScrollViewComponent>
+        <BackButton onPress={navigation.goBack} />
+        <View style={DetailView.container}>
+          <Image source={{ uri: imageUrl }} style={DetailView.image} />
+          <View style={DetailView.infoContainer}>
+            <View style={DetailView.leftInfo}>
+              <Text style={DetailView.product}>{productName}</Text>
+              <Text style={DetailView.brand}>{brandName}</Text>
             </View>
-            <Text style={DetailView.text}>{displayTextValue}</Text>
-            <TouchableOpacity onPress={handleTakePress} style={DetailView.TagButton}>
-              <Text style={DetailView.Tag}>{TagButton}</Text>
-            </TouchableOpacity>
-            <Text
-                style={styles.link}
-                onPress={() => LinkingExpo.openURL("")}
-            >
-              Var produktet ikke i uptaineren?
-            </Text>
-
+            <View style={DetailView.rightInfo}>
+              <TouchableOpacity
+                onPress={openAddressOnMap}
+                style={DetailView.locationContainer}>
+                <Ionicons name="location" size={15} color={Primarycolor1} />
+                <Text style={DetailView.location}>
+                  {uptainer.uptainerCity}, {uptainer.uptainerStreet},{" "}
+                  {uptainer.uptainerZip}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <Text style={DetailView.text}>{displayTextValue}</Text>
           <TouchableOpacity
@@ -117,12 +104,21 @@ const DetailViews = ({ navigation, route }) => {
             style={DetailView.TagButton}>
             <Text style={DetailView.Tag}>{TagButton}</Text>
           </TouchableOpacity>
-          <Text
-            style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-            onPress={() => LinkingExpo.openURL("")}>
+          <Text style={styles.link} onPress={() => LinkingExpo.openURL("")}>
             Var produktet ikke i uptaineren?
           </Text>
         </View>
+        <Text style={DetailView.text}>{displayTextValue}</Text>
+        <TouchableOpacity
+          onPress={handleTakePress}
+          style={DetailView.TagButton}>
+          <Text style={DetailView.Tag}>{TagButton}</Text>
+        </TouchableOpacity>
+        <Text
+          style={{ color: Primarycolor1, textDecorationLine: "underline" }}
+          onPress={() => LinkingExpo.openURL("")}>
+          Var produktet ikke i uptaineren?
+        </Text>
       </ScrollViewComponent>
       <Navigationbar navigation={navigation} />
     </View>
