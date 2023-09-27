@@ -73,7 +73,11 @@ const Add = ({route, navigation}) => {
   const handleSaveButtonClick = async () => {
 
     await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
-    navigation.navigate("ProductSaved");
+      // Reseting the navigation stack and navigate to ProductSaved
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "ProductSaved" }],
+      });    
     setBadgeCount(prevCount => prevCount + 1);
   };
 
