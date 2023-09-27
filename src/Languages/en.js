@@ -122,7 +122,7 @@ export default {
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
-    SaveCode: "Updropp",
+    SaveCode: "Take",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",

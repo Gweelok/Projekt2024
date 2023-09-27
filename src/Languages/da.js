@@ -132,7 +132,7 @@ export default {
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
-    SaveCode: "Updroppe",
+    SaveCode: "Tag",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
