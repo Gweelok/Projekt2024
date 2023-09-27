@@ -43,12 +43,6 @@ const Profile = ({ navigation }) => {
         </View>
         <View>
           <MenuItems
-            msg={t("ProfileScreen.Notification", currentLanguage)}
-            onPress={() => navigation.navigate("Notifications")}
-          />
-        </View>
-        <View>
-          <MenuItems
             msg={t("Profile.logout", currentLanguage)}
             onPress={() => navigation.navigate("LogoutConfirmation")}
           />

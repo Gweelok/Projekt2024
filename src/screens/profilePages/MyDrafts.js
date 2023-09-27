@@ -57,6 +57,7 @@ const MyDrafts = () => {
 
 
   return (
+
     <View>
       <View style={{ flexDirection: "row", alignItems: "center",paddingLeft:20}}>
        <BackButton onPress={navigation.goBack}/>

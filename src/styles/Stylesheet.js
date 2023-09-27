@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 15,
+    marginBottom:15,
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
@@ -82,10 +82,11 @@ export const styles = StyleSheet.create({
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor3,
     alignSelf: 'stretch',
+
   },
   //Menu items
   menuItem: {
-    width: "90%",
+    width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 15,
