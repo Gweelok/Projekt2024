@@ -104,6 +104,8 @@ export async function createUptainer(data) {
     };
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
+
+
 export async function createItem(brandId = "", categoryId = "", itemDescription = "", itemImage = "", itemModel = "", itemproduct = "", itemcondition = "", uptainerQRCode = "") {
     const newItemKey = push(ref(db, paths.items)).key;
     let newImagePath = "Default.jpg"
@@ -174,6 +176,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
 
 
     const newItemKey = push(ref(db, paths.items)).key;
+    const itemQRCode = generateQRCode(item.itemQR);
     const itemData = {
         itemId: newItemKey,
         itemproduct: products,
@@ -184,6 +187,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
+        itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
 }
@@ -846,6 +850,20 @@ export async function updateAuthData(email, password, phoneNumber) {
     }
   }
 
+
+  export function deleteUserById() {
+      const currentUser = GetCurrentUser();
+      if (currentUser.length > 0) {
+          deleteUser(currentUser[0].id)
+              .then(() => {
+                  // User deleted.
+              })
+              .catch((error) => {
+                  // An error occurred
+                  console.error("Error deleting user:", error);
+              });
+      }
+  }
   export async function updateDatabaseData(name, profilePic) {
     const user = firebaseAurth.currentUser;
     const reference = ref(db, `/users/${user.uid}`);

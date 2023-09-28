@@ -5,14 +5,13 @@
 
 import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
-import {inline} from "react-native-web/src/exports/StyleSheet/compiler";
+import { inline } from "react-native-web/src/exports/StyleSheet/compiler";
 
 //		backgroundColor: '#fff',
 //Main colors
 export const Primarycolor1 = "#1c4b3d"; // DarkGreen
 export const Primarycolor2 = "#dae2e0"; //lightgreen
 export const Primarycolor3 = "#fff"; // White
-
 
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
@@ -40,19 +39,18 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   //Headlines
-  Header : {
+  Header: {
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
     marginLeft: 16,
   },
-  Header_Primarycolor1  : {
+  Header_Primarycolor1: {
     color: Primarycolor1,
     fontSize: 16,
     marginTop: 10,
     marginBottom: 10,
   },
-
 
   //Links
   link: {
@@ -77,14 +75,14 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     padding: 10,
     fontSize: 16,
-    fontFamily: 'space-grotesk',
+    fontFamily: "space-grotesk",
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor3,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
   //Menu items
   menuItem: {
-    width: "90%",
+    width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 15,
@@ -111,20 +109,19 @@ export const styles = StyleSheet.create({
   },
 
   //Box_Link
-  boxlink:
-      {
-        paddingBottom: 10,
-        paddingTop: 10,
-        marginBottom: 15,
-        padding: 10,
-        borderColor: Primarycolor1,
-        backgroundColor: Primarycolor2,
-        flexDirection: "row",
-        minHeight: 80,
-        position: "relative",
-        alignContent: 'center',
-        alignItems:'center'
-      },
+  boxlink: {
+    paddingBottom: 10,
+    paddingTop: 10,
+    marginBottom: 15,
+    padding: 10,
+    borderColor: Primarycolor1,
+    backgroundColor: Primarycolor2,
+    flexDirection: "row",
+    minHeight: 80,
+    position: "relative",
+    alignContent: "center",
+    alignItems: "center",
+  },
   boxlinkContainer: {
     flex: 1,
     alignItems: "center",
@@ -179,12 +176,12 @@ export const styles = StyleSheet.create({
     width: 250,
     height: 400,
     justifyContent: "center",
-   // alignItems: "center",
+    // alignItems: "center",
     marginBottom: 20,
     //  backgroundColor: "darkgreen", // Dark green background for border
     borderRadius: 10, // Rounded corners
     position: "relative",
-   //  overflow: "hidden", // Hide overflow from dashed border
+    //  overflow: "hidden", // Hide overflow from dashed border
   },
   dashedBorder: {
     width: "100%",
@@ -208,13 +205,11 @@ export const styles = StyleSheet.create({
     color: Primarycolor1, // Dark green text color
   },
 
-  //Headlines and body text 
+  //Headlines and body text
   bodyText: {
     textAlign: "left",
   },
 });
-
-
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
@@ -275,8 +270,6 @@ export const navStyle = {
   },
 };
 
-
-
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
   informationScreens: {
@@ -288,7 +281,7 @@ export const Backgroundstyle = StyleSheet.create({
   interactive_screens: {
     paddingTop: 50,
     alignItems: "center",
-    marginLeft:"1%",
+    marginLeft: "1%",
     marginRight: "1%",
     flex: 1,
     backgroundColor: Primarycolor3,
@@ -306,26 +299,26 @@ export const Buttons = StyleSheet.create({
     backgroundColor: "#4765A9",
     fontSize: 22,
     padding: 10,
-    width :'70%',
+    width: "70%",
     margin: 30,
     marginLeft: "auto",
-    marginRight:"auto",
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection : "row",
+    marginRight: "auto",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   buttongoogle: {
-    backgroundColor: '#F41616',
+    backgroundColor: "#F41616",
     fontSize: 22,
     padding: 10,
-    marginBottom : 20,
+    marginBottom: 20,
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
   },
   main_button: {
     padding: 10,
-    width :'90%',
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: Primarycolor1,
@@ -333,15 +326,14 @@ export const Buttons = StyleSheet.create({
     borderWidth: 2,
   },
   main_buttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
-  secondary_button:
-  {
+  secondary_button: {
     padding: 7,
-    width :'90%',
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: Primarycolor3,
@@ -350,72 +342,66 @@ export const Buttons = StyleSheet.create({
   },
   secondary_buttonText: {
     color: Primarycolor1,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
   iconContainerRight: {
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     right: 20,
     backgroundColor: Primarycolor1,
   },
-  Icon:
-  {
-    color : Primarycolor3,
+  Icon: {
+    color: Primarycolor3,
   },
 
- //used for continue with facebook and with continue with google
+  //used for continue with facebook and with continue with google
   SocialMediabuttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
-
-}
-);
-export const HeaderText =StyleSheet.create({
-     Header:{
-      fontSize: 30,
-      marginBottom: 10,
-      marginTop: 15,
-      marginLeft: 30,
-      fontFamily: "space-grotesk-Medium",
-       color: Primarycolor1,
-     },
-    Header_Primarycolor1: {
-  color: Primarycolor1,
-      fontSize: 12,
-      marginTop: 10,
-      marginBottom: 10,
-}
-
-
+});
+export const HeaderText = StyleSheet.create({
+  Header: {
+    fontSize: 30,
+    marginBottom: 10,
+    marginTop: 15,
+    marginLeft: 30,
+    fontFamily: "space-grotesk-Medium",
+    color: Primarycolor1,
+  },
+  Header_Primarycolor1: {
+    color: Primarycolor1,
+    fontSize: 12,
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });
 // Dropdown
 export const dropdownStyles = StyleSheet.create({
   dropdownContainer: {
-      ...styles.inputBox,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      height: 55,
+    ...styles.inputBox,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 55,
   },
   dropdownText: {
-      ...styles.menuItem_text,
-      flex: 0,
-      marginRight: 5,
+    ...styles.menuItem_text,
+    flex: 0,
+    marginRight: 5,
   },
   dropdownList: {
-      borderWidth: 4,
-      borderColor: Primarycolor1,
-      marginTop: 0,
+    borderWidth: 4,
+    borderColor: Primarycolor1,
+    marginTop: 0,
   },
   dropdownListItem: {
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: Primarycolor1,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Primarycolor1,
   },
 });
-

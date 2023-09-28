@@ -14,8 +14,9 @@ import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Primarycolor1 } from "../styles/Stylesheet";
+import { styles, Primarycolor1 } from "../styles/Stylesheet";
 import * as LinkingExpo from "expo-linking"; // Import Expo Linking
+import BackButton from "../componets/BackButton";
 
 const DetailViews = ({ navigation, route }) => {
   const details = route.params;
@@ -79,9 +80,7 @@ const DetailViews = ({ navigation, route }) => {
   return (
       <View style={Backgroundstyle.interactive_screens}>
         <ScrollViewComponent>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="chevron-back-outline" size={36} style={DetailView.arrow} />
-          </TouchableOpacity>
+            <BackButton onPress={navigation.goBack}/>
           <View style={DetailView.container}>
             <Image source={{ uri: imageUrl }} style={DetailView.image} />
             <View style={DetailView.infoContainer}>
@@ -106,7 +105,7 @@ const DetailViews = ({ navigation, route }) => {
               <Text style={DetailView.Tag}>{TagButton}</Text>
             </TouchableOpacity>
             <Text
-                style={{ color: Primarycolor1, textDecorationLine: "underline" }}
+                style={styles.link}
                 onPress={() => LinkingExpo.openURL("")}
             >
               Var produktet ikke i uptaineren?
@@ -125,11 +124,13 @@ const DetailView = StyleSheet.create({
     marginRight: "1%",
     marginLeft: "1%",
   },
+
   image: {
     height: 300,
     width: 300,
     marginTop: 15,
   },
+
   text: {
     paddingTop: 10,
     width: "80%",
@@ -137,13 +138,7 @@ const DetailView = StyleSheet.create({
     borderRadius: 1,
     marginTop: 15,
   },
-  arrow: {
-    height: 42,
-    width: 42,
-    color: "white",
-    marginLeft: "4%",
-    backgroundColor: Primarycolor1,
-  },
+
   TagButton: {
     backgroundColor: Primarycolor1,
     width: "100%",
@@ -153,11 +148,13 @@ const DetailView = StyleSheet.create({
     marginBottom: 10,
     textDecorationLine: "underline",
   },
+
   Tag: {
     color: "white",
     textAlign: "center",
     fontSize: 20,
   },
+
   product: {
     fontWeight: "bold",
     fontSize: 20,

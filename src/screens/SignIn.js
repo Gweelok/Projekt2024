@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput , Pressable , Alert } from 'react-native';
-import { styles,
+import { 
+    styles,
     Backgroundstyle,
     Buttons,
     Primarycolor1,
@@ -79,7 +80,7 @@ const SignIn = ({ navigation }) => {
             </Pressable>
 
             <Pressable onPress={() => {  }}>
-                <Text style={SignUpStyles.text_forget_pw}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
+                <Text style={[styles.link, {marginTop: 15}]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
             </Pressable>
 
             <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
@@ -97,7 +98,7 @@ const SignIn = ({ navigation }) => {
             <Pressable onPress={() => {
                 navigation.navigate('SignUp')
             }}>
-                <Text style={SignUpStyles.text_Tertiary}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
+                <Text style={styles.link}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
             </Pressable>
         </View>
         </View>
@@ -105,20 +106,6 @@ const SignIn = ({ navigation }) => {
 }
 
 const SignUpStyles = StyleSheet.create({
-    text_forget_pw:{
-        marginTop: 10,
-        color : "#07A0A2",
-        textAlign: 'center',
-        fontSize: 15,
-    },
-
-    text_Tertiary: {
-        marginBottom: 10,
-        color : "#07A0A2",
-        textAlign: 'center',
-        fontSize: 15,
-    },
-
     container: {
         flexDirection: 'row',
         alignItems: 'center',

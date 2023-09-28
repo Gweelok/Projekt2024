@@ -36,12 +36,27 @@ export default {
   NotificationsScreen: {
     Header: "Notifikationer",
   },
-  AccountSettingsScreen: {
-    Header: "Kontoindstillinger",
+
+    AccountSettingsScreen : {
+     Header: "Kontoindstillinger",
+      BackButton:"Tilbage",
+      Name: "Navn",
+      Email: "E-mail",
+      Tlf: "Tlf",
+      Submit:"Gem",
+      ChangeCode:"Skift kode",
+      Delete:"Slet konto",
+      Optional:'valgfri',
+      HandleSave: 'Oplysningerne er gemt',
+      HandleDeleteAccount:'Konto er slettet',
+      Language:'Sprog'
+    },
+  DeleteAccount:{
+    Header:'Er du sikker på at du vil slette din konto?',
+    MainButton:'Slet min konto',
+    SecondaryButton:'Annullér',
   },
-  MySettingsScreen: {
-    Header: "Mine indstillinger",
-  },
+
   ChangePasswordScreen:{
     Header: "Skift kodeordl",
     SavePassword: "Gem kodeord",
@@ -57,6 +72,11 @@ export default {
     SpecialCharacterError:"Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
     PasswordChanged: "Adgangskoden blev ændret.",
   },
+
+    MySettingsScreen : {
+        Header: "Mine indstillinger",
+    },
+
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -95,7 +115,6 @@ export default {
     MyDrafts: "Mine kladder",
     DataPolicy: "Datapolitik",
     ContactUs: "Kontakt os",
-    Notification: "Notfikationer",
   },
 
   UpdroppForm: {
@@ -157,7 +176,14 @@ export default {
     takenButton: "Produktet er taget",
     productNotListed: "Var produktet ikke i Uptaineren?",
   },
-  thankYouScreen:{
-    header:'Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren'
-  }
+  ContactUs: {
+    Name: "Navn",
+    Topic: "Enme",
+    Message: "Besked",
+    SendMessage: "SEND BESKEND",
+  },
+  thankYouScreen: {
+    header:
+      "Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren",
+  },
 };

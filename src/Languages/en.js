@@ -35,7 +35,6 @@ export default {
     MyDrafts: "My Drafts",
     DataPolicy: "Data Policy",
     ContactUs: "Contact Us",
-    Notification: "Notifications",
   },
 
   UpdroppForm: {
@@ -89,6 +88,23 @@ export default {
   },
   AccountSettingsScreen: {
     Header: "Account Settings",
+    BackButton:"Back",
+    Name: "Name",
+    Email:"E-mail",
+    Tlf:"Phone number",
+    Submit:"Save",
+    ChangeCode:"change password",
+    Delete:"Delete account",
+    Optional:'optional',
+    HandleSave: 'Information is saved',
+    HandleDeleteAccount:'Account is deleted',
+    Language:'language'
+
+  },
+  DeleteAccount:{
+    Header:'Are you sure you want to delete you account?',
+    MainButton:'Delete my account',
+    SecondaryButton:'Cancel',
   },
   MySettingsScreen: {
     Header: "My Settings",
@@ -156,7 +172,14 @@ export default {
     takenButton: "Product has been taken",
     productNotListed: "Couldn't find the product at the Uptainer?",
   },
-  thankYouScreen:{
-    header:'Thanks for informing us. We will check up on this and update the Uptainer'
-  }
+  ContactUs: {
+    Name: "Name",
+    Topic: "Topic",
+    Message: "Message",
+    SendMessage: "Send Message",
+  },
+  thankYouScreen: {
+    header:
+      "Thanks for informing us. We will check up on this and update the Uptainer",
+  },
 };
