@@ -13,6 +13,8 @@ import { t, useLanguage } from '../../Languages/LanguageHandler';
 import { Buttons, HeaderText, Primarycolor1, styles } from '../../styles/Stylesheet';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Navigationbar from "../../componets/Navigationbar";
+import { Keyboard } from 'react-native';
+
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -44,6 +46,7 @@ const ChangePassword = ({ navigation }) => {
             setErrorMessage(t('ChangePasswordScreen.SpecialCharacterError', currentLanguage));
         } else {
             setShowSuccessPopup(true);
+            Keyboard.dismiss();
             return;
         }
     };
