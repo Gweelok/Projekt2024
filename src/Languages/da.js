@@ -37,28 +37,28 @@ export default {
     Header: "Notifikationer",
   },
 
-    AccountSettingsScreen : {
-     Header: "Kontoindstillinger",
-      BackButton:"Tilbage",
-      Name: "Navn",
-      Email: "E-mail",
-      Tlf: "Tlf",
-      Submit:"Gem",
-      ChangeCode:"Skift kode",
-      Delete:"Slet konto",
-      Optional:'valgfri',
-      HandleSave: 'Oplysningerne er gemt',
-      HandleDeleteAccount:'Konto er slettet',
-      Language:'Sprog'
-    },
-  DeleteAccount:{
-    Header:'Er du sikker på at du vil slette din konto?',
-    MainButton:'Slet min konto',
-    SecondaryButton:'Annullér',
+  AccountSettingsScreen: {
+    Header: "Kontoindstillinger",
+    BackButton: "Tilbage",
+    Name: "Navn",
+    Email: "E-mail",
+    Tlf: "Tlf",
+    Submit: "Gem",
+    ChangeCode: "Skift kode",
+    Delete: "Slet konto",
+    Optional: "valgfri",
+    HandleSave: "Oplysningerne er gemt",
+    HandleDeleteAccount: "Konto er slettet",
+    Language: "Sprog",
   },
-    MySettingsScreen : {
-        Header: "Mine indstillinger",
-    },
+  DeleteAccount: {
+    Header: "Er du sikker på at du vil slette din konto?",
+    MainButton: "Slet min konto",
+    SecondaryButton: "Annullér",
+  },
+  MySettingsScreen: {
+    Header: "Mine indstillinger",
+  },
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -163,6 +163,13 @@ export default {
     mainText:
       "Produktet er nu taget. Tak fordi du sparer på Jordens ressourcer",
     button: "Forside",
+  },
+
+  ContactUs: {
+    Name: "Navn",
+    Topic: "Enme",
+    Message: "Besked",
+    SendMessage: "SEND BESKEND",
   },
 
   thankYouScreen: {
