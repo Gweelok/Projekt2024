@@ -98,6 +98,8 @@ const DetailViews = ({ navigation, route }) => {
               </TouchableOpacity>
             </View>
           </View>
+
+          {/* this part might be needed.  
           <Text style={DetailView.text}>{displayTextValue}</Text>
           <TouchableOpacity
             onPress={handleTakePress}
@@ -106,7 +108,7 @@ const DetailViews = ({ navigation, route }) => {
           </TouchableOpacity>
           <Text style={styles.link} onPress={() => LinkingExpo.openURL("")}>
             Var produktet ikke i uptaineren?
-          </Text>
+          </Text> */}
         </View>
         <Text style={DetailView.text}>{displayTextValue}</Text>
         <TouchableOpacity
