@@ -37,28 +37,28 @@ export default {
     Header: "Notifikationer",
   },
 
-    AccountSettingsScreen : {
-     Header: "Kontoindstillinger",
-      BackButton:"Tilbage",
-      Name: "Navn",
-      Email: "E-mail",
-      Tlf: "Tlf",
-      Submit:"Gem",
-      ChangeCode:"Skift kode",
-      Delete:"Slet konto",
-      Optional:'valgfri',
-      HandleSave: 'Oplysningerne er gemt',
-      HandleDeleteAccount:'Konto er slettet',
-      Language:'Sprog'
-    },
-  DeleteAccount:{
-    Header:'Er du sikker på at du vil slette din konto?',
-    MainButton:'Slet min konto',
-    SecondaryButton:'Annullér',
+  AccountSettingsScreen: {
+    Header: "Kontoindstillinger",
+    BackButton: "Tilbage",
+    Name: "Navn",
+    Email: "E-mail",
+    Tlf: "Tlf",
+    Submit: "Gem",
+    ChangeCode: "Skift kode",
+    Delete: "Slet konto",
+    Optional: "valgfri",
+    HandleSave: "Oplysningerne er gemt",
+    HandleDeleteAccount: "Konto er slettet",
+    Language: "Sprog",
   },
-    MySettingsScreen : {
-        Header: "Mine indstillinger",
-    },
+  DeleteAccount: {
+    Header: "Er du sikker på at du vil slette din konto?",
+    MainButton: "Slet min konto",
+    SecondaryButton: "Annullér",
+  },
+  MySettingsScreen: {
+    Header: "Mine indstillinger",
+  },
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -109,6 +109,7 @@ export default {
     addDraft: "Tilføj kladde",
     viewUptainers: "Se nærmeste Uptainer",
     draftSavedtext: "Din kladde er nu gemt",
+    noData: "Udfyld venligst alle de nødvendige oplysninger ovenfor",
   },
 
   ProblemComponent: {

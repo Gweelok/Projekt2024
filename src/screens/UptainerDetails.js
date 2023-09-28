@@ -29,9 +29,12 @@ const UptainerDetails = ({ navigation, route }) => {
   let uptainer = null;
   if (route.params.uptainerData) {
     uptainer = route.params.uptainerData;
-  }else{
+  } else {
     uptainer = route.params;
   }
+
+  console.log("uptainer", uptainer);
+
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
 
@@ -41,7 +44,7 @@ const UptainerDetails = ({ navigation, route }) => {
       const storage = getStorage();
       try {
         const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
-        
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
             const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
@@ -117,7 +120,7 @@ const UptainerDetails = ({ navigation, route }) => {
               onPress={() => navigation.navigate("Map")}
               style={style.productLocation}
             >
-              <Text style={styles.productAddress}>
+              <Text style={style.productAddress}>
                 {uptainer.uptainerName} /{"\n"}
                 {uptainer.uptainerStreet}
               </Text>
@@ -166,18 +169,15 @@ const UptainerDetails = ({ navigation, route }) => {
                     uri: cur?.imageUrl,
                   }}
                 />
-                 <Text
+                <Text
                   style={[
-                    styles.bodyText, 
+                    styles.bodyText,
                     {
-                    fontWeight: "600", 
-                    width: windowWidth / 2.7,
-                    marginTop: 5
-                  }
-                ]}
-
-
-        
+                      fontWeight: "600",
+                      width: windowWidth / 2.7,
+                      marginTop: 5,
+                    },
+                  ]}
                 >
                   {cur?.productName}{" "}
                 </Text>

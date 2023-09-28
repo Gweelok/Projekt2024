@@ -47,6 +47,7 @@ export default {
     addDraft: "Add draft",
     viewUptainers: "View Uptainers nearby",
     draftSavedtext: "Your draft is now saved",
+    noData: "Please fill all the required information above",
   },
   CustomInput: {
     hint: "optional",
@@ -88,23 +89,22 @@ export default {
   },
   AccountSettingsScreen: {
     Header: "Account Settings",
-    BackButton:"Back",
+    BackButton: "Back",
     Name: "Name",
-    Email:"E-mail",
-    Tlf:"Phone number",
-    Submit:"Save",
-    ChangeCode:"change password",
-    Delete:"Delete account",
-    Optional:'optional',
-    HandleSave: 'Information is saved',
-    HandleDeleteAccount:'Account is deleted',
-    Language:'language'
-
+    Email: "E-mail",
+    Tlf: "Phone number",
+    Submit: "Save",
+    ChangeCode: "change password",
+    Delete: "Delete account",
+    Optional: "optional",
+    HandleSave: "Information is saved",
+    HandleDeleteAccount: "Account is deleted",
+    Language: "language",
   },
-  DeleteAccount:{
-    Header:'Are you sure you want to delete you account?',
-    MainButton:'Delete my account',
-    SecondaryButton:'Cancel',
+  DeleteAccount: {
+    Header: "Are you sure you want to delete you account?",
+    MainButton: "Delete my account",
+    SecondaryButton: "Cancel",
   },
   MySettingsScreen: {
     Header: "My Settings",
