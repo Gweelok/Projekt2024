@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Button,
   Alert,
-  Pressable,
+  Pressable, ScrollView,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appropriate icon library
@@ -19,6 +19,7 @@ import {
   getUptainerFromQR,
   getUptainerById,
 } from "../../utils/Repo";
+import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
 const QRScanner = ({ route, navigation }) => {
   const itemData = route.params;
@@ -142,6 +143,7 @@ const QRScanner = ({ route, navigation }) => {
   };
 
   return (
+      <ScrollViewComponent>
     <SafeAreaView style={styles.container2}>
       <View style={styles.header}>
         <Text style={styles.headline}>
@@ -218,6 +220,7 @@ const QRScanner = ({ route, navigation }) => {
         </Text>
       </View>
     </SafeAreaView>
+      </ScrollViewComponent>
   );
 };
 
