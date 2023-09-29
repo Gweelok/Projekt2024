@@ -79,10 +79,10 @@ const ChangePassword = ({ navigation }) => {
 
         <SafeAreaView style={styles.container2}>
             <View style={customStyles.headerContainer}>
-                <TouchableOpacity style={styles.closeButton} onPress={() => navigation.navigate("MySettings")}>
+                <TouchableOpacity style={styles.closeButton} onPress={() => navigation.navigate("AccountSettings")}>
                     <Icon size={30} name="left" style={styles.closeButtonIcon} />
                 </TouchableOpacity>
-                <Text style={customStyles.headline}>
+                <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
                     {t('ChangePasswordScreen.Header', currentLanguage)}
                 </Text>
             </View>

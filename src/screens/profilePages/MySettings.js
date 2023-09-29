@@ -29,7 +29,6 @@ const MySettings = ({ navigation }) => {
             <Text style={[styles.Header]}>{t('MySettingsScreen.Header', currentLanguage)}</Text>
             <MenuItems msg={t('AccountSettingsScreen.Header', currentLanguage)} onPress={() => handlePress(MYSETTINGSSCREEN.AccountSettings)} />
             <MenuItems msg={t('NotificationsScreen.Header', currentLanguage)} onPress={() => handlePress(MYSETTINGSSCREEN.Notifications)} />
-            <MenuItems msg={t('ChangePasswordScreen.Header', currentLanguage)} onPress={() => handlePress(MYSETTINGSSCREEN.ChangePassword)} />
         </View>
     );
 };

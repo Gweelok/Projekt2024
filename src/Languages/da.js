@@ -68,7 +68,7 @@ export default {
     NewPassword:"Nyt kodeord",
     ConfirmPassword:"Bekraft nyt kodeord",
     PasswordMatchError:"Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
-    PasswordMismatchError:"Ny adgangskode og nuværende adgangskode stemmer ikke overens.",
+    PasswordMismatchError:"Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
     PasswordLengthError:"Adgangskoden skal være på mindst 8 tegn.",
     UppercaseError:"Adgangskoden skal indeholde mindst ét stort bogstav.",
     LowercaseError:"Adgangskoden skal indeholde mindst ét lille bogstav.",
