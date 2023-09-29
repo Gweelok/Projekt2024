@@ -15,8 +15,8 @@ import {
   Primarycolor3,
 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React, { useState } from "react";
-import { t, useLanguage } from "../Languages/LanguageHandler";
+import React, {useState, useContext} from "react";
+import {t, useLanguage} from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from "./form/CategoryDropdown";
 import CustomInput from "../componets/atoms/CustomInput";
@@ -28,7 +28,10 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import { createItemDraft, getCurrentUser } from "../utils/Repo";
+import {createItemDraft, getCurrentUser} from "../utils/Repo";
+
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -61,7 +64,7 @@ const ProductDetailScreen = ({ route }) => {
 
 const Add = ({ route, navigation }) => {
   const itemData = route.params?.itemData;
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   // you can fetch the final result of all field through here
   const { currentLanguage, setLanguage } = useLanguage();
 
@@ -75,45 +78,11 @@ const Add = ({ route, navigation }) => {
 
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
-    await createItemDraft(
-      product.productId,
-      brand.brandId,
-      model.modelId,
-      category.categoryId,
-      image,
-      description,
-      condition
-    );
-    // Reseting the navigation stack and navigate to ProductSaved
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "ProductSaved" }],
-    });
-    setBadgeCount((prevCount) => prevCount + 1);
-  };
-
-  const addProductConditions = () => {
-    if (
-      !image ||
-      !description ||
-      !brand.brandId ||
-      !product.productId ||
-      !model.modelId ||
-      !condition ||
-      !category.categoryId
-    ) {
-      Alert.alert(t("UpdroppForm.noData", currentLanguage));
-    } else {
-      navigation.navigate("QRScanner", {
-        product: product.productId,
-        brand: brand.brandId,
-        model: model.modelId,
-        category: category.categoryId,
-        condition: condition,
-        description: description,
-        image: image,
-      });
-    }
+    setIsLoading(true);
+    await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
+    navigation.navigate("ProductSaved");
+    setIsLoading(false);
+    setBadgeCount(prevCount => prevCount + 1);
   };
 
   return (
@@ -175,8 +144,8 @@ const Add = ({ route, navigation }) => {
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-
-          <View style={{ marginBottom: 20 }}>
+          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+          <View style={{marginBottom: 20}}>
             <Pressable
               onPress={() => {
                 addProductConditions();
