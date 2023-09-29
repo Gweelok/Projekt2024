@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getItemsInUptainer,
@@ -22,6 +22,9 @@ import GlobalStyle from "../styles/GlobalStyle";
 import ProductAlert from "../componets/ProductAlert";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -29,19 +32,22 @@ const UptainerDetails = ({ navigation, route }) => {
   let uptainer = null;
   if (route.params.uptainerData) {
     uptainer = route.params.uptainerData;
-  }else{
+  } else {
     uptainer = route.params;
   }
+
+  console.log("uptainer", uptainer);
+
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   useEffect(() => {
     //Fetches items in the uptainer
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
         const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
-        
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
             const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
@@ -67,6 +73,7 @@ const UptainerDetails = ({ navigation, route }) => {
           })
         );
         setData(updatedData); // updates data property with the fetched data from db
+        setIsLoading(false);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
@@ -95,7 +102,8 @@ const UptainerDetails = ({ navigation, route }) => {
   }
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
@@ -117,7 +125,7 @@ const UptainerDetails = ({ navigation, route }) => {
               onPress={() => navigation.navigate("Map")}
               style={style.productLocation}
             >
-              <Text style={styles.productAddress}>
+              <Text style={style.productAddress}>
                 {uptainer.uptainerName} /{"\n"}
                 {uptainer.uptainerStreet}
               </Text>
@@ -166,18 +174,15 @@ const UptainerDetails = ({ navigation, route }) => {
                     uri: cur?.imageUrl,
                   }}
                 />
-                 <Text
+                <Text
                   style={[
-                    styles.bodyText, 
+                    styles.bodyText,
                     {
-                    fontWeight: "600", 
-                    width: windowWidth / 2.7,
-                    marginTop: 5
-                  }
-                ]}
-
-
-        
+                      fontWeight: "600",
+                      width: windowWidth / 2.7,
+                      marginTop: 5,
+                    },
+                  ]}
                 >
                   {cur?.productName}{" "}
                 </Text>

@@ -47,6 +47,7 @@ export default {
     addDraft: "Add draft",
     viewUptainers: "View Uptainers nearby",
     draftSavedtext: "Your draft is now saved",
+    noData: "Please fill all the required information above",
   },
   CustomInput: {
     hint: "optional",
@@ -93,7 +94,7 @@ export default {
     Email: "E-mail",
     Tlf: "Phone number",
     Submit: "Save",
-    ChangeCode: "change password",
+    ChangeCode: "Change password",
     Delete: "Delete account",
     Optional: "optional",
     HandleSave: "Information is saved",
@@ -108,6 +109,21 @@ export default {
   MySettingsScreen: {
     Header: "My Settings",
   },
+  ChangePasswordScreen:{
+    Header: "Change Password",
+    SavePassword: "Save Password",
+    CurrentPassword:"Current Password",
+    NewPassword:"New Password",
+    ConfirmPassword:"Confirm New Password",
+    PasswordMatchError:"Current password and new password cannot be the same.",
+    PasswordMismatchError:"New password and Confirm New Password doesn't match.",
+    PasswordLengthError:"Password must be at least 8 characters long.",
+    UppercaseError:"Password must contain at least one uppercase letter.",
+    LowercaseError:"Password must contain at least one lowercase letter.",
+    NumberError: "Password must contain at least one number.",
+    SpecialCharacterError:"Password must contain at least one special character (!@#$%^&*).",
+    PasswordChanged: "Password changed successfully.",
+  },
 
   ProblemComponent: {
     Header: "The Problem",
@@ -121,7 +137,7 @@ export default {
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
-    SaveCode: "Updropp",
+    SaveCode: "Take",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",

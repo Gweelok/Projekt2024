@@ -60,6 +60,28 @@ export default {
     Header: "Mine indstillinger",
   },
 
+
+
+  ChangePasswordScreen:{
+    Header: "Skift kodeordl",
+    SavePassword: "Gem kodeord",
+    CurrentPassword:"Nuvarende kodeord",
+    NewPassword:"Nyt kodeord",
+    ConfirmPassword:"Bekraft nyt kodeord",
+    PasswordMatchError:"Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
+    PasswordMismatchError:"Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
+    PasswordLengthError:"Adgangskoden skal være på mindst 8 tegn.",
+    UppercaseError:"Adgangskoden skal indeholde mindst ét stort bogstav.",
+    LowercaseError:"Adgangskoden skal indeholde mindst ét lille bogstav.",
+    NumberError: "Kodeord skal indeholde mindst et tal.",
+    SpecialCharacterError:"Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
+    PasswordChanged: "Adgangskoden blev ændret.",
+  },
+
+
+
+
+
   MyDraftsScreen: {
     Header: "Mine Kladder",
     closeButtonTitle: "Slette kladde",
@@ -109,6 +131,7 @@ export default {
     addDraft: "Tilføj kladde",
     viewUptainers: "Se nærmeste Uptainer",
     draftSavedtext: "Din kladde er nu gemt",
+    noData: "Udfyld venligst alle de nødvendige oplysninger ovenfor",
   },
 
   ProblemComponent: {
@@ -131,7 +154,7 @@ export default {
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
-    SaveCode: "Updroppe",
+    SaveCode: "Tag",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",

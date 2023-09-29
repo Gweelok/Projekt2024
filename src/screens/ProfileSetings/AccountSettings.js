@@ -33,7 +33,7 @@ const AccountSettings = () => {
     };
    /* complete this task her */
     const handleChangePasswordPress =()=>{
-        navigation.navigate('ChangePasswordScreen');
+        navigation.navigate('ChangePassword');
     };
 
     return (

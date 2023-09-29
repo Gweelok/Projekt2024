@@ -21,6 +21,13 @@ const ProductIsTakenScreen = ({ navigation, route }) => {
 
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
 
+  // This function sends and gives the status of 'maybe taken' in the DB
+  const productIsTaken = () => {
+    navigation.navigate("ThankYouScreen");
+
+    // write the db logic here
+  };
+
   return (
     <StatusBarComponent>
       <ScrollViewComponent>
@@ -38,7 +45,13 @@ const ProductIsTakenScreen = ({ navigation, route }) => {
           <Text style={styles.apologyText}>
             {t("ProductIsTakenScreen.apology", currentLanguage)}
           </Text>
-          <TouchableOpacity activeOpacity={0.9} style={styles.targetButton} onPress={()=> navigation.navigate('ThankYouScreen')}>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            style={styles.targetButton}
+            onPress={() => {
+              productIsTaken();
+            }}
+          >
             <Text style={styles.targetText}>
               {t("ProductIsTakenScreen.takenButton", currentLanguage)}
             </Text>
