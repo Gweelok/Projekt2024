@@ -21,6 +21,7 @@ const DescriptionField = ({ onInputComplete, data = ''}) => {
             defaultValue={data}
             onChangeText={text => setInputValue(text)}  // Update the state with the input value
             onEndEditing={() => onInputComplete && onInputComplete(inputValue)}  // Call the provided function with the input value
+            textAlignVertical="top"
           />
          </CustomInput>
       </View>

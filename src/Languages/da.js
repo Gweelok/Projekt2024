@@ -37,25 +37,29 @@ export default {
     Header: "Notifikationer",
   },
 
-    AccountSettingsScreen : {
-     Header: "Kontoindstillinger",
-      BackButton:"Tilbage",
-      Name: "Navn",
-      Email: "E-mail",
-      Tlf: "Tlf",
-      Submit:"Gem",
-      ChangeCode:"Skift kode",
-      Delete:"Slet konto",
-      Optional:'valgfri',
-      HandleSave: 'Oplysningerne er gemt',
-      HandleDeleteAccount:'Konto er slettet',
-      Language:'Sprog'
-    },
-  DeleteAccount:{
-    Header:'Er du sikker på at du vil slette din konto?',
-    MainButton:'Slet min konto',
-    SecondaryButton:'Annullér',
+  AccountSettingsScreen: {
+    Header: "Kontoindstillinger",
+    BackButton: "Tilbage",
+    Name: "Navn",
+    Email: "E-mail",
+    Tlf: "Tlf",
+    Submit: "Gem",
+    ChangeCode: "Skift kode",
+    Delete: "Slet konto",
+    Optional: "valgfri",
+    HandleSave: "Oplysningerne er gemt",
+    HandleDeleteAccount: "Konto er slettet",
+    Language: "Sprog",
   },
+  DeleteAccount: {
+    Header: "Er du sikker på at du vil slette din konto?",
+    MainButton: "Slet min konto",
+    SecondaryButton: "Annullér",
+  },
+  MySettingsScreen: {
+    Header: "Mine indstillinger",
+  },
+
 
   ChangePasswordScreen:{
     Header: "Skift kodeordl",
@@ -73,9 +77,8 @@ export default {
     PasswordChanged: "Adgangskoden blev ændret.",
   },
 
-    MySettingsScreen : {
-        Header: "Mine indstillinger",
-    },
+
+
 
 
   MyDraftsScreen: {
@@ -127,6 +130,7 @@ export default {
     addDraft: "Tilføj kladde",
     viewUptainers: "Se nærmeste Uptainer",
     draftSavedtext: "Din kladde er nu gemt",
+    noData: "Udfyld venligst alle de nødvendige oplysninger ovenfor",
   },
 
   ProblemComponent: {
@@ -149,7 +153,7 @@ export default {
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
-    SaveCode: "Updroppe",
+    SaveCode: "Tag",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
