@@ -61,6 +61,7 @@ export default {
   },
 
 
+
   ChangePasswordScreen:{
     Header: "Skift kodeordl",
     SavePassword: "Gem kodeord",
@@ -180,12 +181,20 @@ export default {
     takenButton: "Produktet er taget",
     productNotListed: "Var produktet ikke i Uptaineren?",
   },
+
+  ProductTakenScreen: {
+    mainText:
+      "Produktet er nu taget. Tak fordi du sparer på Jordens ressourcer",
+    button: "Forside",
+  },
+
   ContactUs: {
     Name: "Navn",
     Topic: "Enme",
     Message: "Besked",
     SendMessage: "SEND BESKEND",
   },
+
   thankYouScreen: {
     header:
       "Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren",
