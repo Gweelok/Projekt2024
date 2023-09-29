@@ -72,6 +72,7 @@ import DeleteAccount from "./src/screens/ProfileSetings/deleteAccount";
 
 import ProductIsTakenScreen from "./src/screens/ProductIsTakenScreen";
 import ThankYouscreen from "./src/screens/Thankyouscreen";
+import ChangePassword from "./src/screens/ProfileSetings/ChangePassword";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -175,6 +176,11 @@ export default function App() {
               component={MySettings}
               options={{ animation: "none" }}
             />
+            <Stack.Screen
+                name="ChangePassword"
+                component={ChangePassword}
+                options={{ animation: "none", headerShown: false, }}
+            />
          
           <Stack.Screen
               name="DeleteAccount"
@@ -182,6 +188,7 @@ export default function App() {
               options={{ animation: "none" }}
 
           />
+
             <Stack.Screen
               name="AccountSettings"
               component={AccountSettings}
