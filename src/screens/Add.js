@@ -15,8 +15,8 @@ import {
   Primarycolor3,
 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React, {useState, useContext} from "react";
-import {t, useLanguage} from "../Languages/LanguageHandler";
+import React, { useState, useContext, useEffect } from "react";
+import { t, useLanguage } from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from "./form/CategoryDropdown";
 import CustomInput from "../componets/atoms/CustomInput";
@@ -28,8 +28,8 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import {createItemDraft, getCurrentUser} from "../utils/Repo";
-
+import { createItemDraft, getCurrentUser } from "../utils/Repo";
+import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
 import LoadingScreen from "../componets/LoadingScreen";
 
@@ -63,27 +63,83 @@ const ProductDetailScreen = ({ route }) => {
 };
 
 const Add = ({ route, navigation }) => {
-  const itemData = route.params?.itemData;
+  const itemData = route.params;
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   // you can fetch the final result of all field through here
   const { currentLanguage, setLanguage } = useLanguage();
 
-  const [image, setImage] = useState(itemData?.imageUrl || "");
-  const [category, setCategory] = useState(itemData?.category || null);
-  const [product, setProduct] = useState(itemData?.product || null);
-  const [brand, setBrand] = useState(itemData?.brand || "");
-  const [model, setModel] = useState(itemData?.model || "");
-  const [condition, setCondition] = useState(itemData?.condition || null);
-  const [description, setDescription] = useState(itemData?.description || "");
+  const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
+  const [image, setImage] = useState();
+  const [category, setCategory] = useState(
+    itemData?.itemData?.category || null
+  );
+  const [product, setProduct] = useState(itemData?.itemData?.product || null);
+  const [brand, setBrand] = useState(itemData?.itemData?.brand || "");
+  const [model, setModel] = useState(itemData?.itemData?.model || "");
+  const [condition, setCondition] = useState(
+    itemData?.itemData?.condition || null
+  );
+  const [description, setDescription] = useState(
+    itemData?.itemData?.description || ""
+  );
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
-    await createItemDraft(product.productId, brand.brandId, model.modelId, category.categoryId, image, description, condition);
+    await createItemDraft(
+      product.productId,
+      brand.brandId,
+      model.modelId,
+      category.categoryId,
+      image,
+      description,
+      condition
+    );
     navigation.navigate("ProductSaved");
     setIsLoading(false);
-    setBadgeCount(prevCount => prevCount + 1);
+    setBadgeCount((prevCount) => prevCount + 1);
   };
+
+  const addProductConditions = () => {
+    if (
+      !image ||
+      !description ||
+      !brand.brandId ||
+      !product.productId ||
+      !model.modelId ||
+      !condition ||
+      !category.categoryId
+    ) {
+      Alert.alert(t("UpdroppForm.noData", currentLanguage));
+    } else {
+      navigation.navigate("QRScanner", {
+        product: product.productId,
+        brand: brand.brandId,
+        model: model.modelId,
+        category: category.categoryId,
+        condition: condition,
+        description: description,
+        image: image,
+      });
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const cameraStatus = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermissions(cameraStatus.status == "granted");
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!itemData) {
+      setImage("");
+    } else if (itemData?.uri) {
+      setImage(itemData);
+    } else {
+      setImage(itemData?.itemData);
+    }
+  }, [itemData]);
 
   return (
     <SafeAreaView>
@@ -101,7 +157,10 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl} />
+            <ImageUpload
+              onImageSelect={itemData?.uri}
+              hasCameraPermissions={hasCameraPermissions}
+            />
           </View>
 
           <CategoryDropdown
@@ -145,7 +204,7 @@ const Add = ({ route, navigation }) => {
             </Text>
           </View>
           {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-          <View style={{marginBottom: 20}}>
+          <View style={{ marginBottom: 20 }}>
             <Pressable
               onPress={() => {
                 addProductConditions();

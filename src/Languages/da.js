@@ -60,27 +60,24 @@ export default {
     Header: "Mine indstillinger",
   },
 
-
-
-  ChangePasswordScreen:{
+  ChangePasswordScreen: {
     Header: "Skift kodeordl",
     SavePassword: "Gem kodeord",
-    CurrentPassword:"Nuvarende kodeord",
-    NewPassword:"Nyt kodeord",
-    ConfirmPassword:"Bekraft nyt kodeord",
-    PasswordMatchError:"Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
-    PasswordMismatchError:"Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
-    PasswordLengthError:"Adgangskoden skal være på mindst 8 tegn.",
-    UppercaseError:"Adgangskoden skal indeholde mindst ét stort bogstav.",
-    LowercaseError:"Adgangskoden skal indeholde mindst ét lille bogstav.",
+    CurrentPassword: "Nuvarende kodeord",
+    NewPassword: "Nyt kodeord",
+    ConfirmPassword: "Bekraft nyt kodeord",
+    PasswordMatchError:
+      "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
+    PasswordMismatchError:
+      "Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
+    PasswordLengthError: "Adgangskoden skal være på mindst 8 tegn.",
+    UppercaseError: "Adgangskoden skal indeholde mindst ét stort bogstav.",
+    LowercaseError: "Adgangskoden skal indeholde mindst ét lille bogstav.",
     NumberError: "Kodeord skal indeholde mindst et tal.",
-    SpecialCharacterError:"Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
+    SpecialCharacterError:
+      "Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
     PasswordChanged: "Adgangskoden blev ændret.",
   },
-
-
-
-
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
@@ -132,6 +129,9 @@ export default {
     viewUptainers: "Se nærmeste Uptainer",
     draftSavedtext: "Din kladde er nu gemt",
     noData: "Udfyld venligst alle de nødvendige oplysninger ovenfor",
+    camera: "Kamera",
+    gallery: "Galleri",
+    chooseAction: "Vælge en handling",
   },
 
   ProblemComponent: {

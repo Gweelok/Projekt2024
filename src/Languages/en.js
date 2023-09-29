@@ -48,6 +48,9 @@ export default {
     viewUptainers: "View Uptainers nearby",
     draftSavedtext: "Your draft is now saved",
     noData: "Please fill all the required information above",
+    camera: "Camera",
+    gallery: "Gallery",
+    chooseAction: "Choose an Action",
   },
   CustomInput: {
     hint: "optional",
@@ -109,19 +112,21 @@ export default {
   MySettingsScreen: {
     Header: "My Settings",
   },
-  ChangePasswordScreen:{
+  ChangePasswordScreen: {
     Header: "Change Password",
     SavePassword: "Save Password",
-    CurrentPassword:"Current Password",
-    NewPassword:"New Password",
-    ConfirmPassword:"Confirm New Password",
-    PasswordMatchError:"Current password and new password cannot be the same.",
-    PasswordMismatchError:"New password and Confirm New Password doesn't match.",
-    PasswordLengthError:"Password must be at least 8 characters long.",
-    UppercaseError:"Password must contain at least one uppercase letter.",
-    LowercaseError:"Password must contain at least one lowercase letter.",
+    CurrentPassword: "Current Password",
+    NewPassword: "New Password",
+    ConfirmPassword: "Confirm New Password",
+    PasswordMatchError: "Current password and new password cannot be the same.",
+    PasswordMismatchError:
+      "New password and Confirm New Password doesn't match.",
+    PasswordLengthError: "Password must be at least 8 characters long.",
+    UppercaseError: "Password must contain at least one uppercase letter.",
+    LowercaseError: "Password must contain at least one lowercase letter.",
     NumberError: "Password must contain at least one number.",
-    SpecialCharacterError:"Password must contain at least one special character (!@#$%^&*).",
+    SpecialCharacterError:
+      "Password must contain at least one special character (!@#$%^&*).",
     PasswordChanged: "Password changed successfully.",
   },
 
