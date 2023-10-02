@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: "center",
         alignItems: "center",
+        marginHorizontal: 9
       }
 });
 export default BackButton;
