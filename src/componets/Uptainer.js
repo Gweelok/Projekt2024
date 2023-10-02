@@ -51,8 +51,8 @@ const Uptainer = ({ uptainerData }) => {
             }
           })
         );
-        // DUPLICATED IMAGES TO SEE SCROLLING
-        const doubleData = [...updatedData, ...updatedData];
+        
+        const doubleData = [...updatedData];
         setData(doubleData);
       } catch (error) {
         console.log("Error while fetching items => ", error);
