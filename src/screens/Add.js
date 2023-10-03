@@ -148,35 +148,35 @@ const Add = ({ route, navigation }) => {
 
           <CategoryDropdown
             onCategorySelect={setCategory}
-            data={itemData?.category}
+            data={category}
           />
 
           <ProductDropdown
             categorySelected={!!category}
             onProductSelect={setProduct}
-            data={itemData?.product}
+            data={product}
           />
 
           <BrandDropdown
             productSelected={!!product}
             onBrandSelect={setBrand}
-            data={itemData?.brand}
+            data={brand}
           />
 
           <ModelDropdown
             brandSelected={!!brand}
             onModelSelect={setModel}
-            data={itemData?.model}
+            data={model}
           />
 
           <ConditionDropdown
             onConditionSelect={setCondition}
-            data={itemData?.condition}
+            data={condition}
           />
 
           <View style={{ marginBottom: 20 }}>
             <DescriptionField
-              data={itemData?.itemDescription}
+              data={itemData?.itemData?.itemDescription}
               onInputComplete={setDescription}
             />
           </View>
