@@ -92,7 +92,7 @@ export default function App() {
   var doneTheStuff;
   if (!doneTheStuff) {
     doneTheStuff = true;
-    seedCheck(); //seed data(only works if DB is empty)
+    //seedCheck(); //seed data(only works if DB is empty)
   }
 
   //Loading the font
