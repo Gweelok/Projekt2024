@@ -53,14 +53,6 @@ const ImageUpload = ({ onImageSelect,data, hasCameraPermissions }) => {
       imagePickerBottomSheetRef.current.close();
     }
   };
-
-  useEffect(() => {
-    onImageSelect && setImage(onImageSelect);
-  }, [onImageSelect]);
-
-  // This function will be called when we want to store the selected image on firebase or database
-  const uploadImageToDatabase = async () => {};
-
   return (
     <CustomInput showStar={true} optionalMarginBottom>
       <View>
