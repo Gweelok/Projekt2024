@@ -206,6 +206,8 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
     const newItemKey = push(ref(db, paths.items)).key;
     try {
         let newImagePath = "Default.jpg"
+        
+        console.log("itemImage", itemImage);
         if(itemImage != ""){
             try{
             const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);

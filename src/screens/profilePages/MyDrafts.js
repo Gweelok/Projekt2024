@@ -27,7 +27,7 @@ const MyDrafts = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
-  console.log("data", data);
+  
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   const handlePress = () => {
     navigation.goBack();
@@ -83,7 +83,7 @@ const MyDrafts = () => {
       <View
         style={{ flexDirection: "row", alignItems: "center", paddingLeft: 20 }}
       >
-        <BackButton onPress={navigation.goBack()} />
+        <BackButton onPress={handlePress} />
         <Text style={[HeaderText.Header]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
