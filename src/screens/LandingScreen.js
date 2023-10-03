@@ -31,7 +31,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import BackButton from "../componets/BackButton";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 import { onAuthStateChanged } from "firebase/auth";
-
+import LanguageDropdown from "../Languages/LanguageDropdown";
 const LandingScreen = ({ navigation }) => {
   // for multi language
   const { currentLanguage, setLanguage } = useLanguage();
@@ -101,11 +101,7 @@ const LandingScreen = ({ navigation }) => {
     <SafeAreaView style={Backgroundstyle.informationScreens}>
       <View style={styling.topBar}>
         {backButton}
-        <Pressable onPress={LanguageSelector} style={styling.languageSelector}>
-          <Text style={Buttons.secondary_buttonText}>
-            {t("LandingScreen.LanguageSelector", currentLanguage)}
-          </Text>
-        </Pressable>
+        <LanguageDropdown></LanguageDropdown>
       </View>
 
       {/* this is the main below that shows on the screen */}

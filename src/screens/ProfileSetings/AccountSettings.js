@@ -1,16 +1,18 @@
 
 
 import React, { useState } from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign";
-import { Buttons, HeaderText, styles} from "../../styles/Stylesheet";
+import {Backgroundstyle, Buttons, HeaderText, styles} from "../../styles/Stylesheet";
 import {GoBackButton} from "../../styles/GoBackButton";
 import MenuItems from "../../styles/MenuItems";
 import CustomInput from "../../componets/atoms/CustomInput";
 import ListLanguages from "./ListOfLanguages";
+import LanguageDropdown from "../../Languages/LanguageDropdown";
 // Import your icon components and language dropdown component
+import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
 const AccountSettings = () => {
     const navigation = useNavigation();
@@ -37,6 +39,7 @@ const AccountSettings = () => {
     };
 
     return (
+        <ScrollViewComponent>
         <View style={styles1.container} >
             <View style={styles1.header}>
 
@@ -101,20 +104,20 @@ const AccountSettings = () => {
 
 
             {/* Section 2 */}
-            {/* Language */}
+            {/* ChangeCode */}
             <View style={[styles1.section]}>
-                <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
-                <ListLanguages />
+                <MenuItems  msg={t('AccountSettingsScreen.ChangeCode',currentLanguage)} onPress= {handleChangePasswordPress}/>
             </View>
 
 
 
 
             {/* Section 3 */}
-            {/* ChangeCode */}
-            <View style={{marginTop:2}}>
-                <View >
-                    <MenuItems  msg={t('AccountSettingsScreen.ChangeCode',currentLanguage)} onPress= {handleChangePasswordPress}/>
+            {/* Language */}
+            <View>
+                <View  style={{alignItems:"center"}}>
+                    <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
+                    <LanguageDropdown/>
                 </View>
 
               <View  style={{marginTop:10}}>
@@ -126,8 +129,9 @@ const AccountSettings = () => {
                 </Pressable>
                 </View>
                 </View>
+            </View>
 
-        </View>
+        </ScrollViewComponent>
     );
 };
 
