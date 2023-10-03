@@ -10,32 +10,44 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getItemsInUptainer,
-  getUptainerById,
   getProductById,
   getBrandById,
 } from "../utils/Repo";
+import { styles } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import ProductAlert from "../componets/ProductAlert";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const UptainerDetails = ({ navigation, route }) => {
-  const item = route.params;
+  let uptainer = null;
+  if (route.params.uptainerData) {
+    uptainer = route.params.uptainerData;
+  } else {
+    uptainer = route.params;
+  }
+
+  console.log("uptainer", uptainer);
+
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   useEffect(() => {
     //Fetches items in the uptainer
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
-        const items = await getItemsInUptainer(item.id); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
+        const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
             const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
@@ -61,6 +73,7 @@ const UptainerDetails = ({ navigation, route }) => {
           })
         );
         setData(updatedData); // updates data property with the fetched data from db
+        setIsLoading(false);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
@@ -80,8 +93,7 @@ const UptainerDetails = ({ navigation, route }) => {
     //get uptainerUrl from database
     const storage = getStorage();
     try {
-      const currentUptainer = await getUptainerById(item.id);
-      const uptainerPathReference = ref(storage, currentUptainer.uptainerImage);
+      const uptainerPathReference = ref(storage, uptainer.uptainerImage);
       return await getDownloadURL(uptainerPathReference);
     } catch (error) {
       console.log("Error while getting Uptainer Image URL => ", error);
@@ -91,30 +103,31 @@ const UptainerDetails = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
       >
         <TouchableOpacity
-          style={styles.backButton}
+          style={style.backButton}
           onPress={() => navigation.goBack()}
         >
           <Ionicons name="chevron-back" color="white" size={20} />
         </TouchableOpacity>
         <View>
           <ImageBackground
-            style={styles.detailsImage}
+            style={style.detailsImage}
             source={{
               uri: uptainerImageUrl, // current uptainer main pic
             }}
           >
             <TouchableOpacity
               onPress={() => navigation.navigate("Map")}
-              style={styles.productLocation}
+              style={style.productLocation}
             >
-              <Text style={styles.productAddress}>
-                {item?.name} /{"\n"}
-                {item?.location}
+              <Text style={style.productAddress}>
+                {uptainer.uptainerName} /{"\n"}
+                {uptainer.uptainerStreet}
               </Text>
               <Ionicons name="chevron-forward" color="white" size={30} />
             </TouchableOpacity>
@@ -151,21 +164,25 @@ const UptainerDetails = ({ navigation, route }) => {
                     imageUrl: cur?.imageUrl,
                     productName: cur?.productName,
                     brandName: cur?.brandName,
+                    uptainer: uptainer,
                   })
                 }
               >
                 <Image
-                  style={styles.moreProductsImage}
+                  style={style.moreProductsImage}
                   source={{
                     uri: cur?.imageUrl,
                   }}
                 />
                 <Text
-                  style={{
-                    fontWeight: "600",
-                    width: windowWidth / 2.7,
-                    textAlign: "center",
-                  }}
+                  style={[
+                    styles.bodyText,
+                    {
+                      fontWeight: "600",
+                      width: windowWidth / 2.7,
+                      marginTop: 5,
+                    },
+                  ]}
                 >
                   {cur?.productName}{" "}
                 </Text>
@@ -178,7 +195,7 @@ const UptainerDetails = ({ navigation, route }) => {
       {/* This ProductAlert component is dependent on the uploading of a product to the database */}
       {/* So there should a conditional statement later on when the upload function is created so that that popup displays after */}
 
-      {item?.screenFrom == "QRScanner" && <ProductAlert />}
+      {uptainer?.screenFrom == "QRScanner" && <ProductAlert />}
       <Navigationbar navigation={navigation} />
     </View>
   );
@@ -186,7 +203,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
 export default UptainerDetails;
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
   },

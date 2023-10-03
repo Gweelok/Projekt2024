@@ -18,6 +18,7 @@ const windowHeight = Dimensions.get("window").height;
 const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) => {
   const {currentLanguage, setLanguage} = useLanguage();
 //below we used the props params to display
+console.log(props);
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.draftCard} activeOpacity={0.8} onPress={onDraftPress}>
@@ -33,14 +34,19 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
         
         <Image source={{ uri: props.imageUrl }} style={styles.draftImage} />
         <View style={styles.draftContent}>
-          <Text style={styles.category}>{props.categoryName}</Text>
+          <Text style={styles.category}>{props.category?.categoryName}</Text>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.brand}>{props.brandName}</Text>
-            {props.modelName && (
-              <Text style={[styles.brand, { marginLeft: 0 }]}>
-                {","} {props.modelName}
+          <View style={styles.brandModelContainer}>
+            <Text style={styles.brand} numberOfLines={1} ellipsizeMode="tail">
+              {props.brand?.brandName}
+              {props.model?.modelName ? "," : ""}
+            </Text>
+            {props.model?.modelName && (
+              <Text style={[styles.brand, { marginLeft: 2 }]} numberOfLines={1} ellipsizeMode="tail">
+               {props.model?.modelName}
               </Text>
             )}
+          </View>
           </View>
           <Text
             style={[
@@ -50,7 +56,10 @@ const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) =>
           >
             {props.itemcondition}
           </Text>
-          <Text style={styles.description}>{props.itemDescription}</Text>
+          <Text style={styles.description}
+            numberOfLines={3}>
+            {props.itemDescription}
+          </Text>
         </View>
       </TouchableOpacity>
       <View
@@ -115,6 +124,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: Primarycolor1,
     marginBottom: 10,
+  },
+  brandModelContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    maxWidth: windowWidth / 2.4,
   },
   description: {
     fontSize: 14,

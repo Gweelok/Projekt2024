@@ -47,6 +47,10 @@ export default {
     addDraft: "Add draft",
     viewUptainers: "View Uptainers nearby",
     draftSavedtext: "Your draft is now saved",
+    noData: "Please fill all the required information above",
+    camera: "Camera",
+    gallery: "Gallery",
+    chooseAction: "Choose an Action",
   },
   CustomInput: {
     hint: "optional",
@@ -88,9 +92,42 @@ export default {
   },
   AccountSettingsScreen: {
     Header: "Account Settings",
+    BackButton: "Back",
+    Name: "Name",
+    Email: "E-mail",
+    Tlf: "Phone number",
+    Submit: "Save",
+    ChangeCode: "Change password",
+    Delete: "Delete account",
+    Optional: "optional",
+    HandleSave: "Information is saved",
+    HandleDeleteAccount: "Account is deleted",
+    Language: "language",
+  },
+  DeleteAccount: {
+    Header: "Are you sure you want to delete you account?",
+    MainButton: "Delete my account",
+    SecondaryButton: "Cancel",
   },
   MySettingsScreen: {
     Header: "My Settings",
+  },
+  ChangePasswordScreen: {
+    Header: "Change Password",
+    SavePassword: "Save Password",
+    CurrentPassword: "Current Password",
+    NewPassword: "New Password",
+    ConfirmPassword: "Confirm New Password",
+    PasswordMatchError: "Current password and new password cannot be the same.",
+    PasswordMismatchError:
+      "New password and Confirm New Password doesn't match.",
+    PasswordLengthError: "Password must be at least 8 characters long.",
+    UppercaseError: "Password must contain at least one uppercase letter.",
+    LowercaseError: "Password must contain at least one lowercase letter.",
+    NumberError: "Password must contain at least one number.",
+    SpecialCharacterError:
+      "Password must contain at least one special character (!@#$%^&*).",
+    PasswordChanged: "Password changed successfully.",
   },
 
   ProblemComponent: {
@@ -105,7 +142,7 @@ export default {
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
-    SaveCode: "Updropp",
+    SaveCode: "Take",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",
@@ -133,5 +170,29 @@ export default {
   StationsScreen: {
     showProduct: "Show product",
     showWay: "Show the way",
+  },
+  ProductIsTakenScreen: {
+    apology:
+      "We apologize if you have searched in vain for a product that has already been taken. People can come and take without registering this. Do you want to register the product as taken?",
+    takenButton: "Product has been taken",
+    productNotListed: "Couldn't find the product at the Uptainer?",
+  },
+
+  ProductTakenScreen: {
+    mainText:
+      "Product is now taken, thanks for taking care of the earth resources",
+    button: "Main page",
+  },
+
+  ContactUs: {
+    Name: "Name",
+    Topic: "Topic",
+    Message: "Message",
+    SendMessage: "Send Message",
+  },
+
+  thankYouScreen: {
+    header:
+      "Thanks for informing us. We will check up on this and update the Uptainer",
   },
 };

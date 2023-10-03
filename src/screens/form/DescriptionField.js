@@ -4,7 +4,7 @@ import { useLanguage, t } from '../../Languages/LanguageHandler';
 import { Primarycolor1, Primarycolor3,} from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 
-const DescriptionField = ({ data = '', onInputComplete }) => {
+const DescriptionField = ({ onInputComplete, data = ''}) => {
     const { currentLanguage } = useLanguage();
     const [inputValue, setInputValue] = useState(data); // Create a state to store the input value
 
@@ -21,6 +21,7 @@ const DescriptionField = ({ data = '', onInputComplete }) => {
             defaultValue={data}
             onChangeText={text => setInputValue(text)}  // Update the state with the input value
             onEndEditing={() => onInputComplete && onInputComplete(inputValue)}  // Call the provided function with the input value
+            textAlignVertical="top"
           />
          </CustomInput>
       </View>

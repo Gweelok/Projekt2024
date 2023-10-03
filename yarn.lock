@@ -3113,6 +3113,11 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-picker/picker@^2.5.0":
+  version "2.5.1"
+  resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.5.1.tgz"
+  integrity sha512-/sADUfQsosMRYtrqqL3ZYZSECRygj0fXtpRLqxJfwuMEoqfvfn40756R6B1alzusVvDRZFI0ari0iQid56hA/Q==
+
 "@react-native/assets-registry@^0.72.0":
   version "0.72.0"
   resolved "https://registry.npmjs.org/@react-native/assets-registry/-/assets-registry-0.72.0.tgz"
@@ -3503,7 +3508,7 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
-"@types/qs@*":
+"@types/qs@*", "@types/qs@^6.9.7":
   version "6.9.7"
   resolved "https://registry.npmjs.org/@types/qs/-/qs-6.9.7.tgz"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
@@ -6500,6 +6505,13 @@ expo-barcode-scanner@^12.5.3:
   dependencies:
     expo-image-loader "~4.3.0"
 
+expo-camera@~13.4.4:
+  version "13.4.4"
+  resolved "https://registry.npmjs.org/expo-camera/-/expo-camera-13.4.4.tgz"
+  integrity sha512-7k54APbpSulUDR2CrD5SrmKjCdfdg4tqKRpbBOKc2J2MIBHhunExU77435JDYSejHRY5bfRHZsEp3yKwR862uw==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-cli@>=6.3.10:
   version "6.3.11"
   resolved "https://registry.npmjs.org/expo-cli/-/expo-cli-6.3.11.tgz"
@@ -6706,6 +6718,17 @@ expo-keep-awake@~12.3.0:
   version "12.3.0"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-12.3.0.tgz"
   integrity sha512-ujiJg1p9EdCOYS05jh5PtUrfiZnK0yyLy+UewzqrjUqIT8eAGMQbkfOn3C3fHE7AKd5AefSMzJnS3lYZcZYHDw==
+
+expo-linking@~5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/expo-linking/-/expo-linking-5.0.2.tgz"
+  integrity sha512-SPQus0+tYGx9c69Uw4wmdo3rkKX8vRT1vyJz/mvkpSlZN986s0NmP/V0M5vDv5Zv2qZzVdqJyuITFe0Pg5aI+A==
+  dependencies:
+    "@types/qs" "^6.9.7"
+    expo-constants "~14.4.2"
+    invariant "^2.2.4"
+    qs "^6.11.0"
+    url-parse "^1.5.9"
 
 expo-location@>=16.0.0:
   version "16.0.0"
@@ -10576,6 +10599,8 @@ npm-packlist@^7.0.0:
 
 npm-pick-manifest@^8.0.0, npm-pick-manifest@^8.0.1:
   version "8.0.1"
+  resolved "https://registry.npmjs.org/npm-pick-manifest/-/npm-pick-manifest-8.0.1.tgz"
+  integrity sha512-mRtvlBjTsJvfCCdmPtiu2bdlx8d/KXtF7yNXNWe7G0Z36qWA9Ny5zXsI2PfBZEv7SXgoxTmNaTzGSbbzDZChoA==
   dependencies:
     npm-install-checks "^6.0.0"
     npm-normalize-package-bin "^3.0.0"
@@ -11823,7 +11848,7 @@ qrcode-terminal@0.11.0:
   resolved "https://registry.npmjs.org/qrcode-terminal/-/qrcode-terminal-0.11.0.tgz"
   integrity sha512-Uu7ii+FQy4Qf82G4xu7ShHhjhGahEpCWc3x8UavY3CTcWV+ufmmCtwkr7ZKsX42jdL0kr1B5FKUeqJvAn51jzQ==
 
-qrcode@^1.5.1, qrcode@^1.5.3:
+qrcode@^1.5.1:
   version "1.5.3"
   resolved "https://registry.npmjs.org/qrcode/-/qrcode-1.5.3.tgz"
   integrity sha512-puyri6ApkEHYiVl4CFzo1tDkAZ+ATcnbJrJ6RiBM1Fhctdn/ix9MTE3hRph33omisEbC/2fcfemsseiKgBPKZg==
@@ -11833,7 +11858,7 @@ qrcode@^1.5.1, qrcode@^1.5.3:
     pngjs "^5.0.0"
     yargs "^15.3.1"
 
-qs@6.11.0:
+qs@^6.11.0, qs@6.11.0:
   version "6.11.0"
   resolved "https://registry.npmjs.org/qs/-/qs-6.11.0.tgz"
   integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
@@ -12116,6 +12141,11 @@ react-native-ratings@8.0.4:
   dependencies:
     lodash "^4.17.15"
 
+react-native-raw-bottom-sheet@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/react-native-raw-bottom-sheet/-/react-native-raw-bottom-sheet-2.2.0.tgz"
+  integrity sha512-qL4JKIqvbcVxbkKzeh51hjV7suoJN3ouxzvLmOg0FBUV1yiJAfEbacjQdtRCI6+OU5pyGFBIifLsTXcFDwHggg==
+
 react-native-reanimated@*, react-native-reanimated@^3.4.2, react-native-reanimated@>=2.0.0:
   version "3.4.2"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.4.2.tgz"
@@ -12253,7 +12283,7 @@ react-native-vision-camera@^3.0.0, react-native-vision-camera@>=2.9.4:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.3"
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>= 0.64.3", react-native@>=0.14.0, react-native@>=0.52.0, react-native@>=0.59.0, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.4, react-native@>=0.64.1, react-native@>=0.72.1:
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>= 0.64.3", react-native@>=0.14.0, react-native@>=0.52.0, react-native@>=0.57, react-native@>=0.59.0, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.4, react-native@>=0.64.1, react-native@>=0.72.1:
   version "0.72.1"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.1.tgz"
   integrity sha512-O9cIVD++kt2XQl0XLCUGUgwSKr8xp+yo0ho5QK6KYWJrCFnnvQLTKL0+HD0rZUcuqFfGknHQJh3h0moQO2EMDg==
@@ -12323,7 +12353,7 @@ react-side-effect@^1.1.0:
   dependencies:
     shallowequal "^1.0.1"
 
-react@*, "react@^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^16.13.1, "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 17.0.1", react@>=15.0.0, react@>=16.13.1, react@>=16.3.0, react@>=16.8, react@>=16.8.6, react@>=17.0.0, react@>=17.0.1, react@>=18.2.0, react@18.2.0:
+react@*, "react@^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^16.13.1, "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 17.0.1", react@>=15.0.0, react@>=16, react@>=16.13.1, react@>=16.3.0, react@>=16.8, react@>=16.8.6, react@>=17.0.0, react@>=17.0.1, react@>=18.2.0, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -13132,6 +13162,8 @@ signal-exit@^3.0.7:
 
 signal-exit@^4.0.1:
   version "4.0.2"
+  resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-4.0.2.tgz"
+  integrity sha512-MY2/qGx4enyjprQnFaZsHib3Yadh3IXyV2C321GY0pjGfVBu4un0uDJkwgdxqO+Rdx8JMT8IfJIRwbYVz3Ob3Q==
 
 sigstore@^1.3.0, sigstore@^1.4.0, sigstore@^1.7.0:
   version "1.7.0"
@@ -14386,7 +14418,7 @@ wbuf@^1.1.0, wbuf@^1.7.3:
 wcwidth@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/wcwidth/-/wcwidth-1.0.1.tgz"
-  integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
+  integrity sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==
   dependencies:
     defaults "^1.0.3"
 

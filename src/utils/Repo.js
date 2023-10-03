@@ -3,20 +3,30 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import {
+    getStorage,
+    uploadBytesResumable,
+    getDownloadURL,
+    ref as ref_storage
+  } from "firebase/storage";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
 import { categories, brands, stationData, products, items, models } from "./SeedData";
 import { generateQRCode } from './QRCodeGenerator'; // Import the QR code generator
 
 const db = firebaseGetDB;
 
+//DB is lowercase and storage is uppercase
 const paths = {
     uptainers: "uptainers",
+    Uptainers: "Uptainers/",//for storage
     brands: "brands",
     categories: "categories",
     models: "models",
     items: "items",
+    Items: "Items/",        //for storage
     products: "products",
     users: "users",
+    Profils: "Profils/",    //for storage
   };
 
 export async function seedCheck() {
@@ -95,6 +105,49 @@ export async function createUptainer(data) {
     await writeToDatabase(paths.uptainers + '/' + newUptainerKey, uptainerData);
 }
 
+
+export async function createItem(brandId = "", categoryId = "", itemDescription = "", itemImage = "", itemModel = "", itemproduct = "", itemcondition = "", uptainerQRCode = "") {
+    const newItemKey = push(ref(db, paths.items)).key;
+    let newImagePath = "Default.jpg"
+    if(itemImage != ""){
+        try{
+        const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
+        newImagePath = newItemKey +"."+ fileExtension;
+        const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
+            console.log("progress: ",v)
+            );
+        
+        console.log(uploadResp); 
+        console.log(newImagePath); 
+        } catch (error) {
+            console.log("can not upload image. Error: ", error);
+        }
+
+    }
+    try{
+        const user = await getCurrentUser();
+        const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
+        const itemData = {
+            itemId: newItemKey,
+            itemproduct: itemproduct,
+            itemBrand: brandId,
+            itemModel: itemModel,
+            itemTaken: false,
+            itemCategory: categoryId,
+            itemImage: paths.Items + newImagePath,
+            itemDescription: itemDescription,
+            itemcondition: itemcondition,
+            itemUser: user.id,
+            itemUptainer: UptainerId,
+        };
+        await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+    } catch (error) {
+        console.log("can not upload item to DB. Error: ", error);
+    }
+    
+}
+
+
 export async function createBrand(name) {
     const newBrandKey = push(ref(db, paths.brands)).key;
     const brandData = {
@@ -149,23 +202,45 @@ export async function createProduct(data) {
     await writeToDatabase(paths.products + '/' + newProductKey, productData);
 }
 
-export async function createItemDraft(productId, brandId, modelId, categoryId, itemImage, itemDescription, itemCondition) {
+export async function createItemDraft(productId = "", brandId = "", modelId = "", categoryId = "", itemImage = "", itemDescription = "", itemCondition = "") {
     const newItemKey = push(ref(db, paths.items)).key;
-    const user = await getCurrentUser();
-    const itemData = {
-        itemId: newItemKey,
-        itemproduct: productId,
-        itemBrand: brandId,
-        itemModel: modelId,
-        itemCategory: categoryId,
-        itemImage: itemImage,
-        itemDescription: itemDescription,
-        itemcondition: itemCondition,
-        itemUptainer: "Draft",
-        itemUser: user.id,
-        itemTaken: false,
-    };
+    try {
+        let newImagePath = "Default.jpg"
+        if(itemImage != ""){
+            try{
+            const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
+            newImagePath = newItemKey +"."+ fileExtension;
+            const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
+                console.log("progress: ",v)
+                );
+            
+            console.log(uploadResp); 
+            console.log(newImagePath); 
+            } catch (error) {
+                console.log("can not upload image. Error: ", error);
+            }
+
+    } 
+        const user = await getCurrentUser();
+        
+        const itemData = {
+            itemId: newItemKey,
+            itemproduct: productId,
+            itemBrand: brandId,
+            itemModel: modelId,
+            itemCategory: categoryId,
+            itemImage: paths.Items + newImagePath,
+            itemDescription: itemDescription,
+            itemcondition: itemCondition,
+            itemUptainer: "Draft",
+            itemUser: user.id,
+            itemTaken: false,
+        };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+    } catch (error) {
+        console.error("Error creating item draft:", error);
+    }
+    
 
 }
 
@@ -184,6 +259,17 @@ function writeToDatabase(refPath, data) {
         /********************/
         /******* Get ********/
         /********************/
+
+export async function getUptainerFromQR(QRcode){
+    const uptainerId = await QRCodeExists(QRcode);
+    if(uptainerId != "Draft")
+    {
+        return uptainerId;
+    }else{
+        return null;
+    }
+}
+
 
 export async function getAllCategories() {
     const db = firebaseGetDB;
@@ -221,7 +307,7 @@ export async function getCategoryById(categoryId) {
             };
         } else {
             console.log(`Category with ID ${categoryId} not found.`);
-            return null;
+            return categoryId;
         }
     } catch (error) {
         console.error(`Error fetching data for category with ID ${categoryId}:`, error);
@@ -264,7 +350,7 @@ export async function getBrandById(brandId) {
             };
         } else {
             console.log(`Brand with ID ${brandId} not found.`);
-            return null;
+            return brandId;
         }
     } catch (error) {
         console.error(`Error fetching data for brand with ID ${brandId}:`, error);
@@ -292,8 +378,8 @@ export async function getAllUptainers() {
                 uptainerCity: uptainerData.uptainerCity,
                 uptainerImage: uptainerData.uptainerImage,
                 uptainerDescription: uptainerData.uptainerDescription,
-                uptainerLatitude: parseFloat(uptainerData.uptainerLat),
-                uptainerLongitude: parseFloat(uptainerData.uptainerLong),
+                uptainerLatitude: uptainerData.uptainerLat,
+                uptainerLongitude: uptainerData.uptainerLong,
             };
             uptainers.push(uptainer);
         });
@@ -313,7 +399,7 @@ export async function getUptainerById(uptainerId) {
 
         if (uptainerData) {
             return {
-                uptainerId,
+                uptainerId: uptainerId,
                 uptainerName: uptainerData.uptainerName,
                 uptainerQR: uptainerData.uptainerQR,
                 uptainerStreet: uptainerData.uptainerStreet,
@@ -326,7 +412,7 @@ export async function getUptainerById(uptainerId) {
             };
         } else {
             console.log(`Uptainer with ID ${uptainerId} not found.`);
-            return null;
+            return uptainerId;
         }
     } catch (error) {
         console.error(`Error fetching data for uptainer with ID ${uptainerId}:`, error);
@@ -359,7 +445,6 @@ export async function getAllModels() {
 export async function getModelById(modelId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/models/${modelId}`);
-
     try {
         const snapshot = await get(reference);
         const modelData = snapshot.val();
@@ -372,7 +457,7 @@ export async function getModelById(modelId) {
             };
         } else {
             console.log(`Model with ID ${modelId} not found.`);
-            return null;
+            return modelId;
         }
     } catch (error) {
         console.error(`Error fetching data for model with ID ${modelId}:`, error);
@@ -434,7 +519,7 @@ export async function getProductById(productId) {
             };
         } else {
             console.log(`Product with ID ${productId} not found.`);
-            return null;
+            return productId;
         }
     } catch (error) {
         console.error(`Error fetching data for product with ID ${productId}:`, error);
@@ -500,7 +585,7 @@ export async function getItemById(itemId) {
             };
         } else {
             console.log(`Item with ID ${itemId} not found.`);
-            return null;
+            return itemId;
         }
     } catch (error) {
         console.error(`Error fetching data for item with ID ${itemId}: `, error);
@@ -509,6 +594,7 @@ export async function getItemById(itemId) {
 }
 export async function getDraftFromUser(userId) {
     const itemList = await getAllItems()
+    
     const draftList = itemList.filter(item => item.itemUser === userId && item.itemUptainer === "Draft")
     ///not tested yet
     return draftList
@@ -655,7 +741,38 @@ export function updateItemToTaken(itemId){
     }
 }
 
-
+/****************/
+/**** Upload ****/
+/****************/
+const uploadToFirebase = async (uri, name, path, onProgress) => {
+    const fetchResponse = await fetch(uri);
+    const theBlob = await fetchResponse.blob();
+    const storage = getStorage();
+    const imageRef = ref_storage(storage, `${path}${name}`);
+    const uploadTask = uploadBytesResumable(imageRef, theBlob);
+    return new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          onProgress && onProgress(progress);
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+          console.log(error);
+          reject(error);
+        },
+        async () => {
+          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve({
+            downloadUrl,
+            metadata: uploadTask.snapshot.metadata,
+          });
+        }
+      );
+    });
+  };
 /****************/
 /***** Auth *****/
 /****************/
@@ -717,40 +834,91 @@ export async function getCurrentUser() {
 }
 
 // ToDo find user data and implement it to the function
-/*
-export function updateUserData() {
-    const currentUser = GetCurrentUser();
-    if (currentUser.length > 0) {
-      const { id } = currentUser[0];
-      updateProfile(id, {
-        displayName: "Jane Q. User",
-        photoURL: "https://example.com/jane-q-user/profile.jpg",
-      })
-        .then(() => {
-          // Profile updated!
-          // ...
-        })
-        .catch((error) => {
-          // An error occurred
-          console.error("Error updating user data:", error);
-          // ...
-        });
+export async function updateAuthData(email, password, phoneNumber) {
+    const user = firebaseAurth.currentUser;
+
+    if (email && email !== user.email) {
+      await user.updateEmail(email);
+    }
+
+    if (password) { // Password should always be updated if provided, as we can't retrieve the current password
+      await user.updatePassword(password);
+    }
+
+    if (phoneNumber && phoneNumber !== user.phoneNumber) {
+      await user.updatePhoneNumber(phoneNumber);
     }
   }
 
+
   export function deleteUserById() {
-    const currentUser = GetCurrentUser();
-    if (currentUser.length > 0) {
-      deleteUser(currentUser[0].id)
-        .then(() => {
-          // User deleted.
-        })
-        .catch((error) => {
-          // An error occurred
-          console.error("Error deleting user:", error);
-        });
+      const currentUser = GetCurrentUser();
+      if (currentUser.length > 0) {
+          deleteUser(currentUser[0].id)
+              .then(() => {
+                  // User deleted.
+              })
+              .catch((error) => {
+                  // An error occurred
+                  console.error("Error deleting user:", error);
+              });
+      }
+  }
+  export async function updateDatabaseData(name, profilePic) {
+    const user = firebaseAurth.currentUser;
+    const reference = ref(db, `/users/${user.uid}`);
+    const snapshot = await get(reference);
+    const currentUserData = snapshot.val();
+
+    if (name && name !== currentUserData.name) {
+      await update(reference, { name: name });
     }
-  }*/
+
+    if (profilePic && profilePic !== currentUserData.profilePic) {
+      await update(reference, { profilePic: profilePic });
+    }
+  }
+  //add more info if needed
+  export async function updateUserData(email, password, phoneNumber, name, profilePic) {
+    await updateAuthData(email, password, phoneNumber);
+    await updateDatabaseData(name, profilePic);
+  }
+  
+  export async function deleteUser(navigation) {
+    const user = firebaseAurth.currentUser;
+    // Delete the user from Firebase Authentication
+    user
+        .delete()
+        .then(() => console.log("User deleted"))
+        .catch((error) => console.log(error));
+
+    // Delete the user from Realtime Database   
+    const reference = ref(db, 'users/' + user.uid);
+    try {
+        remove(reference);
+        console.log('User deleted from Realtime Database');
+        navigation.navigate("Sign in");
+    } catch (error) {
+        console.error('Error deleting user from Realtime Database:', error);
+        alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
+      }
+  }
+
+
+    /**************/
+    /*** Checks ***/
+    /**************/
+
+    async function QRCodeExists(qrCode) {
+        const uptainerList  = await getAllUptainers();
+        const item = uptainerList.find(uptainer => uptainer.uptainerQR === qrCode);
+        if (item) {
+            return item.uptainerId;
+        } else {
+            alert("QR Code not found, saved to draft instead");
+            return "Draft";
+        }
+    }
 
 /**************/
 /*** Errors ***/

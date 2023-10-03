@@ -36,11 +36,47 @@ export default {
   NotificationsScreen: {
     Header: "Notifikationer",
   },
+
   AccountSettingsScreen: {
     Header: "Kontoindstillinger",
+    BackButton: "Tilbage",
+    Name: "Navn",
+    Email: "E-mail",
+    Tlf: "Tlf",
+    Submit: "Gem",
+    ChangeCode: "Skift kode",
+    Delete: "Slet konto",
+    Optional: "valgfri",
+    HandleSave: "Oplysningerne er gemt",
+    HandleDeleteAccount: "Konto er slettet",
+    Language: "Sprog",
+  },
+  DeleteAccount: {
+    Header: "Er du sikker på at du vil slette din konto?",
+    MainButton: "Slet min konto",
+    SecondaryButton: "Annullér",
   },
   MySettingsScreen: {
     Header: "Mine indstillinger",
+  },
+
+  ChangePasswordScreen: {
+    Header: "Skift kodeordl",
+    SavePassword: "Gem kodeord",
+    CurrentPassword: "Nuvarende kodeord",
+    NewPassword: "Nyt kodeord",
+    ConfirmPassword: "Bekraft nyt kodeord",
+    PasswordMatchError:
+      "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
+    PasswordMismatchError:
+      "Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
+    PasswordLengthError: "Adgangskoden skal være på mindst 8 tegn.",
+    UppercaseError: "Adgangskoden skal indeholde mindst ét stort bogstav.",
+    LowercaseError: "Adgangskoden skal indeholde mindst ét lille bogstav.",
+    NumberError: "Kodeord skal indeholde mindst et tal.",
+    SpecialCharacterError:
+      "Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
+    PasswordChanged: "Adgangskoden blev ændret.",
   },
 
   MyDraftsScreen: {
@@ -92,6 +128,10 @@ export default {
     addDraft: "Tilføj kladde",
     viewUptainers: "Se nærmeste Uptainer",
     draftSavedtext: "Din kladde er nu gemt",
+    noData: "Udfyld venligst alle de nødvendige oplysninger ovenfor",
+    camera: "Kamera",
+    gallery: "Galleri",
+    chooseAction: "Vælge en handling",
   },
 
   ProblemComponent: {
@@ -114,7 +154,7 @@ export default {
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
-    SaveCode: "Updroppe",
+    SaveCode: "Tag",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
@@ -134,5 +174,29 @@ export default {
   StationsScreen: {
     showProduct: "Vis produkter",
     showWay: "Vis vej",
+  },
+  ProductIsTakenScreen: {
+    apology:
+      "Vi beklager hvis du er gået forgæves efter et produkt som allerede er target. Folk kan komme tage et produkt uden at registrere det. Vil du registere produktet som taget?",
+    takenButton: "Produktet er taget",
+    productNotListed: "Var produktet ikke i Uptaineren?",
+  },
+
+  ProductTakenScreen: {
+    mainText:
+      "Produktet er nu taget. Tak fordi du sparer på Jordens ressourcer",
+    button: "Forside",
+  },
+
+  ContactUs: {
+    Name: "Navn",
+    Topic: "Enme",
+    Message: "Besked",
+    SendMessage: "SEND BESKEND",
+  },
+
+  thankYouScreen: {
+    header:
+      "Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren",
   },
 };

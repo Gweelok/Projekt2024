@@ -10,23 +10,23 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
     const [selectedCondition, setSelectedCondition] = useState(data);
     const [isValidationError, setIsValidationError] = useState(false);
     const ITEM_HEIGHT = 39;
-  // Dummy products, replace with actual data
-  const products = ["Mint Condition", "Good Condition", "Fair Condition", "Poor Condition", "Broken"];
+    //we dont have this data is the database, dont think we need it, wait for task
+    const conditions = ["As new", "Good but used", "Worn but working", "Smaller defects", "Broken"];
 
     const handleConditionSelect = (condition) => {
         setSelectedCondition(condition);
         setIsOpen(false);
         setIsValidationError(false);
-        if(onConditionSelect) {
-            onConditionSelect(condition)
+        if (onConditionSelect) {
+            onConditionSelect(condition);
         }
-    }
+    };
 
     return (
         <View style={conditionDropdownContainer.container}>
             <TouchableOpacity
                 style={[
-                  conditionDropdownContainer.dropdownButton,
+                    conditionDropdownContainer.dropdownButton,
                 ]}
                 onPress={() => {
                     setIsOpen(!isOpen);
@@ -36,7 +36,7 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                 }}
             >
                 <Text style={conditionDropdownContainer.dropdownText}>
-                    {selectedCondition ||  t("ConditionDropdown.selectCondition", currentLanguage) }
+                    {selectedCondition || t("ConditionDropdown.selectCondition", currentLanguage)}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -44,25 +44,25 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                 />
             </TouchableOpacity>
 
-      {isOpen && (
-                <ScrollView style={[conditionDropdownContainer.dropdownList, {height: ITEM_HEIGHT * 5.5}]}>
-                    {products.map(product => (
+            {isOpen && (
+                <ScrollView style={[conditionDropdownContainer.dropdownList, ]}>
+                    {conditions.map(condition => (
                         <TouchableOpacity
-                            key={product}
-                            onPress={() => handleConditionSelect(product)}
+                            key={condition}
+                            onPress={() => handleConditionSelect(condition)}
                             style={conditionDropdownContainer.dropdownListItem}
                         >
-                            <Text style={conditionDropdownContainer.dropdownText}>{product}</Text>
+                            <Text style={conditionDropdownContainer.dropdownText}>{condition}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
             )}
 
-      {isValidationError && !selectedCondition && (
-        <Text style={conditionDropdownContainer.validationErrorText}></Text>
-      )}
-    </View>
-  );
+            {isValidationError && !selectedCondition && (
+                <Text style={conditionDropdownContainer.validationErrorText}></Text>
+            )}
+        </View>
+    );
 };
 
 const conditionDropdownContainer = {
@@ -70,7 +70,7 @@ const conditionDropdownContainer = {
         flexDirection: "column",
     },
     validationErrorText: {
-        color: "red"
+        color: "red",
     },
     dropdownText: {
         fontFamily: "space-grotesk",
@@ -95,7 +95,7 @@ const conditionDropdownContainer = {
         borderBottomWidth: 1,
         borderBottomColor: Primarycolor1,
         backgroundColor: Primarycolor3,
-    }
+    },
 };
 
 export default ConditionDropdown;
