@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
@@ -20,10 +20,18 @@ const windowHeight = Dimensions.get("window").height;
 
 const ImageUpload = ({ onImageSelect,data}) => {
   const [image, setImage] = useState(data || null);
+  const [hasPermission, setHasPermission] = useState(null);
   const imagePickerBottomSheetRef = useRef();
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const getCameraPermissions = async () => {
+      const { status } = await ImagePicker.getCameraPermissionsAsync();
+      setHasPermission(status === 'granted');
+    };
 
+    getCameraPermissions();
+  }, []);
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -43,7 +51,12 @@ const ImageUpload = ({ onImageSelect,data}) => {
       }
     }
   };
-  //needs permission for camera
+  if (hasPermission === null) {
+    return <Text>Requesting for camera permission</Text>;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
   const openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
