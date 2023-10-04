@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
@@ -18,13 +18,11 @@ import { useNavigation } from "@react-navigation/core";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ImageUpload = ({ onImageSelect,data, hasCameraPermissions }) => {
+const ImageUpload = ({ onImageSelect,data}) => {
   const [image, setImage] = useState(data || null);
   const imagePickerBottomSheetRef = useRef();
   const navigation = useNavigation();
 
-  // Camera states
-  const [useCamera, setUseCamera] = useState(false);
 
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
   const pickImage = async () => {
@@ -45,12 +43,22 @@ const ImageUpload = ({ onImageSelect,data, hasCameraPermissions }) => {
       }
     }
   };
-
+  //needs permission for camera
   const openCamera = async () => {
-    setUseCamera(true);
-    if (hasCameraPermissions) {
-      navigation.navigate("Camera");
-      imagePickerBottomSheetRef.current.close();
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      //   allowsEditing: true,
+      //   aspect: [4, 3],
+      quality: 1,
+    });
+    if (onImageSelect) {
+      onImageSelect(result.assets[0]);
+    }
+    if (!result.canceled) {
+      if (result.assets[0]?.type != "video") {
+        setImage(result.assets[0].uri);
+        imagePickerBottomSheetRef.current.close();
+      }
     }
   };
   return (
