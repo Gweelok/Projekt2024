@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable, ScrollView} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -37,7 +37,7 @@ const AccountSettings = () => {
     };
 
     return (
-        <ScrollView style={{flex:1}}>
+       
         <View style={styles1.container} >
             <View style={styles1.header}>
 
@@ -129,7 +129,7 @@ const AccountSettings = () => {
                 </View>
 
         </View>
-        </ScrollView>
+   
     );
 };
 
