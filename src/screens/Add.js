@@ -101,11 +101,7 @@ const Add = ({ route, navigation }) => {
 
   const addProductConditions = () => {
     if (
-      !image ||
-      !description ||
-      !brand.brandId ||
       !product.productId ||
-      !model.modelId ||
       !condition ||
       !category.categoryId
     ) {
