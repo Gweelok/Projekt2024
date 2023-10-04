@@ -69,7 +69,7 @@ const Add = ({ route, navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
   const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
-  const [image, setImage] = useState(itemData?.item.imageUrl || "");
+  const [image, setImage] = useState(itemData?.imageUrl || "");
   const [category, setCategory] = useState(
     itemData?.category || null
   );
