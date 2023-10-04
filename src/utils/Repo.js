@@ -7,7 +7,8 @@ import {
     getStorage,
     uploadBytesResumable,
     getDownloadURL,
-    ref as ref_storage
+    ref as ref_storage,
+    deleteObject,
   } from "firebase/storage";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
 import { categories, brands, stationData, products, items, models } from "./SeedData";
@@ -606,7 +607,7 @@ export async function getDraftFromUser(userId) {
     /***** Delete *******/
     /********************/
 
-export function deleteCategoryById(categoryId) {
+export async function deleteCategoryById(categoryId) {
     const reference = ref(db, `/categories/${categoryId}`);
     try {
         remove(reference);
@@ -615,7 +616,7 @@ export function deleteCategoryById(categoryId) {
         console.error(`Error deleting category with ID ${categoryId}:`, error);
     }
 }
-export function deleteBrandById(brandId) {
+export async function deleteBrandById(brandId) {
     const reference = ref(db, `/brands/${brandId}`);
     try {
         remove(reference);
@@ -624,7 +625,7 @@ export function deleteBrandById(brandId) {
         console.error(`Error deleting brand with ID ${brandId}:`, error);
     }
 }
-export function deleteUptainerById(uptainerId) {
+export async function deleteUptainerById(uptainerId) {
     const reference = ref(db, `/uptainers/${uptainerId}`);
     try {
         remove(reference);
@@ -633,7 +634,7 @@ export function deleteUptainerById(uptainerId) {
         console.error(`Error deleting uptainer with ID ${uptainerId}:`, error);
     }
 }
-export function deleteItemById(itemId) {
+export async function deleteItemById(itemId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         remove(reference);
@@ -642,7 +643,7 @@ export function deleteItemById(itemId) {
         console.error(`Error deleting item with ID ${itemId}:`, error);
     }
 }
-export function deleteModelById(modelId) {
+export async function deleteModelById(modelId) {
     const reference = ref(db, `/models/${modelId}`);
     try {
         remove(reference);
@@ -651,7 +652,7 @@ export function deleteModelById(modelId) {
         console.error(`Error deleting model with ID ${modelId}:`, error);
     }
 }
-export function deleteProductById(productId) {
+export async function deleteProductById(productId) {
     const reference = ref(db, `/products/${productId}`);
     try {
         remove(reference);
@@ -661,11 +662,23 @@ export function deleteProductById(productId) {
     }
 }
 
+export async function deleteImage(imagePath){
+    const storage = getStorage();
+    const desertRef = ref_storage(storage, imagePath);
+    deleteObject(desertRef).then(() => {
+        // File deleted successfully
+        console.log("Image deleted successfully, image file path: ", imagePath);
+    }).catch((error) => {
+        alert("Error deleting image", error);
+        // Uh-oh, an error occurred!
+    });
+}
+
         /**********************/
         /****** Update ********/
         /**********************/
 
-export function updateModelById(modelId, newData) {
+export async function updateModelById(modelId, newData) {
     const reference = ref(db, `/models/${modelId}`);
     try {
         update(reference, newData);
@@ -675,7 +688,7 @@ export function updateModelById(modelId, newData) {
     }
 }
 
-export function updateUptainerById(uptainerId, newData) {
+export async function updateUptainerById(uptainerId, newData) {
     const reference = ref(db, `/uptainers/${uptainerId}`);
     try {
         update(reference, newData);
@@ -685,7 +698,7 @@ export function updateUptainerById(uptainerId, newData) {
     }
 }
 
-export function updateItemById(itemId, newData) {
+export async function updateItemById(itemId, newData) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         update(reference, newData);
@@ -694,7 +707,7 @@ export function updateItemById(itemId, newData) {
         console.error(`Error updating item with ID ${itemId}:`, error);
     }
 }
-export function updateItemfromDraft(itemId, uptainerId) {
+export async function updateItemfromDraft(itemId, uptainerId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         update(reference, {itemUptainer: uptainerId});
@@ -704,7 +717,7 @@ export function updateItemfromDraft(itemId, uptainerId) {
     }
 }
 
-export function updateBrandById(brandId, newData) {
+export async function updateBrandById(brandId, newData) {
     const reference = ref(db, `/brands/${brandId}`);
     try {
         update(reference, newData);
@@ -714,7 +727,7 @@ export function updateBrandById(brandId, newData) {
     }
 }
 
-export function updateCategoryById(categoryId, newData) {
+export async function updateCategoryById(categoryId, newData) {
     const reference = ref(db, `/categories/${categoryId}`);
     try {
         update(reference, newData);
@@ -724,7 +737,7 @@ export function updateCategoryById(categoryId, newData) {
     }
 }
 
-export function updateProductById(productId, newData) {
+export async function updateProductById(productId, newData) {
     const reference = ref(db, `/products/${productId}`);
     try {
         update(reference, newData);
@@ -733,7 +746,7 @@ export function updateProductById(productId, newData) {
         console.error(`Error updating product with ID ${productId}:`, error);
     }
 }
-export function updateItemToTaken(itemId){
+export async function updateItemToTaken(itemId){
     const reference = ref(db, `/items/${itemId}`);
     try {
         update(reference, {itemTaken: true});
@@ -778,7 +791,7 @@ const uploadToFirebase = async (uri, name, path, onProgress) => {
 /****************/
 /***** Auth *****/
 /****************/
-export function signInUser(email, password, navigation){
+export async function signInUser(email, password, navigation){
     signInWithEmailAndPassword(firebaseAurth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
