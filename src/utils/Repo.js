@@ -206,6 +206,8 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
     const newItemKey = push(ref(db, paths.items)).key;
     try {
         let newImagePath = "Default.jpg"
+        
+        console.log("itemImage", itemImage);
         if(itemImage != ""){
             try{
             const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
@@ -851,33 +853,7 @@ export async function updateAuthData(email, password, phoneNumber) {
   }
 
 
-  export function deleteUserById() {
-      const currentUser = GetCurrentUser();
-      if (currentUser.length > 0) {
-          deleteUser(currentUser[0].id)
-              .then(() => {
-                  // User deleted.
-              })
-              .catch((error) => {
-                  // An error occurred
-                  console.error("Error deleting user:", error);
-              });
-      }
-  }
-  export async function updateDatabaseData(name, profilePic) {
-    const user = firebaseAurth.currentUser;
-    const reference = ref(db, `/users/${user.uid}`);
-    const snapshot = await get(reference);
-    const currentUserData = snapshot.val();
-
-    if (name && name !== currentUserData.name) {
-      await update(reference, { name: name });
-    }
-
-    if (profilePic && profilePic !== currentUserData.profilePic) {
-      await update(reference, { profilePic: profilePic });
-    }
-  }
+ 
   //add more info if needed
   export async function updateUserData(email, password, phoneNumber, name, profilePic) {
     await updateAuthData(email, password, phoneNumber);
