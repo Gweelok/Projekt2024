@@ -143,35 +143,39 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl} hasCameraPermissions={hasCameraPermissions} />
+            <ImageUpload
+              onImageSelect={setImage}
+              data={itemData?.imageUrl}
+              hasCameraPermissions={hasCameraPermissions}
+            />
           </View>
 
           <CategoryDropdown
             onCategorySelect={setCategory}
-            data={category}
+            data={itemData?.category}
           />
 
           <ProductDropdown
             categorySelected={!!category}
             onProductSelect={setProduct}
-            data={product}
+            data={itemData?.product}
           />
 
           <BrandDropdown
             productSelected={!!product}
             onBrandSelect={setBrand}
-            data={brand}
+            data={itemData?.brand}
           />
 
           <ModelDropdown
             brandSelected={!!brand}
             onModelSelect={setModel}
-            data={model}
+            data={itemData?.model}
           />
 
           <ConditionDropdown
             onConditionSelect={setCondition}
-            data={condition}
+            data={itemData?.condition}
           />
 
           <View style={{ marginBottom: 20 }}>
