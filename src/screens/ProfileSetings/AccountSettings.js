@@ -1,7 +1,17 @@
 
 
 import React, { useState } from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable, ScrollView} from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    Alert,
+    Pressable,
+    ScrollView,
+    SafeAreaView
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -40,8 +50,8 @@ const AccountSettings = () => {
 
     return (
         <ScrollViewComponent>
-
-        <View style={styles1.container} >
+<SafeAreaView style={styles1.container}>
+        <View>
             <View style={styles1.header}>
 
                 {/* Back Button */}
@@ -115,13 +125,14 @@ const AccountSettings = () => {
 
             {/* Section 3 */}
             {/* Language */}
-            <View>
-                <View  style={{alignItems:"center"}}>
+
+            <View style={{flex:10}}>
+                <View  style={{alignItems:"center",flex:1}}>
                     <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
                     <LanguageDropdown/>
                 </View>
 
-              <View  style={{marginTop:10}}>
+              <View  style={{marginTop:10,flex:1}}>
                 <Pressable onPress={handleDeleteAccount}  >
                     <View style={styles1.iconContainer}>
                         <Icon name="delete" size={25} style={[styles1.iconStyle]} />
@@ -131,7 +142,7 @@ const AccountSettings = () => {
                 </View>
                 </View>
             </View>
-
+</SafeAreaView>
         </ScrollViewComponent>
     );
 };
@@ -157,12 +168,15 @@ const styles1 = StyleSheet.create({
 
     },
     deleteText:{
+        marginTop: 85,
         color : "#ff0000",
         textAlign: 'center',
         fontSize: 20,
 
     },
     iconStyle:{
+        marginTop: 85,
+
         color : "#ff0000",
         marginRight:10,
     }

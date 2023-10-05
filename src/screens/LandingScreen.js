@@ -101,7 +101,7 @@ const LandingScreen = ({ navigation }) => {
     <SafeAreaView style={Backgroundstyle.informationScreens}>
       <View style={styling.topBar}>
         {backButton}
-        <LanguageDropdown></LanguageDropdown>
+        {[1, 2, 3, 4].includes(currentSlide) ? null : <LanguageDropdown />}
       </View>
 
       {/* this is the main below that shows on the screen */}

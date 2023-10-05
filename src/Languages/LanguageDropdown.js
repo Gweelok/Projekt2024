@@ -55,12 +55,12 @@ const LanguageDropdown = () => {
 
 const styles = {
     parentContainer: {
-        width: "80%", // Set the desired width for the parent container
-        position: "relative", // Add this line
+        width: "100%",
+        position: "relative",
     },
     container: {
         flexDirection: "column",
-        position: "relative", // Add this line
+        position: "relative",
     },
     dropdownText: {
         fontFamily: "space-grotesk",
@@ -86,6 +86,7 @@ const styles = {
         width: "100%", // Add this line to make the dropdown full-width
         maxHeight: 150, // Set a max height for the dropdown if needed
         overflowY: "auto", // Add scrollbars if the content exceeds the max height
+        alignContent:"center",
     },
     dropdownListItem: {
         padding: 10,
