@@ -180,7 +180,7 @@ const Add = ({ route, navigation }) => {
 
           <View style={{ marginBottom: 20 }}>
             <DescriptionField
-              data={itemData?.itemData?.itemDescription}
+              data={itemData?.itemDescription}
               onInputComplete={setDescription}
             />
           </View>
