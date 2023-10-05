@@ -58,7 +58,7 @@ const ProductIsTakenScreen = ({ navigation, route }) => {
           />
           <Image
             style={styles.takenImage}
-            source={{ uri: productItem?.itemImage }}
+            source={{ uri: productItem?.imageUrl }}
           />
           <Text style={styles.apologyText}>
             {t("ProductIsTakenScreen.apology", currentLanguage)}
