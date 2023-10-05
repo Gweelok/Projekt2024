@@ -12,6 +12,7 @@ import {t, useLanguage} from "../Languages/LanguageHandler"; // or any other ico
 import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
 import { firebaseAurth } from '../utils/Firebase';
 import GlobalStyle from "../styles/GlobalStyle";
+import ForgotPassword from './ForgotPassword';
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');
@@ -79,7 +80,7 @@ const SignIn = ({ navigation }) => {
                 <Text style={Buttons.main_buttonText}>{Header}</Text>
             </Pressable>
 
-            <Pressable onPress={() => {  }}>
+            <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
                 <Text style={[styles.link, {marginTop: 15}]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
             </Pressable>
 

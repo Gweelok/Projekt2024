@@ -78,6 +78,7 @@ import ChangePassword from "./src/screens/ProfileSetings/ChangePassword";
 
 import { LoaderProvider } from "./src/componets/LoaderContext";
 import CameraScreen from "./src/screens/form/CameraScreen";
+import ForgotPassword from "./src/screens/ForgotPassword";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -309,6 +310,11 @@ export default function App() {
               <Stack.Screen
                 name="Camera"
                 component={CameraScreen}
+                options={{ animation: "none", headerShown: false }}
+              />
+              <Stack.Screen
+                name="ForgotPassword"
+                component={ForgotPassword}
                 options={{ animation: "none", headerShown: false }}
               />
             </Stack.Navigator>
