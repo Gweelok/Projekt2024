@@ -16,6 +16,8 @@ import {
   getProductById,
   getCurrentUser,
   getDraftFromUser,
+  deleteItemById,
+  deleteImage,
 } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
@@ -27,7 +29,6 @@ const MyDrafts = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
-  console.log("data", data);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   const handlePress = () => {
     navigation.goBack();
@@ -58,7 +59,6 @@ const MyDrafts = () => {
                 brand: brand, // loading extram params into the objects
                 category: category,
                 model: model,
-                item: item,
               };
             } catch (error) {
               console.log("Error while downloading image => ", error);
@@ -77,13 +77,24 @@ const MyDrafts = () => {
     };
     fetchDraftList();
   }, []);
+  async function DeleteDraft(itemId, image) {
+      await deleteItemById(itemId);
+    if(image != "Items/Default.jpg"){
+      await deleteImage(image);
+    }
+    data.splice(
+      data.findIndex((item) => item.itemId === itemId),
+      1
+    );
+    setData([...data]);
+  }
 
   return (
     <StatusBarComponent>
       <View
         style={{ flexDirection: "row", alignItems: "center", paddingLeft: 20 }}
       >
-        <BackButton onPress={navigation.goBack()} />
+        <BackButton onPress={handlePress} />
         <Text style={[HeaderText.Header]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
@@ -113,7 +124,6 @@ const MyDrafts = () => {
                 navigation.push("Add", { itemData: cur });
               }}
               onCancelPress={() => {
-                console.log("pressed");
                 Alert.alert(
                   `${t("MyDraftsScreen.closeButtonTitle", currentLanguage)}`,
                   `${t("MyDraftsScreen.closeButtonAsking", currentLanguage)}`,
@@ -123,7 +133,6 @@ const MyDrafts = () => {
                         "MyDraftsScreen.closeButtonAnswerNo",
                         currentLanguage
                       )}`,
-                      //onPress: () => console.log('Cancel Pressed'),
                       style: "cancel",
                     },
                     {
@@ -131,6 +140,7 @@ const MyDrafts = () => {
                         "MyDraftsScreen.closeButtonAnswerYes",
                         currentLanguage
                       )}`,
+                      onPress: () => DeleteDraft(cur.itemId, cur.itemImage),
                     },
                   ]
                 );

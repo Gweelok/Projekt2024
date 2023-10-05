@@ -18,8 +18,8 @@ import { useNavigation } from "@react-navigation/core";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ImageUpload = ({ onImageSelect, hasCameraPermissions }) => {
-  const [image, setImage] = useState(onImageSelect);
+const ImageUpload = ({ onImageSelect,data, hasCameraPermissions }) => {
+  const [image, setImage] = useState(data || null);
   const imagePickerBottomSheetRef = useRef();
   const navigation = useNavigation();
 
@@ -35,7 +35,9 @@ const ImageUpload = ({ onImageSelect, hasCameraPermissions }) => {
       //   aspect: [4, 3],
       quality: 1,
     });
-
+    if (onImageSelect) {
+      onImageSelect(result.assets[0]);
+    }
     if (!result.canceled) {
       if (result.assets[0]?.type != "video") {
         setImage(result.assets[0].uri);
@@ -51,14 +53,6 @@ const ImageUpload = ({ onImageSelect, hasCameraPermissions }) => {
       imagePickerBottomSheetRef.current.close();
     }
   };
-
-  useEffect(() => {
-    onImageSelect && setImage(onImageSelect);
-  }, [onImageSelect]);
-
-  // This function will be called when we want to store the selected image on firebase or database
-  const uploadImageToDatabase = async () => {};
-
   return (
     <CustomInput showStar={true} optionalMarginBottom>
       <View>
