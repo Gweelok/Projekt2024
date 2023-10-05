@@ -40,6 +40,7 @@ const AccountSettings = () => {
 
     return (
         <ScrollViewComponent>
+
         <View style={styles1.container} >
             <View style={styles1.header}>
 

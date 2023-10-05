@@ -18,7 +18,6 @@ const windowHeight = Dimensions.get("window").height;
 const DraftCard = ({props, navigation, onPress, onCancelPress, onDraftPress}) => {
   const {currentLanguage, setLanguage} = useLanguage();
 //below we used the props params to display
-console.log(props);
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.draftCard} activeOpacity={0.8} onPress={onDraftPress}>

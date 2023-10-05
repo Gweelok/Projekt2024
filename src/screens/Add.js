@@ -63,25 +63,24 @@ const ProductDetailScreen = ({ route }) => {
 };
 
 const Add = ({ route, navigation }) => {
-  const itemData = route.params;
+  const itemData = route.params?.itemData;
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   // you can fetch the final result of all field through here
   const { currentLanguage, setLanguage } = useLanguage();
-
   const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(itemData?.imageUrl || "");
   const [category, setCategory] = useState(
-    itemData?.itemData?.category || null
+    itemData?.category || null
   );
-  const [product, setProduct] = useState(itemData?.itemData?.product || null);
-  const [brand, setBrand] = useState(itemData?.itemData?.brand || "");
-  const [model, setModel] = useState(itemData?.itemData?.model || "");
+  const [product, setProduct] = useState(itemData?.product || null);
+  const [brand, setBrand] = useState(itemData?.brand || "");
+  const [model, setModel] = useState(itemData?.model || "");
   const [condition, setCondition] = useState(
-    itemData?.itemData?.condition || null
+    itemData?.condition || null
   );
   const [description, setDescription] = useState(
-    itemData?.itemData?.description || ""
+    itemData?.description || ""
   );
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
@@ -102,11 +101,7 @@ const Add = ({ route, navigation }) => {
 
   const addProductConditions = () => {
     if (
-      !image ||
-      !description ||
-      !brand.brandId ||
       !product.productId ||
-      !model.modelId ||
       !condition ||
       !category.categoryId
     ) {
@@ -131,15 +126,6 @@ const Add = ({ route, navigation }) => {
     })();
   }, []);
 
-  useEffect(() => {
-    if (!itemData) {
-      setImage("");
-    } else if (itemData?.uri) {
-      setImage(itemData);
-    } else {
-      setImage(itemData?.itemData);
-    }
-  }, [itemData]);
 
   return (
     <SafeAreaView>
@@ -157,10 +143,7 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload
-              onImageSelect={itemData?.uri}
-              hasCameraPermissions={hasCameraPermissions}
-            />
+            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl} hasCameraPermissions={hasCameraPermissions} />
           </View>
 
           <CategoryDropdown
