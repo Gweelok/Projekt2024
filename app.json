@@ -28,7 +28,15 @@
       }
     },
     "sdkVersion": "49.0.0",
-    "entryPoint": ".vscode\\exponentIndex.js"
+    "entryPoint": ".vscode\\exponentIndex.js",
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Uppdrop to access your camera."
+        }
+      ]
+    ]
   },
   "name": "main",
   "displayName": "retireditems"
