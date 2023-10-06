@@ -14,6 +14,8 @@ import { Buttons, HeaderText, Primarycolor1, styles } from '../../styles/Stylesh
 import Icon from 'react-native-vector-icons/AntDesign';
 import Navigationbar from "../../componets/Navigationbar";
 import { Keyboard } from 'react-native';
+import { firebaseAurth } from "../../utils/Firebase";
+import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOut } from "firebase/auth";
 
 
 const ChangePassword = ({ navigation }) => {
@@ -27,27 +29,38 @@ const ChangePassword = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-    const handlePress = () => {
+    const handlePress = async () => {
         setErrorMessage('');
 
-        if (currentPassword === newPassword) {
-            setErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage));
-        } else if (newPassword !== confirmPassword) {
-            setErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage));
-        } else if (newPassword.length < 8) {
-            setErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
-        } else if (!/[A-Z]/.test(newPassword)) {
-            setErrorMessage(t('ChangePasswordScreen.UppercaseError', currentLanguage));
-        } else if (!/[a-z]/.test(newPassword)) {
-            setErrorMessage(t('ChangePasswordScreen.LowercaseError', currentLanguage));
-        } else if (!/\d/.test(newPassword)) {
-            setErrorMessage(t('ChangePasswordScreen.NumberError', currentLanguage));
-        } else if (!/[!@#$%^&*]/.test(newPassword)) {
-            setErrorMessage(t('ChangePasswordScreen.SpecialCharacterError', currentLanguage));
-        } else {
-            setShowSuccessPopup(true);
-            Keyboard.dismiss();
-            return;
+        const user = firebaseAurth.currentUser;
+        Keyboard.dismiss();    
+        try {
+            if (currentPassword === newPassword) {
+                setErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage));
+            } else if (newPassword !== confirmPassword) {
+                setErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage));
+            } else if (newPassword.length < 8) {
+                setErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
+            } else {
+                // Reauthenticate the user with their current password
+                const authCredential = EmailAuthProvider.credential(user.email, currentPassword);
+                await reauthenticateWithCredential(user, authCredential);
+
+                try {
+                    // Change the user's password
+                    await updatePassword(user, newPassword);
+                    setShowSuccessPopup(true);
+
+                    return;
+                } catch (passwordUpdateError) {
+                    console.error('Password Update Error:', passwordUpdateError.message);
+                    setErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
+                }
+            }
+
+        } catch (reauthenticationError) {
+            console.error('Reauthentication Error:', reauthenticationError.message);
+            setErrorMessage(t('ChangePasswordScreen.CurrentPasswordError', currentLanguage));
         }
     };
 
@@ -67,12 +80,16 @@ const ChangePassword = ({ navigation }) => {
         }
     };
 
-    const reloadPage = () => {
+    const reloadPage = async () => {
+
+        await signOut(firebaseAurth);
         setShowSuccessPopup(false);
         navigation.reset({
             index: 0,
-            routes: [{ name: 'ChangePassword' }],
+            routes: [{ name: 'Sign in' }],
         });
+        const amILoggedIn = firebaseAurth.currentUser; //FOR SEEING IF LOG OUT INDEED HAPPENED, DELETE AFTER REVIEW/TESTING
+        console.log("Am I Logged In: " + amILoggedIn); // ^ same here
     };
 
     return (
@@ -174,7 +191,7 @@ const ChangePassword = ({ navigation }) => {
                 transparent
                 visible={showSuccessPopup}
                 animationType="fade"
-                onRequestClose={() => setShowSuccessPopup(false)}
+                onRequestClose={reloadPage}
             >
                 <View style={customStyles.successContainer}>
                     <Text style={customStyles.successText}>

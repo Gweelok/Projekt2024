@@ -143,7 +143,11 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl} hasCameraPermissions={hasCameraPermissions} />
+            <ImageUpload
+              onImageSelect={setImage}
+              data={itemData?.imageUrl}
+              hasCameraPermissions={hasCameraPermissions}
+            />
           </View>
 
           <CategoryDropdown

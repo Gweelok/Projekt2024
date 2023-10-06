@@ -66,17 +66,12 @@ export default {
     CurrentPassword: "Nuvarende kodeord",
     NewPassword: "Nyt kodeord",
     ConfirmPassword: "Bekraft nyt kodeord",
-    PasswordMatchError:
-      "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
-    PasswordMismatchError:
-      "Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
+    PasswordMatchError: "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
+    PasswordMismatchError: "Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
     PasswordLengthError: "Adgangskoden skal være på mindst 8 tegn.",
-    UppercaseError: "Adgangskoden skal indeholde mindst ét stort bogstav.",
-    LowercaseError: "Adgangskoden skal indeholde mindst ét lille bogstav.",
-    NumberError: "Kodeord skal indeholde mindst et tal.",
-    SpecialCharacterError:
-      "Adgangskoden skal indeholde mindst ét specialtegn (!@#$%^&*).",
-    PasswordChanged: "Adgangskoden blev ændret.",
+    PasswordChanged: "Adgangskoden blev ændret. Du vil blive omdirigeret til at logge ind.", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
+    CurrentPasswordError: "Nuværende adgangskode er ikke korrekt.", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
+    PasswordUpdateError: "Der opstod en fejl under opdatering af adgangskoden. Prøv igen!", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
   },
 
   MyDraftsScreen: {
