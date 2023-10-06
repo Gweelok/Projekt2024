@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Dimensions,
   Image,
@@ -7,9 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import StatusBarComponent from "../components/atoms/StatusBarComponent";
-import ScrollViewComponent from "../components/atoms/ScrollViewComponent";
-import HeaderTitle from "../components/atoms/HeaderTitle";
+import React from "react";
+import StatusBarComponent from "../componets/atoms/StatusBarComponent";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { firebaseDB } from "../utils/Firebase";

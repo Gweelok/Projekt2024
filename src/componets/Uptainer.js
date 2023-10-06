@@ -1,4 +1,3 @@
-import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { styles, Primarycolor1 } from "../styles/Stylesheet";
+import { React, useEffect, useState, useContext} from "react";
 import { useNavigation } from "@react-navigation/native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -15,7 +15,9 @@ import {
   getProductById,
   getBrandById,
 } from "../utils/Repo";
-import { LoaderContext } from "../components/LoaderContext";
+
+import { LoaderContext } from "../componets/LoaderContext";
+
 
 const Uptainer = ({ uptainerData }) => {
   const navigation = useNavigation();
