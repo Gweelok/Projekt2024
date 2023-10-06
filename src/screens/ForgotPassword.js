@@ -4,14 +4,14 @@ import {
     styles,
     Backgroundstyle,
     Buttons,
-    Primarycolor1, 
+    HeaderText 
 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import BackButton from "../componets/BackButton";
 import GlobalStyle from "../styles/GlobalStyle";
 
 const ForgotPassword = ({ navigation }) => {
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState("");
     const { currentLanguage } = useLanguage();
 
     const handleSendLink = () => {
@@ -22,26 +22,26 @@ const ForgotPassword = ({ navigation }) => {
         <View style={Backgroundstyle.interactive_screens}>
             <View style={GlobalStyle.BodyWrapper}>
 
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ flexDirection: "row", alignItems: "center", paddingLeft: 10 }}>
                     <BackButton onPress={() => navigation.goBack()} />
-                    <Text style={[styles.Header_Primarycolor1, styles.Header]}>
+                    <Text style={[HeaderText.Header]}>
                         {t("ForgotPasswordScreen.Header", currentLanguage)}
                     </Text>
                 </View>
 
-                <Text style={[{ textAlign: "center"}, styles.Header_Primarycolor1]}>
+                <Text style={[styles.Header_Primarycolor1,{paddingLeft: 17, marginTop: 25}]}>
                     {t("ForgotPasswordScreen.Description", currentLanguage)}
                 </Text>
                 
+                <Text style={[styles.Header_Primarycolor1, { fontFamily: "space-grotesk-bold", fontSize: 16, marginBottom: 5, paddingLeft: 16 }]}>E-mail</Text>
                 <TextInput
-                    placeholder={t("ForgotPasswordScreen.EmailLabel", currentLanguage)}
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
                     clearButtonMode={"always"}
                     required
-                    style={[styles.inputBox, { marginBottom: 20, marginTop: 15, fontSize: 16, fontFamily: "space-grotesk" }]}
+                    style={[styles.inputBox, { marginBottom: 20, marginTop: 10, fontSize: 16, fontFamily: "space-grotesk" }]}
                 />
 
                 <TouchableOpacity 

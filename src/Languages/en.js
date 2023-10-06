@@ -198,7 +198,6 @@ export default {
   ForgotPasswordScreen: {
     Header: "Forgot password",
     Description: "Input your associated mail, to receive a link for resetting your password",
-    EmailLabel: "E-mail",
     SendLinkButton: "Send link"
 },
 

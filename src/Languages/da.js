@@ -203,7 +203,6 @@ export default {
   ForgotPasswordScreen: {
     Header: "Glemt kodeord",
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
-    EmailLabel: "E-mail",
     SendLinkButton: "Send link"
 },
 
