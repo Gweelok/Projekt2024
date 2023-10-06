@@ -13,11 +13,10 @@ import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { firebaseDB } from "../utils/Firebase";
-
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const ProductIsTakenScreen = ({ navigation, route }) => {
+const ProductIsTakenScreen = ({ navigation, route, fetchUpdatedData }) => {
   const productItem = route?.params;
 
   const { currentLanguage } = useLanguage();
@@ -36,6 +35,9 @@ const ProductIsTakenScreen = ({ navigation, route }) => {
 
         // Update the item's data with the new value of itemTaken
         await itemRef.update(itemData);
+
+        // Call the fetchUpdatedData function to refresh the data in the Uptainer component
+        fetchUpdatedData();
 
         navigation.navigate("ThankYouScreen");
       } else {
