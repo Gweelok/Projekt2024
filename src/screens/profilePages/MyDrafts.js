@@ -23,6 +23,8 @@ import BackButton from "../../componets/BackButton";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
 import { LoaderContext } from "../../componets/LoaderContext"; 
 import LoadingScreen from "../../componets/LoadingScreen";
+import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
+import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 
 const MyDrafts = () => {
@@ -30,9 +32,13 @@ const MyDrafts = () => {
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const [ popupOpen, setPopupOpen ]= useState(false);
   const handlePress = () => {
     navigation.goBack();
   };
+
+  const [selectedDraftId,setSelectedDraftId]=useState(null);
+
   useEffect(() => {
     //Fetches items in the draftcards from the database
     const fetchDraftList = async () => {
@@ -124,32 +130,17 @@ const MyDrafts = () => {
                 navigation.push("Add", { itemData: cur });
               }}
               onCancelPress={() => {
-                Alert.alert(
-                  `${t("MyDraftsScreen.closeButtonTitle", currentLanguage)}`,
-                  `${t("MyDraftsScreen.closeButtonAsking", currentLanguage)}`,
-                  [
-                    {
-                      text: `${t(
-                        "MyDraftsScreen.closeButtonAnswerNo",
-                        currentLanguage
-                      )}`,
-                      style: "cancel",
-                    },
-                    {
-                      text: `${t(
-                        "MyDraftsScreen.closeButtonAnswerYes",
-                        currentLanguage
-                      )}`,
-                      onPress: () => DeleteDraft(cur.itemId, cur.itemImage),
-                    },
-                  ]
-                );
+                setSelectedDraftId(cur.itemId)
+                setPopupOpen(!popupOpen);
               }}
             />
           )
         )}
       </ScrollViewComponent>
+      {popupOpen && <DeleteDraftsPopUp onConfirm={DeleteDraft()} params={selectedDraftId}></DeleteDraftsPopUp>}
+      
     </StatusBarComponent>
+    
   );
 };
 
