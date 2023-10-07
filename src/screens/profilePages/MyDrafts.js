@@ -44,7 +44,7 @@ const MyDrafts = () => {
   const [selectedDraft,setSelectedDraft]=useState(null);
 
   const deleteCurrentDraft=()=>{
-    DeleteDraft(selectedDraft.itemId,selectedDraft.imageId)
+    DeleteDraft(selectedDraft.itemId,selectedDraft.itemImage)
     closePopup();
   }
 
