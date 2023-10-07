@@ -12,6 +12,7 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
+import { firebaseDB } from "../utils/Firebase";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -19,13 +20,30 @@ const windowHeight = Dimensions.get("window").height;
 const ProductIsTakenScreen = ({ navigation, route }) => {
   const productItem = route?.params;
 
-  const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
+  const { currentLanguage } = useLanguage();
 
-  // This function sends and gives the status of 'maybe taken' in the DB
-  const productIsTaken = () => {
-    navigation.navigate("ThankYouScreen");
+  const productIsTaken = async () => {
+    try {
+      const itemId = productItem?.itemId;
 
-    // write the db logic here
+      if (itemId) {
+        const itemData = {
+          itemTaken: true, // Update itemTaken to true
+        };
+
+        // Reference to the Firebase database node where you store your items
+        const itemRef = firebaseDB.ref(`items/${itemId}`);
+
+        // Update the item's data with the new value of itemTaken
+        await itemRef.update(itemData);
+
+        navigation.navigate("ThankYouScreen");
+      } else {
+        console.error("Item ID is missing.");
+      }
+    } catch (error) {
+      console.error("Error marking product as taken:", error);
+    }
   };
 
   return (
