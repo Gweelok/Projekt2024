@@ -3,22 +3,14 @@ import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import * as styles from "../../styles/Stylesheet";
 
 const GeneralPopUp = ({ message, confirmLabel, cancelLabel, onConfirm, onCancel, customButtonStyle }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const togglePopUp = () => {
-    setModalVisible(!modalVisible);
-  };
 
   const handleConfirm = () => {
-    console.log(modalVisible);
-    togglePopUp();
-    console.log(modalVisible);
+
     onConfirm && onConfirm();
   };
 
   const handleCancel = () => {
-    console.log(modalVisible);
-    togglePopUp();
-    console.log(modalVisible);
+
     onCancel && onCancel();
   };
 
@@ -27,7 +19,7 @@ const GeneralPopUp = ({ message, confirmLabel, cancelLabel, onConfirm, onCancel,
       <Modal
         transparent
         animationType="none"
-        onRequestClose={togglePopUp}>
+        onRequestClose={handleCancel}>
         <View
           style={{
             flex: 1,

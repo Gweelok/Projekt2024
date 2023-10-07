@@ -37,6 +37,10 @@ const MyDrafts = () => {
     navigation.goBack();
   };
 
+  const closePopup = ()=>{
+    setPopupOpen(false);
+  }
+
   const [selectedDraftId,setSelectedDraftId]=useState(null);
 
   useEffect(() => {
@@ -85,15 +89,21 @@ const MyDrafts = () => {
   }, []);
   async function DeleteDraft(itemId, image) {
       await deleteItemById(itemId);
+   
     if(image != "Items/Default.jpg"){
       await deleteImage(image);
+
     }
     data.splice(
       data.findIndex((item) => item.itemId === itemId),
       1
     );
     setData([...data]);
+    setPopupOpen(!popupOpen);
   }
+
+
+  
 
   return (
     <StatusBarComponent>
@@ -137,7 +147,7 @@ const MyDrafts = () => {
           )
         )}
       </ScrollViewComponent>
-      {popupOpen && <DeleteDraftsPopUp onConfirm={DeleteDraft()} params={selectedDraftId}></DeleteDraftsPopUp>}
+      {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={DeleteDraft} params={selectedDraftId}></DeleteDraftsPopUp>}
       
     </StatusBarComponent>
     
