@@ -41,7 +41,12 @@ const MyDrafts = () => {
     setPopupOpen(false);
   }
 
-  const [selectedDraftId,setSelectedDraftId]=useState(null);
+  const [selectedDraft,setSelectedDraft]=useState(null);
+
+  const deleteCurrentDraft=()=>{
+    DeleteDraft(selectedDraft.itemId,selectedDraft.imageId)
+    closePopup();
+  }
 
   useEffect(() => {
     //Fetches items in the draftcards from the database
@@ -99,7 +104,7 @@ const MyDrafts = () => {
       1
     );
     setData([...data]);
-    setPopupOpen(!popupOpen);
+  
   }
 
 
@@ -140,14 +145,14 @@ const MyDrafts = () => {
                 navigation.push("Add", { itemData: cur });
               }}
               onCancelPress={() => {
-                setSelectedDraftId(cur.itemId)
+                setSelectedDraft(cur)
                 setPopupOpen(!popupOpen);
               }}
             />
           )
         )}
       </ScrollViewComponent>
-      {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={DeleteDraft} params={selectedDraftId}></DeleteDraftsPopUp>}
+      {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
       
     </StatusBarComponent>
     

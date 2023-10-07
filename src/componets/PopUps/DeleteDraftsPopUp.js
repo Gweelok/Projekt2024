@@ -1,7 +1,7 @@
 import React from 'react';
 import GeneralPopUp from './GeneralPopUp';
 
-const DeleteDraftsPopUp = ({ onConfirm, onCancel, params}) => { 
+const DeleteDraftsPopUp = ({ onConfirm, onCancel}) => { 
   
   const customButtonStyle = {
     backgroundColor: "#ff0000",
@@ -12,7 +12,7 @@ const DeleteDraftsPopUp = ({ onConfirm, onCancel, params}) => {
 
   const handleConfirm = () => {
     console.log('Confirm button pressed');
-    onConfirm && onConfirm(params);
+    onConfirm && onConfirm();
   };
 
   const handleCancel = () => {
