@@ -39,6 +39,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
         <CustomInput showStar={true} optionalMarginBottom={1}>
 
         <View style={brandDropdownContainer.container}>
+            
             <TouchableOpacity
                 style={[
                   brandDropdownContainer.dropdownButton,

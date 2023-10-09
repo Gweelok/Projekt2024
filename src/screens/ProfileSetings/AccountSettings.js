@@ -5,7 +5,7 @@ import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable, S
 import { useNavigation } from '@react-navigation/native';
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign";
-import { Buttons, HeaderText, styles} from "../../styles/Stylesheet";
+import { Buttons, HeaderText, styles, styles as stylesGlobal, Primarycolor2, Primarycolor1} from "../../styles/Stylesheet";
 import {GoBackButton} from "../../styles/GoBackButton";
 import MenuItems from "../../styles/MenuItems";
 import CustomInput from "../../componets/atoms/CustomInput";
@@ -53,10 +53,18 @@ const AccountSettings = () => {
             {/* Section 1 */}
             <View style={styles1.section}>
                 {/* Name */}
-                <Text style={[styles.menuItem_text,{marginLeft: 20}]}>{t('AccountSettingsScreen.Name',currentLanguage)} </Text>
-                <CustomInput showStar={true}>
+                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 15, marginBottom: 10, marginTop: 10 }}>
+                <Text style={[stylesGlobal.menuItem_text, {marginRight: 4}]}>
+                    {t("AccountSettingsScreen.Name",currentLanguage)} 
+                </Text>
+                <Text style={styles1.optionalText}>
+                     ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                </Text>
+                </View>
+                <CustomInput>
                     <TextInput
                         placeholder="Jane Doe"
+                        placeholderTextColor="rgba(28, 75, 61, 0.4)"
                         value={name}
                         onChangeText={setName}
                         keyboardType="name"
@@ -66,11 +74,13 @@ const AccountSettings = () => {
                     />
                 </CustomInput>
                 {/* email */}
-                <Text style={[styles.menuItem_text,{marginLeft: 20}]}>{t('AccountSettingsScreen.Email',currentLanguage)}</Text>
+                <Text style={[stylesGlobal.menuItem_text, {marginLeft: 15, marginBottom: 10, marginTop: 10}]}>{t('AccountSettingsScreen.Email',currentLanguage)}</Text>
                 <CustomInput showStar={false}>
                     <TextInput
                         value={email}
                         onChangeText={setEmail}
+                        placeholder="janedoe@example.com"
+                        placeholderTextColor="rgba(28, 75, 61, 0.4)"
                         keyboardType="email-address"
                         autoCapitalize="none"
                         clearButtonMode={"always"}
@@ -79,10 +89,18 @@ const AccountSettings = () => {
                 </CustomInput>
 
                 {/* phone */}
-                <Text style={[styles.menuItem_text,{marginLeft: 20}]}>{t('AccountSettingsScreen.Tlf',currentLanguage)} </Text>
-                <CustomInput showStar={true}>
+                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 15, marginBottom: 10, marginTop: 10 }}>
+                <Text style={[stylesGlobal.menuItem_text, {marginRight: 4}]}>
+                    {t("AccountSettingsScreen.Name",currentLanguage)} 
+                </Text>
+                <Text style={styles1.optionalText}>
+                     ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                </Text>
+                </View>
+                <CustomInput>
                     <TextInput
                         placeholder="00 00 00 00"
+                        placeholderTextColor="rgba(28, 75, 61, 0.4)"
                         value={phone}
                         onChangeText={setPhone}
                         keyboardType="phone"
@@ -94,7 +112,7 @@ const AccountSettings = () => {
 
 
                 {/* Submit */}
-                <TouchableOpacity onPress={handleSave} style={Buttons.main_button}>
+                <TouchableOpacity onPress={handleSave} style={[Buttons.main_button, {marginTop: 10}]}>
                     <Text style={Buttons.main_buttonText}>{t('AccountSettingsScreen.Submit',currentLanguage)}</Text>
                 </TouchableOpacity>
             </View>
@@ -104,7 +122,7 @@ const AccountSettings = () => {
             {/* Section 2 */}
             {/* Language */}
             <View style={[styles1.section]}>
-                <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
+                <Text style={[stylesGlobal.menuItem_text, {marginLeft: 30, marginBottom: 10, marginTop: 10}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
                 <ListLanguages />
             </View>
 
@@ -139,10 +157,16 @@ const styles1 = StyleSheet.create({
         margin:10,
     },
     header:{
-        flexDirection:"row",justifyContent: 'flex-end',marginTop:-35,marginBottom:15
+        flexDirection:"row",
+        justifyContent: "flex-end",
+        marginTop:-35,
+        marginBottom:15
     },
     section: {
-        borderBottomWidth: 1, borderBottomColor: '#000', paddingBottom: 17, marginBottom: 8,
+        borderBottomWidth: 1, 
+        borderBottomColor: "#000", 
+        paddingBottom: 17, 
+        marginBottom: 8,
     },
 
     iconContainer: {
@@ -161,7 +185,13 @@ const styles1 = StyleSheet.create({
     iconStyle:{
         color : "#ff0000",
         marginRight:10,
-    }
+    },
+    optionalText: {
+        color: Primarycolor1,
+        fontSize: 13,
+        fontWeight: "300",
+        fontFamily: "space-grotesk"
+    },
 });
 
 export default AccountSettings;
