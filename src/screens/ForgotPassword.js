@@ -41,6 +41,7 @@ const ForgotPassword = ({ navigation }) => {
                     autoCapitalize="none"
                     clearButtonMode={"always"}
                     required
+                    placeholder="E-mail"
                     style={[styles.inputBox, { marginBottom: 20, marginTop: 10, fontSize: 16, fontFamily: "space-grotesk" }]}
                 />
 
