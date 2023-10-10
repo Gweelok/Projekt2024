@@ -29,44 +29,42 @@ const Uptainer = ({ uptainerData }) => {
       const storage = getStorage();
       try {
         const items = await getItemsInUptainer(uptainerData.uptainerId);
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
-            const pathReference = ref(storage, item.itemImage);
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+            if (!item.itemTaken) {
+              const pathReference = ref(storage, item.itemImage);
+              const product = await getProductById(item.itemproduct);
+              const brand = await getBrandById(item.itemBrand);
 
-            try {
-              const url = await getDownloadURL(pathReference);
-              return {
-                ...item,
-                imageUrl: url,
-                productName: product.productName,
-                brandName: brand.brandName,
-              };
-            } catch (error) {
-              console.log("Error while downloading image => ", error);
-              return {
-                ...item,
-                imageUrl: "https://via.placeholder.com/200x200",
-              };
+              try {
+                const url = await getDownloadURL(pathReference);
+                return {
+                  ...item,
+                  imageUrl: url,
+                  productName: product.productName,
+                  brandName: brand.brandName,
+                };
+              } catch (error) {
+                console.log("Error while downloading image => ", error);
+                return {
+                  ...item,
+                  imageUrl: "https://via.placeholder.com/200x200",
+                };
+              }
+            } else {
+              return null;
             }
           })
         );
 
-        // Filter out items with itemTaken set to true
-        /*
-        const doubleData = [...updatedData];
-        setData(doubleData);
-      } catch (error) {
-        console.log("Error while fetching items => ", error);
-      }
-      */
-        const filteredData = updatedData.filter((item) => !item.itemTaken);
+        const filteredData = updatedData.filter((item) => item !== null);
         setData(filteredData);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
     };
+
     fetchItemList();
   }, []);
 
