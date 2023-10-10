@@ -194,4 +194,9 @@ export default {
     header:
       "Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren",
   },
+  ArticleScreen:{
+    Written:"Skrevet: XX/XX/XXXX",
+    Subheadline:"Underoverskrift",
+
+  },
 };
