@@ -23,41 +23,48 @@ const Uptainer = ({ uptainerData }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
+
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
-        const items = await getItemsInUptainer(uptainerData.uptainerId); // Assuming 'id' is defined somewhere
+        const items = await getItemsInUptainer(uptainerData.uptainerId);
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
-            const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+            if (!item.itemTaken) {
+              const pathReference = ref(storage, item.itemImage);
+              const product = await getProductById(item.itemproduct);
+              const brand = await getBrandById(item.itemBrand);
 
-            try {
-              const url = await getDownloadURL(pathReference);
-              return {
-                ...item,
-                imageUrl: url,
-                productName: product.productName,
-                brandName: brand.brandName,
-              };
-            } catch (error) {
-              console.log("Error while downloading image => ", error);
-              return {
-                ...item,
-                imageUrl: "https://via.placeholder.com/200x200",
-              };
+              try {
+                const url = await getDownloadURL(pathReference);
+                return {
+                  ...item,
+                  imageUrl: url,
+                  productName: product.productName,
+                  brandName: brand.brandName,
+                };
+              } catch (error) {
+                console.log("Error while downloading image => ", error);
+                return {
+                  ...item,
+                  imageUrl: "https://via.placeholder.com/200x200",
+                };
+              }
+            } else {
+              return null;
             }
           })
         );
-        
-        const doubleData = [...updatedData];
-        setData(doubleData);
+
+        const filteredData = updatedData.filter((item) => item !== null);
+        setData(filteredData);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
     };
+
     fetchItemList();
   }, []);
 
@@ -65,19 +72,21 @@ const Uptainer = ({ uptainerData }) => {
   for (let i = 0; i < data.length; i += 2) {
     pairedData.push([data[i], data[i + 1]]);
   }
-  
+
   return (
     <View style={{ marginBottom: 20 }}>
       <TouchableOpacity
-        onPress={() =>{
+        onPress={() => {
           setIsLoading(true);
           navigation.navigate("UptainerDetails", {
             uptainerData: uptainerData,
-          })
+          });
         }}
       >
         <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
-        <Text style={{ fontSize: 18, color: Primarycolor1 }}>{uptainerData.uptainerStreet}</Text>
+        <Text style={{ fontSize: 18, color: Primarycolor1 }}>
+          {uptainerData.uptainerStreet}
+        </Text>
       </TouchableOpacity>
 
       <FlatList
@@ -101,10 +110,7 @@ const Uptainer = ({ uptainerData }) => {
               }
             >
               <View style={styling.item}>
-                <Image
-                  source={{ uri: item[0]?.imageUrl }}
-                  style={styling.image}
-                />
+                <Image source={{ uri: item[0]?.imageUrl }} style={styling.image} />
               </View>
             </TouchableOpacity>
             {/* Second Row */}
@@ -122,10 +128,7 @@ const Uptainer = ({ uptainerData }) => {
                 }
               >
                 <View style={styling.item}>
-                  <Image
-                    source={{ uri: item[1]?.imageUrl }}
-                    style={styling.image}
-                  />
+                  <Image source={{ uri: item[1]?.imageUrl }} style={styling.image} />
                 </View>
               </TouchableOpacity>
             )}
