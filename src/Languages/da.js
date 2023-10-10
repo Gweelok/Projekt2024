@@ -78,8 +78,8 @@ export default {
     Header: "Mine Kladder",
     closeButtonTitle: "Slette kladde",
     closeButtonAsking: "Er du sikker på at du vil slette denne kladde?",
-    closeButtonAnswerYes: "Ja",
-    closeButtonAnswerNo: "Nej",
+    closeButtonAnswerYes: "Slet kladde",
+    closeButtonAnswerNo: "Annuler",
   },
   DescriptionField: {
     label: "Beskrivelse",

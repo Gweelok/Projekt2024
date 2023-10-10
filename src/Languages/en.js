@@ -64,8 +64,8 @@ export default {
     Header: "My Drafts",
     closeButtonTitle: "Delete draft",
     closeButtonAsking: "Are you sure you want to delete this draft",
-    closeButtonAnswerYes: "Yes",
-    closeButtonAnswerNo: "No",
+    closeButtonAnswerYes: "Delete draft",
+    closeButtonAnswerNo: "Cancel",
   },
 
   CategoryDropdown: {

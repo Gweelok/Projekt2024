@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity } from 'react-native';
 import * as styles from "../../styles/Stylesheet";
+import { t, useLanguage } from "../../Languages/LanguageHandler";
 
 const GeneralPopUp = ({ message, confirmLabel, cancelLabel, onConfirm, onCancel, customButtonStyle }) => {
+
+  const {currentLanguage} = useLanguage();
+  const translatedMessage = t(message, currentLanguage);
+  const translatedConfirmLabel = t(confirmLabel, currentLanguage);
+  const translatedCancelLabel = t(cancelLabel, currentLanguage);
 
   const handleConfirm = () => {
 

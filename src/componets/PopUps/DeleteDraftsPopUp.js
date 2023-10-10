@@ -1,8 +1,18 @@
 import React from 'react';
 import GeneralPopUp from './GeneralPopUp';
+import { useLanguage, t } from '../../Languages/LanguageHandler';
 
-const DeleteDraftsPopUp = ({ onConfirm, onCancel}) => { 
-  
+const DeleteDraftsPopUp = ({ onConfirm, onCancel }) => {
+  const { currentLanguage } = useLanguage();
+
+  const messageKey = "MyDraftsScreen.closeButtonAsking";
+  const confirmLabelKey = "MyDraftsScreen.closeButtonAnswerYes";
+  const cancelLabelKey = "MyDraftsScreen.closeButtonAnswerNo";
+
+  const translatedMessage = t(messageKey, currentLanguage);
+  const translatedConfirmLabel = t(confirmLabelKey, currentLanguage);
+  const translatedCancelLabel = t(cancelLabelKey, currentLanguage);
+
   const customButtonStyle = {
     backgroundColor: "#ff0000",
     borderRadius: 0,
@@ -22,9 +32,9 @@ const DeleteDraftsPopUp = ({ onConfirm, onCancel}) => {
 
   return (
     <GeneralPopUp
-      message="Er du sikker på at du vil slette denne kladde?"
-      confirmLabel="Slet kladde"
-      cancelLabel="Annuller"
+      message={translatedMessage}
+      confirmLabel={translatedConfirmLabel}
+      cancelLabel={translatedCancelLabel}
       onConfirm={handleConfirm}
       onCancel={handleCancel}
       customButtonStyle={customButtonStyle}
