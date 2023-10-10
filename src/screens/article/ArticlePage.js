@@ -9,6 +9,7 @@ import {
 import GlobalStyle from "../../styles/GlobalStyle";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import ArticleSlider from "./ArticleSlider";
 
 const ArticlePage = ({ route }) => {
   const { title, content } = route.params;
@@ -40,6 +41,7 @@ const ArticlePage = ({ route }) => {
               {"  " + paragraph}
             </Text>
           ))}
+          <ArticleSlider/>
         </View>
       </ScrollViewComponent>
     </StatusBarComponent>

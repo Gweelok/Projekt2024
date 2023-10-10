@@ -192,4 +192,8 @@ export default {
     header:
       "Thanks for informing us. We will check up on this and update the Uptainer",
   },
+
+  ArticleSlider: {
+    header: "Read also"
+  }
 };
