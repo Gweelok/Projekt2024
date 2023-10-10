@@ -23,6 +23,7 @@ import ListLanguages from "./ListOfLanguages";
 import LanguageDropdown from "../../Languages/LanguageDropdown";
 // Import your icon components and language dropdown component
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import LanguageDropdownSettings from "../../Languages/LanguageDropdownSettings";
 
 const AccountSettings = () => {
     const navigation = useNavigation();
@@ -129,10 +130,10 @@ const AccountSettings = () => {
             <View style={{flex:10}}>
                 <View  style={{alignItems:"center",flex:1}}>
                     <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
-                    <LanguageDropdown/>
+                    <LanguageDropdownSettings/>
                 </View>
 
-              <View  style={{marginTop:10,flex:1}}>
+              <View>
                 <Pressable onPress={handleDeleteAccount}  >
                     <View style={styles1.iconContainer}>
                         <Icon name="delete" size={25} style={[styles1.iconStyle]} />
@@ -168,14 +169,14 @@ const styles1 = StyleSheet.create({
 
     },
     deleteText:{
-        marginTop: 85,
+        marginTop: 20,
         color : "#ff0000",
         textAlign: 'center',
         fontSize: 20,
 
     },
     iconStyle:{
-        marginTop: 85,
+        marginTop: 20,
 
         color : "#ff0000",
         marginRight:10,
