@@ -10,7 +10,7 @@ import React, { useState, useRef, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
-import { Primarycolor1 } from "../../styles/Stylesheet";
+import { Primarycolor1, styles as stylesGlobal } from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { useNavigation } from "@react-navigation/core";
@@ -75,7 +75,15 @@ const ImageUpload = ({ onImageSelect,data}) => {
     }
   };
   return (
-    <CustomInput showStar={true} optionalMarginBottom>
+    <CustomInput optionalMarginBottom>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+      {t("ImageUpload.chooseImage", currentLanguage)}
+    </Text>
+    <Text style={[UploadImageStyle.optionalText,{marginLeft: 5 }]}>
+    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+    </Text>
+    </View>
       <View>
         {!image ? (
           <TouchableOpacity
@@ -85,9 +93,9 @@ const ImageUpload = ({ onImageSelect,data}) => {
             style={UploadImageStyle.UploadImageContainer}
           >
             <View style={UploadImageStyle.UploadDescription}>
-              <Ionicons name="images-outline" size={30} color={Primarycolor1} />
+              <Ionicons name="images-outline" size={30} color="rgba(28, 75, 61, 0.4)"/>
 
-              <Text style={UploadImageStyle.uploadText}>
+              <Text style={[UploadImageStyle.uploadText, {color: "rgba(28, 75, 61, 0.4)"}]}>
                 {t("UpdroppForm.uploadText", currentLanguage)}
               </Text>
             </View>
@@ -220,7 +228,8 @@ const UploadImageStyle = StyleSheet.create({
     marginLeft: 10,
     color: Primarycolor1,
     fontWeight: "700",
-    fontSize: 17,
+    fontSize: 16,
+    fontFamily: "space-grotesk"
   },
   galleryBottomText: {
     fontSize: 18,
@@ -234,4 +243,10 @@ const UploadImageStyle = StyleSheet.create({
     fontWeight: "500",
     color: "#000",
   },
+  optionalText: {
+    color: Primarycolor1,
+    fontSize: 14,
+    fontWeight: "300",
+    fontFamily: "space-grotesk"
+},
 });

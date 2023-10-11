@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { getAllCategories } from "../../utils/Repo";
@@ -38,18 +38,18 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
 
     return (
         <View style={categoryDropdownContainer.container}>
+          <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+            {t("CategoryDropdown.selectCategory", currentLanguage)}
+          </Text>
             <TouchableOpacity
                 style={categoryDropdownContainer.dropdownButton}
                 onPress={() => {
                     setIsOpen(!isOpen);
-                    if (!selectedCategory) {
-                        setIsValidationError(true);
-                    }
                 }}
             >
-                <Text style={categoryDropdownContainer.dropdownText}>
+                <Text style={[categoryDropdownContainer.dropdownText, !selectedCategory && {color: "rgba(28, 75, 61, 0.4)"}]}>
                     {selectedCategory ? selectedCategory.categoryName :
-                    t("CategoryDropdown.selectCategory", currentLanguage)}
+                    t("CategoryDropdown.placeholder", currentLanguage)}
                 </Text>
                 <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
             </TouchableOpacity>
@@ -67,10 +67,6 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                     ))}
                 </ScrollView>
             )}
-
-            {isValidationError && !selectedCategory && (
-                <Text style={categoryDropdownContainer.validationErrorText}></Text>
-            )}
         </View>
     );
 };
@@ -86,8 +82,6 @@ const categoryDropdownContainer = {
     fontFamily: "space-grotesk",
     fontSize: 16,
     marginRight: 5,
-      //marginBottom:-4,
-     //flexGrow: 1,
   },
   dropdownButton: {
     borderWidth: 3,

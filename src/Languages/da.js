@@ -83,26 +83,36 @@ export default {
   },
   DescriptionField: {
     label: "Beskrivelse",
+    placeholder: "Beskrivelse her..."
+  },
+
+  ImageUpload: {
+    chooseImage: "Vælg billede"
   },
 
   CategoryDropdown: {
     selectCategory: "Kategori",
+    placeholder: "Vælg kategori"
   },
 
   ProductDropdown: {
     selectProduct: "Produkt",
+    placeholder: "Vælg produkt"
   },
 
   BrandDropdown: {
     selectBrand: "Mærke",
+    placeholder: "Vælg mærke"
   },
 
   ModelDropdown: {
     selectModel: "Model",
+    placeholder: "Vælg model"
   },
 
   ConditionDropdown: {
     selectCondition: "Stand",
+    placeholder: "Vælg stand"
   },
 
   ProfileScreen: {

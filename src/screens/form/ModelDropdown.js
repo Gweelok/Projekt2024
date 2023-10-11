@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import CustomInput from "../../componets/atoms/CustomInput";
@@ -40,7 +40,15 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
     };
 
     return (
-        <CustomInput showStar={true} optionalMarginBottom>
+        <CustomInput optionalMarginBottom>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop: 15 }]}>
+            {t("ModelDropdown.selectModel", currentLanguage)}
+          </Text>
+          <Text style={[modelDropdownContainer.optionalText,{marginLeft: 5, marginTop: 5 }]}>
+    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+    </Text>
+    </View>
             <View style={modelDropdownContainer.container}>
                 <TouchableOpacity
                     style={[
@@ -54,8 +62,8 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                     }}
                     disabled={!brandSelected}
                 >
-                    <Text style={modelDropdownContainer.dropdownText}>
-                        {selectedModel?.modelName  || (!brandSelected ? t("ModelDropdown.selectModel", currentLanguage) : "Model")}
+                    <Text style={[modelDropdownContainer.dropdownText, !selectedModel &&{color: "rgba(28, 75, 61, 0.4)"}]}>
+                        {selectedModel?.modelName  || (!brandSelected ? t("ModelDropdown.placeholder", currentLanguage) : "Model")}
                     </Text>
                     <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
                 </TouchableOpacity>
@@ -94,7 +102,6 @@ const modelDropdownContainer = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginTop: 10,
     },
     dropdownList: {
         borderWidth: 3,
@@ -108,7 +115,13 @@ const modelDropdownContainer = {
     },
     disabled: {
         backgroundColor: "#f0f0f0"
-    }
+    },
+    optionalText: {
+        color: Primarycolor1,
+        fontSize: 14,
+        fontWeight: "300",
+        fontFamily: "space-grotesk"
+    },
 };
 
 export default ModelDropdown;

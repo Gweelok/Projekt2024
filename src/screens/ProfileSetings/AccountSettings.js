@@ -1,11 +1,9 @@
-
-
 import React, { useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Pressable, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign";
-import { Buttons, HeaderText, styles, styles as stylesGlobal, Primarycolor2, Primarycolor1} from "../../styles/Stylesheet";
+import { Buttons, HeaderText, styles, styles as stylesGlobal, Primarycolor1} from "../../styles/Stylesheet";
 import {GoBackButton} from "../../styles/GoBackButton";
 import MenuItems from "../../styles/MenuItems";
 import CustomInput from "../../componets/atoms/CustomInput";
@@ -53,8 +51,8 @@ const AccountSettings = () => {
             {/* Section 1 */}
             <View style={styles1.section}>
                 {/* Name */}
-                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 15, marginBottom: 10, marginTop: 10 }}>
-                <Text style={[stylesGlobal.menuItem_text, {marginRight: 4}]}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)} 
                 </Text>
                 <Text style={styles1.optionalText}>
@@ -74,7 +72,7 @@ const AccountSettings = () => {
                     />
                 </CustomInput>
                 {/* email */}
-                <Text style={[stylesGlobal.menuItem_text, {marginLeft: 15, marginBottom: 10, marginTop: 10}]}>{t('AccountSettingsScreen.Email',currentLanguage)}</Text>
+                <Text style={stylesGlobal.formLabel}>{t('AccountSettingsScreen.Email',currentLanguage)}</Text>
                 <CustomInput showStar={false}>
                     <TextInput
                         value={email}
@@ -89,8 +87,8 @@ const AccountSettings = () => {
                 </CustomInput>
 
                 {/* phone */}
-                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 15, marginBottom: 10, marginTop: 10 }}>
-                <Text style={[stylesGlobal.menuItem_text, {marginRight: 4}]}>
+                <View style={{ flexDirection: "row", alignItems: "center"}}>
+                <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)} 
                 </Text>
                 <Text style={styles1.optionalText}>
@@ -122,7 +120,7 @@ const AccountSettings = () => {
             {/* Section 2 */}
             {/* Language */}
             <View style={[styles1.section]}>
-                <Text style={[stylesGlobal.menuItem_text, {marginLeft: 30, marginBottom: 10, marginTop: 10}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
+                <Text style={stylesGlobal.formLabel}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
                 <ListLanguages />
             </View>
 
@@ -180,7 +178,6 @@ const styles1 = StyleSheet.create({
         color : "#ff0000",
         textAlign: 'center',
         fontSize: 20,
-
     },
     iconStyle:{
         color : "#ff0000",
@@ -188,7 +185,7 @@ const styles1 = StyleSheet.create({
     },
     optionalText: {
         color: Primarycolor1,
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: "300",
         fontFamily: "space-grotesk"
     },

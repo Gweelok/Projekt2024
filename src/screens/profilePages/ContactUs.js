@@ -27,7 +27,6 @@ function reducer(state, action) {
   }
 }
 
-const PLACEHOLDER_TEXT_COLOR = "rgba(28, 75, 61, .6)";
 const ContactUs = () => {
   const { currentLanguage } = useLanguage();
   const [formInfo, dispatch] = useReducer(reducer, {
@@ -54,29 +53,29 @@ const ContactUs = () => {
   }
   return (
     <View style={Backgroundstyle.interactive_screens}>
-      <Text style={styles.formLabel}>
+      <Text style={[stylesGlobal.formLabel, {marginRight: 310}]}>
         {t("ContactUs.Name", currentLanguage)}
       </Text>
       <TextInput
         style={styles.inputField}
         placeholder={`${t("ContactUs.Name", currentLanguage)}`}
-        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+        placeholderTextColor="rgba(28, 75, 61, 0.4)"
         value={formInfo.name}
         onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
       />
 
-      <Text style={styles.formLabel}>
+      <Text style={[stylesGlobal.formLabel, {marginRight: 310}]}>
         {t("ContactUs.Topic", currentLanguage)}
       </Text>
       <TextInput
         style={styles.inputField}
         placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
-        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+        placeholderTextColor="rgba(28, 75, 61, 0.4)"
         value={formInfo.topic}
         onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
       />
 
-      <Text style={styles.formLabel}>
+      <Text style={[stylesGlobal.formLabel, {marginRight: 280}]}>
         {t("ContactUs.Message", currentLanguage)}
       </Text>
       <TextInput
@@ -84,13 +83,13 @@ const ContactUs = () => {
         textAlignVertical="top"
         style={[styles.inputField, { minHeight: 150 }]}
         placeholder={`${t("ContactUs.Message", currentLanguage)}`}
-        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+        placeholderTextColor="rgba(28, 75, 61, 0.4)"
         value={formInfo.message}
         onChangeText={(e) => dispatch({ type: "change_message", payload: e })}
       />
 
-      <TouchableOpacity onPress={sendToEmail} style={styles.sendButton}>
-        <Text style={styles.sendButtonText}>
+      <TouchableOpacity onPress={sendToEmail} style={Buttons.main_button}>
+        <Text style={Buttons.main_buttonText}>
           {t("ContactUs.SendMessage", currentLanguage)}
         </Text>
       </TouchableOpacity>
@@ -112,18 +111,6 @@ const styles = StyleSheet.create({
   formSection: {
     marginBottom: 20,
     gap: 5,
-  },
-  formLabel: {
-    ...stylesGlobal.paragraph_text,
-  },
-  sendButton: {
-    alignSelf: "flex-end",
-    backgroundColor: Primarycolor1,
-    padding: 20,
-    borderRadius: 5,
-  },
-  sendButtonText: {
-    ...Buttons.main_buttonText,
   },
 });
 export default ContactUs;

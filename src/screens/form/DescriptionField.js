@@ -1,7 +1,7 @@
 import {View, Text, TextInput } from 'react-native';
 import React, { useState } from 'react';  // Import useState
 import { useLanguage, t } from '../../Languages/LanguageHandler';
-import { Primarycolor1, Primarycolor3,} from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles as stylesGlobal} from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 
 const DescriptionField = ({ onInputComplete, data = ''}) => {
@@ -9,14 +9,21 @@ const DescriptionField = ({ onInputComplete, data = ''}) => {
     const [inputValue, setInputValue] = useState(data); // Create a state to store the input value
 
     return (
-      <View style={{marginTop: 20}}>
-          <Text style={descriptionFieldStyles.dscLabel}>
-              {t('DescriptionField.label', currentLanguage)}
-          </Text>
-          <CustomInput showStar={true} optionalMarginBottom>
+      <View style={{marginTop: 5}}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop:15 }]}>
+                {t("DescriptionField.label", currentLanguage)}
+            </Text>
+            <Text style={[descriptionFieldStyles.optionalText,{marginLeft: 5, marginTop: 5 }]}>
+                ({t("AccountSettingsScreen.Optional", currentLanguage)})
+            </Text>
+            </View>
 
+          <CustomInput optionalMarginBottom>
           <TextInput
             style={descriptionFieldStyles.dscInput}
+            placeholder={t("DescriptionField.placeholder", currentLanguage)}
+            placeholderTextColor="rgba(28, 75, 61, 0.4)"
             multiline={true}
             defaultValue={data}
             onChangeText={text => setInputValue(text)}  // Update the state with the input value
@@ -44,7 +51,14 @@ const descriptionFieldStyles = {
         borderColor: Primarycolor1,
         backgroundColor: Primarycolor3,
         padding: 10,
+        fontSize: 16,
     },
+    optionalText: {
+        color: Primarycolor1,
+        fontSize: 14,
+        fontWeight: "300",
+        fontFamily: "space-grotesk"
+    }
 };
 
 export default DescriptionField;

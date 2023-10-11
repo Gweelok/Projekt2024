@@ -58,6 +58,7 @@ export default {
 
   DescriptionField: {
     label: "Description",
+    placeholder: "Enter description here..."
   },
 
   MyDraftsScreen: {
@@ -68,23 +69,32 @@ export default {
     closeButtonAnswerNo: "No",
   },
 
+  ImageUpload: {
+    chooseImage: "Choose image"
+  },
+
   CategoryDropdown: {
     selectCategory: "Category",
+    placeholder: "Choose category"
   },
 
   BrandDropdown: {
     selectBrand: "Brand",
+    placeholder: "Choose brand"
   },
 
   ModelDropdown: {
     selectModel: "Model",
+    placeholder: "Choose model"
   },
 
   ConditionDropdown: {
     selectCondition: "Condition",
+    placeholder: "Choose condition"
   },
   ProductDropdown: {
     selectProduct: "Product",
+    placeholder: "Choose product"
   },
 
   NotificationsScreen: {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -24,6 +24,9 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
 
     return (
         <View style={conditionDropdownContainer.container}>
+            <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop:15 }]}>
+                {t("ConditionDropdown.selectCondition", currentLanguage)}
+            </Text>
             <TouchableOpacity
                 style={[
                     conditionDropdownContainer.dropdownButton,
@@ -35,8 +38,8 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                     }
                 }}
             >
-                <Text style={conditionDropdownContainer.dropdownText}>
-                    {selectedCondition || t("ConditionDropdown.selectCondition", currentLanguage)}
+                <Text style={[conditionDropdownContainer.dropdownText, !selectedCondition && {color: "rgba(28, 75, 61, 0.4)"}]}>
+                    {selectedCondition || t("ConditionDropdown.placeholder", currentLanguage)}
                 </Text>
                 <AntDesign
                     name={isOpen ? "caretup" : "caretdown"}
@@ -84,7 +87,6 @@ const conditionDropdownContainer = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginTop: 10,
     },
     dropdownList: {
         borderWidth: 3,
