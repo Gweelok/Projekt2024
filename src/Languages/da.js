@@ -184,10 +184,12 @@ export default {
   },
 
   ContactUs: {
+    Header:'Kontakt os',
     Name: "Navn",
-    Topic: "Enme",
+    Topic: "Emne",
     Message: "Besked",
-    SendMessage: "SEND BESKEND",
+    SendMessage: "Send besked",
+    TextOnTheTop:"Send os en besked via kontaktformularen. Vi svarer på din tilknyttede mail.",
   },
 
   thankYouScreen: {
