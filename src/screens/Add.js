@@ -67,9 +67,8 @@ const Add = ({ route, navigation }) => {
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   // you can fetch the final result of all field through here
   const { currentLanguage, setLanguage } = useLanguage();
-  const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
-  const [image, setImage] = useState(itemData?.item.imageUrl || "");
+  const [image, setImage] = useState(itemData?.imageUrl || "");
   const [category, setCategory] = useState(
     itemData?.category || null
   );
@@ -101,11 +100,7 @@ const Add = ({ route, navigation }) => {
 
   const addProductConditions = () => {
     if (
-      !image ||
-      !description ||
-      !brand.brandId ||
       !product.productId ||
-      !model.modelId ||
       !condition ||
       !category.categoryId
     ) {
@@ -147,7 +142,7 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl} hasCameraPermissions={hasCameraPermissions} />
+            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl}/>
           </View>
 
           <CategoryDropdown

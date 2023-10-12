@@ -122,12 +122,9 @@ export default {
     PasswordMismatchError:
       "New password and Confirm New Password doesn't match.",
     PasswordLengthError: "Password must be at least 8 characters long.",
-    UppercaseError: "Password must contain at least one uppercase letter.",
-    LowercaseError: "Password must contain at least one lowercase letter.",
-    NumberError: "Password must contain at least one number.",
-    SpecialCharacterError:
-      "Password must contain at least one special character (!@#$%^&*).",
-    PasswordChanged: "Password changed successfully.",
+    PasswordChanged: "Password changed successfully. You will be redirected to log in.",
+    CurrentPasswordError: "Current password is not correct.",
+    PasswordUpdateError: "An error occurred during updating the password. Please try again!",
   },
 
   ProblemComponent: {
@@ -195,4 +192,10 @@ export default {
     header:
       "Thanks for informing us. We will check up on this and update the Uptainer",
   },
+  ForgotPasswordScreen: {
+    Header: "Forgot password",
+    Description: "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link"
+},
+
 };

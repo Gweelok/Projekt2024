@@ -22,41 +22,51 @@ const Uptainer = ({ uptainerData }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
+
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
-        const items = await getItemsInUptainer(uptainerData.uptainerId); // Assuming 'id' is defined somewhere
+        const items = await getItemsInUptainer(uptainerData.uptainerId);
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
-            const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+            if (!item.itemTaken) {
+              const pathReference = ref(storage, item.itemImage);
+              const product = await getProductById(item.itemproduct);
+              const brand = await getBrandById(item.itemBrand);
 
-            try {
-              const url = await getDownloadURL(pathReference);
-              return {
-                ...item,
-                imageUrl: url,
-                productName: product.productName,
-                brandName: brand.brandName,
-              };
-            } catch (error) {
-              console.log("Error while downloading image => ", error);
-              return {
-                ...item,
-                imageUrl: "https://via.placeholder.com/200x200",
-              };
+              try {
+                const url = await getDownloadURL(pathReference);
+                return {
+                  ...item,
+                  imageUrl: url,
+                  productName: product.productName,
+                  brandName: brand.brandName,
+                };
+              } catch (error) {
+                console.log("Error while downloading image => ", error);
+                return {
+                  ...item,
+                  imageUrl: "https://via.placeholder.com/200x200",
+                };
+              }
+            } else {
+              return null;
             }
           })
         );
 
         const doubleData = [...updatedData];
         setData(doubleData);
+
+        const filteredData = updatedData.filter((item) => item !== null);
+        setData(filteredData);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
     };
+
     fetchItemList();
   }, []);
 
