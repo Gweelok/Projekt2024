@@ -59,7 +59,7 @@ const ContactUs = () => {
       <TextInput
         style={styles.inputField}
         placeholder={`${t("ContactUs.Name", currentLanguage)}`}
-        placeholderTextColor="rgba(28, 75, 61, 0.4)"
+        placeholderTextColor="#8EA59E"
         value={formInfo.name}
         onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
       />
@@ -70,7 +70,7 @@ const ContactUs = () => {
       <TextInput
         style={styles.inputField}
         placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
-        placeholderTextColor="rgba(28, 75, 61, 0.4)"
+        placeholderTextColor="#8EA59E"
         value={formInfo.topic}
         onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
       />
@@ -83,7 +83,7 @@ const ContactUs = () => {
         textAlignVertical="top"
         style={[styles.inputField, { minHeight: 150 }]}
         placeholder={`${t("ContactUs.Message", currentLanguage)}`}
-        placeholderTextColor="rgba(28, 75, 61, 0.4)"
+        placeholderTextColor="#8EA59E"
         value={formInfo.message}
         onChangeText={(e) => dispatch({ type: "change_message", payload: e })}
       />

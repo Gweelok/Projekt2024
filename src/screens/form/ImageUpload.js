@@ -93,9 +93,9 @@ const ImageUpload = ({ onImageSelect,data}) => {
             style={UploadImageStyle.UploadImageContainer}
           >
             <View style={UploadImageStyle.UploadDescription}>
-              <Ionicons name="images-outline" size={30} color="rgba(28, 75, 61, 0.4)"/>
+              <Ionicons name="images-outline" size={30} color="#8EA59E"/>
 
-              <Text style={[UploadImageStyle.uploadText, {color: "rgba(28, 75, 61, 0.4)"}]}>
+              <Text style={[UploadImageStyle.uploadText, {color: "#8EA59E"}]}>
                 {t("UpdroppForm.uploadText", currentLanguage)}
               </Text>
             </View>

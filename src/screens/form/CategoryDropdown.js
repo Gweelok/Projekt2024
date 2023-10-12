@@ -47,7 +47,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                     setIsOpen(!isOpen);
                 }}
             >
-                <Text style={[categoryDropdownContainer.dropdownText, !selectedCategory && {color: "rgba(28, 75, 61, 0.4)"}]}>
+                <Text style={[categoryDropdownContainer.dropdownText, !selectedCategory && {color: "#8EA59E"}]}>
                     {selectedCategory ? selectedCategory.categoryName :
                     t("CategoryDropdown.placeholder", currentLanguage)}
                 </Text>

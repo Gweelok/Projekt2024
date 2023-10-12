@@ -56,7 +56,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 }}
                 disabled={!categorySelected}
             >
-                <Text style={[productDropdownContainer.dropdownText, !selectedProduct && {color: "rgba(28, 75, 61, 0.4)"}]}>
+                <Text style={[productDropdownContainer.dropdownText, !selectedProduct && {color: "#8EA59E"}]}>
                     {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.placeholder", currentLanguage) : "Product")}
                 </Text>
                 <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />

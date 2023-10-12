@@ -38,7 +38,7 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                     }
                 }}
             >
-                <Text style={[conditionDropdownContainer.dropdownText, !selectedCondition && {color: "rgba(28, 75, 61, 0.4)"}]}>
+                <Text style={[conditionDropdownContainer.dropdownText, !selectedCondition && {color: "#8EA59E"}]}>
                     {selectedCondition || t("ConditionDropdown.placeholder", currentLanguage)}
                 </Text>
                 <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />

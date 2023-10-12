@@ -62,7 +62,7 @@ const AccountSettings = () => {
                 <CustomInput>
                     <TextInput
                         placeholder="Jane Doe"
-                        placeholderTextColor="rgba(28, 75, 61, 0.4)"
+                        placeholderTextColor="#8EA59E"
                         value={name}
                         onChangeText={setName}
                         keyboardType="name"
@@ -78,7 +78,7 @@ const AccountSettings = () => {
                         value={email}
                         onChangeText={setEmail}
                         placeholder="janedoe@example.com"
-                        placeholderTextColor="rgba(28, 75, 61, 0.4)"
+                        placeholderTextColor="#8EA59E"
                         keyboardType="email-address"
                         autoCapitalize="none"
                         clearButtonMode={"always"}
@@ -98,7 +98,7 @@ const AccountSettings = () => {
                 <CustomInput>
                     <TextInput
                         placeholder="00 00 00 00"
-                        placeholderTextColor="rgba(28, 75, 61, 0.4)"
+                        placeholderTextColor="#8EA59E"
                         value={phone}
                         onChangeText={setPhone}
                         keyboardType="phone"

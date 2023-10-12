@@ -23,7 +23,7 @@ const DescriptionField = ({ onInputComplete, data = ''}) => {
           <TextInput
             style={descriptionFieldStyles.dscInput}
             placeholder={t("DescriptionField.placeholder", currentLanguage)}
-            placeholderTextColor="rgba(28, 75, 61, 0.4)"
+            placeholderTextColor="#8EA59E"
             multiline={true}
             defaultValue={data}
             onChangeText={text => setInputValue(text)}  // Update the state with the input value

@@ -119,7 +119,7 @@ const ChangePassword = ({ navigation }) => {
                             textAlignVertical="center"
                             fontFamily="Arial"
                             placeholder="Current password"
-                            placeholderTextColor="rgba(28, 75, 61, 0.4)"
+                            placeholderTextColor="#8EA59E"
                         />
                         <TouchableOpacity
                             style={customStyles.eyeIcon}
@@ -143,7 +143,7 @@ const ChangePassword = ({ navigation }) => {
                             paddingRight={40}
                             textAlignVertical="center"
                             placeholder="New password"
-                            placeholderTextColor="rgba(28, 75, 61, 0.4)"
+                            placeholderTextColor="#8EA59E"
                         />
                         <TouchableOpacity
                             style={customStyles.eyeIcon}
@@ -167,7 +167,7 @@ const ChangePassword = ({ navigation }) => {
                             paddingRight={40}
                             textAlignVertical="center"
                             placeholder="Confirm password"
-                            placeholderTextColor="rgba(28, 75, 61, 0.4)"                        
+                            placeholderTextColor="#8EA59E"                        
                             />
                         <TouchableOpacity
                             style={customStyles.eyeIcon}

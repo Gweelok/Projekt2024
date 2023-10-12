@@ -60,7 +60,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 }}
                 disabled={!productSelected}
             >
-                <Text style={[brandDropdownContainer.dropdownText, !selectedBrand && {color: "rgba(28, 75, 61, 0.4)"}]}>
+                <Text style={[brandDropdownContainer.dropdownText, !selectedBrand && {color: "#8EA59E"}]}>
                 {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.placeholder", currentLanguage) : "Brand")}
                 </Text>
                 <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
