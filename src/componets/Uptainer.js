@@ -136,8 +136,8 @@ const Uptainer = ({ uptainerData }) => {
 
 const styling = StyleSheet.create({
   item: {
-    width: 150, // Set the width of each item
-    height: 100,
+    width: 200, // Set the width of each item
+    height: 200,
     margin: 5,
     overflow: "hidden",
   },
