@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3, styles as stylesGlobal } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import CustomInput from "../../componets/atoms/CustomInput";
@@ -45,7 +45,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
             <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop: 15 }]}>
             {t("ModelDropdown.selectModel", currentLanguage)}
           </Text>
-          <Text style={[modelDropdownContainer.optionalText,{marginLeft: 5, marginTop: 5 }]}>
+          <Text style={[stylesGlobal.optionalText,{marginLeft: 5, marginTop: 5 }]}>
     ({t("AccountSettingsScreen.Optional", currentLanguage)})
     </Text>
     </View>
@@ -65,7 +65,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                     <Text style={[modelDropdownContainer.dropdownText, !selectedModel &&{color: "rgba(28, 75, 61, 0.4)"}]}>
                         {selectedModel?.modelName  || (!brandSelected ? t("ModelDropdown.placeholder", currentLanguage) : "Model")}
                     </Text>
-                    <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+                    <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
                 </TouchableOpacity>
 
                 {isOpen && (
@@ -115,12 +115,6 @@ const modelDropdownContainer = {
     },
     disabled: {
         backgroundColor: "#f0f0f0"
-    },
-    optionalText: {
-        color: Primarycolor1,
-        fontSize: 14,
-        fontWeight: "300",
-        fontFamily: "space-grotesk"
     },
 };
 

@@ -55,7 +55,7 @@ const AccountSettings = () => {
                 <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)} 
                 </Text>
-                <Text style={styles1.optionalText}>
+                <Text style={stylesGlobal.optionalText}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
                 </Text>
                 </View>
@@ -91,7 +91,7 @@ const AccountSettings = () => {
                 <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)} 
                 </Text>
-                <Text style={styles1.optionalText}>
+                <Text style={stylesGlobal.optionalText}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
                 </Text>
                 </View>
@@ -183,12 +183,7 @@ const styles1 = StyleSheet.create({
         color : "#ff0000",
         marginRight:10,
     },
-    optionalText: {
-        color: Primarycolor1,
-        fontSize: 14,
-        fontWeight: "300",
-        fontFamily: "space-grotesk"
-    },
+    
 });
 
 export default AccountSettings;

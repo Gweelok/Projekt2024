@@ -80,7 +80,7 @@ const ImageUpload = ({ onImageSelect,data}) => {
       <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
       {t("ImageUpload.chooseImage", currentLanguage)}
     </Text>
-    <Text style={[UploadImageStyle.optionalText,{marginLeft: 5 }]}>
+    <Text style={[stylesGlobal.optionalText,{marginLeft: 5 }]}>
     ({t("AccountSettingsScreen.Optional", currentLanguage)})
     </Text>
     </View>
@@ -243,10 +243,4 @@ const UploadImageStyle = StyleSheet.create({
     fontWeight: "500",
     color: "#000",
   },
-  optionalText: {
-    color: Primarycolor1,
-    fontSize: 14,
-    fontWeight: "300",
-    fontFamily: "space-grotesk"
-},
 });

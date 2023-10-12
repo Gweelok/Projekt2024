@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3, styles as stylesGlobal } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
@@ -59,10 +59,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 <Text style={[productDropdownContainer.dropdownText, !selectedProduct && {color: "rgba(28, 75, 61, 0.4)"}]}>
                     {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.placeholder", currentLanguage) : "Product")}
                 </Text>
-                <AntDesign
-                    name={isOpen ? "caretup" : "caretdown"}
-                    size={20}
-                />
+                <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
             </TouchableOpacity>
 
             {isOpen && (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3, styles as stylesGlobal } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { getAllCategories } from "../../utils/Repo";
@@ -51,7 +51,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                     {selectedCategory ? selectedCategory.categoryName :
                     t("CategoryDropdown.placeholder", currentLanguage)}
                 </Text>
-                <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+                <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
             </TouchableOpacity>
 
             {isOpen && (

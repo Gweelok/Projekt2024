@@ -102,6 +102,13 @@ export const styles = StyleSheet.create({
   marginTop: 10,
   fontWeight: 'bold',
 },
+// (optional) text style
+optionalText: {
+  color: Primarycolor1,
+  fontSize: 14,
+  fontWeight: "300",
+  fontFamily: "space-grotesk"
+},
   //Text for both menuitem and boxlink
   menuItem_text: {
     fontFamily: "space-grotesk-bold",
