@@ -32,7 +32,7 @@ const LanguageDropdown = () => {
                         {languageOptions.find((option) => option.value === currentLanguage)
                             ?.label || "Select Language"}
                     </Text>
-                    <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+                    <AntDesign name={isOpen ? "up" : "down"} size={20} />
                 </TouchableOpacity>
 
                 {isOpen && (
