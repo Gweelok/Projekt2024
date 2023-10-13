@@ -80,12 +80,13 @@ const styles = {
         borderWidth: 3,
         borderColor: Primarycolor1,
         position: "absolute",
-        top: Platform.OS === "android" ? "100%" : 40, // Adjust top position for iOS
+        top: Platform.OS === "ios" ? "100%" : (Platform.OS === "android" ? 40 : "100%"),
         left: 0,
         zIndex: 1,
         width: "100%",
         maxHeight: 150,
         overflowY: "auto",
+        overflowX:"auto",
     },
     dropdownListItem: {
         padding: 10,
