@@ -34,7 +34,7 @@ const dropdownListStyle = {
     ...styles.dropdownList,
     position: 'absolute', // Set position to absolute
     zIndex: 999, // Set a higher z-index to appear on top
-    marginTop:40,
+    marginTop:"40",
 };
 
 return (
@@ -49,7 +49,7 @@ return (
                     {languageOptions.find((option) => option.value === currentLanguage)
                         ?.label || "Select Language"}
                 </Text>
-                <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+                <AntDesign name={isOpen ? "up" : "down"} size={20} />
             </TouchableOpacity>
 
             {isOpen && (
