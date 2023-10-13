@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet , Dimensions} from "react-native";
+import { View, TextInput, StyleSheet , Dimensions, RefreshControl} from "react-native";
 import { Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
@@ -43,9 +43,9 @@ const Home = ({ navigation }) => {
             color={Primarycolor1}
           />
         </View>
-        <ScrollViewComponent>
+        {/*ScrollViewComponent is deleted here and moved to sortUptainer*/ }
           <SortUptainers navigation={navigation} />    
-        </ScrollViewComponent>
+        
         <Navigationbar navigation={navigation} />
       </View>
     </View>
