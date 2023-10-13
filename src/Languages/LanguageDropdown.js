@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Platform } from "react-native"; // Import Platform from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Platform } from "react-native";
 import { Primarycolor3, Primarycolor1 } from "../styles/Stylesheet";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
@@ -12,56 +12,62 @@ const LanguageDropdown = () => {
     const languageOptions = [
         { label: "English", value: "en" },
         { label: "Danish", value: "da" },
-        // Add more language options as needed
-    ];
+    // Add more language options as needed
+];
 
-    const handleLanguageSelect = (language) => {
-        setLanguage(language);
-        setIsOpen(false); // Close the dropdown
-    };
+const handleLanguageSelect = (language) => {
+    setLanguage(language);
+    setIsOpen(false); // Close the dropdown
+};
 
-    const iconStyle = {
-        name: Platform.OS === 'ios' ? 'ios-globe' : 'md-globe', // Platform-specific icon name
-        size: 24,
-        color: Primarycolor1,
-    };
+const iconStyle = {
+    name: Platform.OS === 'ios' ? 'ios-globe' : 'md-globe', // Platform-specific icon name
+    size: 24,
+    color: Primarycolor1,
+};
 
-    const dropdownButtonStyle = {
-        ...styles.dropdownButton,
-        padding: Platform.OS === 'ios' ? 10 : 5, // Adjust padding for iOS
-    };
+const dropdownButtonStyle = {
+    ...styles.dropdownButton,
+};
 
-    return (
-        <View style={styles.parentContainer}>
-            <View style={styles.container}>
-                <TouchableOpacity
-                    style={dropdownButtonStyle}
-                    onPress={() => setIsOpen(!isOpen)}
-                >
-                    <Ionicons name={iconStyle.name} size={iconStyle.size} color={iconStyle.color} />
-                    <Text style={styles.dropdownText}>
-                        {languageOptions.find((option) => option.value === currentLanguage)
-                            ?.label || "Select Language"}
-                    </Text>
-                    <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
-                </TouchableOpacity>
+const dropdownListStyle = {
+    ...styles.dropdownList,
+    position: 'absolute', // Set position to absolute
+    zIndex: 999, // Set a higher z-index to appear on top
+    marginTop:40,
+};
 
-                {isOpen && (
-                    <ScrollView style={styles.dropdownList}>
-                        {languageOptions.map((option) => (
-                            <TouchableOpacity
-                                key={option.value}
-                                onPress={() => handleLanguageSelect(option.value)}
-                                style={styles.dropdownListItem}
-                            >
-                                <Text style={styles.dropdownText}>{option.label}</Text>
-                            </TouchableOpacity>
-                        ))}
-                    </ScrollView>
-                )}
-            </View>
+return (
+    <View style={styles.parentContainer}>
+        <View style={styles.container}>
+            <TouchableOpacity
+                style={dropdownButtonStyle}
+                onPress={() => setIsOpen(!isOpen)}
+            >
+                <Ionicons name={iconStyle.name} size={iconStyle.size} color={iconStyle.color} />
+                <Text style={styles.dropdownText}>
+                    {languageOptions.find((option) => option.value === currentLanguage)
+                        ?.label || "Select Language"}
+                </Text>
+                <AntDesign name={isOpen ? "caretup" : "caretdown"} size={20} />
+            </TouchableOpacity>
+
+            {isOpen && (
+                <ScrollView style={dropdownListStyle}>
+                    {languageOptions.map((option) => (
+                        <TouchableOpacity
+                            key={option.value}
+                            onPress={() => handleLanguageSelect(option.value)}
+                            style={styles.dropdownListItem}
+                        >
+                            <Text style={styles.dropdownText}>{option.label}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            )}
         </View>
-    );
+    </View>
+);
 };
 
 const styles = {
@@ -90,10 +96,6 @@ const styles = {
     dropdownList: {
         borderWidth: 3,
         borderColor: Primarycolor1,
-        position: "absolute",
-        top: "100%",
-        left: 0,
-        zIndex: 1,
         width: "100%",
         maxHeight: 150,
         overflowY: "auto",
