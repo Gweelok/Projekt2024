@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Platform } from "react-native"; // Import Platform from 'react-native'
 import { Primarycolor3, Primarycolor1 } from "../styles/Stylesheet";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons"; // Use Ionicons for iOS
 
 const LanguageDropdown = () => {
     const { currentLanguage, setLanguage } = useLanguage();
@@ -17,17 +17,28 @@ const LanguageDropdown = () => {
 
     const handleLanguageSelect = (language) => {
         setLanguage(language);
-        setIsOpen(false);
+        setIsOpen(false); // Close the dropdown
+    };
+
+    const iconStyle = {
+        name: Platform.OS === 'ios' ? 'ios-globe' : 'md-globe', // Platform-specific icon name
+        size: 24,
+        color: Primarycolor1,
+    };
+
+    const dropdownButtonStyle = {
+        ...styles.dropdownButton,
+        padding: Platform.OS === 'ios' ? 10 : 5, // Adjust padding for iOS
     };
 
     return (
         <View style={styles.parentContainer}>
             <View style={styles.container}>
                 <TouchableOpacity
-                    style={styles.dropdownButton}
+                    style={dropdownButtonStyle}
                     onPress={() => setIsOpen(!isOpen)}
                 >
-                    <FontAwesome name="globe" size={24} color={Primarycolor1} />
+                    <Ionicons name={iconStyle.name} size={iconStyle.size} color={iconStyle.color} />
                     <Text style={styles.dropdownText}>
                         {languageOptions.find((option) => option.value === currentLanguage)
                             ?.label || "Select Language"}
@@ -79,14 +90,14 @@ const styles = {
     dropdownList: {
         borderWidth: 3,
         borderColor: Primarycolor1,
-        position: "absolute", // Add this line
-        top: "100%", // Add this line to position the dropdown below the button
-        left: 0, // Add this line to align the dropdown with the button
-        zIndex: 1, // Add this line to ensure the dropdown appears above other content
-        width: "100%", // Add this line to make the dropdown full-width
-        maxHeight: 150, // Set a max height for the dropdown if needed
-        overflowY: "auto", // Add scrollbars if the content exceeds the max height
-        alignContent:"center",
+        position: "absolute",
+        top: "100%",
+        left: 0,
+        zIndex: 1,
+        width: "100%",
+        maxHeight: 150,
+        overflowY: "auto",
+        alignContent: "center",
     },
     dropdownListItem: {
         padding: 10,
