@@ -36,10 +36,10 @@ const LandingScreen = ({ navigation }) => {
   // for multi language
   const { currentLanguage, setLanguage } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const[userLogged,setUserLogged]= useState(false)
+  const [userLogged, setUserLogged] = useState(false);
   const backButton =
     currentSlide === 0 ? null : (
-      <BackButton onPress={()=>setCurrentSlide(currentSlide - 1)}/>
+      <BackButton onPress={() => setCurrentSlide(currentSlide - 1)} />
     );
 
   //data to be used that will render on the screen
@@ -78,13 +78,13 @@ const LandingScreen = ({ navigation }) => {
   //Fn to navigate to the Signup Screern
   onAuthStateChanged(firebaseAurth, async (user) => {
     if (user) {
-      setUserLogged(true)
+      setUserLogged(true);
     } else {
-      setUserLogged(false)
+      setUserLogged(false);
     }
   });
-  if(userLogged){
-    navigation.navigate('Homepage')
+  if (userLogged) {
+    navigation.navigate("Homepage");
   }
 
   //Fn to change to langauge and display correct language
