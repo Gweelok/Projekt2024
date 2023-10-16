@@ -14,9 +14,9 @@ const DeleteDraftsPopUp = ({ onConfirm, onCancel }) => {
   const translatedCancelLabel = t(cancelLabelKey, currentLanguage);
 
   const customButtonStyle = {
-    backgroundColor: "#ff0000",
+    backgroundColor: "#AA0000",
     borderRadius: 0,
-    borderColor: "#ff0000",
+    borderColor: "#AA0000",
     alignItems: 'center',
   };
 
