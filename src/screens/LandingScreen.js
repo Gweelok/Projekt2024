@@ -102,6 +102,7 @@ const LandingScreen = ({ navigation }) => {
       <View style={styling.topBar}>
         {backButton}
         {[1, 2, 3, 4].includes(currentSlide) ? null : <LanguageDropdown />}
+
       </View>
 
       {/* this is the main below that shows on the screen */}
@@ -152,6 +153,7 @@ const styling = StyleSheet.create({
     marginLeft: "auto",
   },
   topBar: {
+    zIndex:1,
     flexDirection: "row",
     alignSelf: "stretch",
     paddingHorizontal: 20,

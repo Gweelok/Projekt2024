@@ -51,7 +51,7 @@ const AccountSettings = () => {
 
     return (
         <ScrollViewComponent>
-<SafeAreaView style={styles1.container}>
+<SafeAreaView  style={Backgroundstyle.interactive_screens}>
         <View>
             <View style={styles1.header}>
 
@@ -128,9 +128,9 @@ const AccountSettings = () => {
             {/* Language */}
 
             <View style={{flex:10}}>
-                <View  style={{alignItems:"center",flex:1}}>
+                <View  style={{alignItems:"center",flex:1, zIndex:1}}>
                     <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
-                    <LanguageDropdownSettings/>
+                    <LanguageDropdown/>
                 </View>
 
               <View>
@@ -173,13 +173,13 @@ const styles1 = StyleSheet.create({
         color : "#ff0000",
         textAlign: 'center',
         fontSize: 20,
-
+        zIndex:-999,
     },
     iconStyle:{
         marginTop: 20,
-
         color : "#ff0000",
         marginRight:10,
+        zIndex:-999,
     }
 });
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Platform } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor3, Primarycolor1 } from "../styles/Stylesheet";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
@@ -57,6 +57,7 @@ const styles = {
     parentContainer: {
         width: "100%",
         position: "relative",
+        zIndex: 1,
     },
     container: {
         flexDirection: "column",
@@ -80,13 +81,13 @@ const styles = {
         borderWidth: 3,
         borderColor: Primarycolor1,
         position: "absolute",
-        top: Platform.OS === "ios" ? "100%" : (Platform.OS === "android" ? 40 : "100%"),
+        top: "100%", // Position the dropdown below the button
         left: 0,
-        zIndex: 1,
+        zIndex: 2, // Set a higher z-index to make the dropdown appear above other content
         width: "100%",
         maxHeight: 150,
         overflowY: "auto",
-        overflowX:"auto",
+        opacity: 1, // Remove opacity for a fully visible dropdown
     },
     dropdownListItem: {
         padding: 10,
