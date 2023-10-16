@@ -65,6 +65,11 @@ export const styles = StyleSheet.create({
     color: Primarycolor1,
     fontSize: 16,
   },
+  article_text: {
+    //fontFamily: "arial",
+    color: Primarycolor1,
+    fontSize: 16,
+  },
   //Input box
   inputBox: {
     height: 45,
@@ -368,8 +373,9 @@ export const HeaderText = StyleSheet.create({
   Header: {
     fontSize: 30,
     marginBottom: 10,
+
     marginTop: 15,
-    marginLeft: 30,
+    //marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
   },

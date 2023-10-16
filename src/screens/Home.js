@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet , Dimensions} from "react-native";
+import { View, TextInput, StyleSheet, Dimensions } from "react-native";
 import { Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
@@ -26,8 +26,7 @@ const Home = ({ navigation }) => {
   const [search, onChangeSearch] = useState("");
 
   return (
-
-   <View style={[Backgroundstyle.interactive_screens, { paddingTop: 0, }]}>
+    <View style={[Backgroundstyle.interactive_screens, { paddingTop: 0 }]}>
       <View style={GlobalStyle.BodyWrapper}>
         <View style={styles.container}>
           <TextInput
@@ -44,7 +43,7 @@ const Home = ({ navigation }) => {
           />
         </View>
         <ScrollViewComponent>
-          <SortUptainers navigation={navigation} />    
+          <SortUptainers navigation={navigation} />
         </ScrollViewComponent>
         <Navigationbar navigation={navigation} />
       </View>

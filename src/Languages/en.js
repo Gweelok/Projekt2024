@@ -192,4 +192,16 @@ export default {
     header:
       "Thanks for informing us. We will check up on this and update the Uptainer",
   },
+  ArticleScreen:{
+    Written:"Written at: XX/XX/XXXX",
+    Subheadline:"Subheadline",
+  },
+
+  ForgotPasswordScreen: {
+    Header: "Forgot password",
+    Description: "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link"
+},
+
+
 };
