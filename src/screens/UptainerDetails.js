@@ -1,4 +1,5 @@
 import {
+  RefreshControl,
   StyleSheet,
   Text,
   View,
@@ -41,11 +42,13 @@ const UptainerDetails = ({ navigation, route }) => {
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
   const { isLoading, setIsLoading } = useContext(LoaderContext);
-  useEffect(() => {
+  const [refreshing, setRefreshing] = useState(false);
+  
     //Fetches items in the uptainer
     const fetchItemList = async () => {
       const storage = getStorage();
       try {
+        setIsLoading(true);
         const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
 
         const updatedData = await Promise.all(
@@ -74,12 +77,24 @@ const UptainerDetails = ({ navigation, route }) => {
         );
         setData(updatedData); // updates data property with the fetched data from db
         setIsLoading(false);
+        setRefreshing(false);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
-    };
+  };
+
+
+   
+  
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
     fetchItemList();
-  }, []);
+     }, []);
+
+     useEffect(() => {
+      fetchItemList();
+    }, []);
+
 
   useEffect(() => {
     const fetchUptainerImage = async () => {
@@ -107,7 +122,11 @@ const UptainerDetails = ({ navigation, route }) => {
       <ScrollViewComponent
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
-      >
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        >
+      
+        
         <TouchableOpacity
           style={style.backButton}
           onPress={() => navigation.goBack()}
@@ -166,6 +185,7 @@ const UptainerDetails = ({ navigation, route }) => {
                     brandName: cur?.brandName,
                     uptainer: uptainer,
                   })
+
                 }
               >
                 <Image

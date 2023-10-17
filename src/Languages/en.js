@@ -192,14 +192,29 @@ export default {
   },
 
   ContactUs: {
+    Header:'Contact os',
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
-    SendMessage: "Send Message",
+    SendMessage: "Send message",
+    TextOnTheTop:"Send us a message through the contact form. Vi vil answer on your associated mail.",
+
   },
 
   thankYouScreen: {
     header:
       "Thanks for informing us. We will check up on this and update the Uptainer",
   },
+  ArticleScreen:{
+    Written:"Written at: XX/XX/XXXX",
+    Subheadline:"Subheadline",
+  },
+
+  ForgotPasswordScreen: {
+    Header: "Forgot password",
+    Description: "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link"
+},
+
+
 };

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { styles, Primarycolor1 } from "../styles/Stylesheet";
-import { React, useEffect, useState, useContext} from "react";
+import { React, useEffect, useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -17,7 +17,6 @@ import {
 } from "../utils/Repo";
 
 import { LoaderContext } from "../componets/LoaderContext";
-
 
 const Uptainer = ({ uptainerData }) => {
   const navigation = useNavigation();
@@ -29,44 +28,45 @@ const Uptainer = ({ uptainerData }) => {
       const storage = getStorage();
       try {
         const items = await getItemsInUptainer(uptainerData.uptainerId);
+
         const updatedData = await Promise.all(
           items.map(async (item) => {
-            const pathReference = ref(storage, item.itemImage);
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+            if (!item.itemTaken) {
+              const pathReference = ref(storage, item.itemImage);
+              const product = await getProductById(item.itemproduct);
+              const brand = await getBrandById(item.itemBrand);
 
-            try {
-              const url = await getDownloadURL(pathReference);
-              return {
-                ...item,
-                imageUrl: url,
-                productName: product.productName,
-                brandName: brand.brandName,
-              };
-            } catch (error) {
-              console.log("Error while downloading image => ", error);
-              return {
-                ...item,
-                imageUrl: "https://via.placeholder.com/200x200",
-              };
+              try {
+                const url = await getDownloadURL(pathReference);
+                return {
+                  ...item,
+                  imageUrl: url,
+                  productName: product.productName,
+                  brandName: brand.brandName,
+                };
+              } catch (error) {
+                console.log("Error while downloading image => ", error);
+                return {
+                  ...item,
+                  imageUrl: "https://via.placeholder.com/200x200",
+                };
+              }
+            } else {
+              return null;
             }
           })
         );
 
-        // Filter out items with itemTaken set to true
-        /*
         const doubleData = [...updatedData];
         setData(doubleData);
-      } catch (error) {
-        console.log("Error while fetching items => ", error);
-      }
-      */
-        const filteredData = updatedData.filter((item) => !item.itemTaken);
+
+        const filteredData = updatedData.filter((item) => item !== null);
         setData(filteredData);
       } catch (error) {
         console.log("Error while fetching items => ", error);
       }
     };
+
     fetchItemList();
   }, []);
 
@@ -83,8 +83,7 @@ const Uptainer = ({ uptainerData }) => {
           navigation.navigate("UptainerDetails", {
             uptainerData: uptainerData,
           });
-        }}
-      >
+        }}>
         <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
         <Text style={{ fontSize: 18, color: Primarycolor1 }}>
           {uptainerData.uptainerStreet}
@@ -109,10 +108,12 @@ const Uptainer = ({ uptainerData }) => {
                   imageUrl: item[0]?.imageUrl,
                   uptainer: uptainerData,
                 })
-              }
-            >
+              }>
               <View style={styling.item}>
-                <Image source={{ uri: item[0]?.imageUrl }} style={styling.image} />
+                <Image
+                  source={{ uri: item[0]?.imageUrl }}
+                  style={styling.image}
+                />
               </View>
             </TouchableOpacity>
             {/* Second Row */}
@@ -127,10 +128,12 @@ const Uptainer = ({ uptainerData }) => {
                     imageUrl: item[1]?.imageUrl,
                     uptainer: uptainerData,
                   })
-                }
-              >
+                }>
                 <View style={styling.item}>
-                  <Image source={{ uri: item[1]?.imageUrl }} style={styling.image} />
+                  <Image
+                    source={{ uri: item[1]?.imageUrl }}
+                    style={styling.image}
+                  />
                 </View>
               </TouchableOpacity>
             )}
@@ -143,10 +146,9 @@ const Uptainer = ({ uptainerData }) => {
 
 const styling = StyleSheet.create({
   item: {
-    width: 150, // Set the width of each item
-    height: 100,
+    width: 110, // Set the width of each item
+    height: 110,
     margin: 5,
-    borderRadius: 10,
     overflow: "hidden",
   },
   image: {

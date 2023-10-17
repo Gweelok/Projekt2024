@@ -5,12 +5,14 @@ import * as Location from 'expo-location';
 import { View } from 'react-native';
 import Uptainer from './Uptainer';
 import GlobalStyle from "../styles/GlobalStyle";
+import ScrollViewComponent from './atoms/ScrollViewComponent';
 
 
 const SortUptainers = ({navigation}) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
  
 
@@ -50,21 +52,31 @@ const SortUptainers = ({navigation}) => {
   
     return sortedList;
   };
-useEffect(() => {
+
   const fetchData = async () => {
     try {
       // Fetch the list of uptainers
       const uptainerList = await getAllUptainers();
-      
       setUptainerList(uptainerList);
-      
+      setRefreshing(false);
     } catch (error) {
       console.log('Error:', error);
     }
   };
 
-  fetchData();// Fetch data when component mounts
-}, []);
+  
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  //fetchData();// Fetch data when component mounts
+//}, []);
 
 
   // Fetch user location and Uptainers list from the server
@@ -151,19 +163,31 @@ useEffect(() => {
       // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
+    //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
+    <View    
+    >
     
-    <View>
-      {/* Display the list of sorted uptainers using the Uptainer component */}
+      <ScrollViewComponent
+      
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          
+        >
+          
+          {/* Display the list of sorted uptainers using the Uptainer component */}
       {uptainerList[0] && (
         <Uptainer
             key={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
         />
       )}
-      {/* Display BoxLink component */}
-    
+      {/* Display BoxLink component */}  
       <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo} style={GlobalStyle.BodyWrapper}/>
       {renderUptainers()}
+        </ScrollViewComponent>
+      
+    
+      
      
     </View>
   );
