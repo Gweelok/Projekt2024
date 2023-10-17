@@ -129,7 +129,7 @@ export default {
 
   ProblemComponent: {
     Header: "The Problem",
-    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",
+    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronic devices are trown out before its end-of-life.",
   },
   QrScannerScreen: {
     Scan: "Scan to Updropp",

@@ -131,7 +131,7 @@ export default {
 
   ProblemComponent: {
     Header: "Problemet",
-    Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
+    Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud før tid.",
   },
   SolutionComponent: {
     Header: "Løsningen",
