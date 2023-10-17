@@ -177,9 +177,8 @@ const MyDrafts = () => {
     </StatusBarComponent>
     
   );
-};
+});
 
-export default MyDrafts;
 
 const DraftStyle = StyleSheet.create({
   arrow: {
@@ -189,5 +188,7 @@ const DraftStyle = StyleSheet.create({
     color: "white",
     marginLeft: 30,
     backgroundColor: Primarycolor1,
-  },
-});
+  }
+})}
+
+export default MyDrafts;
