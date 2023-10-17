@@ -9,7 +9,7 @@ const HousePhoneText = ({showPhone, textUnderHouse}) =>{
     //display text from parent component;
     //this is actually half currently of CompleteHousePhoneText component
     return <View style={styling.container}>
-        {/* {showPhone?<PhoneSvg style={styling.phone}/>:null} */}
+        {showPhone?<PhoneSvg style={styling.phone}/>:null}
         <HouseSvg/>
         <Text style={styling.text}>{textUnderHouse}</Text>
     </View>
