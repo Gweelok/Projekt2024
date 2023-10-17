@@ -182,10 +182,13 @@ export default {
   },
 
   ContactUs: {
+    Header:'Contact os',
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
-    SendMessage: "Send Message",
+    SendMessage: "Send message",
+    TextOnTheTop:"Send us a message through the contact form. Vi vil answer on your associated mail.",
+
   },
 
   thankYouScreen: {

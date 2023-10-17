@@ -42,9 +42,9 @@ const Home = ({ navigation }) => {
             color={Primarycolor1}
           />
         </View>
-        <ScrollViewComponent>
-          <SortUptainers navigation={navigation} />
-        </ScrollViewComponent>
+        {/*ScrollViewComponent is deleted here and moved to sortUptainer*/ }
+          <SortUptainers navigation={navigation} />    
+        
         <Navigationbar navigation={navigation} />
       </View>
     </View>
