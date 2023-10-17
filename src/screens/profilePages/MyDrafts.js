@@ -177,7 +177,7 @@ const MyDrafts = () => {
     </StatusBarComponent>
     
   );
-});
+;
 
 
 const DraftStyle = StyleSheet.create({
