@@ -10,12 +10,13 @@ const CompleteTimelineSvg = () => {
   const [isLeft, setIsLeft] = useState(true);
   const phonePositionX = new Animated.Value(isLeft ? -3 : 0);
   const phoneOpacity = new Animated.Value(1);
+  
   setTimeout(() => {
     setIsLeft(false);
   }, 1000);
 
   useEffect(() => {
-    // Animate the phone's position when the component mounts
+    // Animation of phone's position when the component mounts
     const sequence = Animated.sequence([
       Animated.timing(phonePositionX, {
         toValue: 0, 
@@ -39,8 +40,6 @@ const CompleteTimelineSvg = () => {
       loop.stop();
     };
   }, []);
-
-
 
   return (
     <View>
