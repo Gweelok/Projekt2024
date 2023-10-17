@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useContext} from "react";
+import { React, useEffect, useState, useContext, useCallback} from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { HeaderText, Primarycolor1 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { GoBackButton } from "../../styles/GoBackButton";
 import DraftCard from "../../componets/DraftCard";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
-import { ScrollView } from "react-native";
+import { ScrollView, RefreshControl } from "react-native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getBrandById,
@@ -33,6 +33,7 @@ const MyDrafts = () => {
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   const [ popupOpen, setPopupOpen ]= useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const handlePress = () => {
     navigation.goBack();
   };
@@ -48,7 +49,10 @@ const MyDrafts = () => {
     closePopup();
   }
 
-  useEffect(() => {
+
+ 
+
+
     //Fetches items in the draftcards from the database
     const fetchDraftList = async () => {
       const storage = getStorage();
@@ -86,12 +90,24 @@ const MyDrafts = () => {
         );
         setData(updatedData); // updates data property with the fetched data from db
         setIsLoading(false);
+        setRefreshing(false);
       } catch (error) {
         console.log("Error while fetching drafts => ", error);
       }
     };
-    fetchDraftList();
+    
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    
+    fetchDraftList ();
   }, []);
+
+  useEffect(() => {
+    fetchDraftList ();
+  }, []);
+
+
   async function DeleteDraft(itemId, image) {
       await deleteItemById(itemId);
    
@@ -121,7 +137,10 @@ const MyDrafts = () => {
         </Text>
       </View>
       {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-      <ScrollViewComponent>
+      <ScrollViewComponent
+      refreshing={refreshing}
+      onRefresh={onRefresh}
+      >
         {data.map(
           (
             cur // instead of dummy data using data
@@ -140,6 +159,7 @@ const MyDrafts = () => {
                   description: cur.itemDescription,
                   image: cur.imageUrl,
                 });
+                
               }}
               onDraftPress={() => {
                 navigation.push("Add", { itemData: cur });
