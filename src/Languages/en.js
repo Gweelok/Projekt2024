@@ -157,7 +157,7 @@ export default {
   },
   SolutionTimeline: {
     Header: "The Solution",
-    Body: "With this we extend a products lifespan and strengthen the Cirkular Economy",
+    Body: "This way we extend the lifespan of the devices and strengthen the Circular Economy",
     Bottom: {
       first: "0 years",
       second: "5 years",
