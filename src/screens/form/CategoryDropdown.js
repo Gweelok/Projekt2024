@@ -51,7 +51,7 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
                     {selectedCategory ? selectedCategory.categoryName :
                     t("CategoryDropdown.placeholder", currentLanguage)}
                 </Text>
-                <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
+                <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
 
             {isOpen && (

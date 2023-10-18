@@ -30,7 +30,6 @@ function reducer(state, action) {
     }
 }
 
-// const PLACEHOLDER_TEXT_COLOR = "rgba(28, 75, 61, .6)";
 const ContactUs = () => {
     const { currentLanguage } = useLanguage();
     const [formInfo, dispatch] = useReducer(reducer, {
@@ -100,7 +99,7 @@ const ContactUs = () => {
                     textAlignVertical="top"
                     style={[styles1.inputField, { minHeight: 150 }]}
                     placeholder={`${t("ContactUs.Message", currentLanguage)}`}
-                    placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+                    placeholderTextColor="#8EA59E"
                     value={formInfo.message}
                     onChangeText={(e) => dispatch({ type: "change_message", payload: e })}
                 />
@@ -128,7 +127,8 @@ const styles1 = StyleSheet.create({
     },
 
     formLabel: {
-        ...stylesGlobal.menuItem_text,marginLeft: 20,marginBottom:10,marginTop:15,
+        ...stylesGlobal.menuItem_text,marginLeft: 20, marginBottom:10, marginTop:5, fontSize: 15,
+
     },
     inputField: {
         ...stylesGlobal.inputBox,

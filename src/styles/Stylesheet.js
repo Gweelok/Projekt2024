@@ -101,16 +101,16 @@ export const styles = StyleSheet.create({
   formLabel: {
   fontFamily: "space-grotesk-bold",
   color: Primarycolor1,
-  fontSize: 20,
+  fontSize: 15,
   marginLeft: 17,
   marginBottom: 10,
-  marginTop: 10,
-  fontWeight: 'bold',
+  marginTop: 5,
+  fontWeight: "bold",
 },
 // (optional) text style
 optionalText: {
   color: Primarycolor1,
-  fontSize: 14,
+  fontSize: 13,
   fontWeight: "300",
   fontFamily: "space-grotesk"
 },

@@ -65,7 +65,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                     <Text style={[modelDropdownContainer.dropdownText, !selectedModel &&{color: "#8EA59E"}]}>
                         {selectedModel?.modelName  || (!brandSelected ? t("ModelDropdown.placeholder", currentLanguage) : "Model")}
                     </Text>
-                    <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
+                    <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
                 </TouchableOpacity>
 
                 {isOpen && (

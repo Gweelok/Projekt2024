@@ -63,7 +63,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 <Text style={[brandDropdownContainer.dropdownText, !selectedBrand && {color: "#8EA59E"}]}>
                 {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.placeholder", currentLanguage) : "Brand")}
                 </Text>
-                <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
+                <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
             {isOpen && (
                 <ScrollView style={[brandDropdownContainer.dropdownList]}>

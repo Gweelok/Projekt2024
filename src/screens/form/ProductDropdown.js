@@ -59,7 +59,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 <Text style={[productDropdownContainer.dropdownText, !selectedProduct && {color: "#8EA59E"}]}>
                     {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.placeholder", currentLanguage) : "Product")}
                 </Text>
-                <AntDesign name={isOpen ? "up" : "down"} size={30} style={styles.menuItem_arrow} />
+                <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
 
             {isOpen && (
