@@ -102,7 +102,7 @@ export default {
     Optional: "optional",
     HandleSave: "Information is saved",
     HandleDeleteAccount: "Account is deleted",
-    Language: "language",
+    Language: "Language",
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",
