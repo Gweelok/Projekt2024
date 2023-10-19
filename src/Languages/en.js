@@ -198,7 +198,8 @@ export default {
 
   ArticleSlider: {
     header: "Read also"
-  }
+  },
+  
   ArticleScreen:{
     Written:"Written at: XX/XX/XXXX",
     Subheadline:"Subheadline",
