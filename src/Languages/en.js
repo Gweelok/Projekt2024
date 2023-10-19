@@ -65,8 +65,8 @@ export default {
     Header: "My Drafts",
     closeButtonTitle: "Delete draft",
     closeButtonAsking: "Are you sure you want to delete this draft",
-    closeButtonAnswerYes: "Yes",
-    closeButtonAnswerNo: "No",
+    closeButtonAnswerYes: "Delete draft",
+    closeButtonAnswerNo: "Cancel",
   },
 
   ImageUpload: {
@@ -112,7 +112,7 @@ export default {
     Optional: "optional",
     HandleSave: "Information is saved",
     HandleDeleteAccount: "Account is deleted",
-    Language: "language",
+    Language: "Language",
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",
@@ -139,7 +139,7 @@ export default {
 
   ProblemComponent: {
     Header: "The Problem",
-    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",
+    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronic devices are trown out before its end-of-life.",
   },
   QrScannerScreen: {
     Scan: "Scan to Updropp",
