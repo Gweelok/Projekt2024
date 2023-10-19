@@ -30,8 +30,6 @@ function reducer(state, action) {
     }
 }
 
-
-const PLACEHOLDER_TEXT_COLOR = "rgba(28, 75, 61, .6)";
 const ContactUs = () => {
     const { currentLanguage } = useLanguage();
     const [formInfo, dispatch] = useReducer(reducer, {
@@ -45,7 +43,7 @@ const ContactUs = () => {
             formInfo.name ? `My name is ${formInfo.name}.` : null
         }. I would like help regarding : 
     ${formInfo.message}`;
-
+      
         const url = `mailto:info@updropp.dk?subject=${formInfo.topic}&body=${emailMessage}`;
         Linking.canOpenURL(url)
             .then((succes) => {
@@ -76,7 +74,7 @@ const ContactUs = () => {
                 <TextInput
                     style={styles1.inputField}
                     placeholder={`${t("ContactUs.Name", currentLanguage)}`}
-                    placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+                    placeholderTextColor="#8EA59E"
                     value={formInfo.name}
                     onChangeText={(e) => dispatch({ type: "change_name", payload: e })}
                 />
@@ -87,7 +85,7 @@ const ContactUs = () => {
                 <TextInput
                     style={styles1.inputField}
                     placeholder={`${t("ContactUs.Topic", currentLanguage)}`}
-                    placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+                    placeholderTextColor="#8EA59E"
                     value={formInfo.topic}
                     onChangeText={(e) => dispatch({ type: "change_topic", payload: e })}
                 />
@@ -101,7 +99,7 @@ const ContactUs = () => {
                     textAlignVertical="top"
                     style={[styles1.inputField, { minHeight: 150 }]}
                     placeholder={`${t("ContactUs.Message", currentLanguage)}`}
-                    placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
+                    placeholderTextColor="#8EA59E"
                     value={formInfo.message}
                     onChangeText={(e) => dispatch({ type: "change_message", payload: e })}
                 />
@@ -129,7 +127,8 @@ const styles1 = StyleSheet.create({
     },
 
     formLabel: {
-        ...stylesGlobal.menuItem_text,marginLeft: 20,marginBottom:10,marginTop:15,
+        ...stylesGlobal.menuItem_text,marginLeft: 20, marginBottom:10, marginTop:5, fontSize: 15,
+
     },
     inputField: {
         ...stylesGlobal.inputBox,

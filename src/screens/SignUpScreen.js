@@ -94,6 +94,7 @@ const onChangeEmailHandler = (text) => {
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
       <TextInput
         placeholder="E-mail"
+        placeholderTextColor="#8EA59E"
         value={email}
         onChangeText={onChangeEmailHandler}
         keyboardType="email-address"
@@ -108,6 +109,7 @@ const onChangeEmailHandler = (text) => {
         value={password}
         onChangeText={CheckPassword}
         placeholder={t('SignUpScreen.password', currentLanguage)}
+        placeholderTextColor="#8EA59E"
         keyboardType={'default'}
         secureTextEntry={!showPassword}
         style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles,  styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import CustomInput from "../../componets/atoms/CustomInput 2";
@@ -36,9 +36,18 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     };
 
     return (
-        <CustomInput showStar={true} optionalMarginBottom={1}>
+        <CustomInput optionalMarginBottom={1}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop: 15 }]}>
+            {t("BrandDropdown.selectBrand", currentLanguage)}
+          </Text>
+          <Text style={[stylesGlobal.optionalText,{marginLeft: 5, marginTop: 5 }]}>
+    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+    </Text>
+    </View>
 
         <View style={brandDropdownContainer.container}>
+            
             <TouchableOpacity
                 style={[
                   brandDropdownContainer.dropdownButton,
@@ -51,13 +60,10 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                 }}
                 disabled={!productSelected}
             >
-                <Text style={brandDropdownContainer.dropdownText}>
-                {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.selectBrand", currentLanguage) : "Brand")}
+                <Text style={[brandDropdownContainer.dropdownText, !selectedBrand && {color: "#8EA59E"}]}>
+                {selectedBrand?.brandName || (!productSelected ? t("BrandDropdown.placeholder", currentLanguage) : "Brand")}
                 </Text>
-                <AntDesign
-                    name={isOpen ? "caretup" : "caretdown"}
-                    size={20}
-                />
+                <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
             {isOpen && (
                 <ScrollView style={[brandDropdownContainer.dropdownList]}>
@@ -93,7 +99,6 @@ const brandDropdownContainer = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginTop: 10,
     },
     dropdownList: {
         borderWidth: 3,

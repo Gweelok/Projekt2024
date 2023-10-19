@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
-import { Buttons, HeaderText, Primarycolor1, styles } from '../../styles/Stylesheet';
+import { Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Navigationbar from "../../componets/Navigationbar";
 import { Keyboard } from 'react-native';
@@ -103,11 +103,11 @@ const ChangePassword = ({ navigation }) => {
                     {t('ChangePasswordScreen.Header', currentLanguage)}
                 </Text>
             </View>
-
+            {/* Current password */}
             <View style={styles.form}>
-                <Text style={HeaderText.Header}>
-                    {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
-                </Text>
+            <Text style={stylesGlobal.formLabel}>
+                {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
+            </Text>
                 <View style={styles.inputBox}>
                     <View style={styles.inputContainer}>
                         <TextInput
@@ -118,6 +118,8 @@ const ChangePassword = ({ navigation }) => {
                             paddingRight={40}
                             textAlignVertical="center"
                             fontFamily="Arial"
+                            placeholder="Current password"
+                            placeholderTextColor="#8EA59E"
                         />
                         <TouchableOpacity
                             style={customStyles.eyeIcon}
@@ -127,8 +129,8 @@ const ChangePassword = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-
-                <Text style={HeaderText.Header}>
+               {/* New password */}
+                <Text style={stylesGlobal.formLabel}>
                     {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                 </Text>
                 <View style={styles.inputBox}>
@@ -140,7 +142,8 @@ const ChangePassword = ({ navigation }) => {
                             onChangeText={setNewPassword}
                             paddingRight={40}
                             textAlignVertical="center"
-                            fontFamily="Arial"
+                            placeholder="New password"
+                            placeholderTextColor="#8EA59E"
                         />
                         <TouchableOpacity
                             style={customStyles.eyeIcon}
@@ -150,8 +153,8 @@ const ChangePassword = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-
-                <Text style={HeaderText.Header}>
+                {/* Confirm password */}
+                <Text style={stylesGlobal.formLabel}>
                     {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                 </Text>
                 <View style={styles.inputBox}>
@@ -163,8 +166,9 @@ const ChangePassword = ({ navigation }) => {
                             onChangeText={setConfirmPassword}
                             paddingRight={40}
                             textAlignVertical="center"
-                            fontFamily="Arial"
-                        />
+                            placeholder="Confirm password"
+                            placeholderTextColor="#8EA59E"                        
+                            />
                         <TouchableOpacity
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('confirmPassword')}
@@ -217,13 +221,6 @@ const customStyles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 10,
         marginBottom: 20,
-    },
-    headline: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginLeft: 20,
-        fontFamily: 'space-grotesk-bold',
-        color: Primarycolor1,
     },
     eyeIcon: {
         position: 'absolute',
