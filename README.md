@@ -305,8 +305,9 @@ git branch -d <name here>
 ```
 or in source control. And that should be it, if there's any merge conflicts then it should be easy to see what to keep and what not to keep if using vscode.
 					
-## Git practice you should follow - Rebase
-https://docs.google.com/document/d/12mwrght5QEvpEBXpcRvna5ymurbfKNVBtF0zebospcY/edit?usp=sharing
+## Generel documentation
+Git practices to follow: https://docs.google.com/document/d/12mwrght5QEvpEBXpcRvna5ymurbfKNVBtF0zebospcY/edit?usp=sharing
+App documentation https://docs.google.com/document/d/1VijC9MfpXDLzrSM3ON6yELCc7WYxizAtOBS9lLsdJr4/edit#heading=h.c16o28oukuj
 
 # Troubleshooting 
 

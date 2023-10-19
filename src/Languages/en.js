@@ -64,8 +64,8 @@ export default {
     Header: "My Drafts",
     closeButtonTitle: "Delete draft",
     closeButtonAsking: "Are you sure you want to delete this draft",
-    closeButtonAnswerYes: "Yes",
-    closeButtonAnswerNo: "No",
+    closeButtonAnswerYes: "Delete draft",
+    closeButtonAnswerNo: "Cancel",
   },
 
   CategoryDropdown: {
@@ -102,7 +102,7 @@ export default {
     Optional: "optional",
     HandleSave: "Information is saved",
     HandleDeleteAccount: "Account is deleted",
-    Language: "language",
+    Language: "Language",
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",
@@ -129,7 +129,7 @@ export default {
 
   ProblemComponent: {
     Header: "The Problem",
-    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",
+    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronic devices are trown out before its end-of-life.",
   },
   QrScannerScreen: {
     Scan: "Scan to Updropp",
@@ -182,10 +182,13 @@ export default {
   },
 
   ContactUs: {
+    Header:'Contact os',
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
-    SendMessage: "Send Message",
+    SendMessage: "Send message",
+    TextOnTheTop:"Send us a message through the contact form. Vi vil answer on your associated mail.",
+
   },
 
   thankYouScreen: {
@@ -196,4 +199,16 @@ export default {
   ArticleSlider: {
     header: "Read also"
   }
+  ArticleScreen:{
+    Written:"Written at: XX/XX/XXXX",
+    Subheadline:"Subheadline",
+  },
+
+  ForgotPasswordScreen: {
+    Header: "Forgot password",
+    Description: "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link"
+},
+
+
 };

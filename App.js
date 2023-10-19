@@ -78,6 +78,7 @@ import ChangePassword from "./src/screens/ProfileSetings/ChangePassword";
 
 import { LoaderProvider } from "./src/componets/LoaderContext";
 import CameraScreen from "./src/screens/form/CameraScreen";
+import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
 
@@ -329,6 +330,11 @@ export default function App() {
               <Stack.Screen
                 name="Camera"
                 component={CameraScreen}
+                options={{ animation: "none", headerShown: false }}
+              />
+              <Stack.Screen
+                name="ForgotPassword"
+                component={ForgotPassword}
                 options={{ animation: "none", headerShown: false }}
               />
             </Stack.Navigator>

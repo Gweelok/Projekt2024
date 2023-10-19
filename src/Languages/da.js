@@ -76,10 +76,10 @@ export default {
 
   MyDraftsScreen: {
     Header: "Mine Kladder",
-    closeButtonTitle: "Slette kladde",
+    closeButtonTitle: "Slet kladde",
     closeButtonAsking: "Er du sikker på at du vil slette denne kladde?",
-    closeButtonAnswerYes: "Ja",
-    closeButtonAnswerNo: "Nej",
+    closeButtonAnswerYes: "Slet kladde",
+    closeButtonAnswerNo: "Annullér",
   },
   DescriptionField: {
     label: "Beskrivelse",
@@ -131,7 +131,7 @@ export default {
 
   ProblemComponent: {
     Header: "Problemet",
-    Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud, før tid.",
+    Body: "Der bruges en masse af jordens værdifulde råmaterialer på at producere elektronik. Og mange af disse ressourcer, går til spilde, fordi alt for meget elektronik bliver smidt ud før tid.",
   },
   SolutionComponent: {
     Header: "Løsningen",
@@ -184,10 +184,12 @@ export default {
   },
 
   ContactUs: {
+    Header:'Kontakt os',
     Name: "Navn",
-    Topic: "Enme",
+    Topic: "Emne",
     Message: "Besked",
-    SendMessage: "SEND BESKEND",
+    SendMessage: "Send besked",
+    TextOnTheTop:"Send os en besked via kontaktformularen. Vi svarer på din tilknyttede mail.",
   },
 
   thankYouScreen: {
@@ -198,4 +200,19 @@ export default {
   ArticleSlider: {
     header: "Læs også"
   },
+
+  ArticleScreen:{
+    Written:"Skrevet: XX/XX/XXXX",
+    Subheadline:"Underoverskrift",
+
+  },
+
+  
+  ForgotPasswordScreen: {
+    Header: "Glemt kodeord",
+    Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
+    SendLinkButton: "Send link"
+},
+
+
 };

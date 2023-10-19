@@ -11,7 +11,7 @@ const SaleSvg = (props) => (
         data-name="Path 47"
       />
       <Path
-        fill="#60605d"
+          fill="#9E9E9E"
         d="M273.688 250.406h22.073v7.946h-22.073z"
         data-name="Rectangle 169"
       />
@@ -99,7 +99,7 @@ const SaleSvg = (props) => (
         <Path stroke="none" d="M312.309 265.598h6v9h-6z" />
         <Path fill="none" d="M312.809 266.098h5v8h-5z" />
       </G>
-      <Rect
+    <Rect
         width={8}
         height={14}
         fill="#1c4b3d"
@@ -120,7 +120,7 @@ const SaleSvg = (props) => (
         <Path stroke="none" d="M303.309 265.598h6v9h-6z" />
         <Path fill="none" d="M303.809 266.098h5v8h-5z" />
       </G>
-      <Rect
+     <Rect
         width={8}
         height={14}
         fill="#1c4b3d"
@@ -162,28 +162,8 @@ const SaleSvg = (props) => (
         <Path stroke="none" d="M321.309 250.598h6v9h-6z" />
         <Path fill="none" d="M321.809 251.098h5v8h-5z" />
       </G>
-      <Rect
-        width={8}
-        height={14}
-        fill="#1c4b3d"
-        data-name="Rectangle 276"
-        rx={1}
-        transform="translate(329.309 248.598)"
-      />
-      <G
-        fill="#dae2e0"
-        stroke="#dae2e0"
-        data-name="Ellipse 71"
-        transform="translate(350.6 241)"
-      >
-        <Circle cx={0.5} cy={0.5} r={0.5} stroke="none" />
-        <Circle cx={0.5} cy={0.5} fill="none" />
-      </G>
-      <G fill="#dae2e0" stroke="#dae2e0" data-name="Rectangle 277">
-        <Path stroke="none" d="M330.309 250.598h6v9h-6z" />
-        <Path fill="none" d="M330.809 251.098h5v8h-5z" />
-      </G>
-      <Rect
+
+       <Rect
         width={8}
         height={14}
         fill="#1c4b3d"
@@ -204,81 +184,7 @@ const SaleSvg = (props) => (
         <Path stroke="none" d="M321.309 265.598h6v9h-6z" />
         <Path fill="none" d="M321.809 266.098h5v8h-5z" />
       </G>
-      <Rect
-        width={8}
-        height={14}
-        fill="#1c4b3d"
-        data-name="Rectangle 280"
-        rx={1}
-        transform="translate(329.309 263.598)"
-      />
-      <G
-        fill="#dae2e0"
-        stroke="#dae2e0"
-        data-name="Ellipse 73"
-        transform="translate(350.6 256)"
-      >
-        <Circle cx={0.5} cy={0.5} r={0.5} stroke="none" />
-        <Circle cx={0.5} cy={0.5} fill="none" />
-      </G>
-      <G fill="#dae2e0" stroke="#dae2e0" data-name="Rectangle 281">
-        <Path stroke="none" d="M330.309 265.598h6v9h-6z" />
-        <Path fill="none" d="M330.809 266.098h5v8h-5z" />
-      </G>
-      <Rect
-        width={8}
-        height={14}
-        fill="#1c4b3d"
-        data-name="Rectangle 282"
-        rx={1}
-        transform="translate(320.309 263.598)"
-      />
-      <G
-        fill="#dae2e0"
-        stroke="#dae2e0"
-        data-name="Ellipse 74"
-        transform="translate(324.309 275.598)"
-      >
-        <Circle cx={0.5} cy={0.5} r={0.5} stroke="none" />
-        <Circle cx={0.5} cy={0.5} fill="none" />
-      </G>
-      <G fill="#dae2e0" stroke="#dae2e0" data-name="Rectangle 283">
-        <Path stroke="none" d="M321.309 265.598h6v9h-6z" />
-        <Path fill="none" d="M321.809 266.098h5v8h-5z" />
-      </G>
-      <Rect
-        width={8}
-        height={14}
-        fill="#1c4b3d"
-        data-name="Rectangle 284"
-        rx={1}
-        transform="translate(329.309 263.598)"
-      />
-      <G
-        fill="#dae2e0"
-        stroke="#dae2e0"
-        data-name="Ellipse 75"
-        transform="translate(350.6 256)"
-      >
-        <Circle cx={0.5} cy={0.5} r={0.5} stroke="none" />
-        <Circle cx={0.5} cy={0.5} fill="none" />
-      </G>
-      <G fill="#dae2e0" stroke="#dae2e0" data-name="Rectangle 285">
-        <Path stroke="none" d="M330.309 265.598h6v9h-6z" />
-        <Path fill="none" d="M330.809 266.098h5v8h-5z" />
-      </G>
-      <Text
-        fill="#dae2e0"
-        data-name="$"
-        fontFamily="Space Grotesk"
-        fontSize={8}
-        fontWeight={500}
-        transform="translate(282 257)"
-      >
-        <TSpan x={0} y={0}>
-          {"$"}
-        </TSpan>
-      </Text>
+
     </G>
   </Svg>
 );
