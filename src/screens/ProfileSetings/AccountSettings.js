@@ -69,7 +69,7 @@ const AccountSettings = () => {
                 <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)} 
                 </Text>
-                <Text style={stylesGlobal.optionalText}>
+                <Text style={[stylesGlobal.optionalText,{marginLeft: 0, marginBottom: 5 }]}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
                 </Text>
                 </View>
@@ -105,7 +105,7 @@ const AccountSettings = () => {
                 <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)} 
                 </Text>
-                <Text style={stylesGlobal.optionalText}>
+                <Text style={[stylesGlobal.optionalText,{marginLeft: 0, marginBottom: 5 }]}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
                 </Text>
                 </View>
@@ -134,8 +134,6 @@ const AccountSettings = () => {
             {/* Section 2 */}
             {/* ChangeCode */}
             <View style={[styles1.section]}>
-//                 <Text style={stylesGlobal.formLabel}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
-//                 <ListLanguages />
                 <MenuItems  msg={t('AccountSettingsScreen.ChangeCode',currentLanguage)} onPress= {handleChangePasswordPress}/>
             </View>
 

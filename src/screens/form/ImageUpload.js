@@ -80,7 +80,7 @@ const ImageUpload = ({ onImageSelect,data}) => {
       <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
       {t("ImageUpload.chooseImage", currentLanguage)}
     </Text>
-    <Text style={[stylesGlobal.optionalText,{marginLeft: 5 }]}>
+    <Text style={[stylesGlobal.optionalText,{marginLeft: 5, marginBottom: 5 }]}>
     ({t("AccountSettingsScreen.Optional", currentLanguage)})
     </Text>
     </View>
