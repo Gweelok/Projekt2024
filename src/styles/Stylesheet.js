@@ -97,6 +97,23 @@ export const styles = StyleSheet.create({
     backgroundColor: Primarycolor3,
     flexDirection: "row",
   },
+  // Form labels
+  formLabel: {
+  fontFamily: "space-grotesk-bold",
+  color: Primarycolor1,
+  fontSize: 15,
+  marginLeft: 17,
+  marginBottom: 10,
+  marginTop: 5,
+  fontWeight: "bold",
+},
+// (optional) text style
+optionalText: {
+  color: Primarycolor1,
+  fontSize: 13,
+  fontWeight: "300",
+  fontFamily: "space-grotesk"
+},
   //Text for both menuitem and boxlink
   menuItem_text: {
     fontFamily: "space-grotesk-bold",

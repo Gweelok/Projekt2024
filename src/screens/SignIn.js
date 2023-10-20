@@ -78,6 +78,7 @@ const SignIn = ({ navigation }) => {
             <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
             <TextInput
                 placeholder="E-mail"
+                placeholderTextColor="#8EA59E"
                 value={email}
                 onChangeText={onChangeEmailHandler}
                 keyboardType="email-address"
@@ -91,7 +92,8 @@ const SignIn = ({ navigation }) => {
                 <TextInput
                     value={password}
                     onChangeText={CheckPassword}
-                    placeholder={'Kodeord'}
+                    placeholder={`${t("SignUpScreen.password", currentLanguage)}`}                   
+                    placeholderTextColor="#8EA59E"
                     keyboardType={'default'}
                     secureTextEntry={!showPassword}
                     style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}

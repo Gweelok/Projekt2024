@@ -58,6 +58,7 @@ export default {
 
   DescriptionField: {
     label: "Description",
+    placeholder: "Enter description here..."
   },
 
   MyDraftsScreen: {
@@ -68,23 +69,32 @@ export default {
     closeButtonAnswerNo: "Cancel",
   },
 
+  ImageUpload: {
+    chooseImage: "Choose image"
+  },
+
   CategoryDropdown: {
     selectCategory: "Category",
+    placeholder: "Choose category"
   },
 
   BrandDropdown: {
     selectBrand: "Brand",
+    placeholder: "Choose brand"
   },
 
   ModelDropdown: {
     selectModel: "Model",
+    placeholder: "Choose model"
   },
 
   ConditionDropdown: {
     selectCondition: "Condition",
+    placeholder: "Choose condition"
   },
   ProductDropdown: {
     selectProduct: "Product",
+    placeholder: "Choose product"
   },
 
   NotificationsScreen: {
@@ -157,7 +167,7 @@ export default {
   },
   SolutionTimeline: {
     Header: "The Solution",
-    Body: "With this we extend a products lifespan and strengthen the Cirkular Economy",
+    Body: "This way we extend the lifespan of the devices and strengthen the Circular Economy",
     Bottom: {
       first: "0 years",
       second: "5 years",

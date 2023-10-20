@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { Primarycolor1, Primarycolor3 } from "../../styles/Stylesheet";
+import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
@@ -38,6 +38,9 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
 
     return (
         <View style={productDropdownContainer.container}>
+            <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop:15 }]}>
+                {t("ProductDropdown.selectProduct", currentLanguage)}
+            </Text>
             <TouchableOpacity
                 style={[
                     productDropdownContainer.dropdownButton,
@@ -53,13 +56,10 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data }) => {
                 }}
                 disabled={!categorySelected}
             >
-                <Text style={productDropdownContainer.dropdownText}>
-                    {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.selectProduct", currentLanguage) : "Product")}
+                <Text style={[productDropdownContainer.dropdownText, !selectedProduct && {color: "#8EA59E"}]}>
+                    {selectedProduct?.productName || (!categorySelected ? t("ProductDropdown.placeholder", currentLanguage) : "Product")}
                 </Text>
-                <AntDesign
-                    name={isOpen ? "caretup" : "caretdown"}
-                    size={20}
-                />
+                <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
 
             {isOpen && (
@@ -102,7 +102,6 @@ const productDropdownContainer = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginTop: 10,
     },
     dropdownList: {
         borderWidth: 3,
