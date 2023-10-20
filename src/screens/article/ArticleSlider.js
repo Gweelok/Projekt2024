@@ -11,7 +11,6 @@ import {
 import { Primarycolor1 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { styles } from "../../styles/Stylesheet";
-import GlobalStyle from "../../styles/GlobalStyle";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -80,7 +79,6 @@ const ArticleSlider = () => {
     </TouchableOpacity>
   );
   return (
-    <View style={GlobalStyle.BodyWrapper}>
       <View style={Slidestyles.container}>
         <Text style={[styles.menuItem_text, { marginTop: 15 }]}>
           {t("ArticleSlider.header", currentLanguage)}
@@ -118,7 +116,6 @@ const ArticleSlider = () => {
           ))}
         </View>
       </View>
-    </View>
   );
 };
 
