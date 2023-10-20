@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity, BackHandler} from "react-native";
 import { styles, Backgroundstyle, Buttons } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { firebaseAurth } from "../../utils/Firebase";
@@ -10,15 +10,20 @@ const LogoutConfirmation = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
 
   const handleLogout = () => {
-    signOut(firebaseAurth) 
+    signOut(firebaseAurth)
       .then(() => {
-        navigation.navigate("Sign in");  
+        // Reset the navigation stack to prevent going back
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Sign in' }],
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+ 
   return (
     <View style={Backgroundstyle.interactive_screens}>
       <Text style={styles.Header_Primarycolor1}>
