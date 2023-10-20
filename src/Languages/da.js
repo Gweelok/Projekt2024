@@ -207,6 +207,10 @@ export default {
       "Tak for at gøre os opmærksomme på dette. Vi vil tjekke op på det og registrere ændringen til Uptaineren",
   },
 
+  ArticleSlider: {
+    header: "Læs også"
+  },
+
   ArticleScreen:{
     Written:"Skrevet: XX/XX/XXXX",
     Subheadline:"Underoverskrift",

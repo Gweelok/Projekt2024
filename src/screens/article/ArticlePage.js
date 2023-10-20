@@ -10,6 +10,7 @@ import GlobalStyle from "../../styles/GlobalStyle";
 import {styles} from "../../styles/Stylesheet";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import ArticleSlider from "./ArticleSlider";
 import BackButton from "../../componets/BackButton";
 import {useNavigation} from "@react-navigation/native";
 import {Buttons, HeaderText, Primarycolor1} from "../../styles/Stylesheet";
@@ -58,7 +59,8 @@ const ArticlePage = ({ route }) => {
             <Text style={styles.article_text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aspernatur commodi cumque cupiditate eaque earum eum expedita laudantium libero magnam minima, mollitia necessitatibus obcaecati perferendis, quis reiciendis suscipit temporibus.</Text>
           <Text style={styles1.writtenPlaceholder1}>{t('ArticleScreen.Subheadline',currentLanguage)}</Text>
             <Text style={styles.article_text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aut doloribus ducimus esse exercitationem fuga hic illo inventore ipsa ipsum iusto molestiae nihil, non odio praesentium similique ullam voluptas!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deserunt dolores dolorum incidunt laboriosam natus odio officia quia quisquam sit. Atque fuga magni nam neque quae. Error eum illo sint.</Text>
-          </View>
+            <ArticleSlider/>
+        </View>
         </ScrollViewComponent>
         <Navigationbar/>
       </StatusBarComponent>
