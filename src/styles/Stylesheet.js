@@ -156,7 +156,7 @@ optionalText: {
     height: 30,
     justifyContent: "center",
     alignItems: "center", // Adjust spacing as needed
-    marginLeft: 70,
+    marginLeft: 10,
   },
   badgeText: {
     color: "white", // Customize the text color as needed
