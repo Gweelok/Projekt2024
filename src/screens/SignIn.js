@@ -14,6 +14,7 @@ import { firebaseAurth } from '../utils/Firebase';
 import GlobalStyle from "../styles/GlobalStyle";
 import ForgotPassword from './ForgotPassword';
 import ErrorBanner from './ErrorBanner';
+import { onAuthStateChanged } from '@firebase/auth';
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');
@@ -24,7 +25,7 @@ const SignIn = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState("Error msg");
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [emailValid, setEmailValid] = useState(true);
-
+    const [userLogged, setUserLogged] = useState(false);
     const { currentLanguage, setLanguage } = useLanguage();
 
     //To check on email
@@ -66,6 +67,18 @@ const SignIn = ({ navigation }) => {
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
     };
+
+    //Fn to navigate to the Homepage if the user is logged in
+    onAuthStateChanged(firebaseAurth, async (user) => {
+        if (user) {
+            setUserLogged(true);
+        } else {
+            setUserLogged(false);
+        }
+    });
+    if (userLogged) {
+        navigation.navigate("Homepage");
+    }
 
     let Header= t('SignInScreen.Headline', currentLanguage);
 
