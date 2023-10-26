@@ -223,6 +223,26 @@ export default {
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
     SendLinkButton: "Send link"
 },
+  StatsPage:{
+    Header: "Indvirkning",
+    MainButton:"Samlet",
+    SecondaryButton:"Dine",
+    AmountReduced: "Mængde af genbrugte varer",
+    InTotal:"I alt",
+    SoFar:"Så langt i dag",
+    AmountCO2:"Mængde sparet CO2",
+    Yesterday:"I går",
+    kgCO2:"1 kg. CO2 svarer til \"Fact Here\"",
+    Amount:"Altså 4.400 t. Vil svare til \"BEREGNING HER\"",
+    BestAcheieve:"Bedst opnåede Uptainers i denne måned",
+    MostVisitedUptainer:"Din mest besøgte Uptainer",
+    ItemsReused:"Genbrugte varer",
+    CO2Save: "CO2 sparet",
+    Comunity: "Det bæredygtige Forsamlingshus",
+    Info: "Lær, hvordan du får dine oplysninger her",
 
+
+
+  },
 
 };
