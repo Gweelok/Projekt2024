@@ -32,7 +32,7 @@ const Stat = ({ navigation }) => {
 
     return (
         <View style={[Backgroundstyle.interactive_screens,{marginLeft: "4%", marginRight: "4%"}]}>
-            <View style={{ flexDirection: "row", alignItems: "center", right: 90, }}>
+            <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", }}>
                 <BackButton onPress={handlePress} />
                 <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
                     <Text>{t("StatsPage.Header", currentLanguage)}</Text>
