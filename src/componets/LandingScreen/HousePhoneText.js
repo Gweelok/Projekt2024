@@ -25,7 +25,7 @@ const HousePhoneText = ({showPhone, textUnderHouse}) =>{
                 duration: 2000, // Duration of the animation in milliseconds
                 useNativeDriver: false, // Use native driver for better performance
             }).start();
-        }, 1340);
+        }, 1100);
 
         // Clear the timeout if the component is unmounted before the timeout completes
         return () => clearTimeout(timer);
