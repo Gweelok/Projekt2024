@@ -58,33 +58,43 @@ export default {
 
   DescriptionField: {
     label: "Description",
+    placeholder: "Enter description here..."
   },
 
   MyDraftsScreen: {
     Header: "My Drafts",
     closeButtonTitle: "Delete draft",
     closeButtonAsking: "Are you sure you want to delete this draft",
-    closeButtonAnswerYes: "Yes",
-    closeButtonAnswerNo: "No",
+    closeButtonAnswerYes: "Delete draft",
+    closeButtonAnswerNo: "Cancel",
+  },
+
+  ImageUpload: {
+    chooseImage: "Choose image"
   },
 
   CategoryDropdown: {
     selectCategory: "Category",
+    placeholder: "Choose category"
   },
 
   BrandDropdown: {
     selectBrand: "Brand",
+    placeholder: "Choose brand"
   },
 
   ModelDropdown: {
     selectModel: "Model",
+    placeholder: "Choose model"
   },
 
   ConditionDropdown: {
     selectCondition: "Condition",
+    placeholder: "Choose condition"
   },
   ProductDropdown: {
     selectProduct: "Product",
+    placeholder: "Choose product"
   },
 
   NotificationsScreen: {
@@ -102,7 +112,7 @@ export default {
     Optional: "optional",
     HandleSave: "Information is saved",
     HandleDeleteAccount: "Account is deleted",
-    Language: "language",
+    Language: "Language",
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",
@@ -129,7 +139,7 @@ export default {
 
   ProblemComponent: {
     Header: "The Problem",
-    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronics are trown out before its end-of-life.",
+    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronic devices are trown out before its end-of-life.",
   },
   QrScannerScreen: {
     Scan: "Scan to Updropp",
@@ -157,7 +167,7 @@ export default {
   },
   SolutionTimeline: {
     Header: "The Solution",
-    Body: "With this we extend a products lifespan and strengthen the Cirkular Economy",
+    Body: "This way we extend the lifespan of the devices and strengthen the Circular Economy",
     Bottom: {
       first: "0 years",
       second: "5 years",
@@ -182,14 +192,34 @@ export default {
   },
 
   ContactUs: {
+    Header:'Contact os',
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
-    SendMessage: "Send Message",
+    SendMessage: "Send message",
+    TextOnTheTop:"Send us a message through the contact form. Vi vil answer on your associated mail.",
+
   },
 
   thankYouScreen: {
     header:
       "Thanks for informing us. We will check up on this and update the Uptainer",
   },
+
+  ArticleSlider: {
+    header: "Read also"
+  },
+  
+  ArticleScreen:{
+    Written:"Written at: XX/XX/XXXX",
+    Subheadline:"Subheadline",
+  },
+
+  ForgotPasswordScreen: {
+    Header: "Forgot password",
+    Description: "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link"
+},
+
+
 };

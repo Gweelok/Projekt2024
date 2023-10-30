@@ -12,6 +12,7 @@ import {t, useLanguage} from "../Languages/LanguageHandler"; // or any other ico
 import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
 import { firebaseAurth } from '../utils/Firebase';
 import GlobalStyle from "../styles/GlobalStyle";
+import ForgotPassword from './ForgotPassword';
 import ErrorBanner from './ErrorBanner';
 
 const SignIn = ({ navigation }) => {
@@ -77,6 +78,7 @@ const SignIn = ({ navigation }) => {
             <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
             <TextInput
                 placeholder="E-mail"
+                placeholderTextColor="#8EA59E"
                 value={email}
                 onChangeText={onChangeEmailHandler}
                 keyboardType="email-address"
@@ -90,7 +92,8 @@ const SignIn = ({ navigation }) => {
                 <TextInput
                     value={password}
                     onChangeText={CheckPassword}
-                    placeholder={'Kodeord'}
+                    placeholder={`${t("SignUpScreen.password", currentLanguage)}`}                   
+                    placeholderTextColor="#8EA59E"
                     keyboardType={'default'}
                     secureTextEntry={!showPassword}
                     style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
@@ -110,7 +113,7 @@ const SignIn = ({ navigation }) => {
                 <Text style={Buttons.main_buttonText}>{Header}</Text>
             </Pressable>
 
-            <Pressable onPress={() => {  }}>
+            <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
                 <Text style={[styles.link, {marginTop: 15}]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
             </Pressable>
 
