@@ -395,6 +395,7 @@ export const HeaderText = StyleSheet.create({
     //marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
+
   },
   Header_Primarycolor1: {
     color: Primarycolor1,

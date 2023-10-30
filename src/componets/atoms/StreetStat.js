@@ -10,7 +10,7 @@ export const StreetStat = ({navigation,route}) => {
 
     return(
     <View style={[GlobalStyle, {alignContent: "center", marginTop: 15}]}>
-        <Text style={styles.paragraph_text}>{t('StatsPage.Comunity', currentLanguage)}</Text>
+        <Text style={[styles.paragraph_text,{fontSize: 19}]}>KU Lighthouse</Text>
         <Text style={[styles.link,{textAlign: "left", marginTop:5, textDecorationLine: "none",}]}>Norrebrogade 70, Horsens</Text>
         <View style={GlobalStyle}>
             <Text style={[Buttons.main_button,{paddingTop: 9, height:40, marginTop:10, width: "100%", color:"white"}]}>5000 {t('StatsPage.ItemsReused', currentLanguage)}</Text>

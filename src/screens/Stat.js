@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { styles, Backgroundstyle, HeaderText, Buttons } from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
@@ -13,6 +13,7 @@ import StreetStat from "../componets/atoms/StreetStat";
 import VisitedUptainerStat from "../componets/atoms/VisitedUptainerStat";
 import Svg, { Path } from "react-native-svg";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
+import YourStats from "./YourStats";
 
 
 
@@ -22,35 +23,57 @@ const Stat = ({ navigation }) => {
     const handlePress = () => {
         navigation.goBack();
     };
+    const [activeButton, setActiveButton] = useState('main'); // 'main' or 'secondary'
+
+    const handlePress1 = (button) => {
+        setActiveButton(button);
+    };
 
 
     return (
         <View style={[Backgroundstyle.interactive_screens,{marginLeft: "4%", marginRight: "4%"}]}>
-            <View style={{ flexDirection: "row", alignItems: "center", right: 70, }}>
+            <View style={{ flexDirection: "row", alignItems: "center", right: 90, }}>
                 <BackButton onPress={handlePress} />
-                <Text style={[HeaderText.Header]}>
+                <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
                     <Text>{t("StatsPage.Header", currentLanguage)}</Text>
                 </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
                 <View style={{ marginRight: 10 }}>
-                    <TouchableOpacity style={[Buttons.main_button, { width: 150, height: 41 }]}>
-                        <Text style={Buttons.main_buttonText}>{t('StatsPage.MainButton', currentLanguage)}</Text>
+                    <TouchableOpacity
+                        style={[
+                            activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
+                            { width: 150, height: 41 }
+                        ]}
+                        onPress={() => handlePress1('main')}
+                    >
+                        <Text style={activeButton === 'main' ? Buttons.main_buttonText : Buttons.secondary_buttonText}>
+                            {t('StatsPage.MainButton', currentLanguage)}
+                        </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginRight: 10 }}>
-                    <TouchableOpacity style={[Buttons.secondary_button, { width: 150, height: 41 }]}>
-                        <Text style={Buttons.secondary_buttonText}>{t('StatsPage.SecondaryButton', currentLanguage)}</Text>
+                    <TouchableOpacity
+                        style={[
+                            activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
+                            { width: 150, height: 41 }
+                        ]}
+                        onPress={() => handlePress1('secondary')}
+                    >
+                        <Text style={activeButton === 'secondary' ? Buttons.main_buttonText : Buttons.secondary_buttonText}>
+                            {t('StatsPage.SecondaryButton', currentLanguage)}
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            <View style={{ marginTop: 20, right: 65 }}>
-                <Text style={styles.article_text}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
-            </View>
 
             <ScrollViewComponent>
-                <View style={{ justifyContent: "space-between", marginTop: 20 }}>
+                {activeButton === 'main' ? (
+                <View style={{ justifyContent: "space-between", marginTop: 10 }}>
+                    <View style={{ marginTop: 15, marginBottom:10  }}>
+                        <Text style={[styles.article_text,{fontWeight: "bold", fontSize: 18}]}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
+                    </View>
                     <View style={GlobalStyle}>
                         <View style={{ flex: 1, }}>
                             <View style={[Backgroundstyle.informationScreens, { width: 330, paddingTop: 0 }]}>
@@ -84,7 +107,7 @@ const Stat = ({ navigation }) => {
                         <ChartForStats />
                     </View>
                     <View style={{ marginTop: 2, marginBottom:20}}>
-                        <Text style={styles.article_text}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
+                        <Text style={[styles.article_text,{fontWeight: "bold", fontSize: 18}]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                     </View>
                     <View style={GlobalStyle}>
                         <View style={{ flex: 1, }}>
@@ -93,7 +116,7 @@ const Stat = ({ navigation }) => {
                                     {t('StatsPage.SoFar', currentLanguage)}
                                 </Text>
                                 <View style={{ flexDirection: "row" }}>
-                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000</Text>
+                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000 t.</Text>
                                     <View style={{ alignItems: 'center' }}>
                                         <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center' }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
@@ -111,7 +134,7 @@ const Stat = ({ navigation }) => {
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
                                     {t('StatsPage.InTotal', currentLanguage)}
                                 </Text>
-                                <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000</Text>
+                                <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000 t.</Text>
                             </View>
                         </View>
                     </View>
@@ -136,6 +159,9 @@ const Stat = ({ navigation }) => {
                         <VisitedUptainerStat/>
                     </View>
                 </View>
+                ) : (
+                    <YourStats/>
+                )}
             </ScrollViewComponent>
             <Navigationbar navigation={navigation} />
         </View>

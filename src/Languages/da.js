@@ -233,13 +233,15 @@ export default {
     AmountCO2:"Mængden af CO2 sparet",
     Yesterday:"I går",
     kgCO2:"1 kg. CO2 er tilsvarende til *FACT HERE*",
-    Amount:"Så 4,400t. svarer til *CALCULATION HERE*",
+    Amount:"Så 4.400t. svarer til *CALCULATION HERE*",
     BestAcheieve:"Denne måneds bedst præserende Uptainere",
     MostVisitedUptainer:"Din mest besøgte Uptainer",
     ItemsReused:"produkter sparet",
     CO2Save: " CO2 sparet",
     Comunity: "Det bæredygtige Forsamlingshus",
     Info: "Lær hvordan vi får vores informationer her",
+    ItemsRecicled:"produkter genbrugt",
+
 
 
 

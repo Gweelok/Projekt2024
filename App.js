@@ -81,6 +81,7 @@ import CameraScreen from "./src/screens/form/CameraScreen";
 import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
+import YourStats from "./src/screens/YourStats";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -245,6 +246,11 @@ export default function App() {
                   headerShown: false,
                   gestureEnabled: false,
                 }}
+              />
+              <Stack.Screen
+                  name="YourStats"
+                  component={YourStats}
+                  options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Add"

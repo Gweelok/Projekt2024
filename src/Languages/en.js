@@ -230,13 +230,15 @@ StatsPage:{
   AmountCO2:"Amount of CO2 saved",
   Yesterday:"Yesterday",
   kgCO2:"1 kg. CO2 is equivalent to \"Fact Here\"",
-  Amount:"So 4,400 t. Would amount to \"CALCULATION HERE\"",
+  Amount:"So 4.400 t. Would amount to \"CALCULATION HERE\"",
   BestAcheieve:"Best achieving Uptainers this month",
   MostVisitedUptainer:"Your most visited Uptainer",
   ItemsReused:"Items reused",
   CO2Save: "CO2 Saved",
   Comunity: "The sustainable community building",
-  Info: "Learn how to get your information here",
+  Info: "Learn how we get our information here",
+  ItemsRecicled:"items reused",
+
 },
 
 };
