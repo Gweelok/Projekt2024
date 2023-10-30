@@ -162,7 +162,7 @@ export default function App() {
                 name="Homepage"
                 component={Home}
                 options={{
-                  headerShown: true,
+                  headerShown: false,
                   animation: "none",
                   headerBackVisible: false,
                 }}
