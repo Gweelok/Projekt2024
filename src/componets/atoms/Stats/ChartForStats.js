@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, TouchableOpacity, Modal, Text } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
-import {Buttons, Primarycolor1} from "../../styles/Stylesheet";
+import {Buttons, Primarycolor1} from "../../../styles/Stylesheet";
 import Icon from "react-native-vector-icons/AntDesign";
 
 const ChartForStats = () => {

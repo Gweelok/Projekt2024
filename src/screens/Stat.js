@@ -6,19 +6,21 @@ import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import BackButton from "../componets/BackButton";
 import GlobalStyle from "../styles/GlobalStyle";
-import ChartForStats from "../componets/atoms/ChartForStats";
+import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import the appropriate icon library
-import StreetStat from "../componets/atoms/StreetStat";
-import VisitedUptainerStat from "../componets/atoms/VisitedUptainerStat";
+import StreetStat from "../componets/atoms/Stats/StreetStat";
+import VisitedUptainerStat from "../componets/atoms/Stats/VisitedUptainerStat";
 import Svg, { Path } from "react-native-svg";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
 import YourStats from "./YourStats";
 
 
 
-const Stat = ({ navigation }) => {
+const Stat = () => {
     const { currentLanguage } = useLanguage();
+    const navigation = useNavigation();
+
 
     const handlePress = () => {
         navigation.goBack();
@@ -38,12 +40,12 @@ const Stat = ({ navigation }) => {
                     <Text>{t("StatsPage.Header", currentLanguage)}</Text>
                 </Text>
             </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
-                <View style={{ marginRight: 10 }}>
+            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, left:4 }}>
+                <View style={{ marginRight: 10, alignItems:"center", alignSelf:"center" }}>
                     <TouchableOpacity
                         style={[
                             activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
-                            { width: 150, height: 41 }
+                            { width: 155, height: 41 }
                         ]}
                         onPress={() => handlePress1('main')}
                     >
@@ -56,7 +58,7 @@ const Stat = ({ navigation }) => {
                     <TouchableOpacity
                         style={[
                             activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
-                            { width: 150, height: 41 }
+                            { width: 155, height: 41 }
                         ]}
                         onPress={() => handlePress1('secondary')}
                     >
@@ -163,7 +165,9 @@ const Stat = ({ navigation }) => {
                     <YourStats/>
                 )}
             </ScrollViewComponent>
+            <View style={{ width:"108%"}}>
             <Navigationbar navigation={navigation} />
+            </View>
         </View>
     );
 }

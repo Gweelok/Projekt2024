@@ -238,6 +238,11 @@ StatsPage:{
   Comunity: "The sustainable community building",
   Info: "Learn how we get our information here",
   ItemsRecicled:"items reused",
+  ItemsDonated:"Items donated",
+  ItemsCollected:"Items collected",
+  Overview:"Go to the overview of your items",
+  Social:"Share your impact with your friends",
+  GetInspired:"Get inspired",
 
 },
 

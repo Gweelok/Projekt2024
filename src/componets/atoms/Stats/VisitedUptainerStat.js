@@ -1,21 +1,23 @@
-import GlobalStyle from "../../styles/GlobalStyle";
-import {Pressable, Text, View,} from "react-native";
-import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../styles/Stylesheet";
+import GlobalStyle from "../../../styles/GlobalStyle";
+import {Pressable, Text, TouchableOpacity, View,} from "react-native";
+import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
 import React from "react";
-import {BoxLink} from "../../styles/BoxLink";
+import {BoxLink} from "../../../styles/BoxLink";
 import {AntDesign} from "@expo/vector-icons";
 import {msg} from "@babel/core/lib/config/validation/option-assertions";
-import { t, useLanguage} from "../../Languages/LanguageHandler";
+import { t, useLanguage} from "../../../Languages/LanguageHandler";
+import {useNavigation} from "@react-navigation/native";
 
-export const VisitedUptainerStat = ({navigation,route}) => {
+export const VisitedUptainerStat = () => {
     const { currentLanguage } = useLanguage();
+    const navigation = useNavigation();
     const location = "COOP 365";
     const address = "/Norrebrogade 70, Horsens";
     return(
         <View style={GlobalStyle}>
             <View>
                 <View>
-                    <Pressable >
+                    <TouchableOpacity >
                         <View style={styles.boxlink}>
                             <View style={GlobalStyle.BodyWrapper}>
                                 <Text style={styles.menuItem_text}>{location} </Text>
@@ -25,7 +27,7 @@ export const VisitedUptainerStat = ({navigation,route}) => {
                                 <AntDesign name="right" size={30} style={styles.menuItem_arrow} />
                             </View>
                         </View>
-                    </Pressable>
+                    </TouchableOpacity>
                 </View>
                 <View style={GlobalStyle}>
                     <Text style={[Buttons.main_button,{paddingTop: 9, height:40, width: "100%", color:"white"}]}>5000 {t('StatsPage.ItemsRecicled', currentLanguage)}</Text>
@@ -36,7 +38,9 @@ export const VisitedUptainerStat = ({navigation,route}) => {
             </View>
 
             <View>
+                <TouchableOpacity>
             <BoxLink msg={t('StatsPage.Info', currentLanguage)}  style={GlobalStyle.BodyWrapper}/>
+                </TouchableOpacity>
             </View>
         </View>
     )

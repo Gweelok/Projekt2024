@@ -1,8 +1,8 @@
-import GlobalStyle from "../../styles/GlobalStyle";
+import GlobalStyle from "../../../styles/GlobalStyle";
 import {Text, View,} from "react-native";
-import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../styles/Stylesheet";
+import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
 import React from "react";
-import { t, useLanguage} from "../../Languages/LanguageHandler";
+import { t, useLanguage} from "../../../Languages/LanguageHandler";
 
 export const StreetStat = ({navigation,route}) => {
     const { currentLanguage } = useLanguage();

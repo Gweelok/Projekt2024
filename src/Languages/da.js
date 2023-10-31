@@ -241,6 +241,13 @@ export default {
     Comunity: "Det bæredygtige Forsamlingshus",
     Info: "Lær hvordan vi får vores informationer her",
     ItemsRecicled:"produkter genbrugt",
+    ItemsDonated:"Genstande doneret",
+    ItemsCollected:"Genstande hentet",
+    Overview:"Gå til overblikket af dine produkter",
+    Social:"Del din påvirkning med dine venner",
+    GetInspired:"Bliv inspireret",
+
+
 
 
 
