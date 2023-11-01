@@ -137,8 +137,8 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     position: "absolute",
     bottom: 0,
-    right: 0,
-    left: 0,
+    right: -5,
+    left: -5,
     elevation: 0,
     height: 60,
     backgroundColor: "#fff",
