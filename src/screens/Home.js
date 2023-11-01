@@ -26,7 +26,7 @@ const Home = ({ navigation }) => {
   const [search, onChangeSearch] = useState("");
 
   return (
-    <View style={[Backgroundstyle.interactive_screens, { paddingTop: 0 }]}>
+    <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
         <View style={styles.container}>
           <TextInput
@@ -42,9 +42,9 @@ const Home = ({ navigation }) => {
             color={Primarycolor1}
           />
         </View>
-        {/*ScrollViewComponent is deleted here and moved to sortUptainer*/ }
-          <SortUptainers navigation={navigation} />    
-        
+        {/*ScrollViewComponent is deleted here and moved to sortUptainer*/}
+        <SortUptainers navigation={navigation} />
+
         <Navigationbar navigation={navigation} />
       </View>
     </View>

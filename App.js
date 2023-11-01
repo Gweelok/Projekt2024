@@ -161,7 +161,11 @@ export default function App() {
               <Stack.Screen
                 name="Homepage"
                 component={Home}
-                options={{ animation: "none" }}
+                options={{
+                  headerShown: false,
+                  animation: "none",
+                  headerBackVisible: false,
+                }}
               />
               <Stack.Screen name="DetailView" component={DetailView} />
               <Stack.Screen
