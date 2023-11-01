@@ -7,6 +7,7 @@ import BackButton from "../../componets/BackButton"; // Make sure to import this
 import { useNavigation } from "@react-navigation/native";
 import { NavigationActions as navigation } from "react-navigation";
 import {t,useLanguage} from "../../Languages/LanguageHandler";
+import {items} from "../../utils/SeedData";
 
 const ConditionDropdown = ({ onConditionSelect, data }) => {
     const { currentLanguage } = useLanguage();
@@ -77,13 +78,9 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                     <View style={conditionDropdownContainer.topBar}>
                         <BackButton onPress={handleBack}></BackButton>
                         <View style={conditionDropdownContainer.searchContainer}>
-                            <Ionicons name="search" size={20} color="rgba(-1, 129, 90, 0.2)" />
-                            <TextInput
-                                style={conditionDropdownContainer.input}
-                                placeholderTextColor="rgba(-1, 128, 0, 0.2)"
-                                onChangeText={handleSearch}
-                                placeholder={"Search for condition"}
-                            />
+                            <Text style={[styles.paragraph_text, { fontWeight: "bold" }]}>
+                                {t("Dropdown.Condition", currentLanguage)}
+                            </Text>
                         </View>
                     </View>
                     <ScrollView style={conditionDropdownContainer.dropdownList}>
@@ -98,6 +95,10 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                                 <Text style={conditionDropdownContainer.dropdownText}>{condition}</Text>
                             </TouchableOpacity>
                         ))}
+                        <Text style={[styles.article_text, { textAlign: "center", marginTop:10 }]}>
+                            {t("Dropdown.Text", currentLanguage)}
+                        </Text>
+
                     </ScrollView>
                 </View>
             </Modal>

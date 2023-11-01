@@ -87,7 +87,7 @@ const ProductDropdown = ({ onProductSelect, data }) => {
                                 style={productDropdownContainer.input}
                                 placeholderTextColor="rgba(-1, 128, 0, 0.2)"
                                 onChangeText={handleSearch}
-                                placeholder={"Search for product"}
+                                placeholder={t("Dropdown.Product", currentLanguage)}
                             />
                         </View>
                         <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>

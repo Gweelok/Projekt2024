@@ -98,7 +98,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
                                     style={brandDropdownContainer.input}
                                     placeholderTextColor="rgba(-1, 128, 0, 0.2)"
                                     onChangeText={handleSearch}
-                                    placeholder={"Search for brand"}
+                                    placeholder={t("Dropdown.Brand", currentLanguage)}
                                 />
                             </View>
                             <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>
