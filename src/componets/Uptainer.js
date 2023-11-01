@@ -83,7 +83,8 @@ const Uptainer = ({ uptainerData }) => {
           navigation.navigate("UptainerDetails", {
             uptainerData: uptainerData,
           });
-        }}>
+        }}
+      >
         <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
         <Text style={{ fontSize: 18, color: Primarycolor1 }}>
           {uptainerData.uptainerStreet}
@@ -92,6 +93,7 @@ const Uptainer = ({ uptainerData }) => {
 
       <FlatList
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         data={pairedData}
         keyExtractor={(item, index) => index.toString()}
         style={{ marginBottom: 5, marginTop: 5 }}
@@ -108,7 +110,8 @@ const Uptainer = ({ uptainerData }) => {
                   imageUrl: item[0]?.imageUrl,
                   uptainer: uptainerData,
                 })
-              }>
+              }
+            >
               <View style={styling.item}>
                 <Image
                   source={{ uri: item[0]?.imageUrl }}
@@ -128,7 +131,8 @@ const Uptainer = ({ uptainerData }) => {
                     imageUrl: item[1]?.imageUrl,
                     uptainer: uptainerData,
                   })
-                }>
+                }
+              >
                 <View style={styling.item}>
                   <Image
                     source={{ uri: item[1]?.imageUrl }}
