@@ -14,7 +14,8 @@ const Customize = ({top,image,bottom}) =>{
 const styling = StyleSheet.create({
     top:{fontSize: 35,
         fontFamily: "space-grotesk-bold",
-        color:Primarycolor1
+        color:Primarycolor1,
+        marginLeft:17,
     },
     imageContainer:{
         flex:3,
