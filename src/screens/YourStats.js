@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import {Backgroundstyle, HeaderText, Primarycolor1, styles} from "../styles/Stylesheet";
+import { Backgroundstyle, HeaderText, Primarycolor1, styles } from "../styles/Stylesheet";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import GlobalStyle from "../styles/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
@@ -18,17 +18,17 @@ const YourStats = () => {
     return (
         <ScrollViewComponent>
             <View>
-                <View style={{  marginTop: 25, marginBottom: 10, backgroundColor: 'white', borderColor: 'gray' }}>
+                <View style={{ marginTop: 25, marginBottom: 10, backgroundColor: 'white', borderColor: 'gray' }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
                 </View>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10, width: 340 }}>
-                    <View style={[Backgroundstyle.informationScreens, { width: 150, paddingTop: 0, marginRight: 10, alignItems: 'center', justifyContent: 'center' }]}>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10, marginLeft:10 }}>
+                    <View style={[Backgroundstyle.informationScreens, { flex: 1, paddingTop: 5, marginRight: 10, alignItems: 'center', justifyContent: 'center' }]}>
                         <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsDonated', currentLanguage)}</Text>
-                        <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 15, textAlign: 'center' }]} >5</Text>
+                        <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 10, textAlign: 'center', fontSize: 35 }]}>5</Text>
                     </View>
-                    <View style={[Backgroundstyle.informationScreens, { width: 150, paddingTop: 0, marginRight: 10, alignItems: 'center', justifyContent: 'center' }]}>
+                    <View style={[Backgroundstyle.informationScreens, { flex: 1, paddingTop: 5, marginRight: 10, alignItems: 'center', justifyContent: 'center' }]}>
                         <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsCollected', currentLanguage)}</Text>
-                        <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 15, textAlign: 'center' }]}>7</Text>
+                        <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 10, textAlign: 'center',  fontSize: 35 }]}>7</Text>
                     </View>
                 </View>
                 <View style={{ marginTop: 10 }}>
@@ -39,7 +39,7 @@ const YourStats = () => {
                 <View style={{ marginRight: 100, marginTop: 20, marginBottom: 20, backgroundColor: 'white', borderColor: 'gray' }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                 </View>
-                <View style={[Backgroundstyle.informationScreens, { width: "100%", paddingTop: 10, height: 80, alignItems: 'center', justifyContent: 'center' }]}>
+                <View style={[Backgroundstyle.informationScreens, { paddingTop: 10, height: 80, alignItems: 'center', justifyContent: 'center' }]}>
                     <View style={{ flexDirection: "row" }}>
                         <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>960 kg.</Text>
                     </View>
@@ -54,39 +54,39 @@ const YourStats = () => {
                         <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>{t('StatsPage.Amount', currentLanguage)} </Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop:20 }}>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20 }}>
                     <View style={[GlobalStyle, { flexDirection: 'row', alignItems: 'center', marginTop: 3, marginBottom: 3, marginRight: "4%" }]}>
-                        <View style={{ backgroundColor: Primarycolor1,alignItems: 'center', borderRadius:3,padding:4, height:35, width:35 }}>
+                        <View style={{ backgroundColor: Primarycolor1, alignItems: 'center', borderRadius: 3, padding: 4, height: 35, width: 35 }}>
                             <TouchableOpacity>
-                            <Icon name="facebook" size={30} color="white" />
+                                <Icon name="facebook" size={30} color="white" />
                             </TouchableOpacity>
                         </View>
                     </View>
 
                     <View style={[GlobalStyle, { flexDirection: 'row', alignItems: 'center', marginTop: 3, marginBottom: 3, marginRight: "4%" }]}>
-                        <View style={{ backgroundColor: Primarycolor1,alignItems: 'center', borderRadius:3,padding:2, height:35, width:35 }}>
-                           <TouchableOpacity>
-                            <Icon2 name="instagram" size={30} color="white" />
-                           </TouchableOpacity>
+                        <View style={{ backgroundColor: Primarycolor1, alignItems: 'center', borderRadius: 3, padding: 2, height: 35, width: 35 }}>
+                            <TouchableOpacity>
+                                <Icon2 name="instagram" size={30} color="white" />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <View style={{marginTop:10, alignItems:"center"}}>
+                <View style={{ marginTop: 10, alignItems: "center" }}>
                     <Text style={[styles.paragraph_text, { fontSize: 14, }]}>{t('StatsPage.Social', currentLanguage)} </Text>
                 </View>
                 <View>
-                    <View style={{ backgroundColor: Primarycolor1, height: 3, marginTop: 40, marginBottom:30 }} />
+                    <View style={{ backgroundColor: Primarycolor1, height: 3, marginTop: 40, marginBottom: 30 }} />
                 </View>
-                <View style={[GlobalStyle,{alignContent:"center",}]}>
-                    <Text style={[styles.menuItem_text, {marginBottom:20}]}>{t('StatsPage.MostVisitedUptainer', currentLanguage)}</Text>
+                <View style={[GlobalStyle, { alignContent: "center", }]}>
+                    <Text style={[styles.menuItem_text, { marginBottom: 20 }]}>{t('StatsPage.MostVisitedUptainer', currentLanguage)}</Text>
                 </View>
-                <YourVisitedUptainer/>
-                <YourVisitedUptainer/>
-                <YourVisitedUptainer/>
-                <View style={{  marginTop: 25, marginBottom: 10, backgroundColor: 'white', borderColor: 'gray' }}>
+                <YourVisitedUptainer />
+                <YourVisitedUptainer />
+                <YourVisitedUptainer />
+                <View style={{ marginTop: 25, marginBottom: 10, backgroundColor: 'white', borderColor: 'gray' }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.GetInspired', currentLanguage)}</Text>
                 </View>
-                <ArticleSlider/>
+                <ArticleSlider />
             </View>
         </ScrollViewComponent>
     );

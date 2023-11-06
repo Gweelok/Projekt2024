@@ -82,8 +82,8 @@ import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
 import YourStats from "./src/screens/YourStats";
-import StatsInfo from "./src/componets/atoms/StatsInfo";
-import VisitedUptainerStat from "./src/componets/atoms/VisitedUptainerStat";
+import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
+import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
 
 console.log("start");
 const Stack = createNativeStackNavigator();

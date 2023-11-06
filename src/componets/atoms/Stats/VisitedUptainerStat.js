@@ -1,6 +1,6 @@
 import {Pressable, Text, TouchableOpacity, View,} from "react-native";
-import GlobalStyle from "../../styles/GlobalStyle";
-import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../styles/Stylesheet";
+import GlobalStyle from "../../../styles/GlobalStyle";
+import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
 import React from "react";
 import {BoxLink} from "../../../styles/BoxLink";
 import {AntDesign} from "@expo/vector-icons";
