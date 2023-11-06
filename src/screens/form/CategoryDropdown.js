@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
+import {Backgroundstyle, Primarycolor1, Primarycolor3, styles, styles as stylesGlobal} from '../../styles/Stylesheet';
 import { useLanguage, t } from '../../Languages/LanguageHandler';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { getAllCategories } from '../../utils/Repo';
@@ -84,7 +84,8 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
             <Modal
                 visible={isModalVisible}
                 transparent={true}
-                animationType="slide">
+                animationType="slide"
+            >
                 <View style={categoryDropdownContainer.modalContainer}>
                     <View style={categoryDropdownContainer.topBar}>
                         <BackButton onPress={handleBack}></BackButton>
@@ -151,10 +152,19 @@ const categoryDropdownContainer = {
         backgroundColor: Primarycolor3,
     },
     modalContainer: {
-        flex: 1,
         backgroundColor: 'white',
+        position: 'absolute', // Make the modal absolute to cover the entire screen
+        top: 0,               // Position it at the top of the screen
+        left: 0,              // Position it at the left of the screen
+        right: 0,             // Position it at the right of the screen
+        bottom: 0,            // Position it at the bottom of the screen
+        zIndex: 999,          // Add this property to ensure the modal is above other components
 
     },
+
+
+
+
     topBar: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -170,11 +180,7 @@ const categoryDropdownContainer = {
         width: '70%',
         paddingLeft: 10,
     },
-    input: {
-        height: 40,
-        width: '85%',
-        marginLeft: 10,
-    },
+
 };
 
 export default CategoryDropdown;
