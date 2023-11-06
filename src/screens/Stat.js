@@ -17,8 +17,9 @@ import YourStats from "./YourStats";
 
 
 
-const Stat = ({ navigation }) => {
+const Stat = ({navigation}) => {
     const { currentLanguage } = useLanguage();
+
 
     const handlePress = () => {
         navigation.goBack();
@@ -32,43 +33,43 @@ const Stat = ({ navigation }) => {
 
     return (
         <View style={[Backgroundstyle.interactive_screens,{marginLeft: "4%", marginRight: "4%"}]}>
-            <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", }}>
-                <BackButton onPress={handlePress} />
-                <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
-                    <Text>{t("StatsPage.Header", currentLanguage)}</Text>
-                </Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
-                <View style={{ marginRight: 10 }}>
-                    <TouchableOpacity
-                        style={[
-                            activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
-                            { width: 150, height: 41 }
-                        ]}
-                        onPress={() => handlePress1('main')}
-                    >
-                        <Text style={activeButton === 'main' ? Buttons.main_buttonText : Buttons.secondary_buttonText}>
-                            {t('StatsPage.MainButton', currentLanguage)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ marginRight: 10 }}>
-                    <TouchableOpacity
-                        style={[
-                            activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
-                            { width: 150, height: 41 }
-                        ]}
-                        onPress={() => handlePress1('secondary')}
-                    >
-                        <Text style={activeButton === 'secondary' ? Buttons.main_buttonText : Buttons.secondary_buttonText}>
-                            {t('StatsPage.SecondaryButton', currentLanguage)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-
 
             <ScrollViewComponent>
+                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", }}>
+                    <BackButton onPress={handlePress} />
+                    <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
+                        <Text>{t("StatsPage.Header", currentLanguage)}</Text>
+                    </Text>
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
+                    <View style={{ marginRight: 10 }}>
+                        <TouchableOpacity
+                            style={[
+                                activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
+                                { width: 150, height: 41 }
+                            ]}
+                            onPress={() => handlePress1('main')}
+                        >
+                            <Text style={activeButton === 'main' ? Buttons.main_buttonText : Buttons.secondary_buttonText}>
+                                {t('StatsPage.MainButton', currentLanguage)}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ marginRight: 10 }}>
+                        <TouchableOpacity
+                            style={[
+                                activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
+                                { width: 150, height: 41 }
+                            ]}
+                            onPress={() => handlePress1('secondary')}
+                        >
+                            <Text style={activeButton === 'secondary' ? Buttons.main_buttonText : Buttons.secondary_buttonText}>
+                                {t('StatsPage.SecondaryButton', currentLanguage)}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 {activeButton === 'main' ? (
                 <View style={{ justifyContent: "space-between", marginTop: 10 }}>
                     <View style={{ marginTop: 15, marginBottom:10  }}>
@@ -76,14 +77,14 @@ const Stat = ({ navigation }) => {
                     </View>
                     <View style={GlobalStyle}>
                         <View style={{ flex: 1, }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: 330, paddingTop: 0 }]}>
+                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
                                     {t('StatsPage.SoFar', currentLanguage)}
                                 </Text>
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000</Text>
                                     <View style={{ alignItems: 'center' }}>
-                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center' }]}>
+                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
                                         </Text>
                                         <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 1, textAlign: 'center' }]}>
@@ -95,7 +96,7 @@ const Stat = ({ navigation }) => {
                             </View>
                         </View>
                         <View style={{ flex: 1, marginTop: 10 }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: 330, paddingTop: 0, }]}>
+                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
                                     {t('StatsPage.InTotal', currentLanguage)}
                                 </Text>
@@ -111,16 +112,17 @@ const Stat = ({ navigation }) => {
                     </View>
                     <View style={GlobalStyle}>
                         <View style={{ flex: 1, }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: 330, paddingTop: 0 }]}>
+                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
                                     {t('StatsPage.SoFar', currentLanguage)}
                                 </Text>
                                 <View style={{ flexDirection: "row" }}>
-                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000 t.</Text>
+                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000  t.</Text>
                                     <View style={{ alignItems: 'center' }}>
-                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center' }]}>
+                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
                                         </Text>
+
                                         <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 1, textAlign: 'center' }]}>
                                             57t
                                         </Text>
@@ -130,11 +132,11 @@ const Stat = ({ navigation }) => {
                             </View>
                         </View>
                         <View style={{ flex: 1, marginTop: 10 }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: 330, paddingTop: 0,   }]}>
+                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
                                     {t('StatsPage.InTotal', currentLanguage)}
                                 </Text>
-                                <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000 t.</Text>
+                                <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000  t.</Text>
                             </View>
                         </View>
                     </View>
@@ -156,7 +158,7 @@ const Stat = ({ navigation }) => {
                     <StreetStat/>
                     <View style={[GlobalStyle,{alignContent:"center", marginTop:30}]}>
                         <Text style={[styles.menuItem_text, {marginBottom:10}]}>{t('StatsPage.MostVisitedUptainer', currentLanguage)}</Text>
-                        <VisitedUptainerStat/>
+                        <VisitedUptainerStat navigation={navigation}/>
                     </View>
                 </View>
                 ) : (

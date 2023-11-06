@@ -234,7 +234,7 @@ StatsPage:{
   BestAcheieve:"Best achieving Uptainers this month",
   MostVisitedUptainer:"Your most visited Uptainer",
   ItemsReused:"Items reused",
-  CO2Save: "CO2 Saved",
+  CO2Save: " CO2 Saved",
   Comunity: "The sustainable community building",
   Info: "Learn how we get our information here",
   ItemsRecicled:"items reused",
