@@ -7,7 +7,7 @@ import {t, useLanguage} from "../../Languages/LanguageHandler";
 const CompleteHousePhoneText = () =>{
     const {currentLanguage} = useLanguage();
     const [showFirstPhone,setShowFirstPhone] = useState(true);
-    setTimeout(()=>{setShowFirstPhone(false)},1000)
+    setTimeout(()=>{setShowFirstPhone(false)})// you can add the time of showing the pone on the screen.
     // this is the main components that gets to be shown on the screen
     // it has 2 components of HousePhoneText and uses state to tell what child should show the phone svg
     return <View style={styling.container}>

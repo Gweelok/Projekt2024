@@ -145,7 +145,7 @@ export default {
   },
   SolutionComponent: {
     Header: "Løsningen",
-    Body: "Vores Uptainere sørger for at gammelt elektronik kan få nyt liv i andre borgeres hjem.",
+    Body: "Uptainers giver nyt liv til elektroniske produkter, ved at hjælpe dem med at flytte fra ét hjem til et andet.",
     Bottom: {
       firstHalf: "Brugsfase",
       secondHalf: "Ny Brugsfase",

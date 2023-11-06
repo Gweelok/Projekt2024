@@ -156,7 +156,7 @@ export default {
   },
   SolutionComponent: {
     Header: "The Solution",
-    Body: "Our Uptainers help old electronics to a new life in another citizens homes.",
+    Body: "The Uptainers gives new life to electronic devices by helping them move from one home to another.",
     Bottom: {
       firstHalf: "Use Phase",
       secondHalf: "New Use Phase",
