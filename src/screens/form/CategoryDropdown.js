@@ -9,7 +9,7 @@ import BackButton from "../../componets/BackButton";
 import { NavigationActions as navigation } from "react-navigation";
 import { useNavigation } from "@react-navigation/native";
 
-const CategoryDropdown = ({ onCategorySelect, data }) => {
+const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible, isProductDropdownVisible , onSkip, isVisible,  }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(data || null);
@@ -41,7 +41,11 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
         if (onCategorySelect) {
             onCategorySelect(category);
         }
+        if (onSkip) {
+            onSkip();
+        }
     };
+
 
     const handleSearch = (text) => {
         setSearchText(text);
@@ -51,8 +55,10 @@ const CategoryDropdown = ({ onCategorySelect, data }) => {
 
     const handleSkip = () => {
         setIsModalVisible(false);
-
-        // Open the next popup (ProductDropdown) by setting its visibility state to true
+        if (onSkip) {
+            onSkip();
+        }
+        setIsProductDropdownVisible(true); // Open the Product Dropdown
     };
 
     const handleBack = () => {

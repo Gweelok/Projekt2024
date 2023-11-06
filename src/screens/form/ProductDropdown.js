@@ -6,7 +6,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton"; // Make sure to import the BackButton component
 
-const ProductDropdown = ({ onProductSelect, data }) => {
+const ProductDropdown = ({ onProductSelect, data, isVisible, setIsVisible, onSkip }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(data || null);
@@ -15,7 +15,17 @@ const ProductDropdown = ({ onProductSelect, data }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
+    useEffect(() => {
+        setIsModalVisible(isVisible);
+    }, [isVisible]);
 
+
+    const handleSkip = () => {
+        setIsModalVisible(false);
+        if (onSkip) {
+            onSkip();
+        }
+    };
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -47,9 +57,7 @@ const ProductDropdown = ({ onProductSelect, data }) => {
         setFilteredProducts(filtered);
     };
 
-    const handleSkip = () => {
-        setIsModalVisible(false);
-    };
+
 
     const handleBack = () => {
         setIsModalVisible(false);

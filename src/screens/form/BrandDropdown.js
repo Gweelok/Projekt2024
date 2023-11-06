@@ -10,7 +10,7 @@ import { getAllBrands } from "../../utils/Repo";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 
-const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
+const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(data || null);
@@ -19,7 +19,12 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
     const [searchText, setSearchText] = useState('');
     const navigation = useNavigation();
     const [filteredBrands, setFilteredBrands] = useState([]);
-
+    const handleSkip = () => {
+        setIsModalVisible(false);
+        if (onSkip) {
+            onSkip();
+        }
+    };
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -47,9 +52,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data }) => {
         const filtered = brands.filter(brand => brand.brandName.toLowerCase().includes(text.toLowerCase()));
         setFilteredBrands(filtered);
     };
-    const handleSkip = () => {
-        setIsModalVisible(false);
-    };
+
 
     const handleBack = () => {
         setIsModalVisible(false);

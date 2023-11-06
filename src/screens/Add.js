@@ -78,6 +78,11 @@ const Add = ({ route, navigation }) => {
   const [condition, setCondition] = useState(
     itemData?.condition || null
   );
+  const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
+  const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
+  const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(false);
+
+
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
@@ -124,6 +129,18 @@ const Add = ({ route, navigation }) => {
       setHasCameraPermissions(cameraStatus.status == "granted");
     })();
   }, []);
+  const handleSkipCategoryDropdown = () => {
+    setIsProductDropdownVisible(true);
+  };
+
+  const handleSkipProductDropdown = () => {
+    setIsBrandDropdownVisible(true);
+  };
+  const handleSkipBrandDropdown = () => {
+    setIsCategoryDropdownVisible(true);
+    setIsProductDropdownVisible(true);
+  };
+
 
 
   return (
@@ -146,21 +163,38 @@ const Add = ({ route, navigation }) => {
           </View>
 
           <CategoryDropdown
-            onCategorySelect={setCategory}
-            data={itemData?.category}
+              onCategorySelect={setCategory}
+              data={itemData?.category}
+              isVisible={isCategoryDropdownVisible}
+              onSkip={handleSkipCategoryDropdown}
+              isProductDropdownVisible={isProductDropdownVisible}
+              setIsProductDropdownVisible={setIsProductDropdownVisible}
           />
+
+
+
+
 
           <ProductDropdown
-            categorySelected={!!category}
-            onProductSelect={setProduct}
-            data={itemData?.product}
+              onProductSelect={setProduct}
+              data={itemData?.product}
+              isVisible={isProductDropdownVisible}
+              setIsVisible={setIsProductDropdownVisible}
+              onSkip={handleSkipProductDropdown} // Pass the callback
           />
 
+
+
+
           <BrandDropdown
-            productSelected={!!product}
-            onBrandSelect={setBrand}
-            data={itemData?.brand}
+              onBrandSelect={setBrand}
+              productSelected={!!product}
+              data={itemData?.brand}
+              isVisible={isBrandDropdownVisible}
+              setIsVisible={setIsBrandDropdownVisible}
+              onSkip={handleSkipBrandDropdown} // Pass the callback
           />
+
 
           <ModelDropdown
             brandSelected={!!brand}
