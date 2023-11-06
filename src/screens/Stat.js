@@ -41,12 +41,12 @@ const Stat = ({navigation}) => {
                         <Text>{t("StatsPage.Header", currentLanguage)}</Text>
                     </Text>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
+                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, }}>
                     <View style={{ marginRight: 10 }}>
                         <TouchableOpacity
                             style={[
                                 activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 150, height: 41 }
+                                { width: 160, height: 41 }
                             ]}
                             onPress={() => handlePress1('main')}
                         >
@@ -59,7 +59,7 @@ const Stat = ({navigation}) => {
                         <TouchableOpacity
                             style={[
                                 activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 150, height: 41 }
+                                { width: 160, height: 41 }
                             ]}
                             onPress={() => handlePress1('secondary')}
                         >
