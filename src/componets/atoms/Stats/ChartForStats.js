@@ -37,16 +37,16 @@ const ChartForStats = () => {
                     <ECharts ref={chartRef} option={createChartOptions} />
                 </View>
             </TouchableOpacity>
-            <Modal visible={isModalVisible} animationType="slide">
-                <View style={{ flex: 1 }}>
-                    <TouchableOpacity onPress={() => setModalVisible(false)}>
-                        <View style={{backgroundColor:Primarycolor1, width:30, height:30, left:10}}>
-                            <Icon size={30} name="close" style={Buttons.Icon} />
-                        </View>
-                    </TouchableOpacity>
-                    <ECharts ref={chartRef} option={createChartOptions} />
-                </View>
-            </Modal>
+            {/*<Modal visible={isModalVisible} animationType="slide">*/}
+            {/*    <View style={{ flex: 1 }}>*/}
+            {/*        <TouchableOpacity onPress={() => setModalVisible(false)}>*/}
+            {/*            <View style={{backgroundColor:Primarycolor1, width:30, height:30, left:10}}>*/}
+            {/*                <Icon size={30} name="close" style={Buttons.Icon} />*/}
+            {/*            </View>*/}
+            {/*        </TouchableOpacity>*/}
+            {/*        <ECharts ref={chartRef} option={createChartOptions} />*/}
+            {/*    </View>*/}
+            {/*</Modal>*/}
         </View>
     );
 };

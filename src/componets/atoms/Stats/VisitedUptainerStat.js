@@ -1,6 +1,6 @@
-import GlobalStyle from "../../../styles/GlobalStyle";
 import {Pressable, Text, TouchableOpacity, View,} from "react-native";
-import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
+import GlobalStyle from "../../styles/GlobalStyle";
+import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../styles/Stylesheet";
 import React from "react";
 import {BoxLink} from "../../../styles/BoxLink";
 import {AntDesign} from "@expo/vector-icons";
@@ -13,6 +13,10 @@ export const VisitedUptainerStat = () => {
     const navigation = useNavigation();
     const location = "COOP 365";
     const address = "/Norrebrogade 70, Horsens";
+    const handlePress = () => {
+        navigation.navigate("StatsInfo");
+    };
+
     return(
         <View style={GlobalStyle}>
             <View>
@@ -20,8 +24,10 @@ export const VisitedUptainerStat = () => {
                     <TouchableOpacity >
                         <View style={styles.boxlink}>
                             <View style={GlobalStyle.BodyWrapper}>
+                                <TouchableOpacity>
                                 <Text style={styles.menuItem_text}>{location} </Text>
-                                <Text style={[styles.menuItem_text,{fontSize: 18}]}>{address} </Text>
+                                <Text style={[styles.menuItem_text,{fontSize: 15}]}>{address} </Text>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.Icon_container}>
                                 <AntDesign name="right" size={30} style={styles.menuItem_arrow} />
@@ -38,9 +44,8 @@ export const VisitedUptainerStat = () => {
             </View>
 
             <View>
-                <TouchableOpacity>
-            <BoxLink msg={t('StatsPage.Info', currentLanguage)}  style={GlobalStyle.BodyWrapper}/>
-                </TouchableOpacity>
+
+                    <BoxLink msg={t('StatsPage.Info', currentLanguage)} onPress={handlePress} style={GlobalStyle.BodyWrapper} />
             </View>
         </View>
     )
