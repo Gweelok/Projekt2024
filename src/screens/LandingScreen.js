@@ -110,7 +110,7 @@ const LandingScreen = ({ navigation }) => {
         {<Customize {...data[currentSlide]} />}
       </View>
 
-      <Pressable onPress={nextSlideAndSignUp} style={Buttons.main_button}>
+      <Pressable onPress={nextSlideAndSignUp} style={styling.main_button}>
         <Text style={Buttons.main_buttonText}>
           {t("LandingScreen.continue", currentLanguage)}
         </Text>
@@ -158,7 +158,10 @@ const styling = StyleSheet.create({
     alignSelf: "stretch",
     paddingHorizontal: 20,
     marginBottom: 10,
-    marginLeft:8,
+    marginLeft:9.5,
+  },
+  main_button:{
+    ...Buttons.main_button, width: "79.2%",
   },
   backButton: {
     backgroundColor: "#1c4b3d",

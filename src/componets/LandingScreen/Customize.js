@@ -15,7 +15,7 @@ const styling = StyleSheet.create({
     top:{fontSize: 35,
         fontFamily: "space-grotesk-bold",
         color:Primarycolor1,
-        marginLeft:17,
+        marginLeft:18.5,
     },
     imageContainer:{
         flex:3,
