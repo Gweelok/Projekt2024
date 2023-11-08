@@ -83,11 +83,11 @@ const Stat = ({navigation}) => {
                                 </Text>
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000</Text>
-                                    <View style={{ alignItems: 'center' }}>
-                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
+                                    <View style={{ alignItems: 'center', marginRight:15 }}>
+                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20,  textAlign: 'center', fontSize: 13 }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
                                         </Text>
-                                        <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 1, textAlign: 'center' }]}>
+                                        <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 1,  textAlign: 'center' }]}>
                                             57t
                                         </Text>
                                     </View>
@@ -118,7 +118,7 @@ const Stat = ({navigation}) => {
                                 </Text>
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000  t.</Text>
-                                    <View style={{ alignItems: 'center' }}>
+                                    <View style={{ alignItems: 'center', marginRight:15 }}>
                                         <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
                                         </Text>
