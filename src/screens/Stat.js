@@ -14,6 +14,7 @@ import VisitedUptainerStat from "../componets/atoms/VisitedUptainerStat";
 import Svg, { Path } from "react-native-svg";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
 import YourStats from "./YourStats";
+import GreenBox from "../styles/GreenBox";
 
 
 
@@ -32,7 +33,7 @@ const Stat = ({navigation}) => {
 
 
     return (
-        <View style={[Backgroundstyle.interactive_screens,]}>
+        <View style={[Backgroundstyle.interactive_screens, GlobalStyle]}>
 
             <ScrollViewComponent>
                 <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", marginHorizontal:-8 }}>
@@ -75,33 +76,20 @@ const Stat = ({navigation}) => {
                     <View style={{ marginTop: 15, marginBottom:10  }}>
                         <Text style={[styles.article_text,{fontWeight: "bold", fontSize: 18}]}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
                     </View>
-                    <View style={GlobalStyle}>
-                        <View style={{ flex: 1, }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
-                                <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
-                                    {t('StatsPage.SoFar', currentLanguage)}
-                                </Text>
-                                <View style={[{ flexDirection: "row" }]}>
-                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1,  }]}>500000</Text>
-                                    <View style={{ alignItems: 'center', marginRight:15 }}>
-                                        <Text style={[styles.article_text,  { marginTop: -20,  textAlign: 'center', fontSize: 13 }]}>
-                                            {t('StatsPage.Yesterday', currentLanguage)}
-                                        </Text>
-                                        <Text style={[styles.paragraph_text, { marginTop: 1,  textAlign: 'center' }]}>
-                                            57t
-                                        </Text>
-                                    </View>
+                    <View>
+                        <View>
+                            <View>
+                                <GreenBox msg= {t('StatsPage.SoFar', currentLanguage)}
+                                          data={"50000 t."}
+                                          secondMsg={t('StatsPage.Yesterday', currentLanguage)}
+                                          secondData={"57 t"}
+                                />
+                            </View>
+                            <View>
+                                <GreenBox msg={t('StatsPage.InTotal', currentLanguage)}
+                                          data={"50000 t."}/>
+                            </View>
 
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ flex: 1, marginTop: 10 }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
-                                <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
-                                    {t('StatsPage.InTotal', currentLanguage)}
-                                </Text>
-                                <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000</Text>
-                            </View>
                         </View>
                     </View>
                     <View style={[ { height: 285, }]}>
@@ -111,34 +99,18 @@ const Stat = ({navigation}) => {
                         <Text style={[styles.article_text,{fontWeight: "bold", fontSize: 18}]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                     </View>
                     <View>
-                        <View style={{ flex: 1, }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
-                                <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
-                                    {t('StatsPage.SoFar', currentLanguage)}
-                                </Text>
-                                <View style={{ flexDirection: "row" }}>
-                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000  t.</Text>
-                                    <View style={{ alignItems: 'center', marginRight:15 }}>
-                                        <Text style={[styles.article_text, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
-                                            {t('StatsPage.Yesterday', currentLanguage)}
-                                        </Text>
-
-                                        <Text style={[styles.paragraph_text, { marginTop: 1, textAlign: 'center' }]}>
-                                            57t
-                                        </Text>
-                                    </View>
-
-                                </View>
-                            </View>
+                        <View>
+                            <GreenBox msg= {t('StatsPage.SoFar', currentLanguage)}
+                                      data={"50000 t."}
+                                      secondMsg={t('StatsPage.Yesterday', currentLanguage)}
+                                      secondData={"57 t"}
+                            />
                         </View>
-                        <View style={{ flex: 1, marginTop: 10 }}>
-                            <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
-                                <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
-                                    {t('StatsPage.InTotal', currentLanguage)}
-                                </Text>
-                                <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000  t.</Text>
-                            </View>
+                        <View>
+                            <GreenBox msg={t('StatsPage.InTotal', currentLanguage)}
+                                      data={"50000 t."}/>
                         </View>
+
                     </View>
                     <View>
                         <View style={[{ flexDirection: 'row',  marginTop:20, marginBottom:3,marginRight: "4%", }]}>
@@ -150,13 +122,13 @@ const Stat = ({navigation}) => {
                             <Text style={[styles.paragraph_text, {marginLeft:5}]}> {t('StatsPage.Amount', currentLanguage)} </Text>
                         </View>
                     </View>
-                    <View style={[GlobalStyle,{alignContent:"center", marginTop:30}]}>
+                    <View style={[{alignContent:"center", marginTop:30}]}>
                         <Text style={styles.menuItem_text}>{t('StatsPage.BestAcheieve', currentLanguage)}</Text>
                     </View>
                     <StreetStat/>
                     <StreetStat/>
                     <StreetStat/>
-                    <View style={[GlobalStyle,{alignContent:"center", marginTop:30}]}>
+                    <View style={[{alignContent:"center", marginTop:30}]}>
                         <Text style={[styles.menuItem_text, {marginBottom:10}]}>{t('StatsPage.MostVisitedUptainer', currentLanguage)}</Text>
                         <VisitedUptainerStat navigation={navigation}/>
                     </View>
