@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'; // for Facebook
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import ArticleSlider from "./article/ArticleSlider";
+import GreenBox from "../styles/GreenBox";
 
 const YourStats = () => {
     const { currentLanguage } = useLanguage();
@@ -39,10 +40,9 @@ const YourStats = () => {
                 <View style={{ marginTop: 20, marginBottom: 20, }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                 </View>
-                <View style={[Backgroundstyle.informationScreens, { paddingTop: 10, height: 80, }]}>
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>960 kg.</Text>
-                    </View>
+                <View style={{marginTop:0,}}>
+                    <GreenBox data={"960 kg."} style={{ paddingTop:300 }} />
+
                 </View>
                 <View>
                     <View style={[{ flexDirection: 'row', alignItems: 'center', marginTop:20, marginBottom:3,marginRight: "4%", }]}>
