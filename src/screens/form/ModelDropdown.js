@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import CustomInput from "../../componets/atoms/CustomInput";
-import backButton from "../../componets/BackButton"; // Make sure to import this if used
-import BackButton from "../../componets/BackButton"; // Make sure to import this if used
+import BackButton from "../../componets/BackButton";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationActions as navigation } from "react-navigation";
 import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { getAllModels } from "../../utils/Repo";
 
-const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
+const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsConditionDropdownVisible }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState(data || null);
@@ -49,6 +48,8 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
     };
     const handleSkip = () => {
         setIsModalVisible(false);
+        // Open the ConditionDropdown modal
+        setIsConditionDropdownVisible(true);
     };
     const handleBack = () => {
         setIsModalVisible(false);
@@ -95,7 +96,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data }) => {
                                     style={modelDropdownContainer.input}
                                     placeholderTextColor="rgba(-1, 128, 0, 0.2)"
                                     onChangeText={handleSearch}
-                                    placeholder={t("Dropdown.Model", currentLanguage)}
+                                    placeholder={t("DropdownScreen.Model", currentLanguage)}
                                 />
                             </View>
                             <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>

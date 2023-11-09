@@ -6,7 +6,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton"; // Make sure to import the BackButton component
 
-const ProductDropdown = ({ onProductSelect, data, isVisible, setIsVisible, onSkip }) => {
+const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isBrandDropdownVisible , onSkip, isVisible, }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(data || null);
@@ -25,6 +25,7 @@ const ProductDropdown = ({ onProductSelect, data, isVisible, setIsVisible, onSki
         if (onSkip) {
             onSkip();
         }
+        setIsBrandDropdownVisible(true); // Open the Product Dropdown
     };
     useEffect(() => {
         const fetchData = async () => {
@@ -95,12 +96,10 @@ const ProductDropdown = ({ onProductSelect, data, isVisible, setIsVisible, onSki
                                 style={productDropdownContainer.input}
                                 placeholderTextColor="rgba(-1, 128, 0, 0.2)"
                                 onChangeText={handleSearch}
-                                placeholder={t("Dropdown.Product", currentLanguage)}
+                                placeholder={t('DropdownScreen.Product',currentLanguage)}
                             />
                         </View>
-                        <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>
-                            <Text style={styles.link}>Skip</Text>
-                        </TouchableOpacity>
+
                     </View>
                     <ScrollView style={productDropdownContainer.dropdownList}>
                         {filteredProducts.map((product) => (
@@ -169,7 +168,7 @@ const productDropdownContainer = {
         alignItems: "center",
         borderColor: "white",
         borderWidth: 1,
-        width: "70%",
+        width: "80%",
         paddingLeft: 10,
     },
     input: {

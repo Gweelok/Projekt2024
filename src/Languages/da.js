@@ -223,7 +223,7 @@ export default {
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
     SendLinkButton: "Send link"
 },
-  Dropdown:{
+  DropdownScreen:{
     Category: "Søg efter kategori...",
     Product:"Søg efter produkt...",
     Model: "Søg efter model...",

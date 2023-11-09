@@ -9,7 +9,7 @@ import { NavigationActions as navigation } from "react-navigation";
 import {t,useLanguage} from "../../Languages/LanguageHandler";
 import {items} from "../../utils/SeedData";
 
-const ConditionDropdown = ({ onConditionSelect, data }) => {
+const ConditionDropdown = ({ onConditionSelect, data, isVisible }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCondition, setSelectedCondition] = useState(data);
@@ -79,7 +79,7 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                         <BackButton onPress={handleBack}></BackButton>
                         <View style={conditionDropdownContainer.searchContainer}>
                             <Text style={[styles.paragraph_text, { fontWeight: "bold" }]}>
-                                {t("Dropdown.Condition", currentLanguage)}
+                                {t("DropdownScreen.Condition", currentLanguage)}
                             </Text>
                         </View>
                     </View>
@@ -96,7 +96,7 @@ const ConditionDropdown = ({ onConditionSelect, data }) => {
                             </TouchableOpacity>
                         ))}
                         <Text style={[styles.article_text, { textAlign: "center", marginTop:10 }]}>
-                            {t("Dropdown.Text", currentLanguage)}
+                            {t("DropdownScreen.Text", currentLanguage)}
                         </Text>
 
                     </ScrollView>

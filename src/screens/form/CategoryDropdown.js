@@ -95,7 +95,7 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                                 style={categoryDropdownContainer.input}
                                 placeholderTextColor="rgba(-1, 128, 0, 0.2)"
                                 onChangeText={handleSearch}
-                                placeholder={t("Dropdown.Category", currentLanguage)}
+                                placeholder={t("DropdownScreen.Category", currentLanguage)}
                             />
                         </View>
                         <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>

@@ -10,7 +10,7 @@ import { getAllBrands } from "../../utils/Repo";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "../../styles/Stylesheet";
 
-const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip }) => {
+const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown}) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(data || null);
@@ -24,7 +24,13 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
         if (onSkip) {
             onSkip();
         }
+        setIsModelDropdownVisible(true);
     };
+    useEffect(() => {
+        if (shouldOpenBrandDropdown) {
+            setIsModalVisible(true);
+        }
+    }, [shouldOpenBrandDropdown]);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -101,12 +107,9 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
                                     style={brandDropdownContainer.input}
                                     placeholderTextColor="rgba(-1, 128, 0, 0.2)"
                                     onChangeText={handleSearch}
-                                    placeholder={t("Dropdown.Brand", currentLanguage)}
+                                    placeholder={t("DropdownScreen.Brand", currentLanguage)}
                                 />
                             </View>
-                            <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>
-                                <Text style={styles.link}>Skip</Text>
-                            </TouchableOpacity>
                         </View>
                         <ScrollView style={brandDropdownContainer.dropdownList}>
                             {filteredBrands.map(brand => (
@@ -171,7 +174,7 @@ const brandDropdownContainer = {
         alignItems: "center",
         borderColor: "white",
         borderWidth: 1,
-        width: "70%",
+        width: "80%",
         paddingLeft: 10,
     },
     input: {

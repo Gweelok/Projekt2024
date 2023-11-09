@@ -81,6 +81,9 @@ const Add = ({ route, navigation }) => {
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
   const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(false);
+  const [isModelDropdownVisible, setIsModelDropdownVisible] = useState(false);
+  const [isConditionDropdownVisible, setIsConditionDropdownVisible] = useState(false);
+
 
 
   const [description, setDescription] = useState(
@@ -137,8 +140,14 @@ const Add = ({ route, navigation }) => {
     setIsBrandDropdownVisible(true);
   };
   const handleSkipBrandDropdown = () => {
-    setIsCategoryDropdownVisible(true);
-    setIsProductDropdownVisible(true);
+   setIsModelDropdownVisible(true)
+  };
+  const handleSkipModelDropdown = () => {
+    setIsConditionDropdownVisible(true);
+  };
+
+  const handleSkipConditionDropdown = () => {
+    setIsConditionDropdownVisible(!isConditionDropdownVisible); // Toggle visibility
   };
 
 
@@ -178,13 +187,15 @@ const Add = ({ route, navigation }) => {
           <ProductDropdown
               onProductSelect={setProduct}
               data={itemData?.product}
+              productSelected={!!category}
               isVisible={isProductDropdownVisible}
               setIsVisible={setIsProductDropdownVisible}
-              onSkip={handleSkipProductDropdown} // Pass the callback
+              onSkip={handleSkipProductDropdown}
+              onSpinPress={() => {
+                // Set the state variable to indicate the "spin" button press
+                setIsBrandDropdownVisible(true);
+              }}
           />
-
-
-
 
           <BrandDropdown
               onBrandSelect={setBrand}
@@ -192,19 +203,26 @@ const Add = ({ route, navigation }) => {
               data={itemData?.brand}
               isVisible={isBrandDropdownVisible}
               setIsVisible={setIsBrandDropdownVisible}
-              onSkip={handleSkipBrandDropdown} // Pass the callback
+              onSkip={handleSkipBrandDropdown}
+              shouldOpenBrandDropdown={isBrandDropdownVisible}
           />
 
-
           <ModelDropdown
-            brandSelected={!!brand}
-            onModelSelect={setModel}
-            data={itemData?.model}
+              brandSelected={!!brand}
+              onModelSelect={setModel}
+              data={itemData?.model}
+              isVisible={isModelDropdownVisible}
+              setIsVisible={setIsModelDropdownVisible}
+              onSkip={handleSkipModelDropdown}
+              setIsConditionDropdownVisible={setIsConditionDropdownVisible}
           />
 
           <ConditionDropdown
-            onConditionSelect={setCondition}
-            data={itemData?.condition}
+              onConditionSelect={setCondition}
+              data={itemData?.condition}
+              onSkip={handleSkipConditionDropdown}
+              isVisible={isConditionDropdownVisible}
+              setIsVisible={setIsConditionDropdownVisible}
           />
 
           <View style={{ marginBottom: 20 }}>
