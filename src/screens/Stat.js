@@ -32,21 +32,21 @@ const Stat = ({navigation}) => {
 
 
     return (
-        <View style={[Backgroundstyle.interactive_screens,{marginLeft: "4%", marginRight: "4%"}]}>
+        <View style={[Backgroundstyle.interactive_screens,]}>
 
             <ScrollViewComponent>
-                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", }}>
+                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", marginHorizontal:-8 }}>
                     <BackButton onPress={handlePress} />
                     <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
                         <Text>{t("StatsPage.Header", currentLanguage)}</Text>
                     </Text>
                 </View>
                 <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, }}>
-                    <View style={{ marginRight: 10 }}>
+                    <View style={{marginRight:7}}>
                         <TouchableOpacity
                             style={[
                                 activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 160, height: 41 }
+                                { width: 173, height: 41 }
                             ]}
                             onPress={() => handlePress1('main')}
                         >
@@ -55,11 +55,11 @@ const Stat = ({navigation}) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{ marginRight: 10 }}>
+                    <View>
                         <TouchableOpacity
                             style={[
                                 activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 160, height: 41 }
+                                { width: 173, height: 41 }
                             ]}
                             onPress={() => handlePress1('secondary')}
                         >
@@ -81,13 +81,13 @@ const Stat = ({navigation}) => {
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
                                     {t('StatsPage.SoFar', currentLanguage)}
                                 </Text>
-                                <View style={{ flexDirection: "row" }}>
-                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000</Text>
+                                <View style={[{ flexDirection: "row" }]}>
+                                    <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1,  }]}>500000</Text>
                                     <View style={{ alignItems: 'center', marginRight:15 }}>
-                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20,  textAlign: 'center', fontSize: 13 }]}>
+                                        <Text style={[styles.article_text,  { marginTop: -20,  textAlign: 'center', fontSize: 13 }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
                                         </Text>
-                                        <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 1,  textAlign: 'center' }]}>
+                                        <Text style={[styles.paragraph_text, { marginTop: 1,  textAlign: 'center' }]}>
                                             57t
                                         </Text>
                                     </View>
@@ -110,7 +110,7 @@ const Stat = ({navigation}) => {
                     <View style={{ marginTop: 2, marginBottom:20}}>
                         <Text style={[styles.article_text,{fontWeight: "bold", fontSize: 18}]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                     </View>
-                    <View style={GlobalStyle}>
+                    <View>
                         <View style={{ flex: 1, }}>
                             <View style={[Backgroundstyle.informationScreens, { width: '100%', paddingTop: 0 }]}>
                                 <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 5 }]}>
@@ -119,11 +119,11 @@ const Stat = ({navigation}) => {
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>500000  t.</Text>
                                     <View style={{ alignItems: 'center', marginRight:15 }}>
-                                        <Text style={[styles.article_text, GlobalStyle.BodyWrapper, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
+                                        <Text style={[styles.article_text, { marginTop: -20, textAlign: 'center', fontSize: 13 }]}>
                                             {t('StatsPage.Yesterday', currentLanguage)}
                                         </Text>
 
-                                        <Text style={[styles.paragraph_text, GlobalStyle.BodyWrapper, { marginTop: 1, textAlign: 'center' }]}>
+                                        <Text style={[styles.paragraph_text, { marginTop: 1, textAlign: 'center' }]}>
                                             57t
                                         </Text>
                                     </View>
