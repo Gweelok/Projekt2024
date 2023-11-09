@@ -104,7 +104,7 @@ const Stat = ({navigation}) => {
                             </View>
                         </View>
                     </View>
-                    <View style={[GlobalStyle, { height: 285, }]}>
+                    <View style={[ { height: 285, }]}>
                         <ChartForStats />
                     </View>
                     <View style={{ marginTop: 2, marginBottom:20}}>
@@ -141,11 +141,11 @@ const Stat = ({navigation}) => {
                         </View>
                     </View>
                     <View>
-                        <View style={[{ flexDirection: 'row', alignItems: 'center', marginTop:20, marginBottom:3,marginRight: "4%", }]}>
+                        <View style={[{ flexDirection: 'row',  marginTop:20, marginBottom:3,marginRight: "4%", }]}>
                             <LightbulbIcon />
                             <Text style={[styles.paragraph_text,{marginLeft:5}]}> {t('StatsPage.kgCO2', currentLanguage)}</Text>
                         </View>
-                        <View style={[{ flexDirection: 'row', alignItems: 'center', marginTop:3, marginBottom:3,marginRight: "4%", }]}>
+                        <View style={[{ flexDirection: 'row', marginTop:5, marginBottom:3,marginRight: "4%", }]}>
                             <LightbulbIcon />
                             <Text style={[styles.paragraph_text, {marginLeft:5}]}> {t('StatsPage.Amount', currentLanguage)} </Text>
                         </View>
