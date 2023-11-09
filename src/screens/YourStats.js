@@ -22,11 +22,11 @@ const YourStats = () => {
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
                 </View>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10, marginLeft:10 }}>
-                    <View style={[Backgroundstyle.informationScreens, { flex: 1, paddingTop: 5, marginRight: 10,  }]}>
+                    <View style={[Backgroundstyle.informationScreens, {  paddingTop: 5, marginRight: 10,  }]}>
                         <Text style={[styles.paragraph_text,  { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsDonated', currentLanguage)}</Text>
                         <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>5</Text>
                     </View>
-                    <View style={[Backgroundstyle.informationScreens, { flex: 1, paddingTop: 5, marginRight: 10, }]}>
+                    <View style={[Backgroundstyle.informationScreens, { paddingTop: 5, marginRight: 10, }]}>
                         <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsCollected', currentLanguage)}</Text>
                         <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>7</Text>
                     </View>
@@ -36,10 +36,10 @@ const YourStats = () => {
                         <Text style={styles.link}>{t('StatsPage.Overview', currentLanguage)}</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ marginRight: 100, marginTop: 20, marginBottom: 20, backgroundColor: 'white', borderColor: 'gray' }}>
+                <View style={{ marginTop: 20, marginBottom: 20, }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                 </View>
-                <View style={[Backgroundstyle.informationScreens, { paddingTop: 10, height: 80, alignItems: 'center', justifyContent: 'center' }]}>
+                <View style={[Backgroundstyle.informationScreens, { paddingTop: 10, height: 80, }]}>
                     <View style={{ flexDirection: "row" }}>
                         <Text style={[HeaderText.Header, GlobalStyle.BodyWrapper, { marginTop: 1 }]}>960 kg.</Text>
                     </View>
@@ -83,7 +83,7 @@ const YourStats = () => {
                 <YourVisitedUptainer />
                 <YourVisitedUptainer />
                 <YourVisitedUptainer />
-                <View style={{ marginTop: 25, marginBottom: 10, backgroundColor: 'white', borderColor: 'gray' }}>
+                <View style={{ marginTop: 25, marginBottom: 10, }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.GetInspired', currentLanguage)}</Text>
                 </View>
                 <ArticleSlider />
