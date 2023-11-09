@@ -16,10 +16,16 @@ const ChartForStats = () => {
                 const options = {
                     xAxis: {
                         data: months,
+                        itemStyle: {
+                            color: Primarycolor1,
+                        },
                     },
                     series: [
                         {
                             data: newChartData,
+                            itemStyle: {
+                                color: Primarycolor1,
+                            },
                         },
                     ],
                 };
@@ -56,16 +62,22 @@ const createChartOptions = {
     xAxis: {
         type: "category",
         data: [],
+        itemStyle: {
+            color: Primarycolor1,
+        },
     },
     yAxis: {
         type: "value",
+        itemStyle: {
+            color: Primarycolor1,
+        },
     },
     series: [
         {
             data: [],
             type: "bar",
             itemStyle: {
-                color: "darkgreen",
+                color: Primarycolor1,
             },
         },
     ],
@@ -74,6 +86,9 @@ const createChartOptions = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width:380,
+
+
     },
     chartContainer: {
         height: 300,
