@@ -99,16 +99,14 @@ const LandingScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={Backgroundstyle.informationScreens}>
-      <View style={styling.topBar}>
-        {backButton}
-        {[1, 2, 3, 4].includes(currentSlide) ? null : <LanguageDropdown />}
-
-      </View>
-
       {/* this is the main below that shows on the screen */}
       <View style={GlobalStyle.BodyWrapper}>
+        <View style={styling.topBar}>
+          {backButton}
+          {[1, 2, 3, 4].includes(currentSlide) ? null : <LanguageDropdown />}
+
+        </View>
         {<Customize {...data[currentSlide]} />}
-      </View>
 
       <Pressable onPress={nextSlideAndSignUp} style={styling.main_button}>
         <Text style={Buttons.main_buttonText}>
@@ -124,6 +122,7 @@ const LandingScreen = ({ navigation }) => {
             color={Primarycolor1}
           />
         ))}
+      </View>
       </View>
     </SafeAreaView>
   );
@@ -158,10 +157,9 @@ const styling = StyleSheet.create({
     alignSelf: "stretch",
     paddingHorizontal: 20,
     marginBottom: 10,
-    marginLeft:9.5,
   },
   main_button:{
-    ...Buttons.main_button, width: "79.2%",
+    ...Buttons.main_button,
   },
   backButton: {
     backgroundColor: "#1c4b3d",
