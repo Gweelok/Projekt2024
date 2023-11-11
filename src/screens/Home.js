@@ -9,6 +9,8 @@ import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { firebaseAurth } from "../utils/Firebase";
 
+
+
 const Home = ({ navigation }) => {
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);

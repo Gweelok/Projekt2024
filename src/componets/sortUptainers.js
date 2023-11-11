@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import Uptainer from './Uptainer';
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from './atoms/ScrollViewComponent';
+import QuizPoll from './atoms/QuizPoll';
 
 
 const SortUptainers = ({navigation}) => {
@@ -183,8 +184,11 @@ const SortUptainers = ({navigation}) => {
       )}
       {/* Display BoxLink component */}  
       <BoxLink msg="Hvordan funger UPDROPP?" onPress={navigatetoinfo} style={GlobalStyle.BodyWrapper}/>
+
+      {/* Display the QuizComponent */}
+      {QuizPoll && <QuizPoll />}  
       {renderUptainers()}
-        </ScrollViewComponent>
+      </ScrollViewComponent>
       
     
       

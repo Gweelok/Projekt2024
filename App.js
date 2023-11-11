@@ -82,6 +82,8 @@ import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
 
+
+
 console.log("start");
 const Stack = createNativeStackNavigator();
 
