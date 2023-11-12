@@ -1,5 +1,5 @@
 import React from "react";
-import ECharts from "react-native-echarts-wrapper";
+import {ECharts} from "react-native-echarts-wrapper";
 
 const PollChart = ({ pollData }) => {
   // Check if pollData is available
