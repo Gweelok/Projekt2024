@@ -11,14 +11,14 @@ const PollChart = ({ pollData }) => {
   const chartOptions = {
     xAxis: {
       type: "category",
-      data: Object.keys(pollData), // Use poll question as x-axis labels
+      data: pollData.options.map((option)=>option.text), // Use poll question as x-axis labels
     },
     yAxis: {
       type: "value",
     },
     series: [
       {
-        data: Object.values(pollData), // Use user responses as y-axis values
+        data: pollData.options.map((option)=>option.responses), // Use user responses as y-axis values
         type: "bar",
         itemStyle: {
           color: "#1c4b3d", // Use your primary color for the bars

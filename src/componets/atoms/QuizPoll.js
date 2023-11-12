@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { ECharts } from "react-native-echarts-wrapper";
 import * as style from "../../styles/Stylesheet";
 import PollChart from "./PollChart";
 
@@ -10,10 +9,12 @@ const QuizPoll = () => {
       question: "How many electronic devices have you bought the last year?",
       type: "poll",
       options: [
-        "A) 0 ",
-        "B) 1-3",
-        "C) 4-6",
-        "D) 7+",
+       { text:"A) 0 ",responses:15},
+       { text:"B) 1-3 ",responses:30},
+       { text:"C) 4-6 ",responses:3},
+       { text:"D) 7+ ",responses:55},
+       
+     
       ],
     },
     {
@@ -46,13 +47,6 @@ const QuizPoll = () => {
     }
   };
 
-  // Mock poll data for testing
-  const mockPollData = {
-    "A) 0": 10,       // Simulate 10 responses for option A
-    "B) 1-3": 20,     // Simulate 20 responses for option B
-    "C) 4-6": 15,     // Simulate 15 responses for option C
-    "D) 7+": 5,       // Simulate 5 responses for option D
-  };
 
   const styles = {
     optionButton: {
@@ -96,13 +90,13 @@ const QuizPoll = () => {
               },
           ]}
         >
-          <Text style={styles.optionText}>{option}</Text>
+          <Text style={styles.optionText}>{option.text}</Text>
         </TouchableOpacity>
       ))}
 
       {/* Render the PollChart component */}
       {Questions[currentQuestionIndex].type === "poll" && (
-        <PollChart pollData={mockPollData} />
+        <PollChart pollData={Questions[0]} />
       )}
     </View>
   );
