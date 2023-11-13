@@ -4,17 +4,16 @@ import * as style from "../../styles/Stylesheet";
 import PollChart from "./PollChart";
 
 const QuizPoll = () => {
+  const [chartVisible, setChartVisible] = useState(false);
   const [Questions, setQuestions] = useState([
     {
       question: "How many electronic devices have you bought the last year?",
       type: "poll",
       options: [
-       { text:"A) 0 ",responses:15},
-       { text:"B) 1-3 ",responses:30},
-       { text:"C) 4-6 ",responses:3},
-       { text:"D) 7+ ",responses:55},
-       
-     
+        { text: "A) 0 ", responses: 15 },
+        { text: "B) 1-3 ", responses: 30 },
+        { text: "C) 4-6 ", responses: 3 },
+        { text: "D) 7+ ", responses: 55 },
       ],
     },
     {
@@ -42,11 +41,9 @@ const QuizPoll = () => {
         setSelectedOption({ option, isCorrect: false });
       }
     } else if (currentQuestion.type === "poll") {
-      // Handle poll selection
-      // You can record the user's response or simulate data for testing
+      setChartVisible(true);
     }
   };
-
 
   const styles = {
     optionButton: {
@@ -71,35 +68,38 @@ const QuizPoll = () => {
     },
   };
 
-  return (
-    <View>
-      <Text style={styles.questionText}>
-        {Questions[currentQuestionIndex].question}
-      </Text>
-      {Questions[currentQuestionIndex].options.map((option, optionIndex) => (
-        <TouchableOpacity
-          key={optionIndex}
-          onPress={() => handleOptionSelect(option)}
-          style={[
-            styles.optionButton,
-            selectedOption &&
-              selectedOption.option === option && {
-                backgroundColor: selectedOption.isCorrect
-                  ? style.Primarycolor1 // Correct answer color
-                  : "#AA0000", // Wrong answer color
-              },
-          ]}
-        >
-          <Text style={styles.optionText}>{option.text}</Text>
-        </TouchableOpacity>
-      ))}
-
-      {/* Render the PollChart component */}
-      {Questions[currentQuestionIndex].type === "poll" && (
+  if (chartVisible) {
+    return (
+      <View>
         <PollChart pollData={Questions[0]} />
-      )}
-    </View>
-  );
+      </View>
+    );
+  } else {
+    return (
+      <View>
+        <Text style={styles.questionText}>
+          {Questions[currentQuestionIndex].question}
+        </Text>
+        {Questions[currentQuestionIndex].options.map((option, optionIndex) => (
+          <TouchableOpacity
+            key={optionIndex}
+            onPress={() => handleOptionSelect(option)}
+            style={[
+              styles.optionButton,
+              selectedOption &&
+                selectedOption.option === option && {
+                  backgroundColor: selectedOption.isCorrect
+                    ? style.Primarycolor1 // Correct answer color
+                    : "#AA0000", // Wrong answer color
+                },
+            ]}
+          >
+            <Text style={styles.optionText}>{option.text}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    );
+  }
 };
 
 export default QuizPoll;
