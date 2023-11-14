@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
 import { styles, Backgroundstyle, HeaderText, Buttons } from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import { useNavigation } from "@react-navigation/native";
@@ -33,7 +33,8 @@ const Stat = ({navigation}) => {
 
 
     return (
-        <View style={[Backgroundstyle.interactive_screens, GlobalStyle]}>
+        <View style={[Backgroundstyle.interactive_screens]}>
+<SafeAreaView>
 
             <ScrollViewComponent>
                 <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", marginHorizontal:-8 }}>
@@ -138,6 +139,7 @@ const Stat = ({navigation}) => {
                 )}
             </ScrollViewComponent>
             <Navigationbar navigation={navigation} />
+</SafeAreaView>
         </View>
     );
 }
