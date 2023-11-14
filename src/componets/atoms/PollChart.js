@@ -8,7 +8,7 @@ import {
 } from "../../styles/Stylesheet";
 
 const PollChart = ({ pollData }) => {
-  // Check if pollData is available
+  // If pollData is available
   if (!pollData) {
     return null;
   }
@@ -17,10 +17,10 @@ const PollChart = ({ pollData }) => {
 
   pollData.options.forEach((x) => (sum += x.responses));
 
-  // Reverse the order of options
+  // Reversing the order of options
   const reversedOptions = [...pollData.options].reverse();
 
-  // Define the chart options using pollData
+  // Chart's options using pollData
   const chartOptions = {
     grid: {
       top: 0,
@@ -79,6 +79,15 @@ const PollChart = ({ pollData }) => {
         },
         barWidth: 20,
         barBorderRadius: [0, 0, 0, 0],
+        label: {
+          show: true,
+          formatter: "{c}%",
+          color: Primarycolor1,
+          fontSize: 13,
+          fontFamily: "space-grotesk-Medium",
+          position: "outsideRight",
+          offset: [250, -22],
+        },
       },
       {
         stack: "chart",
@@ -91,6 +100,9 @@ const PollChart = ({ pollData }) => {
         },
         barWidth: 20,
         barBorderRadius: [0, 0, 0, 0],
+        label: {
+          show: false,
+        },
       },
     ],
   };
@@ -102,23 +114,6 @@ const PollChart = ({ pollData }) => {
     backgroundColor: Primarycolor2,
     marginBottom: 15,
     marginTop: 15,
-  });
-
-  const styles = StyleSheet.create({
-    labelContainer: {
-      position: "absolute",
-      top: 0,
-      right: 0,
-      bottom: 0,
-      justifyContent: "center",
-      alignItems: "flex-end",
-      paddingRight: 15,
-    },
-    labelText: {
-      color: Primarycolor1,
-      fontSize: 16,
-      fontFamily: "space-grotesk-Medium",
-    },
   });
 
   return (
@@ -142,9 +137,6 @@ const PollChart = ({ pollData }) => {
         option={chartOptions}
         backgroundColor={Primarycolor2}
       />
-      <View style={styles.labelContainer}>
-        <Text style={styles.labelText}>{/* Show percentage here */}</Text>
-      </View>
     </View>
   );
 };

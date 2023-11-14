@@ -57,7 +57,7 @@ const QuizPoll = () => {
       fontSize: 14,
       fontFamily: "space-grotesk-Medium",
       color: style.Primarycolor1,
-      marginLeft:5,
+      marginLeft: 5,
     },
     container: {
       width: "100%",
