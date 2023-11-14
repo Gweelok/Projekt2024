@@ -80,7 +80,7 @@ const Add = ({ route, navigation }) => {
   );
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
-  const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(false);
+  const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(true);
   const [isModelDropdownVisible, setIsModelDropdownVisible] = useState(false);
   const [isConditionDropdownVisible, setIsConditionDropdownVisible] = useState(false);
 
@@ -205,6 +205,7 @@ const Add = ({ route, navigation }) => {
               setIsVisible={setIsBrandDropdownVisible}
               onSkip={handleSkipBrandDropdown}
               shouldOpenBrandDropdown={isBrandDropdownVisible}
+
           />
 
           <ModelDropdown
@@ -215,6 +216,7 @@ const Add = ({ route, navigation }) => {
               setIsVisible={setIsModelDropdownVisible}
               onSkip={handleSkipModelDropdown}
               setIsConditionDropdownVisible={setIsConditionDropdownVisible}
+              isConditionDropdownVisible={isConditionDropdownVisible}
           />
 
           <ConditionDropdown

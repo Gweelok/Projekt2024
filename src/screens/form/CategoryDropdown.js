@@ -90,10 +90,10 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                     <View style={categoryDropdownContainer.topBar}>
                         <BackButton onPress={handleBack}></BackButton>
                         <View style={categoryDropdownContainer.searchContainer}>
-                            <Ionicons name="search" size={20} color="rgba(-1, 129, 90, 0.2)" />
+                            <Ionicons name="search" size={20} color={Primarycolor1} />
                             <TextInput
                                 style={categoryDropdownContainer.input}
-                                placeholderTextColor="rgba(-1, 128, 0, 0.2)"
+                                placeholderTextColor={Primarycolor1}
                                 onChangeText={handleSearch}
                                 placeholder={t("DropdownScreen.Category", currentLanguage)}
                             />

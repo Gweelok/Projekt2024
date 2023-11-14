@@ -102,10 +102,10 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
                         <View style={brandDropdownContainer.topBar}>
                             <BackButton onPress={handleBack}></BackButton>
                             <View style={brandDropdownContainer.searchContainer}>
-                                <Ionicons name="search" size={20} color="rgba(-1, 129, 90, 0.2)" />
+                                <Ionicons name="search" size={20} color={Primarycolor1} />
                                 <TextInput
                                     style={brandDropdownContainer.input}
-                                    placeholderTextColor="rgba(-1, 128, 0, 0.2)"
+                                    placeholderTextColor={Primarycolor1}
                                     onChangeText={handleSearch}
                                     placeholder={t("DropdownScreen.Brand", currentLanguage)}
                                 />

@@ -9,7 +9,7 @@ import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "..
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { getAllModels } from "../../utils/Repo";
 
-const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsConditionDropdownVisible }) => {
+const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsConditionDropdownVisible, isConditionDropdownVisible, onSkip }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState(data || null);
@@ -18,6 +18,9 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
     const [searchText, setSearchText] = useState('');
     const navigation = useNavigation();
     const [filteredModels, setFilteredModels] = useState([]);
+    useEffect(() => {
+        setIsModalVisible(isVisible);
+    }, [isVisible]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,8 +51,15 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
     };
     const handleSkip = () => {
         setIsModalVisible(false);
-        // Open the ConditionDropdown modal
-        setIsConditionDropdownVisible(true);
+        if (onSkip) {
+            onSkip();
+        }
+        if (!isConditionDropdownVisible) {
+            setIsConditionDropdownVisible(true);
+        }
+        if (isConditionDropdownVisible) {
+            setIsConditionDropdownVisible(true);
+        }
     };
     const handleBack = () => {
         setIsModalVisible(false);
@@ -91,10 +101,10 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
                         <View style={modelDropdownContainer.topBar}>
                             <BackButton onPress={handleBack}></BackButton>
                             <View style={modelDropdownContainer.searchContainer}>
-                                <Ionicons name="search" size={20} color="rgba(-1, 129, 90, 0.2)" />
+                                <Ionicons name="search" size={20} color={Primarycolor1} />
                                 <TextInput
                                     style={modelDropdownContainer.input}
-                                    placeholderTextColor="rgba(-1, 128, 0, 0.2)"
+                                    placeholderTextColor={Primarycolor1}
                                     onChangeText={handleSearch}
                                     placeholder={t("DropdownScreen.Model", currentLanguage)}
                                 />

@@ -31,6 +31,9 @@ const ConditionDropdown = ({ onConditionSelect, data, isVisible }) => {
 
         fetchData();
     }, []);
+    useEffect(() => {
+        setIsModalVisible(isVisible);
+    }, [isVisible]);
 
     const handleConditionSelect = (condition) => {
         setSelectedCondition(condition);

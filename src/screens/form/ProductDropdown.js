@@ -20,13 +20,7 @@ const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isB
     }, [isVisible]);
 
 
-    const handleSkip = () => {
-        setIsModalVisible(false);
-        if (onSkip) {
-            onSkip();
-        }
-        setIsBrandDropdownVisible(true); // Open the Product Dropdown
-    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -85,16 +79,15 @@ const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isB
                 visible={isModalVisible}
                 transparent={true}
                 animationType="slide"
-                style={{top:-30, position:"absolute"}}
             >
                 <View style={[productDropdownContainer.modalContainer, { height: '100%', width: '100%'}]}>
                     <View style={productDropdownContainer.topBar}>
                         <BackButton onPress={handleBack} />
                         <View style={productDropdownContainer.searchContainer}>
-                            <Ionicons name="search" size={20} color="rgba(-1, 129, 90, 0.2)" />
+                            <Ionicons name="search" size={20} color={Primarycolor1} />
                             <TextInput
                                 style={productDropdownContainer.input}
-                                placeholderTextColor="rgba(-1, 128, 0, 0.2)"
+                                placeholderTextColor={Primarycolor1}
                                 onChangeText={handleSearch}
                                 placeholder={t('DropdownScreen.Product',currentLanguage)}
                             />
