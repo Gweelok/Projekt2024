@@ -47,24 +47,34 @@ const QuizPoll = () => {
 
   const styles = {
     optionButton: {
-      padding: 10,
+      padding: 7,
       margin: 5,
-      backgroundColor: "lightgray",
+      backgroundColor: "white",
+      borderColor: style.Primarycolor1,
+      borderWidth: 2,
     },
     optionText: {
       fontSize: 14,
+      fontFamily: "space-grotesk-Medium",
+      color: style.Primarycolor1,
+      marginLeft:5,
     },
     container: {
-      marginTop: 15,
       width: "100%",
-      backgroundColor: "#fff",
+      height: 295,
+      backgroundColor: style.Primarycolor2,
       marginBottom: 15,
+      marginTop: 15,
     },
     questionText: {
       color: style.Primarycolor1,
       fontSize: 18,
       fontFamily: "space-grotesk-Medium",
       fontWeight: "bold",
+      marginTop: 13,
+      marginBottom: 20,
+      textAlign: "left",
+      marginLeft: 15,
     },
   };
 
@@ -76,7 +86,7 @@ const QuizPoll = () => {
     );
   } else {
     return (
-      <View>
+      <View style={styles.container}>
         <Text style={styles.questionText}>
           {Questions[currentQuestionIndex].question}
         </Text>
