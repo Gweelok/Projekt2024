@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, SafeAreaView, ScrollViewComponent} from 'react-native';
 import { styles, Backgroundstyle, HeaderText, Buttons } from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import { useNavigation } from "@react-navigation/native";
@@ -7,7 +7,6 @@ import { t, useLanguage } from "../Languages/LanguageHandler";
 import BackButton from "../componets/BackButton";
 import GlobalStyle from "../styles/GlobalStyle";
 import ChartForStats from "../componets/atoms/ChartForStats";
-import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import the appropriate icon library
 import StreetStat from "../componets/atoms/StreetStat";
 import VisitedUptainerStat from "../componets/atoms/VisitedUptainerStat";
@@ -33,10 +32,10 @@ const Stat = ({navigation}) => {
 
 
     return (
-        <View style={[Backgroundstyle.interactive_screens]}>
+        <View style={[Backgroundstyle.interactive_screens,{ flex: 1, justifyContent: 'center' }]}>
 <SafeAreaView>
 
-            <ScrollViewComponent>
+            <ScrollView>
                 <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", marginHorizontal:-8 }}>
                     <BackButton onPress={handlePress} />
                     <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
@@ -137,9 +136,11 @@ const Stat = ({navigation}) => {
                 ) : (
                     <YourStats/>
                 )}
-            </ScrollViewComponent>
-            <Navigationbar navigation={navigation} />
+                <View style={{marginTop:50}}></View>
+            </ScrollView>
 </SafeAreaView>
+            <Navigationbar navigation={navigation} />
+
         </View>
     );
 }

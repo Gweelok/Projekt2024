@@ -87,10 +87,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
 
-
     },
     chartContainer: {
         height: 300,
+        width:"100%",
+        left:10
     },
 });
 
