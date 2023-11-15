@@ -27,6 +27,9 @@ export default {
     Button: "Log ind",
     ForgetPwHint: "Glemt dit kodeord?",
     SignUpHint: "Har du ikke en bruger? Opret her.",
+    validemail:"Indtast venligst en gyldig e-mail.",
+    fields:"Felter må ikke være tomme.",
+    passwordmsg:"Dit kodeord skal være på mindst 8 tegn."
   },
 
   CustomInput: {
@@ -217,7 +220,7 @@ export default {
 
   },
 
-  
+
   ForgotPasswordScreen: {
     Header: "Glemt kodeord",
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",

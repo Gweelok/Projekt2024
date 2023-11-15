@@ -159,7 +159,7 @@ export default function App() {
               <Stack.Screen
                 name="Sign in"
                 component={SignIn}
-                options={{ animation: "none", headerLeft: null }}
+                options={{ animation: "none", headerShown: false, headerLeft: null }}
               />
               <Stack.Screen
                 name="Homepage"
