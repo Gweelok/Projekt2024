@@ -4,7 +4,7 @@ export default {
     password: "Password",
     passwordmsg: "Minimum 8 characters",
     LogInLink: "Already have an account? Sign in.",
-    validemail:"Please enter a valid email.",
+    validemail:"Please enter a valid email",
     fields:"Fields cannot be empty.",
   },
   LandingScreen: {

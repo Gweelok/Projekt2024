@@ -4,7 +4,7 @@ export default {
     password: "Kodeord",
     passwordmsg: "Minimum 8 tegn",
     LogInLink: "Har du allerede en bruger? Log ind.",
-    validemail:"Indtast venligst en gyldig e-mail.",
+    validemail:"Indtast venligst en gyldig e-mail",
     fields:"Felter må ikke være tomme.",
   },
   LandingScreen: {
