@@ -207,8 +207,7 @@ const SignUpStyles = StyleSheet.create({
     fontSize: 12,
     marginTop: -10,
     marginBottom:13,
-    textAlign:"start",
-    marginLeft:17,
+    textAlign: "center",
     }
 });
 
