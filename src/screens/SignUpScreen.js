@@ -56,18 +56,48 @@ const onChangeEmailHandler = (text) => {
   //Checks and navigates to Terms and Conditions
   const handleSubmit = () => {
     setFormSubmitted(true);
-    if (email.trim() === "" && password.trim() === "") {
+    // Check if email is empty
+    if (email.trim() === "") {
       setShowError(true);
-      setErrorMessage(t('SignUpScreen.fields', currentLanguage));
-    } else if (!emailValid && email.trim() !== "" && password.trim() !== "") {
-        setShowError(true);
-    } else if (!passwordCheck && email.trim() !== "" && password.trim() !== "") {
-        setShowError(true);
-    } else {
-        setShowError(false);
-        navigation.navigate("TermsAndConditions", { email, password });
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setEmailValid(false);
+      setPasswordCheck(true);
+      return; // Return early since email is a prerequisite for password check
     }
-};
+
+    // Validate email format
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email) && email.trim()!=="") {
+      setShowError(true);
+      setErrorMessage("Error msg");
+      setEmailValid(false);
+      setPasswordCheck(true);
+      return; // Return early since we need a valid email before checking password
+    }
+
+    // Check if password is empty only if email is valid
+    if (password.trim() === "") {
+      setShowError(true);
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setPasswordCheck(false);
+      setEmailValid(true);
+      return; // Return early to ask for password input
+    }
+
+    // Validate password length
+    if (password.length < 8 && password.trim()!=="") {
+      setShowError(true);
+      setErrorMessage("Error msg");
+      setPasswordCheck(false);
+      setEmailValid(true);
+      return; // Return early since password needs to meet length requirement
+    }
+
+    // If all validations pass
+    setShowError(false);
+    navigation.navigate("TermsAndConditions", { email, password });
+  };
+
 
   //check if pass should be shown
   const togglePasswordVisibility = () => {
