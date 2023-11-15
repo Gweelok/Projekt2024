@@ -40,7 +40,7 @@ const onChangeEmailHandler = (text) => {
   onChangeEmail(text);
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   if(formSubmitted) setEmailValid(emailPattern.test(text));
-  };  
+  };
 
   //To check on password
   const CheckPassword = (text) => {
@@ -56,13 +56,12 @@ const onChangeEmailHandler = (text) => {
   //Checks and navigates to Terms and Conditions
   const handleSubmit = () => {
     setFormSubmitted(true);
-
     if (email.trim() === "" && password.trim() === "") {
       setShowError(true);
-      setErrorMessage(t("Fields cannot be empty"));
-    } else if (!emailValid) {
+      setErrorMessage(t('SignUpScreen.fields', currentLanguage));
+    } else if (!emailValid && email.trim() !== "" && password.trim() !== "") {
         setShowError(true);
-    } else if (!passwordCheck) {
+    } else if (!passwordCheck && email.trim() !== "" && password.trim() !== "") {
         setShowError(true);
     } else {
         setShowError(false);
@@ -75,21 +74,13 @@ const onChangeEmailHandler = (text) => {
     setShowPassword((prevState) => !prevState);
   };
 
-  let Header = "Opret bruger";
-
   return (
     <SafeAreaView style={Backgroundstyle.informationScreens}>
       {showError && <ErrorBanner message={errorMessage} />}
+
       <View style={{ alignSelf: "stretch", paddingLeft: 25, paddingTop: 5 }}>
         <BackButton onPress={navigation.goBack}/>
       </View>
-
-      <View style={GlobalStyle.BodyWrapper}>
-        <Text style={[styles.Header_Primarycolor1, styles.Header]}>
-          {/* {t("SignUpScreen.Signup", currentLanguage)} */}
-        </Text>
-
-    <View style={Backgroundstyle.informationScreens}>
         <View style={GlobalStyle.BodyWrapper}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
       <TextInput
@@ -102,7 +93,7 @@ const onChangeEmailHandler = (text) => {
         clearButtonMode={"always"}
         style={[styles.inputBox, styles.inputBox, (!emailValid && formSubmitted) && SignUpStyles.errorInputBox]}
       />
-      {!emailValid && formSubmitted ? <Text style={SignUpStyles.errorText}>Please enter a valid email.</Text> : null}
+      {!emailValid && formSubmitted ? <Text style={SignUpStyles.errorText}>{t("SignUpScreen.validemail", currentLanguage)}</Text> : null}
 
       <View style={[styles.inputBox , {flexDirection:"row"}, (!passwordCheck && formSubmitted) && SignUpStyles.errorInputBox]}>
       <TextInput
@@ -122,11 +113,7 @@ const onChangeEmailHandler = (text) => {
         onPress={togglePasswordVisibility}
       />
       </View>
-      { //Check on the password
-        (!passwordCheck && formSubmitted) ?
-        <Text style={SignUpStyles.errorText}>Your password must be at least 8 characters long.</Text> :
-        passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}>{t("SignUpScreen.passwordmsg", currentLanguage)}</Text>
-      }
+          { (!passwordCheck && formSubmitted)  ?<Text style={SignUpStyles.errorText}> {t("SignUpScreen.passwordmsg", currentLanguage)}</Text>:null  }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
             <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
         </Pressable>
@@ -160,8 +147,6 @@ const onChangeEmailHandler = (text) => {
           </Text>
         </Pressable>
       </View>
-    </View>
-      </View>
     </SafeAreaView>
   );
 };
@@ -192,8 +177,9 @@ const SignUpStyles = StyleSheet.create({
     fontSize: 12,
     marginTop: -10,
     marginBottom:13,
-    textAlign:"center",
-    }    
+    textAlign:"start",
+    marginLeft:17,
+    }
 });
 
 export default SignUpScreen;

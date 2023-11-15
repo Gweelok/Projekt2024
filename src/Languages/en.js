@@ -2,8 +2,10 @@ export default {
   SignUpScreen: {
     Signup: "Sign up",
     password: "Password",
-    passwordmsg: "min. eight characters",
-    LogInLink: "Already have an account? Log in",
+    passwordmsg: "Minimum 8 characters",
+    LogInLink: "Already have an account? Sign in.",
+    validemail:"Please enter a valid email.",
+    fields:"Fields cannot be empty.",
   },
   LandingScreen: {
     LanguageSelector: "Danish",
@@ -209,7 +211,7 @@ export default {
   ArticleSlider: {
     header: "Read also"
   },
-  
+
   ArticleScreen:{
     Written:"Written at: XX/XX/XXXX",
     Subheadline:"Subheadline",

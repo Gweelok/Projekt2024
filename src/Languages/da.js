@@ -2,8 +2,10 @@ export default {
   SignUpScreen: {
     Signup: "Opret Bruger",
     password: "Kodeord",
-    passwordmsg: "min. otte tegn",
-    LogInLink: "Har du allerede en bruger",
+    passwordmsg: "Minimum 8 tegn",
+    LogInLink: "Har du allerede en bruger? Log ind.",
+    validemail:"Indtast venligst en gyldig e-mail.",
+    fields:"Felter må ikke være tomme.",
   },
   LandingScreen: {
     LanguageSelector: "English",
@@ -217,7 +219,7 @@ export default {
 
   },
 
-  
+
   ForgotPasswordScreen: {
     Header: "Glemt kodeord",
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
