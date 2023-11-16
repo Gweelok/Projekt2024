@@ -4,7 +4,7 @@ import {
     styles,
     Backgroundstyle,
     Buttons,
-    Primarycolor1,
+    Primarycolor1, Primarycolor3,
 }
     from '../styles/Stylesheet';
 import { Ionicons } from '@expo/vector-icons';
@@ -127,7 +127,15 @@ const SignIn = ({ navigation }) => {
                     placeholderTextColor="#8EA59E"
                     keyboardType={'default'}
                     secureTextEntry={!showPassword}
-                    style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
+                    style={{flex:1,
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop:"auto",
+                        marginBottom:"auto",
+                        fontFamily: "space-grotesk",
+                        fontSize: 16,
+                        alignSelf: "stretch",}}
+
                 />
                 <Ionicons
                     name={showPassword ? 'ios-eye-off' : 'ios-eye'}
