@@ -157,9 +157,10 @@ const styling = StyleSheet.create({
     alignSelf: "stretch",
     paddingHorizontal: 20,
     marginBottom: 10,
+    marginLeft:-8.5
   },
   main_button:{
-    ...Buttons.main_button,
+    ...Buttons.main_button, width: "88.9%",
   },
   backButton: {
     backgroundColor: "#1c4b3d",
