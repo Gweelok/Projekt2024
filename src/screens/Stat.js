@@ -32,22 +32,21 @@ const Stat = ({navigation}) => {
 
 
     return (
-        <View style={[Backgroundstyle.interactive_screens,{ flex: 1, justifyContent: 'center' }]}>
+        <View style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper, { flex: 1, justifyContent: 'center' }]}>
 <SafeAreaView>
 
             <ScrollView>
-                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", marginHorizontal:-8 }}>
+                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start"}}>
                     <BackButton onPress={handlePress} />
                     <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
                         <Text>{t("StatsPage.Header", currentLanguage)}</Text>
                     </Text>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, }}>
-                    <View style={{marginRight:7}}>
+                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10}}>
+                    <View style={{width: "48%"}} >
                         <TouchableOpacity
                             style={[
-                                activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 173, height: 41 }
+                                activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button
                             ]}
                             onPress={() => handlePress1('main')}
                         >
@@ -56,11 +55,10 @@ const Stat = ({navigation}) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View>
+                    <View style={{width: "48%"}}>
                         <TouchableOpacity
                             style={[
-                                activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 173, height: 41 }
+                                activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button
                             ]}
                             onPress={() => handlePress1('secondary')}
                         >
