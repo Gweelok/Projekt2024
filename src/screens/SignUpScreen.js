@@ -46,11 +46,16 @@ const onChangeEmailHandler = (text) => {
   const CheckPassword = (text) => {
     onChangePassword(text);
     if(formSubmitted)
-      if(text.length < 8 || text.length >= 8) {
+      if(text.length >= 8 ) {
         setShowError(false);
         setEmailValid(true);
         setPasswordCheck(true); // it must be at least 8 chars
       }
+    if(text.length < 8 ) {
+      setShowError(false);
+      setEmailValid(true);
+      setPasswordCheck(false); // it must be at least 8 chars
+    }
   };
 
   // Hide the banner when email or password is edited
