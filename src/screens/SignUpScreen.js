@@ -45,7 +45,12 @@ const onChangeEmailHandler = (text) => {
   //To check on password
   const CheckPassword = (text) => {
     onChangePassword(text);
-    if(formSubmitted) setPasswordCheck(text.length >= 8); // it must be at least 8 chars
+    if(formSubmitted)
+      if(text.length < 8 || text.length >= 8) {
+        setShowError(false);
+        setEmailValid(true);
+        setPasswordCheck(true); // it must be at least 8 chars
+      }
   };
 
   // Hide the banner when email or password is edited
@@ -86,7 +91,7 @@ const onChangeEmailHandler = (text) => {
 
     // Validate password length
     if (password.length < 8 && password.trim()!=="") {
-      setShowError(true);
+      setShowError(false);
       setErrorMessage("Error msg");
       setPasswordCheck(false);
       setEmailValid(true);
@@ -150,7 +155,7 @@ const onChangeEmailHandler = (text) => {
         onPress={togglePasswordVisibility}
       />
       </View>
-          { (!passwordCheck && formSubmitted)  ?<Text style={SignUpStyles.errorText}> {t("SignUpScreen.passwordmsg", currentLanguage)}</Text>:null  }
+          { (!passwordCheck && formSubmitted)  ?<Text style={[SignUpStyles.errorText, { marginLeft: 16,textAlign: "start" }]}> {t("SignUpScreen.passwordmsg", currentLanguage)}</Text>:null  }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
             <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
         </Pressable>
