@@ -59,8 +59,12 @@ const ArticlePage = ({ route }) => {
             <Text style={styles.article_text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aspernatur commodi cumque cupiditate eaque earum eum expedita laudantium libero magnam minima, mollitia necessitatibus obcaecati perferendis, quis reiciendis suscipit temporibus.</Text>
           <Text style={styles1.writtenPlaceholder1}>{t('ArticleScreen.Subheadline',currentLanguage)}</Text>
             <Text style={styles.article_text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aut doloribus ducimus esse exercitationem fuga hic illo inventore ipsa ipsum iusto molestiae nihil, non odio praesentium similique ullam voluptas!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deserunt dolores dolorum incidunt laboriosam natus odio officia quia quisquam sit. Atque fuga magni nam neque quae. Error eum illo sint.</Text>
+            <Text style={[styles.menuItem_text, { marginTop: 15 }]}>
+              {t("ArticleSlider.header", currentLanguage)}
+            </Text>
             <ArticleSlider/>
         </View>
+
         </ScrollViewComponent>
         <Navigationbar/>
       </StatusBarComponent>
