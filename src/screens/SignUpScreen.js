@@ -39,7 +39,15 @@ const SignUpScreen = ({ navigation }) => {
 const onChangeEmailHandler = (text) => {
   onChangeEmail(text);
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  if(formSubmitted) setEmailValid(emailPattern.test(text));
+  if(formSubmitted)
+    if(emailPattern.test(text)){
+      setShowError(false);
+      setEmailValid(true);
+    }
+  if(!emailPattern.test(text)){
+    setShowError(false);
+    setEmailValid(false);
+  }
   };
 
   //To check on password
@@ -48,12 +56,10 @@ const onChangeEmailHandler = (text) => {
     if(formSubmitted)
       if(text.length >= 8 ) {
         setShowError(false);
-        setEmailValid(true);
         setPasswordCheck(true); // it must be at least 8 chars
       }
     if(text.length < 8 ) {
       setShowError(false);
-      setEmailValid(true);
       setPasswordCheck(false); // it must be at least 8 chars
     }
   };
@@ -80,19 +86,19 @@ const onChangeEmailHandler = (text) => {
       setEmailValid(false);
       return; // Return early since email is a prerequisite for password check
     }
-    if ( password.trim()==="") {
-      setShowError(false);
-      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
-      setPasswordCheck(false);
-      return; // Return early since email is a prerequisite for password check
-    }
-
     // Validate email format
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email) && email.trim()!=="" && password.length < 8 && password.trim()==="") {
+    if (!emailPattern.test(email) && email.trim()!=="" && (password.trim()==="")) {
       setShowError(true);
       setErrorMessage("Error msg");
       setEmailValid(false);
+      setPasswordCheck(false);
+      return; // Return early since we need a valid email before checking password
+    }
+    if (emailPattern.test(email) && email.trim()!=="" && (password.trim()==="")) {
+      setShowError(true);
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setEmailValid(true);
       setPasswordCheck(false);
       return; // Return early since we need a valid email before checking password
     }
@@ -104,20 +110,20 @@ const onChangeEmailHandler = (text) => {
       return; // Return early since we need a valid email before checking password
     }
     // Check if password is empty only if email is valid
-    if (!emailPattern.test(email) && email.trim()!=="" ) {
+    if (!emailPattern.test(email) && email.trim()!=="" && password.length >=8 && password.trim()!=="") {
       setShowError(true);
       setErrorMessage("Error msg");
       setEmailValid(false);
-   //   setPasswordCheck(true);
+     setPasswordCheck(true);
       return; // Return early since we need a valid email before checking password
     }
 
     // Validate password length
-    if (password.length < 8 && password.trim()!=="") {
+    if (emailPattern.test(email) && email.trim()!=="" && password.length < 8 && password.trim()!=="") {
       setShowError(false);
       setErrorMessage("Error msg");
       setPasswordCheck(false);
-      //setEmailValid(true);
+      setEmailValid(true);
       return; // Return early since password needs to meet length requirement
     }
 
