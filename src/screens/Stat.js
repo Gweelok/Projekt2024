@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, TouchableOpacity, ScrollView, SafeAreaView, ScrollViewComponent} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, SafeAreaView,} from 'react-native';
 import { styles, Backgroundstyle, HeaderText, Buttons } from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +14,7 @@ import Svg, { Path } from "react-native-svg";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
 import YourStats from "./YourStats";
 import GreenBox from "../styles/GreenBox";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 
 
 
@@ -35,7 +36,7 @@ const Stat = ({navigation}) => {
         <View style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper, { flex: 1, justifyContent: 'center' }]}>
 <SafeAreaView>
 
-            <ScrollView>
+            <ScrollViewComponent>
                 <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start"}}>
                     <BackButton onPress={handlePress} />
                     <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
@@ -134,8 +135,7 @@ const Stat = ({navigation}) => {
                 ) : (
                     <YourStats/>
                 )}
-                <View style={{marginTop:50}}></View>
-            </ScrollView>
+            </ScrollViewComponent>
 </SafeAreaView>
             <Navigationbar navigation={navigation} />
 
