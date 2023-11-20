@@ -43,10 +43,12 @@ const onChangeEmailHandler = (text) => {
     if(emailPattern.test(text)){
       setShowError(false);
       setEmailValid(true);
+      return;
     }
   if(!emailPattern.test(text)){
     setShowError(false);
     setEmailValid(false);
+    return;
   }
   };
 
@@ -57,10 +59,12 @@ const onChangeEmailHandler = (text) => {
       if(text.length >= 8 ) {
         setShowError(false);
         setPasswordCheck(true); // it must be at least 8 chars
+        return;
       }
     if(text.length < 8 ) {
       setShowError(false);
       setPasswordCheck(false); // it must be at least 8 chars
+      return;
     }
   };
 
