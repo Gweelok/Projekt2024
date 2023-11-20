@@ -1,13 +1,11 @@
 import React, {useState} from "react";
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, SafeAreaView,} from 'react-native';
 import { styles, Backgroundstyle, HeaderText, Buttons } from '../styles/Stylesheet';
 import Navigationbar from '../componets/Navigationbar';
 import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import BackButton from "../componets/BackButton";
 import GlobalStyle from "../styles/GlobalStyle";
-import ChartForStats from "../componets/atoms/Stats/ChartForStats";
-import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import the appropriate icon library
 import StreetStat from "../componets/atoms/Stats/StreetStat";
 import VisitedUptainerStat from "../componets/atoms/Stats/VisitedUptainerStat";
@@ -15,6 +13,8 @@ import Svg, { Path } from "react-native-svg";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
 import YourStats from "./YourStats";
 import GreenBox from "../styles/GreenBox";
+import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 
 
 
@@ -35,23 +35,23 @@ const Stat = ({navigation}) => {
 
 
     return (
-        <View style={[Backgroundstyle.interactive_screens, GlobalStyle]}>
+        <View style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper, { flex: 1, justifyContent: 'center' }]}>
+<SafeAreaView>
 
 
 
             <ScrollViewComponent>
-                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start", marginHorizontal:-8 }}>
+                <View style={{ flexDirection: "row", alignItems: "center", alignSelf:"flex-start"}}>
                     <BackButton onPress={handlePress} />
                     <Text style={[HeaderText.Header,{fontFamily: "space-grotesk-Medium" }]}>
                         <Text>{t("StatsPage.Header", currentLanguage)}</Text>
                     </Text>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, }}>
-                    <View style={{marginRight:7}}>
+                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10}}>
+                    <View style={{width: "48%"}} >
                         <TouchableOpacity
                             style={[
-                                activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 173, height: 41 }
+                                activeButton === 'main' ? Buttons.main_button : Buttons.secondary_button
                             ]}
                             onPress={() => handlePress1('main')}
                         >
@@ -60,11 +60,10 @@ const Stat = ({navigation}) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View>
+                    <View style={{width: "48%"}}>
                         <TouchableOpacity
                             style={[
-                                activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button,
-                                { width: 173, height: 41 }
+                                activeButton === 'secondary' ? Buttons.main_button : Buttons.secondary_button
                             ]}
                             onPress={() => handlePress1('secondary')}
                         >
@@ -141,9 +140,8 @@ const Stat = ({navigation}) => {
                     <YourStats/>
                 )}
             </ScrollViewComponent>
-            <View style={{ width:"108%"}}>
+</SafeAreaView>
             <Navigationbar navigation={navigation} />
-            </View>
         </View>
     );
 }
