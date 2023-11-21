@@ -1,3 +1,5 @@
+
+
 import React, {useEffect, useRef} from "react";
 import {View, Text, StyleSheet, Animated} from "react-native";
 import PhoneSvg from "../svg-components/Phone";
@@ -37,13 +39,14 @@ const HousePhoneText = ({showPhone, textUnderHouse}) =>{
         outputRange: [0, 200], // Start and end positions of the movement
     });
 
-    return <View style={styling.container}>
+    return (<View style={styling.container}>
         <Animated.View style={{  transform: [{ translateX: moveX }] }} >
         {showPhone?<PhoneSvg style={styling.phone}/>:null}
         </Animated.View>
         <HouseSvg/>
         <Text style={styling.text}>{textUnderHouse}</Text>
     </View>
+  );
 };
 const styling = StyleSheet.create({
     container:{
