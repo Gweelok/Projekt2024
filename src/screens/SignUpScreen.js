@@ -190,6 +190,7 @@ const onChangeEmailHandler = (text) => {
       />
       </View>
           { (!passwordCheck && formSubmitted)  ?<Text style={[SignUpStyles.errorText, { marginLeft: 16,textAlign: "start" }]}> {t("SignUpScreen.passwordmsg", currentLanguage)}</Text>:null  }
+          {   <Text style={[SignUpStyles.helperText]}> {t("SignUpScreen.passwordmsg", currentLanguage)}</Text> }
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
             <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
         </Pressable>
@@ -250,11 +251,19 @@ const SignUpStyles = StyleSheet.create({
     },
   errorText: {
     color: "#AA0000",
-    fontSize: 12,
+    fontSize: 13,
     marginTop: -10,
     marginBottom:13,
     textAlign: "center",
-    }
+    },
+  helperText: {
+    color:  "#1c4b3d",
+    fontSize: 14,
+    marginTop: -10,
+    marginBottom:13,
+    marginLeft: 16,
+    textAlign: "start"
+  }
 });
 
 export default SignUpScreen;
