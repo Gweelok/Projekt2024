@@ -26,7 +26,10 @@ export default {
     Headline: "Sign in",
     Button: "Sign in",
     ForgetPwHint: "Forgot your password?",
-    SignUpHint: "Don't have a user? Sign up.",
+    SignUpHint: "Don't have an account? Sign up.",
+    validemail:"Please enter a valid email.",
+    fields:"Fields cannot be empty.",
+    passwordmsg:"Your password must be at least 8 characters long.",
   },
 
   ProfileScreen: {
