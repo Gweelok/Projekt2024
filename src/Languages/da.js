@@ -27,6 +27,9 @@ export default {
     Button: "Log ind",
     ForgetPwHint: "Glemt dit kodeord?",
     SignUpHint: "Har du ikke en bruger? Opret her.",
+    validemail:"Indtast venligst en gyldig e-mail.",
+    fields:"Felter må ikke være tomme.",
+    passwordmsg:"Dit kodeord skal være på mindst 8 tegn."
   },
 
   CustomInput: {
@@ -217,12 +220,13 @@ export default {
 
   },
 
-  
+
   ForgotPasswordScreen: {
     Header: "Glemt kodeord",
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
     SendLinkButton: "Send link"
 },
+
   DropdownScreen:{
     Category: "Søg efter kategori...",
     Product:"Søg efter produkt...",
@@ -230,7 +234,39 @@ export default {
     Brand: "Søg efter mærke...",
     Condition:"Standen af produktet",
     Text:"Du kan fortælle mere om produktets stand i beskrivelsesfeltet."
+  },
+
+  StatsPage:{
+    Header: "Påvirkning",
+    MainButton:"Generelt",
+    SecondaryButton:"Din",
+    AmountReduced: "Antal genbrugte produkter",
+    InTotal:"I alt",
+    SoFar:"Indtil videre i dag",
+    AmountCO2:"Mængden af CO2 sparet",
+    Yesterday:"I går",
+    kgCO2:"1 kg. CO2 er tilsvarende til *FACT HERE*",
+    Amount:"Så 4.400 t. svarer til *CALCULATION HERE*",
+    BestAcheieve:"Denne måneds bedst præserende Uptainere",
+    MostVisitedUptainer:"Din mest besøgte Uptainer",
+    ItemsReused:"produkter sparet",
+    CO2Save: " CO2 sparet",
+    Comunity: "Det bæredygtige Forsamlingshus",
+    Info: "Lær hvordan vi får vores informationer her",
+    ItemsRecicled:"produkter genbrugt",
+    ItemsDonated:"Genstande doneret",
+    ItemsCollected:"Genstande hentet",
+    Overview:"Gå til overblikket af dine produkter",
+    Social:"Del din påvirkning med dine venner",
+    GetInspired:"Bliv inspireret",
+
 
   }
+
+
+
+
+
+
 
 };
