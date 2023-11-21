@@ -303,8 +303,6 @@ export const Backgroundstyle = StyleSheet.create({
   interactive_screens: {
     paddingTop: 50,
     alignItems: "center",
-    marginLeft: "1%",
-    marginRight: "1%",
     flex: 1,
     backgroundColor: Primarycolor3,
   },
@@ -321,13 +319,12 @@ export const Buttons = StyleSheet.create({
     backgroundColor: "#4765A9",
     fontSize: 22,
     padding: 10,
-    width: "70%",
-    margin: 30,
     marginLeft: "auto",
     marginRight: "auto",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+    width: "100%"
   },
   buttongoogle: {
     backgroundColor: "#F41616",
@@ -337,15 +334,16 @@ export const Buttons = StyleSheet.create({
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
+    width: "100%"
   },
   main_button: {
-    padding: 10,
-    width: "90%",
+    padding: 8,
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
-    borderWidth: 2,
+    borderWidth: 4,
+    width: "100%"
   },
   main_buttonText: {
     color: "white",
@@ -354,13 +352,13 @@ export const Buttons = StyleSheet.create({
     fontFamily: "space-grotesk-Medium",
   },
   secondary_button: {
-    padding: 7,
-    width: "90%",
+    padding: 8,
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: Primarycolor3,
     borderColor: Primarycolor1,
     borderWidth: 4,
+    width: "100%"
   },
   secondary_buttonText: {
     color: Primarycolor1,
@@ -395,6 +393,7 @@ export const HeaderText = StyleSheet.create({
     //marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
+
   },
   Header_Primarycolor1: {
     color: Primarycolor1,

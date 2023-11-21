@@ -20,6 +20,7 @@ const ArticleSlider = () => {
   const flatListRef = useRef(null);
   const { currentLanguage } = useLanguage();
 
+
   const handleArticleClick = (article) => {
     //todo in the future, add the navigation to specific article.
     //Example: navigation.navigate("ArticleDetail", { article });
@@ -80,9 +81,7 @@ const ArticleSlider = () => {
   );
   return (
       <View style={Slidestyles.container}>
-        <Text style={[styles.menuItem_text, { marginTop: 15 }]}>
-          {t("ArticleSlider.header", currentLanguage)}
-        </Text>
+
         <FlatList
           ref={flatListRef}
           data={staticArticles}
