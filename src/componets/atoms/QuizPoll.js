@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import * as style from "../../styles/Stylesheet";
 import PollChart from "./PollChart";
+import Quiz from "./Quiz";
 
 const QuizPoll = () => {
   const [chartVisible, setChartVisible] = useState(false);
-  const [Questions, setQuestions] = useState([
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Start with the first question
+  const [selectedOption, setSelectedOption] = useState(null);
+  const Questions = [
     {
       question: "How many electronic devices have you bought the last year?",
       type: "poll",
@@ -26,90 +29,42 @@ const QuizPoll = () => {
       ],
       correctAnswer: "C) Global warming caused by human actions",
     },
-  ]);
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
+  ];
 
   const handleOptionSelect = (option) => {
     const currentQuestion = Questions[currentQuestionIndex];
 
     if (currentQuestion.type === "quiz") {
-      if (option === currentQuestion.correctAnswer) {
-        setSelectedOption({ option, isCorrect: true });
-      } else {
-        setSelectedOption({ option, isCorrect: false });
-      }
+      const isCorrect = currentQuestion.correctAnswer.includes(option);
+      setSelectedOption({ option, isCorrect });
     } else if (currentQuestion.type === "poll") {
+      // Show the chart when the poll option is pressed
       setChartVisible(true);
     }
   };
 
-  const styles = {
-    optionButton: {
-      padding: 7,
-      margin: 5,
-      backgroundColor: "white",
-      borderColor: style.Primarycolor1,
-      borderWidth: 2,
-    },
-    optionText: {
-      fontSize: 14,
-      fontFamily: "space-grotesk-Medium",
-      color: style.Primarycolor1,
-      marginLeft: 5,
-    },
-    container: {
-      width: "100%",
-      height: 295,
-      backgroundColor: style.Primarycolor2,
-      marginBottom: 15,
-      marginTop: 15,
-    },
-    questionText: {
-      color: style.Primarycolor1,
-      fontSize: 18,
-      fontFamily: "space-grotesk-Medium",
-      fontWeight: "bold",
-      marginTop: 13,
-      marginBottom: 20,
-      textAlign: "left",
-      marginLeft: 15,
-    },
-  };
+  // Show the current question
+  const currentQuestion = Questions[currentQuestionIndex];
 
-  if (chartVisible) {
-    return (
-      <View>
-        <PollChart pollData={Questions[0]} />
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.questionText}>
-          {Questions[currentQuestionIndex].question}
-        </Text>
-        {Questions[currentQuestionIndex].options.map((option, optionIndex) => (
-          <TouchableOpacity
-            key={optionIndex}
-            onPress={() => handleOptionSelect(option)}
-            style={[
-              styles.optionButton,
-              selectedOption &&
-                selectedOption.option === option && {
-                  backgroundColor: selectedOption.isCorrect
-                    ? style.Primarycolor1 // Correct answer color
-                    : "#AA0000", // Wrong answer color
-                },
-            ]}
-          >
-            <Text style={styles.optionText}>{option.text}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
-  }
+  return (
+    <View>
+      {currentQuestion.type === "quiz" ? (
+        <Quiz
+          question={currentQuestion}
+          handleOptionSelect={handleOptionSelect}
+          selectedOption={selectedOption}
+        />
+      ) : (
+        <View>
+          <PollChart
+            pollData={currentQuestion}
+            handleOptionSelect={handleOptionSelect}
+            chartVisible={chartVisible}
+          />
+        </View>
+      )}
+    </View>
+  );
 };
 
 export default QuizPoll;

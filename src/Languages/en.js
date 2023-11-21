@@ -58,7 +58,7 @@ export default {
 
   DescriptionField: {
     label: "Description",
-    placeholder: "Enter description here..."
+    placeholder: "Enter description here...",
   },
 
   MyDraftsScreen: {
@@ -70,31 +70,31 @@ export default {
   },
 
   ImageUpload: {
-    chooseImage: "Choose image"
+    chooseImage: "Choose image",
   },
 
   CategoryDropdown: {
     selectCategory: "Category",
-    placeholder: "Choose category"
+    placeholder: "Choose category",
   },
 
   BrandDropdown: {
     selectBrand: "Brand",
-    placeholder: "Choose brand"
+    placeholder: "Choose brand",
   },
 
   ModelDropdown: {
     selectModel: "Model",
-    placeholder: "Choose model"
+    placeholder: "Choose model",
   },
 
   ConditionDropdown: {
     selectCondition: "Condition",
-    placeholder: "Choose condition"
+    placeholder: "Choose condition",
   },
   ProductDropdown: {
     selectProduct: "Product",
-    placeholder: "Choose product"
+    placeholder: "Choose product",
   },
 
   NotificationsScreen: {
@@ -132,9 +132,11 @@ export default {
     PasswordMismatchError:
       "New password and Confirm New Password doesn't match.",
     PasswordLengthError: "Password must be at least 8 characters long.",
-    PasswordChanged: "Password changed successfully. You will be redirected to log in.",
+    PasswordChanged:
+      "Password changed successfully. You will be redirected to log in.",
     CurrentPasswordError: "Current password is not correct.",
-    PasswordUpdateError: "An error occurred during updating the password. Please try again!",
+    PasswordUpdateError:
+      "An error occurred during updating the password. Please try again!",
   },
 
   ProblemComponent: {
@@ -192,13 +194,13 @@ export default {
   },
 
   ContactUs: {
-    Header:'Contact os',
+    Header: "Contact os",
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
     SendMessage: "Send message",
-    TextOnTheTop:"Send us a message through the contact form. Vi vil answer on your associated mail.",
-
+    TextOnTheTop:
+      "Send us a message through the contact form. Vi vil answer on your associated mail.",
   },
 
   thankYouScreen: {
@@ -207,19 +209,19 @@ export default {
   },
 
   ArticleSlider: {
-    header: "Read also"
+    header: "Read also",
   },
-  
-  ArticleScreen:{
-    Written:"Written at: XX/XX/XXXX",
-    Subheadline:"Subheadline",
+
+  ArticleScreen: {
+    Written: "Written at: XX/XX/XXXX",
+    Subheadline: "Subheadline",
   },
 
   ForgotPasswordScreen: {
     Header: "Forgot password",
-    Description: "Input your associated mail, to receive a link for resetting your password",
-    SendLinkButton: "Send link"
-},
-
+    Description:
+      "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link",
+  },
 
 };

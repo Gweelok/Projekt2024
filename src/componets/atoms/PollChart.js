@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { ECharts } from "react-native-echarts-wrapper";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import {
   Primarycolor1,
   Primarycolor2,
   Primarycolor3,
 } from "../../styles/Stylesheet";
 
-const PollChart = ({ pollData }) => {
+const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
   // If pollData is available
   if (!pollData) {
     return null;
@@ -110,33 +110,68 @@ const PollChart = ({ pollData }) => {
   const containerStyle = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
-    height: 379,
+    height: 265,
     backgroundColor: Primarycolor2,
-    marginBottom: 15,
-    marginTop: 15,
+    marginBottom: 0,
+    marginTop: 0,
   });
 
+  const styles = {
+    container: {
+      width: "100%",
+      height: 295,
+      backgroundColor: Primarycolor2,
+      marginBottom: 50,
+      marginTop: 10,
+    },
+    questionText: {
+      color: Primarycolor1,
+      fontSize: 18,
+      fontFamily: "space-grotesk-Medium",
+      fontWeight: "bold",
+      marginTop: 13,
+      marginBottom: 20,
+      textAlign: "left",
+      marginLeft: 15,
+    },
+    optionButton: {
+      padding: 7,
+      margin: 5,
+      backgroundColor: "white",
+      borderColor: Primarycolor1,
+      borderWidth: 2,
+      justifyContent: "center",
+    },
+    optionText: {
+      fontSize: 14,
+      fontFamily: "space-grotesk-Medium",
+      color: Primarycolor1,
+      marginLeft: 5,
+    },
+  };
+
   return (
-    <View style={containerStyle}>
-      <Text
-        style={{
-          color: Primarycolor1,
-          fontSize: 18,
-          fontFamily: "space-grotesk-Medium",
-          fontWeight: "bold",
-          marginTop: 13,
-          marginBottom: 20,
-          textAlign: "left",
-          marginLeft: 15,
-        }}
-      >
-        {pollData.question}
-      </Text>
-      <ECharts
-        style={containerStyle}
-        option={chartOptions}
-        backgroundColor={Primarycolor2}
-      />
+    <View style={styles.container}>
+      <Text style={styles.questionText}>{pollData.question}</Text>
+      {!chartVisible &&
+        reversedOptions.map((option, optionIndex) => (
+          <TouchableOpacity
+            key={optionIndex}
+            onPress={() => handleOptionSelect(option)}
+            style={styles.optionButton}
+          >
+            <Text style={styles.optionText}>{option.text}</Text>
+          </TouchableOpacity>
+        ))}
+      {chartVisible && (
+        <View style={containerStyle}>
+          <ECharts
+            option={chartOptions}
+            backgroundColor={Primarycolor2}
+            style={containerStyle}
+          />
+        </View>
+      )}
     </View>
   );
 };
