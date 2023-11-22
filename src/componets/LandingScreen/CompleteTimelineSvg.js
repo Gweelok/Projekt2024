@@ -10,7 +10,7 @@ const CompleteTimelineSvg = () => {
   const [isLeft, setIsLeft] = useState(true);
   const phonePositionX = new Animated.Value(isLeft ? -3 : 0);
   const phoneOpacity = new Animated.Value(1);
-  
+
   setTimeout(() => {
     setIsLeft(false);
   }, 1000);
@@ -19,21 +19,21 @@ const CompleteTimelineSvg = () => {
     // Animation of phone's position when the component mounts
     const sequence = Animated.sequence([
       Animated.timing(phonePositionX, {
-        toValue: 0, 
-        duration: 9000, 
+        toValue: 0,
+        duration: 9000,
         useNativeDriver: false,
       }),
       Animated.timing(phonePositionX, {
         toValue: -3,
-        duration: 9000, 
+        duration: 9000,
         useNativeDriver: false,
       }),
     ]);
 
-    const loop = Animated.loop(sequence); 
+    const loop = Animated.loop(sequence);
 
     loop.start(() => {
-      setIsLeft(true); 
+      setIsLeft(true);
     });
 
     return () => {
@@ -44,15 +44,14 @@ const CompleteTimelineSvg = () => {
   return (
     <View>
       <View style={[isLeft ? "" : styles.containerCenter, { gap: 10 }]}>
-      <Animated.View
+        <Animated.View
           style={[
             styles.phone,
             isLeft ? styles.phoneLeft : { marginLeft: phonePositionX },
             { opacity: phoneOpacity },
-          ]}
-        >
-        {/* <PhoneSvg style={isLeft ? styles.phoneLeft : ""} /> */}
-        <PhoneSvg />
+          ]}>
+          {/* <PhoneSvg style={isLeft ? styles.phoneLeft : ""} /> */}
+          <PhoneSvg />
         </Animated.View>
         <TimelineSvg />
       </View>
@@ -62,8 +61,7 @@ const CompleteTimelineSvg = () => {
           justifyContent: "space-between",
           marginTop: 5,
           color: Primarycolor1,
-        }}
-      >
+        }}>
         <Text style={[{ right: 15 }, styles.text]}>
           {t("SolutionTimeline.Bottom.first", currentLanguage)}
         </Text>

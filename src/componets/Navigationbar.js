@@ -98,31 +98,31 @@ const Navigationbar = ({ navigation }) => {
       </Pressable>
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
-      <View style={{ position: "relative" }}>
-        {
-          //check which icon will load
-          selected == PAGE_NAMES.PROFILE ? (
-            <Ionicons
-              name="person-circle-sharp"
-              size={24}
-              color={Primarycolor1}
-            />
-          ) : (
-            <Ionicons
-              name="person-circle-outline"
-              size={24}
-              color={Primarycolor1}
-            />
-          )
-        }
-        {badgeCount > 0 && <Badge count={badgeCount} />}
-      </View>
+        <View style={{ position: "relative" }}>
+          {
+            //check which icon will load
+            selected == PAGE_NAMES.PROFILE ? (
+              <Ionicons
+                name="person-circle-sharp"
+                size={24}
+                color={Primarycolor1}
+              />
+            ) : (
+              <Ionicons
+                name="person-circle-outline"
+                size={24}
+                color={Primarycolor1}
+              />
+            )
+          }
+          {badgeCount > 0 && <Badge count={badgeCount} />}
+        </View>
       </Pressable>
     </View>
   );
 };
 
-  // The notification badge for drafts created that would later be displayed under profile-> my drafts
+// The notification badge for drafts created that would later be displayed under profile-> my drafts
 const Badge = ({ count }) => {
   return (
     <View style={styles.badgeContainer}>
@@ -137,8 +137,8 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     position: "absolute",
     bottom: 0,
-    right: 0,
-    left: 0,
+    right: -5,
+    left: -5,
     elevation: 0,
     height: 60,
     backgroundColor: "#fff",
@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   badgeText: {
     color: "white",
     fontSize: 10,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

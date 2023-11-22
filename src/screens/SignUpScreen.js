@@ -40,7 +40,7 @@ const onChangeEmailHandler = (text) => {
   onChangeEmail(text);
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   if(formSubmitted) setEmailValid(emailPattern.test(text));
-  };  
+  };
 
   //To check on password
   const CheckPassword = (text) => {
@@ -112,7 +112,7 @@ const onChangeEmailHandler = (text) => {
         placeholderTextColor="#8EA59E"
         keyboardType={'default'}
         secureTextEntry={!showPassword}
-        style={{flex:1 , fontSize: 16, fontFamily: 'space-grotesk',}}
+             style={{flex:1 ,fontFamily: 'space-grotesk',fontSize:15}}
       />
       <Ionicons
         name={showPassword ? 'ios-eye-off' : 'ios-eye'}
@@ -193,7 +193,7 @@ const SignUpStyles = StyleSheet.create({
     marginTop: -10,
     marginBottom:13,
     textAlign:"center",
-    }    
+    }
 });
 
 export default SignUpScreen;
