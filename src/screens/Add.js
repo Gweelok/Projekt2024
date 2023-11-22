@@ -191,10 +191,8 @@ const Add = ({ route, navigation }) => {
               isVisible={isProductDropdownVisible}
               setIsVisible={setIsProductDropdownVisible}
               onSkip={handleSkipProductDropdown}
-              onSpinPress={() => {
-                // Set the state variable to indicate the "spin" button press
-                setIsBrandDropdownVisible(true);
-              }}
+              setIsBrandDropdownVisible={setIsBrandDropdownVisible}
+              isBrandDropdownVisible={isBrandDropdownVisible}
           />
 
           <BrandDropdown
@@ -205,6 +203,8 @@ const Add = ({ route, navigation }) => {
               setIsVisible={setIsBrandDropdownVisible}
               onSkip={handleSkipBrandDropdown}
               shouldOpenBrandDropdown={isBrandDropdownVisible}
+              setIsModelDropdownVisible={setIsModelDropdownVisible}
+              isModelDropdownVisible={isModelDropdownVisible}
 
           />
 

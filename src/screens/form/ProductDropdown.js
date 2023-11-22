@@ -42,6 +42,7 @@ const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isB
         if (onProductSelect) {
             onProductSelect(product);
         }
+        setIsBrandDropdownVisible(true);
     };
 
     const handleSearch = (text) => {
