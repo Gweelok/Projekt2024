@@ -4,7 +4,7 @@ import {
     Backgroundstyle,
     Primarycolor1,
     Primarycolor2,
-    Primarycolor3,
+    Primarycolor3, Primarycolor4,
     styles,
     styles as stylesGlobal
 } from '../../styles/Stylesheet';
@@ -90,10 +90,10 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                     <View style={categoryDropdownContainer.topBar}>
                         <BackButton onPress={handleBack}></BackButton>
                         <View style={categoryDropdownContainer.searchContainer}>
-                            <Ionicons name="search" size={20} color={Primarycolor2} />
+                            <Ionicons name="search" size={20} color={Primarycolor4} />
                             <TextInput
                                 style={[categoryDropdownContainer.input,{marginLeft:5}]}
-                                placeholderTextColor={Primarycolor2}
+                                placeholderTextColor={Primarycolor4}
                                 onChangeText={handleSearch}
                                 placeholder={t("DropdownScreen.Category", currentLanguage)}
                             />

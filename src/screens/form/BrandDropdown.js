@@ -8,7 +8,14 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationActions as navigation } from "react-navigation";
 import { getAllBrands } from "../../utils/Repo";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
-import {Primarycolor1, Primarycolor2, Primarycolor3, styles, styles as stylesGlobal} from "../../styles/Stylesheet";
+import {
+    Primarycolor1,
+    Primarycolor2,
+    Primarycolor3,
+    Primarycolor4,
+    styles,
+    styles as stylesGlobal
+} from "../../styles/Stylesheet";
 
 const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown}) => {
     const { currentLanguage } = useLanguage();
@@ -100,10 +107,10 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
                         <View style={brandDropdownContainer.topBar}>
                             <BackButton onPress={handleBack}></BackButton>
                             <View style={brandDropdownContainer.searchContainer}>
-                                <Ionicons name="search" size={20} color={Primarycolor2} />
+                                <Ionicons name="search" size={20} color={Primarycolor4} />
                                 <TextInput
                                     style={[brandDropdownContainer.input,{marginLeft:5}]}
-                                    placeholderTextColor={Primarycolor2}
+                                    placeholderTextColor={Primarycolor4}
                                     onChangeText={handleSearch}
                                     placeholder={t("DropdownScreen.Brand", currentLanguage)}
                                 />

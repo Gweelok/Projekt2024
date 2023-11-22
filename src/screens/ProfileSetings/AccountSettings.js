@@ -22,6 +22,8 @@ import LanguageDropdown from "../../Languages/LanguageDropdown";
 // Import your icon components and language dropdown component
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import LanguageDropdownSettings from "../../Languages/LanguageDropdownSettings";
+import GlobalStyle from "../../styles/GlobalStyle";
+import BackButton from "../../componets/BackButton";
 
 const AccountSettings = () => {
     const navigation = useNavigation();
@@ -31,7 +33,7 @@ const AccountSettings = () => {
     const [phone, setPhone] = useState(''); // Fetch the initial value from the database
 
     const handlePress = () => {
-        navigation.goBack();
+        navigation.navigate("MySettings");
     };
     const handleSave = () => {
         // Handle save action to update the database with the new values
@@ -50,13 +52,16 @@ const AccountSettings = () => {
     return (
         <ScrollViewComponent>
 <SafeAreaView  style={Backgroundstyle.interactive_screens}>
-        <View>
-            <View style={styles1.header}>
+        <View style={GlobalStyle.BodyWrapper}>
+            <View style={[styles1.header,{flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingHorizontal: 5,
+               }]}>
 
                 {/* Back Button */}
-                <TouchableOpacity onPress={handlePress}>
-                    <GoBackButton  />
-                </TouchableOpacity>
+                <BackButton onPress={handlePress}></BackButton>
+
                 {/* Headline */}
                 <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>{t('AccountSettingsScreen.Header',currentLanguage)} </Text>
             </View>
@@ -145,7 +150,7 @@ const AccountSettings = () => {
 
             <View style={{flex:10}}>
                 <View  style={{alignItems:"center",flex:1, zIndex:1}}>
-                    <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:1,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
+                    <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:10,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
                     <LanguageDropdown/>
                 </View>
 

@@ -5,7 +5,14 @@ import CustomInput from "../../componets/atoms/CustomInput";
 import BackButton from "../../componets/BackButton";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationActions as navigation } from "react-navigation";
-import {Primarycolor1, Primarycolor2, Primarycolor3, styles, styles as stylesGlobal} from "../../styles/Stylesheet";
+import {
+    Primarycolor1,
+    Primarycolor2,
+    Primarycolor3,
+    Primarycolor4,
+    styles,
+    styles as stylesGlobal
+} from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { getAllModels } from "../../utils/Repo";
 
@@ -103,10 +110,10 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
                         <View style={modelDropdownContainer.topBar}>
                             <BackButton onPress={handleBack}></BackButton>
                             <View style={modelDropdownContainer.searchContainer}>
-                                <Ionicons name="search" size={20} color={Primarycolor2} />
+                                <Ionicons name="search" size={20} color={Primarycolor4} />
                                 <TextInput
                                     style={[modelDropdownContainer.input,{marginLeft:5}]}
-                                    placeholderTextColor={Primarycolor2}
+                                    placeholderTextColor={Primarycolor4}
                                     onChangeText={handleSearch}
                                     placeholder={t("DropdownScreen.Model", currentLanguage)}
                                 />
