@@ -84,11 +84,11 @@ const onChangeEmailHandler = (text) => {
       return;
     }
     // Check if email is empty, and password is not empty
-   if (email.trim() === ""&& password.trim()!=="" ) {
+   if (email.trim() === ""&& password.trim()!=="" && password.length <8 ) {
       setShowError(true);
       setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
       setEmailValid(false);
-     setPasswordCheck(true);
+     setPasswordCheck(false);
       return;
     }
     // Validate email format
