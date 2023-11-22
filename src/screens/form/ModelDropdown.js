@@ -172,6 +172,8 @@ const modelDropdownContainer = {
         alignItems: "center",
         paddingHorizontal: 20,
         marginBottom: 10,
+        marginTop:10
+
     },
     searchContainer: {
         flexDirection: "row",

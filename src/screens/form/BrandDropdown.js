@@ -19,13 +19,6 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
     const [searchText, setSearchText] = useState('');
     const navigation = useNavigation();
     const [filteredBrands, setFilteredBrands] = useState([]);
-    const handleSkip = () => {
-        setIsModalVisible(false);
-        if (onSkip) {
-            onSkip();
-        }
-        setIsModelDropdownVisible(true);
-    };
     useEffect(() => {
         if (shouldOpenBrandDropdown) {
             setIsModalVisible(true);
@@ -63,6 +56,9 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
 
 
     const handleBack = () => {
+        setIsModalVisible(false);
+    };
+    const handleSkip = () => {
         setIsModalVisible(false);
     };
 
@@ -112,6 +108,9 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
                                     placeholder={t("DropdownScreen.Brand", currentLanguage)}
                                 />
                             </View>
+                            <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>
+                                <Text style={styles.link}>Skip</Text>
+                            </TouchableOpacity>
                         </View>
                         <ScrollView style={brandDropdownContainer.dropdownList}>
                             {filteredBrands.map(brand => (
@@ -170,13 +169,14 @@ const brandDropdownContainer = {
         alignItems: "center",
         paddingHorizontal: 20,
         marginBottom: 10,
+        marginTop:10,
     },
     searchContainer: {
         flexDirection: "row",
         alignItems: "center",
         borderColor: "white",
         borderWidth: 1,
-        width: "80%",
+        width: "70%",
         paddingLeft: 10,
     },
     input: {

@@ -60,13 +60,6 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
         setFilteredCategories(filtered);
     };
 
-    const handleSkip = () => {
-        setIsModalVisible(false);
-        if (onSkip) {
-            onSkip();
-        }
-        setIsProductDropdownVisible(true); // Open the Product Dropdown
-    };
 
     const handleBack = () => {
         setIsModalVisible(false);
@@ -105,9 +98,6 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                                 placeholder={t("DropdownScreen.Category", currentLanguage)}
                             />
                         </View>
-                        <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>
-                            <Text style={styles.link}>Skip</Text>
-                        </TouchableOpacity>
                     </View>
                     <ScrollView style={categoryDropdownContainer.dropdownList}>
                         {filteredCategories.map((category) => (
@@ -166,6 +156,7 @@ const categoryDropdownContainer = {
         right: 0,             // Position it at the right of the screen
         bottom: 0,            // Position it at the bottom of the screen
         zIndex: 999,          // Add this property to ensure the modal is above other components
+        padding:10,
 
     },
 
@@ -178,13 +169,14 @@ const categoryDropdownContainer = {
         alignItems: 'center',
         paddingHorizontal: 20,
         marginBottom: 10,
+        marginTop:10,
     },
     searchContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         borderColor: 'white',
         borderWidth: 1,
-        width: '70%',
+        width: '80%',
         paddingLeft: 10,
     },
 

@@ -58,6 +58,9 @@ const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isB
     const handleBack = () => {
         setIsModalVisible(false);
     };
+    const handleSkip = () => {
+        setIsModalVisible(false);
+    };
 
     return (
         <View style={productDropdownContainer.container}>
@@ -93,7 +96,9 @@ const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isB
                                 placeholder={t('DropdownScreen.Product',currentLanguage)}
                             />
                         </View>
-
+                        <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>
+                            <Text style={styles.link}>Skip</Text>
+                        </TouchableOpacity>
                     </View>
                     <ScrollView style={productDropdownContainer.dropdownList}>
                         {filteredProducts.map((product) => (
@@ -156,13 +161,14 @@ const productDropdownContainer = {
         alignItems: "center",
         paddingHorizontal: 20,
         marginBottom: 10,
+        marginTop:10,
     },
     searchContainer: {
         flexDirection: "row",
         alignItems: "center",
         borderColor: "white",
         borderWidth: 1,
-        width: "80%",
+        width: "70%",
         paddingLeft: 10,
     },
     input: {
