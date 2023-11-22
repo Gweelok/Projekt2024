@@ -42,6 +42,8 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
         if (onModelSelect) {
             onModelSelect(model);
         }
+        // Set Condition Dropdown visibility to true when a model is selected
+        setIsConditionDropdownVisible(true);
     };
 
     const handleSearch = (text) => {

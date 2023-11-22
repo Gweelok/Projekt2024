@@ -146,6 +146,9 @@ const conditionDropdownContainer = {
     modalContainer: {
         flex: 1,
         backgroundColor: "white",
+        margin: 0, // Reset margin to fill entire screen
+        justifyContent: "flex-start",
+
     },
     topBar: {
         flexDirection: "row",
