@@ -28,7 +28,10 @@ export default {
     Headline: "Sign in",
     Button: "Sign in",
     ForgetPwHint: "Forgot your password?",
-    SignUpHint: "Don't have a user? Sign up.",
+    SignUpHint: "Don't have an account? Sign up.",
+    validemail:"Please enter a valid email.",
+    fields:"Fields cannot be empty.",
+    passwordmsg:"Your password must be at least 8 characters long.",
   },
 
   ProfileScreen: {
@@ -222,6 +225,30 @@ export default {
     Description: "Input your associated mail, to receive a link for resetting your password",
     SendLinkButton: "Send link"
 },
+StatsPage:{
+  Header: "Impact",
+  MainButton:"Overall",
+  SecondaryButton:"Yours",
+  AmountReduced: "Amount of reused items",
+  InTotal:"In total",
+  SoFar:"So far today",
+  AmountCO2:"Amount of CO2 saved",
+  Yesterday:"Yesterday",
+  kgCO2:"1 kg. CO2 is equivalent to \"Fact Here\"",
+  Amount:"So 4.400 t. Would amount to \"CALCULATION HERE\"",
+  BestAcheieve:"Best achieving Uptainers this month",
+  MostVisitedUptainer:"Your most visited Uptainer",
+  ItemsReused:"Items reused",
+  CO2Save: " CO2 Saved",
+  Comunity: "The sustainable community building",
+  Info: "Learn how we get our information here",
+  ItemsRecicled:"items reused",
+  ItemsDonated:"Items donated",
+  ItemsCollected:"Items collected",
+  Overview:"Go to the overview of your items",
+  Social:"Share your impact with your friends",
+  GetInspired:"Get inspired",
 
+},
 
 };

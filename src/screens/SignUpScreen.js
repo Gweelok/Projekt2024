@@ -222,14 +222,7 @@ const onChangeEmailHandler = (text) => {
         placeholderTextColor="#8EA59E"
         keyboardType={'default'}
         secureTextEntry={!showPassword}
-        style={{flex:1,
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop:"auto",
-          marginBottom:"auto",
-          fontFamily: "space-grotesk",
-          fontSize: 16,
-          alignSelf: "stretch",}}
+             style={{flex:1 ,fontFamily: 'space-grotesk',fontSize:15}}
       />
       <Ionicons
         name={showPassword ? 'ios-eye-off' : 'ios-eye'}
@@ -313,6 +306,7 @@ const SignUpStyles = StyleSheet.create({
     marginLeft: 20,
     textAlign: "start"
   }
+
 });
 
 export default SignUpScreen;

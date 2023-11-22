@@ -81,6 +81,9 @@ import CameraScreen from "./src/screens/form/CameraScreen";
 import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
+import YourStats from "./src/screens/YourStats";
+import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
+import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
 
 console.log("start");
 const Stack = createNativeStackNavigator();
@@ -156,7 +159,7 @@ export default function App() {
               <Stack.Screen
                 name="Sign in"
                 component={SignIn}
-                options={{ animation: "none", headerLeft: null }}
+                options={{ animation: "none", headerShown: false, headerLeft: null }}
               />
               <Stack.Screen
                 name="Homepage"
@@ -242,6 +245,16 @@ export default function App() {
                 options={{ animation: "none" }}
               />
               <Stack.Screen
+                  name="StatsInfo"
+                  component={StatsInfo}
+                  options={{ animation: "none" }}
+              />
+              <Stack.Screen
+                  name="VisitedUptainerStat"
+                  component={VisitedUptainerStat}
+                  options={{ animation: "none" }}
+              />
+              <Stack.Screen
                 name="Stats"
                 component={Stat}
                 options={{
@@ -249,6 +262,11 @@ export default function App() {
                   headerShown: false,
                   gestureEnabled: false,
                 }}
+              />
+              <Stack.Screen
+                  name="YourStats"
+                  component={YourStats}
+                  options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Add"
