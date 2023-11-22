@@ -98,7 +98,7 @@ const ConditionDropdown = ({ onConditionSelect, data, isVisible }) => {
                                 <Text style={conditionDropdownContainer.dropdownText}>{condition}</Text>
                             </TouchableOpacity>
                         ))}
-                        <Text style={[styles.article_text, { textAlign: "center", marginTop:10 }]}>
+                        <Text style={[styles.article_text, { textAlign: "center", marginTop:20 }]}>
                             {t("DropdownScreen.Text", currentLanguage)}
                         </Text>
 
@@ -134,8 +134,8 @@ const conditionDropdownContainer = {
         justifyContent: "space-between",
     },
     dropdownList: {
-        borderWidth: 3,
-        borderColor: Primarycolor1,
+        borderTopWidth: 1,
+        borderTopColor: Primarycolor1,
     },
     dropdownListItem: {
         padding: 10,

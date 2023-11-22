@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
-import {Backgroundstyle, Primarycolor1, Primarycolor3, styles, styles as stylesGlobal} from '../../styles/Stylesheet';
+import {
+    Backgroundstyle,
+    Primarycolor1,
+    Primarycolor2,
+    Primarycolor3,
+    styles,
+    styles as stylesGlobal
+} from '../../styles/Stylesheet';
 import { useLanguage, t } from '../../Languages/LanguageHandler';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { getAllCategories } from '../../utils/Repo';
@@ -90,10 +97,10 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                     <View style={categoryDropdownContainer.topBar}>
                         <BackButton onPress={handleBack}></BackButton>
                         <View style={categoryDropdownContainer.searchContainer}>
-                            <Ionicons name="search" size={20} color={Primarycolor1} />
+                            <Ionicons name="search" size={20} color={Primarycolor2} />
                             <TextInput
-                                style={categoryDropdownContainer.input}
-                                placeholderTextColor={Primarycolor1}
+                                style={[categoryDropdownContainer.input,{marginLeft:5}]}
+                                placeholderTextColor={Primarycolor2}
                                 onChangeText={handleSearch}
                                 placeholder={t("DropdownScreen.Category", currentLanguage)}
                             />
@@ -142,8 +149,8 @@ const categoryDropdownContainer = {
         justifyContent: 'space-between',
     },
     dropdownList: {
-        borderWidth: 3,
-        borderColor: Primarycolor1,
+        borderTopWidth: 1,
+        borderTopColor: Primarycolor1,
     },
     dropdownListItem: {
         padding: 10,
