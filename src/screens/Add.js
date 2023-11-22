@@ -125,13 +125,21 @@ const Add = ({ route, navigation }) => {
       });
     }
   };
+  const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
   useEffect(() => {
     (async () => {
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermissions(cameraStatus.status == "granted");
+      setHasCameraPermissions(cameraStatus.status === "granted");
     })();
   }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const cameraStatus = await Camera.requestCameraPermissionsAsync();
+  //     setHasCameraPermissions(cameraStatus.status == "granted");
+  //   })();
+  // }, []);
   const handleSkipCategoryDropdown = () => {
     setIsProductDropdownVisible(true);
   };
