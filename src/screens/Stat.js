@@ -108,7 +108,7 @@ const Stat = ({navigation}) => {
                                       data={"50000 t."}
                                       secondMsg={t('StatsPage.Yesterday', currentLanguage)}
                                       secondData={"57 t."}
-                                      secondDataStyle={{fontWeight:"bold", fontSize:18}}
+                                      secondDataStyle={{fontWeight:"bold"}}
                             />
                         </View>
                         <View>
