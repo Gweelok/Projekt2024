@@ -69,9 +69,7 @@ const Add = ({ route, navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
 
   const [image, setImage] = useState(itemData?.imageUrl || "");
-  const [category, setCategory] = useState(
-    itemData?.category || null
-  );
+  const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
@@ -191,16 +189,14 @@ const Add = ({ route, navigation }) => {
 
 
 
-
           <ProductDropdown
               onProductSelect={setProduct}
+              categorySelected={!!category} // Pass the state of category selection
               data={itemData?.product}
-              productSelected={!!category}
-              isVisible={isProductDropdownVisible}
-              setIsVisible={setIsProductDropdownVisible}
-              onSkip={handleSkipProductDropdown}
               setIsBrandDropdownVisible={setIsBrandDropdownVisible}
               isBrandDropdownVisible={isBrandDropdownVisible}
+              onSkip={handleSkipProductDropdown}
+              isVisible={isProductDropdownVisible}
           />
 
           <BrandDropdown

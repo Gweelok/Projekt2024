@@ -13,7 +13,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton"; // Make sure to import the BackButton component
 
-const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isBrandDropdownVisible , onSkip, isVisible, }) => {
+const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDropdownVisible, isBrandDropdownVisible , onSkip, isVisible, }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(data || null);
@@ -75,10 +75,16 @@ const ProductDropdown = ({ onProductSelect, data, setIsBrandDropdownVisible, isB
                 {t("ProductDropdown.selectProduct", currentLanguage)}
             </Text>
             <TouchableOpacity
-                style={productDropdownContainer.dropdownButton}
+                style={[
+                    productDropdownContainer.dropdownButton,
+                    !categorySelected && productDropdownContainer.disabled
+                ]}
                 onPress={() => {
-                    setIsModalVisible(true);
+                    if (categorySelected) {
+                        setIsModalVisible(true);
+                    }
                 }}
+                disabled={!categorySelected}
             >
                 <Text style={[productDropdownContainer.dropdownText, !selectedProduct && { color: "#8EA59E" }]}>
                     {selectedProduct ? selectedProduct.productName : t("ProductDropdown.placeholder", currentLanguage)}
@@ -182,6 +188,9 @@ const productDropdownContainer = {
         height: 40,
         width: "85%",
         marginLeft: 10,
+    },
+    disabled: {
+        backgroundColor: "#f0f0f0",
     },
 };
 
