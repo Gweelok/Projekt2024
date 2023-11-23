@@ -85,7 +85,7 @@ const Stat = ({navigation}) => {
                                 <GreenBox msg= {t('StatsPage.SoFar', currentLanguage)}
                                           data={"50000 t."}
                                           secondMsg={t('StatsPage.Yesterday', currentLanguage)}
-                                          secondData={"57 t"}
+                                          secondData={"57 t."}
                                           secondDataStyle={{fontWeight:"bold"}}
                                 />
                             </View>
@@ -107,7 +107,7 @@ const Stat = ({navigation}) => {
                             <GreenBox msg= {t('StatsPage.SoFar', currentLanguage)}
                                       data={"50000 t."}
                                       secondMsg={t('StatsPage.Yesterday', currentLanguage)}
-                                      secondData={"57 t"}
+                                      secondData={"57 t."}
                                       secondDataStyle={{fontWeight:"bold", fontSize:18}}
                             />
                         </View>
