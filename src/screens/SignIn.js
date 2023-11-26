@@ -115,7 +115,7 @@ const SignIn = ({ navigation }) => {
     return (
         <View style={Backgroundstyle.informationScreens}>
             {showError && <ErrorBanner message={errorMessage} />}
-            <View style={{ alignSelf: "stretch", paddingLeft: 25, paddingTop: 5 }}>
+            <View style={{ alignSelf: "stretch", paddingLeft: 25}}>
                 <BackButton onPress={navigation.goBack}/>
             </View>
         <View style={GlobalStyle.BodyWrapper}>

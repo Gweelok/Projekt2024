@@ -20,7 +20,7 @@ const ScrollViewComponent = ({ children, contentContainerStyle,  refreshing,onRe
       }>
     
       {children}
-      <View style={{ marginTop: 50, minHeight: 100, marginBottom: 100 }} />
+      <View style={{ marginTop: 50, minHeight: 100, marginBottom: 50 }} />
     </ScrollView>
   );
 };

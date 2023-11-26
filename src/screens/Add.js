@@ -186,7 +186,7 @@ const Add = ({ route, navigation }) => {
             </Text>
           </View>
           {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-          <View style={{ marginBottom: 20 }}>
+          <View style={{ }}>
             <Pressable
               onPress={() => {
                 addProductConditions();
