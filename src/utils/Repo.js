@@ -805,6 +805,14 @@ export async function signInUser(email, password, navigation){
 
 export async function createUser(email, password, navigation ,name = "John Doe") {
     try {
+
+        let isAdmin = false;
+
+        // admin email
+        if (email === "admin@updropp.dk") {
+          isAdmin = true;
+        }
+
       const userCredential = await createUserWithEmailAndPassword(
         firebaseAurth,
         email,
@@ -816,6 +824,8 @@ export async function createUser(email, password, navigation ,name = "John Doe")
           name: name,
           email: email,
           uuid: userCredential.user.uid,
+          isAdmin: isAdmin,
+         
         };
         await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
         navigation.navigate("Homepage");
@@ -824,6 +834,7 @@ export async function createUser(email, password, navigation ,name = "John Doe")
         authErrors(error);
     }
   }
+
 
 export async function getCurrentUser() {
   try {

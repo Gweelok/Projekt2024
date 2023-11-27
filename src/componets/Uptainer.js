@@ -76,7 +76,7 @@ const Uptainer = ({ uptainerData }) => {
   }
 
   return (
-    <View style={{ marginBottom: 20 }}>
+    <View style={{ marginVertical: 10 }}>
       <TouchableOpacity
         onPress={() => {
           setIsLoading(true);

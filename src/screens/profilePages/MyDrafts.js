@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useContext, useCallback} from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { HeaderText, Primarycolor1 } from "../../styles/Stylesheet";
+import { HeaderText, Primarycolor1, Backgroundstyle } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { Ionicons } from "@expo/vector-icons";
@@ -26,6 +26,7 @@ import LoadingScreen from "../../componets/LoadingScreen";
 import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
+import GlobalStyle from "../../styles/GlobalStyle";
 
 const MyDrafts = () => {
   const navigation = useNavigation();
@@ -127,10 +128,8 @@ const MyDrafts = () => {
   
 
   return (
-    <StatusBarComponent>
-      <View
-        style={{ flexDirection: "row", alignItems: "center", paddingLeft: 20 }}
-      >
+    <StatusBarComponent style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper ]}>
+      <View style={{flexDirection: "row", alignItems: "center"}}>
         <BackButton onPress={handlePress} />
         <Text style={[HeaderText.Header]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
@@ -173,7 +172,6 @@ const MyDrafts = () => {
         )}
       </ScrollViewComponent>
       {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
-      
     </StatusBarComponent>
     
   );

@@ -197,7 +197,9 @@ const onChangeEmailHandler = (text) => {
     <SafeAreaView style={Backgroundstyle.informationScreens}>
       {showError && <ErrorBanner message={errorMessage} />}
 
+
       <View style={{ alignSelf: "stretch", paddingLeft: 25, paddingTop: 5 }}>
+
         <BackButton onPress={navigation.goBack}/>
       </View>
         <View style={GlobalStyle.BodyWrapper}>
