@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Button } from "react-native";
 import * as style from "../../styles/Stylesheet";
 import PollChart from "./PollChart";
 import Quiz from "./Quiz";
@@ -35,7 +35,7 @@ const QuizPoll = () => {
     const currentQuestion = Questions[currentQuestionIndex];
 
     if (currentQuestion.type === "quiz") {
-      const isCorrect = currentQuestion.correctAnswer.includes(option);
+      const isCorrect = currentQuestion.correctAnswer === option; // Check if the selected option is the correct answer
       setSelectedOption({ option, isCorrect });
     } else if (currentQuestion.type === "poll") {
       // Show the chart when the poll option is pressed
@@ -43,7 +43,16 @@ const QuizPoll = () => {
     }
   };
 
-  // Show the current question
+  const handleNextQuestion = () => {
+    // Move to the next question
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+
+    setSelectedOption(null);
+
+    setChartVisible(false);
+  };
+
+  //current question
   const currentQuestion = Questions[currentQuestionIndex];
 
   return (
@@ -61,6 +70,7 @@ const QuizPoll = () => {
             handleOptionSelect={handleOptionSelect}
             chartVisible={chartVisible}
           />
+          <Button title="Next Question" onPress={handleNextQuestion} />
         </View>
       )}
     </View>

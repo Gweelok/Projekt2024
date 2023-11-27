@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import * as style from "../../styles/Stylesheet";
 
-const Quiz = ({ question, handleOptionSelect }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
-
+const Quiz = ({ question, handleOptionSelect, selectedOption }) => {
   const styles = {
     container: {
       width: "100%",
@@ -41,29 +38,18 @@ const Quiz = ({ question, handleOptionSelect }) => {
     selectedOptionText: {
       color: style.Primarycolor3,
     },
-    correctOption: {
+    correctAnswerStyle: {
       borderColor: style.Primarycolor1, // Correct answer color
       backgroundColor: style.Primarycolor1, // Correct answer color
     },
-    wrongOption: {
-      borderColor: "#AA0000", // Wrong answer color
-      backgroundColor: "#AA0000", // Wrong answer color
+    incorrectAnswerStyle: {
+      borderColor: "#AA0000", // Incorrect answer color
+      backgroundColor: "#AA0000",
     },
   };
 
-  const handlePress = (option) => {
-    const correct = question.correctOption === option;
-
-    // Update the state to reflect the selected option and whether it's correct
-    setSelectedOption(option);
-    setIsCorrect(correct);
-
-    // Inform the parent component about the selected option
-    handleOptionSelect({
-      questionId: question.id,
-      selectedOption: option,
-      isCorrect: correct,
-    });
+  const handlePress = (selectedOption) => {
+    handleOptionSelect(selectedOption);
   };
 
   return (
@@ -76,16 +62,17 @@ const Quiz = ({ question, handleOptionSelect }) => {
           style={[
             styles.optionButton,
             selectedOption &&
-              selectedOption === option &&
-              (isCorrect ? styles.correctOption : styles.wrongOption),
+              selectedOption.option === option &&
+              (selectedOption.isCorrect
+                ? styles.correctAnswerStyle
+                : styles.incorrectAnswerStyle),
           ]}
-          disabled={selectedOption !== null} // Disable options after selection
         >
           <Text
             style={[
               styles.optionText,
               selectedOption &&
-                selectedOption === option &&
+                selectedOption.option === option &&
                 styles.selectedOptionText,
             ]}
           >

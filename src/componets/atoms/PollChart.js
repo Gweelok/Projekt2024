@@ -5,6 +5,7 @@ import {
   Primarycolor1,
   Primarycolor2,
   Primarycolor3,
+  fontFamily,
 } from "../../styles/Stylesheet";
 
 const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
@@ -102,6 +103,7 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
         barBorderRadius: [0, 0, 0, 0],
         label: {
           show: false,
+          fontFamily: "space-grotesk-Medium"
         },
       },
     ],
@@ -122,25 +124,25 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
       height: 295,
       backgroundColor: Primarycolor2,
       marginBottom: 50,
-      marginTop: 10,
+      marginTop: 9,
     },
     questionText: {
       color: Primarycolor1,
       fontSize: 18,
       fontFamily: "space-grotesk-Medium",
       fontWeight: "bold",
-      marginTop: 13,
-      marginBottom: 20,
+      marginTop: 8,
+      marginBottom: 7,
       textAlign: "left",
       marginLeft: 15,
     },
     optionButton: {
       padding: 7,
-      margin: 5,
+      margin: 8,
       backgroundColor: "white",
       borderColor: Primarycolor1,
       borderWidth: 2,
-      justifyContent: "center",
+      marginBottom: 8,
     },
     optionText: {
       fontSize: 14,
@@ -154,7 +156,7 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
     <View style={styles.container}>
       <Text style={styles.questionText}>{pollData.question}</Text>
       {!chartVisible &&
-        reversedOptions.map((option, optionIndex) => (
+        pollData.options.map((option, optionIndex) => (
           <TouchableOpacity
             key={optionIndex}
             onPress={() => handleOptionSelect(option)}
