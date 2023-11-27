@@ -252,7 +252,6 @@ export default {
     Amount:"Så 4.400 t. svarer til *CALCULATION HERE*",
     BestAcheieve:"Denne måneds bedst præserende Uptainere",
     MostVisitedUptainer:"Din mest besøgte Uptainer",
-    ItemsReused:"produkter sparet",
     ItemsReused:"produkter genbrugt",
     CO2Save: " CO2 sparet",
     Comunity: "Det bæredygtige Forsamlingshus",
