@@ -248,7 +248,7 @@ export default {
     kgCO2:"1 kg. CO2 er tilsvarende til *FACT HERE*",
     Amount:"Så 4.400 t. svarer til *CALCULATION HERE*",
     BestAcheieve:"Denne måneds bedst præserende Uptainere",
-    MostVisitedUptainer:"Din mest besøgte Uptainer",
+    MostVisitedUptainer:"Dine mest besøgte Uptainere",
     ItemsReused:"produkter sparet",
     CO2Save: " CO2 sparet",
     Comunity: "Det bæredygtige Forsamlingshus",
