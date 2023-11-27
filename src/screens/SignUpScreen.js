@@ -120,7 +120,7 @@ const onChangeEmailHandler = (text) => {
     // Check if email is empty, and password is not empty and number of characters are bigger or equal than 8
     if (!emailPattern.test(email) && email.trim()==="" && password.length >=8 && password.trim()!=="") {
       setShowError(true);
-      setErrorMessage("Error msg");
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
       setEmailValid(false);
       setPasswordCheck(true);
       return;
@@ -158,15 +158,15 @@ const onChangeEmailHandler = (text) => {
     if (!formSubmitted) {
       return (
           <Text style={SignUpStyles.helperText}>
-            {t("SignUpScreen.passwordmsg", currentLanguage)}
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
           </Text>
       );
     }
     // If the form has been submitted and the password is invalid, show an error text
     else if (formSubmitted && !passwordCheck) {
       return (
-          <Text style={[SignUpStyles.errorText, { marginLeft: 20, textAlign: "start" }]}>
-            {t("SignUpScreen.passwordmsg", currentLanguage)}
+          <Text style={[SignUpStyles.errorText, { marginLeft: 2, textAlign: "start" }]}>
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
           </Text>
       );
     }
@@ -174,7 +174,7 @@ const onChangeEmailHandler = (text) => {
     else if (passwordCheck) {
       return (
           <Text style={SignUpStyles.helperText}>
-            {t("SignUpScreen.passwordmsg", currentLanguage)}
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
           </Text>
       );
     }
@@ -182,7 +182,7 @@ const onChangeEmailHandler = (text) => {
      else {
       return (
           <Text style={SignUpStyles.helperText}>
-            {t("SignUpScreen.passwordmsg", currentLanguage)}
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
           </Text>
       );
     }
@@ -305,7 +305,7 @@ const SignUpStyles = StyleSheet.create({
     fontSize: 14,
     marginTop: -10,
     marginBottom:13,
-    marginLeft: 20,
+    marginLeft: 2,
     textAlign: "start"
   }
 

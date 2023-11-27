@@ -2,7 +2,7 @@ export default {
   SignUpScreen: {
     Signup: "Sign up",
     password: "Password",
-    passwordmsg: "Minimum 8 characters",
+    passwordmsgUP: "Minimum 8 characters",
     LogInLink: "Already have an account? Sign in.",
     validemail:"Please enter a valid email",
     fields:"Fields cannot be empty.",

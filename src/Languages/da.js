@@ -2,7 +2,7 @@ export default {
   SignUpScreen: {
     Signup: "Opret Bruger",
     password: "Kodeord",
-    passwordmsg: "Minimum 8 tegn",
+    passwordmsgUP: "Minimum 8 tegn",
     LogInLink: "Har du allerede en bruger? Log ind.",
     validemail:"Indtast venligst en gyldig e-mail",
     fields:"Felter må ikke være tomme.",
