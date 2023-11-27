@@ -12,6 +12,7 @@ import { inline } from "react-native-web/src/exports/StyleSheet/compiler";
 export const Primarycolor1 = "#1c4b3d"; // DarkGreen
 export const Primarycolor2 = "#dae2e0"; //lightgreen
 export const Primarycolor3 = "#fff"; // White
+export const Primarycolor4 = "#8EA59E"; //SweetGreen
 
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
@@ -156,7 +157,7 @@ optionalText: {
     height: 30,
     justifyContent: "center",
     alignItems: "center", // Adjust spacing as needed
-    marginLeft: 70,
+    marginLeft: 10,
   },
   badgeText: {
     color: "white", // Customize the text color as needed

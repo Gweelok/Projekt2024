@@ -69,15 +69,21 @@ const Add = ({ route, navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
 
   const [image, setImage] = useState(itemData?.imageUrl || "");
-  const [category, setCategory] = useState(
-    itemData?.category || null
-  );
+  const [category, setCategory] = useState(itemData?.category || null);
   const [product, setProduct] = useState(itemData?.product || null);
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
   const [condition, setCondition] = useState(
     itemData?.condition || null
   );
+  const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
+  const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
+  const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(true);
+  const [isModelDropdownVisible, setIsModelDropdownVisible] = useState(false);
+  const [isConditionDropdownVisible, setIsConditionDropdownVisible] = useState(false);
+
+
+
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
@@ -117,13 +123,39 @@ const Add = ({ route, navigation }) => {
       });
     }
   };
+  const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
   useEffect(() => {
     (async () => {
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermissions(cameraStatus.status == "granted");
+      setHasCameraPermissions(cameraStatus.status === "granted");
     })();
   }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const cameraStatus = await Camera.requestCameraPermissionsAsync();
+  //     setHasCameraPermissions(cameraStatus.status == "granted");
+  //   })();
+  // }, []);
+  const handleSkipCategoryDropdown = () => {
+    setIsProductDropdownVisible(true);
+  };
+
+  const handleSkipProductDropdown = () => {
+    setIsBrandDropdownVisible(true);
+  };
+  const handleSkipBrandDropdown = () => {
+   setIsModelDropdownVisible(true)
+  };
+  const handleSkipModelDropdown = () => {
+    setIsConditionDropdownVisible(true);
+  };
+
+  const handleSkipConditionDropdown = () => {
+    setIsConditionDropdownVisible(!isConditionDropdownVisible); // Toggle visibility
+  };
+
 
 
   return (
@@ -146,31 +178,57 @@ const Add = ({ route, navigation }) => {
           </View>
 
           <CategoryDropdown
-            onCategorySelect={setCategory}
-            data={itemData?.category}
+              onCategorySelect={setCategory}
+              data={itemData?.category}
+              isVisible={isCategoryDropdownVisible}
+              onSkip={handleSkipCategoryDropdown}
+              isProductDropdownVisible={isProductDropdownVisible}
+              setIsProductDropdownVisible={setIsProductDropdownVisible}
           />
 
+
+
+
           <ProductDropdown
-            categorySelected={!!category}
-            onProductSelect={setProduct}
-            data={itemData?.product}
+              onProductSelect={setProduct}
+              categorySelected={!!category} // Pass the state of category selection
+              data={itemData?.product}
+              setIsBrandDropdownVisible={setIsBrandDropdownVisible}
+              isBrandDropdownVisible={isBrandDropdownVisible}
+              onSkip={handleSkipProductDropdown}
+              isVisible={isProductDropdownVisible}
           />
 
           <BrandDropdown
-            productSelected={!!product}
-            onBrandSelect={setBrand}
-            data={itemData?.brand}
+              onBrandSelect={setBrand}
+              productSelected={!!product}
+              data={itemData?.brand}
+              isVisible={isBrandDropdownVisible}
+              setIsVisible={setIsBrandDropdownVisible}
+              onSkip={handleSkipBrandDropdown}
+              shouldOpenBrandDropdown={isBrandDropdownVisible}
+              setIsModelDropdownVisible={setIsModelDropdownVisible}
+              isModelDropdownVisible={isModelDropdownVisible}
+
           />
 
           <ModelDropdown
-            brandSelected={!!brand}
-            onModelSelect={setModel}
-            data={itemData?.model}
+              brandSelected={!!brand}
+              onModelSelect={setModel}
+              data={itemData?.model}
+              isVisible={isModelDropdownVisible}
+              setIsVisible={setIsModelDropdownVisible}
+              onSkip={handleSkipModelDropdown}
+              setIsConditionDropdownVisible={setIsConditionDropdownVisible}
+              isConditionDropdownVisible={isConditionDropdownVisible}
           />
 
           <ConditionDropdown
-            onConditionSelect={setCondition}
-            data={itemData?.condition}
+              onConditionSelect={setCondition}
+              data={itemData?.condition}
+              onSkip={handleSkipConditionDropdown}
+              isVisible={isConditionDropdownVisible}
+              setIsVisible={setIsConditionDropdownVisible}
           />
 
           <View style={{ marginBottom: 20 }}>

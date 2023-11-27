@@ -226,6 +226,16 @@ export default {
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
     SendLinkButton: "Send link"
 },
+
+  DropdownScreen:{
+    Category: "Søg efter kategori...",
+    Product:"Søg efter produkt...",
+    Model: "Søg efter model...",
+    Brand: "Søg efter mærke...",
+    Condition:"Standen af produktet",
+    Text:"Du kan fortælle mere om produktets stand i beskrivelsesfeltet."
+  },
+
   StatsPage:{
     Header: "Påvirkning",
     MainButton:"Generelt",
@@ -251,10 +261,12 @@ export default {
     GetInspired:"Bliv inspireret",
 
 
+  }
 
 
 
 
-  },
+
+
 
 };
