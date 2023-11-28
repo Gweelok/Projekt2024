@@ -24,6 +24,7 @@ import BackButton from "../componets/BackButton";
 import ErrorBanner from "./ErrorBanner";
 
 const SignUpScreen = ({ navigation }) => {
+  // State variables using React Hooks
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("false"); // to check on password
@@ -34,62 +35,173 @@ const SignUpScreen = ({ navigation }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
 
-
-  //To check on email
+  // Function to handle changes in the email input
 const onChangeEmailHandler = (text) => {
   onChangeEmail(text);
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  if(formSubmitted) setEmailValid(emailPattern.test(text));
+  if(formSubmitted)
+    if(emailPattern.test(text)){
+      setShowError(false);
+      setEmailValid(true);
+      return;
+    }
+  if(!emailPattern.test(text)){
+    setShowError(false);
+    setEmailValid(false);
+    return;
+  }
   };
-
-  //To check on password
+// Function to check password and update state
   const CheckPassword = (text) => {
     onChangePassword(text);
-    if(formSubmitted) setPasswordCheck(text.length >= 8); // it must be at least 8 chars
+    if(formSubmitted)
+      if(text.length >= 8 ) {
+        setShowError(false);
+        setPasswordCheck(true);
+        return;
+      }
+    if(text.length < 8 ) {
+      setShowError(false);
+      setPasswordCheck(false);
+      return ;
+    }
   };
 
-  // Hide the banner when email or password is edited
+  // useEffect hook to reset error state on email or password change
   React.useEffect(() => {
     setShowError(false);
 }, [email, password]);
 
-  //Checks and navigates to Terms and Conditions
+  // Function to handle form submission and Checks and navigates to Terms and Conditions
   const handleSubmit = () => {
     setFormSubmitted(true);
-
-    if (email.trim() === "" && password.trim() === "") {
+    // Check if email and password is empty
+    if (email.trim() === "" && password.trim()==="") {
       setShowError(true);
-      setErrorMessage(t("Fields cannot be empty"));
-    } else if (!emailValid) {
-        setShowError(true);
-    } else if (!passwordCheck) {
-        setShowError(true);
-    } else {
-        setShowError(false);
-        navigation.navigate("TermsAndConditions", { email, password });
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setEmailValid(false);
+      setPasswordCheck(false);
+      return;
     }
-};
+    // Check if email is empty, and password is not empty
+   if (email.trim() === ""&& password.trim()!=="" && password.length <8 ) {
+      setShowError(true);
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setEmailValid(false);
+     setPasswordCheck(false);
+      return;
+    }
+    // Validate email format
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    // Check if email is not empty, and password is empty
+    if (!emailPattern.test(email) && email.trim()!=="" && (password.trim()==="")) {
+      setShowError(true);
+      setErrorMessage("Error msg");
+      setEmailValid(false);
+      setPasswordCheck(false);
+      return;
+    }
+    // Check if email is not empty, and password is not empty and number of characters are less than 8
+    if (!emailPattern.test(email) && email.trim()!=="" && password.length < 8 && password.trim()!=="") {
+      setShowError(true);
+      setErrorMessage("Error msg");
+      setEmailValid(false);
+      setPasswordCheck(false);
+      return;
+    }
+    // Check if email is not empty, and password is not empty and number of characters are bigger or equal than 8
+    if (!emailPattern.test(email) && email.trim()!=="" && password.length >=8 && password.trim()!=="") {
+      setShowError(true);
+      setErrorMessage("Error msg");
+      setEmailValid(false);
+     setPasswordCheck(true);
+      return;
+    }
+    // Check if email is empty, and password is not empty and number of characters are bigger or equal than 8
+    if (!emailPattern.test(email) && email.trim()==="" && password.length >=8 && password.trim()!=="") {
+      setShowError(true);
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setEmailValid(false);
+      setPasswordCheck(true);
+      return;
+    }
+    if (emailPattern.test(email) && email.trim()!=="" && (password.trim()==="")) {
+      setShowError(true);
+      setErrorMessage([t("SignUpScreen.fields",currentLanguage)]);
+      setEmailValid(true);
+      setPasswordCheck(false);
+      return;
+    }
+
+    if (emailPattern.test(email) && email.trim()!=="" && password.length < 8 && password.trim()!=="") {
+      setShowError(false);
+      setErrorMessage("Error msg");
+      setPasswordCheck(false);
+      setEmailValid(true);
+      return;
+    }
+    if (emailPattern.test(email) && email.trim()!=="" && password.length >=8 && password.trim()!=="") {
+      setShowError(false);
+      setErrorMessage("Error msg");
+      setEmailValid(true);
+      setPasswordCheck(true);
+      return  navigation.navigate("TermsAndConditions", { email, password }); // Return early since we need a valid email before checking password
+    }
+   /* // If all validations pass
+    setShowError(false);
+    navigation.navigate("TermsAndConditions", { email, password });*/
+  };
+
+  // Function to render error or helper text based on form submission and password check
+  const renderMessage = () => {
+    // If the form has not been submitted yet, show a helper text
+    if (!formSubmitted) {
+      return (
+          <Text style={SignUpStyles.helperText}>
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
+          </Text>
+      );
+    }
+    // If the form has been submitted and the password is invalid, show an error text
+    else if (formSubmitted && !passwordCheck) {
+      return (
+          <Text style={[SignUpStyles.errorText, { marginLeft: 2, textAlign: "start" }]}>
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
+          </Text>
+      );
+    }
+    // If the password is valid, show a helper text
+    else if (passwordCheck) {
+      return (
+          <Text style={SignUpStyles.helperText}>
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
+          </Text>
+      );
+    }
+    // Default case, show a helper text
+     else {
+      return (
+          <Text style={SignUpStyles.helperText}>
+            {t("SignUpScreen.passwordmsgUP", currentLanguage)}
+          </Text>
+      );
+    }
+  };
 
   //check if pass should be shown
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  let Header = "Opret bruger";
-
   return (
     <SafeAreaView style={Backgroundstyle.informationScreens}>
       {showError && <ErrorBanner message={errorMessage} />}
-      <View style={{ alignSelf: "stretch", paddingLeft: 25}}>
+
+
+      <View style={{ alignSelf: "stretch", paddingLeft: 25, paddingTop: 5 }}>
+
         <BackButton onPress={navigation.goBack}/>
       </View>
-
-      <View style={GlobalStyle.BodyWrapper}>
-        <Text style={[styles.Header_Primarycolor1, styles.Header]}>
-          {/* {t("SignUpScreen.Signup", currentLanguage)} */}
-        </Text>
-
-    <View style={Backgroundstyle.informationScreens}>
         <View style={GlobalStyle.BodyWrapper}>
       <Text style={[styles.Header_Primarycolor1,styles.Header]}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
       <TextInput
@@ -102,7 +214,7 @@ const onChangeEmailHandler = (text) => {
         clearButtonMode={"always"}
         style={[styles.inputBox, styles.inputBox, (!emailValid && formSubmitted) && SignUpStyles.errorInputBox]}
       />
-      {!emailValid && formSubmitted ? <Text style={SignUpStyles.errorText}>Please enter a valid email.</Text> : null}
+      {!emailValid && formSubmitted ? <Text style={SignUpStyles.errorText}>{t("SignUpScreen.validemail", currentLanguage)}</Text> : null}
 
       <View style={[styles.inputBox , {flexDirection:"row"}, (!passwordCheck && formSubmitted) && SignUpStyles.errorInputBox]}>
       <TextInput
@@ -122,11 +234,7 @@ const onChangeEmailHandler = (text) => {
         onPress={togglePasswordVisibility}
       />
       </View>
-      { //Check on the password
-        (!passwordCheck && formSubmitted) ?
-        <Text style={SignUpStyles.errorText}>Your password must be at least 8 characters long.</Text> :
-        passwordCheck ? null : <Text style={SignUpStyles.text_Tertiary}>{t("SignUpScreen.passwordmsg", currentLanguage)}</Text>
-      }
+          { renderMessage()}
       <Pressable onPress={handleSubmit} style={Buttons.main_button}>
             <Text style={Buttons.main_buttonText}>{t('SignUpScreen.Signup', currentLanguage)}</Text>
         </Pressable>
@@ -160,8 +268,6 @@ const onChangeEmailHandler = (text) => {
           </Text>
         </Pressable>
       </View>
-    </View>
-      </View>
     </SafeAreaView>
   );
 };
@@ -189,11 +295,20 @@ const SignUpStyles = StyleSheet.create({
     },
   errorText: {
     color: "#AA0000",
-    fontSize: 12,
+    fontSize: 14,
     marginTop: -10,
     marginBottom:13,
-    textAlign:"center",
-    }
+    textAlign: "center",
+    },
+  helperText: {
+    color:  "#1c4b3d",
+    fontSize: 14,
+    marginTop: -10,
+    marginBottom:13,
+    marginLeft: 2,
+    textAlign: "start"
+  }
+
 });
 
 export default SignUpScreen;
