@@ -41,7 +41,7 @@ const YourStats = () => {
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                 </View>
                 <View style={{marginTop:0,}}>
-                    <GreenBox data={"960 kg."} textStyle={{ marginTop:-10 }} />
+                    <GreenBox data={"960 kg."} textStyle={{ marginTop:20, marginBottom:-5,height:20 }} />
 
                 </View>
                 <View>
