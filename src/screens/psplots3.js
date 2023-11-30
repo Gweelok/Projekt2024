@@ -2,10 +2,14 @@ const ExcelJS = require('exceljs');
 const workbook = new ExcelJS.Workbook();
 const regression = require('regression');
 const plotly = require('plotly')('Lukalop', 'U766kTpOnDN0FQNvEGXx');
+const path = require('path')
 
 async function readExcelData() {
   try {
-    await workbook.xlsx.readFile('C:\\Users\\lukak\\OneDrive\\Bureaublad\\eletrical_production_co2eq_js.xlsx');
+    // Searching for absolute file path
+    pathFile = path.resolve('eletrical_production_co2eq_js.xlsx');
+
+    await workbook.xlsx.readFile(pathFile);
 
     const worksheet = workbook.getWorksheet('eletrical_production_co2eq');
     const data = [];
