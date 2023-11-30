@@ -1,6 +1,7 @@
 const ExcelJS = require('exceljs');
 const workbook = new ExcelJS.Workbook();
 const regression = require('regression');
+// We should remove this token from the code in the future
 const plotly = require('plotly')('Lukalop', 'U766kTpOnDN0FQNvEGXx');
 const path = require('path')
 
