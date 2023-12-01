@@ -285,22 +285,6 @@ function calculateAreas(intervals, data, linearModel, poly2Model, poly3Model, ex
 }
 
 
-<<<<<<< Updated upstream
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> Stashed changes
 function printFitStatistics(modelName, model, data) {
   // Calculate predictions from the model
   const predictedValues = data.map((point) => model.predict(point[0])[1]);
