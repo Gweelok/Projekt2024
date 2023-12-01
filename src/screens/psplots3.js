@@ -201,7 +201,6 @@ async function readExcelData() {
 
 
 
-
 function calculateAreaTrapezoidal(x, y) {
   if (x.length < 2) {
     return 0;
@@ -286,6 +285,7 @@ function calculateAreas(intervals, data, linearModel, poly2Model, poly3Model, ex
 }
 
 
+<<<<<<< Updated upstream
 
 
 
@@ -393,6 +393,8 @@ console.log('Adjusted CO2 equivalent of PlayStation Vita (Exponential Model):', 
 
 
 
+=======
+>>>>>>> Stashed changes
 function printFitStatistics(modelName, model, data) {
   // Calculate predictions from the model
   const predictedValues = data.map((point) => model.predict(point[0])[1]);
