@@ -83,22 +83,15 @@ const StationsMap = ({ navigation }) => {
         }
     };
    
-    const handleMarkerPress = (location) => {
-        setSelectedLocation(location);
-    };
+    
 
     return (
         <View style={styles.container}>
             <MapView
                 ref={mapRef}
                 style={styles.map}
-                provider={PROVIDER_GOOGLE}
                 initialRegion={region}
-                showsUserLocation
-                showsMyLocationButton
-                scrollEnabled={true}
-                zoomEnabled={true}
-                zoomTapEnabled={true}
+                showsUserLocation={true}
             >
                 {filteredLocations.map((location) => (
                     <Marker
@@ -108,9 +101,9 @@ const StationsMap = ({ navigation }) => {
                             longitude: parseFloat(location.uptainerLong),
                         }}
                         image={require('../../../../assets/images/marker_bg.jpg')}
-                        onPress={() => handleMarkerPress(location)}
+                        
                     >
-                        <Callout tooltip={true} onPress={() => openStationPage(location)}>
+                        <Callout tooltip={false} onPress={() => openStationPage(location)}>
                             <CustomCallout currentLocation={location} />
                         </Callout>
                     </Marker>
@@ -146,4 +139,5 @@ const styles = StyleSheet.create({
 });
 
 export default StationsMap;
+
 
