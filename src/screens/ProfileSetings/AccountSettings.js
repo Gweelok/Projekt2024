@@ -72,7 +72,7 @@ const AccountSettings = () => {
                 {/* Name */}
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
-                    {t("AccountSettingsScreen.Name",currentLanguage)} 
+                    {t("AccountSettingsScreen.Name",currentLanguage)}
                 </Text>
                 <Text style={[stylesGlobal.optionalText,{marginLeft: 0, marginBottom: 5 }]}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
@@ -108,7 +108,7 @@ const AccountSettings = () => {
                 {/* phone */}
                 <View style={{ flexDirection: "row", alignItems: "center"}}>
                 <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
-                    {t("AccountSettingsScreen.Name",currentLanguage)} 
+                    {t("AccountSettingsScreen.Tlf",currentLanguage)}
                 </Text>
                 <Text style={[stylesGlobal.optionalText,{marginLeft: 0, marginBottom: 5 }]}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
@@ -182,9 +182,9 @@ const styles1 = StyleSheet.create({
         marginBottom:15
     },
     section: {
-        borderBottomWidth: 1, 
-        borderBottomColor: "#000", 
-        paddingBottom: 17, 
+        borderBottomWidth: 1,
+        borderBottomColor: "#000",
+        paddingBottom: 17,
         marginBottom: 8,
     },
 

@@ -264,7 +264,11 @@ export default {
     GetInspired:"Bliv inspireret",
 
 
-  }
+  },
+  Detailviews:{
+    product:" Var produktet ikke i uptaineren?"
+
+  },
 
 
 
