@@ -204,7 +204,7 @@ export default {
     Topic: "Topic",
     Message: "Message",
     SendMessage: "Send message",
-    TextOnTheTop:"Send us a message through the contact form. We wil answer on your associated mail.",
+    TextOnTheTop:"Send us a message through the contact form. We will answer on your associated mail.",
 
   },
 
