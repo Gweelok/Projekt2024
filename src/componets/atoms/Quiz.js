@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import * as style from "../../styles/Stylesheet";
 
-const Quiz = ({ question, handleOptionSelect, selectedOption }) => {
+const Quiz = ({ question }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const styles = {
     container: {
       width: "100%",
@@ -46,40 +48,65 @@ const Quiz = ({ question, handleOptionSelect, selectedOption }) => {
       borderColor: "#AA0000", // Incorrect answer color
       backgroundColor: "#AA0000",
     },
+    animationStyle: {
+      flex: 1,
+      position: "absolute",
+
+      height: "100%",
+      width: "100%",
+
+      zIndex: 100,
+    },
+  };
+  const styleButtonOnClick = (option) => {
+    if (!!selectedOption) {
+      if (option.isCorrect) {
+        return styles.correctAnswerStyle;
+      } else {
+        if (option === selectedOption) {
+          return styles.incorrectAnswerStyle;
+        }
+      }
+    }
   };
 
+  const styleTextOnClick = (option) => {
+    if (!!selectedOption) {
+      if (option.isCorrect) {
+        return styles.selectedOptionText;
+      } else {
+        if (option === selectedOption) {
+          return styles.selectedOptionText;
+        }
+      }
+    }
+  };
   const handlePress = (selectedOption) => {
-    handleOptionSelect(selectedOption);
+    setSelectedOption(selectedOption);
+
+    const isCorrect = selectedOption.isCorrect; // Check if the selected option is the correct answer
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.questionText}>{question.question}</Text>
-      {question.options.map((option, optionIndex) => (
-        <TouchableOpacity
-          key={optionIndex}
-          onPress={() => handlePress(option)}
-          style={[
-            styles.optionButton,
-            selectedOption &&
-              selectedOption.option === option &&
-              (selectedOption.isCorrect
-                ? styles.correctAnswerStyle
-                : styles.incorrectAnswerStyle),
-          ]}
-        >
-          <Text
-            style={[
-              styles.optionText,
-              selectedOption &&
-                selectedOption.option === option &&
-                styles.selectedOptionText,
-            ]}
+      {question.options.map(
+        (
+          option,
+          optionIndex //For each option -->making  button
+        ) => (
+          <TouchableOpacity
+            key={optionIndex}
+            onPress={() => handlePress(option)}
+            style={[styles.optionButton, styleButtonOnClick(option)]}
+            disabled={selectedOption !== null} // Disable options after selection
           >
-            {option}
-          </Text>
-        </TouchableOpacity>
-      ))}
+            <Text style={[styles.optionText, styleTextOnClick(option)]}>
+              {option.text}
+            </Text>
+          </TouchableOpacity>
+        )
+      )}
     </View>
   );
 };

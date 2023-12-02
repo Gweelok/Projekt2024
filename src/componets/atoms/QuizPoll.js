@@ -23,21 +23,17 @@ const QuizPoll = () => {
       question: "What is climate change?",
       type: "quiz",
       options: [
-        "A) The planet's changing weather patterns",
-        "B) Earth's warming due to pollution",
-        "C) Global warming caused by human actions",
+        { text: "A) The planet's changing weather patterns", isCorrect: false },
+        { text: "B) Earth's warming due to pollution", isCorrect: false },
+        { text: "C) Global warming caused by human actions", isCorrect: true },
       ],
-      correctAnswer: "C) Global warming caused by human actions",
     },
   ];
 
   const handleOptionSelect = (option) => {
     const currentQuestion = Questions[currentQuestionIndex];
 
-    if (currentQuestion.type === "quiz") {
-      const isCorrect = currentQuestion.correctAnswer === option; // Check if the selected option is the correct answer
-      setSelectedOption({ option, isCorrect });
-    } else if (currentQuestion.type === "poll") {
+    if (currentQuestion.type === "poll") {
       // Show the chart when the poll option is pressed
       setChartVisible(true);
     }
@@ -58,11 +54,7 @@ const QuizPoll = () => {
   return (
     <View>
       {currentQuestion.type === "quiz" ? (
-        <Quiz
-          question={currentQuestion}
-          handleOptionSelect={handleOptionSelect}
-          selectedOption={selectedOption}
-        />
+        <Quiz question={currentQuestion} />
       ) : (
         <View>
           <PollChart
