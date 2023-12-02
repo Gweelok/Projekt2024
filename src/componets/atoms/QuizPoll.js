@@ -3,14 +3,17 @@ import { View, Text, TouchableOpacity, Button } from "react-native";
 import * as style from "../../styles/Stylesheet";
 import PollChart from "./PollChart";
 import Quiz from "./Quiz";
+import { useLanguage, t } from "../../Languages/LanguageHandler";
 
 const QuizPoll = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Start with the first question
   const [selectedOption, setSelectedOption] = useState(null);
+  const { currentLanguage, setLanguage } = useLanguage();
+
   const Questions = [
     {
-      question: "How many electronic devices have you bought the last year?",
+      question: t("PollQuestions.Poll1Question1", currentLanguage),
       type: "poll",
       options: [
         { text: "A) 0 ", responses: 15 },
@@ -20,12 +23,21 @@ const QuizPoll = () => {
       ],
     },
     {
-      question: "What is climate change?",
+      question: t("QuizQuestions.Quiz1Question1", currentLanguage),
       type: "quiz",
       options: [
-        { text: "A) The planet's changing weather patterns", isCorrect: false },
-        { text: "B) Earth's warming due to pollution", isCorrect: false },
-        { text: "C) Global warming caused by human actions", isCorrect: true },
+        {
+          text: t("QuizQuestions.Quiz1Option1", currentLanguage),
+          isCorrect: false,
+        },
+        {
+          text: t("QuizQuestions.Quiz1Option2", currentLanguage),
+          isCorrect: false,
+        },
+        {
+          text: t("QuizQuestions.Quiz1Option3", currentLanguage),
+          isCorrect: true,
+        },
       ],
     },
   ];

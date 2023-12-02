@@ -4,8 +4,8 @@ export default {
     password: "Password",
     passwordmsgUP: "Minimum 8 characters",
     LogInLink: "Already have an account? Sign in.",
-    validemail:"Please enter a valid email",
-    fields:"Fields cannot be empty.",
+    validemail: "Please enter a valid email",
+    fields: "Fields cannot be empty.",
   },
   LandingScreen: {
     LanguageSelector: "Danish",
@@ -29,9 +29,9 @@ export default {
     Button: "Sign in",
     ForgetPwHint: "Forgot your password?",
     SignUpHint: "Don't have an account? Sign up.",
-    validemail:"Please enter a valid email.",
-    fields:"Fields cannot be empty.",
-    passwordmsg:"Your password must be at least 8 characters long.",
+    validemail: "Please enter a valid email.",
+    fields: "Fields cannot be empty.",
+    passwordmsg: "Your password must be at least 8 characters long.",
   },
 
   ProfileScreen: {
@@ -224,44 +224,53 @@ export default {
 
   ForgotPasswordScreen: {
     Header: "Forgot password",
-    Description: "Input your associated mail, to receive a link for resetting your password",
-    SendLinkButton: "Send link"
-},
+    Description:
+      "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link",
+  },
 
-  DropdownScreen:{
+  DropdownScreen: {
     Category: "Search for category...",
-   Product:"Search for product...",
-   Model: "Search for model...",
-   Brand: "Search for brand...",
-   Condition:"Condition of the product",
-   Text:"You can elaborate on the condition of the item in the description field."
- },
+    Product: "Search for product...",
+    Model: "Search for model...",
+    Brand: "Search for brand...",
+    Condition: "Condition of the product",
+    Text: "You can elaborate on the condition of the item in the description field.",
+  },
 
-StatsPage:{
-  Header: "Impact",
-  MainButton:"Overall",
-  SecondaryButton:"Yours",
-  AmountReduced: "Amount of reused items",
-  InTotal:"In total",
-  SoFar:"So far today",
-  AmountCO2:"Amount of CO2 saved",
-  Yesterday:"Yesterday",
-  kgCO2:"1 kg. CO2 is equivalent to \"Fact Here\"",
-  Amount:"So 4.400 t. Would amount to \"CALCULATION HERE\"",
-  BestAcheieve:"Best achieving Uptainers this month",
-  MostVisitedUptainer:"Your most visited Uptainer",
-  ItemsReused:"Items reused",
-  CO2Save: " CO2 Saved",
-  Comunity: "The sustainable community building",
-  Info: "Learn how we get our information here",
-  ItemsRecicled:"items reused",
-  ItemsDonated:"Items donated",
-  ItemsCollected:"Items collected",
-  Overview:"Go to the overview of your items",
-  Social:"Share your impact with your friends",
-  GetInspired:"Get inspired",
+  StatsPage: {
+    Header: "Impact",
+    MainButton: "Overall",
+    SecondaryButton: "Yours",
+    AmountReduced: "Amount of reused items",
+    InTotal: "In total",
+    SoFar: "So far today",
+    AmountCO2: "Amount of CO2 saved",
+    Yesterday: "Yesterday",
+    kgCO2: '1 kg. CO2 is equivalent to "Fact Here"',
+    Amount: 'So 4.400 t. Would amount to "CALCULATION HERE"',
+    BestAcheieve: "Best achieving Uptainers this month",
+    MostVisitedUptainer: "Your most visited Uptainer",
+    ItemsReused: "Items reused",
+    CO2Save: " CO2 Saved",
+    Comunity: "The sustainable community building",
+    Info: "Learn how we get our information here",
+    ItemsRecicled: "items reused",
+    ItemsDonated: "Items donated",
+    ItemsCollected: "Items collected",
+    Overview: "Go to the overview of your items",
+    Social: "Share your impact with your friends",
+    GetInspired: "Get inspired",
+  },
 
-},
-
-
+  QuizQuestions: {
+    Quiz1Question1: "What is climate change?",
+    Quiz1Option1: "A) The planet's changing weather patterns",
+    Quiz1Option2: "B) Earth's warming due to pollution",
+    Quiz1Option3: "C) Global warming caused by human actions",
+  },
+  PollQuestions: { 
+    Poll1Question1:
+      "How many electronic devices have you bought the last year?",
+  },
 };

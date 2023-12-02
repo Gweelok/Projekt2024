@@ -81,6 +81,7 @@ const Quiz = ({ question }) => {
       }
     }
   };
+
   const handlePress = (selectedOption) => {
     setSelectedOption(selectedOption);
 
