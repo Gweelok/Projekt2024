@@ -2,8 +2,11 @@ export default {
   SignUpScreen: {
     Signup: "Opret Bruger",
     password: "Kodeord",
-    passwordmsg: "min. otte tegn",
-    LogInLink: "Har du allerede en bruger",
+    passwordmsgUP: "Minimum 8 tegn",
+    LogInLink: "Har du allerede en bruger? Log ind.",
+    validemail:"Indtast venligst en gyldig e-mail",
+    fields:"Felter må ikke være tomme.",
+
   },
   LandingScreen: {
     LanguageSelector: "English",
@@ -226,6 +229,16 @@ export default {
     Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
     SendLinkButton: "Send link"
 },
+
+  DropdownScreen:{
+    Category: "Søg efter kategori...",
+    Product:"Søg efter produkt...",
+    Model: "Søg efter model...",
+    Brand: "Søg efter mærke...",
+    Condition:"Standen af produktet",
+    Text:"Du kan fortælle mere om produktets stand i beskrivelsesfeltet."
+  },
+
   StatsPage:{
     Header: "Påvirkning",
     MainButton:"Generelt",
@@ -239,7 +252,7 @@ export default {
     Amount:"Så 4.400 t. svarer til *CALCULATION HERE*",
     BestAcheieve:"Denne måneds bedst præserende Uptainere",
     MostVisitedUptainer:"Din mest besøgte Uptainer",
-    ItemsReused:"produkter sparet",
+    ItemsReused:"produkter genbrugt",
     CO2Save: " CO2 sparet",
     Comunity: "Det bæredygtige Forsamlingshus",
     Info: "Lær hvordan vi får vores informationer her",
@@ -251,11 +264,13 @@ export default {
     GetInspired:"Bliv inspireret",
 
 
+  }
 
 
 
 
-  },
+
+
 
 };
 

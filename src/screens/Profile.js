@@ -14,7 +14,7 @@ const Profile = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
   const { badgeCount } = React.useContext(BadgeContext);
   return (
-    <View style={Backgroundstyle.interactive_screens}>
+    <View style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper]}>
       <ScrollViewComponent>
         <View>
           <MenuItems

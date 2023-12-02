@@ -2,8 +2,10 @@ export default {
   SignUpScreen: {
     Signup: "Sign up",
     password: "Password",
-    passwordmsg: "min. eight characters",
-    LogInLink: "Already have an account? Log in",
+    passwordmsgUP: "Minimum 8 characters",
+    LogInLink: "Already have an account? Sign in.",
+    validemail:"Please enter a valid email",
+    fields:"Fields cannot be empty.",
   },
   LandingScreen: {
     LanguageSelector: "Danish",
@@ -225,6 +227,16 @@ export default {
     Description: "Input your associated mail, to receive a link for resetting your password",
     SendLinkButton: "Send link"
 },
+
+  DropdownScreen:{
+    Category: "Search for category...",
+   Product:"Search for product...",
+   Model: "Search for model...",
+   Brand: "Search for brand...",
+   Condition:"Condition of the product",
+   Text:"You can elaborate on the condition of the item in the description field."
+ },
+
 StatsPage:{
   Header: "Impact",
   MainButton:"Overall",
@@ -250,5 +262,6 @@ StatsPage:{
   GetInspired:"Get inspired",
 
 },
+
 
 };

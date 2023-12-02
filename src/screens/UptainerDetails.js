@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Navigationbar from "../componets/Navigationbar";
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getItemsInUptainer,
@@ -43,58 +43,54 @@ const UptainerDetails = ({ navigation, route }) => {
   const [uptainerImageUrl, setUptainerImageUrl] = useState(""); // New state for Uptainer image URL
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   const [refreshing, setRefreshing] = useState(false);
-  
-    //Fetches items in the uptainer
-    const fetchItemList = async () => {
-      const storage = getStorage();
-      try {
-        setIsLoading(true);
-        const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
 
-        const updatedData = await Promise.all(
-          items.map(async (item) => {
-            const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+  //Fetches items in the uptainer
+  const fetchItemList = async () => {
+    const storage = getStorage();
+    try {
+      setIsLoading(true);
+      const items = await getItemsInUptainer(uptainer.uptainerId); // Assuming 'id' is defined somewhere --> id is from Uptainer (ln 42)
 
-            try {
-              const url = await getDownloadURL(pathReference);
+      const updatedData = await Promise.all(
+        items.map(async (item) => {
+          const pathReference = ref(storage, item.itemImage); // Adjust the path according to your storage structure
+          const product = await getProductById(item.itemproduct);
+          const brand = await getBrandById(item.itemBrand);
 
-              return {
-                ...item,
-                imageUrl: url,
-                productName: product.productName,
-                brandName: brand.brandName,
-              };
-            } catch (error) {
-              console.log("Error while downloading image => ", error);
-              return {
-                ...item,
-                imageUrl: "https://via.placeholder.com/200x200",
-              };
-            }
-          })
-        );
-        setData(updatedData); // updates data property with the fetched data from db
-        setIsLoading(false);
-        setRefreshing(false);
-      } catch (error) {
-        console.log("Error while fetching items => ", error);
-      }
+          try {
+            const url = await getDownloadURL(pathReference);
+
+            return {
+              ...item,
+              imageUrl: url,
+              productName: product.productName,
+              brandName: brand.brandName,
+            };
+          } catch (error) {
+            console.log("Error while downloading image => ", error);
+            return {
+              ...item,
+              imageUrl: "https://via.placeholder.com/200x200",
+            };
+          }
+        })
+      );
+      setData(updatedData); // updates data property with the fetched data from db
+      setIsLoading(false);
+      setRefreshing(false);
+    } catch (error) {
+      console.log("Error while fetching items => ", error);
+    }
   };
 
-
-   
-  
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     fetchItemList();
-     }, []);
+  }, []);
 
-     useEffect(() => {
-      fetchItemList();
-    }, []);
-
+  useEffect(() => {
+    fetchItemList();
+  }, []);
 
   useEffect(() => {
     const fetchUptainerImage = async () => {
@@ -123,14 +119,10 @@ const UptainerDetails = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 10 }}
         refreshing={refreshing}
-        onRefresh={onRefresh}
-        >
-      
-        
+        onRefresh={onRefresh}>
         <TouchableOpacity
           style={style.backButton}
-          onPress={() => navigation.goBack()}
-        >
+          onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back" color="white" size={20} />
         </TouchableOpacity>
         <View>
@@ -138,12 +130,10 @@ const UptainerDetails = ({ navigation, route }) => {
             style={style.detailsImage}
             source={{
               uri: uptainerImageUrl, // current uptainer main pic
-            }}
-          >
+            }}>
             <TouchableOpacity
               onPress={() => navigation.navigate("Map")}
-              style={style.productLocation}
-            >
+              style={style.productLocation}>
               <Text style={style.productAddress}>
                 {uptainer.uptainerName} /{"\n"}
                 {uptainer.uptainerStreet}
@@ -159,8 +149,7 @@ const UptainerDetails = ({ navigation, route }) => {
             width: windowWidth,
             flexWrap: "wrap",
             padding: 10,
-          }}
-        >
+          }}>
           {data?.map(
             (
               cur,
@@ -185,9 +174,7 @@ const UptainerDetails = ({ navigation, route }) => {
                     brandName: cur?.brandName,
                     uptainer: uptainer,
                   })
-
-                }
-              >
+                }>
                 <Image
                   style={style.moreProductsImage}
                   source={{
@@ -202,8 +189,7 @@ const UptainerDetails = ({ navigation, route }) => {
                       width: windowWidth / 2.7,
                       marginTop: 5,
                     },
-                  ]}
-                >
+                  ]}>
                   {cur?.productName}{" "}
                 </Text>
               </TouchableOpacity>

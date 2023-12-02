@@ -12,6 +12,7 @@ import { inline } from "react-native-web/src/exports/StyleSheet/compiler";
 export const Primarycolor1 = "#1c4b3d"; // DarkGreen
 export const Primarycolor2 = "#dae2e0"; //lightgreen
 export const Primarycolor3 = "#fff"; // White
+export const Primarycolor4 = "#8EA59E"; //SweetGreen
 
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     marginBottom: 20,
     marginTop: 30,
-    marginLeft: 16,
+    fontFamily: "space-grotesk",
   },
   Header_Primarycolor1: {
     color: Primarycolor1,
@@ -73,7 +74,7 @@ export const styles = StyleSheet.create({
   //Input box
   inputBox: {
     height: 45,
-    width: "90%",
+    width: "100%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 15,
@@ -87,7 +88,7 @@ export const styles = StyleSheet.create({
   },
   //Menu items
   menuItem: {
-    width: "80%",
+    width: "100%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 15,
@@ -134,7 +135,7 @@ optionalText: {
   boxlink: {
     paddingBottom: 10,
     paddingTop: 10,
-    marginBottom: 15,
+    marginVertical: 10,
     padding: 10,
     borderColor: Primarycolor1,
     backgroundColor: Primarycolor2,
@@ -156,7 +157,7 @@ optionalText: {
     height: 30,
     justifyContent: "center",
     alignItems: "center", // Adjust spacing as needed
-    marginLeft: 70,
+    marginLeft: 10,
   },
   badgeText: {
     color: "white", // Customize the text color as needed
@@ -324,7 +325,8 @@ export const Buttons = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: "100%"
+    width: "100%",
+    marginTop: "8%"
   },
   buttongoogle: {
     backgroundColor: "#F41616",
@@ -334,7 +336,8 @@ export const Buttons = StyleSheet.create({
     alignItems: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    width: "100%"
+    width: "100%",
+    marginTop: "4%"
   },
   main_button: {
     padding: 8,
@@ -343,7 +346,8 @@ export const Buttons = StyleSheet.create({
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
     borderWidth: 4,
-    width: "100%"
+    width: "100%",
+    marginTop: "4%"
   },
   main_buttonText: {
     color: "white",
@@ -358,7 +362,8 @@ export const Buttons = StyleSheet.create({
     backgroundColor: Primarycolor3,
     borderColor: Primarycolor1,
     borderWidth: 4,
-    width: "100%"
+    width: "100%",
+    marginTop: "4%"
   },
   secondary_buttonText: {
     color: Primarycolor1,

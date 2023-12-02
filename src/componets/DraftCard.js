@@ -101,7 +101,7 @@ export default DraftCard;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    marginLeft: 10,
+    width: "100%"
   },
   draftCard: {
     width: windowWidth / 1.2,
