@@ -260,6 +260,10 @@ StatsPage:{
   GetInspired:"Get inspired",
 
 },
+  months:{
+    may:"May",
+    October:"Oct"
+  },
 
 
 };

@@ -264,7 +264,11 @@ export default {
     GetInspired:"Bliv inspireret",
 
 
-  }
+  },
+  months:{
+    may:"Maj",
+    October:"Okt"
+  },
 
 
 

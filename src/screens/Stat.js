@@ -83,15 +83,15 @@ const Stat = ({navigation}) => {
                         <View>
                             <View>
                                 <GreenBox msg= {t('StatsPage.SoFar', currentLanguage)}
-                                          data={"50000 t."}
+                                          data={"50000 ."}
                                           secondMsg={t('StatsPage.Yesterday', currentLanguage)}
-                                          secondData={"57 t."}
+                                          secondData={"57 ."}
                                           secondDataStyle={styles1.text}
                                 />
                             </View>
                             <View>
                                 <GreenBox msg={t('StatsPage.InTotal', currentLanguage)}
-                                          data={"50000 t."}/>
+                                          data={"50000 ."}/>
                             </View>
 
                         </View>
