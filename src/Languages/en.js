@@ -1,3 +1,5 @@
+import DetailViews from "../screens/DetailView";
+
 export default {
   SignUpScreen: {
     Signup: "Sign up",
@@ -197,12 +199,12 @@ export default {
   },
 
   ContactUs: {
-    Header:'Contact os',
+    Header:'Contact us',
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
     SendMessage: "Send message",
-    TextOnTheTop:"Send us a message through the contact form. Vi vil answer on your associated mail.",
+    TextOnTheTop:"Send us a message through the contact form. We will answer on your associated mail.",
 
   },
 
@@ -263,7 +265,9 @@ StatsPage:{
   months:{
     may:"May",
     October:"Oct"
-  },
 
+  Detailviews:{
+    product:"Was the product not at the Uptainer?"
+  },
 
 };

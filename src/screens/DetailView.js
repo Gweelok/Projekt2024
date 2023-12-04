@@ -17,6 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles, Primarycolor1 } from "../styles/Stylesheet";
 import * as LinkingExpo from "expo-linking"; // Import Expo Linking
 import BackButton from "../componets/BackButton";
+import {t, useLanguage} from "../Languages/LanguageHandler";
 
 const DetailViews = ({ navigation, route }) => {
   const details = route.params;
@@ -25,6 +26,7 @@ const DetailViews = ({ navigation, route }) => {
   const productName = details.productName;
   const imageUrl = details.imageUrl;
   const uptainer = details.uptainer;
+  const { currentLanguage } = useLanguage();
 
   const [productDetails, setProductDetails] = useState(null);
 
@@ -107,7 +109,7 @@ const DetailViews = ({ navigation, route }) => {
             <Text
                 style={{ color: Primarycolor1, textDecorationLine: "underline" }}
                 onPress={() => LinkingExpo.openURL("")}>
-              Var produktet ikke i uptaineren?
+              {t("Detailviews.product", currentLanguage)}
             </Text>
           </View>
         </ScrollViewComponent>
