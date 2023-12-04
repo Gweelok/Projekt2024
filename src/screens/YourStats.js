@@ -42,7 +42,8 @@ const YourStats = () => {
                 </View>
 
                 <View style={{}}>
-                    <GreenBox data={"960 kg."} textStyle={{ }}/>
+                    <GreenBox data={"960 kg."} textStyle={{height:50}} headerStyle={{marginBottom: 30, marginTop: -30,
+                    }}/>
 
                 </View>
                 <View>
