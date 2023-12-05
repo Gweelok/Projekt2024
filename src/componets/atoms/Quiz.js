@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import * as style from "../../styles/Stylesheet";
+import LottieView from "lottie-react-native";
 
 const Quiz = ({ question }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const animationRef = useRef(null);
+
   const styles = {
     container: {
       width: "100%",
-      height: 280,
+      height: "fit-content",
       backgroundColor: style.Primarycolor2,
       marginBottom: 15,
       marginTop: 10,
+      paddingBottom: 3,
     },
     questionText: {
       color: style.Primarycolor1,
@@ -19,13 +23,17 @@ const Quiz = ({ question }) => {
       fontFamily: "space-grotesk-Medium",
       fontWeight: "bold",
       marginTop: 13,
-      marginBottom: 20,
+      marginBottom: 15,
       textAlign: "left",
-      marginLeft: 15,
+      marginLeft: 8,
     },
     optionButton: {
       padding: 7,
-      margin: 8,
+
+      marginLeft: 8,
+      marginRight: 8,
+      marginBottom: 15,
+
       backgroundColor: style.Primarycolor3,
       borderColor: style.Primarycolor1,
       borderWidth: 2,
@@ -49,13 +57,11 @@ const Quiz = ({ question }) => {
       backgroundColor: "#AA0000",
     },
     animationStyle: {
-      flex: 1,
       position: "absolute",
+      flex: 1,
+      pointerEvents: "none",
 
-      height: "100%",
-      width: "100%",
-
-      zIndex: 100,
+      zIndex: 1,
     },
   };
   const styleButtonOnClick = (option) => {
@@ -84,12 +90,20 @@ const Quiz = ({ question }) => {
 
   const handlePress = (selectedOption) => {
     setSelectedOption(selectedOption);
-
-    const isCorrect = selectedOption.isCorrect; // Check if the selected option is the correct answer
+    if (selectedOption.isCorrect) {
+      animationRef.current?.play();
+    }
   };
 
   return (
     <View style={styles.container}>
+      <LottieView
+        ref={animationRef}
+        style={styles.animationStyle}
+        source={require("../../../assets/animations/firework.json")}
+        autoPlay={false}
+        loop={false}
+      />
       <Text style={styles.questionText}>{question.question}</Text>
       {question.options.map(
         (
