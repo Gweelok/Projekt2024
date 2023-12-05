@@ -11,12 +11,14 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import Navigationbar from '../componets/Navigationbar';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { getItemsInUptainer, getProductById, getBrandById } from '../utils/Repo';
+import {getItemsInUptainer, getProductById, getBrandById, getAllUptainers, getUptainersByLocation} from '../utils/Repo';
 import { styles } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
 import { LoaderContext } from '../componets/LoaderContext';
 import LoadingScreen from '../componets/LoadingScreen';
+import Uptainer from "../componets/Uptainer";
+import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,9 +28,31 @@ const UptainerDetails = ({ navigation, route }) => {
   const [uptainerImageUrl, setUptainerImageUrl] = useState('');
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   const [refreshing, setRefreshing] = useState(false);
-
+  const [userLocation, setUserLocation] = useState(null);
+  const [sortedUptainers, setSortedUptainers] = useState([]);
   let uptainer = route.params.uptainerData || route.params;
+  const [uptainersList, setUptainerList] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      // Assuming uptainer.location holds the location information
+      const uptainerList = await getUptainersByLocation(uptainer.location);
+      setUptainerList(uptainerList);
+      setRefreshing(false);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   useEffect(() => {
     const fetchItemList = async () => {
       // Fetch items in the uptainer
@@ -86,11 +110,7 @@ const UptainerDetails = ({ navigation, route }) => {
     fetchUptainerImage();
   }, [uptainer, setIsLoading]);
 
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await fetchItemList();
-  };
-  
+  const uptainerList = userLocation ? sortedUptainers : uptainersList;
 
   return (
       <View style={styles.container}>
@@ -170,8 +190,14 @@ const UptainerDetails = ({ navigation, route }) => {
                 </TouchableOpacity>
             ))}
           </View>
-          <View>
 
+          <View>
+            {uptainerList.map((uptainer) => (
+                <SortSpecificUptainer
+                    key={uptainer.uptainerId}
+                    uptainerData={uptainer}
+                />
+            ))}
           </View>
         </ScrollViewComponent>
         <Navigationbar navigation={navigation} />
