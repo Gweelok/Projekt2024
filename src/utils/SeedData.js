@@ -303,6 +303,231 @@ export const categories = [
         },
         {
             name: "",
-        },];
+        },
+{
+    name: "Krups 10-Cup Coffee Maker (Model: KM785D50)",
+},
+{
+    name: "Krups 12-Cup Programmable Coffee Maker (Model: KM785D50)",
+},
+{
+    name: "Krups Espresso Machine (Model: XP344C51)",
+},
+{
+    name: "Krups Single Serve Coffee Maker (Model: KM202850)",
+},
+{
+    name: "Krups Coffee and Spice Grinder (Model: GX4100)",
+},
+{
+    name: "Krups Cool Touch Electric Kettle (Model: BW442D50)",
+},
+{
+    name: "Krups Precision Temperature Electric Kettle (Model: BW3140)",
+},
+{
+    name: "Krups Savoy Electric Kettle (Model: BW442D50)",
+},
+{
+    name: "Krups Cordless Electric Kettle (Model: BW3110)",
+},
+{
+    name: "Krups Stainless Steel Electric Kettle (Model: BW730D50)",
+},
+{
+    name: "Smeg 50's Retro Style Food Processor",
+},
+{
+    name: "Smeg DFP14BSS 14-Cup Food Processor",
+},
+{
+    name: "Smeg SMF02 Stand Mixer with Food Grinder Accessory",
+},
+{
+    name: "Smeg SMF03 Stand Mixer with Pasta Roller Accessory",
+},
+{
+    name: "Smeg SMF03 Stand Mixer with Food Grinder Accessory",
+},
+{
+    name: "Smeg SMF03 Stand Mixer with Citrus Juicer Accessory",
+},
+{
+    name: "Smeg SMF03 Stand Mixer with Grater/Slicer/Shredder Accessory",
+},
+{
+    name: "Smeg HBF01 Hand Blender with Chopper Accessory",
+},
+{
+    name: "Smeg BLF01BLUS 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01CRUS 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01PKUS 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01PGUS 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01RDUS 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01SVUS 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01PGUK 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01RDUK 50's Retro Style Blender",
+},
+{
+    name: "Smeg BLF01SVUK 50's Retro Style Blender",
+},
+{
+    name: "Smeg CJF01 Citrus Juicer",
+},
+{
+    name: "Smeg SJF01 Slow Juicer",
+},
+{
+    name: "Smeg CJF01PBUK Retro Style Citrus Juicer",
+},
+{
+    name: "Smeg SJF01PBUK Retro Style Slow Juicer",
+},
+{
+    name: "Smeg CJF01BLEU Retro Style Citrus Juicer",
+},
+{
+    name: "Smeg DCF02 drip coffee maker",
+},
+{
+    name: "Smeg ECF01 espresso machine",
+},
+{
+    name: "Smeg CGF01 grinder",
+},
+{
+    name: "Smeg CMS6451X built-in coffee machine",
+},
+{
+    name: "Smeg KLF032",
+},
+{
+    name: "Smeg KLF043",
+},
+{
+    name: "Smeg KLF014",
+},
+{
+    name: "Smeg KLF055",
+},
+{
+    name: "Smeg KLF03CRUS",
+},
+{
+    name: "Dash Chef Series 14-Cup Food Processor",
+},
+{
+    name: "Dash Deluxe 12-Cup Food Processor",
+},
+{
+    name: "Dash Everyday Mini Food Processor",
+},
+{
+    name: "Dash Go Everyday Mini Food Processor",
+},
+{
+    name: "Dash Express Mini Food Processor",
+},
+{
+    name: "Dash Stand Mixer",
+},
+{
+    name: "Dash Everyday 3-Speed Hand Mixer",
+},
+{
+    name: "Dash Smart Store Compact Hand Mixer",
+},
+{
+    name: "Dash Go Everyday Mixer",
+},
+{
+    name: "Dash Masha 2X Hand Blender and Potato Masher",
+},
+{
+    name: "Dash Chef Series Digital Blender",
+},
+{
+    name: "Dash Chef Series 64 oz Blender",
+},
+{
+    name: "Dash Chef Series Power Blender",
+},
+{
+    name: "Dash Arctic Chill Blender",
+},
+{
+    name: "Dash Go Sport Blender",
+},
+{
+    name: "Dash Go Everyday Blender",
+},
+{
+    name: "Dash Citrus Juicer",
+},
+{
+    name: "Dash Go Dual Citrus Juicer",
+},
+{
+    name: "Dash Premium Juicer",
+},
+{
+    name: "Dash Go Deluxe Compact Power Juicer",
+},
+{
+    name: "Dash Express Coffee Maker",
+},
+{
+    name: "Dash Cold Brew Coffee Maker",
+},
+{
+    name: "Dash One Cup Coffee Maker",
+},
+{
+    name: "Dash Compact Cold Brew Coffee Maker",
+},
+{
+    name: "Dash 1.7L Electric Kettle",
+},
+{
+    name: "Dash Stainless Steel Rapid Kettle",
+},
+{
+    name: "Dash Go Everyday Electric Kettle",
+},
+{
+    name: "Dash Express Hot Pot Electric Kettle",
+},
+{
+    name: "DeLonghi DFP950 Die-Cast Food Processor",
+},
+{
+    name: "DeLonghi MultiFry FH1363 Food Processor",
+},
+{
+    name: "DeLonghi PrimaDonna Exclusive ESAM 6900 Coffee Machine (includes a food processor attachment)",
+},
+{
+    name: "DeLonghi Distinta Electric Stand Mixer",
+},
+{
+    name: "DeLonghi MultiFry FH1363 Food Processor",
+}
+
+      
+      ];
     
     
