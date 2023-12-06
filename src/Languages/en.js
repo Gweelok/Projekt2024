@@ -237,12 +237,10 @@ export default {
     Text:"You can elaborate on the condition of the item in the description field."
   },
 
-
-},
   months:{
     may:"May",
-    October:"Oct"
-
+    October:"Oct",
+  },
 
   StatsPage:{
     Header: "Impact",
