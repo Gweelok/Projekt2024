@@ -273,5 +273,7 @@ export default {
 
   },
 
-
+  SearchField: {
+    placeholder: "Find Uptainer"
+  },
 };

@@ -22,12 +22,12 @@ const YourStats = () => {
                 <View style={{ marginTop: 25, marginBottom: 10,}}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
                 </View>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10, marginLeft:10 }}>
-                    <View style={[Backgroundstyle.informationScreens, {  paddingTop: 5, marginRight: 10,  }]}>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>
+                    <View style={[Backgroundstyle.informationScreens, {  paddingTop: 5, marginRight: 15,  }]}>
                         <Text style={[styles.paragraph_text,  { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsDonated', currentLanguage)}</Text>
                         <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>5</Text>
                     </View>
-                    <View style={[Backgroundstyle.informationScreens, { paddingTop: 5, marginRight: 10, }]}>
+                    <View style={[Backgroundstyle.informationScreens, { paddingTop: 5,  }]}>
                         <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsCollected', currentLanguage)}</Text>
                         <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>7</Text>
                     </View>
@@ -38,10 +38,12 @@ const YourStats = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginTop: 20, marginBottom: 20, }}>
-                    <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
+                    <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18,marginBottom:-10 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                 </View>
-                <View style={{marginTop:0,}}>
-                    <GreenBox data={"960 kg."} textStyle={{ marginTop:-10 }} />
+
+                <View style={{}}>
+                    <GreenBox data={"960 kg."} textStyle={{height:50,}} headerStyle={{marginBottom: 30, marginTop: -30,
+                    }}/>
 
                 </View>
                 <View>
