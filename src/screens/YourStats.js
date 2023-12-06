@@ -22,12 +22,12 @@ const YourStats = () => {
                 <View style={{ marginTop: 25, marginBottom: 10,}}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountReduced', currentLanguage)}</Text>
                 </View>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10, marginLeft:10 }}>
-                    <View style={[Backgroundstyle.informationScreens, {  paddingTop: 5, marginRight: 10,  }]}>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>
+                    <View style={[Backgroundstyle.informationScreens, {  paddingTop: 5, marginRight: 15,  }]}>
                         <Text style={[styles.paragraph_text,  { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsDonated', currentLanguage)}</Text>
                         <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>5</Text>
                     </View>
-                    <View style={[Backgroundstyle.informationScreens, { paddingTop: 5, marginRight: 10, }]}>
+                    <View style={[Backgroundstyle.informationScreens, { paddingTop: 5,  }]}>
                         <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>{t('StatsPage.ItemsCollected', currentLanguage)}</Text>
                         <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>7</Text>
                     </View>
