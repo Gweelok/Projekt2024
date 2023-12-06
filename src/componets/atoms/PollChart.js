@@ -5,10 +5,10 @@ import {
   Primarycolor1,
   Primarycolor2,
   Primarycolor3,
-  fontFamily,
 } from "../../styles/Stylesheet";
 
 const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
+  const [loaded, setLoaded] = useState(false);
   // If pollData is available
   if (!pollData) {
     return null;
@@ -23,6 +23,10 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
 
   // Chart's options using pollData
   const chartOptions = {
+    backgroundColor: Primarycolor2,
+    textStyle: {
+      fontFamily: "space-grotesk-Medium",
+    },
     grid: {
       top: 0,
       width: "100%",
@@ -37,9 +41,6 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
         hideOverlap: false,
         color: Primarycolor1,
         fontSize: 13,
-        textStyle: {
-          fontFamily: "space-grotesk-Medium",
-        },
       },
       type: "category",
       splitLine: {
@@ -85,7 +86,6 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
           formatter: "{c}%",
           color: Primarycolor1,
           fontSize: 13,
-          fontFamily: "space-grotesk-Medium",
           position: "outsideRight",
           offset: [250, -22],
         },
@@ -103,26 +103,41 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
         barBorderRadius: [0, 0, 0, 0],
         label: {
           show: false,
-          fontFamily: "space-grotesk-Medium"
         },
       },
     ],
+    additionalCode: `
+        chart.on('rendered', function(param) {
+            sendData('renderFinish');
+        });
+    `,
   };
 
   const containerStyle = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     height: 265,
-    backgroundColor: Primarycolor2,
+    minHeight: 265,
     marginBottom: 0,
     marginTop: 0,
   });
 
   const styles = {
-    container: {
-      width: "100%",
-      height: 295,
+    invisible: {
+      opacity: 0,
+      height: "100%",
+    },
+    loaded: {
       backgroundColor: Primarycolor2,
+      height: "100%",
+      opacity: 1,
+    },
+    container: {
+      backgroundColor: Primarycolor2,
+      display: "flex",
+      width: "100%",
+      height: 315,
+      minHeight: "30%",
       marginBottom: 50,
       marginTop: 9,
     },
@@ -138,7 +153,7 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
     },
     optionButton: {
       padding: 7,
-      margin: 8,
+      margin: 12,
       backgroundColor: "white",
       borderColor: Primarycolor1,
       borderWidth: 2,
@@ -151,29 +166,34 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
       marginLeft: 5,
     },
   };
+  const onFinishLoading = () => {
+    if (!loaded) {
+      setTimeout(() => {
+        setLoaded(true);
+      }, 500);//This is because on "rendered" event in echarts, it triggers too fast and we can see a white screen before it actually finishes rendering.
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.questionText}>{pollData.question}</Text>
-      {!chartVisible &&
-        pollData.options.map((option, optionIndex) => (
-          <TouchableOpacity
-            key={optionIndex}
-            onPress={() => handleOptionSelect(option)}
-            style={styles.optionButton}
-          >
-            <Text style={styles.optionText}>{option.text}</Text>
-          </TouchableOpacity>
-        ))}
-      {chartVisible && (
-        <View style={containerStyle}>
-          <ECharts
-            option={chartOptions}
-            backgroundColor={Primarycolor2}
-            style={containerStyle}
-          />
-        </View>
-      )}
+      <View style={containerStyle}>
+        <Text style={styles.questionText}>{pollData.question}</Text>
+        {!chartVisible &&
+          pollData.options.map((option, optionIndex) => (
+            <TouchableOpacity
+              key={optionIndex}
+              onPress={() => handleOptionSelect(option)}
+              style={styles.optionButton}
+            >
+              <Text style={styles.optionText}>{option.text}</Text>
+            </TouchableOpacity>
+          ))}
+        {chartVisible && (
+          <View style={loaded ? styles.loaded : styles.invisible}>
+            <ECharts onData={onFinishLoading()} option={chartOptions} />
+          </View>
+        )}
+      </View>
     </View>
   );
 };
