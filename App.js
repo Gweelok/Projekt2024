@@ -211,7 +211,7 @@ export default function App() {
               <Stack.Screen
                 name="MySettings"
                 component={MySettings}
-                options={{ animation: "none" }}
+                options={{ animation: "none", headerShown: false }}
               />
 
               <Stack.Screen
