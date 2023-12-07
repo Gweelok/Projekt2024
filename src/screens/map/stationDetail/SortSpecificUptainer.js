@@ -1,11 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
-import {View, Text, Image, FlatList, StyleSheet, TouchableOpacity, ScrollView} from "react-native";
+import {
+    View,
+    Text,
+    Image,
+    FlatList,
+    StyleSheet,
+    TouchableOpacity,
+    ScrollView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
     getItemsInUptainer,
     getProductById,
-    getBrandById
+    getBrandById,
 } from "../../../utils/Repo";
 import { LoaderContext } from "../../../componets/LoaderContext";
 import { styles, Primarycolor1 } from "../../../styles/Stylesheet";
@@ -60,7 +68,6 @@ const SortSpecificUptainer = ({ uptainerData }) => {
         fetchItemList();
     }, [uptainerData.uptainerId]);
 
-    // Splitting data into two items per row
     const groupedData = [];
     for (let i = 0; i < data.length; i += 2) {
         groupedData.push(data.slice(i, i + 2));
@@ -75,39 +82,42 @@ const SortSpecificUptainer = ({ uptainerData }) => {
                         uptainerData: uptainerData,
                     });
                 }}
-            >
-            </TouchableOpacity>
+            ></TouchableOpacity>
             <ScrollView>
-
-            <FlatList
-                data={groupedData}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
-                    <View style={{ flexDirection: 'row' }}>
-                        {item.map((element, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                onPress={() =>
-                                    navigation.navigate("DetailView", {
-                                        data: element?.itemId,
-                                        itemDescription: element?.itemDescription,
-                                        brandName: element?.brandName,
-                                        productName: element?.productName,
-                                        imageUrl: element?.imageUrl,
-                                        uptainer: uptainerData,
-                                    })
-                                }
-                                style={styling.item}
-                            >
-                                <Image
-                                    source={{ uri: element?.imageUrl }}
-                                    style={styling.image}
-                                />
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                )}
-            />
+                <FlatList
+                    data={groupedData}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => (
+                        <View style={{ flexDirection: 'row' }}>
+                            {item.map((element, index) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() =>
+                                        navigation.navigate("DetailView", {
+                                            data: element?.itemId,
+                                            itemDescription: element?.itemDescription,
+                                            brandName: element?.brandName,
+                                            productName: element?.productName,
+                                            imageUrl: element?.imageUrl,
+                                            uptainer: uptainerData,
+                                        })
+                                    }
+                                    style={styling.item}
+                                >
+                                    <View style={styling.imageContainer}>
+                                        <Image
+                                            source={{ uri: element?.imageUrl }}
+                                            style={styling.image}
+                                        />
+                                    </View>
+                                    <Text style={styling.productNameText}>
+                                        {element?.productName}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    )}
+                />
             </ScrollView>
         </View>
     );
@@ -115,15 +125,28 @@ const SortSpecificUptainer = ({ uptainerData }) => {
 
 const styling = StyleSheet.create({
     item: {
-        width: '50%', // Set the width of each item to occupy 50% of the screen
-        aspectRatio: 1, // Maintain a square aspect ratio for the items
-        margin: 5,
+        width: '50%',
+        aspectRatio: 1,
         overflow: "hidden",
+        marginRight: 5,
+        marginBottom:10,
+    },
+    imageContainer: {
+        flex: 1,
+        alignItems: 'center',
     },
     image: {
         width: "100%",
         height: "100%",
         resizeMode: "cover",
+    },
+    productNameText: {
+        flexDirection: 'row',
+        marginTop:5,
+        marginBottom:10,
+        width:"100%",
+        fontWeight: "bold",
+        fontSize: 15,
     },
 });
 
