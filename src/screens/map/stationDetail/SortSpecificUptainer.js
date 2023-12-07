@@ -76,17 +76,12 @@ const SortSpecificUptainer = ({ uptainerData }) => {
                     });
                 }}
             >
-                <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
-                <Text style={{ fontSize: 18, color: Primarycolor1 }}>
-                    {uptainerData.uptainerStreet}
-                </Text>
             </TouchableOpacity>
             <ScrollView>
 
             <FlatList
                 data={groupedData}
                 keyExtractor={(item, index) => index.toString()}
-                style={{ marginBottom: 5, marginTop: 5 }}
                 renderItem={({ item }) => (
                     <View style={{ flexDirection: 'row' }}>
                         {item.map((element, index) => (
