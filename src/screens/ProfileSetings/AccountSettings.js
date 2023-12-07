@@ -190,18 +190,22 @@ const styles1 = StyleSheet.create({
         alignItems: "center",
         marginLeft:'auto',
         marginRight:'auto',
-        marginTop: 30,
+        marginTop: 35,
         zIndex:-999,
+        borderBottomWidth: 2,
+        borderColor: '#ff0000', // Set the border color similar to the icon color
 
     },
     deleteText:{
+        textAlign: "center",
         color : "#ff0000",
-        textAlign: 'center',
         fontSize: 20,
+        fontFamily: "space-grotesk",
     },
     iconStyle:{
         color : "#ff0000",
         marginRight:10,
+        marginBottom:2,
     },
 });
 
