@@ -229,7 +229,7 @@ export default function App() {
               <Stack.Screen
                 name="AccountSettings"
                 component={AccountSettings}
-                options={{ animation: "none" }}
+                options={{ animation: "none",headerShown: false, }}
               />
               <Stack.Screen
                 name="Notifications"

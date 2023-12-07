@@ -25,8 +25,7 @@ import LanguageDropdownSettings from "../../Languages/LanguageDropdownSettings";
 import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
 
-const AccountSettings = () => {
-    const navigation = useNavigation();
+const AccountSettings = ({navigation}) => {
     const { currentLanguage } = useLanguage();
     const [name, setName] = useState(''); // Fetch the initial value from the database
     const [email, setEmail] = useState(''); // Fetch the initial value from the database
@@ -51,19 +50,15 @@ const AccountSettings = () => {
 
     return (
         <ScrollViewComponent>
-<SafeAreaView  style={Backgroundstyle.interactive_screens}>
+             <SafeAreaView  style={Backgroundstyle.interactive_screens}>
         <View style={GlobalStyle.BodyWrapper}>
-            <View style={[styles1.header,{flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingHorizontal: 5,
-               }]}>
+            <View style={[styles1.header]}>
 
                 {/* Back Button */}
                 <BackButton onPress={handlePress}></BackButton>
 
                 {/* Headline */}
-                <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>{t('AccountSettingsScreen.Header',currentLanguage)} </Text>
+                <Text style={[HeaderText.Header,{marginRight: 25}]}>{t('AccountSettingsScreen.Header',currentLanguage)} </Text>
             </View>
 
 
@@ -71,10 +66,10 @@ const AccountSettings = () => {
             <View style={styles1.section}>
                 {/* Name */}
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
+                <Text style={[stylesGlobal.formLabel,{marginLeft: 0,marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)}
                 </Text>
-                <Text style={[stylesGlobal.optionalText,{marginLeft: 0, marginBottom: 5 }]}>
+                <Text style={[stylesGlobal.optionalText,{ marginBottom: 5 }]}>
                      ({t("AccountSettingsScreen.Optional", currentLanguage)})
                 </Text>
                 </View>
@@ -91,7 +86,7 @@ const AccountSettings = () => {
                     />
                 </CustomInput>
                 {/* email */}
-                <Text style={stylesGlobal.formLabel}>{t('AccountSettingsScreen.Email',currentLanguage)}</Text>
+                <Text style={[stylesGlobal.formLabel,{marginLeft: 0}]}>{t('AccountSettingsScreen.Email',currentLanguage)}</Text>
                 <CustomInput showStar={false}>
                     <TextInput
                         value={email}
@@ -107,7 +102,7 @@ const AccountSettings = () => {
 
                 {/* phone */}
                 <View style={{ flexDirection: "row", alignItems: "center"}}>
-                <Text style={[stylesGlobal.formLabel,{marginRight: 5}]}>
+                <Text style={[stylesGlobal.formLabel,{marginLeft: 0,marginRight: 5}]}>
                     {t("AccountSettingsScreen.Tlf",currentLanguage)}
                 </Text>
                 <Text style={[stylesGlobal.optionalText,{marginLeft: 0, marginBottom: 5 }]}>
@@ -138,7 +133,7 @@ const AccountSettings = () => {
 
             {/* Section 2 */}
             {/* ChangeCode */}
-            <View style={[styles1.section]}>
+            <View style={[styles1.section,{marginTop:18}]}>
                 <MenuItems  msg={t('AccountSettingsScreen.ChangeCode',currentLanguage)} onPress= {handleChangePasswordPress}/>
             </View>
 
@@ -148,15 +143,15 @@ const AccountSettings = () => {
             {/* Section 3 */}
             {/* Language */}
 
-            <View style={{flex:10}}>
+            <View style={{flex:10,marginTop:10}}>
                 <View  style={{alignItems:"center",flex:1, zIndex:1}}>
-                    <Text style={[styles.menuItem_text,{marginLeft: 35,marginBottom:10,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
+                    <Text style={[styles.menuItem_text,{marginLeft: 0,marginBottom:10,}]}>{t('AccountSettingsScreen.Language',currentLanguage)} </Text>
                     <LanguageDropdown/>
                 </View>
 
-              <View>
+              <View style={{marginTop:10}}>
                 <Pressable onPress={handleDeleteAccount}  >
-                    <View style={styles1.iconContainer}>
+                    <View style={[styles1.iconContainer]}>
                         <Icon name="delete" size={25} style={[styles1.iconStyle]} />
                         <Text style={styles1.deleteText}>{t('AccountSettingsScreen.Delete', currentLanguage)}</Text>
                     </View>
@@ -177,8 +172,10 @@ const styles1 = StyleSheet.create({
     },
     header:{
         flexDirection:"row",
-        justifyContent: "flex-end",
-        marginTop:-35,
+        justifyContent:'space-between',
+        alignItems:'center',
+        paddingHorizontal: 5,
+        marginTop:-15,
         marginBottom:15
     },
     section: {
@@ -193,20 +190,18 @@ const styles1 = StyleSheet.create({
         alignItems: "center",
         marginLeft:'auto',
         marginRight:'auto',
+        marginTop: 30,
+        zIndex:-999,
 
     },
     deleteText:{
-        marginTop: 20,
         color : "#ff0000",
         textAlign: 'center',
         fontSize: 20,
-        zIndex:-999,
     },
     iconStyle:{
-        marginTop: 20,
         color : "#ff0000",
         marginRight:10,
-        zIndex:-999,
     },
 });
 
