@@ -32,7 +32,7 @@ const MySettings = ({ navigation }) => {
     };
 
     return (
-        <View style={Backgroundstyle.informationScreens}>
+        <View style={Backgroundstyle.interactive_screens}>
             <View style={{ alignSelf: "stretch", paddingLeft: 25}}>
                 <BackButton onPress={backButtonPressed}/>
             </View>
