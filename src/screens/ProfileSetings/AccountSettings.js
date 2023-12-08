@@ -58,14 +58,14 @@ const AccountSettings = ({navigation}) => {
                 <BackButton onPress={handlePress}></BackButton>
 
                 {/* Headline */}
-                <Text style={[HeaderText.Header,{marginRight: 25}]}>{t('AccountSettingsScreen.Header',currentLanguage)} </Text>
+                <Text style={[HeaderText.Header,{marginTop:1,marginLeft:"auto",marginRight:"auto",}]}>{t('AccountSettingsScreen.Header',currentLanguage)} </Text>
             </View>
 
 
             {/* Section 1 */}
             <View style={styles1.section}>
                 {/* Name */}
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ flexDirection: "row", alignItems: "center",marginTop:20 }}>
                 <Text style={[stylesGlobal.formLabel,{marginLeft: 0,marginRight: 5}]}>
                     {t("AccountSettingsScreen.Name",currentLanguage)}
                 </Text>
@@ -172,11 +172,8 @@ const styles1 = StyleSheet.create({
     },
     header:{
         flexDirection:"row",
-        justifyContent:'space-between',
-        alignItems:'center',
+        justifyContent:'flex-start',
         paddingHorizontal: 5,
-        marginTop:-15,
-        marginBottom:15
     },
     section: {
         borderBottomWidth: 1,
