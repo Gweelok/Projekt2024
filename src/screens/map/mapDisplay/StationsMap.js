@@ -2,8 +2,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, View, Alert } from 'react-native';
-import SearchBox from './SearchBox';
+import SearchBox from '../../../componets/SearchBox'
 import CustomCallout from './CustomCallout';
+import GlobalStyle from "../../../styles/GlobalStyle";
 
 const stationData = [
     {
@@ -108,15 +109,14 @@ const StationsMap = ({ navigation }) => {
                         </Callout>
                     </Marker>
                 ))}
-
-          
             </MapView>
-
-            <SearchBox
-                style={styles.searchBox}
-                onChangeText={handleSearch}
-                value={searchText}
-            />
+            <View style={[GlobalStyle.BodyWrapper, styles.searchBox]}> 
+                <SearchBox
+                    onChangeText={handleSearch}
+                    value={searchText}
+                    placeholderText={"SearchField.mapPlaceholder"}
+                />
+            </View>
         </View>
     );
 };
@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
     searchBox: {
         position: 'absolute',
         zIndex: 1,
-        width: '80%',
+        marginTop: 50,
+        width: '100%',
     },
 });
 
