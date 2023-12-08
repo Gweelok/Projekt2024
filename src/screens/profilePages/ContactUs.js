@@ -118,7 +118,7 @@ const ContactUs = ({navigation}) => {
 };
 const styles1 = StyleSheet.create({
     TextOnTheTop:{
-        color: Primarycolor1, fontSize: 23, margin: 7,marginBottom:20, textAlign: 'start',marginTop:20
+        color: Primarycolor1, fontSize: 23, margin: 7,marginBottom:30, textAlign: 'start',marginTop:20,
     },
 
     header:{
