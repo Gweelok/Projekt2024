@@ -273,8 +273,8 @@ export default {
     product:" Var produktet ikke i uptaineren?"
 
   },
-
   SearchField: {
-    placeholder: "Find Uptainer"
+    mapPlaceholder: "Find Uptainer",
+    productPlaceholder: "Find produkt"
   },
 };

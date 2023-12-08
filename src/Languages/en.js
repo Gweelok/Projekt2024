@@ -270,7 +270,7 @@ export default {
     product:"Was the product not at the Uptainer?"
   },
   SearchField: {
-    placeholder: "Find Uptainer"
+    mapPlaceholder: "Find Uptainer",
+    productPlaceholder: "Find product"
   },
-
 };
