@@ -5,7 +5,7 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    StyleSheet, Alert, ScrollView,
+    StyleSheet, Alert, ScrollView, SafeAreaView,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import * as Linking from "expo-linking";
@@ -18,6 +18,7 @@ import {
 import {useNavigation} from "@react-navigation/native";
 import BackButton from "../../componets/BackButton";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -30,20 +31,19 @@ function reducer(state, action) {
     }
 }
 
-const ContactUs = () => {
+const ContactUs = ({navigation}) => {
     const { currentLanguage } = useLanguage();
     const [formInfo, dispatch] = useReducer(reducer, {
         name: "",
         topic: "",
         message: "",
     });
-    const navigation = useNavigation();
     function sendToEmail() {
         const emailMessage = `Hello! ${
             formInfo.name ? `My name is ${formInfo.name}.` : null
         }. I would like help regarding : 
     ${formInfo.message}`;
-      
+
         const url = `mailto:info@updropp.dk?subject=${formInfo.topic}&body=${emailMessage}`;
         Linking.canOpenURL(url)
             .then((succes) => {
@@ -57,7 +57,8 @@ const ContactUs = () => {
     }
     return (
         <ScrollViewComponent >
-            <View style={Backgroundstyle.interactive_screens}>
+            <SafeAreaView  style={Backgroundstyle.interactive_screens}>
+                <View style={GlobalStyle.BodyWrapper}>
                 <View style={styles1.header}>
                     {/* Back Button */}
                     <BackButton onPress={navigation.goBack}  />
@@ -111,23 +112,26 @@ const ContactUs = () => {
                     </Text>
                 </TouchableOpacity>
             </View>
+            </SafeAreaView>
         </ScrollViewComponent>
     );
 };
 const styles1 = StyleSheet.create({
     TextOnTheTop:{
-        color: Primarycolor1, fontSize: 20, margin: 20,marginBottom:20, textAlign: 'start',marginRight:50
+        color: Primarycolor1, fontSize: 23, margin: 7,marginBottom:20, textAlign: 'start',marginTop:20
     },
 
     header:{
-        flexDirection:"row",marginTop:-30,marginRight:80,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 5,
     },
     headerText:{
-        ...HeaderText.Header,marginTop:1,marginLeft:50,
+        ...HeaderText.Header,marginTop:1,marginLeft:"auto",marginRight:"auto",
     },
 
     formLabel: {
-        ...stylesGlobal.menuItem_text,marginLeft: 20, marginBottom:10, marginTop:5, fontSize: 15,
+        ...stylesGlobal.menuItem_text,marginLeft: 0, marginBottom:10, marginTop:5, fontSize: 15,
 
     },
     inputField: {

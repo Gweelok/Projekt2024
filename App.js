@@ -195,7 +195,7 @@ export default function App() {
               <Stack.Screen
                 name="ContactUs"
                 component={ContactUs}
-                options={{ animation: "none" }}
+                options={{ animation: "none",headerShown:false, }}
               />
 
               <Stack.Screen
