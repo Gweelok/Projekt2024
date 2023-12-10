@@ -174,6 +174,7 @@ const styles1 = StyleSheet.create({
         flexDirection:"row",
         justifyContent:'flex-start',
         paddingHorizontal: 5,
+        margin:-5,
     },
     section: {
         borderBottomWidth: 1,
@@ -189,20 +190,16 @@ const styles1 = StyleSheet.create({
         marginRight:'auto',
         marginTop: 35,
         zIndex:-999,
-        borderBottomWidth: 2,
-        borderColor: '#ff0000', // Set the border color similar to the icon color
 
     },
     deleteText:{
-        textAlign: "center",
+        ...styles.link,
         color : "#ff0000",
-        fontSize: 20,
-        fontFamily: "space-grotesk",
+
     },
     iconStyle:{
         color : "#ff0000",
-        marginRight:10,
-        marginBottom:2,
+        marginBottom:3,
     },
 });
 
