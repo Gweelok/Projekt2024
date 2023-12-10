@@ -170,7 +170,7 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
     if (!loaded) {
       setTimeout(() => {
         setLoaded(true);
-      }, 500);//This is because on "rendered" event in echarts, it triggers too fast and we can see a white screen before it actually finishes rendering.
+      }, 500); //This is because on "rendered" event in echarts, it triggers too fast and we can see a white screen before it actually finishes rendering.
     }
   };
 
@@ -182,7 +182,9 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
           pollData.options.map((option, optionIndex) => (
             <TouchableOpacity
               key={optionIndex}
-              onPress={() => handleOptionSelect(option)}
+              onPress={() => {
+                handleOptionSelect(option);
+              }}
               style={styles.optionButton}
             >
               <Text style={styles.optionText}>{option.text}</Text>
