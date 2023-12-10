@@ -277,4 +277,15 @@ export default {
     Poll1Question1:
       "Hvor mange elektroniske enheder har du købt det sidste år?",
   },
+  months: {
+    may: "Maj",
+    October: "Okt",
+  },
+  Detailviews: {
+    product: " Var produktet ikke i uptaineren?",
+  },
+  SearchField: {
+    mapPlaceholder: "Find Uptainer",
+    productPlaceholder: "Find produkt",
+  },
 };

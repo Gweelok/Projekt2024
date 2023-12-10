@@ -21,7 +21,7 @@ export const YourVisitedUptainer = () => {
                         <View style={styles.boxlink}>
                             <View style={GlobalStyle.BodyWrapper}>
                                 <Text style={styles.menuItem_text}>{location} </Text>
-                                <Text style={[styles.menuItem_text,{fontSize: 15}]}>{address} </Text>
+                                <Text style={[styles.menuItem_text,{ fontFamily: "space-grotesk",fontSize: 15}]}>{address} </Text>
                             </View>
                             <View style={styles.Icon_container}>
                                 <AntDesign name="right" size={30} style={styles.menuItem_arrow} />

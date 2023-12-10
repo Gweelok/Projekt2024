@@ -1,40 +1,53 @@
-import React, {useState} from 'react';
-import MapView, {Callout, Marker} from 'react-native-maps';
-import {StyleSheet, View} from 'react-native';
-import SearchBox from "./SearchBox";
-import CustomCallout from "./CustomCallout";
 
-const CopenhagenLocations = [
-    // todo  get stations from server database
+import React, { useEffect, useRef, useState } from 'react';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { StyleSheet, View, Alert } from 'react-native';
+import SearchBox from '../../../componets/SearchBox'
+import CustomCallout from './CustomCallout';
+import GlobalStyle from "../../../styles/GlobalStyle";
+
+const stationData = [
     {
-        id: 1,
-        name: 'KU Lighthouse',
-        address: "Tagensvej 16A, 2200 København",
-        latitude: 55.697733214205,
-        longitude:  12.559954477291
+        uptainerName: "Det Bæredygtige Forsamlingshus",
+        uptainerQR: "https://www.google.com",
+        uptainerStreet: "Stockflethsvej 2",
+        uptainerZip: "2000",
+        uptainerCity: "Frederiksberg",
+        uptainerImage: "UPT1.jpg",
+        uptainerDescription: "I nærheden af Det Bæredygtige Forsamlingshus",
+        uptainerLat: "55.686256",
+        uptainerLong: "12.519641697795900",
     },
     {
-        id: 2,
-        name: 'COOP 365',
-        address: "Vigerslev Allé 124, 2500 København",
-        latitude: 55.661102,
-        longitude: 12.505218
+        uptainerName: "KU Lighthouse",
+        uptainerQR: "https://www.google.com",
+        uptainerStreet: "Tagensvej 16A",
+        uptainerZip: "2200",
+        uptainerCity: "Nørrebro",
+        uptainerImage: "UPT2.jpg",
+        uptainerDescription: "I nærheden af KU Lighthouse",
+        uptainerLat: "55.697947",
+        uptainerLong: "12.560119055467000",
     },
     {
-        id: 4,
-        name: 'Rosenborg Castle',
-        address: "Stockflethsvej 2, 2000 København",
-        latitude: 55.6867,
-        longitude: 12.5783
-    }
-];
+        uptainerName: "COOP 365",
+        uptainerQR: "https://www.google.com",
+        uptainerStreet: "Vigerslev Allé 124",
+        uptainerZip: "2500",
+        uptainerCity: "Valby",
+        uptainerImage: "UPT3.jpg",
+        uptainerDescription: "I nærheden af COOP 365",
+        uptainerLat: "55.661317",
+        uptainerLong: "12.50583269168790",
+    },
+  ];
 
-const StationsMap = ({navigation}) => {
+const StationsMap = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
-
-    // todo what is the focus of the map? fetch it from server?
+    const [filteredLocations, setFilteredLocations] = useState(stationData);
+ 
+    const mapRef = useRef();
     const region = {
-        // center of Copenhagen
         latitude: 55.6761,
         longitude: 12.5683,
         latitudeDelta: 0.0922,
@@ -42,32 +55,68 @@ const StationsMap = ({navigation}) => {
     };
 
     const openStationPage = (location) => {
-        navigation.navigate('StationDetails', {stationDetail: location});
+        navigation.navigate('StationDetails', { stationDetail: location });
         console.log('onPress', location);
     };
+
+    const handleSearch = (text) => {
+        setSearchText(text);
+        
+        if (text === '') {
+            // If there is no search text, reset the filtered locations
+            setFilteredLocations(stationData);
+            return;
+        }
+       
+        // Filter locations based on the search text
+        const filtered = stationData.filter(
+            (location) =>
+                location.uptainerName.toLowerCase().includes(text.toLowerCase()) ||
+                location.uptainerStreet.toLowerCase().includes(text.toLowerCase()) ||
+                location.uptainerCity.toLowerCase().includes(text.toLowerCase()) ||
+                location.uptainerZip.includes(text)
+        );
+
+        setFilteredLocations(filtered);
+
+        if (filtered.length === 0) {
+            Alert.alert('No stores found. Please check the address');
+        }
+    };
+   
+    
 
     return (
         <View style={styles.container}>
             <MapView
+                ref={mapRef}
                 style={styles.map}
                 initialRegion={region}
                 showsUserLocation={true}
             >
-                {CopenhagenLocations.map((location) => (
+                {filteredLocations.map((location) => (
                     <Marker
-                        key={location.id}
-                        coordinate={{latitude: location.latitude, longitude: location.longitude}}
+                        key={location.uptainerName}
+                        coordinate={{
+                            latitude: parseFloat(location.uptainerLat),
+                            longitude: parseFloat(location.uptainerLong),
+                        }}
                         image={require('../../../../assets/images/marker_bg.jpg')}
+                        
                     >
                         <Callout tooltip={false} onPress={() => openStationPage(location)}>
-                            <CustomCallout currentLocation={location}/>
+                            <CustomCallout currentLocation={location} />
                         </Callout>
                     </Marker>
                 ))}
             </MapView>
-
-            <SearchBox style={styles.searchBox} onChangeText={setSearchText} value={searchText}/>
-            {/*  todo the action when user search something in searchBox hasn't be defined, leave it to be done in the future  */}
+            <View style={[GlobalStyle.BodyWrapper, styles.searchBox]}> 
+                <SearchBox
+                    onChangeText={handleSearch}
+                    value={searchText}
+                    placeholderText={"SearchField.mapPlaceholder"}
+                />
+            </View>
         </View>
     );
 };
@@ -77,15 +126,19 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-start',
         alignItems: 'center',
+        flex: 1,
     },
     map: {
         ...StyleSheet.absoluteFillObject,
     },
-
     searchBox: {
         position: 'absolute',
         zIndex: 1,
-    }
+        marginTop: 50,
+        width: '100%',
+    },
 });
 
 export default StationsMap;
+
+

@@ -422,6 +422,46 @@ export async function getUptainerById(uptainerId) {
         return null;
     }
 }
+export async function getUptainersByLocation(location) {
+    const db = firebaseGetDB;
+    const uptainersRef = ref(db, '/uptainers');
+
+    try {
+        const snapshot = await get(uptainersRef);
+        const uptainers = [];
+
+        snapshot.forEach((childSnapshot) => {
+            const uptainerData = childSnapshot.val();
+            // Assuming location filtering based on uptainerStreet
+            if (uptainerData.uptainerStreet === location) {
+                uptainers.push({
+                    uptainerId: childSnapshot.key,
+                    uptainerName: uptainerData.uptainerName,
+                    uptainerQR: uptainerData.uptainerQR,
+                    uptainerStreet: uptainerData.uptainerStreet,
+                    uptainerZip: uptainerData.uptainerZip,
+                    uptainerCity: uptainerData.uptainerCity,
+                    uptainerImage: uptainerData.uptainerImage,
+                    uptainerDescription: uptainerData.uptainerDescription,
+                    uptainerLat: uptainerData.uptainerLat,
+                    uptainerLong: uptainerData.uptainerLong,
+                });
+            }
+        });
+
+        if (uptainers.length > 0) {
+            return uptainers;
+        } else {
+            console.log(`No uptainers found at ${location}.`);
+            return [];
+        }
+    } catch (error) {
+        console.error(`Error fetching uptainers at ${location}:`, error);
+        return null;
+    }
+}
+
+
 export async function getAllModels() {
     const db = firebaseGetDB;
     const reference = ref(db, '/models');

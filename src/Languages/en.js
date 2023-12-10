@@ -1,3 +1,5 @@
+import DetailViews from "../screens/DetailView";
+
 export default {
   SignUpScreen: {
     Signup: "Sign up",
@@ -199,13 +201,13 @@ export default {
   },
 
   ContactUs: {
-    Header: "Contact os",
+    Header: "Contact us",
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
     SendMessage: "Send message",
     TextOnTheTop:
-      "Send us a message through the contact form. Vi vil answer on your associated mail.",
+      "Send us a message through the contact form. We will answer on your associated mail.",
   },
 
   thankYouScreen: {
@@ -238,6 +240,11 @@ export default {
     Text: "You can elaborate on the condition of the item in the description field.",
   },
 
+  months: {
+    may: "May",
+    October: "Oct",
+  },
+
   StatsPage: {
     Header: "Impact",
     MainButton: "Overall",
@@ -262,6 +269,13 @@ export default {
     Social: "Share your impact with your friends",
     GetInspired: "Get inspired",
   },
+  Detailviews: {
+    product: "Was the product not at the Uptainer?",
+  },
+  SearchField: {
+    mapPlaceholder: "Find Uptainer",
+    productPlaceholder: "Find product",
+  },
 
   QuizQuestions: {
     Quiz1Question1: "What is climate change?",
@@ -269,7 +283,7 @@ export default {
     Quiz1Option2: "B) Earth's warming due to pollution",
     Quiz1Option3: "C) Global warming caused by human actions",
   },
-  PollQuestions: { 
+  PollQuestions: {
     Poll1Question1:
       "How many electronic devices have you bought the last year?",
   },

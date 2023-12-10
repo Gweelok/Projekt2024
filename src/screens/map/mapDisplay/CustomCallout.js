@@ -10,8 +10,8 @@ class CustomCallout extends React.Component {
         return (
             <View style={styles.rowContainer}>
                 <View style={styles.columnContainer}>
-                    <Text style={styles.locationName}>{currentLocation.name}</Text>
-                    <Text style={styles.locationAddress}>{currentLocation.address}</Text>
+                    <Text style={styles.locationName}>{currentLocation.uptainerName}</Text>
+                    <Text style={styles.locationAddress}>{currentLocation.uptainerStreet}</Text>
                 </View>
                 <View style={styles.Icon_container}>
                     <AntDesign style={{justifyContent: 'center'}} name="right" size={26} color={Primarycolor1}/>
