@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ECharts } from "react-native-echarts-wrapper";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import {
@@ -6,9 +6,26 @@ import {
   Primarycolor2,
   Primarycolor3,
 } from "../../styles/Stylesheet";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
   const [loaded, setLoaded] = useState(false);
+
+  const [userClicked, setUserClicked] = useState(false);
+
+  const loadFromStorage = async () => {
+    try {
+      const getData = await AsyncStorage.getItem("pollClicked");
+      if (getData) {
+        setUserClicked(JSON.parse(getData));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  loadFromStorage();
+
   // If pollData is available
   if (!pollData) {
     return null;
@@ -174,15 +191,26 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
     }
   };
 
+  const savePoll = async () => {
+    try {
+      await AsyncStorage.setItem("pollClicked", JSON.stringify(true));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={containerStyle}>
         <Text style={styles.questionText}>{pollData.question}</Text>
         {!chartVisible &&
+          !userClicked &&
           pollData.options.map((option, optionIndex) => (
             <TouchableOpacity
               key={optionIndex}
               onPress={() => {
+                setUserClicked(true);
+                savePoll();
                 handleOptionSelect(option);
               }}
               style={styles.optionButton}
@@ -190,7 +218,7 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
               <Text style={styles.optionText}>{option.text}</Text>
             </TouchableOpacity>
           ))}
-        {chartVisible && (
+        {(chartVisible || userClicked) && (
           <View style={loaded ? styles.loaded : styles.invisible}>
             <ECharts onData={onFinishLoading()} option={chartOptions} />
           </View>
