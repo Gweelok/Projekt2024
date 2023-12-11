@@ -1,10 +1,12 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, Dimensions} from 'react-native';
-import {Primarycolor1, Primarycolor4} from "../../../styles/Stylesheet";
-import {Feather} from "@expo/vector-icons";
-import { useLanguage, t } from '../../../Languages/LanguageHandler';
+import {View, TextInput, StyleSheet} from 'react-native';
 
-const SearchBox = ({ onChangeText, value }) => {
+import {Feather} from "@expo/vector-icons";
+
+import {Primarycolor1, Primarycolor4} from "../styles/Stylesheet";
+import { useLanguage, t } from '../Languages/LanguageHandler';
+
+const SearchBox = ({ onChangeText, value, placeholderText }) => {
     const { currentLanguage } = useLanguage();
     return (
         <View style={styles.container}>
@@ -12,10 +14,15 @@ const SearchBox = ({ onChangeText, value }) => {
                 style={styles.input}
                 onChangeText={onChangeText}
                 value={value}
-                placeholder={t('SearchField.placeholder', currentLanguage)}
+                placeholder={t(placeholderText, currentLanguage)}
                 placeholderTextColor={Primarycolor4}
             />
-            <Feather style={styles.searchIcon} name="search" size={24} color={Primarycolor4} />
+            <Feather 
+                style={styles.searchIcon} 
+                name="search" 
+                size={24} 
+                color={Primarycolor4} 
+            />
         </View>
     );
 };
@@ -28,9 +35,10 @@ const styles = StyleSheet.create({
         transform: [{ translateY: -12 }],
     },
     container: {
-        marginTop: 50,
-        width:  Dimensions.get('window').width * 0.85,
+        width: '100%',
+        alignSelf: 'center',
         backgroundColor: '#fff',
+        marginBottom: 15,
     },
     input: {
         height: 40,
