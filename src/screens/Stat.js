@@ -49,14 +49,20 @@ const Stat = ({ navigation }) => {
     //Create all Uptainers in allUptainersStat
     for (let i = 0; i < allUptainers.length; i ++ ){
         allUptainersStat[allUptainers[i]["uptainerId"]] = {
-            "uptainerCity": allUptainers[i]["uptainerCity"],
-            "uptainerName": allUptainers[i]["uptainerName"],
-            "uptainerStreet": allUptainers[i]["uptainerStreet"],
-            "upTainerID": allUptainers[i]["uptainerId"], 
-            "itemsReused": 0,
-            "savedCO2":0,
-            "numberUsers":0,
-        }
+            uptainerCity: allUptainers[i]["uptainerCity"],
+            uptainerName: allUptainers[i]["uptainerName"],
+            uptainerStreet: allUptainers[i]["uptainerStreet"],
+            uptainerId: allUptainers[i]["uptainerId"], 
+            itemsReused: 0,
+            savedCO2:0,
+            numberUsers:0,
+            uptainerDescription: allUptainers[i]["uptainerDescription"],
+            uptainerImage: allUptainers[i]["uptainerImage"],
+            uptainerLatitude: allUptainers[i]["uptainerLatitude"],
+            uptainerLongitude: allUptainers[i]["uptainerLongitude"],
+            uptainerQR: allUptainers[i]["uptainerQR"],
+            uptainerZip: allUptainers[i]["uptainerZip"],
+            }
     }
     // Test Items
     const items =

@@ -1,16 +1,18 @@
 import {Pressable, Text, TouchableOpacity, View,} from "react-native";
 import GlobalStyle from "../../../styles/GlobalStyle";
 import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
-import React from "react";
+import {React, useContext} from "react";
 import {BoxLink} from "../../../styles/BoxLink";
 import {AntDesign} from "@expo/vector-icons";
 import {msg} from "@babel/core/lib/config/validation/option-assertions";
 import { t, useLanguage} from "../../../Languages/LanguageHandler";
 import {useNavigation} from "@react-navigation/native";
+import { LoaderContext } from "../../../componets/LoaderContext";
 
 export const VisitedUptainerStat = (value) => {
     const { currentLanguage } = useLanguage();
     const navigation = useNavigation();
+    const { isLoading, setIsLoading } = useContext(LoaderContext);
     const data = value["value"];
     const location = data["uptainerName"];
     const address = data["uptainerStreet"];
@@ -25,7 +27,12 @@ export const VisitedUptainerStat = (value) => {
                     <TouchableOpacity >
                         <View style={styles.boxlink}>
                             <View style={GlobalStyle.BodyWrapper}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => {
+                                    setIsLoading(true);
+                                    navigation.navigate("UptainerDetails", {
+                                    uptainerData: data,
+                                    });
+                                    }}>
                                 <Text style={styles.menuItem_text}>{location} </Text>
                                 <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address} </Text>
                                 </TouchableOpacity>
