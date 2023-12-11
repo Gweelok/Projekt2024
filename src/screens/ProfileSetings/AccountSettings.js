@@ -152,7 +152,7 @@ const AccountSettings = ({navigation}) => {
               <View style={{marginTop:10}}>
                 <Pressable onPress={handleDeleteAccount}  >
                     <View style={[styles1.iconContainer]}>
-                        <Icon name="delete" size={25} style={[styles1.iconStyle]} />
+                        <Icon name="delete" size={16} style={[styles1.iconStyle]} />
                         <Text style={styles1.deleteText}>{t('AccountSettingsScreen.Delete', currentLanguage)}</Text>
                     </View>
                 </Pressable>
@@ -190,16 +190,20 @@ const styles1 = StyleSheet.create({
         marginRight:'auto',
         marginTop: 35,
         zIndex:-999,
-
+        borderBottomWidth:1,
+        borderBottomColor:"#ff0000",
     },
     deleteText:{
-        ...styles.link,
         color : "#ff0000",
+        textAlign: "center",
+        fontFamily: "space-grotesk",
+        marginLeft:3,
 
     },
     iconStyle:{
         color : "#ff0000",
-        marginBottom:3,
+        marginBottom:1,
+
     },
 });
 
