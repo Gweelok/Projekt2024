@@ -1,19 +1,41 @@
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
 import { Primarycolor1 } from "../../../styles/Stylesheet";
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
 
-const ChartForStats = () => {
+const ChartForStats = (value) => {
     const chartRef = useRef(null);
     const {currentLanguage}=useLanguage();
-    const months = [
-        "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage),];
+    // Number month for statistic
+    const numberMonth = 10;
+    // Today Date
+    const now = new Date();
+    // Month name
+    const monthsName = [
+        "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage), "Nov", "Dec"];
 
-    // Static data for each month - adjust as necessary
-    const monthlyData = [180, 450, 150, 360, 520, 250, 450, 415, 590, 490];
-
+    // Create array for statistics
+    const monthlyData = [];
+    const months = [];
+    // Props
+    const data = value["value"]
+    for(let i = numberMonth; i > 0; i --){
+        // Getting previous month
+        let nextDate = new Date(now.getFullYear(), now.getMonth() - i);
+        // Adding name of month
+        months.push(monthsName[nextDate.getMonth()]);
+        if(data[nextDate.getFullYear().toString() + "-" + (nextDate.getMonth() + 1).toString()]){
+            // Adding statistic in this month
+            monthlyData.push(data[nextDate.getFullYear().toString() + "-" + (nextDate.getMonth() + 1).toString()])
+        }
+        else{
+            // Adding 0 in this month
+            monthlyData.push(0);
+        }
+    }
+    
     // Set initial chart options
     const options = createChartOptions(months, monthlyData);
 
