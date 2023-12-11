@@ -13,7 +13,7 @@ import {
     Backgroundstyle,
     Primarycolor1,
     styles as stylesGlobal,
-    Buttons, HeaderText,
+    Buttons, HeaderText, styles,
 } from "../../styles/Stylesheet";
 import {useNavigation} from "@react-navigation/native";
 import BackButton from "../../componets/BackButton";
@@ -68,7 +68,7 @@ const ContactUs = ({navigation}) => {
                 <View>
                     <Text style={styles1.TextOnTheTop}>{t('ContactUs.TextOnTheTop',currentLanguage)}</Text>
                 </View>
-                <Text style={styles1.formLabel}>
+                <Text style={[styles1.formLabel,{marginTop:30,}]}>
                     {t("ContactUs.Name", currentLanguage)}
                 </Text>
 
@@ -118,7 +118,7 @@ const ContactUs = ({navigation}) => {
 };
 const styles1 = StyleSheet.create({
     TextOnTheTop:{
-        color: Primarycolor1, fontSize: 23, margin: 0,marginBottom:30, textAlign: 'start',marginTop:20,
+        ...styles.paragraph_text,
     },
 
     header:{
@@ -126,6 +126,7 @@ const styles1 = StyleSheet.create({
         justifyContent: 'flex-start',
         paddingHorizontal: 5,
         margin: -5,
+        marginBottom:20
     },
     headerText:{
         ...HeaderText.Header,marginTop:1,marginLeft:"auto",marginRight:"auto",
