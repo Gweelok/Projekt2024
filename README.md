@@ -128,8 +128,8 @@ And that should be it, I hope, just remember to "pull" every time you open up th
 
 ## How to use Loading on screens
 
-import { LoaderContext } from "../componets/LoaderContext";
-import LoadingScreen from "../componets/LoadingScreen";
+import { LoaderContext } from "../components/LoaderContext";
+import LoadingScreen from "../components/LoadingScreen";
 import useContext
 Create a const to access to the global loading state and its associated setter.
  const { isLoading, setIsLoading } = useContext(LoaderContext);
