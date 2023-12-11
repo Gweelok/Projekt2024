@@ -1,67 +1,51 @@
-import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, TouchableOpacity, Modal, Text } from "react-native";
+
+import React, { useRef } from "react";
+import { View, StyleSheet } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
-import {Buttons, Primarycolor1} from "../../../styles/Stylesheet";
-import Icon from "react-native-vector-icons/AntDesign";
+import { Primarycolor1 } from "../../../styles/Stylesheet";
+import {t, useLanguage} from "../../../Languages/LanguageHandler";
 
 const ChartForStats = () => {
-    const [isModalVisible, setModalVisible] = useState(false);
     const chartRef = useRef(null);
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const {currentLanguage}=useLanguage();
+    const months = [
+        "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage),];
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (chartRef.current) {
-                const newChartData = months.map(() => Math.floor(Math.random() * 500) + 100);
-                const options = {
-                    xAxis: {
-                        data: months,
-                        itemStyle: {
-                            color: Primarycolor1,
-                        },
-                    },
-                    series: [
-                        {
-                            data: newChartData,
-                            itemStyle: {
-                                color: Primarycolor1,
-                            },
-                        },
-                    ],
-                };
-                chartRef.current.setOption(options);
-            }
-        }, 3000);
+    // Static data for each month - adjust as necessary
+    const monthlyData = [180, 450, 150, 360, 520, 250, 450, 415, 590, 490];
 
-        return () => clearInterval(intervalId);
+    // Set initial chart options
+    const options = createChartOptions(months, monthlyData);
+
+    // Set options on the chart
+    useRef(() => {
+        chartRef.current.setOption(options);
     }, []);
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <View style={styles.chartContainer}>
-                    <ECharts ref={chartRef} option={createChartOptions} />
-                </View>
-            </TouchableOpacity>
-            {/*<Modal visible={isModalVisible} animationType="slide">*/}
-            {/*    <View style={{ flex: 1 }}>*/}
-            {/*        <TouchableOpacity onPress={() => setModalVisible(false)}>*/}
-            {/*            <View style={{backgroundColor:Primarycolor1, width:30, height:30, left:10}}>*/}
-            {/*                <Icon size={30} name="close" style={Buttons.Icon} />*/}
-            {/*            </View>*/}
-            {/*        </TouchableOpacity>*/}
-            {/*        <ECharts ref={chartRef} option={createChartOptions} />*/}
-            {/*    </View>*/}
-            {/*</Modal>*/}
+            <View style={styles.chartContainer}>
+                <ECharts ref={chartRef} option={options} />
+            </View>
         </View>
     );
 };
 
-const createChartOptions = {
-
+const createChartOptions = (months, data) => ({
     xAxis: {
         type: "category",
-        data: [],
+        data: months,
+        axisLabel: {
+            interval: 0, // Display all labels
+           /* rotate: 45, // Rotate labels */
+            textStyle: {
+                fontSize: 13, // Adjust font size as needed
+               /* fontWeight: 'bold'*/ // Make text bold
+            }
+        },
+        axisTick: {
+            alignWithLabel: true
+        },
         itemStyle: {
             color: Primarycolor1,
         },
@@ -74,24 +58,22 @@ const createChartOptions = {
     },
     series: [
         {
-            data: [],
+            data: data,
             type: "bar",
             itemStyle: {
                 color: Primarycolor1,
             },
         },
     ],
-};
+});
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     chartContainer: {
         height: 300,
-        width:"100%",
-        left:10
+        width: "100%",
     },
 });
 

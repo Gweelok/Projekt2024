@@ -226,46 +226,51 @@ export default {
     Header: "Forgot password",
     Description: "Input your associated mail, to receive a link for resetting your password",
     SendLinkButton: "Send link"
-},
+  },
 
   DropdownScreen:{
     Category: "Search for category...",
-   Product:"Search for product...",
-   Model: "Search for model...",
-   Brand: "Search for brand...",
-   Condition:"Condition of the product",
-   Text:"You can elaborate on the condition of the item in the description field."
- },
-
-StatsPage:{
-  Header: "Impact",
-  MainButton:"Overall",
-  SecondaryButton:"Yours",
-  AmountReduced: "Amount of reused items",
-  InTotal:"In total",
-  SoFar:"So far today",
-  AmountCO2:"Amount of CO2 saved",
-  Yesterday:"Yesterday",
-  kgCO2:"1 kg. CO2 is equivalent to \"Fact Here\"",
-  Amount:"So 4.400 t. Would amount to \"CALCULATION HERE\"",
-  BestAcheieve:"Best achieving Uptainers this month",
-  MostVisitedUptainer:"Your most visited Uptainer",
-  ItemsReused:"Items reused",
-  CO2Save: " CO2 Saved",
-  Comunity: "The sustainable community building",
-  Info: "Learn how we get our information here",
-  ItemsRecicled:"items reused",
-  ItemsDonated:"Items donated",
-  ItemsCollected:"Items collected",
-  Overview:"Go to the overview of your items",
-  Social:"Share your impact with your friends",
-  GetInspired:"Get inspired",
-
-},
-  Detailviews:{
-    product:"Was the product not at the Uptainer?"
-
+    Product:"Search for product...",
+    Model: "Search for model...",
+    Brand: "Search for brand...",
+    Condition:"Condition of the product",
+    Text:"You can elaborate on the condition of the item in the description field."
   },
 
+  months:{
+    may:"May",
+    October:"Oct",
+  },
 
+  StatsPage:{
+    Header: "Impact",
+    MainButton:"Overall",
+    SecondaryButton:"Yours",
+    AmountReduced: "Amount of reused items",
+    InTotal:"In total",
+    SoFar:"So far today",
+    AmountCO2:"Amount of CO2 saved",
+    Yesterday:"Yesterday",
+    kgCO2:"1 kg. CO2 is equivalent to \"Fact Here\"",
+    Amount:"So 4.400 t. Would amount to \"CALCULATION HERE\"",
+    BestAcheieve:"Best achieving Uptainers this month",
+    MostVisitedUptainer:"Your most visited Uptainer",
+    ItemsReused:"Items reused",
+    CO2Save: " CO2 Saved",
+    Comunity: "The sustainable community building",
+    Info: "Learn how we get our information here",
+    ItemsRecicled:"items reused",
+    ItemsDonated:"Items donated",
+    ItemsCollected:"Items collected",
+    Overview:"Go to the overview of your items",
+    Social:"Share your impact with your friends",
+    GetInspired:"Get inspired",
+  },
+  Detailviews:{
+    product:"Was the product not at the Uptainer?"
+  },
+  SearchField: {
+    mapPlaceholder: "Find Uptainer",
+    productPlaceholder: "Find product"
+  },
 };

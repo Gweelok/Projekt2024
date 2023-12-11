@@ -265,15 +265,16 @@ export default {
 
 
   },
+  months: {
+    may: "Maj",
+    October: "Okt",
+  },
   Detailviews:{
     product:" Var produktet ikke i uptaineren?"
 
   },
-
-
-
-
-
-
-
+  SearchField: {
+    mapPlaceholder: "Find Uptainer",
+    productPlaceholder: "Find produkt"
+  },
 };

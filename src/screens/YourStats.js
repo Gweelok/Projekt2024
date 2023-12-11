@@ -38,10 +38,12 @@ const YourStats = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginTop: 20, marginBottom: 20, }}>
-                    <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
+                    <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18,marginBottom:-10 }]}>{t('StatsPage.AmountCO2', currentLanguage)}</Text>
                 </View>
-                <View style={{marginTop:0,}}>
-                    <GreenBox data={"960 kg."} textStyle={{ marginTop:-10 }} />
+
+                <View style={{}}>
+                    <GreenBox data={"960 kg."} textStyle={{height:50,}} headerStyle={{marginBottom: 30, marginTop: -30,
+                    }}/>
 
                 </View>
                 <View>
