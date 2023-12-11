@@ -26,7 +26,7 @@ import YourStats from "./YourStats";
 import GreenBox from "../styles/GreenBox";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
-import { getAllItems, getAllUptainers, getProductById} from "../utils/Repo";
+import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser} from "../utils/Repo";
 
 const Stat = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -42,9 +42,11 @@ const Stat = ({ navigation }) => {
     
     // Load all items from database
     //const items = await getAllItems();
+
+    // Load current user
+    const userCurrent  = await getCurrentUser()
     // Load all Uptainers from database
     const allUptainers = await getAllUptainers();
-
     const allUptainersStat = {}
     //Create all Uptainers in allUptainersStat
     for (let i = 0; i < allUptainers.length; i ++ ){
@@ -72,24 +74,32 @@ const Stat = ({ navigation }) => {
             itemTaken: true,
             itemUptainer: "-NbzQlf95xoexGIlcIpX",
             itemproduct: "-NbzQlfHewkweUD_k_Ym",
+            itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+            itemTakenUser: ""
         },
         {
             itemTakenDate: "2023-12-10",
             itemTaken: true,
             itemUptainer: "-NbzQlf95xoexGIlcIpY",
             itemproduct: "-NbzQlfCJqUDW4jtThUc",
+            itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+            itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2"
         },
         {
             itemTakenDate: "2023-12-09",
             itemTaken: true,
             itemUptainer: "-NbzQlf95xoexGIlcIpY",
             itemproduct: "-NbzQlfCJqUDW4jtThUc",
+            itemUser: "",
+            itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2"
         },
         {
             itemTakenDate: "2023-11-06",
             itemTaken: true,
             itemUptainer: "-NbzQlf95xoexGIlcIpY",
             itemproduct: "-NbzQlfCJqUDW4jtThUc",
+            itemUser: "",
+            itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2"
         },
         {
             itemTakenDate: "2023-11-06",
@@ -146,13 +156,17 @@ const Stat = ({ navigation }) => {
     for (let i=0; i < items.length; i ++) {
         //Counting how many times Uptainer was used for putting item
         if(allUptainersStat[items[i]["itemUptainer"]]){
+          if(items[i]["itemUser"] == userCurrent["id"]){
+            
             allUptainersStat[items[i]["itemUptainer"]]["numberUsers"] += 1;
-        }
+        }}
         //Filter items, which was taken
         if (items[i].itemTaken == true) {
             //Counting how many times Uptainer was used for taking item
             if(allUptainersStat[items[i]["itemUptainer"]]){
+              if(items[i]["itemTakenUser"] == userCurrent["id"]){
                 allUptainersStat[items[i]["itemUptainer"]]["numberUsers"] += 1;
+              }
                 allUptainersStat[items[i]["itemUptainer"]]["itemsReused"] += 1;
                 //Getting info about co2Footprint this item
                 const productInfo = await getProductById(items[i]["itemproduct"]);
@@ -193,7 +207,7 @@ const Stat = ({ navigation }) => {
         bestUptainer: bestUptainer,
     }
     //Print for checking
-    //console.log(result);
+    console.log(result);
    
     return result
     }
