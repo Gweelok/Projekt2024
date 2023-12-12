@@ -421,7 +421,7 @@ export const dropdownStyles = StyleSheet.create({
     zIndex: 1,
     marginTop: 90,
     width: '100%',
-    maxHeight:230,
+    maxHeight:250,
   },
   dropdownText: {
     ...styles.menuItem_text,
