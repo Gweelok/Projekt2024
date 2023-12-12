@@ -1,4 +1,4 @@
-import { get, ref, push, set, update, remove } from "firebase/database";
+import { get, ref, query, orderByChild, push, set, update, remove, startAt, endAt } from "firebase/database";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -642,6 +642,52 @@ export async function getDraftFromUser(userId) {
     ///not tested yet
     return draftList
 }
+
+
+export async function getItemsByName(searchText) {
+    const db = firebaseGetDB;
+    const productsReference = ref(db, '/products')
+    const brandsReference = ref(db, '/brands')
+    const modelsReference = ref(db, '/models')
+    const categoryReference = ref(db, '/categories')
+
+    //  Example:       products   productName inputText
+    const searchQuery = (reference, childKey, text) => 
+        query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
+
+    const productsQuery =  searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery =  searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery =  searchQuery(modelsReference, `modelName`, searchText)
+    const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
+
+    try {
+        const fetchSnapshot = async (query) => {
+            const snapshot = await get(query);
+            return snapshot.val() || [];
+        }
+
+        const [productsSnapshot, brandsSnapshot, modelsSnapshot, categoriesSnapshot] = await Promise.all([
+            fetchSnapshot(productsQuery),
+            fetchSnapshot(brandsQuery),
+            fetchSnapshot(modelsQuery),
+            fetchSnapshot(categoryQuery)
+        ])
+        
+        const combineSnapshots = (snapshots) => {
+            const results = [];
+            snapshots.forEach((snapshot) => {
+                results.push(...Object.values(snapshot))
+            });
+            return results;
+        }
+
+        return combineSnapshots([productsSnapshot, brandsSnapshot, modelsSnapshot, categoriesSnapshot])
+    } catch (error) {
+        console.error(`Error fetching data for item with name ${searchText}: `, error);
+    }
+}
+
+
 
     /********************/
     /***** Delete *******/
