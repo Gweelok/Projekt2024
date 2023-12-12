@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import {StyleSheet, View, Alert, TouchableOpacity, Text, ScrollView} from 'react-native';
+import {StyleSheet, View, Alert, TouchableOpacity, Text, ScrollView, ActivityIndicator, Modal} from 'react-native';
 import SearchBox from '../../../componets/SearchBox'
 import CustomCallout from './CustomCallout';
 import GlobalStyle from "../../../styles/GlobalStyle";
@@ -60,6 +60,7 @@ const StationsMap = ({ navigation }) => {
     const [loading, setLoading] = useState(true);
     const [showSearchResults, setShowSearchResults] = useState(true);
     const mapRef = useRef();
+    const isLoaderShow = false;
 
     useEffect(() => {
         const getUserLocation = async () => {
@@ -76,6 +77,7 @@ const StationsMap = ({ navigation }) => {
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching location:', error);
+                Alert.alert('Error fetching location. Please try again.');
                 setLoading(false);
             }
         };
@@ -83,9 +85,25 @@ const StationsMap = ({ navigation }) => {
         getUserLocation();
     }, []);
 
+    useEffect(() => {
+        const loadingTimer = setTimeout(() => {
+            setLoading(false); // Set loading to false after 2 seconds (simulating completion)
+        }, 2000);
+
+        // Clear the timeout when the component unmounts or when loading finishes
+        return () => clearTimeout(loadingTimer);
+    }, []);
+
     if (loading) {
-        return <View><Text>Loading...</Text></View>;
+        return (
+
+                <View style={styles.MainContainer}>
+                    <ActivityIndicator size='large' color='black' />
+                </View>
+        );
     }
+
+
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const R = 6371;
@@ -102,8 +120,8 @@ const StationsMap = ({ navigation }) => {
         return distance.toFixed(2);
     };
 
-    const userLatitude = userLocation.latitude;
-    const userLongitude = userLocation.longitude;
+    const userLatitude = userLocation?.latitude || 0;
+    const userLongitude = userLocation?.longitude || 0;
 
     const region = {
         latitude: 55.6761,
@@ -297,6 +315,11 @@ const styles1 = StyleSheet.create({
     },
     lastItem: {
         borderBottomWidth: 3,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
 });
