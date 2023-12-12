@@ -29,7 +29,13 @@ import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 
 const Stat = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
-
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = () => {
+    setRefreshing(true)
+    setTimeout(()=>{
+      setRefreshing(false)
+    }, 1000)
+  }
   const handlePress = () => {
     navigation.goBack();
   };
@@ -48,7 +54,7 @@ const Stat = ({ navigation }) => {
       ]}
     >
       <SafeAreaView>
-        <ScrollViewComponent>
+        <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
           <View
             style={{
               flexDirection: "row",
@@ -146,7 +152,7 @@ const Stat = ({ navigation }) => {
                 </View>
               </View>
               <View style={[{ height: 285 }]}>
-                <ChartForStats />
+                <ChartForStats refreshing={refreshing}/>
               </View>
               <View style={{ marginTop: 2, marginBottom: 20 }}>
                 <Text

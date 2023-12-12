@@ -1,16 +1,15 @@
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, StyleSheet } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
 import { Primarycolor1 } from "../../../styles/Stylesheet";
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
 
-const ChartForStats = () => {
+const ChartForStats = ({refreshing}) => {
     const chartRef = useRef(null);
     const {currentLanguage}=useLanguage();
     const months = [
         "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage),];
-
     // Static data for each month - adjust as necessary
     const monthlyData = [180, 450, 150, 360, 520, 250, 450, 415, 590, 490];
 
@@ -21,6 +20,15 @@ const ChartForStats = () => {
     useRef(() => {
         chartRef.current.setOption(options);
     }, []);
+
+    // on refresh update into chart
+    useEffect(()=>{
+        if(refreshing){ 
+            const newOptions = createChartOptions(months, [180, 450, 150, 360, 520, 250, 450, 415, 590, 777]);
+            chartRef.current.setOption(newOptions);
+        }
+        console.log('updated')
+    }, [refreshing])
 
     return (
         <View style={styles.container}>
