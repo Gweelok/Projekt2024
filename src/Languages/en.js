@@ -186,6 +186,7 @@ export default {
   StationsScreen: {
     showProduct: "Show product",
     showWay: "Show the way",
+    NoUptainers:"No Uptainer is matching your search.",
   },
   ProductIsTakenScreen: {
     apology:
@@ -287,4 +288,5 @@ export default {
     Poll1Question1:
       "How many electronic devices have you bought the last year?",
   },
+
 };

@@ -14,6 +14,7 @@ import {
     styles
 } from "../../../styles/Stylesheet";
 import * as Location from 'expo-location';
+import {t, useLanguage} from "../../../Languages/LanguageHandler";
 
 
 
@@ -61,6 +62,8 @@ const StationsMap = ({ navigation }) => {
     const [showSearchResults, setShowSearchResults] = useState(true);
     const mapRef = useRef();
     const isLoaderShow = false;
+    const { currentLanguage } = useLanguage();
+
 
     useEffect(() => {
         const getUserLocation = async () => {
@@ -174,7 +177,7 @@ const StationsMap = ({ navigation }) => {
         setFilteredLocations(filtered);
 
         if (filtered.length === 0) {
-            Alert.alert('No stores found. Please check the address');
+            setFilteredLocations([]); // Clear the filtered locations
         }
     };
 
@@ -194,7 +197,8 @@ const StationsMap = ({ navigation }) => {
     const lastIndex = sortedLocations.length - 1;
 
     const toggleSearchResults = () => {
-        setShowSearchResults(!showSearchResults);
+        // Remove setShowSearchResults(false) from selectStation function
+        setShowSearchResults(true); // Always show search results when toggleSearchResults is called
     };
     return (
         <View style={styles1.container}>
@@ -232,7 +236,8 @@ const StationsMap = ({ navigation }) => {
             {/* List of sorted locations */}
             {showSearchResults && (
             <ScrollView style={[GlobalStyle.BodyWrapper, dropdownStyles.dropdownContainer2]}>
-                {sortedLocations.map((location, index) => (
+                {filteredLocations.length > 0 ? (
+                    sortedLocations.map((location, index) => (
                     <TouchableOpacity
                         key={location.uptainerName}
                         onPress={() => {
@@ -260,7 +265,14 @@ const StationsMap = ({ navigation }) => {
                         </View>
                     </TouchableOpacity>
 
-                ))}
+                ))
+                ) : (
+                <View style={{ borderColor: Primarycolor1,
+                    width: '100%',
+                    borderWidth:3, backgroundColor:"white"}}>
+                    <Text style={{marginBottom:50, maxHeight:50, marginTop:15, textAlign:"center", color:Primarycolor4}}>{t("StationsScreen.NoUptainers", currentLanguage)}</Text>
+                </View>
+                )}
             </ScrollView>
             )}
         </View>
@@ -320,6 +332,16 @@ const styles1 = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    noStoreFound: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 20,
+    },
+    noStoreFoundText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'red', // You can modify the color as desired
     },
 
 });

@@ -188,6 +188,8 @@ export default {
   StationsScreen: {
     showProduct: "Vis produkter",
     showWay: "Vis vej",
+    NoUptainers:"Ingen Uptainere matcher din søgning.",
+
   },
   ProductIsTakenScreen: {
     apology:
