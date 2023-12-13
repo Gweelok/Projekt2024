@@ -61,7 +61,7 @@ const ChartForStats = ({value, refreshing}) => {
     // on refresh update into chart
     useEffect(()=>{
         if(refreshing){ 
-            const newOptions = createChartOptions(months, [180, 450, 150, 360, 520, 250, 450, 415, 590, 777]);
+            const newOptions = retreiveChartOptions()
             chartRef.current.setOption(newOptions);
         }
         console.log('updated')
