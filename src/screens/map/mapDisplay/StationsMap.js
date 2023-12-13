@@ -90,10 +90,9 @@ const StationsMap = ({ navigation }) => {
 
     useEffect(() => {
         const loadingTimer = setTimeout(() => {
-            setLoading(false); // Set loading to false after 2 seconds (simulating completion)
+            setLoading(false);
         }, 2000);
 
-        // Clear the timeout when the component unmounts or when loading finishes
         return () => clearTimeout(loadingTimer);
     }, []);
 
@@ -177,7 +176,7 @@ const StationsMap = ({ navigation }) => {
         setFilteredLocations(filtered);
 
         if (filtered.length === 0) {
-            setFilteredLocations([]); // Clear the filtered locations
+            setFilteredLocations([]);
         }
     };
 
@@ -191,14 +190,14 @@ const StationsMap = ({ navigation }) => {
             longitudeDelta: 0.01,
         });
 
+        setSearchText(location.uptainerName);
         setShowSearchResults(false);
     };
 
     const lastIndex = sortedLocations.length - 1;
 
     const toggleSearchResults = () => {
-        // Remove setShowSearchResults(false) from selectStation function
-        setShowSearchResults(true); // Always show search results when toggleSearchResults is called
+        setShowSearchResults(true);
     };
     return (
         <View style={styles1.container}>
@@ -224,7 +223,6 @@ const StationsMap = ({ navigation }) => {
                 ))}
             </MapView>
 
-            {/* Search bar */}
             <View style={[GlobalStyle.BodyWrapper, styles1.searchBox]} onTouchStart={toggleSearchResults}>
                 <SearchBox
                     onChangeText={handleSearch}
@@ -332,16 +330,6 @@ const styles1 = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    noStoreFound: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 20,
-    },
-    noStoreFoundText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'red', // You can modify the color as desired
     },
 
 });
