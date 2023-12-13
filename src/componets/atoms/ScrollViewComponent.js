@@ -8,9 +8,9 @@ import  {React, useState, useCallback} from "react";
 // the children prop is for any component that needs to be displayed inside the scrollviewComponent
 
 const ScrollViewComponent = ({ children, contentContainerStyle,  refreshing,onRefresh   }) => {
-  
 
-  
+
+
   return (
     <ScrollView
       contentContainerStyle={contentContainerStyle}
@@ -18,9 +18,9 @@ const ScrollViewComponent = ({ children, contentContainerStyle,  refreshing,onRe
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-    
+
       {children}
-      <View style={{ marginTop: 50, minHeight: 100, marginBottom: 50 }} />
+      <View style={{ marginTop: 50, minHeight: 100, marginBottom: 147 }} />
     </ScrollView>
   );
 };

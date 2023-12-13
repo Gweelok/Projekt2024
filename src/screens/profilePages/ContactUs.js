@@ -19,6 +19,7 @@ import {useNavigation} from "@react-navigation/native";
 import BackButton from "../../componets/BackButton";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import GlobalStyle from "../../styles/GlobalStyle";
+import Navigationbar from "../../componets/Navigationbar";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -56,9 +57,11 @@ const ContactUs = ({navigation}) => {
             .catch((e) => Alert(e));
     }
     return (
+        <View>
         <ScrollViewComponent >
-            <SafeAreaView  style={Backgroundstyle.interactive_screens}>
-                <View style={GlobalStyle.BodyWrapper}>
+        <View style={Backgroundstyle.interactive_screens}>
+            <SafeAreaView  style={GlobalStyle.BodyWrapper} >
+
                 <View style={styles1.header}>
                     {/* Back Button */}
                     <BackButton onPress={navigation.goBack}  />
@@ -111,9 +114,13 @@ const ContactUs = ({navigation}) => {
                         {t("ContactUs.SendMessage", currentLanguage)}
                     </Text>
                 </TouchableOpacity>
-            </View>
             </SafeAreaView>
-        </ScrollViewComponent>
+
+        </View>
+
+        </ScrollViewComponent >
+            <Navigationbar navigation={navigation} />
+        </View>
     );
 };
 const styles1 = StyleSheet.create({
