@@ -58,7 +58,7 @@ const ContactUs = ({navigation}) => {
     }
     return (
         <View>
-        <ScrollViewComponent >
+        <ScrollViewComponent style={{ marginBottom: 97 }}>
         <View style={Backgroundstyle.interactive_screens}>
             <SafeAreaView  style={GlobalStyle.BodyWrapper} >
 
@@ -117,7 +117,6 @@ const ContactUs = ({navigation}) => {
             </SafeAreaView>
 
         </View>
-
         </ScrollViewComponent >
             <Navigationbar navigation={navigation} />
         </View>

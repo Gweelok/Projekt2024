@@ -7,12 +7,13 @@ import  {React, useState, useCallback} from "react";
 // there are props needed, the contentContainerStyle is for any styling you want to add to the scrollview such as padding, margin and the rest
 // the children prop is for any component that needs to be displayed inside the scrollviewComponent
 
-const ScrollViewComponent = ({ children, contentContainerStyle,  refreshing,onRefresh   }) => {
+const ScrollViewComponent = ({ children, contentContainerStyle,style,  refreshing,onRefresh   }) => {
 
 
 
   return (
     <ScrollView
+        style={style}
       contentContainerStyle={contentContainerStyle}
       showsVerticalScrollIndicator={false}
       refreshControl={
@@ -20,7 +21,7 @@ const ScrollViewComponent = ({ children, contentContainerStyle,  refreshing,onRe
       }>
 
       {children}
-      <View style={{ marginTop: 50, minHeight: 100, marginBottom: 147 }} />
+      <View style={{ marginTop: 50, minHeight: 100, marginBottom: 50 }} />
     </ScrollView>
   );
 };
