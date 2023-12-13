@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import * as style from "../../styles/Stylesheet";
 import LottieView from "lottie-react-native";
 
-const Quiz = ({ question }) => {
+const Quiz = ({ questionData }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const animationRef = useRef(null);
@@ -104,8 +104,8 @@ const Quiz = ({ question }) => {
         autoPlay={false}
         loop={false}
       />
-      <Text style={styles.questionText}>{question.question}</Text>
-      {question.options.map(
+      <Text style={styles.questionText}>{questionData.question}</Text>
+      {questionData.options.map(
         (
           option,
           optionIndex //For each option -->making  button

@@ -8,11 +8,11 @@ import {
 } from "../../styles/Stylesheet";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
+const PollChart = ({ pollData }) => {
   const [loaded, setLoaded] = useState(false);
 
   const [userClicked, setUserClicked] = useState(false);
-
+  const [chartVisible, setChartVisible] = useState(false);
   const loadFromStorage = async () => {
     try {
       const getData = await AsyncStorage.getItem("pollClicked");
@@ -24,8 +24,12 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
     }
   };
 
-  loadFromStorage();
+  const handleOptionSelect = (option) => {
+    // Show the chart when the poll option is pressed
+    setChartVisible(true);
+  };
 
+  loadFromStorage();
   // If pollData is available
   if (!pollData) {
     return null;
@@ -33,7 +37,7 @@ const PollChart = ({ pollData, handleOptionSelect, chartVisible }) => {
 
   let sum = 0;
 
-  pollData.options.forEach((x) => (sum += x.responses));
+  pollData.options.forEach((x) => (sum += x.responses)); //calculating the percentages
 
   // Reversing the order of options
   const reversedOptions = [...pollData.options].reverse();
