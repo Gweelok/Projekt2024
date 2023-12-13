@@ -24,6 +24,7 @@ import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import LanguageDropdownSettings from "../../Languages/LanguageDropdownSettings";
 import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
+import Navigationbar from "../../componets/Navigationbar";
 
 const AccountSettings = ({navigation}) => {
     const { currentLanguage } = useLanguage();
@@ -49,10 +50,12 @@ const AccountSettings = ({navigation}) => {
     };
 
     return (
-        <ScrollViewComponent>
-             <SafeAreaView  style={Backgroundstyle.interactive_screens}>
-        <View style={GlobalStyle.BodyWrapper}>
-            <View style={[styles1.header]}>
+        <View>
+            <ScrollViewComponent >
+                <View style={Backgroundstyle.interactive_screens}>
+                    <SafeAreaView  style={GlobalStyle.BodyWrapper} >
+
+                        <View style={[styles1.header]}>
 
                 {/* Back Button */}
                 <BackButton onPress={handlePress}></BackButton>
@@ -157,10 +160,12 @@ const AccountSettings = ({navigation}) => {
                     </View>
                 </Pressable>
                 </View>
-                </View>
             </View>
-</SafeAreaView>
+         </SafeAreaView>
+                </View>
         </ScrollViewComponent>
+            <Navigationbar navigation={navigation} />
+     </View>
     );
 };
 
