@@ -419,7 +419,7 @@ export const dropdownStyles = StyleSheet.create({
   dropdownContainer2: {
     position: 'absolute',
     zIndex: 1,
-    marginTop: 90,
+    marginTop: 87,
     width: '100%',
     maxHeight:250,
   },

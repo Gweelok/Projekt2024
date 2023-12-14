@@ -59,7 +59,7 @@ const StationsMap = ({ navigation }) => {
     const [filteredLocations, setFilteredLocations] = useState(stationData);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [showSearchResults, setShowSearchResults] = useState(true);
+    const [showSearchResults, setShowSearchResults] = useState(false);
     const mapRef = useRef();
     const isLoaderShow = false;
     const { currentLanguage } = useLanguage();
