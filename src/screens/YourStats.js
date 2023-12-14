@@ -20,7 +20,9 @@ import { getAllItems, getCurrentUser, getAllProducts } from "../utils/Repo";
 
 const YourStats = () => {
   const { currentLanguage } = useLanguage();
-  let [data, setData] = useState(0);
+  let [data, setData] = useState(
+    {TotalCo2Footprint: 0}
+    );
   const navigation = useNavigation();
   const getProducts = async () => {
     const products = await getAllProducts();
@@ -35,11 +37,7 @@ const YourStats = () => {
     const items = await getAllItems();
     return items;
   };
-  const me = {
-    // id: "lywlgHhkOcXEa53j9jPADYoWmrO2",
-    id: "aRI2hjbGaWWFrmc8hcXIaiu1Zuj1",
-    // id: "qW3w4L0P2Jc4LG5tqoQCBgWCEbC3",
-  };
+  
   let TotalCo2Footprint = 0;
   useEffect(() => {
     async function fetchData() {
@@ -132,7 +130,7 @@ const YourStats = () => {
 
         <View style={{}}>
           <GreenBox
-            data={data+" Kgs"}
+            data={data+" Kg."}
             textStyle={{ height: 50 }}
             headerStyle={{ marginBottom: 30, marginTop: -30 }}
           />
