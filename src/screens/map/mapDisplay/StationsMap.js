@@ -303,22 +303,22 @@ const styles1 = StyleSheet.create({
     stationName: {
         fontWeight: 'bold',
         fontSize: 16,
-        marginBottom: 4,
+        marginBottom: 10,
         color: Primarycolor1,
     },
     addressInfo: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginBottom: 10,
     },
     stationAddress: {
         fontSize: 12,
-        marginBottom: 2,
         color:Primarycolor1,
-        width:"80%"
+        width:"75%"
     },
 
     distance: {
-        width:"20%",
+        width:"25%",
         fontSize: 12,
         color: Primarycolor1,
         alignItems:"center"
