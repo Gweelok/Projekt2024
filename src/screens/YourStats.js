@@ -20,58 +20,36 @@ import { getAllItems, getCurrentUser, getAllProducts } from "../utils/Repo";
 
 const YourStats = () => {
   const { currentLanguage } = useLanguage();
-  let [data, setData] = useState(
-    {TotalCo2Footprint: 0}
-    );
+  let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 });
   const navigation = useNavigation();
-  const getProducts = async () => {
-    const products = await getAllProducts();
-    return products;
-  };
-  const getUser = async () => {
-    // Load current user
-    const userCurrent = await getCurrentUser();
-    return userCurrent;
-  };
-  const getItems = async () => {
-    const items = await getAllItems();
-    return items;
-  };
   
-  let TotalCo2Footprint = 0;
   useEffect(() => {
-    async function fetchData() {
-      //Get current user
-      const userCurrent = await getUser();
-      //Get all items
-      const items = await getItems();
-      //Get all products
-      const products = await getProducts();
-      //   console.log("totalProducts", JSON.stringify(products.length, null, "  "));
-      //   console.log("totalItems", items.length);
-      //   console.log("totalItems", JSON.stringify(items, null, "  "));
-      let itemsCount = 0;
-      let productsCount = 0;
-      //Filter items by user
-      const userItems = items.filter((item) => item.itemUser === userCurrent.id);
-    //   console.log("userItems", JSON.stringify(userItems.length, null, "  "));
-
-    //Get footprint for all items
-      userItems.forEach((item) => {
-        products.forEach((product) => {
-          if (item.itemproduct === product.productId) {
-            TotalCo2Footprint += parseInt(product.co2Footprint);
-          }
-        });
-      });
-    //   console.log("items", itemsCount);
-    //   console.log("products", productsCount);
-    //   console.log(co2Footprint);
-      setData(TotalCo2Footprint);
-      console.log(TotalCo2Footprint)
-    }
     fetchData();
   }, []);
+  async function fetchData() {
+    //Get current user
+    const userCurrent = await getCurrentUser();
+    //Get all items
+    const items = await getAllItems();
+    //Get all products
+    const products = await getAllProducts();
+    //Filter items by user
+    const userItems = items.filter((item) => item.itemUser === userCurrent.id);
+    let co2Footprint = 0;
+    //Get footprint for all items
+    userItems.forEach((item) => {
+      products.forEach((product) => {
+        if (item.itemproduct === product.productId) {
+          co2Footprint += parseInt(product.co2Footprint);
+        }
+      });
+    });
+    setCO2Data((prevData) => ({
+      ...prevData,
+      TotalCo2Footprint: co2Footprint,
+     
+    }));
+  }
 
   return (
     <ScrollViewComponent>
@@ -130,7 +108,7 @@ const YourStats = () => {
 
         <View style={{}}>
           <GreenBox
-            data={data+" Kg."}
+            data={co2Data.TotalCo2Footprint + " Kg."}
             textStyle={{ height: 50 }}
             headerStyle={{ marginBottom: 30, marginTop: -30 }}
           />
