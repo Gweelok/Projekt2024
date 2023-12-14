@@ -46,12 +46,12 @@ const ChartForStats = ({value, refreshing}) => {
 
     const options = retreiveChartOptions()
     useEffect(()=>{
-        if(refreshing){
+        if(refreshing || value){
             const newOptions = retreiveChartOptions()
             chartRef.current.setOption(newOptions)
             console.log('chart data retrieved')
         }
-    }, [refreshing])
+    }, [value, refreshing])
 
     // Set options on the chart
     useRef(() => {
