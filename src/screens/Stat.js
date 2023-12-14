@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -26,9 +26,197 @@ import YourStats from "./YourStats";
 import GreenBox from "../styles/GreenBox";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
+import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser} from "../utils/Repo";
 
 const Stat = ({ navigation }) => {
-  const { currentLanguage } = useLanguage();
+    const { currentLanguage } = useLanguage();
+    let [data, setData] = useState({
+        bestUptainer: {},
+        allTakenItems: 0,
+        todayTakenItems: 0,
+        yesterdayTakenItems: 0,
+        allTakenItemsMonth: {},
+        });
+
+    const allItems = async () => {
+    
+    // Load all items from database
+    //const items = await getAllItems();
+
+    // Load current user
+    const userCurrent  = await getCurrentUser()
+    // Load all Uptainers from database
+    const allUptainers = await getAllUptainers();
+    const allUptainersStat = {}
+    //Create all Uptainers in allUptainersStat
+    for (let i = 0; i < allUptainers.length; i ++ ){
+        allUptainersStat[allUptainers[i]["uptainerId"]] = {
+            uptainerCity: allUptainers[i]["uptainerCity"],
+            uptainerName: allUptainers[i]["uptainerName"],
+            uptainerStreet: allUptainers[i]["uptainerStreet"],
+            uptainerId: allUptainers[i]["uptainerId"], 
+            itemsReused: 0,
+            savedCO2:0,
+            numberUsers:0,
+            uptainerDescription: allUptainers[i]["uptainerDescription"],
+            uptainerImage: allUptainers[i]["uptainerImage"],
+            uptainerLatitude: allUptainers[i]["uptainerLatitude"],
+            uptainerLongitude: allUptainers[i]["uptainerLongitude"],
+            uptainerQR: allUptainers[i]["uptainerQR"],
+            uptainerZip: allUptainers[i]["uptainerZip"],
+            }
+    }
+    // Test Items
+    const items =
+    [
+        {
+            itemTakenDate: "2023-12-10",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpX",
+            itemproduct: "-NbzQlfHewkweUD_k_Ym",
+            itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+            itemTakenUser: ""
+        },
+        {
+            itemTakenDate: "2023-12-10",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpY",
+            itemproduct: "-NbzQlfCJqUDW4jtThUc",
+            itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+            itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2"
+        },
+        {
+            itemTakenDate: "2023-12-09",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpY",
+            itemproduct: "-NbzQlfCJqUDW4jtThUc",
+            itemUser: "",
+            itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2"
+        },
+        {
+            itemTakenDate: "2023-11-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpY",
+            itemproduct: "-NbzQlfCJqUDW4jtThUc",
+            itemUser: "",
+            itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2"
+        },
+        {
+            itemTakenDate: "2023-11-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpX",
+            itemproduct: "-NbzQlfHewkweUD_k_Ym",
+        },
+        {
+            itemTakenDate: "2023-09-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpX",
+            itemproduct: "-NbzQlfHewkweUD_k_Ym",
+        },            
+        {
+            itemTakenDate: "2023-07-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpX",
+            itemproduct: "-NbzQlfHewkweUD_k_Ym",
+        },
+        {
+            itemTakenDate: "2023-07-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpY",
+            itemproduct: "-NbzQlfCJqUDW4jtThUc",
+        },
+        {
+            itemTakenDate: "2023-07-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpY",
+            itemproduct: "-NbzQlfCJqUDW4jtThUc",
+        },
+        {
+            itemTakenDate: "2023-07-06",
+            itemTaken: true,
+            itemUptainer: "-NbzQlf95xoexGIlcIpY",
+            itemproduct: "-NbzQlfCJqUDW4jtThUc",
+        },
+    ]
+
+    // Create variables for counting
+    let allNumberTakenItems = 0;
+    let todayNumberTakenItems = 0;
+    let yesterdayNumberTakenItems = 0;
+
+    //Date today
+    const today = new Date();
+    
+    //Date yersterday
+    const yesterday = new Date(today - 86400000);
+    
+    //Create a dictionary for counting reused items by month
+    const allTakenItemsMonth ={};
+    
+    for (let i=0; i < items.length; i ++) {
+        //Counting how many times Uptainer was used for putting item
+        if(allUptainersStat[items[i]["itemUptainer"]]){
+          if(items[i]["itemUser"] == userCurrent["id"]){
+            
+            allUptainersStat[items[i]["itemUptainer"]]["numberUsers"] += 1;
+        }}
+        //Filter items, which was taken
+        if (items[i].itemTaken == true) {
+            //Counting how many times Uptainer was used for taking item
+            if(allUptainersStat[items[i]["itemUptainer"]]){
+              if(items[i]["itemTakenUser"] == userCurrent["id"]){
+                allUptainersStat[items[i]["itemUptainer"]]["numberUsers"] += 1;
+              }
+                allUptainersStat[items[i]["itemUptainer"]]["itemsReused"] += 1;
+                //Getting info about co2Footprint this item
+                const productInfo = await getProductById(items[i]["itemproduct"]);
+                allUptainersStat[items[i]["itemUptainer"]]["savedCO2"] += productInfo["co2Footprint"];
+            }
+
+            allNumberTakenItems += 1;
+            //Filter reused items, which have itemTakenDate. itemTakenDate should has format "YYYY-MM-DD" (like itemTakenDate: "2023-12-06")
+            if (items[i].itemTakenDate){
+                const itemTakenDate = new Date(items[i].itemTakenDate);
+                if (itemTakenDate.toLocaleDateString() == today.toLocaleDateString()) {
+                    todayNumberTakenItems += 1
+                }
+                if (itemTakenDate.toLocaleDateString() == yesterday.toLocaleDateString()) {
+                    yesterdayNumberTakenItems += 1
+                }
+                if (allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()]) {
+                allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()] += 1
+                }
+                else{
+                    allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()] = 1
+                }
+                
+            }
+
+        }
+    }
+    //Definition of the most popular Uptainer
+    const bestUptainerId = Object.entries(allUptainersStat).reduce((acc,curr) => acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr)[0];
+    const bestUptainer = allUptainersStat[bestUptainerId];
+
+    //Create result after counting reused items
+    result = {
+        allTakenItems: allNumberTakenItems,
+        todayTakenItems: todayNumberTakenItems,
+        yesterdayTakenItems: yesterdayNumberTakenItems,
+        allTakenItemsMonth: allTakenItemsMonth, //{"2023-Dec": 1, "2023-Jul": 1, "2023-Nov": 1, "2023-Sep": 1}
+        bestUptainer: bestUptainer,
+    }
+    //Print for checking
+    console.log(result);
+   
+    return result
+    }
+  
+    useEffect(() => {async function fetchData(){
+    const result = await allItems();
+    setData(result)         
+    }
+    fetchData()}, []);
 
   const handlePress = () => {
     navigation.goBack();
@@ -132,21 +320,21 @@ const Stat = ({ navigation }) => {
                   <View>
                     <GreenBox
                       msg={t("StatsPage.SoFar", currentLanguage)}
-                      data={"50000 t."}
+                      data={data.todayTakenItems}
                       secondMsg={t("StatsPage.Yesterday", currentLanguage)}
-                      secondData={"57 t"}
+                      secondData={data.yesterdayTakenItems}
                     />
                   </View>
                   <View>
                     <GreenBox
                       msg={t("StatsPage.InTotal", currentLanguage)}
-                      data={"50000 t."}
+                      data={data.allTakenItems}
                     />
                   </View>
                 </View>
               </View>
               <View style={[{ height: 285 }]}>
-                <ChartForStats />
+                <ChartForStats value={data["allTakenItemsMonth"]}/>
               </View>
               <View style={{ marginTop: 2, marginBottom: 20 }}>
                 <Text
@@ -220,7 +408,7 @@ const Stat = ({ navigation }) => {
                 <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
                   {t("StatsPage.MostVisitedUptainer", currentLanguage)}
                 </Text>
-                <VisitedUptainerStat navigation={navigation} />
+                <VisitedUptainerStat navigation={navigation} value={data["bestUptainer"]}/>
               </View>
             </View>
           ) : (
