@@ -200,7 +200,7 @@ const Stat = ({ navigation }) => {
   });
   useEffect(() => {
     updateCO2Savings();
-  }, []); // Run only on mount
+  }, []); 
 
   const updateCO2Savings = () => {
     const currentDate = new Date().toLocaleDateString();
@@ -242,25 +242,69 @@ const Stat = ({ navigation }) => {
       return kg + " kg";
     }
   };
-  // Placeholder values for your facts, replace these with your actual values or calculations
-  const co2EquivalentFact = 5;
-  const co2SavedFact = 10;
+  
+  const co2EquivalentFact = 10;
+  const co2SavedFact = 4;
   
   const calculateCO2Equivalent = (fact, kg) => {
-    return Math.round(fact * kg) + " " + fact;
+    const equivalent = Math.round(fact * kg);
+    const comparisonText = equivalent > 1 ? comparison + "s" : comparison; // Pluralize if necessary
+    return `${equivalent} `;
   };
 
   const convertCO2Saved = (fact, kg) => {
     const threshold = 100;
     if (kg >= threshold) {
-      return Math.round(kg / threshold) + " " + fact;
+      return Math.round(kg / threshold) + " " ;
     } else {
-      return kg + " kg CO2";
+      return kg + " " + comparison;
     }
   };
+
   const todayEquivalent = calculateCO2Equivalent(co2EquivalentFact, co2Data.todayCO2Saved);
   const todaySavedConverted = convertCO2Saved(co2SavedFact, co2Data.todayCO2Saved);
   
+  const Calculate_co2_Equivalent = (co2_pers, co2_total, conv_factor, comparison) => {
+    console.log(
+      "10 kg of CO2 is equivalent to approximately",
+      Math.round(10 * conv_factor),
+      comparison
+    );
+
+    console.log(
+      "Your personal CO2 contribution is equivalent to approximately",
+      Math.round(co2_pers * conv_factor),
+      comparison
+    );
+    console.log(
+      "So",
+      co2_total,
+      "kg would amount to approximately",
+      Math.round(co2_total * conv_factor),
+      comparison
+    );
+
+    const calc_pers = co2_pers * conv_factor; 
+    const calc_total = co2_total * conv_factor; 
+
+    return {
+      personalEquivalent: Math.round(calc_pers),
+      totalEquivalent: Math.round(calc_total),
+    };
+  };
+
+  const co2_pers = 10; 
+  const co2_total = 100; 
+  const conv_factor = 4 / 10; 
+  const comparison = "loads of washing and drying."; 
+
+  const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(
+    co2_pers,
+    co2_total,
+    conv_factor,
+    comparison
+  );
+
   const handlePress1 = (button) => {
     setActiveButton(button);
   };
