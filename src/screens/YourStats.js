@@ -12,7 +12,8 @@ import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
 
-const YourStats = () => {
+const YourStats = (value) => {
+    const data = value["value"]
     const { currentLanguage } = useLanguage();
     const navigation = useNavigation();
 
@@ -82,9 +83,9 @@ const YourStats = () => {
                 <View style={[ { alignContent: "center", }]}>
                     <Text style={[styles.menuItem_text, { marginBottom: 20 }]}>{t('StatsPage.MostVisitedUptainer', currentLanguage)}</Text>
                 </View>
-                <YourVisitedUptainer />
-                <YourVisitedUptainer />
-                <YourVisitedUptainer />
+                
+                {data.map(uptainer => <YourVisitedUptainer value={uptainer}/>)} 
+
                 <View style={{ marginTop: 25, marginBottom: 10, }}>
                     <Text style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}>{t('StatsPage.GetInspired', currentLanguage)}</Text>
                 </View>

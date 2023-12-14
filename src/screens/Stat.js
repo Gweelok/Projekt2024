@@ -198,14 +198,14 @@ const Stat = ({ navigation }) => {
 
     const { currentLanguage } = useLanguage();
     let [data, setData] = useState({
-        bestUptainer: {},
         allTakenItems: 0,
         todayTakenItems: 0,
         yesterdayTakenItems: 0,
         allTakenItemsMonth: {},
+        bestUptainers: [],
         });
 
-    const allItems = async () => {
+    const calculateStatistic = async () => {
     
     // Load all items from database
     //const items = await getAllItems();
@@ -361,17 +361,23 @@ const Stat = ({ navigation }) => {
 
         }
     }
-    //Definition of the most popular Uptainer
-    const bestUptainerId = Object.entries(allUptainersStat).reduce((acc,curr) => acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr)[0];
-    const bestUptainer = allUptainersStat[bestUptainerId];
+    //Definition of the most popular Uptainers for current user
+    //Sorting by number of users
+    const sortedUptainers = Object.values(allUptainersStat).sort(function(uptainer1, uptainer2){
+      return uptainer2["numberUsers"] - uptainer1["numberUsers"]
+    })
+    //Filtering uptainers with number of users > 0
+    const sortedFiltredUptainers = sortedUptainers.filter(function(uptainer){
+      return uptainer["numberUsers"] > 0
+    })
 
     //Create result after counting reused items
     result = {
         allTakenItems: allNumberTakenItems,
         todayTakenItems: todayNumberTakenItems,
         yesterdayTakenItems: yesterdayNumberTakenItems,
-        allTakenItemsMonth: allTakenItemsMonth, //{"2023-Dec": 1, "2023-Jul": 1, "2023-Nov": 1, "2023-Sep": 1}
-        bestUptainer: bestUptainer,
+        allTakenItemsMonth: allTakenItemsMonth, //{"2023-12": 1, "2023-07": 1, "2023-11": 1, "2023-09": 1}
+        bestUptainers: sortedFiltredUptainers,
     }
     //Print for checking
     console.log(result);
@@ -380,7 +386,7 @@ const Stat = ({ navigation }) => {
     }
   
     useEffect(() => {async function fetchData(){
-    const result = await allItems();
+    const result = await calculateStatistic();
     setData(result)         
     }
     fetchData()}, []);
@@ -679,11 +685,11 @@ const Stat = ({ navigation }) => {
                 <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
                   {t("StatsPage.MostVisitedUptainer", currentLanguage)}
                 </Text>
-                <VisitedUptainerStat navigation={navigation} value={data["bestUptainer"]}/>
+                <VisitedUptainerStat navigation={navigation} value={data["bestUptainers"].slice(0, 1)}/>
               </View>
             </View>
           ) : (
-            <YourStats />
+            <YourStats value={data["bestUptainers"].slice(0, 3)}/>
           )}
         </ScrollViewComponent>
       </SafeAreaView>
