@@ -16,12 +16,11 @@ const ChartForStats = ({value, refreshing}) => {
     const monthsName = [
         "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage), "Nov", "Dec"];
     
-    let monthlyData = [];
-    let months = [];
+    
     const retreiveChartOptions = () => {
             // Create array for statistics
-        monthlyData = [];
-        months = [];
+        const monthlyData = [];
+        const months = [];
         // Props
         const data = value
         for(let i = numberMonth; i > 0; i --){
