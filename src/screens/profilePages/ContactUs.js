@@ -5,7 +5,7 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    StyleSheet, Alert, ScrollView,
+    StyleSheet, Alert, ScrollView, SafeAreaView,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import * as Linking from "expo-linking";
@@ -13,11 +13,13 @@ import {
     Backgroundstyle,
     Primarycolor1,
     styles as stylesGlobal,
-    Buttons, HeaderText,
+    Buttons, HeaderText, styles,
 } from "../../styles/Stylesheet";
 import {useNavigation} from "@react-navigation/native";
 import BackButton from "../../componets/BackButton";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import GlobalStyle from "../../styles/GlobalStyle";
+import Navigationbar from "../../componets/Navigationbar";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -30,20 +32,19 @@ function reducer(state, action) {
     }
 }
 
-const ContactUs = () => {
+const ContactUs = ({navigation}) => {
     const { currentLanguage } = useLanguage();
     const [formInfo, dispatch] = useReducer(reducer, {
         name: "",
         topic: "",
         message: "",
     });
-    const navigation = useNavigation();
     function sendToEmail() {
         const emailMessage = `Hello! ${
             formInfo.name ? `My name is ${formInfo.name}.` : null
         }. I would like help regarding : 
     ${formInfo.message}`;
-      
+
         const url = `mailto:info@updropp.dk?subject=${formInfo.topic}&body=${emailMessage}`;
         Linking.canOpenURL(url)
             .then((succes) => {
@@ -56,8 +57,11 @@ const ContactUs = () => {
             .catch((e) => Alert(e));
     }
     return (
-        <ScrollViewComponent >
-            <View style={Backgroundstyle.interactive_screens}>
+        <View>
+        <ScrollViewComponent style={{ marginBottom: 97 }}>
+        <View style={Backgroundstyle.interactive_screens}>
+            <SafeAreaView  style={GlobalStyle.BodyWrapper} >
+
                 <View style={styles1.header}>
                     {/* Back Button */}
                     <BackButton onPress={navigation.goBack}  />
@@ -67,7 +71,7 @@ const ContactUs = () => {
                 <View>
                     <Text style={styles1.TextOnTheTop}>{t('ContactUs.TextOnTheTop',currentLanguage)}</Text>
                 </View>
-                <Text style={styles1.formLabel}>
+                <Text style={[styles1.formLabel,{marginTop:30,}]}>
                     {t("ContactUs.Name", currentLanguage)}
                 </Text>
 
@@ -110,24 +114,32 @@ const ContactUs = () => {
                         {t("ContactUs.SendMessage", currentLanguage)}
                     </Text>
                 </TouchableOpacity>
-            </View>
-        </ScrollViewComponent>
+            </SafeAreaView>
+
+        </View>
+        </ScrollViewComponent >
+            <Navigationbar navigation={navigation} />
+        </View>
     );
 };
 const styles1 = StyleSheet.create({
     TextOnTheTop:{
-        color: Primarycolor1, fontSize: 20, margin: 20,marginBottom:20, textAlign: 'start',marginRight:50
+        ...styles.paragraph_text,
     },
 
     header:{
-        flexDirection:"row",marginTop:-30,marginRight:80,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 5,
+        margin: -5,
+        marginBottom:20
     },
     headerText:{
-        ...HeaderText.Header,marginTop:1,marginLeft:50,
+        ...HeaderText.Header,marginTop:1,marginLeft:"auto",marginRight:"auto",
     },
 
     formLabel: {
-        ...stylesGlobal.menuItem_text,marginLeft: 20, marginBottom:10, marginTop:5, fontSize: 15,
+        ...stylesGlobal.menuItem_text,marginLeft: 0, marginBottom:10, marginTop:5, fontSize: 15,
 
     },
     inputField: {
