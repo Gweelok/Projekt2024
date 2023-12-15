@@ -63,6 +63,8 @@ const StationsMap = ({ navigation }) => {
     const mapRef = useRef();
     const isLoaderShow = false;
     const { currentLanguage } = useLanguage();
+    const markersRef = useRef({});
+
 
 
     useEffect(() => {
@@ -192,7 +194,14 @@ const StationsMap = ({ navigation }) => {
 
         setSearchText(location.uptainerName);
         setShowSearchResults(false);
+
+        const selectedMarkerRef = markersRef.current[location.uptainerName];
+        if (selectedMarkerRef) {
+            selectedMarkerRef.showCallout();
+        }
     };
+
+
 
     const lastIndex = sortedLocations.length - 1;
 
@@ -209,6 +218,7 @@ const StationsMap = ({ navigation }) => {
             >
                 {filteredLocations.map((location) => (
                     <Marker
+                        ref={(marker) => (markersRef.current[location.uptainerName] = marker)}
                         key={location.uptainerName}
                         coordinate={{
                             latitude: parseFloat(location.uptainerLat),
@@ -220,6 +230,7 @@ const StationsMap = ({ navigation }) => {
                             <CustomCallout currentLocation={location} />
                         </Callout>
                     </Marker>
+
                 ))}
             </MapView>
 
