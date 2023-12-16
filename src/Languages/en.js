@@ -13,7 +13,7 @@ export default {
     LanguageSelector: "Danish",
     Header: "Welcome to Updropp",
     Intro:
-      "Updropp turns waste into ressoruce, by enabeling direct reuse and mobilizing of electronic devices in local communities.",
+      "Updropp turns waste into a resource by enabling direct reuse and mobilization of electronic devices in local communities.",
     Littlemsg: "By pressing continue, you accept our",
     Termsandcond: "Terms and Conditions",
     continue: "Continue",
@@ -29,7 +29,7 @@ export default {
   SignInScreen: {
     Headline: "Sign in",
     Button: "Sign in",
-    ForgetPwHint: "Forgot your password?",
+    ForgetPwHint: "Forgot password?",
     SignUpHint: "Don't have an account? Sign up.",
     validemail: "Please enter a valid email.",
     fields: "Fields cannot be empty.",
@@ -48,13 +48,13 @@ export default {
     title: "Updropp",
     uploadText: "Add image",
     informativeText:
-      "To Updropp your item you need to scan the QR-code on the Uptainer, when you drop off the item. If you have added information beforehand, you can save a draft by pressing the 'Scan later' button ",
+      "Once you have filed in the Updropp form, scan the QR code on the Uptainer to drop off your item. If you have filed in the Updropp form beforehand, you can save a draft by clicking on the “Scan Later” button.",
     scanLaterButton: "SCAN LATER",
     scanButton: "UPDROPP",
     addDraft: "Add draft",
     viewUptainers: "View Uptainers nearby",
     draftSavedtext: "Your draft is now saved",
-    noData: "Please fill all the required information above",
+    noData: "Please fill all the required information",
     camera: "Camera",
     gallery: "Gallery",
     chooseAction: "Choose an Action",
@@ -71,7 +71,7 @@ export default {
   MyDraftsScreen: {
     Header: "My Drafts",
     closeButtonTitle: "Delete draft",
-    closeButtonAsking: "Are you sure you want to delete this draft",
+    closeButtonAsking: "Are you sure you want to delete this draft?",
     closeButtonAnswerYes: "Delete draft",
     closeButtonAnswerNo: "Cancel",
   },
@@ -117,8 +117,8 @@ export default {
     ChangeCode: "Change password",
     Delete: "Delete account",
     Optional: "optional",
-    HandleSave: "Information is saved",
-    HandleDeleteAccount: "Account is deleted",
+    HandleSave: "Information saved",
+    HandleDeleteAccount: "Account deleted",
     Language: "Language",
   },
   DeleteAccount: {
@@ -137,7 +137,7 @@ export default {
     ConfirmPassword: "Confirm New Password",
     PasswordMatchError: "Current password and new password cannot be the same.",
     PasswordMismatchError:
-      "New password and Confirm New Password doesn't match.",
+      "Passwords don't match.",
     PasswordLengthError: "Password must be at least 8 characters long.",
     PasswordChanged:
       "Password changed successfully. You will be redirected to log in.",
@@ -148,13 +148,13 @@ export default {
 
   ProblemComponent: {
     Header: "The Problem",
-    Body: "A lot of earths ressources are used for producing electronic devices. And a lot of these ressources are wasted, because electronic devices are trown out before its end-of-life.",
+    Body: "A lot of natural resources are used for the production of electronic devices. And many of these resources are wasted because electronic devices are often thrown out before the end of their lifespan.",
   },
   QrScannerScreen: {
     Scan: "Scan to Updropp",
     Header: "Place the QR-code inside the frame to read it",
     Bottom:
-      "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan later",
+      "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan Later",
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
@@ -165,18 +165,18 @@ export default {
   },
   SolutionComponent: {
     Header: "The Solution",
-    Body: "The Uptainers gives new life to electronic devices by helping them move from one home to another.",
+    Body: "The Uptainers give a new life to electronic devices by helping them find a new home.",
     Bottom: {
       firstHalf: "Use Phase",
       secondHalf: "New Use Phase",
     },
   },
   ProductUpdroppedAlert: {
-    productUpdropped: "The product has now been Updropped",
+    productUpdropped: "The product has been Updropped",
   },
   SolutionTimeline: {
     Header: "The Solution",
-    Body: "This way we extend the lifespan of the devices and strengthen the Circular Economy",
+    Body: "This way, we extend the lifespan of the devices and strengthen the circular economy",
     Bottom: {
       first: "0 years",
       second: "5 years",
@@ -190,14 +190,14 @@ export default {
   },
   ProductIsTakenScreen: {
     apology:
-      "We apologize if you have searched in vain for a product that has already been taken. People can come and take without registering this. Do you want to register the product as taken?",
+      "We apologize if you have searched for a product that was already taken. People can often come and take them without registering. Do you want to mark the product as taken?",
     takenButton: "Product has been taken",
     productNotListed: "Couldn't find the product at the Uptainer?",
   },
 
   ProductTakenScreen: {
     mainText:
-      "Product is now taken, thanks for taking care of the earth resources",
+      "Product is now taken, thanks for taking care of natural resources",
     button: "Main page",
   },
 
