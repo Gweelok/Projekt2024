@@ -203,6 +203,7 @@ const Stat = ({ navigation }) => {
         todayTakenItems: 0,
         yesterdayTakenItems: 0,
         allTakenItemsMonth: {},
+        top3Uptainers: {}
         });
 
   const allItems = async () => {
