@@ -6,8 +6,8 @@ export default {
     password: "Password",
     passwordmsgUP: "Minimum 8 characters",
     LogInLink: "Already have an account? Sign in.",
-    validemail:"Please enter a valid email",
-    fields:"Fields cannot be empty.",
+    validemail: "Please enter a valid email",
+    fields: "Fields cannot be empty.",
   },
   LandingScreen: {
     LanguageSelector: "Danish",
@@ -31,9 +31,9 @@ export default {
     Button: "Sign in",
     ForgetPwHint: "Forgot your password?",
     SignUpHint: "Don't have an account? Sign up.",
-    validemail:"Please enter a valid email.",
-    fields:"Fields cannot be empty.",
-    passwordmsg:"Your password must be at least 8 characters long.",
+    validemail: "Please enter a valid email.",
+    fields: "Fields cannot be empty.",
+    passwordmsg: "Your password must be at least 8 characters long.",
   },
 
   ProfileScreen: {
@@ -65,7 +65,7 @@ export default {
 
   DescriptionField: {
     label: "Description",
-    placeholder: "Enter description here..."
+    placeholder: "Enter description here...",
   },
 
   MyDraftsScreen: {
@@ -77,31 +77,31 @@ export default {
   },
 
   ImageUpload: {
-    chooseImage: "Choose image"
+    chooseImage: "Choose image",
   },
 
   CategoryDropdown: {
     selectCategory: "Category",
-    placeholder: "Choose category"
+    placeholder: "Choose category",
   },
 
   BrandDropdown: {
     selectBrand: "Brand",
-    placeholder: "Choose brand"
+    placeholder: "Choose brand",
   },
 
   ModelDropdown: {
     selectModel: "Model",
-    placeholder: "Choose model"
+    placeholder: "Choose model",
   },
 
   ConditionDropdown: {
     selectCondition: "Condition",
-    placeholder: "Choose condition"
+    placeholder: "Choose condition",
   },
   ProductDropdown: {
     selectProduct: "Product",
-    placeholder: "Choose product"
+    placeholder: "Choose product",
   },
 
   NotificationsScreen: {
@@ -139,9 +139,11 @@ export default {
     PasswordMismatchError:
       "New password and Confirm New Password doesn't match.",
     PasswordLengthError: "Password must be at least 8 characters long.",
-    PasswordChanged: "Password changed successfully. You will be redirected to log in.",
+    PasswordChanged:
+      "Password changed successfully. You will be redirected to log in.",
     CurrentPasswordError: "Current password is not correct.",
-    PasswordUpdateError: "An error occurred during updating the password. Please try again!",
+    PasswordUpdateError:
+      "An error occurred during updating the password. Please try again!",
   },
 
   ProblemComponent: {
@@ -199,13 +201,13 @@ export default {
   },
 
   ContactUs: {
-    Header:'Contact us',
+    Header: "Contact us",
     Name: "Name",
     Topic: "Topic",
     Message: "Message",
     SendMessage: "Send message",
-    TextOnTheTop:"Send us a message through the contact form. We will answer on your associated mail.",
-
+    TextOnTheTop:
+      "Send us a message through the contact form. We will answer on your associated mail.",
   },
 
   thankYouScreen: {
@@ -214,63 +216,75 @@ export default {
   },
 
   ArticleSlider: {
-    header: "Read also"
+    header: "Read also",
   },
 
-  ArticleScreen:{
-    Written:"Written at: XX/XX/XXXX",
-    Subheadline:"Subheadline",
+  ArticleScreen: {
+    Written: "Written at: XX/XX/XXXX",
+    Subheadline: "Subheadline",
   },
 
   ForgotPasswordScreen: {
     Header: "Forgot password",
-    Description: "Input your associated mail, to receive a link for resetting your password",
-    SendLinkButton: "Send link"
+    Description:
+      "Input your associated mail, to receive a link for resetting your password",
+    SendLinkButton: "Send link",
   },
 
-  DropdownScreen:{
+  DropdownScreen: {
     Category: "Search for category...",
-    Product:"Search for product...",
+    Product: "Search for product...",
     Model: "Search for model...",
     Brand: "Search for brand...",
-    Condition:"Condition of the product",
-    Text:"You can elaborate on the condition of the item in the description field."
+    Condition: "Condition of the product",
+    Text: "You can elaborate on the condition of the item in the description field.",
   },
 
-  months:{
-    may:"May",
-    October:"Oct",
+  months: {
+    may: "May",
+    October: "Oct",
   },
 
-  StatsPage:{
+  StatsPage: {
     Header: "Impact",
-    MainButton:"Overall",
-    SecondaryButton:"Yours",
+    MainButton: "Overall",
+    SecondaryButton: "Yours",
     AmountReduced: "Amount of reused items",
-    InTotal:"In total",
-    SoFar:"So far today",
-    AmountCO2:"Amount of CO2 saved",
-    Yesterday:"Yesterday",
-    kgCO2:"1 kg. CO2 is equivalent to \"Fact Here\"",
-    Amount:"So 4.400 t. Would amount to \"CALCULATION HERE\"",
-    BestAcheieve:"Best achieving Uptainers this month",
-    MostVisitedUptainer:"Your most visited Uptainer",
-    ItemsReused:"Items reused",
+    InTotal: "In total",
+    SoFar: "So far today",
+    AmountCO2: "Amount of CO2 saved",
+    Yesterday: "Yesterday",
+    kgCO2: '1 kg. CO2 is equivalent to "Fact Here"',
+    Amount: 'So 4.400 t. Would amount to "CALCULATION HERE"',
+    BestAcheieve: "Best achieving Uptainers this month",
+    MostVisitedUptainer: "Your most visited Uptainer",
+    ItemsReused: "Items reused",
     CO2Save: " CO2 Saved",
     Comunity: "The sustainable community building",
     Info: "Learn how we get our information here",
-    ItemsRecicled:"items reused",
-    ItemsDonated:"Items donated",
-    ItemsCollected:"Items collected",
-    Overview:"Go to the overview of your items",
-    Social:"Share your impact with your friends",
-    GetInspired:"Get inspired",
+    ItemsRecicled: "items reused",
+    ItemsDonated: "Items donated",
+    ItemsCollected: "Items collected",
+    Overview: "Go to the overview of your items",
+    Social: "Share your impact with your friends",
+    GetInspired: "Get inspired",
   },
-  Detailviews:{
-    product:"Was the product not at the Uptainer?"
+  Detailviews: {
+    product: "Was the product not at the Uptainer?",
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",
-    productPlaceholder: "Find product"
+    productPlaceholder: "Find product",
+  },
+
+  QuizQuestions: {
+    Quiz1Question1: "What is climate change?",
+    Quiz1Option1: "A) The planet's changing weather patterns",
+    Quiz1Option2: "B) Earth's warming due to pollution",
+    Quiz1Option3: "C) Global warming caused by human actions",
+  },
+  PollQuestions: {
+    Poll1Question1:
+      "How many electronic devices have you bought the last year?",
   },
 };

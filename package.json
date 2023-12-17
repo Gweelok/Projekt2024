@@ -32,6 +32,7 @@
     "expo-updates": ">=0.18.9",
     "firebase": "^10.1.0",
     "galio-framework": "^0.8.0",
+    "lottie-react-native": "^5.1.6",
     "nachos-ui": "^0.2.0-beta.1",
     "npm": ">=9.8.0",
     "plotly": "^1.0.6",
