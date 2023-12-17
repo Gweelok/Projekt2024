@@ -189,6 +189,13 @@ const products = [
 ]
 
 const Stat = ({ navigation }) => {
+    const [refreshing, setRefresh] = useState(false);
+    const onRefresh = () =>{
+      
+      setRefresh(true)
+      setTimeout(()=>{ setRefresh(false)}, 1000)
+    }
+
     const { currentLanguage } = useLanguage();
     let [data, setData] = useState({
         bestUptainer: {},
@@ -377,7 +384,6 @@ const Stat = ({ navigation }) => {
     setData(result)         
     }
     fetchData()}, []);
-
   const handlePress = () => {
     navigation.goBack();
   };
@@ -507,7 +513,7 @@ const Stat = ({ navigation }) => {
       ]}
     >
       <SafeAreaView>
-        <ScrollViewComponent>
+        <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
           <View
             style={{
               flexDirection: "row",
@@ -605,7 +611,7 @@ const Stat = ({ navigation }) => {
                 </View>
               </View>
               <View style={[{ height: 285 }]}>
-                <ChartForStats value={data["allTakenItemsMonth"]}/>
+                <ChartForStats value={data["allTakenItemsMonth"]} refreshing={refreshing}/>
               </View>
               <View style={{ marginTop: 2, marginBottom: 20 }}>
                 <Text

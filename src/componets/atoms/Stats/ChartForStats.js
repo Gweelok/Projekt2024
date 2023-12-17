@@ -5,7 +5,7 @@ import { ECharts } from "react-native-echarts-wrapper";
 import { Primarycolor1 } from "../../../styles/Stylesheet";
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
 
-const ChartForStats = (value) => {
+const ChartForStats = ({value, refreshing}) => {
     const chartRef = useRef(null);
     const {currentLanguage}=useLanguage();
     // Number month for statistic
@@ -15,34 +15,56 @@ const ChartForStats = (value) => {
     // Month name
     const monthsName = [
         "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage), "Nov", "Dec"];
-
-    // Create array for statistics
-    const monthlyData = [];
-    const months = [];
-    // Props
-    const data = value["value"]
-    for(let i = numberMonth; i > 0; i --){
-        // Getting previous month
-        let nextDate = new Date(now.getFullYear(), now.getMonth() - i);
-        // Adding name of month
-        months.push(monthsName[nextDate.getMonth()]);
-        if(data[nextDate.getFullYear().toString() + "-" + (nextDate.getMonth() + 1).toString()]){
-            // Adding statistic in this month
-            monthlyData.push(data[nextDate.getFullYear().toString() + "-" + (nextDate.getMonth() + 1).toString()])
-        }
-        else{
-            // Adding 0 in this month
-            monthlyData.push(0);
-        }
-    }
     
-    // Set initial chart options
-    const options = createChartOptions(months, monthlyData);
+    
+    const retreiveChartOptions = () => {
+            // Create array for statistics
+        const monthlyData = [];
+        const months = [];
+        // Props
+        const data = value
+        for(let i = numberMonth; i > 0; i --){
+            // Getting previous month
+            let nextDate = new Date(now.getFullYear(), now.getMonth() - i);
+            // Adding name of month
+            months.push(monthsName[nextDate.getMonth()]);
+            if(data[nextDate.getFullYear().toString() + "-" + (nextDate.getMonth() + 1).toString()]){
+                // Adding statistic in this month
+                monthlyData.push(data[nextDate.getFullYear().toString() + "-" + (nextDate.getMonth() + 1).toString()])
+            }
+            else{
+                // Adding 0 in this month
+                monthlyData.push(0);
+            }
+        }
+    
+        // Set initial chart options
+        return createChartOptions(months, monthlyData);
+        
+    }
+
+    const options = retreiveChartOptions()
+    useEffect(()=>{
+        if(refreshing || value){
+            const newOptions = retreiveChartOptions()
+            chartRef.current.setOption(newOptions)
+            console.log('chart data retrieved')
+        }
+    }, [value, refreshing])
 
     // Set options on the chart
     useRef(() => {
         chartRef.current.setOption(options);
     }, []);
+
+    // on refresh update into chart
+    useEffect(()=>{
+        if(refreshing){ 
+            const newOptions = retreiveChartOptions()
+            chartRef.current.setOption(newOptions);
+        }
+        console.log('updated')
+    }, [refreshing])
 
     return (
         <View style={styles.container}>
