@@ -443,6 +443,7 @@ export const dropdownStyles = StyleSheet.create({
     fontFamily: "space-grotesk-bold",
     color: Primarycolor4,
     flex: 0,
+  },
   dropdownListItem2: {
     backgroundColor: 'white',
     padding: 10,
