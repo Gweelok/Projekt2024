@@ -8,6 +8,8 @@ import GlobalStyle from "../styles/GlobalStyle";
 import SearchBox from '../componets/SearchBox';
 import { firebaseAurth } from "../utils/Firebase";
 
+
+
 const Home = ({ navigation }) => {
   const [search, onChangeSearch] = useState("");
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens

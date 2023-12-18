@@ -15,7 +15,8 @@ const ChartForStats = ({value, refreshing}) => {
     // Month name
     const monthsName = [
         "Jan", "Feb", "Mar", "Apr", t("months.may", currentLanguage), "Jun", "Jul", "Aug", "Sep", t("months.October", currentLanguage), "Nov", "Dec"];
-
+    
+    
     const retreiveChartOptions = () => {
             // Create array for statistics
         const monthlyData = [];
@@ -44,17 +45,26 @@ const ChartForStats = ({value, refreshing}) => {
 
     const options = retreiveChartOptions()
     useEffect(()=>{
-        if(refreshing){
+        if(refreshing || value){
             const newOptions = retreiveChartOptions()
             chartRef.current.setOption(newOptions)
             console.log('chart data retrieved')
         }
-    }, [refreshing])
+    }, [value, refreshing])
 
     // Set options on the chart
     useRef(() => {
         chartRef.current.setOption(options);
     }, []);
+
+    // on refresh update into chart
+    useEffect(()=>{
+        if(refreshing){ 
+            const newOptions = retreiveChartOptions()
+            chartRef.current.setOption(newOptions);
+        }
+        console.log('updated')
+    }, [refreshing])
 
     return (
         <View style={styles.container}>

@@ -4,9 +4,8 @@ export default {
     password: "Kodeord",
     passwordmsgUP: "Minimum 8 tegn",
     LogInLink: "Har du allerede en bruger? Log ind.",
-    validemail:"Indtast venligst en gyldig e-mail",
-    fields:"Felter må ikke være tomme.",
-
+    validemail: "Indtast venligst en gyldig e-mail",
+    fields: "Felter må ikke være tomme.",
   },
   LandingScreen: {
     LanguageSelector: "English",
@@ -30,9 +29,9 @@ export default {
     Button: "Log ind",
     ForgetPwHint: "Glemt dit kodeord?",
     SignUpHint: "Har du ikke en bruger? Opret her.",
-    validemail:"Indtast venligst en gyldig e-mail.",
-    fields:"Felter må ikke være tomme.",
-    passwordmsg:"Dit kodeord skal være på mindst 8 tegn."
+    validemail: "Indtast venligst en gyldig e-mail.",
+    fields: "Felter må ikke være tomme.",
+    passwordmsg: "Dit kodeord skal være på mindst 8 tegn.",
   },
 
   CustomInput: {
@@ -72,12 +71,16 @@ export default {
     CurrentPassword: "Nuvarende kodeord",
     NewPassword: "Nyt kodeord",
     ConfirmPassword: "Bekraft nyt kodeord",
-    PasswordMatchError: "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
-    PasswordMismatchError: "Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
+    PasswordMatchError:
+      "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
+    PasswordMismatchError:
+      "Ny adgangskode og Bekræft ny adgangskode stemmer ikke overens.",
     PasswordLengthError: "Adgangskoden skal være på mindst 8 tegn.",
-    PasswordChanged: "Adgangskoden blev ændret. Du vil blive omdirigeret til at logge ind.", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
+    PasswordChanged:
+      "Adgangskoden blev ændret. Du vil blive omdirigeret til at logge ind.", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
     CurrentPasswordError: "Nuværende adgangskode er ikke korrekt.", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
-    PasswordUpdateError: "Der opstod en fejl under opdatering af adgangskoden. Prøv igen!", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
+    PasswordUpdateError:
+      "Der opstod en fejl under opdatering af adgangskoden. Prøv igen!", //IN COLLABORATION WITH GOOGLE TRANSLATE PLS A NATIVE SPEAKER DOUBLE CHECK IT :D
   },
 
   MyDraftsScreen: {
@@ -89,36 +92,36 @@ export default {
   },
   DescriptionField: {
     label: "Beskrivelse",
-    placeholder: "Beskrivelse her..."
+    placeholder: "Beskrivelse her...",
   },
 
   ImageUpload: {
-    chooseImage: "Vælg billede"
+    chooseImage: "Vælg billede",
   },
 
   CategoryDropdown: {
     selectCategory: "Kategori",
-    placeholder: "Vælg kategori"
+    placeholder: "Vælg kategori",
   },
 
   ProductDropdown: {
     selectProduct: "Produkt",
-    placeholder: "Vælg produkt"
+    placeholder: "Vælg produkt",
   },
 
   BrandDropdown: {
     selectBrand: "Mærke",
-    placeholder: "Vælg mærke"
+    placeholder: "Vælg mærke",
   },
 
   ModelDropdown: {
     selectModel: "Model",
-    placeholder: "Vælg model"
+    placeholder: "Vælg model",
   },
 
   ConditionDropdown: {
     selectCondition: "Stand",
-    placeholder: "Vælg stand"
+    placeholder: "Vælg stand",
   },
 
   ProfileScreen: {
@@ -185,6 +188,8 @@ export default {
   StationsScreen: {
     showProduct: "Vis produkter",
     showWay: "Vis vej",
+    NoUptainers:"Ingen Uptainere matcher din søgning.",
+
   },
   ProductIsTakenScreen: {
     apology:
@@ -200,12 +205,13 @@ export default {
   },
 
   ContactUs: {
-    Header:'Kontakt os',
+    Header: "Kontakt os",
     Name: "Navn",
     Topic: "Emne",
     Message: "Besked",
     SendMessage: "Send besked",
-    TextOnTheTop:"Send os en besked via kontaktformularen. Vi svarer på din tilknyttede mail.",
+    TextOnTheTop:
+      "Send os en besked via kontaktformularen. Vi svarer på din tilknyttede mail.",
   },
 
   thankYouScreen: {
@@ -214,67 +220,74 @@ export default {
   },
 
   ArticleSlider: {
-    header: "Læs også"
+    header: "Læs også",
   },
 
-  ArticleScreen:{
-    Written:"Skrevet: XX/XX/XXXX",
-    Subheadline:"Underoverskrift",
-
+  ArticleScreen: {
+    Written: "Skrevet: XX/XX/XXXX",
+    Subheadline: "Underoverskrift",
   },
-
 
   ForgotPasswordScreen: {
     Header: "Glemt kodeord",
-    Description: "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
-    SendLinkButton: "Send link"
-},
-
-  DropdownScreen:{
-    Category: "Søg efter kategori...",
-    Product:"Søg efter produkt...",
-    Model: "Søg efter model...",
-    Brand: "Søg efter mærke...",
-    Condition:"Standen af produktet",
-    Text:"Du kan fortælle mere om produktets stand i beskrivelsesfeltet."
+    Description:
+      "Skriv den mail du har tilknyttet til appen, så sender vi en mail med et link til nulstilling af kodeord.",
+    SendLinkButton: "Send link",
   },
 
-  StatsPage:{
+  DropdownScreen: {
+    Category: "Søg efter kategori...",
+    Product: "Søg efter produkt...",
+    Model: "Søg efter model...",
+    Brand: "Søg efter mærke...",
+    Condition: "Standen af produktet",
+    Text: "Du kan fortælle mere om produktets stand i beskrivelsesfeltet.",
+  },
+
+  StatsPage: {
     Header: "Påvirkning",
-    MainButton:"Generelt",
-    SecondaryButton:"Din",
+    MainButton: "Generelt",
+    SecondaryButton: "Din",
     AmountReduced: "Antal genbrugte produkter",
-    InTotal:"I alt",
-    SoFar:"Indtil videre i dag",
-    AmountCO2:"Mængden af CO2 sparet",
-    Yesterday:"I går",
-    kgCO2:"1 kg. CO2 er tilsvarende til *FACT HERE*",
-    Amount:"Så 4.400 t. svarer til *CALCULATION HERE*",
-    BestAcheieve:"Denne måneds bedst præserende Uptainere",
-    MostVisitedUptainer:"Dine mest besøgte Uptainere",
-    ItemsReused:"produkter sparet",
+    InTotal: "I alt",
+    SoFar: "Indtil videre i dag",
+    AmountCO2: "Mængden af CO2 sparet",
+    Yesterday: "I går",
+    kgCO2: "1 kg. CO2 er tilsvarende til *FACT HERE*",
+    Amount: "Så 4.400 t. svarer til *CALCULATION HERE*",
+    BestAcheieve: "Denne måneds bedst præserende Uptainere",
+    MostVisitedUptainer: "Din mest besøgte Uptainer",
+    ItemsReused: "produkter genbrugt",
     CO2Save: " CO2 sparet",
     Comunity: "Det bæredygtige Forsamlingshus",
     Info: "Lær hvordan vi får vores informationer her",
-    ItemsRecicled:"produkter genbrugt",
-    ItemsDonated:"Genstande doneret",
-    ItemsCollected:"Genstande hentet",
-    Overview:"Gå til overblikket af dine produkter",
-    Social:"Del din påvirkning med dine venner",
-    GetInspired:"Bliv inspireret",
+    ItemsRecicled: "produkter genbrugt",
+    ItemsDonated: "Genstande doneret",
+    ItemsCollected: "Genstande hentet",
+    Overview: "Gå til overblikket af dine produkter",
+    Social: "Del din påvirkning med dine venner",
+    GetInspired: "Bliv inspireret",
+  },
 
-
+  QuizQuestions: {
+    Quiz1Question1: "Hvad er klimaforandringer?",
+    Quiz1Option1: "A) Planetens skiftende vejrforhold",
+    Quiz1Option2: "B) Jordens opvarmning som følge af forurening",
+    Quiz1Option3: "C) Global opvarmning forårsaget af menneskelige handlinger",
+  },
+  PollQuestions: {
+    Poll1Question1:
+      "Hvor mange elektroniske enheder har du købt det sidste år?",
   },
   months: {
     may: "Maj",
     October: "Okt",
   },
-  Detailviews:{
-    product:" Var produktet ikke i uptaineren?"
-
+  Detailviews: {
+    product: " Var produktet ikke i uptaineren?",
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",
-    productPlaceholder: "Find produkt"
+    productPlaceholder: "Find produkt",
   },
 };
