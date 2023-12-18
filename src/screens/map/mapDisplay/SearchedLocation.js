@@ -23,12 +23,13 @@ const SearchedLocation = ({location, styling, onPress, userLatitude, userLongitu
                 <View style={styles1.addressInfo}>
                     <Text style={[styles.article_text, styles1.stationAddress]}>{`${location.uptainerStreet}, ${location.uptainerCity}`}</Text>
                     <View style={styles1.spacer} />
-                    <Text style={styles1.distance}>{` ${calculateDistance(
+                    {(userLatitude !== null && userLongitude !== null) &&
+                    (<Text style={styles1.distance}>{` ${calculateDistance(
                         userLatitude,
                         userLongitude,
                         parseFloat(location.uptainerLat),
                         parseFloat(location.uptainerLong)
-                    )} km`}</Text>
+                    )} km`}</Text>)}
                 </View>
             </View>
         </View>

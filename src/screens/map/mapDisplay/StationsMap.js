@@ -16,6 +16,7 @@ import {
 import * as Location from 'expo-location';
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
 import { calculateDistance } from '../../../utils/uptainersUtils';
+import SearchedLocation from './SearchedLocation';
 
 
 
@@ -229,34 +230,42 @@ const StationsMap = ({ navigation }) => {
             {/* List of sorted locations */}
             {showSearchResults && (
             <ScrollView style={[GlobalStyle.BodyWrapper, dropdownStyles.dropdownContainer2]}>
-                {filteredLocations.length > 0 ? (
-                    sortedLocations.map((location, index) => (
-                    <TouchableOpacity
-                        key={location.uptainerName}
+                {filteredLocations.length > 0 ? 
+                
+                (userLatitude === 0 && userLongitude === 0) ? (
+                    filteredLocations.map((location, index) =>(
+                        <SearchedLocation
+                        location={location}
                         onPress={() => {
                             selectStation(location);
                         }}
-                        style={[
+                        index={index}
+                        styling={[
                             dropdownStyles.dropdownListItem2,
                             index === lastIndex ? styles1.lastItem : null,
                         ]}
+                        userLatitude={null}
+                        userLongitude={null}
                     >
-                        <View style={styles1.stationInfo}>
-                            <View>
-                                <Text style={styles1.stationName}>{location.uptainerName}</Text>
-                                <View style={styles1.addressInfo}>
-                                    <Text style={[styles.article_text, styles1.stationAddress]}>{`${location.uptainerStreet}, ${location.uptainerCity}`}</Text>
-                                    <View style={styles1.spacer} />
-                                    <Text style={styles1.distance}>{` ${calculateDistance(
-                                        userLatitude,
-                                        userLongitude,
-                                        parseFloat(location.uptainerLat),
-                                        parseFloat(location.uptainerLong)
-                                    )} km`}</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    </SearchedLocation>
+                    ))
+                )
+                :(
+                    sortedLocations.map((location, index) => (
+                    <SearchedLocation
+                        location={location}
+                        onPress={() => {
+                            selectStation(location);
+                        }}
+                        index={index}
+                        styling={[
+                            dropdownStyles.dropdownListItem2,
+                            index === lastIndex ? styles1.lastItem : null,
+                        ]}
+                        userLatitude={userLatitude}
+                        userLongitude={userLongitude}
+                    >
+                    </SearchedLocation>
 
                 ))
                 ) : (
