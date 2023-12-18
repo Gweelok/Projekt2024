@@ -431,4 +431,9 @@ export const dropdownStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Primarycolor1,
   },
+  dropdownFilterTextHome: {
+    fontFamily: "space-grotesk-bold",
+    color: Primarycolor4,
+    flex: 0,
+  },
 });
