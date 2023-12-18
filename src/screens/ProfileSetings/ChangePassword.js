@@ -11,12 +11,14 @@ import {
 import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
 import { Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
-import Icon from 'react-native-vector-icons/AntDesign';
+//import Icon from 'react-native-vector-icons/AntDesign';
 import Navigationbar from "../../componets/Navigationbar";
 import { Keyboard } from 'react-native';
 import { firebaseAurth } from "../../utils/Firebase";
 import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOut } from "firebase/auth";
-
+import Icon from 'react-native-vector-icons/Ionicons';
+import BackButton from "../../componets/BackButton";
+import {GoBackButton} from "../../styles/GoBackButton";
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -31,7 +33,6 @@ const ChangePassword = ({ navigation }) => {
 
     const handlePress = async () => {
         setErrorMessage('');
-
         const user = firebaseAurth.currentUser;
         Keyboard.dismiss();    
         try {
@@ -64,6 +65,8 @@ const ChangePassword = ({ navigation }) => {
         }
     };
 
+
+
     const togglePasswordVisibility = (field) => {
         switch (field) {
             case 'currentPassword':
@@ -91,13 +94,15 @@ const ChangePassword = ({ navigation }) => {
         const amILoggedIn = firebaseAurth.currentUser; //FOR SEEING IF LOG OUT INDEED HAPPENED, DELETE AFTER REVIEW/TESTING
         console.log("Am I Logged In: " + amILoggedIn); // ^ same here
     };
-
+    const bye = () => {
+        navigation.navigate("AccountSettings");
+    };
     return (
 
         <SafeAreaView style={styles.container2}>
             <View style={customStyles.headerContainer}>
-                <TouchableOpacity style={styles.closeButton} onPress={() => navigation.navigate("AccountSettings")}>
-                    <Icon size={30} name="left" style={styles.closeButtonIcon} />
+                <BackButton onPress={bye}></BackButton>
+                <TouchableOpacity BackButton onPress={() => navigation.navigate("AccountSettings")}>
                 </TouchableOpacity>
                 <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
                     {t('ChangePasswordScreen.Header', currentLanguage)}
@@ -105,7 +110,7 @@ const ChangePassword = ({ navigation }) => {
             </View>
             {/* Current password */}
             <View style={styles.form}>
-            <Text style={stylesGlobal.formLabel}>
+            <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
                 {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
             </Text>
                 <View style={styles.inputBox}>
@@ -125,12 +130,12 @@ const ChangePassword = ({ navigation }) => {
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('currentPassword')}
                         >
-                            <Icon size={20} name={showCurrentPassword ? 'eye' : 'eyeo'} />
+                            <Icon size={18} name={showCurrentPassword ? 'ios-eye-off' : 'ios-eye'} />
                         </TouchableOpacity>
                     </View>
                 </View>
                {/* New password */}
-                <Text style={stylesGlobal.formLabel}>
+                <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
                     {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                 </Text>
                 <View style={styles.inputBox}>
@@ -149,12 +154,12 @@ const ChangePassword = ({ navigation }) => {
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('newPassword')}
                         >
-                            <Icon size={20} name={showNewPassword ? 'eye' : 'eyeo'} />
+                            <Icon size={18} name={showNewPassword ? 'ios-eye-off' : 'ios-eye'} />
                         </TouchableOpacity>
                     </View>
                 </View>
                 {/* Confirm password */}
-                <Text style={stylesGlobal.formLabel}>
+                <Text style={[stylesGlobal.formLabel,{marginLeft:0}]}>
                     {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                 </Text>
                 <View style={styles.inputBox}>
@@ -173,7 +178,7 @@ const ChangePassword = ({ navigation }) => {
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('confirmPassword')}
                         >
-                            <Icon size={20} name={showConfirmPassword ? 'eye' : 'eyeo'} />
+                            <Icon size={18} name={showConfirmPassword ? 'ios-eye-off' : 'ios-eye'} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -198,7 +203,7 @@ const ChangePassword = ({ navigation }) => {
                 onRequestClose={reloadPage}
             >
                 <View style={customStyles.successContainer}>
-                    <Text style={customStyles.successText}>
+                    <Text style={[customStyles.successText,{marginLeft:0}]}>
                         {t('ChangePasswordScreen.PasswordChanged', currentLanguage)}
                     </Text>
                     <TouchableOpacity style={customStyles.okButton} onPress={reloadPage}>
@@ -224,7 +229,7 @@ const customStyles = StyleSheet.create({
     },
     eyeIcon: {
         position: 'absolute',
-        right: 10,
+       right: 10,
         top: '50%',
         transform: [{ translateY: -10 }],
     },

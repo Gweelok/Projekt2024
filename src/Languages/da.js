@@ -66,7 +66,7 @@ export default {
   },
 
   ChangePasswordScreen: {
-    Header: "Skift kodeordl",
+    Header: "Skift kodeord",
     SavePassword: "Gem kodeord",
     CurrentPassword: "Nuvarende kodeord",
     NewPassword: "Nyt kodeord",
