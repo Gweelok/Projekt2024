@@ -416,6 +416,13 @@ export const dropdownStyles = StyleSheet.create({
     justifyContent: "space-between",
     height: 55,
   },
+  dropdownContainer2: {
+    position: 'absolute',
+    zIndex: 1,
+    marginTop: 87,
+    width: '100%',
+    maxHeight:250,
+  },
   dropdownText: {
     ...styles.menuItem_text,
     flex: 0,
@@ -426,6 +433,7 @@ export const dropdownStyles = StyleSheet.create({
     borderColor: Primarycolor1,
     marginTop: 0,
   },
+
   dropdownListItem: {
     padding: 10,
     borderBottomWidth: 1,
@@ -435,5 +443,12 @@ export const dropdownStyles = StyleSheet.create({
     fontFamily: "space-grotesk-bold",
     color: Primarycolor4,
     flex: 0,
+  dropdownListItem2: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderColor: Primarycolor1,
+    width: '100%',
+    borderWidth:3,
+    borderBottomWidth: 0,
   },
 });

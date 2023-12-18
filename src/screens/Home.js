@@ -14,6 +14,8 @@ import { firebaseAurth } from "../utils/Firebase";
 import { getItemsByName } from '../utils/Repo';
 import { useEffect } from "react";
 
+
+
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
