@@ -15,7 +15,7 @@ const StreetStat = ({ data, pos }) => {
             <Text style={[styles.link, { textAlign: "left", marginTop: 5, textDecorationLine: "none" }]}>{uptainerLocation} </Text>
             <View style={GlobalStyle}>
                 <Text
-                    style={[Backgroundstyle.message_Screens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${pos}%`, color: "white"}]}>
+                    style={[Backgroundstyle.message_Screens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${pos}%`, color: "white" }]}>
                     {itemsReused} {t('StatsPage.ItemsReused', currentLanguage)}
                 </Text>
             </View>
