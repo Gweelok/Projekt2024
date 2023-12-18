@@ -38,11 +38,12 @@ const styles = StyleSheet.create({
         width: '100%',
         alignSelf: 'center',
         backgroundColor: '#fff',
-        marginBottom: 15,
     },
     input: {
         height: 40,
         borderColor: Primarycolor1,
+        color: Primarycolor1,
+        fontWeight:  "bold",
         borderWidth: 3,
         paddingHorizontal: 10,
     },
