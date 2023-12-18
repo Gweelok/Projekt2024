@@ -165,6 +165,7 @@ const SortUptainers = ({navigation}) => {
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
     <View    
+      style={{ marginTop: 15 }}
     >
     
       <ScrollViewComponent
