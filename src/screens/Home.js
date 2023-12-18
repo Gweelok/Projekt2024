@@ -8,7 +8,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import Navigationbar from "../componets/Navigationbar";
 import SortUptainers from "../componets/sortUptainers";
 import SearchBox from '../componets/SearchBox';
-import SearchFilter from '../componets/SearchFilter';
+import SearchFilter from './SearchFilter';
 
 import { firebaseAurth } from "../utils/Firebase";
 import { getItemsByName } from '../utils/Repo';
@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
   })();
 
   useEffect(() => {
-    async function getItemsByFilterText() {
+    async function getItemsByTextFilter() {
       try {
         const result = await getItemsByName(searchText)
 
@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
     }
 
     if (searchText !== "") {
-      getItemsByFilterText()
+      getItemsByTextFilter()
     }
 
   }, [searchText])
@@ -64,6 +64,7 @@ const Home = ({ navigation }) => {
         {isFilterOpen ?
           <SearchFilter 
             data={searchResults} 
+            input={searchText}
           />
         : null}
         <SortUptainers navigation={navigation} />
