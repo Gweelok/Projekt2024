@@ -180,9 +180,9 @@ export default {
     Header: "Løsningen",
     Body: "På den måde forlænger vi elektronikkens levetid og styrker den cirkulære økonomi",
     Bottom: {
-      first: "0 ar",
-      second: "5 ar",
-      third: "10 ar",
+      first: "0 år",
+      second: "5 år",
+      third: "10 år",
     },
   },
   StationsScreen: {
