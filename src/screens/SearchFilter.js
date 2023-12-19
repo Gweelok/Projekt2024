@@ -1,4 +1,4 @@
-import { Text, FlatList, TouchableOpacity, SafeAreaView, View } from "react-native";
+import { Text, FlatList, TouchableOpacity, SafeAreaView } from "react-native";
 import React from "react";
 
 import { useLanguage, t } from "../Languages/LanguageHandler";
