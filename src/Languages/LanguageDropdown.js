@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Primarycolor3, Primarycolor1 } from "../styles/Stylesheet";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
+
 
 const LanguageDropdown = () => {
     const { currentLanguage, setLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
-
+const navigation=useNavigation();
     const languageOptions = [
         { label: "English", value: "en" },
         { label: "Danish", value: "da" },
