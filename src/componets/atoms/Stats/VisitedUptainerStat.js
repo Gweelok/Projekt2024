@@ -16,9 +16,23 @@ export const VisitedUptainerStat = (value) => {
     const data = value["value"];
     const location = data["uptainerName"];
     const address = data["uptainerStreet"];
+    const id = data["id"];
+    const imageUrl = data["imageUrl"];
     const handlePress = () => {
         navigation.navigate("StatsInfo");
     };
+    const handlePressOn = () => {
+        setIsLoading(true);
+        navigation.navigate("UptainerDetails", {
+            uptainerData:{
+                id: data?.id,
+                name: data?.uptainerName,
+                location: data?.uptainerStreet,
+                imageUrl: data?.imageUrl,
+            },
+        });
+    };
+
 
     return(
         <View style={GlobalStyle}>
@@ -27,12 +41,7 @@ export const VisitedUptainerStat = (value) => {
                     <TouchableOpacity >
                         <View style={styles.boxlink}>
                             <View style={GlobalStyle.BodyWrapper}>
-                                <TouchableOpacity onPress={() => {
-                                    setIsLoading(true);
-                                    navigation.navigate("UptainerDetails", {
-                                    uptainerData: data,
-                                    });
-                                    }}>
+                                <TouchableOpacity onPress={handlePressOn}>
                                 <Text style={styles.menuItem_text}>{location} </Text>
                                 <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address} </Text>
                                 </TouchableOpacity>
