@@ -122,17 +122,13 @@ const StationsMap = ({ navigation }) => {
     const sortLocationsByDistance = () => {
         const sortedLocations = [...filteredLocations].sort((a, b) => {
             const distanceA = calculateDistance(
-                userLatitude,
-                userLongitude,
-                parseFloat(a.uptainerLat),
-                parseFloat(a.uptainerLong)
+                { latitude: userLatitude, longitude: userLongitude },
+                { latitude: parseFloat(a.uptainerLat), longitude: parseFloat(a.uptainerLong) }
             );
             const distanceB = calculateDistance(
-                userLatitude,
-                userLongitude,
-                parseFloat(b.uptainerLat),
-                parseFloat(b.uptainerLong)
-            );
+                { latitude: userLatitude, longitude: userLongitude },
+                { latitude: parseFloat(b.uptainerLat), longitude: parseFloat(b.uptainerLong) }
+            )
             return parseFloat(distanceA) - parseFloat(distanceB);
         });
 
