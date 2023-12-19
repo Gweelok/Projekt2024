@@ -1,17 +1,26 @@
-import { View } from "react-native";
-import { Backgroundstyle } from "../styles/Stylesheet";
-import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
+import { View, Text } from "react-native";
 import * as Location from "expo-location";
-import SortUptainers from "../componets/sortUptainers";
+
+import { Backgroundstyle } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
+
+import Navigationbar from "../componets/Navigationbar";
+import SortUptainers from "../componets/sortUptainers";
 import SearchBox from '../componets/SearchBox';
+import SearchFilter from './SearchFilter';
+
 import { firebaseAurth } from "../utils/Firebase";
+import { getItemsByName } from '../utils/Repo';
+import { useEffect } from "react";
 
 
 
 const Home = ({ navigation }) => {
-  const [search, onChangeSearch] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [notMatchingProduct, setNotMatchingProduct] = useState(false)
+
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
@@ -25,16 +34,46 @@ const Home = ({ navigation }) => {
     }
   })();
 
+  useEffect(() => {
+    setNotMatchingProduct(false)
+
+    async function getItemsByTextFilter() {
+      try {
+        const result = await getItemsByName(searchText)
+        if (result.length == 0) {
+          setNotMatchingProduct(true)
+        }
+        return setSearchResults(result)         
+      } catch (error) {
+        console.log('Error');
+      }
+    }
+
+    if (searchText !== "") {
+      getItemsByTextFilter()
+    }
+
+  }, [searchText])
+
+  let isFilterOpen = searchText !== ""
+
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
         <SearchBox
-          onChangeText={onChangeSearch}
-          value={search}
+          onChangeText={setSearchText}
+          value={searchText}
           placeholderText={"SearchField.productPlaceholder"}
         /> 
+        {isFilterOpen ?
+          <SearchFilter 
+            data={searchResults} 
+            input={searchText}
+            error={notMatchingProduct}                                                                                                                                              
+          />
+        : null}
         <SortUptainers navigation={navigation} />
-        <Navigationbar navigation={navigation} />
+        <Navigationbar navigation={navigation} /> 
       </View>
     </View>
   );

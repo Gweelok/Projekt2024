@@ -439,6 +439,11 @@ export const dropdownStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Primarycolor1,
   },
+  dropdownFilterTextHome: {
+    fontFamily: "space-grotesk-bold",
+    color: Primarycolor4,
+    flex: 0,
+  },
   dropdownListItem2: {
     backgroundColor: 'white',
     padding: 10,
@@ -446,5 +451,27 @@ export const dropdownStyles = StyleSheet.create({
     width: '100%',
     borderWidth:3,
     borderBottomWidth: 0,
+  },
+  dropdownSearchFieldList: {
+    borderBottomWidth: 3,
+    borderRightWidth: 3,
+    borderLeftWidth: 3,
+    borderColor: Primarycolor1,
+    marginTop: 0,
+  },
+  dropdownErrorText: {
+    textAlign: "center",
+    paddingTop: 20,
+    paddingBottom: 40,
+    color: Primarycolor4,
+    fontWeight: "bold"
+  },
+  dropdownListItemForSearchField: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Primarycolor1,
+    display: 'flex', 
+    flexDirection: 'row', 
+    flexWrap: 'nowrap',
   },
 });

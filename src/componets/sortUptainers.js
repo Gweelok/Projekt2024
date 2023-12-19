@@ -183,7 +183,9 @@ const SortUptainers = ({ navigation }) => {
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
-    <View>
+    <View 
+      style={{ marginTop: 15 }}
+    >
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
         {uptainerList[0] && (
