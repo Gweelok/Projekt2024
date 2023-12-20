@@ -117,11 +117,11 @@ export default function App() {
   // Main navigation of all the views
   return (
     //
+      <LanguageProvider>
     <LoaderProvider>
       <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
-        <LanguageProvider>
           <NavigationContainer theme={navStyle}>
-            <Stack.Navigator initialRouteName="SplashScreen">
+            <Stack.Navigator initialRouteName="Homepage">
               <Stack.Screen
                 name="SplashScreen"
                 component={SplashScreen}
@@ -363,9 +363,10 @@ export default function App() {
               />
             </Stack.Navigator>
           </NavigationContainer>
-        </LanguageProvider>
+
       </BadgeContext.Provider>
     </LoaderProvider>
+      </LanguageProvider>
   );
 
   //Screens
