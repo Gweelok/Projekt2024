@@ -153,7 +153,6 @@ const MyDrafts = () => {
                   product: cur.product.productId,
                   brand: cur.brand.brandId,
                   model: cur.model.modelId,
-                  category: cur.category.categoryId,
                   condition: cur.itemcondition,
                   description: cur.itemDescription,
                   image: cur.imageUrl,

@@ -45,7 +45,6 @@ const DraftCard = ({
         <Image source={{ uri: props.imageUrl }} style={styles.draftImage} />
         <View style={styles.draftContent}>
           <Text style={styles.product}>{props.product?.productName}</Text>
-          <Text style={styles.category}>{props.category?.categoryName}</Text>
           <View style={{ flexDirection: "row" }}>
             <View style={styles.brandModelContainer}>
               <Text style={styles.brand} numberOfLines={1} ellipsizeMode="tail">
