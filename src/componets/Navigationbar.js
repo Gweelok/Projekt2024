@@ -16,7 +16,6 @@ const PAGE_NAMES = {
   ADD: "add",
   STATS: "stats",
   PROFILE: "profile",
-  ChangePassword:"ChangePassword",
 };
 
 //Selected page
