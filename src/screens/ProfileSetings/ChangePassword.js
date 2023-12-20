@@ -105,14 +105,16 @@ const ChangePassword = ({ navigation }) => {
 
 
         <SafeAreaView style={styles.container2}>
+            <View style={[styles.form,GlobalStyle.BodyWrapper]}>
             <View style={customStyles.headerContainer}>
-                <BackButton onPress={bye}Style={{marginLeft:0}}></BackButton>
+                <BackButton onPress={bye} style={{marginLeft:-7}} />
                 <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
                     {t('ChangePasswordScreen.Header', currentLanguage)}
                 </Text>
             </View>
             {/* Current password */}
-            <View style={[styles.form,GlobalStyle.BodyWrapper]}>
+
+
             <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
                 {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
             </Text>
@@ -234,6 +236,7 @@ const customStyles = StyleSheet.create({
         paddingLeft: 10,
         marginBottom: 20,
     },
+
     eyeIcon: {
         position: 'absolute',
        right: 10,
@@ -272,6 +275,9 @@ const customStyles = StyleSheet.create({
         justifyContent: 'space-between', // Space text and button evenly
         alignItems: 'center', // Center align text and button vertically
         borderRadius: 5,
+    },
+    BackButton:{
+     marginLeft: 10,
     },
     successText: {
         color: 'white',

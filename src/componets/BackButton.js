@@ -1,11 +1,10 @@
 import React from "react";
 import { TouchableOpacity,StyleSheet } from "react-native";
 import {Octicons} from "@expo/vector-icons";
-const BackButton = ({onPress}) =>{
+const BackButton = ({onPress,style}) =>{
     return <TouchableOpacity
-    onPress={onPress}
-    style={styles.backButton}
-  >
+    onPress={onPress} style={[styles.backButton, {marginLeft:0}, style]}>
+
     <Octicons name="chevron-left" size={20} style={{ color: "white" }} />
   </TouchableOpacity>
 }
@@ -16,7 +15,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: "center",
         alignItems: "center",
-        marginRight: 10
+        marginRight: 10,
       }
 });
 export default BackButton;
