@@ -205,26 +205,32 @@ const Stat = ({ navigation }) => {
     top3Uptainers: {}
   });
 
-  const allItems = async () => {
+  const calculateStatistic = async () => {
     // Load all items from database
     // const items = await getAllItems();
     // Load current user
     const userCurrent = await getCurrentUser()
     // Load all Uptainers from database
     const allUptainers = await getAllUptainers();
-    // Create variables for counting
-    let allNumberTakenItems = 0;
-    let todayNumberTakenItems = 0;
-    let yesterdayNumberTakenItems = 0;
-
-    //Date today
-    const today = new Date();
-
-    //Date yersterday
-    const yesterday = new Date(today - 86400000);
-
-    //Create a dictionary for counting reused items by month
-    const allTakenItemsMonth = {};
+    //Create all Uptainers in allUptainersStat
+    const allUptainersStat = allUptainers.reduce((acc, uptainer) => {
+      acc[uptainer.uptainerId] = {
+        uptainerCity: uptainer.uptainerCity,
+        uptainerName: uptainer.uptainerName,
+        uptainerStreet: uptainer.uptainerStreet,
+        uptainerId: uptainer.uptainerId,
+        itemsReused: 0,
+        savedCO2: 0,
+        numberUsers: 0,
+        uptainerDescription: uptainer.uptainerDescription,
+        uptainerImage: uptainer.uptainerImage,
+        uptainerLatitude: uptainer.uptainerLatitude,
+        uptainerLongitude: uptainer.uptainerLongitude,
+        uptainerQR: uptainer.uptainerQR,
+        uptainerZip: uptainer.uptainerZip,
+      };
+      return acc;
+    }, {});
     // Test Items
     const items =
       [
@@ -297,25 +303,19 @@ const Stat = ({ navigation }) => {
           itemproduct: "-NbzQlfCJqUDW4jtThUc",
         },
       ]
-    //Create all Uptainers in allUptainersStat
-    const allUptainersStat = allUptainers.reduce((acc, uptainer) => {
-      acc[uptainer.uptainerId] = {
-        uptainerCity: uptainer.uptainerCity,
-        uptainerName: uptainer.uptainerName,
-        uptainerStreet: uptainer.uptainerStreet,
-        uptainerId: uptainer.uptainerId,
-        itemsReused: 0,
-        savedCO2: 0,
-        numberUsers: 0,
-        uptainerDescription: uptainer.uptainerDescription,
-        uptainerImage: uptainer.uptainerImage,
-        uptainerLatitude: uptainer.uptainerLatitude,
-        uptainerLongitude: uptainer.uptainerLongitude,
-        uptainerQR: uptainer.uptainerQR,
-        uptainerZip: uptainer.uptainerZip,
-      };
-      return acc;
-    }, {});
+    // Create variables for counting
+    let allNumberTakenItems = 0;
+    let todayNumberTakenItems = 0;
+    let yesterdayNumberTakenItems = 0;
+
+    //Date today
+    const today = new Date();
+
+    //Date yersterday
+    const yesterday = new Date(today - 86400000);
+
+    //Create a dictionary for counting reused items by month
+    const allTakenItemsMonth = {};
 
     for (const item of items) {
       const itemUptainer = allUptainersStat[item["itemUptainer"]];
@@ -368,7 +368,13 @@ const Stat = ({ navigation }) => {
         Co2Savings: uptainer.savedCO2,
       }))
       .sort((a, b) => b.Co2Savings - a.Co2Savings);
-
+    const sortedUptainers = Object.values(allUptainersStat).sort(function (uptainer1, uptainer2) {
+      return uptainer2["numberUsers"] - uptainer1["numberUsers"]
+    })
+    //Filtering uptainers with number of users > 0
+    const sortedFiltredUptainers = sortedUptainers.filter(function (uptainer) {
+      return uptainer["numberUsers"] > 0
+    })
     //Create result after counting reused items
     result = {
       allTakenItems: allNumberTakenItems,
@@ -385,7 +391,7 @@ const Stat = ({ navigation }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await allItems();
+      const result = await calculateStatistic();
       setData(result)
     }
     fetchData()
@@ -680,8 +686,8 @@ const Stat = ({ navigation }) => {
                 </Text>
               </View>
               <StreetStat data={data.top3Uptainers[0]} pos={100} />
-              <StreetStat data={data.top3Uptainers[1]} pos={75}/>
-              <StreetStat data={data.top3Uptainers[2]} pos={50}/>
+              <StreetStat data={data.top3Uptainers[1]} pos={75} />
+              <StreetStat data={data.top3Uptainers[2]} pos={50} />
               <View style={[{ alignContent: "center", marginTop: 30 }]}>
                 <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
                   {t("StatsPage.MostVisitedUptainer", currentLanguage)}
