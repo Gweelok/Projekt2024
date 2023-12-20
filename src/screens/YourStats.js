@@ -16,27 +16,28 @@ import Icon2 from "react-native-vector-icons/FontAwesome";
 import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
-import { getAllItems, getCurrentUser, getAllProducts } from "../utils/Repo";
+import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
+// import { products } from "../utils/Testdata";
 
-const YourStats = () => {
+const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
   let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 });
   const navigation = useNavigation();
-  
+
   useEffect(() => {
     fetchData();
   }, []);
   async function fetchData() {
     //Get current user
-    const userCurrent = await getCurrentUser();
-    //Get all items
-    const items = await getAllItems();
+    const userCurrent = props.user;
     //Get all products
-    const products = await getAllProducts();
+
+  const products = await getAllProducts();
+    
     //Filter items by user
-    const userItems = items.filter((item) => item.itemUser === userCurrent.id);
+    const userItems = await getItemsFromUser(userCurrent.id);
+    //Calculate co2 footprint
     let co2Footprint = 0;
-    //Get footprint for all items
     userItems.forEach((item) => {
       products.forEach((product) => {
         if (item.itemproduct === product.productId) {
