@@ -150,17 +150,8 @@ const categoryDropdownContainer = {
     },
     modalContainer: {
         backgroundColor: 'white',
-        position: 'absolute', // Make the modal absolute to cover the entire screen
-        top: 0,               // Position it at the top of the screen
-        left: 0,              // Position it at the left of the screen
-        right: 0,             // Position it at the right of the screen
-        bottom: 0,            // Position it at the bottom of the screen
-        zIndex: 999,          // Add this property to ensure the modal is above other components
-        padding:10,
-
+    flex:1,
     },
-
-
 
 
     topBar: {
@@ -169,7 +160,7 @@ const categoryDropdownContainer = {
         alignItems: 'center',
         paddingHorizontal: 20,
         marginBottom: 10,
-        marginTop:10,
+        marginTop:20,
     },
     searchContainer: {
         flexDirection: 'row',
