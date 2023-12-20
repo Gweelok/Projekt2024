@@ -648,6 +648,15 @@ export async function getDraftFromUser(userId) {
     ///not tested yet
     return draftList
 }
+//To be tested
+//Retrieve all user items
+export async function getItemsFromUser(userId) {
+    const itemList = await getAllItems()
+    
+    const itemsUserList = itemList.filter(item => item.itemUser === userId)
+    ///not tested yet
+    return itemsUserList
+}
 
     /********************/
     /***** Delete *******/
