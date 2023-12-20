@@ -16,6 +16,7 @@ const PAGE_NAMES = {
   ADD: "add",
   STATS: "stats",
   PROFILE: "profile",
+  ChangePassword:"ChangePassword",
 };
 
 //Selected page
@@ -78,6 +79,7 @@ const Navigationbar = ({ navigation }) => {
         }
       </Pressable>
 
+
       <Pressable onPress={() => handlePress(PAGE_NAMES.STATS)}>
         {
           //check which icon will load
@@ -118,6 +120,7 @@ const Navigationbar = ({ navigation }) => {
           {badgeCount > 0 && <Badge count={badgeCount} />}
         </View>
       </Pressable>
+
     </View>
   );
 };

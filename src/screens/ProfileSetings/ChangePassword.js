@@ -189,7 +189,6 @@ const ChangePassword = ({ navigation }) => {
                     </View>
                 </View>
             </View>
-
             <TouchableOpacity
                 style={[Buttons.main_button,{position: 'relativ',top:-350} ]}onPress={handlePress}>
                 <View>
@@ -204,7 +203,7 @@ const ChangePassword = ({ navigation }) => {
                     <Text style={customStyles.errorText}>{errorMessage}</Text>
                 </View>
             )}
-
+            <Navigationbar navigation={navigation} />
             <Modal
                 transparent
                 visible={showSuccessPopup}
@@ -220,7 +219,9 @@ const ChangePassword = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </Modal>
+
         </SafeAreaView>
+
 
     );
 };
@@ -234,7 +235,7 @@ const customStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 10,
-        marginBottom: 20,
+        marginBottom: 30,
     },
 
     eyeIcon: {
