@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     View,
     Text,
@@ -27,6 +27,7 @@ import BackButton from "../../componets/BackButton";
 import Navigationbar from "../../componets/Navigationbar";
 
 const AccountSettings = ({navigation}) => {
+    console.log('Account Settings screen is rendered');
     const { currentLanguage } = useLanguage();
     const [name, setName] = useState(''); // Fetch the initial value from the database
     const [email, setEmail] = useState(''); // Fetch the initial value from the database
