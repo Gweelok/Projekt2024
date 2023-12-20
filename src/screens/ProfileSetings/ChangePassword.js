@@ -19,6 +19,10 @@ import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOu
 import Icon from 'react-native-vector-icons/Ionicons';
 import BackButton from "../../componets/BackButton";
 import {GoBackButton} from "../../styles/GoBackButton";
+import backButton from "../../componets/BackButton";
+import globalStyle from "../../styles/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
+
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -99,30 +103,29 @@ const ChangePassword = ({ navigation }) => {
     };
     return (
 
+
         <SafeAreaView style={styles.container2}>
             <View style={customStyles.headerContainer}>
-                <BackButton onPress={bye}></BackButton>
-                <TouchableOpacity BackButton onPress={() => navigation.navigate("AccountSettings")}>
-                </TouchableOpacity>
+                <BackButton onPress={bye}Style={{marginLeft:0}}></BackButton>
                 <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
                     {t('ChangePasswordScreen.Header', currentLanguage)}
                 </Text>
             </View>
             {/* Current password */}
-            <View style={styles.form}>
+            <View style={[styles.form,GlobalStyle.BodyWrapper]}>
             <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
                 {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
             </Text>
                 <View style={styles.inputBox}>
-                    <View style={styles.inputContainer}>
+                    <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
                             secureTextEntry={!showCurrentPassword}
                             value={currentPassword}
                             onChangeText={setCurrentPassword}
-                            paddingRight={40}
-                            textAlignVertical="center"
-                            fontFamily="Arial"
+                            //paddingRight={40}
+                            //textAlignVertical="center"
+                            //fontFamily="Arial"
                             placeholder="Current password"
                             placeholderTextColor="#8EA59E"
                         />
@@ -139,14 +142,14 @@ const ChangePassword = ({ navigation }) => {
                     {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                 </Text>
                 <View style={styles.inputBox}>
-                    <View style={styles.inputContainer}>
+                    <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
                             secureTextEntry={!showNewPassword}
                             value={newPassword}
                             onChangeText={setNewPassword}
-                            paddingRight={40}
-                            textAlignVertical="center"
+                            //paddingRight={40}
+                            //textAlignVertical="center"
                             placeholder="New password"
                             placeholderTextColor="#8EA59E"
                         />
@@ -162,15 +165,16 @@ const ChangePassword = ({ navigation }) => {
                 <Text style={[stylesGlobal.formLabel,{marginLeft:0}]}>
                     {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                 </Text>
-                <View style={styles.inputBox}>
-                    <View style={styles.inputContainer}>
+                <View style={[styles.inputBox,{flexdirection:'row'}]}>
+                    <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
                             secureTextEntry={!showConfirmPassword}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
-                            paddingRight={40}
-                            textAlignVertical="center"
+                            keyboardType={'default'}
+                            //paddingRight={40}
+                            //textAlignVertical="center"
                             placeholder="Confirm password"
                             placeholderTextColor="#8EA59E"                        
                             />
@@ -184,10 +188,13 @@ const ChangePassword = ({ navigation }) => {
                 </View>
             </View>
 
-            <TouchableOpacity style={Buttons.main_button} onPress={handlePress}>
+            <TouchableOpacity
+                style={[Buttons.main_button,{position: 'relativ',top:-350} ]}onPress={handlePress}>
+                <View>
                 <Text style={Buttons.main_buttonText}>
                     {t('ChangePasswordScreen.SavePassword', currentLanguage)}
                 </Text>
+            </View>
             </TouchableOpacity>
 
             {errorMessage !== '' && (
@@ -234,9 +241,12 @@ const customStyles = StyleSheet.create({
         transform: [{ translateY: -10 }],
     },
     inputText: {
-        fontSize: 17,
+        fontSize: 15,
         color: 'black',
         textAlignVertical: 'center',
+        flex:1,
+        fontFamily:'space-grotesk'
+
     },
     errorContainer: {
         backgroundColor: 'red',

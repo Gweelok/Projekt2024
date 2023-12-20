@@ -231,7 +231,8 @@ optionalText: {
   //Headlines and body text
   bodyText: {
     textAlign: "left",
-  },
+  }, Bodywrapper: {backgroundColor: "white", flex: 1, top: "5%"}
+
 });
 
 //Profile styles
