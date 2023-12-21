@@ -17,7 +17,7 @@ import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
 import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
-// import { products } from "../utils/Testdata";
+import { items } from "../utils/Testdata";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
@@ -33,18 +33,27 @@ const products = props.products;
   async function fetchData() {
     //Filter items by user
     const userItems = await getItemsFromUser(userCurrent.id);
-    //Calculate co2 footprint
-    let co2Footprint = 0;
+    // Initializing variables to hold CO2 footprint for taken and not taken items
+    let co2FootprintTaken = 0;
+    let co2FootprintNotTaken = 0;
+    // Loop through the items array and products arrays to calculate the total CO2 footprint
     userItems.forEach((item) => {
-      products.forEach((product) => {
-        if (item.itemproduct === product.productId) {
-          co2Footprint += parseInt(product.co2Footprint);
+      products.forEach((product) => {       
+        if (item.itemproduct === product.productId && item.itemTaken === true) {
+          co2FootprintTaken += parseInt(product.co2Footprint);
+        }else if(item.itemproduct === product.productId && item.itemTaken === false){
+          co2FootprintNotTaken += parseInt(product.co2Footprint);
         }
       });
     });
+    // Calculate the total CO2 footprint
+    const totalCO2Footprint = co2FootprintTaken + co2FootprintNotTaken;
+    console.log("CO2 footprint of taken items:", co2FootprintTaken);
+    console.log("CO2 footprint of not taken items:", co2FootprintNotTaken);
+    console.log("Total CO2 footprint:", totalCO2Footprint);
     setCO2Data((prevData) => ({
       ...prevData,
-      TotalCo2Footprint: co2Footprint,
+      TotalCo2Footprint: totalCO2Footprint,
      
     }));
   }
