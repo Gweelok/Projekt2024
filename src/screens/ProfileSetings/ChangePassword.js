@@ -223,7 +223,12 @@ const ChangePassword = ({ navigation }) => {
             </Modal>
 
         </SafeAreaView>
-        
+    <Navigationbar
+
+        style={{width: windowWidth*0.02,height:windowHeight*0.08,display: 'abselute'}}
+        navigation={navigation}
+    />
+
     );
 };
 
