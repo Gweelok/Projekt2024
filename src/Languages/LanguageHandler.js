@@ -46,12 +46,14 @@ export function LanguageProvider({ children }) {
 
 
   function setLanguage(lang) {
+    console.log('Language changing to:', lang);
     setCurrentLanguage(lang);
   }
 
 
   return (
-    <LanguageContext.Provider value={{ currentLanguage, setLanguage }}>
+    <LanguageContext.Provider value={{ currentLanguage, setLanguage }} >
+
       {children}
     </LanguageContext.Provider>
   );
