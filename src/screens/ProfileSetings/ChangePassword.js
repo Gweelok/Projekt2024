@@ -22,7 +22,8 @@ import {GoBackButton} from "../../styles/GoBackButton";
 import backButton from "../../componets/BackButton";
 import globalStyle from "../../styles/GlobalStyle";
 import GlobalStyle from "../../styles/GlobalStyle";
-
+import { Dimensions } from "react-native";
+import {windowHeight, windowWidth} from "../../utils/Dimensions";
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -203,7 +204,8 @@ const ChangePassword = ({ navigation }) => {
                     <Text style={customStyles.errorText}>{errorMessage}</Text>
                 </View>
             )}
-            <Navigationbar navigation={navigation} />
+
+
             <Modal
                 transparent
                 visible={showSuccessPopup}
@@ -221,8 +223,7 @@ const ChangePassword = ({ navigation }) => {
             </Modal>
 
         </SafeAreaView>
-
-
+        
     );
 };
 
