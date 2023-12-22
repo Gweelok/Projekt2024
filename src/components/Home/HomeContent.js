@@ -24,7 +24,7 @@ const style = StyleSheet.create({
 
     },
     buttons: {
-        marginTop: 50,
+        marginTop: 100,
         padding: 20,
         backgroundColor: Primarycolor2,
         width: windowWidth * 0.6
