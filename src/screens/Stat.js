@@ -257,7 +257,7 @@ const Stat = ({ navigation }) => {
               </View>
             </View>
           ) : (
-            <YourStats user={userCurrent} products = { products } value={data["bestUptainers"].slice(0, 3)}/>
+            <YourStats user={userCurrent} products = { products } uptainers={data["bestUptainers"].slice(0, 3)}/>
           )}
         </ScrollViewComponent>
       </SafeAreaView>

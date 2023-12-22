@@ -28,6 +28,8 @@ const YourStats = (props) => {
 const userCurrent = props.user;
 //Get all products
 const products = props.products;
+//Get info about uptainers
+const uptainers = props.uptainers;
   useEffect(() => {
     fetchData();
   }, []);
@@ -241,9 +243,7 @@ const products = props.products;
             {t("StatsPage.MostVisitedUptainer", currentLanguage)}
           </Text>
         </View>
-        <YourVisitedUptainer />
-        <YourVisitedUptainer />
-        <YourVisitedUptainer />
+        {uptainers.map(uptainer => <YourVisitedUptainer value={uptainer}/>)} 
         <View style={{ marginTop: 25, marginBottom: 10 }}>
           <Text
             style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}
