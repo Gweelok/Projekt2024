@@ -18,6 +18,7 @@ import {
   createItem,
   getUptainerFromQR,
   getUptainerById,
+  QRCodeExists
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
@@ -49,17 +50,40 @@ const QRScanner = ({ route, navigation }) => {
     askForCameraPermission();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     setText(data);
     const scannedQRCode = generateQRCode(data);
     setScannedQRCode(scannedQRCode);
-    console.log("Type: " + type + "\nData: " + data);
+    const scannedQRCodeExist = await QRCodeExists(data);
+    if(scannedQRCodeExist === "Draft"){
+      // alert("QR Code not found, saved to draft instead.\n Close the window and scan again");
+      Alert.alert(
+        t("QrScannerScreen.QRCodeNotFound",currentLanguage),
+        t("QrScannerScreen.ScanAgain",currentLanguage),
+        [
+          {
+            text: t("OK",currentLanguage),
+            onPress: () => {
+              handleScanAgain();
+              
+              // Optionally, navigate or perform other actions after saving
+            },
+          },
+        ]
+      );
+
+    }else {
+      console.log("Type: " + type + "\nData: " + data);
+    }
+    
+    
+
   };
 
   const handleScanAgain = () => {
     setScanned(false);
-    console.log("description: ", itemData?.description);
+    // console.log("description: ", itemData?.description);
     //setText('Not yet scanned'); // Reset the scanned text
     setScannedQRCode(null);
   };
@@ -70,7 +94,7 @@ const QRScanner = ({ route, navigation }) => {
       try {
         await AsyncStorage.setItem("scannedQRCode", qrCodeString);
         const scannedQRCodeObject = JSON.parse(qrCodeString);
-        console.log("scannedQRCodeObject: ", scannedQRCodeObject);
+        // console.log("scannedQRCodeObject: ", scannedQRCodeObject);
         const value = scannedQRCodeObject.props.value;
         let navDir = "UptainerDetails";
 

@@ -157,6 +157,7 @@ export default {
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
+    QRCodeNotFound:"QR Code not found, saved to draft instead.",
     SaveCode: "Take",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
