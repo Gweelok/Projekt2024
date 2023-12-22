@@ -1,4 +1,3 @@
-import DetailViews from "../screens/DetailView";
 
 export default {
   SignUpScreen: {
