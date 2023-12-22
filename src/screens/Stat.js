@@ -43,6 +43,7 @@ const Stat = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
   let [data, setData] = useState({
     bestUptainer: {},
+    bestUptainers: [],
     allTakenItems: 0,
     allTakenItemsCO2: 0,
     todayTakenItems: 0,
@@ -252,11 +253,11 @@ const Stat = ({ navigation }) => {
                 <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
                   {t("StatsPage.MostVisitedUptainer", currentLanguage)}
                 </Text>
-                <VisitedUptainerStat navigation={navigation} value={data["bestUptainer"]} />
+                <VisitedUptainerStat navigation={navigation} value={data["bestUptainers"].slice(0, 1)} />
               </View>
             </View>
           ) : (
-            <YourStats user={userCurrent} products = { products }/>
+            <YourStats user={userCurrent} products = { products } value={data["bestUptainers"].slice(0, 3)}/>
           )}
         </ScrollViewComponent>
       </SafeAreaView>

@@ -107,8 +107,17 @@ export async function CalculateStatistic () {
       }
     }
     //Definition of the most popular Uptainer
-    const bestUptainerId = Object.entries(allUptainersStat).reduce((acc, curr) => acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr)[0];
-    const bestUptainer = allUptainersStat[bestUptainerId];
+    //const bestUptainerId = Object.entries(allUptainersStat).reduce((acc, curr) => acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr)[0];
+    //const bestUptainer = allUptainersStat[bestUptainerId];
+    //Sorting by number of users
+    const sortedUptainers = Object.values(allUptainersStat).sort(function(uptainer1, uptainer2){
+      return uptainer2["numberUsers"] - uptainer1["numberUsers"]
+    })
+    //Filtering uptainers with number of users > 0
+    const sortedFiltredUptainers = sortedUptainers.filter(function(uptainer){
+      return uptainer["numberUsers"] > 0
+    })
+
     const mostAchievingUptainers = Object.entries(allUptainersStat)
       .map(([uptainerId, uptainer]) => ({
         uptainerId,
@@ -128,7 +137,8 @@ export async function CalculateStatistic () {
       yesterdayTakenItems: yesterdayNumberTakenItems,
       yesterdayTakenItemsCO2: yesterdayTakenItemsCO2,
       allTakenItemsMonth: allTakenItemsMonth, //{"2023-Dec": 1, "2023-Jul": 1, "2023-Nov": 1, "2023-Sep": 1}
-      bestUptainer: bestUptainer,
+      //bestUptainer: bestUptainer,
+      bestUptainers: sortedFiltredUptainers,
       top3Uptainers: mostAchievingUptainers
     }
     //Print for checking
