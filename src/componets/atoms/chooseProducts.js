@@ -5,9 +5,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 
-// sqlite database
-import { getDataGroup } from '../../../src/utils/Database'
-
 // import from files
 import { RegRender } from '../../../src/utils/RenderData'
 
