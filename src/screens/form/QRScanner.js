@@ -65,7 +65,6 @@ const QRScanner = ({ route, navigation }) => {
           {
             text: t("OK", currentLanguage),
             onPress: () => {
-              handleScanAgain();
               // console.log("Type: " + type + "\nData: " + data);
               // Optionally, navigate or perform other actions after saving
             },
