@@ -21,7 +21,7 @@ import {
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
-const QRScanner = ({ route, navigation }) => {
+const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;
   console.log("route.params: ", route.params);
 
@@ -89,10 +89,22 @@ const QRScanner = ({ route, navigation }) => {
           console.log("can not create item. Error: ", error);
         }
         const uptainerId = await getUptainerFromQR(value);
+        // Inside handleSaveCode after creating the item and obtaining uptainerId
         const uptainer = await getUptainerById(uptainerId);
         if (uptainer) {
-          navigation.navigate("UptainerDetails", { screenFrom: "QRScanner" });
+          navigation.navigate('UptainerDetails', {
+            screenFrom: 'QRScanner',
+            uptainerData: {
+              id: uptainer.id,
+              name: uptainer.uptainerName,
+              location: uptainer.uptainerStreet, // or uptainer.uptainerCity if appropriate
+              imageUrl: uptainer.imageUrl, // Use appropriate image URL if available
+            },
+            scannedQRCodeData: scannedQRCodeObject.props.value, // Ensure this is defined correctly
+          });
         }
+
+
         if (!uptainerId) {
           navDir = "MyDrafts";
         }
@@ -103,7 +115,7 @@ const QRScanner = ({ route, navigation }) => {
             {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
-                navigation.navigate(navDir, uptainer);
+                // navigation.navigate(navDir, uptainer);
 
                 // Optionally, navigate or perform other actions after saving
               },
