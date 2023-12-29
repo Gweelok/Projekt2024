@@ -139,8 +139,9 @@ const UptainerDetails = ({ navigation, route }) => {
             <ImageBackground
                 style={style.detailsImage}
                 source={{
-                  uri: uptainerImageUrl,
-                }}>
+                  uri: uptainerImageUrl || 'https://via.placeholder.com/200x200', // Provide a placeholder if the URL is empty
+                }}
+            >
               <TouchableOpacity
                   onPress={() => navigation.navigate('Map')}
                   style={style.productLocation}>
