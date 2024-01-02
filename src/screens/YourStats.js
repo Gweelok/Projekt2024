@@ -18,15 +18,19 @@ import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
 import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
 import { items } from "../utils/Testdata";
+import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/Statcalculate";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
   let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 });
   const navigation = useNavigation();
-//Get current user
+
+  //Get current user
 const userCurrent = props.user;
 //Get all products
 const products = props.products;
+//Get info about uptainers
+const uptainers = props.uptainers;
   useEffect(() => {
     fetchData();
   }, []);
@@ -57,6 +61,8 @@ const products = props.products;
      
     }));
   }
+
+  const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(co2Data.TotalCo2Footprint)
 
   return (
     <ScrollViewComponent>
@@ -135,7 +141,7 @@ const products = props.products;
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
               {" "}
-              {t("StatsPage.kgCO2", currentLanguage)}
+              {t('StatsPage.kgCO2', currentLanguage)} {personalEquivalent} {t('StatsPage.Fact_equavalent', currentLanguage)}
             </Text>
           </View>
           <View
@@ -152,7 +158,7 @@ const products = props.products;
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
               {" "}
-              {t("StatsPage.Amount", currentLanguage)}{" "}
+              {t('StatsPage.Amount_first_part', currentLanguage)} {convertKgToTons(co2Data.TotalCo2Footprint)} {t('StatsPage.Amount_second_part', currentLanguage)} {totalEquivalent} {t('StatsPage.Fact_equavalent', currentLanguage)}
             </Text>
           </View>
         </View>
@@ -238,9 +244,7 @@ const products = props.products;
             {t("StatsPage.MostVisitedUptainer", currentLanguage)}
           </Text>
         </View>
-        <YourVisitedUptainer />
-        <YourVisitedUptainer />
-        <YourVisitedUptainer />
+        {uptainers.map(uptainer => <YourVisitedUptainer value={uptainer}/>)} 
         <View style={{ marginTop: 25, marginBottom: 10 }}>
           <Text
             style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}
