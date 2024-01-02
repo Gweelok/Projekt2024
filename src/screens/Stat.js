@@ -29,7 +29,7 @@ import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
 import { convertKgToTons, Calculate_co2_Equivalent, CalculateStatistic } from "../utils/Statcalculate";
 import { items } from "../utils/Testdata";
-import { convertKgToTons, convertCO2Saved, comparison, calculateCO2Equivalent, Calculate_co2_Equivalent } from "../utils/uptainersUtils";
+
 
 
 const Stat = ({ navigation }) => {
