@@ -23,7 +23,8 @@ const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
   let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 });
   const navigation = useNavigation();
-//Get current user
+
+  //Get current user
 const userCurrent = props.user;
 //Get all products
 const products = props.products;

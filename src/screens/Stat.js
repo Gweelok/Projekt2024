@@ -28,12 +28,15 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
 import { items } from "../utils/Testdata";
+import { convertKgToTons, convertCO2Saved, comparison, calculateCO2Equivalent, Calculate_co2_Equivalent } from "../utils/uptainersUtils";
 
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [userCurrent, setUserCurrent] = useState({});
   const [refreshing, setRefresh] = useState(false);
+
+  
   const onRefresh = () => {
 
     setRefresh(true)
@@ -203,7 +206,7 @@ const Stat = ({ navigation }) => {
       totalCO2Saved: prevData.totalCO2Saved + todaySavings,
     }));
   };
-
+  
   const calculateSavings = (type) => {
     const savings = products.reduce((acc, product) => {
       return acc + product.co2Footprint;
@@ -212,68 +215,18 @@ const Stat = ({ navigation }) => {
     return savings;
   };
 
-  const convertKgToTons = (kg) => {
-    if (kg >= 1000) {
-      return (kg / 1000).toFixed(2) + " t";
-    } else {
-      return kg + " kg";
-    }
-  };
-
   const co2EquivalentFact = 10;
   const co2SavedFact = 4;
-
-  const calculateCO2Equivalent = (fact, kg) => {
-    const equivalent = Math.round(fact * kg);
-    const comparisonText = equivalent > 1 ? comparison + "s" : comparison; // Pluralize if necessary
-    return `${equivalent} `;
-  };
-
-  const convertCO2Saved = (fact, kg) => {
-    const threshold = 100;
-    if (kg >= threshold) {
-      return Math.round(kg / threshold) + " ";
-    } else {
-      return kg + " " + comparison;
-    }
-  };
 
   const todayEquivalent = calculateCO2Equivalent(co2EquivalentFact, co2Data.todayCO2Saved);
   const todaySavedConverted = convertCO2Saved(co2SavedFact, co2Data.todayCO2Saved);
 
-  const Calculate_co2_Equivalent = (co2_pers, co2_total, conv_factor, comparison) => {
-    console.log(
-      "10 kg of CO2 is equivalent to approximately",
-      Math.round(10 * conv_factor),
-      comparison
-    );
 
-    console.log(
-      "Your personal CO2 contribution is equivalent to approximately",
-      Math.round(co2_pers * conv_factor),
-      comparison
-    );
-    console.log(
-      "So",
-      co2_total,
-      "kg would amount to approximately",
-      Math.round(co2_total * conv_factor),
-      comparison
-    );
-
-    const calc_pers = co2_pers * conv_factor;
-    const calc_total = co2_total * conv_factor;
-
-    return {
-      personalEquivalent: Math.round(calc_pers),
-      totalEquivalent: Math.round(calc_total),
-    };
-  };
 
   const co2_pers = 10;
   const co2_total = 100;
   const conv_factor = 4 / 10;
-  const comparison = "loads of washing and drying.";
+  
 
   const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(
     co2_pers,
