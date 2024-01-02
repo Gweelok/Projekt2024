@@ -22,7 +22,7 @@ import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/Statcalculat
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
-  let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 });
+  let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 , itemsDonated: 0, itemsCollected: 0});
   const navigation = useNavigation();
 //Get current user
 const userCurrent = props.user;
@@ -39,7 +39,10 @@ const uptainers = props.uptainers;
     // Initializing variables to hold CO2 footprint for taken and not taken items
     let co2FootprintTaken = 0;
     let co2FootprintNotTaken = 0;
+    let itemsDonated = 0;
+    let itemsCollected = 0;
     // Loop through the items array and products arrays to calculate the total CO2 footprint
+    console.log("userItems", userItems)
     userItems.forEach((item) => {
       products.forEach((product) => {       
         if (item.itemproduct === product.productId && item.itemTaken === true) {
@@ -48,6 +51,12 @@ const uptainers = props.uptainers;
           co2FootprintNotTaken += parseInt(product.co2Footprint);
         }
       });
+      if(item.itemTaken === false){
+        itemsDonated+=1;
+      }
+      if(item.itemTaken === true){
+        itemsCollected+=1;
+      }
     });
     // Calculate the total CO2 footprint
     const totalCO2Footprint = co2FootprintTaken + co2FootprintNotTaken;
@@ -57,7 +66,8 @@ const uptainers = props.uptainers;
     setCO2Data((prevData) => ({
       ...prevData,
       TotalCo2Footprint: totalCO2Footprint,
-     
+      itemsDonated: itemsDonated,
+      itemsCollected: itemsCollected
     }));
   }
 
@@ -86,7 +96,7 @@ const uptainers = props.uptainers;
               {t("StatsPage.ItemsDonated", currentLanguage)}
             </Text>
             <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
-              5
+              {co2Data.itemsDonated}
             </Text>
           </View>
           <View style={[Backgroundstyle.informationScreens, { paddingTop: 5 }]}>
@@ -96,7 +106,7 @@ const uptainers = props.uptainers;
               {t("StatsPage.ItemsCollected", currentLanguage)}
             </Text>
             <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
-              7
+              {co2Data.itemsCollected}
             </Text>
           </View>
         </View>
