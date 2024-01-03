@@ -99,7 +99,7 @@ export const Catagories = [
   },
 ];
 
-export const Products = [
+export const products = [
   {
     id: 1,
     catId: 1,
@@ -768,3 +768,77 @@ export const Brands = [
     name: "PlayStation",
   },
 ];
+
+   // Test Items
+   export const items = [
+    {
+      itemTakenDate: "2023-12-22",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpX",
+      itemproduct: "-NbzQlfHewkweUD_k_Ym",
+      itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+      itemTakenUser: "",
+    },
+    {
+      itemTakenDate: "2023-12-22",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
+      itemproduct: "-NbzQlfCJqUDW4jtThUc",
+      itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+    },
+    {
+      itemTakenDate: "2023-12-21",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
+      itemproduct: "-NbzQlfCJqUDW4jtThUc",
+      itemUser: "",
+      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+    },
+    {
+      itemTakenDate: "2023-11-06",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
+      itemproduct: "-NbzQlfCJqUDW4jtThUc",
+      itemUser: "",
+      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
+    },
+    {
+      itemTakenDate: "2023-11-06",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpX",
+      itemproduct: "-NbzQlfHewkweUD_k_Ym",
+    },
+    {
+      itemTakenDate: "2023-09-06",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpX",
+      itemproduct: "-NbzQlfHewkweUD_k_Ym",
+    },
+    {
+      itemTakenDate: "2023-07-06",
+      itemTaken: true,
+      itemUptainer: "-NbzQlf95xoexGIlcIpX",
+      itemproduct: "-NbzQlfHewkweUD_k_Ym",
+    },
+    {
+      itemTakenDate: "2023-07-06",
+      itemTaken: false,
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
+      itemproduct: "-NbzQlfCJqUDW4jtThUc",
+    },
+    {
+      itemTakenDate: "2023-07-06",
+      itemTaken: false,
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
+      itemproduct: "-NbzQlfCJqUDW4jtThUc",
+    },
+    {
+      itemTakenDate: "2023-07-06",
+      itemTaken: false,
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
+      itemproduct: "-NbzQlfCJqUDW4jtThUc",
+    },
+  ];
+
+  

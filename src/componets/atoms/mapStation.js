@@ -21,11 +21,7 @@ import { Button, ListItem } from "react-native-elements";
 // import MapViewDirections from 'react-native-maps-directions';
 
 import { styles, elementsStyles } from "../../../src/styles/Stylesheet";
-import {
-  getCountryEst,
-  getSpecificItem,
-  database,
-} from "../../../src/utils/Database";
+
 import MapView, { Marker } from "react-native-maps";
 
 //

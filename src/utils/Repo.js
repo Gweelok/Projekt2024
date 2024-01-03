@@ -642,6 +642,15 @@ export async function getDraftFromUser(userId) {
     ///not tested yet
     return draftList
 }
+//To be tested
+//Retrieve all user items
+export async function getItemsFromUser(userId) {
+    const itemList = await getAllItems()
+    
+    const itemsUserList = itemList.filter(item => item.itemUser === userId)
+    ///not tested yet
+    return itemsUserList
+}
 
 
 export async function getItemsByName(searchText) {
@@ -1027,13 +1036,14 @@ export async function updateAuthData(email, password, phoneNumber) {
     /*** Checks ***/
     /**************/
 
-    async function QRCodeExists(qrCode) {
+    export async function QRCodeExists(qrCode) {
         const uptainerList  = await getAllUptainers();
+        // console.log("Uptainer list: ", uptainerList);
         const item = uptainerList.find(uptainer => uptainer.uptainerQR === qrCode);
         if (item) {
+            console.log("Uptainer found: ", item);
             return item.uptainerId;
         } else {
-            alert("QR Code not found, saved to draft instead");
             return "Draft";
         }
     }
