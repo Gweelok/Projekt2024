@@ -13,7 +13,7 @@ const SearchBox = ({ onChangeText, value, placeholderText }) => {
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
-                value={value}
+                value={value}j
                 placeholder={t(placeholderText, currentLanguage)}
                 placeholderTextColor={Primarycolor4}
             />
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: Primarycolor1,
         color: Primarycolor1,
-        fontWeight:  "bold",
+        fontWeight:  "regular",
         borderWidth: 3,
         paddingHorizontal: 10,
     },
