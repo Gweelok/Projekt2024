@@ -13,7 +13,7 @@ const SearchBox = ({ onChangeText, value, placeholderText }) => {
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
-                value={value}j
+                value={value}
                 placeholder={t(placeholderText, currentLanguage)}
                 placeholderTextColor={Primarycolor4}
             />
