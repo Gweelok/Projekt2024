@@ -393,12 +393,9 @@ export const HeaderText = StyleSheet.create({
   Header: {
     fontSize: 30,
     marginBottom: 10,
-
     marginTop: 15,
-    //marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
-
   },
   Header_Primarycolor1: {
     color: Primarycolor1,
@@ -443,21 +440,36 @@ export const dropdownStyles = StyleSheet.create({
     fontFamily: "space-grotesk-bold",
     color: Primarycolor4,
     flex: 0,
+    fontWeight: "regular",
   },
   dropdownListItem2: {
     backgroundColor: 'white',
     padding: 10,
     borderColor: Primarycolor1,
     width: '100%',
-    borderWidth:3,
+    borderWidth: 3,
     borderBottomWidth: 0,
   },
-  dropdownSearchFieldList: {
+  dropdownSearchFieldListContainer: {
+    top: 40, 
+    zIndex: 1,
+    position: "absolute",
+    width: "100%",
+    marginHorizontal: 19.5,
     borderBottomWidth: 3,
     borderRightWidth: 3,
     borderLeftWidth: 3,
+    borderTopWidth: 0,
+    backgroundColor: 'white',
     borderColor: Primarycolor1,
-    marginTop: 0,
+    minHeight: 40,
+    justifyContent: "center",
+  },
+  dropdownSearchFieldList: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderColor: Primarycolor1,
+    width: '100%',
   },
   dropdownErrorText: {
     textAlign: "center",
@@ -465,13 +477,5 @@ export const dropdownStyles = StyleSheet.create({
     paddingBottom: 40,
     color: Primarycolor4,
     fontWeight: "bold"
-  },
-  dropdownListItemForSearchField: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: Primarycolor1,
-    display: 'flex', 
-    flexDirection: 'row', 
-    flexWrap: 'nowrap',
   },
 });

@@ -1,37 +1,49 @@
-import { Text, FlatList, TouchableOpacity, SafeAreaView } from "react-native";
+import { Text, FlatList, View, ActivityIndicator } from "react-native";
 import React from "react";
+import { Divider } from "react-native-elements";
 
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { Primarycolor1, dropdownStyles } from "../styles/Stylesheet";
 
-const SearchFilter = ({ data, input,  error }) => {
-  const currentLanguage = useLanguage()
+const SearchFilter = ({ data = [], input,  error, isLoading }) => { 
+  const currentLanguage = useLanguage();
 
-  const renderItem = ({ item }) => {
-    const itemName = item.brandName || item.productName || item.categoryName || item.modelName
-    const splittedItemName = itemName.split(input)
+  const renderItem = ({ item, index }) => {
+    const itemName = item.brandName || item.productName || item.categoryName || item.modelName;
+    const splittedItemName = itemName.split(input);
+    const isLastItem = data.length - 1 === index;
 
-    return (
-      <TouchableOpacity
-        key={item.brandName || item.productName || item.categoryName || item.modelName}
-        onPress={() => console.log('selectedItem', item)}
-        style={[dropdownStyles.dropdownListItemForSearchField]}
-      >
-        <Text style={[dropdownStyles.dropdownFilterTextHome, { color: Primarycolor1 }]}>{input}</Text>
-        <Text style={dropdownStyles.dropdownFilterTextHome}>{splittedItemName}</Text>
-      </TouchableOpacity>
-    );
+    if (itemName.includes(input)) {
+      return (
+        <>
+          <Text
+            key={item.brandName || item.productName || item.categoryName || item.modelName}
+            onPress={() => console.log('selectedItem', item)}
+            style={dropdownStyles.dropdownSearchFieldList}
+          >
+            <Text style={[dropdownStyles.dropdownFilterTextHome, { color: Primarycolor1 }]}>{input}</Text>
+            <Text style={dropdownStyles.dropdownFilterTextHome}>{splittedItemName}</Text>
+          </Text>
+          {!isLastItem ? <Divider color={Primarycolor1} width={1} /> : null}
+        </>
+      );
+    }
   };
 
-
+  const renderLoading = () => <ActivityIndicator size="small" />;
+  const renderError = () => (<Text style={dropdownStyles.dropdownErrorText}>{t("SearchField.notMatchingProduct", currentLanguage)}</Text>)
+  
   return (
-    <SafeAreaView style={dropdownStyles.dropdownSearchFieldList}>
-      {!error 
-        ? <FlatList data={data} renderItem={renderItem} /> 
-        : <Text style={dropdownStyles.dropdownErrorText}>{t("SearchField.notMatchingProduct", currentLanguage)}</Text>
+    <View
+      style={dropdownStyles.dropdownSearchFieldListContainer}
+    >
+      {isLoading 
+        ? renderLoading() 
+        : error 
+          ? renderError()
+          : (<FlatList key="flat-list" data={data} renderItem={renderItem} />)  
       }
-      
-    </SafeAreaView>
+    </View>
   )
 }
 
