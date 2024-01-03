@@ -27,8 +27,8 @@ import GreenBox from "../styles/GreenBox";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
-import { convertKgToTons, Calculate_co2_Equivalent, CalculateStatistic } from "../utils/Statcalculate";
-import { items } from "../utils/Testdata";
+import { convertKgToTons, Calculate_co2_Equivalent, CalculateStatistic } from "../utils/uptainersUtils";
+
 
 
 
