@@ -290,5 +290,7 @@ export default {
     Poll1Question1:
       "How many electronic devices have you bought the last year?",
   },
-
+  SearchHome: {
+    productsMatch: "products match your search."
+  }
 };

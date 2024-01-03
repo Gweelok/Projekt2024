@@ -293,4 +293,7 @@ export default {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find produkt",
   },
+  SearchHome: {
+    productsMatch: "produkter matcher din søgning."
+  }
 };
