@@ -205,7 +205,6 @@ const ChangePassword = ({ navigation }) => {
                 </View>
             )}
 
-            <Navigationbar navigation={navigation}/>
 
 
             <Modal
