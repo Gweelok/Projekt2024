@@ -106,7 +106,7 @@ const ChangePassword = ({ navigation }) => {
 
 
         <SafeAreaView style={styles.container2}>
-            <View style={[styles.form,GlobalStyle.BodyWrapper]}>
+            <View style={GlobalStyle.BodyWrapper}>
             <View style={customStyles.headerContainer}>
                 <BackButton onPress={bye} style={{marginLeft:-7}} />
                 <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
@@ -205,6 +205,8 @@ const ChangePassword = ({ navigation }) => {
                 </View>
             )}
 
+            <Navigationbar navigation={navigation}/>
+
 
             <Modal
                 transparent
@@ -220,14 +222,12 @@ const ChangePassword = ({ navigation }) => {
                         <Text style={customStyles.okButtonText}>OK</Text>
                     </TouchableOpacity>
                 </View>
+
+
             </Modal>
 
         </SafeAreaView>
-    <Navigationbar
 
-        style={{width: windowWidth*0.02,height:windowHeight*0.08,display: 'abselute'}}
-        navigation={navigation}
-    />
 
     );
 };
