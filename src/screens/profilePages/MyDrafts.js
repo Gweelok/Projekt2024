@@ -1,5 +1,5 @@
 import { React, useEffect, useState, useContext, useCallback} from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert, SafeAreaView } from "react-native";
 import { HeaderText, Primarycolor1, Backgroundstyle } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
@@ -27,6 +27,7 @@ import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 import GlobalStyle from "../../styles/GlobalStyle";
+import Navigationbar from '../../componets/Navigationbar';
 
 const MyDrafts = () => {
   const navigation = useNavigation();
@@ -123,20 +124,28 @@ const MyDrafts = () => {
     setData([...data]);
   
   }
-
-
-  
+  const backButtonPressed = () => navigation.goBack()
 
   return (
-    <StatusBarComponent style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper ]}>
-      <View style={{flexDirection: "row", alignItems: "center"}}>
-        <BackButton onPress={handlePress} />
-        <Text style={[HeaderText.Header]}>
-          {t("MyDraftsScreen.Header", currentLanguage)}
-        </Text>
-      </View>
-      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-      <ScrollViewComponent
+    
+    <View style={[Backgroundstyle.interactive_screens]}>
+      <View style={GlobalStyle.BodyWrapper}>
+          
+        <View style={{
+          flexDirection: "row",
+          alignItems: "center",
+          alignSelf: "flex-start",
+          marginBottom: 15,
+        }}>
+                {/* Back Button */}
+                <BackButton onPress={navigation.goBack}  />
+                {/* Headline */}
+                <Text style={HeaderText.Header}>{t('MyDraftsScreen.Header',currentLanguage)} </Text>
+        </View>
+        
+          <View>
+          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+          <ScrollViewComponent
       refreshing={refreshing}
       onRefresh={onRefresh}
       >
@@ -170,12 +179,15 @@ const MyDrafts = () => {
             />
           )
         )}
-      </ScrollViewComponent>
-      {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
-    </StatusBarComponent>
-    
+          </ScrollViewComponent>
+          {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
+
+          </View>
+      </View>
+      <Navigationbar navigation={navigation} />        
+    </View>
   );
-;
+
 
 
 const DraftStyle = StyleSheet.create({
