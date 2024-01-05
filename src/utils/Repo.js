@@ -612,6 +612,51 @@ export async function getAllItems() {
         return [];
     }
 }
+
+export async function getAllItemsByProductIds() {
+    // retreives items and and return setup them all as object by product id
+    const db = firebaseGetDB;
+    const reference = ref(db, '/items');
+
+    try {
+        const snapshot = await get(reference);
+        const items = {};
+        snapshot.forEach((childSnapshot) => {
+            const itemId = childSnapshot.key;
+            const itemproduct = childSnapshot.val().itemproduct;
+            const itemBrand = childSnapshot.val().itemBrand;
+            const itemModel = childSnapshot.val().itemModel;
+            const itemCategory = childSnapshot.val().itemCategory;
+            const itemImage = childSnapshot.val().itemImage;
+            const itemDescription = childSnapshot.val().itemDescription;
+            const itemcondition = childSnapshot.val().itemcondition;
+            const itemUptainer = childSnapshot.val().itemUptainer;
+            const itemUser = childSnapshot.val().itemUser;
+            const itemTaken = childSnapshot.val().itemTaken;
+            const itemTakenDate = childSnapshot.val().itemTakenDate;
+            const itemTakenUser = childSnapshot.val().itemTakenUser;
+            items[itemproduct] = {
+                itemId: itemId,
+                itemproduct: itemproduct,
+                itemBrand: itemBrand,
+                itemModel: itemModel,
+                itemCategory: itemCategory,
+                itemImage: itemImage,
+                itemDescription: itemDescription,
+                itemcondition: itemcondition,
+                itemUptainer: itemUptainer,
+                itemUser: itemUser,
+                itemTaken: itemTaken,
+                itemTakenDate: itemTakenDate,
+                itemTakenUser: itemTakenUser,
+            }
+        });
+        return items;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return {};
+    }
+}
 export async function getItemById(itemId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/items/${itemId}`);
