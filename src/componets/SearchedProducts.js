@@ -8,15 +8,7 @@ import { filterProducts } from "../utils/productsUtils"
 import { useLanguage, t } from "../Languages/LanguageHandler"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 import ItemsSearched from "./ItemsSearched"
-
-const setUptainersAsObj = async (uptainers) => {
-    let res = {}
-    uptainers.forEach(u => {
-        res[u.uptainerId] = u;
-
-    });
-    return res;
-}
+import { setUptainersByIds } from "../utils/uptainersUtils"
 
 const SearchedProducts = ({navigation, search, userLocation}) =>{
     const [allProducts, setAllProducts] = useState(null)
@@ -35,7 +27,7 @@ const SearchedProducts = ({navigation, search, userLocation}) =>{
                 const items = await getAllItemsByProductIds()
                 setAllItems(items)
                 const uptainers = await getAllUptainers()
-                const setupUptainers = await setUptainersAsObj(uptainers)
+                const setupUptainers = await setUptainersByIds(uptainers)
                 setAllUptainers(setupUptainers)
             })()
         } else {
