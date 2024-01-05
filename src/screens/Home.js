@@ -7,11 +7,13 @@ import SortUptainers from "../componets/sortUptainers";
 import GlobalStyle from "../styles/GlobalStyle";
 import SearchBox from '../componets/SearchBox';
 import { firebaseAurth } from "../utils/Firebase";
+import SearchedProducts from "../componets/SearchedProducts";
 
 
 
 const Home = ({ navigation }) => {
   const [search, onChangeSearch] = useState("");
+  const [userLocation, setuserLocation] = useState(null)
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
@@ -22,6 +24,7 @@ const Home = ({ navigation }) => {
       console.log("status good");
       //				let loc = await Location.getLastKnownPositionAsync({});
       let loc = await Location.getCurrentPositionAsync({});
+      setuserLocation(loc.coords)
     }
   })();
 
@@ -33,6 +36,7 @@ const Home = ({ navigation }) => {
           value={search}
           placeholderText={"SearchField.productPlaceholder"}
         /> 
+        {!!search.length && <SearchedProducts userLocation={userLocation} search={search}/>}
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} />
       </View>
