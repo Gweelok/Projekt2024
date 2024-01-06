@@ -614,7 +614,7 @@ export async function getAllItems() {
 }
 
 export async function getAllItemsByProductIds() {
-    // retreives items and and return setup them all as object by product id
+    // retreives items and setup them all as object by product id
     const db = firebaseGetDB;
     const reference = ref(db, '/items');
 
