@@ -36,7 +36,7 @@ const Home = ({ navigation }) => {
           value={search}
           placeholderText={"SearchField.productPlaceholder"}
         /> 
-        {!!search.length && <SearchedProducts userLocation={userLocation} search={search}/>}
+        {!!search.length && <SearchedProducts onChangeSearch={onChangeSearch} navigation={navigation} userLocation={userLocation} search={search}/>}
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} />
       </View>

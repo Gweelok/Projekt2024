@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { Pressable, StyleSheet, View, Text, Image } from "react-native"
+import { Pressable, StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 import { getItemById, getUptainerById } from "../utils/Repo"
 import { getDownloadURL, getStorage, ref } from "firebase/storage"
 import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 
-const ItemsSearched = ({navigation, product, item, index, userLocation}) =>{
+const ItemsSearched = ({navigation, product, item, index, userLocation, onChangeSearch}) =>{
     const [imageUrl, setImageUrl] = useState(null)
     const [uptainer, setUptainer] = useState(null)
     const storage = getStorage()
@@ -22,7 +22,18 @@ const ItemsSearched = ({navigation, product, item, index, userLocation}) =>{
     }, [])
 
     return (
-        <Pressable style={style.mainContainer} key={index}>
+        <TouchableOpacity onPress={() => {
+                onChangeSearch('')
+                navigation.navigate("DetailView", {
+                data: item?.itemId,
+                itemDescription: item?.itemDescription,
+                brandName: item?.brandName,
+                productName: item?.productName,
+                imageUrl: imageUrl,
+                uptainer: uptainer,
+                })
+            }
+          } style={style.mainContainer} key={index}>
             <View>
                 <View style={style.container1}>
                     <Text style={style.productName}>{product.productName}</Text>
@@ -35,7 +46,7 @@ const ItemsSearched = ({navigation, product, item, index, userLocation}) =>{
                 {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName || uptainer} / {uptainer.uptainerStreet}</Text>}
                 {!!imageUrl && <Image source={{uri: imageUrl}} style={style.image}></Image>}
             </View>
-        </Pressable>
+        </TouchableOpacity>
     )
 }
 
