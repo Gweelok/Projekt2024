@@ -25,13 +25,8 @@ const  DeleteAccount=({navigation})=>{
             <View style={GlobalStyle.BodyWrapper}>
             {/* Headline */}
 
-                    <View style={styles1.headerContainer}>
-                        <BackButtonHomemade onPress={BackToAccountSettings} />
-                        <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20,marginTop: 35,marginBottom: 30}]}>
-                            {t('DeleteAccount.Main', currentLanguage)}
-                        </Text>
-                    </View>
-            <Text style={[HeaderText.Header,{marginTop: -10}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
+
+            <Text style={[HeaderText.Header,{marginTop: 40}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
 
 
 
