@@ -60,6 +60,7 @@ export default {
     Header: "Er du sikker på at du vil slette din konto?",
     MainButton: "Slet min konto",
     SecondaryButton: "Annullér",
+    Main:"DeleteAccount",
   },
   MySettingsScreen: {
     Header: "Mine indstillinger",

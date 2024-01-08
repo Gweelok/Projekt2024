@@ -3,6 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import {Buttons, HeaderText} from "../../styles/Stylesheet";
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import React from "react";
+import GlobalStyle from "../../styles/GlobalStyle";
+import BackButton from "../../componets/BackButton";
+import BackButtonHomemade from "../../componets/BackButton";
 
 // eslint-disable-next-line react/prop-types
 const  DeleteAccount=({navigation})=>{
@@ -18,16 +21,23 @@ const  DeleteAccount=({navigation})=>{
         return(
 
     // eslint-disable-next-line react/react-in-jsx-scope
-    <View style={styles1.container}>
 
+            <View style={GlobalStyle.BodyWrapper}>
             {/* Headline */}
-            <Text style={[HeaderText.Header]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
+
+                    <View style={styles1.headerContainer}>
+                        <BackButtonHomemade onPress={BackToAccountSettings} />
+                        <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20,marginTop: 35,marginBottom: 30}]}>
+                            {t('DeleteAccount.Main', currentLanguage)}
+                        </Text>
+                    </View>
+            <Text style={[HeaderText.Header,{marginTop: -10}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
 
 
 
-        <View style={styles1.buttonContainer}>
+        <View style={GlobalStyle.BodyWrapper}>
             <View >
-                <TouchableOpacity style={[Buttons.main_button]}
+                <TouchableOpacity style={[Buttons.main_button,{marginTop: 50}]}
                     onPress={deleteacount}
                 >
                     <Text  style={[Buttons.main_buttonText]}> {t('DeleteAccount.MainButton',currentLanguage)}</Text>
@@ -46,10 +56,16 @@ const  DeleteAccount=({navigation})=>{
 
 }
 const styles1 = StyleSheet.create({
-    container: {
+    container:
+            {
         flex: 1,
     },
-
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 10,
+        marginBottom: 20,
+    },
     buttonContainer: {
         flexDirection: 'column',
         marginLeft:30,
@@ -57,5 +73,14 @@ const styles1 = StyleSheet.create({
         justifyContent: 'center',
         width: '80%',
     },
+    backButtonHomemade: {
+        backgroundColor: "#1c4b3d",
+        width: 40,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 10,
+        marginLeft: 10,
+    }
 });
   export default DeleteAccount;
