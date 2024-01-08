@@ -36,9 +36,7 @@ export function t(key, currentLanguage) {
 
   for (const k of keys) {
     if (translation[k]) {
-      
       translation = translation[k];
-      console.log(translation, "translation");
     } else {
       return key;
     }
