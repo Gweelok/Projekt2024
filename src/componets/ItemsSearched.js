@@ -13,10 +13,10 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, onChange
     useEffect(()=>{
         (async ()=>{
             const getUptainer = await getUptainerById(item.itemUptainer)
+            setUptainer(getUptainer)
             const imageRef = ref(storage, item.itemImage)
             const image = await getDownloadURL(imageRef)
             setImageUrl(image)
-            setUptainer(getUptainer)
 
         })()
     }, [])
