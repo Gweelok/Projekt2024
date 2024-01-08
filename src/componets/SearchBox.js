@@ -3,7 +3,7 @@ import {View, TextInput, StyleSheet} from 'react-native';
 
 import {Feather} from "@expo/vector-icons";
 
-import {Primarycolor1, Primarycolor4, styles } from "../styles/Stylesheet";
+import {Primarycolor1, Primarycolor4 } from "../styles/Stylesheet";
 import { useLanguage, t } from '../Languages/LanguageHandler';
 
 const SearchBox = ({ onChangeText, value, placeholderText }) => {
@@ -19,9 +19,9 @@ const SearchBox = ({ onChangeText, value, placeholderText }) => {
     };
 
     return (
-        <View style={styles1.inputContainer}>
+        <View style={styles.inputContainer}>
             <TextInput
-                style={styles1.input}
+                style={styles.input}
                 onChangeText={onChangeText}
                 value={value}
                 placeholder={t(placeholderText, currentLanguage)}
@@ -30,7 +30,6 @@ const SearchBox = ({ onChangeText, value, placeholderText }) => {
                 onBlur={handleBlur}
             />
             <Feather 
-                style={styles1.icon} 
                 name="search" 
                 size={22} 
                 color={isInputFocused ? Primarycolor1 : Primarycolor4} 
@@ -39,7 +38,7 @@ const SearchBox = ({ onChangeText, value, placeholderText }) => {
     );
 };
 
-const styles1 = StyleSheet.create({
+const styles = StyleSheet.create({
     inputContainer: {
         backgroundColor: "white",
         height: 40,
