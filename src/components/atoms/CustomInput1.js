@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, TextInput } from "react-native"
-import { Primarycolor1 } from "../../styles/styleSheet"
+import { Primarycolor1, Primarycolor3, Primarycolor4 } from "../../styles/styleSheet"
 
 const CustomInput1 = ({value, onChange, placeholder}) =>{
     return (
@@ -12,10 +12,11 @@ const CustomInput1 = ({value, onChange, placeholder}) =>{
 const style = StyleSheet.create({
     input: {
         height: 45,
-        margin: 12,
+        marginTop: 15,
         borderWidth: 3,
         borderColor: Primarycolor1,
         padding: 10,
+        backgroundColor: Primarycolor3
       },
 })
 
