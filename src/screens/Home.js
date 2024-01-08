@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 
 import { Backgroundstyle } from "../styles/Stylesheet";
@@ -62,21 +62,23 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={GlobalStyle.BodyWrapper}>
-        <SearchBox
-          onChangeText={setSearchText}
-          value={searchText}
-          placeholderText={"SearchField.productPlaceholder"}
-        />
-        {searchText ?
-          <SearchFilter 
-            data={searchResults} 
-            input={searchText}
-            error={notMatchingProduct}     
-            isLoading={isLoading}
+      <View style={[GlobalStyle.BodyWrapper]}>
+        <View style={{zIndex: 1}}>
+          <SearchBox
+            onChangeText={setSearchText}
+            value={searchText}
+            placeholderText={"SearchField.productPlaceholder"}
           />
-          : null
-        }
+          {searchText ?
+            <SearchFilter 
+              data={searchResults} 
+              input={searchText}
+              error={notMatchingProduct}     
+              isLoading={isLoading}
+            />
+            : null
+          }
+        </View>
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} /> 
       </View>

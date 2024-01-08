@@ -20,7 +20,7 @@ const SearchFilter = ({ data = [], input,  error, isLoading }) => {
             key={item.brandName || item.productName || item.categoryName || item.modelName}
             onPress={() => console.log('selectedItem', item)}
             style={dropdownStyles.dropdownSearchFieldList}
-          >
+          > 
             <Text style={[dropdownStyles.dropdownFilterTextHome, { color: Primarycolor1 }]}>{input}</Text>
             <Text style={dropdownStyles.dropdownFilterTextHome}>{splittedItemName}</Text>
           </Text>
