@@ -3,16 +3,18 @@ import CustomInput1 from "../atoms/CustomInput1"
 import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native"
 import { Primarycolor1, Primarycolor3 } from "../../styles/styleSheet"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
+import { t, useLanguage } from "../../Languages/LanguageHandler"
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const {currentLanguage} = useLanguage()
     return (
         <SafeAreaView style={style.container}>
-            <Text style={style.title}>Login</Text>
-            <CustomInput1 placeholder={'set email'} value={email} onChange={setEmail}></CustomInput1>
-            <CustomInput1 placeholder={'set password'} value={password} onChange={setPassword}></CustomInput1>
-            <Pressable style={style.button}><Text style={style.buttonText}>Login</Text></Pressable>
+            <Text style={style.title}>{t("loginScreen.login", currentLanguage)}</Text>
+            <CustomInput1 placeholder={t('loginScreen.username', currentLanguage)} value={username} onChange={setUsername}></CustomInput1>
+            <CustomInput1 placeholder={t("loginScreen.password", currentLanguage)} value={password} onChange={setPassword}></CustomInput1>
+            <Pressable style={style.button}><Text style={style.buttonText}>{t("loginScreen.login", currentLanguage)}</Text></Pressable>
         </SafeAreaView>
     )
 }
