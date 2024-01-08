@@ -476,6 +476,5 @@ export const dropdownStyles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 40,
     color: Primarycolor4,
-    fontWeight: "bold"
   },
 });

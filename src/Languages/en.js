@@ -278,7 +278,7 @@ export default {
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find product",
-    notMatchingProduct: "No products match your search."
+    notMatchingProduct: "No products match your search.",
   },
 
   QuizQuestions: {

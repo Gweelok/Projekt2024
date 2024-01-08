@@ -292,6 +292,6 @@ export default {
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find produkt",
-    notMatchingProduct: "Ingen produkter matcher din søgning."
+    notMatchingProduct: "Ingen produkter matcher din søgning.",
   },
 };

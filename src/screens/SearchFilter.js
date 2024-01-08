@@ -6,7 +6,7 @@ import { useLanguage, t } from "../Languages/LanguageHandler";
 import { Primarycolor1, dropdownStyles } from "../styles/Stylesheet";
 
 const SearchFilter = ({ data = [], input,  error, isLoading }) => { 
-  const currentLanguage = useLanguage();
+  const { currentLanguage } = useLanguage();
 
   const renderItem = ({ item, index }) => {
     const itemName = item.brandName || item.productName || item.categoryName || item.modelName;

@@ -20,6 +20,7 @@ const Home = ({ navigation }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [notMatchingProduct, setNotMatchingProduct] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
