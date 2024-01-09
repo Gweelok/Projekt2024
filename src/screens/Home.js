@@ -14,6 +14,7 @@ import SearchedProducts from "../componets/SearchedProducts";
 const Home = ({ navigation }) => {
   const [search, onChangeSearch] = useState("");
   const [userLocation, setuserLocation] = useState(null)
+  const endSearch = async () => onChangeSearch('')
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
@@ -36,7 +37,7 @@ const Home = ({ navigation }) => {
           value={search}
           placeholderText={"SearchField.productPlaceholder"}
         /> 
-        {!!search.length && <SearchedProducts onChangeSearch={onChangeSearch} navigation={navigation} userLocation={userLocation} search={search}/>}
+        {!!search.length && <SearchedProducts endSearch={endSearch} navigation={navigation} userLocation={userLocation} search={search}/>}
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} />
       </View>

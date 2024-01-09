@@ -10,7 +10,7 @@ import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Styleshee
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds } from "../utils/uptainersUtils"
 
-const SearchedProducts = ({navigation, search, userLocation, onChangeSearch}) =>{
+const SearchedProducts = ({navigation, search, userLocation, endSearch}) =>{
     const [allProducts, setAllProducts] = useState(null)
     const [filteredProducts, setfilteredProducts] = useState([])
     const { currentLanguage, setLanguage } = useLanguage()
@@ -46,7 +46,7 @@ const SearchedProducts = ({navigation, search, userLocation, onChangeSearch}) =>
             <ScrollViewComponent>
                 <Text style={style.productsMatch}>{filteredProducts.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
                 {(!!filteredProducts.length && !!allItems && allUptainers) && ( filteredProducts.map((product, index) =>(
-                    <ItemsSearched uptainer={allUptainers[allItems[product.productId]?.itemUptainer] || "Draft"}  onChangeSearch={onChangeSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
+                    <ItemsSearched uptainer={allUptainers[allItems[product.productId]?.itemUptainer] || "Draft"}  endSearch={endSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
                 )))}
                 
 

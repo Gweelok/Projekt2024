@@ -6,7 +6,7 @@ import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 
-const ItemsSearched = ({navigation, product, item, index, userLocation, onChangeSearch , uptainer}) =>{
+const ItemsSearched = ({navigation, product, item, index, userLocation, endSearch , uptainer}) =>{
     const [imageUrl, setImageUrl] = useState(null)
     const storage = getStorage()
     useEffect(()=>{
@@ -20,7 +20,6 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, onChange
 
     return (
         <TouchableOpacity onPress={() => {
-                onChangeSearch('')
                 navigation.navigate("DetailView", {
                 data: item?.itemId,
                 itemDescription: item?.itemDescription,
@@ -29,6 +28,7 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, onChange
                 imageUrl: imageUrl,
                 uptainer: uptainer,
                 })
+                endSearch()
             }
           } style={style.mainContainer} key={index}>
             <View>
