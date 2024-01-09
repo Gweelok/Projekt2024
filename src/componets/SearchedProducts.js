@@ -45,8 +45,8 @@ const SearchedProducts = ({navigation, search, userLocation, onChangeSearch}) =>
         <View style={style.container}>
             <ScrollViewComponent>
                 <Text style={style.productsMatch}>{filteredProducts.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
-                {(!!filteredProducts.length && !!allItems) && ( filteredProducts.map((product, index) => (
-                    <ItemsSearched onChangeSearch={onChangeSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
+                {(!!filteredProducts.length && !!allItems && allUptainers) && ( filteredProducts.map((product, index) =>(
+                    <ItemsSearched uptainer={allUptainers[allItems[product.productId]?.itemUptainer] || "Draft"}  onChangeSearch={onChangeSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
                 )))}
                 
 

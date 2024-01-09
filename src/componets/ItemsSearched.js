@@ -6,14 +6,11 @@ import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 
-const ItemsSearched = ({navigation, product, item, index, userLocation, onChangeSearch}) =>{
+const ItemsSearched = ({navigation, product, item, index, userLocation, onChangeSearch , uptainer}) =>{
     const [imageUrl, setImageUrl] = useState(null)
-    const [uptainer, setUptainer] = useState(null)
     const storage = getStorage()
     useEffect(()=>{
-        (async ()=>{
-            const getUptainer = await getUptainerById(item.itemUptainer)
-            setUptainer(getUptainer)
+        (async ()=>{        
             const imageRef = ref(storage, item.itemImage)
             const image = await getDownloadURL(imageRef)
             setImageUrl(image)
@@ -40,7 +37,7 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, onChange
                     {(!!userLocation && !!uptainer) && <Text style={style.distance}>{
                         calculateDistance(
                         {latitude: userLocation.latitude, longitude: userLocation.longitude},
-                        {latitude: uptainer.uptainerLat, longitude: uptainer.uptainerLong}
+                        {latitude: uptainer.uptainerLatitude, longitude: uptainer.uptainerLongitude}
                         )}</Text>}
                 </View>
                 {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName || uptainer} / {uptainer.uptainerStreet}</Text>}
