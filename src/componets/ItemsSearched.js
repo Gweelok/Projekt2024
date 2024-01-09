@@ -37,7 +37,7 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, endSearc
                     <Text style={style.productName}>{product.productName}</Text>
                     {(!!userLocation && !!uptainer) && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
-                {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName || uptainer} / {uptainer.uptainerStreet}</Text>}
+                {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName} / {uptainer.uptainerStreet}</Text>}
                 {!!imageUrl && <Image source={{uri: imageUrl}} style={style.image}></Image>}
             </View>
         </TouchableOpacity>
