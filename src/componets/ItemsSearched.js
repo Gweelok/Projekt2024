@@ -5,6 +5,7 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage"
 import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
+import Distance from "./atoms/Distance"
 
 const ItemsSearched = ({navigation, product, item, index, userLocation, endSearch , uptainer}) =>{
     const [imageUrl, setImageUrl] = useState(null)
@@ -34,11 +35,7 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, endSearc
             <View>
                 <View style={style.container1}>
                     <Text style={style.productName}>{product.productName}</Text>
-                    {(!!userLocation && !!uptainer) && <Text style={style.distance}>{
-                        calculateDistance(
-                        {latitude: userLocation.latitude, longitude: userLocation.longitude},
-                        {latitude: uptainer.uptainerLatitude, longitude: uptainer.uptainerLongitude}
-                        )}</Text>}
+                    {(!!userLocation && !!uptainer) && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
                 {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName || uptainer} / {uptainer.uptainerStreet}</Text>}
                 {!!imageUrl && <Image source={{uri: imageUrl}} style={style.image}></Image>}
@@ -66,10 +63,6 @@ const style = StyleSheet.create({
     uptainer: {
         color: Primarycolor1,
         fontSize: 13
-    },
-    distance: {
-        color: Primarycolor1,
-        fontSize: 11
     },
     image: {
         marginTop: 5,
