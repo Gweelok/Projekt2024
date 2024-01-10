@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native"
 import HomeContent from "../components/Home/HomeContent"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
-import StationsMap from "./StationsMap"
+import StationsMap from "./UptainerList"
 
 const Home = () => {
     return (
