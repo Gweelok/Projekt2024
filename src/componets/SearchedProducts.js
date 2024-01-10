@@ -22,19 +22,19 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch}) =>{
             (async () =>{
                 const retrivedProducts = await getAllProducts()
                 setAllProducts(retrivedProducts)
-                const filteredPs = await filterProducts(retrivedProducts, search)
-                setfilteredProducts(filteredPs)
                 const items = await getAllItemsByProductIds()
                 setAllItems(items)
                 const uptainers = await getAllUptainers()
                 const setupUptainers = await setUptainersByIds(uptainers)
                 setAllUptainers(setupUptainers)
+                const filteredPs = await filterProducts(retrivedProducts, search, items, setupUptainers)
+                setfilteredProducts(filteredPs)
             })()
         } else {
 
             (async () =>{
                 
-                const filteredPs = await filterProducts(allProducts, search)
+                const filteredPs = await filterProducts(allProducts, search, allItems, allUptainers)
                 setfilteredProducts(filteredPs)
             })()
         }
