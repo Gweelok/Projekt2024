@@ -26,7 +26,7 @@ const  DeleteAccount=({navigation})=>{
 
 
         <View style={GlobalStyle.BodyWrapper}>
-            <Text style={[HeaderText.Header,{marginTop: 40}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
+            <Text style={[HeaderText.Header,{marginTop: 40, marginLeft: 0, marginRight: 0}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
             <View >
                 <TouchableOpacity style={[Buttons.main_button,{marginTop: 50}]}
                     onPress={deleteacount}
