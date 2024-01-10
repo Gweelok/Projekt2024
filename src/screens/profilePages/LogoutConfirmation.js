@@ -4,6 +4,7 @@ import { styles, Backgroundstyle, Buttons } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { firebaseAurth } from "../../utils/Firebase";
 import { signOut } from "firebase/auth";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 
 const LogoutConfirmation = ({ navigation }) => {
@@ -25,8 +26,8 @@ const LogoutConfirmation = ({ navigation }) => {
 
  
   return (
-    <View style={Backgroundstyle.interactive_screens}>
-      <Text style={styles.Header_Primarycolor1}>
+      <View style={GlobalStyle.BodyWrapper}>
+      <Text style={[styles.Header_Primarycolor1,{marginTop: 60}]}>
         {t("LogoutConfirmation.confirmMessage", currentLanguage)}
       </Text>
 
