@@ -1,20 +1,17 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, Text, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
-import GlobalStyle from "../styles/GlobalStyle";
+import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import {
     dropdownStyles,
-    Primarycolor1,
-    Primarycolor4,
     styles,
 } from "../styles/styleSheet";
 
 //import {t, useLanguage} from "../languages/LanguageHandler";
 import { calculateDistance } from '../utils/uptainersUtils';
-import SearchedLocation from './SearchedLocation';
+import UptainerLocation from './UptainerLocation';
 
 
-
+//!!Remove later!!
 const stationData = [
     {
         uptainerName: "Det Bæredygtige Forsamlingshus",
@@ -105,7 +102,7 @@ const StationsMap = () => {
         );
 
         return (
-            <SearchedLocation
+            <UptainerLocation
                 location={item}
                 onPress={() => handleUptainerPress(item)}
                 index={index}
