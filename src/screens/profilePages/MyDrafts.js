@@ -129,61 +129,56 @@ const MyDrafts = () => {
   return (
     
     <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={GlobalStyle.BodyWrapper}>
-          
-        <View style={{
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "flex-start",
-          marginBottom: 15,
-        }}>
+      <View style={GlobalStyle.BodyWrapper}>  
+        
+          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+          <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
+            <View style={{
+              flexDirection: "row",
+              alignItems: "center",
+              alignSelf: "flex-start",
+              marginBottom: 15,
+                  }}>
                 {/* Back Button */}
                 <BackButton onPress={navigation.goBack}  />
                 {/* Headline */}
                 <Text style={HeaderText.Header}>{t('MyDraftsScreen.Header',currentLanguage)} </Text>
-        </View>
-        
-          <View>
-          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-          <ScrollViewComponent
-      refreshing={refreshing}
-      onRefresh={onRefresh}
-      >
-        {data.map(
-          (
-            cur // instead of dummy data using data
-          ) => (
-            <DraftCard
-              key={cur.itemId}
-              props={cur}
-              onPress={() => {
-                //needs to be update in the furture|does not delete the draft from the database
-                navigation.navigate("QRScanner", {
-                  product: cur.product.productId,
-                  brand: cur.brand.brandId,
-                  model: cur.model.modelId,
-                  category: cur.category.categoryId,
-                  condition: cur.itemcondition,
-                  description: cur.itemDescription,
-                  image: cur.imageUrl,
-                });
-                
-              }}
-              onDraftPress={() => {
-                navigation.push("Add", { itemData: cur });
-              }}
-              onCancelPress={() => {
-                setSelectedDraft(cur)
-                setPopupOpen(!popupOpen);
-              }}
-            />
-          )
-        )}
-          </ScrollViewComponent>
-          {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
+            </View>
+            {data.map(
+              (
+                cur // instead of dummy data using data
+              ) => (
+                <DraftCard
+                  key={cur.itemId}
+                  props={cur}
+                  onPress={() => {
+                    //needs to be update in the furture|does not delete the draft from the database
+                    navigation.navigate("QRScanner", {
+                      product: cur.product.productId,
+                      brand: cur.brand.brandId,
+                      model: cur.model.modelId,
+                      category: cur.category.categoryId,
+                      condition: cur.itemcondition,
+                      description: cur.itemDescription,
+                      image: cur.imageUrl,
+                    });
 
-          </View>
+                  }}
+                  onDraftPress={() => {
+                    navigation.push("Add", { itemData: cur });
+                  }}
+                  onCancelPress={() => {
+                    setSelectedDraft(cur)
+                    setPopupOpen(!popupOpen);
+                  }}
+                />
+              )
+              )}
+          </ScrollViewComponent>
+            {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
+
       </View>
+        
       <Navigationbar navigation={navigation} />        
     </View>
   );

@@ -80,7 +80,7 @@ const DraftCard = ({
       <View>
         <Pressable
           onPress={onPress}
-          style={[Buttons.main_button, {marginBottom: 15, marginTop: 5}]}
+          style={[Buttons.main_button, {marginBottom: 30, marginTop: 5}]}
         >
           <Text style={Buttons.main_buttonText}>
             {t("UpdroppForm.scanButton", currentLanguage)}
