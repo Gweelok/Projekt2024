@@ -16,6 +16,8 @@ export const VisitedUptainerStat = (value) => {
     const data = value["value"];
     const location = data["uptainerName"];
     const address = data["uptainerStreet"];
+    const city=data["uptainerCity"];
+    const zip=["uptainerZip"];
     const id = data["id"];
     const imageUrl = data["imageUrl"];
     const handlePress = () => {
@@ -43,7 +45,7 @@ export const VisitedUptainerStat = (value) => {
                             <View style={GlobalStyle.BodyWrapper}>
                                 <TouchableOpacity onPress={handlePressOn}>
                                 <Text style={styles.menuItem_text}>{location} </Text>
-                                <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address} </Text>
+                                <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address}, {city}, {zip}  </Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.Icon_container}>
