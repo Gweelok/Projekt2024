@@ -1,11 +1,11 @@
 import { View, StyleSheet } from "react-native"
-import HomeContent from "../components/Home/HomeContent"
+import UptainerList from "../components/Home/UptainerButtonList"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 
 const Home = () => {
     return (
         <View style={style.container}>
-            <HomeContent></HomeContent>
+            <UptainerList></UptainerList>
         </View>
     )
 }
