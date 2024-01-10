@@ -22,15 +22,11 @@ const  DeleteAccount=({navigation})=>{
 
     // eslint-disable-next-line react/react-in-jsx-scope
 
-            <View style={GlobalStyle.BodyWrapper}>
-            {/* Headline */}
-
-
-            <Text style={[HeaderText.Header,{marginTop: 40}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
 
 
 
         <View style={GlobalStyle.BodyWrapper}>
+            <Text style={[HeaderText.Header,{marginTop: 40}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
             <View >
                 <TouchableOpacity style={[Buttons.main_button,{marginTop: 50}]}
                     onPress={deleteacount}
@@ -46,7 +42,7 @@ const  DeleteAccount=({navigation})=>{
                     <Text   style={[Buttons.secondary_buttonText]}>   {t('DeleteAccount.SecondaryButton',currentLanguage)}</Text>
                 </TouchableOpacity>
             </View>
-    </View>
+
 );
 
 }
