@@ -1,10 +1,10 @@
 import React from "react";
 import {
     Primarycolor1,
-    styles
-} from "../../../styles/Stylesheet";
+    styles,
+} from "../styles/styleSheet";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
-import { calculateDistance } from "../../../utils/uptainersUtils";
+import { calculateDistance } from "../utils/uptainersUtils";
 
 const SearchedLocation = ({location, styling, onPress, userLatitude, userLongitude,}) =>{
     return (
