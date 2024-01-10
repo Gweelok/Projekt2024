@@ -1,19 +1,16 @@
-
+import * as Location from 'expo-location';
 import React, { useEffect, useRef, useState } from 'react';
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import {StyleSheet, View, Alert, TouchableOpacity, Text, ScrollView, ActivityIndicator, Modal} from 'react-native';
-import SearchBox from '../../../componets/SearchBox'
-import CustomCallout from './CustomCallout';
-import GlobalStyle from "../../../styles/GlobalStyle";
+import { StyleSheet, View, Text, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
+import GlobalStyle from "../styles/GlobalStyle";
 import {
     dropdownStyles,
     Primarycolor1,
     Primarycolor4,
-    styles
-} from "../../../styles/Stylesheet";
-import * as Location from 'expo-location';
-import {t, useLanguage} from "../../../Languages/LanguageHandler";
-import { calculateDistance } from '../../../utils/uptainersUtils';
+    styles,
+} from "../styles/styleSheet";
+
+//import {t, useLanguage} from "../languages/LanguageHandler";
+import { calculateDistance } from '../utils/uptainersUtils';
 import SearchedLocation from './SearchedLocation';
 
 
@@ -58,19 +55,14 @@ const StationsMap = () => {
     const [filteredLocations, setFilteredLocations] = useState(stationData);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [showSearchResults, setShowSearchResults] = useState(false);
     const mapRef = useRef();
-    const { currentLanguage } = useLanguage();
-    const markersRef = useRef({});
-
-
 
     useEffect(() => {
         const getUserLocation = async () => {
             try {
                 const { status } = await Location.requestForegroundPermissionsAsync();
                 if (status !== 'granted') {
-                    Alert.alert('Permission to access location was denied');
+                    // Handle denied permission
                     setLoading(false);
                     return;
                 }
@@ -80,7 +72,6 @@ const StationsMap = () => {
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching location:', error);
-                Alert.alert('Error fetching location. Please try again.');
                 setLoading(false);
             }
         };
@@ -98,177 +89,55 @@ const StationsMap = () => {
 
     if (loading) {
         return (
-
-                <View style={styles.MainContainer}>
-                    <ActivityIndicator size='large' color='black' />
-                </View>
+            <View style={styles.MainContainer}>
+                <ActivityIndicator size='large' color='black' />
+            </View>
         );
     }
 
     const userLatitude = userLocation?.latitude || 0;
     const userLongitude = userLocation?.longitude || 0;
 
-    const region = {
-        latitude: 55.6761,
-        longitude: 12.5683,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+    const renderItem = ({ item, index }) => {
+        const distance = calculateDistance(
+            { latitude: userLatitude, longitude: userLongitude },
+            { latitude: parseFloat(item.uptainerLat), longitude: parseFloat(item.uptainerLong) }
+        );
+
+        return (
+            <SearchedLocation
+                location={item}
+                onPress={() => handleUptainerPress(item)}
+                index={index}
+                styling={[
+                    dropdownStyles.dropdownListItem2,
+                    index === filteredLocations.length - 1 ? styles1.lastItem : null,
+                ]}
+                userLatitude={userLatitude}
+                userLongitude={userLongitude}
+                distance={distance}
+            />
+        );
     };
 
-    const sortLocationsByDistance = () => {
-        const sortedLocations = [...filteredLocations].sort((a, b) => {
-            const distanceA = calculateDistance(
-                { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(a.uptainerLat), longitude: parseFloat(a.uptainerLong) }
-            );
-            const distanceB = calculateDistance(
-                { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(b.uptainerLat), longitude: parseFloat(b.uptainerLong) }
-            )
-            return parseFloat(distanceA) - parseFloat(distanceB);
-        });
-
-        return sortedLocations;
+    const handleUptainerPress = (location) => {
+        // Handle the press event, e.g., navigate to a detailed view
+        console.log(`Uptainer ${location.uptainerName} pressed`);
     };
-
-
-    const sortedLocations = sortLocationsByDistance();
-
-    const selectStation = (location) => {
-        mapRef.current.animateToRegion({
-            latitude: parseFloat(location.uptainerLat),
-            longitude: parseFloat(location.uptainerLong),
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-        });
-
-        setSearchText(location.uptainerName);
-        setShowSearchResults(false);
-
-        const selectedMarkerRef = markersRef.current[location.uptainerName];
-        if (selectedMarkerRef) {
-            selectedMarkerRef.showCallout();
-        }
-    };
-
-
-
-    const lastIndex = sortedLocations.length - 1;
 
     return (
-        <View style={styles1.container}>
-
-            {/* List of sorted locations */}
-            {showSearchResults && (
-            <ScrollView style={[GlobalStyle.BodyWrapper, dropdownStyles.dropdownContainer2]}>
-                {filteredLocations.length > 0 ? 
-                
-                (userLatitude === 0 && userLongitude === 0) ? (
-                    filteredLocations.map((location, index) =>(
-                        <SearchedLocation
-                        location={location}
-                        onPress={() => {
-                            selectStation(location);
-                        }}
-                        index={index}
-                        styling={[
-                            dropdownStyles.dropdownListItem2,
-                            index === lastIndex ? styles1.lastItem : null,
-                        ]}
-                        userLatitude={null}
-                        userLongitude={null}
-                    >
-                    </SearchedLocation>
-                    ))
-                )
-                :(
-                    sortedLocations.map((location, index) => (
-                    <SearchedLocation
-                        location={location}
-                        onPress={() => {
-                            selectStation(location);
-                        }}
-                        index={index}
-                        styling={[
-                            dropdownStyles.dropdownListItem2,
-                            index === lastIndex ? styles1.lastItem : null,
-                        ]}
-                        userLatitude={userLatitude}
-                        userLongitude={userLongitude}
-                    >
-                    </SearchedLocation>
-
-                ))
-                ) : (
-                <View style={{ borderColor: Primarycolor1,
-                    width: '100%',
-                    borderWidth:3, backgroundColor:"white"}}>
-                    <Text style={{marginBottom:50, maxHeight:50, marginTop:15, textAlign:"center", color:Primarycolor4}}>{t("StationsScreen.NoUptainers", currentLanguage)}</Text>
-                </View>
-                )}
-            </ScrollView>
-            )}
-        </View>
+        <FlatList
+            data={filteredLocations}
+            keyExtractor={(item) => item.uptainerName}
+            renderItem={renderItem}
+        />
     );
-
 };
 
 const styles1 = StyleSheet.create({
-    container: {
-        ...StyleSheet.absoluteFillObject,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flex: 1,
-    },
-    map: {
-        ...StyleSheet.absoluteFillObject,
-    },
-    searchBox: {
-        position: 'absolute',
-        zIndex: 1,
-        marginTop: 50,
-        width: '100%',
-    },
-    stationInfo: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-
-    },
-    stationName: {
-        fontWeight: 'bold',
-        fontSize: 16,
-        marginBottom: 10,
-        color: Primarycolor1,
-    },
-    addressInfo: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    stationAddress: {
-        fontSize: 12,
-        color:Primarycolor1,
-        width:"75%"
-    },
-
-    distance: {
-        width:"25%",
-        fontSize: 12,
-        color: Primarycolor1,
-        alignItems:"center"
-    },
     lastItem: {
         borderBottomWidth: 3,
     },
-    loadingContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
 });
 
 export default StationsMap;
-
-
