@@ -127,7 +127,6 @@ const MyDrafts = () => {
   const backButtonPressed = () => navigation.goBack()
 
   return (
-    
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>  
         
