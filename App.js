@@ -4,12 +4,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 
+//Change back to home
+import ServiceAdmin from './src/screens/ServiceAdmin'
+
 export default function App() {
   const Stack = createNativeStackNavigator()
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen options={{headerShown: false}} name="Home" component={Home}/>
+      <Stack.Navigator initialRouteName='ServiceAdmin'>
+        <Stack.Screen options={{headerShown: false}} name="ServiceAdmin" component={ServiceAdmin}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

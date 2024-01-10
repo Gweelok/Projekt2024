@@ -1,14 +1,11 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
-import {
-    dropdownStyles,
-    styles,
-} from "../styles/styleSheet";
+import { StyleSheet, View, FlatList, ActivityIndicator,  } from 'react-native';
+import {dropdownStyles, styles} from "../../styles/styleSheet";
 
 //import {t, useLanguage} from "../languages/LanguageHandler";
-import { calculateDistance } from '../utils/uptainersUtils';
-import UptainerLocation from './UptainerLocation';
+import { calculateDistance } from '../../utils/uptainersUtils';
+import UptainerLocation from './UptainerLocationButton';
 
 
 //!!Remove later!!
@@ -122,12 +119,15 @@ const StationsMap = () => {
         console.log(`Uptainer ${location.uptainerName} pressed`);
     };
 
+    //Remove Margin later if needed
     return (
-        <FlatList
-            data={filteredLocations}
-            keyExtractor={(item) => item.uptainerName}
-            renderItem={renderItem}
-        />
+        <View style={{ justifyContent: 'center',alignItems: 'center', margin: 16 , marginTop: 150}}>
+            <FlatList
+                data={filteredLocations}
+                keyExtractor={(item) => item.uptainerName}
+                renderItem={renderItem}
+            />
+        </View>
     );
 };
 
