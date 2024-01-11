@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native"
 import UptainerList from "../components/Home/UptainerButtonList"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 
-const Home = () => {
+const ServiceAdmin = () => {
     return (
         <View style={style.container}>
             <UptainerList></UptainerList>
@@ -17,4 +17,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default Home
+export default ServiceAdmin
