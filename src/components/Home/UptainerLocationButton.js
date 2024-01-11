@@ -1,9 +1,6 @@
 import React from "react";
-import {
-    Primarycolor1,
-    styles,
-} from "../../styles/styleSheet";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { Primarycolor1, styles, } from "../../styles/styleSheet";
 import { calculateDistance } from "../../utils/uptainersUtils";
 
 const UptainerLocation = ({ location, styling, onPress, userLatitude, userLongitude, }) => {
@@ -17,19 +14,19 @@ const UptainerLocation = ({ location, styling, onPress, userLatitude, userLongit
                 <View>
                     <Text style={styles1.stationName}>{location.uptainerName}</Text>
                     <View style={styles1.addressInfo}>
-                        <Text style={[styles.article_text, styles1.stationAddress]}>{`${location.uptainerStreet}, ${location.uptainerCity}`}</Text>
+                        <Text style={[styles.article_text, styles1.stationAddress]}>
+                            {`${location.uptainerStreet}, ${location.uptainerCity}`}
+                        </Text>
                         <View style={styles1.spacer} />
                         {(userLatitude !== null && userLongitude !== null) &&
-                            (<Text style={styles1.distance}>{` ${calculateDistance(
+                            (<Text style={styles1.distance}>
                                 {
-                                    latitude: userLatitude,
-                                    longitude: userLongitude
-                                },
-                                {
-                                    latitude: parseFloat(location.uptainerLat),
-                                    longitude: parseFloat(location.uptainerLong)
+                                    `${calculateDistance(
+                                        { latitude: userLatitude, longitude: userLongitude },
+                                        { latitude: parseFloat(location.uptainerLat), longitude: parseFloat(location.uptainerLong) }
+                                    )} km`
                                 }
-                            )} km`}</Text>)}
+                            </Text>)}
                     </View>
                 </View>
             </View>
@@ -41,7 +38,6 @@ const styles1 = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-
     },
     stationName: {
         fontWeight: 'bold',
@@ -59,14 +55,12 @@ const styles1 = StyleSheet.create({
         color: Primarycolor1,
         width: "75%"
     },
-
     distance: {
         width: "25%",
         fontSize: 12,
         color: Primarycolor1,
         alignItems: "center"
     },
-
 });
 
 export default UptainerLocation;
