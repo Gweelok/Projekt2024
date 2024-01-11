@@ -108,9 +108,18 @@ export async function createUptainer(data) {
 
 
 export async function createItem(brandId = "", categoryId = "", itemDescription = "", itemImage = "", itemModel = "", itemproduct = "", itemcondition = "", uptainerQRCode = "") {
+    console.log("createItem for QRScanner called with parameters:");
+    console.log("brandId:", brandId);
+    console.log("categoryId:", categoryId);
+    console.log("itemDescription:", itemDescription);
+    console.log("itemImage:", itemImage);
+    console.log("itemModel:", itemModel);
+    console.log("itemproduct:", itemproduct);
+    console.log("itemcondition:", itemcondition);
+    console.log("uptainerQRCode:", uptainerQRCode);
     const newItemKey = push(ref(db, paths.items)).key;
     let newImagePath = "Default.jpg"
-    if(itemImage != ""){
+    if(itemImage !== ""){
         try{
         const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
         newImagePath = newItemKey +"."+ fileExtension;
@@ -128,6 +137,7 @@ export async function createItem(brandId = "", categoryId = "", itemDescription 
     try{
         const user = await getCurrentUser();
         const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
+        console.log("UptainerId:", UptainerId);
         const itemData = {
             itemId: newItemKey,
             itemproduct: itemproduct,
@@ -204,6 +214,14 @@ export async function createProduct(data) {
 }
 
 export async function createItemDraft(productId = "", brandId = "", modelId = "", categoryId = "", itemImage = "", itemDescription = "", itemCondition = "") {
+    console.log("createItemDraft for  add without scanner with parameters:");
+    console.log("productId:", productId);
+    console.log("brandId:", brandId);
+    console.log("modelId:", modelId);
+    console.log("categoryId:", categoryId);
+    console.log("itemImage:", itemImage);
+    console.log("itemDescription:", itemDescription);
+    console.log("itemCondition:", itemCondition);
     const newItemKey = push(ref(db, paths.items)).key;
     try {
         let newImagePath = "Default.jpg"
@@ -265,8 +283,10 @@ function writeToDatabase(refPath, data) {
 
 export async function getUptainerFromQR(QRcode){
     const uptainerId = await QRCodeExists(QRcode);
-    if(uptainerId != "Draft")
+    console.log("Result from getUptainerFromQR to QRCodeExists:", uptainerId);
+    if(uptainerId !== "Draft")
     {
+        console.log("Returning uptainerId:", uptainerId);
         return uptainerId;
     }else{
         return null;

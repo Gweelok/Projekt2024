@@ -72,18 +72,11 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         const scannedQRCodeObject = JSON.parse(qrCodeString);
         console.log("scannedQRCodeObject: ", scannedQRCodeObject);
         const value = scannedQRCodeObject.props.value;
+        console.log("value: ", value);
         let navDir = "UptainerDetails";
 
         try {
           await createItem(
-          /*  (brandId = itemData?.brand),
-            (categoryId = itemData?.category),
-            (itemDescription = itemData?.description),
-            (itemImage = itemData?.image),
-            (itemModel = itemData?.model),
-            (itemproduct = itemData?.product),
-            (itemcondition = itemData?.condition),
-            (uptainerQRCode = value)*/
               itemData?.brand,
               itemData?.category,
               itemData?.description,
@@ -113,8 +106,13 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         }
 
 
+        console.log("uptainerId before condition:", uptainerId);
+
         if (!uptainerId) {
           navDir = "MyDrafts";
+          console.log("Condition met, navDir set to:", navDir);
+        } else {
+          console.log("Condition not met, navDir remains unchanged.");
         }
         Alert.alert(
           t("QrScannerScreen.Success", currentLanguage),

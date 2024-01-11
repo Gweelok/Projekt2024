@@ -28,8 +28,7 @@ import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 import GlobalStyle from "../../styles/GlobalStyle";
 
-const MyDrafts = () => {
-  const {navigation} = useNavigation();
+const MyDrafts = ({navigation}) => {
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -49,10 +48,6 @@ const MyDrafts = () => {
     DeleteDraft(selectedDraft.itemId,selectedDraft.itemImage)
     closePopup();
   }
-
-
-
-
 
     //Fetches items in the draftcards from the database
     const fetchDraftList = async () => {
@@ -84,11 +79,12 @@ const MyDrafts = () => {
               console.log("Error while downloading image => ", error);
               return {
                 ...item,
-                imageUrl: "https://via.placeholder.com/200x200",
+                imageUrl: "https://via.placeholder.com/200x200"||"",
               };
             }
           })
         );
+        console.log("Updated data:", updatedData); // Log the updatedData here
         setData(updatedData); // updates data property with the fetched data from db
         setIsLoading(false);
         setRefreshing(false);
