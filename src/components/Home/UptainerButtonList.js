@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, } from 'react-native';
 import { getAllUptainers, signInUser } from "../../utils/Repo";
 import { dropdownStyles } from "../../styles/styleSheet";
+import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
 import UptainerLocation from './UptainerLocationButton';
 
 /****************************************
-Only for purpose of reaching db in test!!
-Needs to be removed later on   
+Only for purpose of reaching db in test,
+add user......
+Needs to be removed later on.   
 ****************************************/
-signInUser('prova@gmail.com', '123456', 'UptainerButtonList');
+signInUser('', '');
 /***************************************
 ***************************************/
 
@@ -91,12 +93,12 @@ const UptainerButtonList = () => {
         console.log(`Uptainer ${location.uptainerName} pressed`);
     };
 
-    //Remove Margin later if needed
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', margin: 16, marginTop: 150 }}>
+        <View style={styles1.container}>
             <FlatList
                 data={filteredLocations}
                 keyExtractor={(item) => item.uptainerName}
+                style={[GlobalStyle.BodyWrapper, dropdownStyles.dropdownContainer2]}
                 renderItem={renderItem}
             />
         </View>
