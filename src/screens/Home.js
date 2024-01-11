@@ -6,7 +6,7 @@ import UptainerButtonList from "../components/Home/UptainerButtonList"
 const Home = () => {
     return (
         <View style={style.container}>
-            {<HomeContent></HomeContent>}
+            <HomeContent></HomeContent>
         </View>
     )
 }
