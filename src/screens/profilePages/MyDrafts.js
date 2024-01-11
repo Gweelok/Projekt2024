@@ -21,7 +21,7 @@ import {
 } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
-import { LoaderContext } from "../../componets/LoaderContext"; 
+import { LoaderContext } from "../../componets/LoaderContext";
 import LoadingScreen from "../../componets/LoadingScreen";
 import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
@@ -29,7 +29,7 @@ import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 import GlobalStyle from "../../styles/GlobalStyle";
 
 const MyDrafts = () => {
-  const navigation = useNavigation();
+  const {navigation} = useNavigation();
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -51,7 +51,7 @@ const MyDrafts = () => {
   }
 
 
- 
+
 
 
     //Fetches items in the draftcards from the database
@@ -59,7 +59,7 @@ const MyDrafts = () => {
       const storage = getStorage();
       setIsLoading(true);
       const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
-      
+
       try {
         const drafts = await getDraftFromUser(user.id); // userId is not working so this get all items from database
         const updatedData = await Promise.all(
@@ -96,11 +96,11 @@ const MyDrafts = () => {
         console.log("Error while fetching drafts => ", error);
       }
     };
-    
+
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    
+
     fetchDraftList ();
   }, []);
 
@@ -111,8 +111,8 @@ const MyDrafts = () => {
 
   async function DeleteDraft(itemId, image) {
       await deleteItemById(itemId);
-   
-    if(image != "Items/Default.jpg"){
+
+    if(image !== "Items/Default.jpg"){
       await deleteImage(image);
 
     }
@@ -121,11 +121,11 @@ const MyDrafts = () => {
       1
     );
     setData([...data]);
-  
+
   }
 
 
-  
+
 
   return (
     <StatusBarComponent style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper ]}>
@@ -158,7 +158,7 @@ const MyDrafts = () => {
                   description: cur.itemDescription,
                   image: cur.imageUrl,
                 });
-                
+
               }}
               onDraftPress={() => {
                 navigation.push("Add", { itemData: cur });
@@ -173,7 +173,7 @@ const MyDrafts = () => {
       </ScrollViewComponent>
       {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
     </StatusBarComponent>
-    
+
   );
 ;
 

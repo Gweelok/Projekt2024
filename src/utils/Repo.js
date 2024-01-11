@@ -117,9 +117,9 @@ export async function createItem(brandId = "", categoryId = "", itemDescription 
         const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
             console.log("progress: ",v)
             );
-        
-        console.log(uploadResp); 
-        console.log(newImagePath); 
+
+        console.log(uploadResp);
+        console.log(newImagePath);
         } catch (error) {
             console.log("can not upload image. Error: ", error);
         }
@@ -145,7 +145,7 @@ export async function createItem(brandId = "", categoryId = "", itemDescription 
     } catch (error) {
         console.log("can not upload item to DB. Error: ", error);
     }
-    
+
 }
 
 
@@ -207,25 +207,25 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
     const newItemKey = push(ref(db, paths.items)).key;
     try {
         let newImagePath = "Default.jpg"
-        
+
         console.log("itemImage", itemImage);
-        if(itemImage != ""){
+        if(itemImage !== ""){
             try{
             const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
             newImagePath = newItemKey +"."+ fileExtension;
             const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
                 console.log("progress: ",v)
                 );
-            
-            console.log(uploadResp); 
-            console.log(newImagePath); 
+
+            console.log(uploadResp);
+            console.log(newImagePath);
             } catch (error) {
                 console.log("can not upload image. Error: ", error);
             }
 
-    } 
+    }
         const user = await getCurrentUser();
-        
+
         const itemData = {
             itemId: newItemKey,
             itemproduct: productId,
@@ -243,7 +243,7 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
     } catch (error) {
         console.error("Error creating item draft:", error);
     }
-    
+
 
 }
 
@@ -643,7 +643,7 @@ export async function getItemById(itemId) {
 }
 export async function getDraftFromUser(userId) {
     const itemList = await getAllItems()
-    
+
     const draftList = itemList.filter(item => item.itemUser === userId && item.itemUptainer === "Draft")
     ///not tested yet
     return draftList
@@ -652,7 +652,7 @@ export async function getDraftFromUser(userId) {
 //Retrieve all user items
 export async function getItemsFromUser(userId) {
     const itemList = await getAllItems()
-    
+
     const itemsUserList = itemList.filter(item => item.itemUser === userId)
     ///not tested yet
     return itemsUserList
@@ -880,7 +880,7 @@ export async function createUser(email, password, navigation ,name = "John Doe")
           email: email,
           uuid: userCredential.user.uid,
           isAdmin: isAdmin,
-         
+
         };
         await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
         navigation.navigate("Homepage");
@@ -932,13 +932,13 @@ export async function updateAuthData(email, password, phoneNumber) {
   }
 
 
- 
+
   //add more info if needed
   export async function updateUserData(email, password, phoneNumber, name, profilePic) {
     await updateAuthData(email, password, phoneNumber);
     await updateDatabaseData(name, profilePic);
   }
-  
+
   export async function deleteUser(navigation) {
     const user = firebaseAurth.currentUser;
     // Delete the user from Firebase Authentication
@@ -947,7 +947,7 @@ export async function updateAuthData(email, password, phoneNumber) {
         .then(() => console.log("User deleted"))
         .catch((error) => console.log(error));
 
-    // Delete the user from Realtime Database   
+    // Delete the user from Realtime Database
     const reference = ref(db, 'users/' + user.uid);
     try {
         remove(reference);

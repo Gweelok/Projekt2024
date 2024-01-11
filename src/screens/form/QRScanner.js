@@ -76,14 +76,22 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
         try {
           await createItem(
-            (brandId = itemData?.brand),
+          /*  (brandId = itemData?.brand),
             (categoryId = itemData?.category),
             (itemDescription = itemData?.description),
             (itemImage = itemData?.image),
             (itemModel = itemData?.model),
             (itemproduct = itemData?.product),
             (itemcondition = itemData?.condition),
-            (uptainerQRCode = value)
+            (uptainerQRCode = value)*/
+              itemData?.brand,
+              itemData?.category,
+              itemData?.description,
+              itemData?.image,
+              itemData?.model,
+              itemData?.product,
+              itemData?.condition,
+              value // Assuming this is the uptainerQRCode value
           );
         } catch (error) {
           console.log("can not create item. Error: ", error);
@@ -115,7 +123,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
-                // navigation.navigate(navDir, uptainer);
+                 navigation.navigate(navDir, uptainer);
 
                 // Optionally, navigate or perform other actions after saving
               },
