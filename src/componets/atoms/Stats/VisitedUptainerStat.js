@@ -45,7 +45,7 @@ export const VisitedUptainerStat = (value) => {
                             <View style={GlobalStyle.BodyWrapper}>
                                 <TouchableOpacity onPress={handlePressOn}>
                                 <Text style={styles.menuItem_text}>{location} </Text>
-                                <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address}, {city}, {zip}  </Text>
+                                <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address}, {city}  </Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.Icon_container}>
