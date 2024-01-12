@@ -1,5 +1,6 @@
 export default {
   loginScreen: {
+    header: "Log In", 
     login: "Log in",
     username: "Username",
     password: "Password",
