@@ -20,11 +20,6 @@ const  DeleteAccount=({navigation})=>{
 
         return(
 
-    // eslint-disable-next-line react/react-in-jsx-scope
-
-
-
-
         <View style={GlobalStyle.BodyWrapper}>
             <Text style={[HeaderText.Header,{marginTop: 40, marginLeft: 0, marginRight: 0}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
             <View >
@@ -47,31 +42,6 @@ const  DeleteAccount=({navigation})=>{
 
 }
 const styles1 = StyleSheet.create({
-    container:
-            {
-        flex: 1,
-    },
-    headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingLeft: 10,
-        marginBottom: 20,
-    },
-    buttonContainer: {
-        flexDirection: 'column',
-        marginLeft:30,
-        marginTop:70,
-        justifyContent: 'center',
-        width: '80%',
-    },
-    backButtonHomemade: {
-        backgroundColor: "#1c4b3d",
-        width: 40,
-        height: 40,
-        justifyContent: "center",
-        alignItems: "center",
-        marginRight: 10,
-        marginLeft: 10,
-    }
+
 });
   export default DeleteAccount;
