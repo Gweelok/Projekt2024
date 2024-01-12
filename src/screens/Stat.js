@@ -27,13 +27,17 @@ import GreenBox from "../styles/GreenBox";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
-import { convertKgToTons, Calculate_co2_Equivalent, CalculateStatistic } from "../utils/Statcalculate";
+import { convertKgToTons, Calculate_co2_Equivalent, CalculateStatistic } from "../utils/uptainersUtils";
+
+
 
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [userCurrent, setUserCurrent] = useState({});
   const [refreshing, setRefresh] = useState(false);
+
+  
   const onRefresh = () => {
 
     setRefresh(true)
