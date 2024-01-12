@@ -98,7 +98,7 @@ const LoginForm = () => {
     return (
         <SafeAreaView style={style.container}>
             {showError && <ErrorBanner message={errorMessage} />}
-            <Text style={style.title}>{t("loginScreen.login", currentLanguage)}</Text>
+            <Text style={style.title}>{t("loginScreen.header", currentLanguage)}</Text>
             <CustomInput1 placeholder='E-mail' value={email} onChange={onChangeEmailHandler}></CustomInput1>
             <PasswordInput password={password} CheckPassword={CheckPassword} passwordCheck={passwordCheck} formSubmitted={formSubmitted} />
             <Pressable style={style.button} onPress={handleSubmit}><Text style={style.buttonText}>{t("loginScreen.login", currentLanguage)}</Text></Pressable>

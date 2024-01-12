@@ -1,5 +1,6 @@
 export default {
   loginScreen: {
+    header: "Log Ind",
     login: "Log ind",
     username: "Brugernavn",
     password: "Kodeord",
