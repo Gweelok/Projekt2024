@@ -1,8 +1,11 @@
 export default {
   loginScreen: {
-    login: "Log In",
+    login: "Log in",
     username: "Username",
-    password: "Password"
+    password: "Password",
+    validemail: "Please enter a valid email.",
+    fields: "Fields cannot be empty.",
+    passwordmsg: "Your password must be at least 8 characters long.",
 
   }
 };
