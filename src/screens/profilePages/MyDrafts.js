@@ -35,7 +35,7 @@ const MyDrafts = ({navigation}) => {
   const [ popupOpen, setPopupOpen ]= useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const handlePress = () => {
-    navigation.goBack();
+    navigation.navigate("Profile");
   };
 
   const closePopup = ()=>{
@@ -79,12 +79,11 @@ const MyDrafts = ({navigation}) => {
               console.log("Error while downloading image => ", error);
               return {
                 ...item,
-                imageUrl: "https://via.placeholder.com/200x200"||"",
+                imageUrl: "https://via.placeholder.com/200x200",
               };
             }
           })
         );
-        console.log("Updated data:", updatedData); // Log the updatedData here
         setData(updatedData); // updates data property with the fetched data from db
         setIsLoading(false);
         setRefreshing(false);
@@ -125,9 +124,9 @@ const MyDrafts = ({navigation}) => {
 
   return (
     <StatusBarComponent style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper ]}>
-      <View style={{flexDirection: "row", alignItems: "center"}}>
+      <View style={{flexDirection: "row", alignItems: "center",marginLeft:20}}>
         <BackButton onPress={handlePress} />
-        <Text style={[HeaderText.Header]}>
+        <Text style={[HeaderText.Header,{marginLeft:20}]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>

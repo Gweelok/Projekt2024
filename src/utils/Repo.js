@@ -107,15 +107,15 @@ export async function createUptainer(data) {
 }
 
 
-export async function createItem(brandId = "", categoryId = "", itemDescription = "", itemImage = "", itemModel = "", itemproduct = "", itemcondition = "", uptainerQRCode = "") {
+export async function createItem(itemImage = "",categoryId = "",itemproduct = "",brandId = "",  itemModel = "",  itemcondition = "",itemDescription = "", uptainerQRCode = "") {
     console.log("createItem for QRScanner called with parameters:");
-    console.log("brandId:", brandId);
-    console.log("categoryId:", categoryId);
-    console.log("itemDescription:", itemDescription);
     console.log("itemImage:", itemImage);
-    console.log("itemModel:", itemModel);
+    console.log("categoryId:", categoryId);
     console.log("itemproduct:", itemproduct);
+    console.log("brandId:", brandId);
+    console.log("itemModel:", itemModel);
     console.log("itemcondition:", itemcondition);
+    console.log("itemDescription:", itemDescription);
     console.log("uptainerQRCode:", uptainerQRCode);
     const newItemKey = push(ref(db, paths.items)).key;
     let newImagePath = "Default.jpg"
@@ -136,8 +136,9 @@ export async function createItem(brandId = "", categoryId = "", itemDescription 
     }
     try{
         const user = await getCurrentUser();
+        console.log("uptainerQRCode before QRCodeExists:", uptainerQRCode);
         const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
-        console.log("UptainerId:", UptainerId);
+        console.log("UptainerId after QRCodeExists:", UptainerId);
         const itemData = {
             itemId: newItemKey,
             itemproduct: itemproduct,
@@ -360,7 +361,8 @@ export async function getAllBrands() {
 }
 export async function getBrandById(brandId) {
     const db = firebaseGetDB;
-    const reference = ref(db, `/brands/${brandId}`);
+    const path=`/brands/${brandId}`;
+    const reference = ref(db, path);
 
     try {
         const snapshot = await get(reference);

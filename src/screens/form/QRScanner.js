@@ -77,13 +77,13 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
         try {
           await createItem(
-              itemData?.brand,
-              itemData?.category,
-              itemData?.description,
               itemData?.image,
-              itemData?.model,
+              itemData?.category,
               itemData?.product,
+              itemData?.brand,
+              itemData?.model,
               itemData?.condition,
+              itemData?.description,
               value // Assuming this is the uptainerQRCode value
           );
         } catch (error) {
@@ -103,17 +103,29 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             },
             scannedQRCodeData: scannedQRCodeObject.props.value, // Ensure this is defined correctly
           });
+          Alert.alert(
+              t("QrScannerScreen.Success", currentLanguage),
+              t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
+              [
+                {
+                  text: t("QrScannerScreen.OK", currentLanguage),
+                  onPress: () => {
+                    navigation.navigate(navDir, uptainer);
+
+                    // Optionally, navigate or perform other actions after saving
+                  },
+                },
+              ]
+          );
         }
 
 
         console.log("uptainerId before condition:", uptainerId);
-
+        let navDir1 = "MyDrafts";
         if (!uptainerId) {
-          navDir = "MyDrafts";
-          console.log("Condition met, navDir set to:", navDir);
-        } else {
-          console.log("Condition not met, navDir remains unchanged.");
-        }
+
+          console.log("Condition met, navDir set to:", navDir1);
+
         Alert.alert(
           t("QrScannerScreen.Success", currentLanguage),
           t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
@@ -121,14 +133,15 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
-                 navigation.navigate(navDir, uptainer);
+                 navigation.navigate(navDir1, uptainer);
 
                 // Optionally, navigate or perform other actions after saving
               },
             },
           ]
         );
-      } catch (error) {
+      }
+    }catch (error) {
         console.error("Error saving scanned QR code:", error);
 
         Alert.alert(
