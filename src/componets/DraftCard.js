@@ -11,6 +11,7 @@ import React from "react";
 import { Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { Ionicons } from "@expo/vector-icons";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -75,15 +76,10 @@ const DraftCard = ({
           </Text>
         </View>
       </TouchableOpacity>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
+      <View>
         <Pressable
           onPress={onPress}
-          style={[Buttons.main_button, { borderWidth: 1, width: "50%" }]}
+          style={[Buttons.main_button, {marginBottom: 30, marginTop: 5}]}
         >
           <Text style={Buttons.main_buttonText}>
             {t("UpdroppForm.scanButton", currentLanguage)}
@@ -99,11 +95,10 @@ export default DraftCard;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     width: "100%"
   },
   draftCard: {
-    width: windowWidth / 1.2,
+    width: "100%",
     height: windowHeight / 3,
     marginBottom: 10,
     borderWidth: 3,
@@ -113,14 +108,8 @@ const styles = StyleSheet.create({
   draftContent: {
     alignContent: "center",
     alignSelf: "center",
-    // backgroundColor: "green",
     padding: 20,
     width: windowWidth / 2.4,
-
-    // justifyContent: "center",
-    // alignItems: "center",
-
-    // padding: 20,
   },
   draftImage: {
     width: windowWidth / 2.4,
