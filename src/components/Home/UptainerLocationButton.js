@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { Primarycolor1, styles, } from "../../styles/styleSheet";
-import { calculateDistance } from "../../utils/uptainersUtils";
 
-const UptainerLocation = ({ location, styling, onPress, userLatitude, userLongitude, }) => {
+const UptainerLocation = ({ location, styling, onPress, distance }) => {
     return (
         <TouchableOpacity
             key={location.uptainerName}
@@ -18,14 +17,9 @@ const UptainerLocation = ({ location, styling, onPress, userLatitude, userLongit
                             {`${location.uptainerStreet}, ${location.uptainerCity}`}
                         </Text>
                         <View style={styles1.spacer} />
-                        {(userLatitude !== null && userLongitude !== null) &&
+                        {(distance !== null && distance !== NaN) &&
                             (<Text style={styles1.distance}>
-                                {
-                                    `${calculateDistance(
-                                        { latitude: userLatitude, longitude: userLongitude },
-                                        { latitude: parseFloat(location.uptainerLat), longitude: parseFloat(location.uptainerLong) }
-                                    )} km`
-                                }
+                                {`${distance} km`}
                             </Text>)}
                     </View>
                 </View>
