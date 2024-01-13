@@ -7,14 +7,16 @@ import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
 
-const ItemsSearched = ({navigation, product, item, index, userLocation, endSearch , uptainer}) =>{
-    const [imageUrl, setImageUrl] = useState(null)
+const ItemsSearched = ({navigation, product, item, index, userLocation, endSearch , uptainer, setItemImageUrl}) =>{
     const storage = getStorage()
     useEffect(()=>{
         (async ()=>{        
-            const imageRef = ref(storage, item.itemImage)
-            const image = await getDownloadURL(imageRef)
-            setImageUrl(image)
+            if( !item.imageUrl ) {
+                
+                const imageRef = ref(storage, item.itemImage)
+                const image = await getDownloadURL(imageRef)
+                setItemImageUrl(product.productId, image)
+            }
 
         })()
     }, [])
@@ -26,19 +28,19 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, endSearc
                 itemDescription: item?.itemDescription,
                 brandName: item?.brandName,
                 productName: item?.productName,
-                imageUrl: imageUrl,
+                imageUrl: item?.imageUrl,
                 uptainer: uptainer,
                 })
                 endSearch()
             }
-          } style={style.mainContainer} key={index}>
-            <View>
+          } style={style.mainContainer}>
+            <View key={index}>
                 <View style={style.container1}>
                     <Text style={style.productName}>{product.productName}</Text>
                     {(!!userLocation && !!uptainer) && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
                 {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName} / {uptainer.uptainerStreet}</Text>}
-                {!!imageUrl && <Image source={{uri: imageUrl}} style={style.image}></Image>}
+                {!!item?.imageUrl && <Image source={{uri: item.imageUrl}} style={style.image}></Image>}
             </View>
         </TouchableOpacity>
     )

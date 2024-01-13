@@ -16,8 +16,20 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch}) =>{
     const { currentLanguage, setLanguage } = useLanguage()
     const [allItems, setAllItems] = useState(null);
     const [allUptainers, setAllUptainers] = useState(null);
+    const [loading, setLoading] = useState(false)
+
+    const setItemImageUrl = (id, imageUrl) => {
+        setAllItems(items => {
+            items[id] = {
+                ...items[id],
+                imageUrl
+            }
+            
+            return items
+        })
+    }
+
     useEffect(()=>{
-       
         if(!allProducts){
             (async () =>{
                 const retrivedProducts = await getAllProducts()
@@ -33,7 +45,6 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch}) =>{
         } else {
 
             (async () =>{
-                
                 const filteredPs = await filterProducts(allProducts, search, allItems, allUptainers)
                 setfilteredProducts(filteredPs)
             })()
@@ -46,7 +57,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch}) =>{
             <ScrollViewComponent>
                 <Text style={style.productsMatch}>{filteredProducts.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
                 {(!!filteredProducts.length && !!allItems && allUptainers) && ( filteredProducts.map((product, index) =>(
-                    <ItemsSearched uptainer={allUptainers[allItems[product.productId]?.itemUptainer]}  endSearch={endSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
+                    <ItemsSearched setItemImageUrl={setItemImageUrl} uptainer={allUptainers[allItems[product.productId]?.itemUptainer]}  endSearch={endSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
                 )))}
                 
 
