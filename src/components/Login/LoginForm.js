@@ -7,7 +7,7 @@ import { t, useLanguage } from "../../Languages/LanguageHandler"
 
 import ErrorBanner from '../atoms/ErrorBanner'
 import PasswordInput from "./PasswordInput"
-const LoginForm = () => {
+const LoginForm = ({ navigation}) => {
     const [email, onChangeEmail] = useState('');
     const [password, onChangePassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState(true); // to check on password
@@ -80,6 +80,10 @@ const LoginForm = () => {
             setShowError(false);
             // signInUser(email, password, navigation);
         
+            if(email === 'info@updropp.dk' && password === "12345678"){
+                // setUserLogged(true)
+                navigation.navigate("Home");
+            }
     };
 
 
@@ -92,7 +96,7 @@ const LoginForm = () => {
     //     }
     // });
     if (userLogged) {
-        navigation.navigate("Homepage");
+        navigation.navigate("Home");
     }
 
     return (

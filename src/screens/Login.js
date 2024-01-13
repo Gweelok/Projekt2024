@@ -6,7 +6,7 @@ import LoginForm from "../components/Login/LoginForm"
 const Login = ({navigation}) =>{
     return (
         <View style={style.container}>
-            <LoginForm />
+            <LoginForm navigation={navigation}/>
         </View>
     )
 }
