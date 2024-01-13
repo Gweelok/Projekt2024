@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet, TextInput } from "react-native"
-import { Primarycolor1, Primarycolor3, Primarycolor4 } from "../../styles/styleSheet"
+import { Primarycolor1, Primarycolor2, Primarycolor3, Primarycolor4 } from "../../styles/styleSheet"
 
 const CustomInput1 = ({value, onChange, placeholder}) =>{
     return (
         <SafeAreaView>
-            <TextInput placeholder={placeholder} style={style.input} value={value} onChangeText={onChange}/>
+            <TextInput placeholder={placeholder} style={[style.input, {color: value.length ? Primarycolor1 : Primarycolor2,}]} value={value} onChangeText={onChange}/>
         </SafeAreaView>
     )
 }

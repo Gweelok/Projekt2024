@@ -2,7 +2,7 @@ import { useState } from "react";
 import { StyleSheet } from "react-native"
 import { View, TextInput } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import { Primarycolor1, styles } from "../../styles/styleSheet";
+import { Primarycolor1, Primarycolor2, styles } from "../../styles/styleSheet";
 import { t, useLanguage } from "../../Languages/LanguageHandler"
 
 const PasswordInput = ({ password, CheckPassword, passwordCheck, formSubmitted}) => {
@@ -22,7 +22,7 @@ const PasswordInput = ({ password, CheckPassword, passwordCheck, formSubmitted})
                     placeholderTextColor="#8EA59E"
                     keyboardType={'default'}
                     secureTextEntry={!showPassword}
-                    style={style.input}
+                    style={[style.input, {color: value.length ? Primarycolor1 : Primarycolor2,}]}
 
                 />
                 <Ionicons
