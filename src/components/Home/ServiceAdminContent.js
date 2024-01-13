@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native"
-import UptainerList from "./UptainerButtonList"
+import UptainerList from "./UptainerList"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 
 const ServiceAdmin = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { Primarycolor1, styles, } from "../../styles/styleSheet";
 
-const UptainerLocation = ({ location, styling, onPress, distance }) => {
+const Uptainer = ({ location, styling, onPress, distance }) => {
     return (
         <TouchableOpacity
             key={location.uptainerName}
@@ -57,4 +57,4 @@ const styles1 = StyleSheet.create({
     },
 });
 
-export default UptainerLocation;
+export default Uptainer;

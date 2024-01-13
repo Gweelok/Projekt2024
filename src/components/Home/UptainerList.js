@@ -5,17 +5,17 @@ import { getAllUptainers} from "../../utils/Repo";
 import { dropdownStyles } from "../../styles/styleSheet";
 import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
-import UptainerLocation from './UptainerLocationButton';
+import Uptainer from './Uptainer';
 
-const UptainerButtonList = () => {
-    const [filteredLocations, setFilteredLocations] = useState([]);
+const UptainerList = () => {
+    const [uptainers, setUptainers] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const getUptainers = async () => {
         try {
             const uptainerList = await getAllUptainers();
-            setFilteredLocations(uptainerList);
+            setUptainers(uptainerList);
         } catch (error) {
             console.log("Error:", error);
         }
@@ -63,14 +63,14 @@ const UptainerButtonList = () => {
         );
 
         return (
-            <UptainerLocation
+            <Uptainer
                 key={index}
                 location={item}
                 onPress={() => handleUptainerPress(item)}
                 index={index}
                 styling={[
                     dropdownStyles.dropdownListItem2,
-                    index === filteredLocations.length - 1 ? styles1.lastItem : null,
+                    index === uptainers.length - 1 ? styles1.lastItem : null,
                 ]}
                 distance={distance}
             />
@@ -83,7 +83,7 @@ const UptainerButtonList = () => {
                 <ActivityIndicator size='large' color='black' />
             ) : (
                 <FlatList
-                    data={filteredLocations}
+                    data={uptainers}
                     keyExtractor={(item) => item.uptainerName}
                     style={[GlobalStyle.BodyWrapper, styles1.uptainerList]}
                     renderItem={renderUptainers} 
@@ -104,4 +104,4 @@ const styles1 = StyleSheet.create(
         }
     });
 
-export default UptainerButtonList;
+export default UptainerList;
