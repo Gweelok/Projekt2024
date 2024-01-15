@@ -1,7 +1,7 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, } from 'react-native';
-import { getAllUptainers} from "../../utils/Repo";
+import { getAllUptainers } from "../../utils/Repo";
 import { dropdownStyles } from "../../styles/styleSheet";
 import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
@@ -15,8 +15,10 @@ const UptainerList = () => {
     const getUptainers = async () => {
         try {
             const uptainerList = await getAllUptainers();
+            setLoading(false);
             setUptainers(uptainerList);
         } catch (error) {
+            setLoading(false);
             console.log("Error:", error);
         }
     };
@@ -25,15 +27,12 @@ const UptainerList = () => {
         try {
             const { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setLoading(false);
                 return;
             }
             const location = await Location.getCurrentPositionAsync({});
             setUserLocation(location.coords);
-            setLoading(false);
         } catch (error) {
             console.error('Error fetching location:', error);
-            setLoading(false);
         }
     };
 
@@ -86,7 +85,7 @@ const UptainerList = () => {
                     data={uptainers}
                     keyExtractor={(item) => item.uptainerName}
                     style={[GlobalStyle.BodyWrapper, styles1.uptainerList]}
-                    renderItem={renderUptainers} 
+                    renderItem={renderUptainers}
                 />
             )}
         </View>
