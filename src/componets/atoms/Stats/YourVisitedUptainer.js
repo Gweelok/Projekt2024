@@ -35,7 +35,10 @@ export const YourVisitedUptainer = (value) => {
                     <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
                                     navigation.navigate("UptainerDetails", {
-                                    uptainerData: uptainerData,
+                                        id: uptainerData?.id,
+                                        name: uptainerData?.uptainerName,
+                                        location: uptainerData?.uptainerStreet,
+                                        imageUrl: uptainerData?.imageUrl,
                                     });
                                     }}>
                         <View style={styles.boxlink}>
