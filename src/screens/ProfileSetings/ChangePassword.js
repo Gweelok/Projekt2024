@@ -99,17 +99,17 @@ const ChangePassword = ({ navigation }) => {
         const amILoggedIn = firebaseAurth.currentUser; //FOR SEEING IF LOG OUT INDEED HAPPENED, DELETE AFTER REVIEW/TESTING
         console.log("Am I Logged In: " + amILoggedIn); // ^ same here
     };
-    const bye = () => {
+    const navigateToAccountSettings = () => {
         navigation.navigate("AccountSettings");
     };
     return (
 
 
-        <SafeAreaView style={styles.container2}>
-            <View style={GlobalStyle.BodyWrapper}>
+        <View style={GlobalStyle.BodyWrapper}>
+
             <View style={customStyles.headerContainer}>
-                <BackButton onPress={bye} style={{marginLeft:-7}} />
-                <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
+                <BackButton onPress={navigateToAccountSettings}  />
+                <Text style={[HeaderText.Header,{marginLeft:0 ,marginRight: 0,}]}>
                     {t('ChangePasswordScreen.Header', currentLanguage)}
                 </Text>
             </View>
@@ -189,9 +189,9 @@ const ChangePassword = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+
             <TouchableOpacity
-                style={[Buttons.main_button,{position: 'relativ',top:-350} ]}onPress={handlePress}>
+                style={[Buttons.main_button,{position: 'relativ'} ]}onPress={handlePress}>
                 <View>
                 <Text style={Buttons.main_buttonText}>
                     {t('ChangePasswordScreen.SavePassword', currentLanguage)}
@@ -224,8 +224,8 @@ const ChangePassword = ({ navigation }) => {
 
 
             </Modal>
-
-        </SafeAreaView>
+            <Navigationbar navigation={navigation} />
+        </View>
 
 
     );
@@ -241,6 +241,7 @@ const customStyles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 10,
         marginBottom: 30,
+        marginTop: 30,
     },
 
     eyeIcon: {
