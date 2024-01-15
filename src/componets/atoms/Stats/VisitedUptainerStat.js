@@ -22,6 +22,7 @@ export const VisitedUptainerStat = (value) => {
     let city = 'n/d';
     let zip = 'n/d';
 
+
     if(bestUptainers.length !== 0){
         location = bestUptainers["uptainerName"];
         address = bestUptainers["uptainerStreet"];
@@ -60,10 +61,12 @@ export const VisitedUptainerStat = (value) => {
                     </TouchableOpacity>
                 </View>
                 <View style={GlobalStyle}>
+
                     <Text style={[Buttons.main_button,{paddingTop: 9, height:40, width: "100%", color:"white"}]}>{bestUptainers["itemsReused"]} {t('StatsPage.ItemsRecicled', currentLanguage)}</Text>
                 </View>
                 <View style={GlobalStyle}>
                     <Text style={[Backgroundstyle.informationScreens,{paddingTop: 9, height:40, marginTop:5, marginBottom:40, paddingLeft:10, width: "100%", color:Primarycolor1}]}>{bestUptainers["savedCO2"]} kg {t('StatsPage.CO2Save', currentLanguage)}</Text>
+
                 </View>
             </View>
 

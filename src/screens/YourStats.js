@@ -18,15 +18,19 @@ import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
 import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
 import { items } from "../utils/Testdata";
+import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
-  let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 });
+  let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 , itemsDonated: 0, itemsCollected: 0});
   const navigation = useNavigation();
-//Get current user
+
+  //Get current user
 const userCurrent = props.user;
 //Get all products
 const products = props.products;
+//Get info about uptainers
+const uptainers = props.uptainers;
   useEffect(() => {
     fetchData();
   }, []);
@@ -36,7 +40,10 @@ const products = props.products;
     // Initializing variables to hold CO2 footprint for taken and not taken items
     let co2FootprintTaken = 0;
     let co2FootprintNotTaken = 0;
+    let itemsDonated = 0;
+    let itemsCollected = 0;
     // Loop through the items array and products arrays to calculate the total CO2 footprint
+    console.log("userItems", userItems)
     userItems.forEach((item) => {
       products.forEach((product) => {       
         if (item.itemproduct === product.productId && item.itemTaken === true) {
@@ -45,6 +52,12 @@ const products = props.products;
           co2FootprintNotTaken += parseInt(product.co2Footprint);
         }
       });
+      if(item.itemTaken === false){
+        itemsDonated+=1;
+      }
+      if(item.itemTaken === true){
+        itemsCollected+=1;
+      }
     });
     // Calculate the total CO2 footprint
     const totalCO2Footprint = co2FootprintTaken + co2FootprintNotTaken;
@@ -54,9 +67,12 @@ const products = props.products;
     setCO2Data((prevData) => ({
       ...prevData,
       TotalCo2Footprint: totalCO2Footprint,
-     
+      itemsDonated: itemsDonated,
+      itemsCollected: itemsCollected
     }));
   }
+
+  const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(co2Data.TotalCo2Footprint)
 
   return (
     <ScrollViewComponent>
@@ -81,7 +97,7 @@ const products = props.products;
               {t("StatsPage.ItemsDonated", currentLanguage)}
             </Text>
             <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
-              5
+              {co2Data.itemsDonated}
             </Text>
           </View>
           <View style={[Backgroundstyle.informationScreens, { paddingTop: 5 }]}>
@@ -91,7 +107,7 @@ const products = props.products;
               {t("StatsPage.ItemsCollected", currentLanguage)}
             </Text>
             <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
-              7
+              {co2Data.itemsCollected}
             </Text>
           </View>
         </View>
@@ -135,7 +151,7 @@ const products = props.products;
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
               {" "}
-              {t("StatsPage.kgCO2", currentLanguage)}
+              {t('StatsPage.kgCO2', currentLanguage)} {personalEquivalent} {t('StatsPage.Fact_equavalent', currentLanguage)}
             </Text>
           </View>
           <View
@@ -152,7 +168,7 @@ const products = props.products;
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
               {" "}
-              {t("StatsPage.Amount", currentLanguage)}{" "}
+              {t('StatsPage.Amount_first_part', currentLanguage)} {convertKgToTons(co2Data.TotalCo2Footprint)} {t('StatsPage.Amount_second_part', currentLanguage)} {totalEquivalent} {t('StatsPage.Fact_equavalent', currentLanguage)}
             </Text>
           </View>
         </View>
@@ -238,9 +254,7 @@ const products = props.products;
             {t("StatsPage.MostVisitedUptainer", currentLanguage)}
           </Text>
         </View>
-        <YourVisitedUptainer />
-        <YourVisitedUptainer />
-        <YourVisitedUptainer />
+        {uptainers.map(uptainer => <YourVisitedUptainer value={uptainer}/>)} 
         <View style={{ marginTop: 25, marginBottom: 10 }}>
           <Text
             style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}

@@ -1,5 +1,5 @@
 import { React, useEffect, useState, useContext, useCallback} from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert, SafeAreaView } from "react-native";
 import { HeaderText, Primarycolor1, Backgroundstyle } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
@@ -27,7 +27,9 @@ import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 import GlobalStyle from "../../styles/GlobalStyle";
+
 import Navigationbar from "../../componets/Navigationbar";
+
 
 const MyDrafts = ({navigation}) => {
   const { currentLanguage } = useLanguage();
@@ -120,9 +122,6 @@ const MyDrafts = ({navigation}) => {
 
   }
 
-
-
-
   return (
       <View style={[Backgroundstyle.interactive_screens]}>
         <View style={GlobalStyle.BodyWrapper}>
@@ -174,7 +173,7 @@ const MyDrafts = ({navigation}) => {
         <Navigationbar navigation={navigation} />
       </View>
   );
-;
+
 
 
 const DraftStyle = StyleSheet.create({
