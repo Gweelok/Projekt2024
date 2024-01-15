@@ -125,9 +125,9 @@ const MyDrafts = ({navigation}) => {
   return (
       <View style={[Backgroundstyle.interactive_screens]}>
         <View style={GlobalStyle.BodyWrapper}>
-        <View style={{flexDirection: "row", alignItems: "center",marginLeft:20}}>
+        <View style={{flexDirection: "row", alignItems: "center"}}>
         <BackButton onPress={handlePress} />
-        <Text style={[HeaderText.Header,{marginLeft:20}]}>
+        <Text style={[HeaderText.Header,{marginLeft:30}]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>
