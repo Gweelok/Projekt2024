@@ -3,7 +3,6 @@ import {
     View,
     Text,
     TouchableOpacity,
-    SafeAreaView,
     TextInput,
     StyleSheet,
     Modal,
@@ -11,19 +10,14 @@ import {
 import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
 import { Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
-//import Icon from 'react-native-vector-icons/AntDesign';
 import Navigationbar from "../../componets/Navigationbar";
 import { Keyboard } from 'react-native';
 import { firebaseAurth } from "../../utils/Firebase";
 import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOut } from "firebase/auth";
 import Icon from 'react-native-vector-icons/Ionicons';
 import BackButton from "../../componets/BackButton";
-import {GoBackButton} from "../../styles/GoBackButton";
-import backButton from "../../componets/BackButton";
-import globalStyle from "../../styles/GlobalStyle";
 import GlobalStyle from "../../styles/GlobalStyle";
-import { Dimensions } from "react-native";
-import {windowHeight, windowWidth} from "../../utils/Dimensions";
+
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -126,9 +120,6 @@ const ChangePassword = ({ navigation }) => {
                             secureTextEntry={!showCurrentPassword}
                             value={currentPassword}
                             onChangeText={setCurrentPassword}
-                            //paddingRight={40}
-                            //textAlignVertical="center"
-                            //fontFamily="Arial"
                             placeholder="Current password"
                             placeholderTextColor="#8EA59E"
                         />
@@ -151,8 +142,6 @@ const ChangePassword = ({ navigation }) => {
                             secureTextEntry={!showNewPassword}
                             value={newPassword}
                             onChangeText={setNewPassword}
-                            //paddingRight={40}
-                            //textAlignVertical="center"
                             placeholder="New password"
                             placeholderTextColor="#8EA59E"
                         />
@@ -176,8 +165,6 @@ const ChangePassword = ({ navigation }) => {
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
                             keyboardType={'default'}
-                            //paddingRight={40}
-                            //textAlignVertical="center"
                             placeholder="Confirm password"
                             placeholderTextColor="#8EA59E"                        
                             />
@@ -240,16 +227,10 @@ const customStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 10,
-        marginBottom: 30,
+        marginBottom: 20,
         marginTop: 30,
     },
 
-    eyeIcon: {
-        position: 'absolute',
-       right: 10,
-        top: '50%',
-        transform: [{ translateY: -10 }],
-    },
     inputText: {
         fontSize: 15,
         color: 'black',
@@ -283,9 +264,7 @@ const customStyles = StyleSheet.create({
         alignItems: 'center', // Center align text and button vertically
         borderRadius: 5,
     },
-    BackButton:{
-     marginLeft: 10,
-    },
+
     successText: {
         color: 'white',
         fontSize: 16,
