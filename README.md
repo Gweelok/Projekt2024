@@ -87,6 +87,12 @@ And that should be it on the computer side, there’ll be a last section for how
 ## To run the app on the phone
 To run our application, after you’ve run the command “npx expo start” successfully, you’ll have to download the app ”expo go”, and also connect to the same internet as your computer, in it I’ll have a QR code reader, scan your given QR code and presto, the app now runs (after an initial installation).
 
+# Admin user credential
+To log into the application UpdroppAdmin you can use the following email and password
+```
+Email: info@updropp.dk
+Password: 12345678
+```
 
 # Code editor: prerequisites
 Firstly you'll need to install git while installing there'll be lots of options, that most of you don't need to touch except for: "choose default editor for git" which should be set to "visual studio code", "adjust the name of the initial branch" which should be set to "override the default" and the name should be changed to "main".
