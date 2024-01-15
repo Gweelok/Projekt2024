@@ -27,6 +27,7 @@ import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 import GlobalStyle from "../../styles/GlobalStyle";
+import Navigationbar from "../../componets/Navigationbar";
 
 const MyDrafts = ({navigation}) => {
   const { currentLanguage } = useLanguage();
@@ -123,8 +124,9 @@ const MyDrafts = ({navigation}) => {
 
 
   return (
-    <StatusBarComponent style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper ]}>
-      <View style={{flexDirection: "row", alignItems: "center",marginLeft:20}}>
+      <View style={[Backgroundstyle.interactive_screens]}>
+        <View style={GlobalStyle.BodyWrapper}>
+        <View style={{flexDirection: "row", alignItems: "center",marginLeft:20}}>
         <BackButton onPress={handlePress} />
         <Text style={[HeaderText.Header,{marginLeft:20}]}>
           {t("MyDraftsScreen.Header", currentLanguage)}
@@ -167,8 +169,10 @@ const MyDrafts = ({navigation}) => {
         )}
       </ScrollViewComponent>
       {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
-    </StatusBarComponent>
 
+      </View>
+        <Navigationbar navigation={navigation} />
+      </View>
   );
 ;
 

@@ -84,7 +84,7 @@ const DraftCard = ({
       >
         <Pressable
           onPress={onPress}
-          style={[Buttons.main_button, { borderWidth: 1, width: "50%" }]}
+          style={[Buttons.main_button, { borderWidth: 1,marginLeft: 0,width: "104%", }]}
         >
           <Text style={Buttons.main_buttonText}>
             {t("UpdroppForm.scanButton", currentLanguage)}
