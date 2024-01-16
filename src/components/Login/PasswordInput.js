@@ -22,7 +22,7 @@ const PasswordInput = ({ password, CheckPassword, passwordCheck, formSubmitted})
                     placeholderTextColor="#8EA59E"
                     keyboardType={'default'}
                     secureTextEntry={!showPassword}
-                    style={[style.input, {color: value.length ? Primarycolor1 : Primarycolor2,}]}
+                    style={[style.input, {color: password.length ? Primarycolor1 : Primarycolor2,}]}
 
                 />
                 <Ionicons
