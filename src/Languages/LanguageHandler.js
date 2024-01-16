@@ -7,6 +7,9 @@ import da from './da';
 
 const LanguageContext = createContext();
 
+function isValidLanguage(language) {
+  return typeof language === 'string' && (language === 'en' || language === 'da');
+}
 
 function getLanguageObject(currentLanguage) {
   switch (currentLanguage) {
@@ -23,7 +26,10 @@ function getLanguageObject(currentLanguage) {
 export function t(key, currentLanguage) {
   const langObj = getLanguageObject(currentLanguage);
   const keys = key.split('.');
-
+  
+  if (!isValidLanguage(currentLanguage)) {
+    throw new Error('Error: currentLanguage must be a valid string and should be either "en" for English or "da" for Danish.')
+  }
 
   let translation = langObj;
 
