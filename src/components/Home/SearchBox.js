@@ -1,25 +1,25 @@
 import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 
-import {Feather} from "@expo/vector-icons";
-import {Primarycolor1, Primarycolor4} from "../../styles/styleSheet";
+import { Feather } from "@expo/vector-icons";
+import { Primarycolor1, Primarycolor4 } from "../../styles/styleSheet";
 
 const SearchBox = ({ onChangeText, value, placeholderText }) => {
-   
+console.log(isSearching)
     return (
         <View style={styles.container}>
             <TextInput
-                style={styles.input}
+                style={[styles.input]}
                 onChangeText={onChangeText}
                 value={value}
                 placeholder={placeholderText}
                 placeholderTextColor={Primarycolor4}
             />
-            <Feather 
-                style={styles.searchIcon} 
-                name="search" 
-                size={24} 
-                color={Primarycolor4} 
+            <Feather
+                style={styles.searchIcon}
+                name="search"
+                size={24}
+                color={Primarycolor4}
             />
         </View>
     );

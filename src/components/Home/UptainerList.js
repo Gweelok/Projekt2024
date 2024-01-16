@@ -34,7 +34,7 @@ const UptainerList = ({ searchValue }) => {
             }
 
             //Filter uptainers by search string if it's available.
-            if (searchValue !== '') {
+            if (searchValue.length !== 0) {
                 const filteredUptainerList = uptainerList.filter(item =>
                     item.uptainerName.toLowerCase().includes(searchValue.toLowerCase()) ||
                     item.uptainerStreet.toLowerCase().includes(searchValue.toLowerCase()) ||

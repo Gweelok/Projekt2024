@@ -21,10 +21,16 @@ const ServiceAdmin = () => {
     return (
         <View style={style.container}>
 
-            <View style={style.container2} >
+            <View style={style.searchContainer} >
 
                 <View style={[GlobalStyle.BodyWrapper, style.searchBox]} onTouchStart={openSearch}>
-                    <SearchBox onChangeText={(text) => setSearchText(text)} value={searchText} placeholderText={"Search"}></SearchBox>
+
+                    <SearchBox
+                        onChangeText={(text) => setSearchText(text)}
+                        value={searchText} placeholderText={"search"}
+                        isSearching={isSearching}>                              
+                    </SearchBox>
+
                 </View>
 
                 {isSearching && (
@@ -34,9 +40,9 @@ const ServiceAdmin = () => {
                 )}
 
             </View>
-            <View onTouchStart={closeSearch} style={style.container3}>
 
-            </View>
+            <View onTouchStart={closeSearch} style={style.container2} />
+
         </View>
     )
 }
@@ -48,10 +54,10 @@ const style = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    container2: {
+    searchContainer: {
         width: '80%',
     },
-    container3: {
+    container2: {
         width: '100%',
         height: '100%'
     },
