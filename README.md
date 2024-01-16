@@ -142,6 +142,10 @@ Create a const to access to the global loading state and its associated setter.
 
 Welcome to the guide on effectively using Firebase functions in your React Native app. Below, you'll find a comprehensive list of functions available in the repository, along with examples of how to use them. Let's dive in!
 
+#### Diagram Firebase
+
+In this diagram you can see the name of the objects in the database and the name of all the fields.
+![Diagram for working with Realtime Database](https://github.com/ekmakeitgoodagain/updropp/blob/igor_sorokin_add_diagram_to_readme/src/utils/firebaseDiagram.png)
 ### Function Descriptions
 
 Each function's purpose is briefly described to help you understand its role in your app.

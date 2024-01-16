@@ -15,10 +15,10 @@ import {
   getProductById,
   getBrandById,
 } from "../utils/Repo";
-
 import { LoaderContext } from "../componets/LoaderContext";
+import { calculateDistance } from "../utils/uptainersUtils";
 
-const Uptainer = ({ uptainerData }) => {
+const Uptainer = ({ uptainerData, userLocation }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -86,9 +86,16 @@ const Uptainer = ({ uptainerData }) => {
         }}
       >
         <Text style={styles.menuItem_text}>{uptainerData.uptainerName}</Text>
-        <Text style={{ fontSize: 18, color: Primarycolor1 }}>
-          {uptainerData.uptainerStreet}
-        </Text>
+        <View style={styling.details}>
+          <Text style={{ fontSize: 18, color: Primarycolor1 }}>
+            {uptainerData.uptainerStreet}
+          </Text>
+          {userLocation && (
+          <Text style={styling.distance}>
+            {calculateDistance({ latitude: userLocation.latitude, longitude: userLocation.longitude },
+            { latitude: parseFloat(uptainerData.uptainerLatitude), longitude: parseFloat(uptainerData.uptainerLongitude)})} km</Text>
+          )}
+        </View>
       </TouchableOpacity>
 
       <FlatList
@@ -160,6 +167,15 @@ const styling = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
   },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  distance: {
+    fontSize: 12,
+    color: Primarycolor1, 
+    marginTop: 5
+  }
 });
 
 export default Uptainer;

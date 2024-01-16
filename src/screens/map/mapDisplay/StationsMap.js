@@ -15,6 +15,8 @@ import {
 } from "../../../styles/Stylesheet";
 import * as Location from 'expo-location';
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
+import { calculateDistance } from '../../../utils/uptainersUtils';
+import SearchedLocation from './SearchedLocation';
 
 
 
@@ -107,23 +109,6 @@ const StationsMap = ({ navigation }) => {
         );
     }
 
-
-
-    const calculateDistance = (lat1, lon1, lat2, lon2) => {
-        const R = 6371;
-        const dLat = (lat2 - lat1) * (Math.PI / 180);
-        const dLon = (lon2 - lon1) * (Math.PI / 180);
-        const a =
-            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos((lat1 * Math.PI) / 180) *
-            Math.cos((lat2 * Math.PI) / 180) *
-            Math.sin(dLon / 2) *
-            Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distance = R * c;
-        return distance.toFixed(2);
-    };
-
     const userLatitude = userLocation?.latitude || 0;
     const userLongitude = userLocation?.longitude || 0;
 
@@ -137,17 +122,13 @@ const StationsMap = ({ navigation }) => {
     const sortLocationsByDistance = () => {
         const sortedLocations = [...filteredLocations].sort((a, b) => {
             const distanceA = calculateDistance(
-                userLatitude,
-                userLongitude,
-                parseFloat(a.uptainerLat),
-                parseFloat(a.uptainerLong)
+                { latitude: userLatitude, longitude: userLongitude },
+                { latitude: parseFloat(a.uptainerLat), longitude: parseFloat(a.uptainerLong) }
             );
             const distanceB = calculateDistance(
-                userLatitude,
-                userLongitude,
-                parseFloat(b.uptainerLat),
-                parseFloat(b.uptainerLong)
-            );
+                { latitude: userLatitude, longitude: userLongitude },
+                { latitude: parseFloat(b.uptainerLat), longitude: parseFloat(b.uptainerLong) }
+            )
             return parseFloat(distanceA) - parseFloat(distanceB);
         });
 
@@ -245,34 +226,42 @@ const StationsMap = ({ navigation }) => {
             {/* List of sorted locations */}
             {showSearchResults && (
             <ScrollView style={[GlobalStyle.BodyWrapper, dropdownStyles.dropdownContainer2]}>
-                {filteredLocations.length > 0 ? (
-                    sortedLocations.map((location, index) => (
-                    <TouchableOpacity
-                        key={location.uptainerName}
+                {filteredLocations.length > 0 ? 
+                
+                (userLatitude === 0 && userLongitude === 0) ? (
+                    filteredLocations.map((location, index) =>(
+                        <SearchedLocation
+                        location={location}
                         onPress={() => {
                             selectStation(location);
                         }}
-                        style={[
+                        index={index}
+                        styling={[
                             dropdownStyles.dropdownListItem2,
                             index === lastIndex ? styles1.lastItem : null,
                         ]}
+                        userLatitude={null}
+                        userLongitude={null}
                     >
-                        <View style={styles1.stationInfo}>
-                            <View>
-                                <Text style={styles1.stationName}>{location.uptainerName}</Text>
-                                <View style={styles1.addressInfo}>
-                                    <Text style={[styles.article_text, styles1.stationAddress]}>{`${location.uptainerStreet}, ${location.uptainerCity}`}</Text>
-                                    <View style={styles1.spacer} />
-                                    <Text style={styles1.distance}>{` ${calculateDistance(
-                                        userLatitude,
-                                        userLongitude,
-                                        parseFloat(location.uptainerLat),
-                                        parseFloat(location.uptainerLong)
-                                    )} km`}</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    </SearchedLocation>
+                    ))
+                )
+                :(
+                    sortedLocations.map((location, index) => (
+                    <SearchedLocation
+                        location={location}
+                        onPress={() => {
+                            selectStation(location);
+                        }}
+                        index={index}
+                        styling={[
+                            dropdownStyles.dropdownListItem2,
+                            index === lastIndex ? styles1.lastItem : null,
+                        ]}
+                        userLatitude={userLatitude}
+                        userLongitude={userLongitude}
+                    >
+                    </SearchedLocation>
 
                 ))
                 ) : (

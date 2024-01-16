@@ -8,6 +8,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "./atoms/ScrollViewComponent";
 import QuizPoll from "./atoms/QuizPoll";
 import { useLanguage, t } from "../Languages/LanguageHandler";
+import { sortUptainersByDistance } from "../utils/uptainersUtils";
 
 const SortUptainers = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
@@ -15,46 +16,6 @@ const SortUptainers = ({ navigation }) => {
   const [uptainersList, setUptainerList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const { currentLanguage, setLanguage } = useLanguage();
-
-  // Function to calculate distance between two points.
-  const calculateDistance = (
-    { latitude: lat1, longitude: lon1 },
-    { latitude: lat2, longitude: lon2 }
-  ) => {
-    const R = 6371; // Radius of the Earth in kilometers
-    const dLat = deg2rad(lat2 - lat1);
-    const dLon = deg2rad(lon2 - lon1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) *
-        Math.cos(deg2rad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in kilometers
-
-    return distance; // Return the calculated distance
-  };
-
-  // Helper function to convert degrees to radians
-  const deg2rad = (angle) => {
-    return angle * (Math.PI / 180);
-  };
-
-  // Function to sort the Uptainers list by distance based on the user's location
-  const sortUptainersByDistance = (userLocation, uptainersList) => {
-    // Destructure latitude and longitude from userLocation
-    const { latitude, longitude } = userLocation;
-
-    // Sort uptainersList by distance from userLocation
-    const sortedList = uptainersList.slice().sort((a, b) => {
-      const distanceA = calculateDistance({ latitude, longitude }, a);
-      const distanceB = calculateDistance({ latitude, longitude }, b);
-      return distanceA - distanceB;
-    });
-
-    return sortedList;
-  };
 
   const fetchData = async () => {
     try {
@@ -120,7 +81,7 @@ const SortUptainers = ({ navigation }) => {
 
     // Render Uptainer components
     return displayedUptainers.map((item) => (
-      <Uptainer key={item.uptainerId} uptainerData={item} />
+      <Uptainer key={item.uptainerId} uptainerData={item} userLocation={userLocation} />
     ));
   };
 
@@ -192,6 +153,7 @@ const SortUptainers = ({ navigation }) => {
           <Uptainer
             key={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
+            userLocation={userLocation}
           />
         )}
         {/* Display BoxLink component */}

@@ -11,7 +11,7 @@ const Quiz = ({ questionData }) => {
   const styles = {
     container: {
       width: "100%",
-      height: "fit-content",
+      height: "auto",
       backgroundColor: style.Primarycolor2,
       marginBottom: 15,
       marginTop: 10,
