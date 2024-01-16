@@ -169,6 +169,7 @@ export default {
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
     QRCodeNotFound:"QR Code ikke fundet, gemt til kladde i stedet.",
+    QRCodeNotFound1:"QR-koden blev ikke fundet, så klik på Tag for at gemme til kladde i stedet.",
     SaveCode: "Tag",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
