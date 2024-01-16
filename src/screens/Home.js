@@ -19,6 +19,7 @@ import { useEffect } from "react";
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
@@ -34,41 +35,47 @@ const Home = ({ navigation }) => {
   })();
 
   useEffect(() => {
+
     async function getItemsByTextFilter() {
       try {
+        setIsLoading(true)
         const result = await getItemsByName(searchText)
-
-        if (result.length == 0) {
-          // manage error if result is empty
+        if (result.length === 0) {
+          setSearchResults([])
+        } else {
+          setSearchResults(result)
         }
-
-        return setSearchResults(result)         
       } catch (error) {
-        console.log('Error');
+        console.log('Error', error);
+      } finally {
+        setIsLoading(false)
       }
     }
 
-    if (searchText !== "") {
+    if (searchText) {
       getItemsByTextFilter()
     }
 
   }, [searchText])
 
-  let isFilterOpen = searchText !== "" && searchResults.length >= 1 
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={GlobalStyle.BodyWrapper}>
-        <SearchBox
-          onChangeText={setSearchText}
-          value={searchText}
-          placeholderText={"SearchField.productPlaceholder"}
-        /> 
-        {isFilterOpen ?
-          <SearchFilter 
-            data={searchResults} 
-            input={searchText}
+      <View style={[GlobalStyle.BodyWrapper]}>
+        <View style={{zIndex: 1}}>
+          <SearchBox
+            onChangeText={setSearchText}
+            value={searchText}
+            placeholderText={"SearchField.productPlaceholder"}
           />
-        : null}
+          {searchText ?
+            <SearchFilter 
+              data={searchResults} 
+              input={searchText}
+              isLoading={isLoading}
+            />
+            : null
+          }
+        </View>
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} /> 
       </View>

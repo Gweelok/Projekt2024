@@ -681,7 +681,7 @@ export async function getItemsByName(searchText) {
             fetchSnapshot(modelsQuery),
             fetchSnapshot(categoryQuery)
         ])
-        
+
         const combineSnapshots = (snapshots) => {
             const results = [];
             snapshots.forEach((snapshot) => {
@@ -724,11 +724,11 @@ export async function getItemsByName(searchText) {
 function compare(a, b) {
     const keyA = a.brandName || a.categoryName || a.modelName || a.productName;
     const keyB = b.brandName || b.categoryName || b.modelName || b.productName;
-  
+
     if (keyA < keyB) return -1;
     if (keyA > keyB) return 1;
     return 0;
-  }
+}
 
     /********************/
     /***** Delete *******/
