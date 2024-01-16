@@ -1,19 +1,30 @@
 import { Pressable, View, Text, StyleSheet } from "react-native"
+import { useState } from "react"
 import { Primarycolor1, Primarycolor2 } from "../../styles/styleSheet"
 import { windowWidth } from "../../utils/Dimensions"
-
+import ServiceAdminContent from "../Home/ServiceAdminContent"
 const HomeContent = () => {
+    const [showServiceAdmin, setShowServiceAdmin] = useState(false);
+
     return (
         <View style={style.container}>
-            <View style={style.routes}>
 
-                <Pressable style={style.buttons}>
-                    <Text style={style.buttonsText}>Admin Panel</Text>
-                </Pressable>
-                <Pressable style={style.buttons}>
-                    <Text style={style.buttonsText}>Service Admin</Text>
-                </Pressable>
-            </View>
+            {!showServiceAdmin && (
+                <View style={style.routes}>
+
+                    <Pressable style={style.buttons}>
+                        <Text style={style.buttonsText}>Admin Panel</Text>
+                    </Pressable>
+
+                    <Pressable style={style.buttons} onPress={() => setShowServiceAdmin(true)}>
+                        <Text style={style.buttonsText}>Service Admin</Text>
+                    </Pressable>
+
+                </View>
+            )}
+
+            {showServiceAdmin && <ServiceAdminContent />}
+            
         </View>
     )
 }
@@ -28,7 +39,7 @@ const style = StyleSheet.create({
         padding: 20,
         backgroundColor: Primarycolor2,
         width: windowWidth * 0.6
-        
+
     },
     buttonsText: {
         color: Primarycolor1,
