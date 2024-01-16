@@ -1,11 +1,11 @@
 import { View, StyleSheet } from "react-native"
-import HomeContent from "../components/Home/HomeContent"
-import { windowHeight, windowWidth } from "../utils/Dimensions"
+import UptainerList from "./UptainerList"
+import { windowHeight, windowWidth } from "../../utils/Dimensions"
 
-const Home = () => {
+const ServiceAdmin = () => {
     return (
         <View style={style.container}>
-            <HomeContent></HomeContent>
+            <UptainerList></UptainerList>
         </View>
     )
 }
@@ -17,4 +17,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default Home
+export default ServiceAdmin
