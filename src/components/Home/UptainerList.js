@@ -1,8 +1,8 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, FlatList, ActivityIndicator, } from 'react-native';
+import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native';
 import { getAllUptainers } from "../../utils/Repo";
-import { dropdownStyles } from "../../styles/styleSheet";
+import { dropdownStyles, Primarycolor1, Primarycolor4} from "../../styles/styleSheet";
 import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
 import Uptainer from './Uptainer';
@@ -12,6 +12,7 @@ const UptainerList = ({ searchValue }) => {
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [effectHasRun, setEffectHasRun] = useState(false);
+    const NO_UPTAINERS_FOUND = 'No uptainers found';
 
     const getUptainers = async () => {
         try {
@@ -75,34 +76,23 @@ const UptainerList = ({ searchValue }) => {
     /*useEffect for first retriving location
      before fetching uptainer data */
      useEffect(() => {
-        async function getLocationCoords() {
+        async function fetchLocationCoords() {
             await getUserLocation();
             setEffectHasRun(true);
         }
-        getLocationCoords();
+        fetchLocationCoords();
     }, []);
 
     useEffect(() => {
-        async function getData() {
+        async function fetchUptainersData() {
             if (effectHasRun) {
                 await getUptainers()
             }
         }
-        getData();
+        fetchUptainersData();
     }, [searchValue, effectHasRun]);
 
     const renderUptainers = ({ item, index }) => {
-        const userLatitude = userLocation?.latitude || 0;
-        const userLongitude = userLocation?.longitude || 0;
-
-        const uptainerLatitude = item.uptainerLatitude;
-        const uptainerLongitude = item.uptainerLongitude;
-
-        const distance = calculateDistance(
-            { latitude: userLatitude, longitude: userLongitude },
-            { latitude: parseFloat(uptainerLatitude), longitude: parseFloat(uptainerLongitude) }
-        );
-
         return (
             <Uptainer
                 key={index}
@@ -113,7 +103,7 @@ const UptainerList = ({ searchValue }) => {
                     dropdownStyles.dropdownListItem2,
                     index === uptainers.length - 1 ? styles1.lastItem : null,
                 ]}
-                distance={distance}
+                distance={item.distance}
             />
         );
     };
@@ -122,16 +112,21 @@ const UptainerList = ({ searchValue }) => {
         <View style={styles1.container}>
             {loading ? (
                 <ActivityIndicator size='large' color='black' />
-            ) : (
+            ) : uptainers.length !== 0 ? (
                 <FlatList
                     data={uptainers}
                     keyExtractor={(item) => item.uptainerName}
                     style={[GlobalStyle.BodyWrapper, styles1.uptainerList]}
                     renderItem={renderUptainers}
                 />
+            ) : (
+                <Text style={[GlobalStyle.BodyWrapper, styles1.notFound]}>
+                    {NO_UPTAINERS_FOUND}
+                </Text>
             )}
         </View>
     );
+
 };
 
 const styles1 = StyleSheet.create(
@@ -142,6 +137,20 @@ const styles1 = StyleSheet.create(
             zIndex: 1,
             marginTop: 87,
             width: '100%',
+        },
+        notFound: {
+            marginTop: 87,
+            borderWidth: 3,
+            minHeight: 80,
+            width: '90%',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+            backgroundColor: 'white',
+            borderColor: Primarycolor1,
+            color: Primarycolor4,
+            zIndex: 1,
+            justifyContent: 'center',
+            alignSelf: 'center'
         }
     });
 
