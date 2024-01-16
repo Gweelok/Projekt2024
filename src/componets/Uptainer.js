@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { styles, Primarycolor1 } from "../styles/Stylesheet";
 import { React, useEffect, useState, useContext } from "react";
@@ -22,7 +23,8 @@ const Uptainer = ({ uptainerData, userLocation }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
-
+  const [imagesLoading, setImagesLoading] = useState(true)
+  const loadings = [ 1, 1, 1, 1, 1, 1]
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
@@ -56,7 +58,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             }
           })
         );
-
+        setImagesLoading(false)
         const doubleData = [...updatedData];
         setData(doubleData);
 
@@ -67,6 +69,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
       }
     };
 
+
     fetchItemList();
   }, []);
 
@@ -74,6 +77,22 @@ const Uptainer = ({ uptainerData, userLocation }) => {
   for (let i = 0; i < data.length; i += 2) {
     pairedData.push([data[i], data[i + 1]]);
   }
+
+  const renderLoadings = ({item}) => (
+    <View>
+
+      <View style={styling.item}>
+        <View style={{marginLeft: 10, marginTop: 10}}>
+          <ActivityIndicator size={90} color={Primarycolor1}/>
+        </View>
+      </View>
+      <View style={styling.item}>
+        <View style={{marginLeft: 10, marginTop: 10}}>
+          <ActivityIndicator size={90} color={Primarycolor1}/>
+        </View>
+      </View>
+    </View>
+  )
 
   return (
     <View style={{ marginVertical: 10 }}>
@@ -103,7 +122,17 @@ const Uptainer = ({ uptainerData, userLocation }) => {
         </View>
       </TouchableOpacity>
 
-      <FlatList
+      { imagesLoading ?  
+        <FlatList 
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={loadings}
+          keyExtractor={(item, index) => index.toString()}
+          style={{ marginBottom: 5, marginTop: 5 }}
+          renderItem={renderLoadings}
+          />
+
+      : <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={pairedData}
@@ -125,10 +154,10 @@ const Uptainer = ({ uptainerData, userLocation }) => {
               }
             >
               <View style={styling.item}>
-                <Image
+                {item[0]?.imageUrl ? <Image
                   source={{ uri: item[0]?.imageUrl }}
                   style={styling.image}
-                />
+                />: <ActivityIndicator size='large' color={Primarycolor1}/>}
               </View>
             </TouchableOpacity>
             {/* Second Row */}
@@ -155,7 +184,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             )}
           </View>
         )}
-      />
+      />}
     </View>
   );
 };
