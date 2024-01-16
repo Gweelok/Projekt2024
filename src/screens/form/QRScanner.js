@@ -23,7 +23,7 @@ import {
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
-const QRScanner = ({ route, navigation }) => {
+const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;
   console.log("route.params: ", route.params);
 
@@ -44,7 +44,7 @@ const QRScanner = ({ route, navigation }) => {
   const askForCameraPermission = async () => {
     // Made askForCameraPermission an async function
     const { status } = await BarCodeScanner.requestPermissionsAsync();
-    setHasPermission(status === "granted"); 
+    setHasPermission(status === "granted");
   };
 
   useEffect(() => {
@@ -58,20 +58,18 @@ const QRScanner = ({ route, navigation }) => {
     setScanned(true)
     if (scannedQRCodeExist === "Draft") {
       setIsActive(false);
-      Alert.alert(  
-        t("QrScannerScreen.QRCodeNotFound", currentLanguage),
-        t("QrScannerScreen.ScanAgain", currentLanguage),
-        [
-          {
-            text: t("OK", currentLanguage),
-            onPress: () => {
-              // console.log("Type: " + type + "\nData: " + data);
-              // Optionally, navigate or perform other actions after saving
+      Alert.alert(
+          t("QrScannerScreen.QRCodeNotFound1", currentLanguage),
+          t("QrScannerScreen.ScanAgain", currentLanguage),
+          [
+            {
+              text: t("QrScannerScreen.OK", currentLanguage),
+              onPress: () => {
+              //  console.log("Type: " + type + "\nData: " + data);
+              },
             },
-          },
-        ]
+          ]
       );
-
     } else {
       console.log("Type: " + type + "\nData: " + data);
       setIsActive(true);
@@ -80,7 +78,7 @@ const QRScanner = ({ route, navigation }) => {
     }
   };
 
-  const handleScanAgain = () => {  
+  const handleScanAgain = () => {
     setScanned(false);
     // console.log("description: ", itemData?.description);
     //setText('Not yet scanned'); // Reset the scanned text
@@ -92,48 +90,78 @@ const QRScanner = ({ route, navigation }) => {
       const qrCodeString = JSON.stringify(scannedQRCode);
       try {
         await AsyncStorage.setItem("scannedQRCode", qrCodeString);
-        const scannedQRCodeObject = JSON.parse(qrCodeString);
-        // console.log("scannedQRCodeObject: ", scannedQRCodeObject);
+        const scannedQRCodeObject = JSON.parse(qrCodeString);;
         const value = scannedQRCodeObject.props.value;
+        console.log("value: ", value);
         let navDir = "UptainerDetails";
 
         try {
           await createItem(
-            (brandId = itemData?.brand),
-            (categoryId = itemData?.category),
-            (itemDescription = itemData?.description),
-            (itemImage = itemData?.image),
-            (itemModel = itemData?.model),
-            (itemproduct = itemData?.product),
-            (itemcondition = itemData?.condition),
-            (uptainerQRCode = value)
+              itemData?.image,
+              itemData?.category,
+              itemData?.product,
+              itemData?.brand,
+              itemData?.model,
+              itemData?.condition,
+              itemData?.description,
+              value // Assuming this is the uptainerQRCode value
           );
         } catch (error) {
           console.log("can not create item. Error: ", error);
         }
         const uptainerId = await getUptainerFromQR(value);
+        // Inside handleSaveCode after creating the item and obtaining uptainerId
         const uptainer = await getUptainerById(uptainerId);
         if (uptainer) {
-          navigation.navigate("UptainerDetails", { screenFrom: "QRScanner" });
-        }
-        if (!uptainerId) {
-          navDir = "MyDrafts";
-        }
-        Alert.alert(
-          t("QrScannerScreen.Success", currentLanguage),
-          t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
-          [
-            {
-              text: t("QrScannerScreen.OK", currentLanguage),
-              onPress: () => {
-                navigation.navigate(navDir, uptainer);
-
-                // Optionally, navigate or perform other actions after saving
-              },
+          setIsActive(true);
+          navigation.navigate('UptainerDetails', {
+            screenFrom: 'QRScanner',
+            uptainerData: {
+              id: uptainer.id,
+              name: uptainer.uptainerName,
+              location: uptainer.uptainerStreet, // or uptainer.uptainerCity if appropriate
+              imageUrl: uptainer.imageUrl, // Use appropriate image URL if available
             },
-          ]
-        );
-      } catch (error) {
+            scannedQRCodeData: scannedQRCodeObject.props.value, // Ensure this is defined correctly
+          });
+          Alert.alert(
+              t("QrScannerScreen.Success", currentLanguage),
+              t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
+              [
+                {
+                  text: t("QrScannerScreen.OK", currentLanguage),
+                  onPress: () => {
+                    navigation.navigate(navDir, uptainer);
+
+                  },
+                },
+              ]
+          );
+        }
+
+        else {
+
+          if (!uptainerId) {
+            setIsActive(false);
+            console.log("uptainerId before condition:", uptainerId);
+            const navDir1 = "MyDrafts";
+            console.log("Condition met, navDir set to:", navDir1);
+
+            Alert.alert(
+                t("QrScannerScreen.QRCodeNotFound", currentLanguage),
+                t("QrScannerScreen.ScanAgain", currentLanguage),
+                [
+                  {
+                    text: t("QrScannerScreen.OK", currentLanguage),
+                    onPress: () => {
+                      navigation.navigate(navDir1, uptainer);
+                    },
+                  },
+                ]
+            );
+          }
+        }
+    }catch (error) {
         console.error("Error saving scanned QR code:", error);
 
         Alert.alert(
@@ -187,7 +215,7 @@ const QRScanner = ({ route, navigation }) => {
                 <BarCodeScanner
                   onBarCodeScanned={ scanned ? undefined : handleBarCodeScanned}
                   style={{ flex: 1 }}
-                  
+
                 />
               </View >
             </View>
@@ -216,6 +244,7 @@ const QRScanner = ({ route, navigation }) => {
                       {t("QrScannerScreen.SaveCode", currentLanguage)}
                     </Text>
                   </Pressable>) : (<Pressable
+                          onPress={handleSaveCode}
                     style={[
                       Buttons.main_button,
                       {
