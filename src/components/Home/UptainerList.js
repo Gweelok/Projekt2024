@@ -7,22 +7,53 @@ import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
 import Uptainer from './Uptainer';
 
-const UptainerList = () => {
+const UptainerList = ({ searchValue }) => {
     const [uptainers, setUptainers] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [effectHasRun, setEffectHasRun] = useState(false);
 
     const getUptainers = async () => {
         try {
             const uptainerList = await getAllUptainers();
-            setLoading(false);
+            // Check if userLocation is available
+            if (userLocation !== null) {
+                // Calculate distance for each uptainer and add it as a new property
+                uptainerList.forEach((uptainer) => {
+                    const uptainerLatitude = parseFloat(uptainer.uptainerLatitude);
+                    const uptainerLongitude = parseFloat(uptainer.uptainerLongitude)
+                    uptainer.distance = calculateDistance(
+                        { latitude: userLocation.latitude, longitude: userLocation.longitude },
+                        { latitude: uptainerLatitude, longitude: uptainerLongitude }
+                    );
+                });
+
+                // Sort the uptainerList based on distance
+                uptainerList.sort((a, b) => a.distance - b.distance);
+            }
+
+            //Filter uptainers by search string if it's available.
+            if (searchValue !== '') {
+                const filteredUptainerList = uptainerList.filter(item =>
+                    item.uptainerName.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    item.uptainerStreet.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    item.uptainerCity.toLowerCase().includes(searchValue.toLowerCase())
+                );
+
+                //Return filtered search
+                setUptainers(filteredUptainerList);
+                setLoading(false);
+                return;
+            }
+            //Return unfiltered search
             setUptainers(uptainerList);
-        } catch (error) {
             setLoading(false);
+        } catch (error) {
             console.log("Error:", error);
         }
     };
 
+    //Get location coords from user
     const getUserLocation = async () => {
         try {
             const { status } = await Location.requestForegroundPermissionsAsync();
@@ -41,13 +72,24 @@ const UptainerList = () => {
         console.log(`Uptainer ${location.uptainerName} pressed`);
     };
 
-    useEffect(() => {
-        async function getLocationAndData() {
+    /*useEffect for first retriving location
+     before fetching uptainer data */
+     useEffect(() => {
+        async function getLocationCoords() {
             await getUserLocation();
-            await getUptainers();
+            setEffectHasRun(true);
         }
-        getLocationAndData();
+        getLocationCoords();
     }, []);
+
+    useEffect(() => {
+        async function getData() {
+            if (effectHasRun) {
+                await getUptainers()
+            }
+        }
+        getData();
+    }, [searchValue, effectHasRun]);
 
     const renderUptainers = ({ item, index }) => {
         const userLatitude = userLocation?.latitude || 0;
