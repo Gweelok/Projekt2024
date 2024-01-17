@@ -8,6 +8,9 @@ import GlobalStyle from "../../styles/GlobalStyle"
 const ServiceAdmin = () => {
     const [searchText, setSearchText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
+    
+    //Temporary placeholder for searchbox
+    const FIND_UPTAINER = 'Find Uptainer';
 
     //Function to open the search when the search box is touched.
     const openSearch = () => {
@@ -27,8 +30,7 @@ const ServiceAdmin = () => {
 
                     <SearchBox
                         onChangeText={(text) => setSearchText(text)}
-                        value={searchText} placeholderText={"search"}
-                        isSearching={isSearching}>                              
+                        value={searchText} placeholderText={FIND_UPTAINER}>                              
                     </SearchBox>
 
                 </View>

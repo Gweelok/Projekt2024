@@ -2,7 +2,7 @@ import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native';
 import { getAllUptainers } from "../../utils/Repo";
-import { dropdownStyles, Primarycolor1, Primarycolor4} from "../../styles/styleSheet";
+import { dropdownStyles, Primarycolor1, Primarycolor4 } from "../../styles/styleSheet";
 import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
 import Uptainer from './Uptainer';
@@ -12,6 +12,8 @@ const UptainerList = ({ searchValue }) => {
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [effectHasRun, setEffectHasRun] = useState(false);
+
+    //Temporary string for not found text
     const NO_UPTAINERS_FOUND = 'No uptainers found';
 
     const getUptainers = async () => {
@@ -23,24 +25,23 @@ const UptainerList = ({ searchValue }) => {
                 uptainerList.forEach((uptainer) => {
                     const uptainerLatitude = parseFloat(uptainer.uptainerLatitude);
                     const uptainerLongitude = parseFloat(uptainer.uptainerLongitude)
+
                     uptainer.distance = calculateDistance(
                         { latitude: userLocation.latitude, longitude: userLocation.longitude },
                         { latitude: uptainerLatitude, longitude: uptainerLongitude }
-                    );
+                    );                   
                 });
-
                 // Sort the uptainerList based on distance
                 uptainerList.sort((a, b) => a.distance - b.distance);
             }
-
-            //Filter uptainers by search string if it's available.
+            //Filter uptainers by search-string if it's available.
             if (searchValue.length !== 0) {
                 const filteredUptainerList = uptainerList.filter(item =>
                     item.uptainerName.toLowerCase().includes(searchValue.toLowerCase()) ||
                     item.uptainerStreet.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerCity.toLowerCase().includes(searchValue.toLowerCase())
+                    item.uptainerCity.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    item.uptainerZip.toString().includes(searchValue)
                 );
-
                 //Return filtered search
                 setUptainers(filteredUptainerList);
                 setLoading(false);
@@ -50,7 +51,8 @@ const UptainerList = ({ searchValue }) => {
             setUptainers(uptainerList);
             setLoading(false);
         } catch (error) {
-            console.log("Error:", error);
+            console.log("Error fetching uptainers:", error);
+            setLoading(false);
         }
     };
 
@@ -65,6 +67,8 @@ const UptainerList = ({ searchValue }) => {
             setUserLocation(location.coords);
         } catch (error) {
             console.error('Error fetching location:', error);
+            Alert.alert('Error fetching location. Please try again.');
+            setLoading(false);
         }
     };
 
@@ -75,7 +79,7 @@ const UptainerList = ({ searchValue }) => {
 
     /*useEffect for first retriving location
      before fetching uptainer data */
-     useEffect(() => {
+    useEffect(() => {
         async function fetchLocationCoords() {
             await getUserLocation();
             setEffectHasRun(true);
@@ -101,7 +105,7 @@ const UptainerList = ({ searchValue }) => {
                 index={index}
                 styling={[
                     dropdownStyles.dropdownListItem2,
-                    index === uptainers.length - 1 ? styles1.lastItem : null,
+                    index === uptainers.length - 1 ? styles.lastItem : null,
                 ]}
                 distance={item.distance}
             />
@@ -109,18 +113,18 @@ const UptainerList = ({ searchValue }) => {
     };
 
     return (
-        <View style={styles1.container}>
+        <View style={styles.container}>
             {loading ? (
                 <ActivityIndicator size='large' color='black' />
             ) : uptainers.length !== 0 ? (
                 <FlatList
                     data={uptainers}
                     keyExtractor={(item) => item.uptainerName}
-                    style={[GlobalStyle.BodyWrapper, styles1.uptainerList]}
+                    style={[GlobalStyle.BodyWrapper, styles.uptainerList]}
                     renderItem={renderUptainers}
                 />
             ) : (
-                <Text style={[GlobalStyle.BodyWrapper, styles1.notFound]}>
+                <Text style={[GlobalStyle.BodyWrapper, styles.notFound]}>
                     {NO_UPTAINERS_FOUND}
                 </Text>
             )}
@@ -129,7 +133,7 @@ const UptainerList = ({ searchValue }) => {
 
 };
 
-const styles1 = StyleSheet.create(
+const styles = StyleSheet.create(
     {
         lastItem: { borderBottomWidth: 3 },
         uptainerList: {

@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import { Primarycolor1, Primarycolor4 } from "../../styles/styleSheet";
 
 const SearchBox = ({ onChangeText, value, placeholderText }) => {
-console.log(isSearching)
+
     return (
         <View style={styles.container}>
             <TextInput
