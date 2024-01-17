@@ -1,27 +1,41 @@
-import React from 'react';
+import React, { useState} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
+
+import { useLanguage, t } from '../Languages/LanguageHandler';
 
 import {Feather} from "@expo/vector-icons";
 
 import {Primarycolor1, Primarycolor4} from "../styles/Stylesheet";
-import { useLanguage, t } from '../Languages/LanguageHandler';
+
 
 const SearchBox = ({ onChangeText, value, placeholderText }) => {
+    const [isInputFocused, setIsInputFocused] = useState(false)
     const { currentLanguage } = useLanguage();
+
+    const handleFocus = () => {
+        setIsInputFocused(true);
+    };
+
+    const handleBlur = () => {
+        setIsInputFocused(false);
+    };
+    
     return (
-        <View style={styles.container}>
+        <View style={styles.inputContainer}>
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
                 value={value}
                 placeholder={t(placeholderText, currentLanguage)}
                 placeholderTextColor={Primarycolor4}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
             />
             <Feather 
                 style={styles.searchIcon} 
                 name="search" 
-                size={24} 
-                color={Primarycolor4} 
+                size={22} 
+                color={isInputFocused ? Primarycolor1 : Primarycolor4}
             />
         </View>
     );
@@ -34,18 +48,23 @@ const styles = StyleSheet.create({
         top: '50%',
         transform: [{ translateY: -12 }],
     },
-    container: {
-        width: '100%',
-        alignSelf: 'center',
-        backgroundColor: '#fff',
-        marginBottom: 15,
+    inputContainer: {
+        backgroundColor: "white",
+        height: 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 3,
+        borderColor: Primarycolor1,
+        paddingHorizontal: 10,
     },
     input: {
-        height: 40,
-        borderColor: Primarycolor1,
-        borderWidth: 3,
-        paddingHorizontal: 10,
+        borderRadius: 0,
+        flex: 1,
+        backgroundColor: "white",
+        color: Primarycolor1,
     },
 });
 
 export default SearchBox;
+
+
