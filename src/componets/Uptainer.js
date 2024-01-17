@@ -23,8 +23,6 @@ const Uptainer = ({ uptainerData, userLocation }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
-  const [imagesLoading, setImagesLoading] = useState(true)
-  const loadings = [ 1, 1, 1, 1, 1, 1]
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
@@ -58,7 +56,6 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             }
           })
         );
-        setImagesLoading(false)
         const doubleData = [...updatedData];
         setData(doubleData);
 
@@ -77,22 +74,6 @@ const Uptainer = ({ uptainerData, userLocation }) => {
   for (let i = 0; i < data.length; i += 2) {
     pairedData.push([data[i], data[i + 1]]);
   }
-
-  const renderLoadings = ({item}) => (
-    <View>
-
-      <View style={styling.item}>
-        <View style={{marginLeft: 10, marginTop: 10}}>
-          <ActivityIndicator size={90} color={Primarycolor1}/>
-        </View>
-      </View>
-      <View style={styling.item}>
-        <View style={{marginLeft: 10, marginTop: 10}}>
-          <ActivityIndicator size={90} color={Primarycolor1}/>
-        </View>
-      </View>
-    </View>
-  )
 
   return (
     <View style={{ marginVertical: 10 }}>
@@ -122,17 +103,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
         </View>
       </TouchableOpacity>
 
-      { imagesLoading ?  
-        <FlatList 
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={loadings}
-          keyExtractor={(item, index) => index.toString()}
-          style={{ marginBottom: 5, marginTop: 5 }}
-          renderItem={renderLoadings}
-          />
-
-      : <FlatList
+      <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={pairedData}
@@ -184,7 +155,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             )}
           </View>
         )}
-      />}
+      />
     </View>
   );
 };

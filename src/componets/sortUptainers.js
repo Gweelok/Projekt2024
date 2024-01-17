@@ -10,6 +10,7 @@ import QuizPoll from "./atoms/QuizPoll";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
+import { LoaderScreen } from "react-native-ui-lib";
 
 const SortUptainers = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
@@ -145,6 +146,9 @@ const SortUptainers = ({ navigation }) => {
     ],
   };
 
+  if (loading) {
+    return <LoaderScreen isLoaderShow={loading}/>
+  }
   // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
@@ -152,11 +156,7 @@ const SortUptainers = ({ navigation }) => {
     <View>
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
-        {(loading && !uptainerList[0]) ? (
-          <View style={{ marginVertical: 23 }}>
-            <ActivityIndicator size='large' color={Primarycolor1}/>
-          </View>
-          ) : (
+        {uptainerList[0]  && (
             <Uptainer
             key={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
