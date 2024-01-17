@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { Primarycolor1, styles, } from "../../styles/styleSheet";
+import { Primarycolor1, styles } from "../../styles/styleSheet";
 
 const UptainerInfo = ({ location }) => {   
     return (
@@ -39,12 +39,6 @@ const styles1 = StyleSheet.create({
         fontSize: 12,
         color: Primarycolor1,
         width: "75%"
-    },
-    distance: {
-        width: "25%",
-        fontSize: 12,
-        color: Primarycolor1,
-        alignItems: "center"
     },
 });
 
