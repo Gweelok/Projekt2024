@@ -31,7 +31,7 @@ const LogoutConfirmation = ({ navigation }) => {
       </Text>
 
       <TouchableOpacity 
-        style={[Buttons.main_button, { marginTop: 20, marginBottom: 10 }]}
+        style={[Buttons.main_button, { marginTop: 20, marginBottom: 10}]}
         onPress={handleLogout}>
         <Text style={Buttons.main_buttonText}>
         {t("LogoutConfirmation.logoutButton", currentLanguage)}

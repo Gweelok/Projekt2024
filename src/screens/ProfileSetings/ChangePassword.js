@@ -17,6 +17,7 @@ import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOu
 import Icon from 'react-native-vector-icons/Ionicons';
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
+import {extractMarginValues} from "react-native-ui-lib/src/commons/modifiers";
 
 
 const ChangePassword = ({ navigation }) => {
@@ -226,10 +227,11 @@ const customStyles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: 10,
+        paddingLeft: 0,
         marginBottom: 20,
         marginTop: 30,
     },
+    
 
     inputText: {
         fontSize: 15,
