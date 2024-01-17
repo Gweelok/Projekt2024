@@ -5,7 +5,7 @@ import SearchBox from "./SearchBox"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 import GlobalStyle from "../../styles/GlobalStyle"
 
-const ServiceAdmin = () => {
+const ServiceAdminContent = () => {
     const [searchText, setSearchText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     
@@ -72,4 +72,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default ServiceAdmin
+export default ServiceAdminContent
