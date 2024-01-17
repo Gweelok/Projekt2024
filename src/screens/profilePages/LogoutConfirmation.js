@@ -26,9 +26,10 @@ const LogoutConfirmation = ({ navigation }) => {
 
  
   return (
+      <View style={Backgroundstyle.interactive_screens}>
       <View style={GlobalStyle.BodyWrapper}>
 
-      <Text style={[styles.Header,{marginTop: 60}]}>
+      <Text style={[styles.article_text]}>
         {t("LogoutConfirmation.confirmMessage", currentLanguage)}
       </Text>
 
@@ -48,6 +49,7 @@ const LogoutConfirmation = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
     </View>
+      </View>
 
   );
 }
