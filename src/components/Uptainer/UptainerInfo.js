@@ -2,8 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Primarycolor1, styles, } from "../../styles/styleSheet";
 
-const Uptainer = ({ location }) => {
-
+const UptainerInfo = ({ location }) => {   
     return (
 
         <View style={styles1.stationInfo}>
@@ -49,4 +48,4 @@ const styles1 = StyleSheet.create({
     },
 });
 
-export default Uptainer;
+export default UptainerInfo;

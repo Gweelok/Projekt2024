@@ -2,7 +2,9 @@ import { View, StyleSheet } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import UptainerContent from "../components/Uptainer/UptainerContent"
 
-const Uptainer = ({location}) => {
+const Uptainer = ({route}) => {
+    const { location } = route.params;
+
     return (
         <View style={style.container}>
             <UptainerContent location={location}></UptainerContent>
