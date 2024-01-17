@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity, BackHandler} from "react-native";
+import {View, Text, TouchableOpacity, BackHandler, ScrollViewComponent} from "react-native";
 import { styles, Backgroundstyle, Buttons } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { firebaseAurth } from "../../utils/Firebase";
@@ -27,7 +27,8 @@ const LogoutConfirmation = ({ navigation }) => {
  
   return (
       <View style={GlobalStyle.BodyWrapper}>
-      <Text style={[styles.Header_Primarycolor1,{marginTop: 60}]}>
+
+      <Text style={[styles.Header,{marginTop: 60}]}>
         {t("LogoutConfirmation.confirmMessage", currentLanguage)}
       </Text>
 
@@ -47,6 +48,7 @@ const LogoutConfirmation = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
     </View>
+
   );
 }
 
