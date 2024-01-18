@@ -11,6 +11,7 @@ import { useLanguage, t } from "../Languages/LanguageHandler";
 import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { LoaderScreen } from "react-native-ui-lib";
+import { windowHeight, windowWidth } from "../utils/Dimensions";
 
 const SortUptainers = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
@@ -22,13 +23,12 @@ const SortUptainers = ({ navigation }) => {
 
   const finishLoading = async () => setLoading(false)
 
-  const fetchData = async (callback) => {
+  const fetchData = async () => {
     try {
       // Fetch the list of uptainers
       const uptainerList = await getAllUptainers();
       setUptainerList(uptainerList);
       setRefreshing(false);
-      if (callback) { callback() }
     } catch (error) {
       console.log("Error:", error);
     }
@@ -40,7 +40,7 @@ const SortUptainers = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    fetchData(finishLoading);
+    fetchData();
   }, []);
 
   //fetchData();// Fetch data when component mounts
@@ -146,14 +146,15 @@ const SortUptainers = ({ navigation }) => {
     ],
   };
 
-  if (loading) {
-    return <LoaderScreen isLoaderShow={loading}/>
-  }
   // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
     <View>
+      {loading && 
+      <View style={{width: windowWidth, height: windowHeight - 150, alignSelf: 'center', }}>
+          <LoaderScreen isLoaderShow={loading}/>
+      </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
         {uptainerList[0]  && (
@@ -161,6 +162,7 @@ const SortUptainers = ({ navigation }) => {
             key={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
             userLocation={userLocation}
+            finishLoading={finishLoading}
             />
           ) 
           }

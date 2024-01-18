@@ -19,7 +19,7 @@ import {
 import { LoaderContext } from "../componets/LoaderContext";
 import { calculateDistance } from "../utils/uptainersUtils";
 
-const Uptainer = ({ uptainerData, userLocation }) => {
+const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -56,6 +56,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             }
           })
         );
+        finishLoading()
         const doubleData = [...updatedData];
         setData(doubleData);
 
