@@ -152,7 +152,7 @@ const SortUptainers = ({ navigation }) => {
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
     <View style={{ marginTop: 15 }}>
       {loading && 
-      <View style={{width: windowWidth, height: windowHeight - 150, alignSelf: 'center', }}>
+      <View style={{width: windowWidth, height: windowHeight - 145, alignSelf: 'center', }}>
           <LoaderScreen isLoaderShow={loading}/>
       </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
