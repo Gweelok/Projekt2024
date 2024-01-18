@@ -1,6 +1,7 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { getAllUptainers } from "../../utils/Repo";
 import { dropdownStyles } from "../../styles/styleSheet";
 import GlobalStyle from "../../styles/GlobalStyle"
@@ -11,6 +12,7 @@ const UptainerList = () => {
     const [uptainers, setUptainers] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigation = useNavigation();
 
     const getUptainers = async () => {
         try {
@@ -39,6 +41,7 @@ const UptainerList = () => {
     const handleUptainerPress = (location) => {
         // Handle the press event, e.g., navigate to a detailed view
         console.log(`Uptainer ${location.uptainerName} pressed`);
+        navigation.navigate("Uptainer", { location: location });
     };
 
     useEffect(() => {
