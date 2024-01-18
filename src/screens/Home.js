@@ -1,17 +1,26 @@
-import { View } from "react-native";
-import { Backgroundstyle } from "../styles/Stylesheet";
-import Navigationbar from "../componets/Navigationbar";
 import React, { useState } from "react";
+import { View, Text } from "react-native";
 import * as Location from "expo-location";
-import SortUptainers from "../componets/sortUptainers";
+
+import { Backgroundstyle } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
+
+import Navigationbar from "../componets/Navigationbar";
+import SortUptainers from "../componets/sortUptainers";
 import SearchBox from '../componets/SearchBox';
+import SearchFilter from './SearchFilter';
+
 import { firebaseAurth } from "../utils/Firebase";
+import { getItemsByName } from '../utils/Repo';
+import { useEffect } from "react";
 
 
 
 const Home = ({ navigation }) => {
-  const [search, onChangeSearch] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
@@ -25,16 +34,50 @@ const Home = ({ navigation }) => {
     }
   })();
 
+  useEffect(() => {
+
+    async function getItemsByTextFilter() {
+      try {
+        setIsLoading(true)
+        const result = await getItemsByName(searchText)
+        if (result.length === 0) {
+          setSearchResults([])
+        } else {
+          setSearchResults(result)
+        }
+      } catch (error) {
+        console.log('Error', error);
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    if (searchText) {
+      getItemsByTextFilter()
+    }
+
+  }, [searchText])
+
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={GlobalStyle.BodyWrapper}>
-        <SearchBox
-          onChangeText={onChangeSearch}
-          value={search}
-          placeholderText={"SearchField.productPlaceholder"}
-        /> 
+      <View style={[GlobalStyle.BodyWrapper]}>
+        <View style={{zIndex: 1}}>
+          <SearchBox
+            onChangeText={setSearchText}
+            value={searchText}
+            placeholderText={"SearchField.productPlaceholder"}
+          />
+          {searchText ?
+            <SearchFilter 
+              data={searchResults} 
+              input={searchText}
+              isLoading={isLoading}
+            />
+            : null
+          }
+        </View>
         <SortUptainers navigation={navigation} />
-        <Navigationbar navigation={navigation} />
+        <Navigationbar navigation={navigation} /> 
       </View>
     </View>
   );

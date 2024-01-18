@@ -150,7 +150,7 @@ const SortUptainers = ({ navigation }) => {
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
-    <View>
+    <View style={{ marginTop: 15 }}>
       {loading && 
       <View style={{width: windowWidth, height: windowHeight - 150, alignSelf: 'center', }}>
           <LoaderScreen isLoaderShow={loading}/>

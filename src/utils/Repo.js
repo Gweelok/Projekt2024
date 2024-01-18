@@ -1,4 +1,4 @@
-import { get, ref, push, set, update, remove } from "firebase/database";
+import { get, ref, query, push, set, update, remove, startAt, endAt, orderByChild } from "firebase/database";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -609,9 +609,6 @@ export async function getAllItems() {
             const itemcondition = childSnapshot.val().itemcondition;
             const itemUptainer = childSnapshot.val().itemUptainer;
             const itemUser = childSnapshot.val().itemUser;
-            const itemTaken = childSnapshot.val().itemTaken;
-            const itemTakenDate = childSnapshot.val().itemTakenDate;
-            const itemTakenUser = childSnapshot.val().itemTakenUser;
             items.push({
                 itemId: itemId,
                 itemproduct: itemproduct,
@@ -623,9 +620,6 @@ export async function getAllItems() {
                 itemcondition: itemcondition,
                 itemUptainer: itemUptainer,
                 itemUser: itemUser,
-                itemTaken: itemTaken,
-                itemTakenDate: itemTakenDate,
-                itemTakenUser: itemTakenUser,
             });
         });
         return items;
@@ -678,6 +672,84 @@ export async function getItemsFromUser(userId) {
     const itemsUserList = itemList.filter(item => item.itemUser === userId)
     ///not tested yet
     return itemsUserList
+}
+
+
+export async function getItemsByName(searchText) {
+    const db = firebaseGetDB;
+    const productsReference = ref(db, '/products')
+    const brandsReference = ref(db, '/brands')
+    const modelsReference = ref(db, '/models')
+    const categoryReference = ref(db, '/categories')
+
+    //  Example:       products   productName inputText
+    const searchQuery = (reference, childKey, text) => 
+        query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
+
+    const productsQuery =  searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery =  searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery =  searchQuery(modelsReference, `modelName`, searchText)
+    const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
+
+    try {
+        const fetchSnapshot = async (query) => {
+            const snapshot = await get(query);
+            return snapshot.val() || [];
+        }
+
+        const [productsSnapshot, brandsSnapshot, modelsSnapshot, categoriesSnapshot] = await Promise.all([
+            fetchSnapshot(productsQuery),
+            fetchSnapshot(brandsQuery),
+            fetchSnapshot(modelsQuery),
+            fetchSnapshot(categoryQuery)
+        ])
+
+        const combineSnapshots = (snapshots) => {
+            const results = [];
+            snapshots.forEach((snapshot) => {
+                if (snapshot == []) {
+                    return null
+                } else {
+                    results.push(...Object.values(snapshot))
+                }
+            });
+            return results;
+        }
+
+        // eslint-disable-next-line react/prop-types
+        let sortedData = combineSnapshots([
+        productsSnapshot, 
+        brandsSnapshot,
+        modelsSnapshot, 
+        categoriesSnapshot
+        ]).sort(compare);
+
+        // Use a Set to track unique keys
+        const uniqueKeys = new Set();
+
+        // Filter out duplicates and update the data array
+        sortedData = sortedData.filter(item => {
+            const key = item.brandName || item.categoryName || item.modelName || item.productName;
+            if (!uniqueKeys.has(key)) {
+                uniqueKeys.add(key);
+                return true;
+            }
+            return false;
+        });
+
+        return sortedData
+    } catch (error) {
+        console.error(`Error fetching data for item with name ${searchText}: `, error);
+    }
+}
+
+function compare(a, b) {
+    const keyA = a.brandName || a.categoryName || a.modelName || a.productName;
+    const keyB = b.brandName || b.categoryName || b.modelName || b.productName;
+
+    if (keyA < keyB) return -1;
+    if (keyA > keyB) return 1;
+    return 0;
 }
 
     /********************/
