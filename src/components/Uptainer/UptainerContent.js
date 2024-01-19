@@ -15,12 +15,12 @@ const UptainerContent = ({ location }) => {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 70,
-        height: windowHeight,
+        marginTop: 20,
+        //height: windowHeight,
         width: windowWidth
     },
     content:{
-        paddingHorizontal: '15%'   
+        //paddingHorizontal: '15%'   
     }
 })
 
