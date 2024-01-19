@@ -48,7 +48,7 @@ const Home = ({ navigation }) => {
           setSearchResults(result)
         }
       } catch (error) {
-        console.log('Error', error);
+        console.log('Error', error, error);
       } finally {
         setIsLoading(false)
       }

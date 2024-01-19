@@ -32,6 +32,16 @@ const UptainerDetails = ({ navigation, route }) => {
   const [sortedUptainers, setSortedUptainers] = useState([]);
   let uptainer = route.params.uptainerData || route.params;
   const [uptainersList, setUptainerList] = useState([]);
+  useEffect(() => {
+    console.log('Route params:', route.params); // Check the entire route.params object
+    const scannedData = route.params?.scannedQRCodeData;
+    if (scannedData) {
+      console.log('Scanned QR code data:', scannedData);
+      // Handle the scanned data here
+    } else {
+      console.log('Scanned QR code data is undefined or not passed correctly');
+    }
+  }, [route.params?.scannedQRCodeData]);
 
   const fetchData = async () => {
     try {
@@ -129,8 +139,9 @@ const UptainerDetails = ({ navigation, route }) => {
             <ImageBackground
                 style={style.detailsImage}
                 source={{
-                  uri: uptainerImageUrl,
-                }}>
+                  uri: uptainerImageUrl || 'https://via.placeholder.com/200x200', // Provide a placeholder if the URL is empty
+                }}
+            >
               <TouchableOpacity
                   onPress={() => navigation.navigate('Map')}
                   style={style.productLocation}>

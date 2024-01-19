@@ -21,23 +21,24 @@ import {
 } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
-import { LoaderContext } from "../../componets/LoaderContext"; 
+import { LoaderContext } from "../../componets/LoaderContext";
 import LoadingScreen from "../../componets/LoadingScreen";
 import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 import GlobalStyle from "../../styles/GlobalStyle";
-import Navigationbar from '../../componets/Navigationbar';
 
-const MyDrafts = () => {
-  const navigation = useNavigation();
+import Navigationbar from "../../componets/Navigationbar";
+
+
+const MyDrafts = ({navigation}) => {
   const { currentLanguage } = useLanguage();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
   const [ popupOpen, setPopupOpen ]= useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const handlePress = () => {
-    navigation.goBack();
+    navigation.navigate("Profile");
   };
 
   const closePopup = ()=>{
@@ -51,16 +52,12 @@ const MyDrafts = () => {
     closePopup();
   }
 
-
- 
-
-
     //Fetches items in the draftcards from the database
     const fetchDraftList = async () => {
       const storage = getStorage();
       setIsLoading(true);
       const user = await getCurrentUser();//firebaseAurth.currentUser; this is not working right now
-      
+
       try {
         const drafts = await getDraftFromUser(user.id); // userId is not working so this get all items from database
         const updatedData = await Promise.all(
@@ -97,11 +94,11 @@ const MyDrafts = () => {
         console.log("Error while fetching drafts => ", error);
       }
     };
-    
+
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    
+
     fetchDraftList ();
   }, []);
 
@@ -112,8 +109,8 @@ const MyDrafts = () => {
 
   async function DeleteDraft(itemId, image) {
       await deleteItemById(itemId);
-   
-    if(image != "Items/Default.jpg"){
+
+    if(image !== "Items/Default.jpg"){
       await deleteImage(image);
 
     }
@@ -122,64 +119,59 @@ const MyDrafts = () => {
       1
     );
     setData([...data]);
-  
+
   }
-  const backButtonPressed = () => navigation.goBack()
 
   return (
-    <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={GlobalStyle.BodyWrapper}>  
-        
-          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-          <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
-            <View style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "flex-start",
-              marginBottom: 15,
-                  }}>
-                {/* Back Button */}
-                <BackButton onPress={navigation.goBack}  />
-                {/* Headline */}
-                <Text style={HeaderText.Header}>{t('MyDraftsScreen.Header',currentLanguage)} </Text>
-            </View>
-            {data.map(
-              (
-                cur // instead of dummy data using data
-              ) => (
-                <DraftCard
-                  key={cur.itemId}
-                  props={cur}
-                  onPress={() => {
-                    //needs to be update in the furture|does not delete the draft from the database
-                    navigation.navigate("QRScanner", {
-                      product: cur.product.productId,
-                      brand: cur.brand.brandId,
-                      model: cur.model.modelId,
-                      category: cur.category.categoryId,
-                      condition: cur.itemcondition,
-                      description: cur.itemDescription,
-                      image: cur.imageUrl,
-                    });
+      <View style={[Backgroundstyle.interactive_screens]}>
+        <View style={GlobalStyle.BodyWrapper}>
+        <View style={{flexDirection: "row", alignItems: "center"}}>
+        <BackButton onPress={handlePress} />
+        <Text style={[HeaderText.Header,{marginLeft:30}]}>
+          {t("MyDraftsScreen.Header", currentLanguage)}
+        </Text>
+      </View>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+      <ScrollViewComponent
+      refreshing={refreshing}
+      onRefresh={onRefresh}
+      >
+        {data.map(
+          (
+            cur // instead of dummy data using data
+          ) => (
+            <DraftCard
+              key={cur.itemId}
+              props={cur}
+              onPress={() => {
+                //needs to be update in the furture|does not delete the draft from the database
+                navigation.navigate("QRScanner", {
+                  product: cur.product.productId,
+                  brand: cur.brand.brandId,
+                  model: cur.model.modelId,
+                  category: cur.category.categoryId,
+                  condition: cur.itemcondition,
+                  description: cur.itemDescription,
+                  image: cur.imageUrl,
+                });
 
-                  }}
-                  onDraftPress={() => {
-                    navigation.push("Add", { itemData: cur });
-                  }}
-                  onCancelPress={() => {
-                    setSelectedDraft(cur)
-                    setPopupOpen(!popupOpen);
-                  }}
-                />
-              )
-              )}
-          </ScrollViewComponent>
-            {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
+              }}
+              onDraftPress={() => {
+                navigation.push("Add", { itemData: cur });
+              }}
+              onCancelPress={() => {
+                setSelectedDraft(cur)
+                setPopupOpen(!popupOpen);
+              }}
+            />
+          )
+        )}
+      </ScrollViewComponent>
+      {popupOpen && <DeleteDraftsPopUp onCancel={ closePopup} onConfirm={deleteCurrentDraft}></DeleteDraftsPopUp>}
 
       </View>
-        
-      <Navigationbar navigation={navigation} />        
-    </View>
+        <Navigationbar navigation={navigation} />
+      </View>
   );
 
 

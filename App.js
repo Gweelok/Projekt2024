@@ -223,7 +223,7 @@ export default function App() {
               <Stack.Screen
                 name="DeleteAccount"
                 component={DeleteAccount}
-                options={{ animation: "none" }}
+                options={{ animation: "none",headerShown: false }}
               />
 
               <Stack.Screen
@@ -319,7 +319,7 @@ export default function App() {
               <Stack.Screen
                 name="LogoutConfirmation"
                 component={LogoutConfirmation}
-                options={{ animation: "none" }}
+                options={{ animation: "none",headerShown:false }}
               />
               <Stack.Screen
                 name="PrivacyPolicy"

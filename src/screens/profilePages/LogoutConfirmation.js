@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity, BackHandler} from "react-native";
+import {View, Text, TouchableOpacity, BackHandler, ScrollViewComponent} from "react-native";
 import { styles, Backgroundstyle, Buttons } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { firebaseAurth } from "../../utils/Firebase";
 import { signOut } from "firebase/auth";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 
 const LogoutConfirmation = ({ navigation }) => {
@@ -25,8 +26,10 @@ const LogoutConfirmation = ({ navigation }) => {
 
  
   return (
-    <View style={Backgroundstyle.interactive_screens}>
-      <Text style={styles.Header_Primarycolor1}>
+      <View style={Backgroundstyle.interactive_screens}>
+      <View style={GlobalStyle.BodyWrapper}>
+
+      <Text style={[styles.article_text]}>
         {t("LogoutConfirmation.confirmMessage", currentLanguage)}
       </Text>
 
@@ -46,6 +49,8 @@ const LogoutConfirmation = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
     </View>
+      </View>
+
   );
 }
 
