@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
+import Uptainer from './src/screens/Uptainer';
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -10,6 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen options={{headerShown: false}} name="Home" component={Home}/>
+        <Stack.Screen options={{headerShown: false}} name="Uptainer" component={Uptainer}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

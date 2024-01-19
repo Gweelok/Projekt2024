@@ -24,4 +24,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default ServiceAdmin
+export default ServiceAdminContent
