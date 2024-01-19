@@ -67,7 +67,7 @@ const Navigationbar = ({ navigation }) => {
       </Pressable>
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
-        <View style={{ position: "relative" }}>
+        <View>
           {
             selected == PAGE_NAMES.PROFILE ? (
               <Ionicons
