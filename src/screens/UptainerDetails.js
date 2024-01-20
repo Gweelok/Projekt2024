@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Navigationbar from '../componets/Navigationbar';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import {getItemsInUptainer, getProductById, getBrandById, getAllUptainers, getUptainersByLocation} from '../utils/Repo';
-import { styles } from '../styles/Stylesheet';
+import { styles, Backgroundstyle } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
 import { LoaderContext } from '../componets/LoaderContext';
@@ -123,11 +123,10 @@ const UptainerDetails = ({ navigation, route }) => {
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
 
   return (
-      <View style={styles.container}>
+    <View style={[Backgroundstyle.interactive_screens]}>
+      <View style={GlobalStyle.BodyWrapper}>
         {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <ScrollViewComponent
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ padding: 10 }}
             refreshing={refreshing}
             onRefresh={onRefresh}>
           <TouchableOpacity
@@ -164,13 +163,10 @@ const UptainerDetails = ({ navigation, route }) => {
                 <TouchableOpacity
                     key={i}
                     style={{
-                      marginLeft: 6,
+                      marginLeft: 0,
                       marginBottom: 20,
-                      marginRight: 20,
-                      alignContent: 'center',
-                      alignItems: 'center',
-                      alignSelf: 'center',
-                      justifyContent: 'center',
+                      marginRight: 0,
+
                     }}
                     onPress={() =>
                         navigation.navigate('DetailView', {
@@ -193,7 +189,7 @@ const UptainerDetails = ({ navigation, route }) => {
                         {
                           fontWeight: '600',
                           width: windowWidth / 2.7,
-                          marginTop: 5,
+
                         },
                       ]}>
                     {cur?.productName}
@@ -213,6 +209,7 @@ const UptainerDetails = ({ navigation, route }) => {
         </ScrollViewComponent>
         <Navigationbar navigation={navigation} />
       </View>
+    </View>
   );
 };
 

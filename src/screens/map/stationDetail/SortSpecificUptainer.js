@@ -112,12 +112,13 @@ const styling = StyleSheet.create({
     scrollViewContent: {
         flexDirection: "row",
         flexWrap: "wrap",
+        justifyContent: "space-between",
         paddingVertical: 10,
     },
     item: {
         width: '47%', // Adjust the width as per your requirement
         aspectRatio: 1,
-        margin: 5,
+        margin: 0,
         overflow: "hidden",
     },
     imageContainer: {
