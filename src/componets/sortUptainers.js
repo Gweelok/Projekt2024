@@ -10,7 +10,7 @@ import QuizPoll from "./atoms/QuizPoll";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
-import { LoaderScreen } from "react-native-ui-lib";
+import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 
 const SortUptainers = ({ navigation }) => {
@@ -153,7 +153,7 @@ const SortUptainers = ({ navigation }) => {
     <View style={{ marginTop: 15 }}>
       {loading && 
       <View style={{width: windowWidth, height: windowHeight - 145, alignSelf: 'center', }}>
-          <LoaderScreen isLoaderShow={loading}/>
+          <LoadingScreen isLoaderShow={loading}/>
       </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
