@@ -1,6 +1,7 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { getAllUptainers } from "../../utils/Repo";
 import { dropdownStyles, Primarycolor1, Primarycolor4 } from "../../styles/styleSheet";
 import GlobalStyle from "../../styles/GlobalStyle"
@@ -15,6 +16,7 @@ const UptainerList = ({ searchValue }) => {
 
     //Temporary string for not found text
     const NO_UPTAINERS_FOUND = 'No uptainers found';
+    const navigation = useNavigation();
 
     const getUptainers = async () => {
         try {
@@ -75,6 +77,7 @@ const UptainerList = ({ searchValue }) => {
     const handleUptainerPress = (location) => {
         // Handle the press event, e.g., navigate to a detailed view
         console.log(`Uptainer ${location.uptainerName} pressed`);
+        navigation.navigate("Uptainer", { location: location });
     };
 
     /*useEffect for first retriving location
