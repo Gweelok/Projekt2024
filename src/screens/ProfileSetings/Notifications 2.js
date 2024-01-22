@@ -8,7 +8,7 @@ import {styles} from "../../styles/Stylesheet";
 
 
 
-const Notifications = () => {
+const Notifications2 = () => {
     const { currentLanguage } = useLanguage();
     return (
         <View>
@@ -18,8 +18,8 @@ const Notifications = () => {
 };
 
 // Add prop validation
-Notifications.propTypes = {
+Notifications2.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
 
-export default Notifications;
+export default Notifications2;
