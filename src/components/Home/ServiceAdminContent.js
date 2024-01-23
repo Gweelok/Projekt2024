@@ -1,17 +1,14 @@
-import { View, StyleSheet, Dimensions, StatusBar } from "react-native"
+import { View, StyleSheet} from "react-native"
 import UptainerList from "./UptainerList"
 import Navigationbar from "./Navigationbar"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 
-const statusBar = StatusBar.currentHeight;
-
-const ServiceAdmin = () => {
+const ServiceAdminContent = ({navigation}) => {
    
     return (
         <View style={style.container}>
             <UptainerList></UptainerList>
-
-            <Navigationbar ></Navigationbar>
+            <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
     )
 }
@@ -19,7 +16,7 @@ const ServiceAdmin = () => {
 const style = StyleSheet.create({
     container: {
         //Added height for the status bar to obtain the correct screen height.
-        height: windowHeight + statusBar,
+        height: windowHeight,
         width: windowWidth,
     }
 })

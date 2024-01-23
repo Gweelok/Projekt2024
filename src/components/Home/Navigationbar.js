@@ -1,36 +1,32 @@
 //imports
 import { StyleSheet, View, Pressable} from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Primarycolor1, Primarycolor2 } from "../../styles/styleSheet";
 
 //Page_names
 const PAGE_NAMES = {
-  HOME: "home",
-  STATS: "stats",
-  PROFILE: "profile",
+  HOME: "Home",
+  STATS: "Stats",
+  PROFILE: "Profile",
 };
 
-//Selected page
-let selected = PAGE_NAMES.HOME;
-
 const Navigationbar = ({ navigation }) => {
+
+  const [page, setPage] = useState('');
 
   //handles when clicked on icons
   const handlePress = (iconName) => {
 
     switch (iconName) {
-      case PAGE_NAMES.HOME: selected = PAGE_NAMES.HOME;
-        //navigation.navigate("Homepage");
-        console.log('Home page');
+      case PAGE_NAMES.HOME: setPage(PAGE_NAMES.HOME);
+        navigation.navigate(PAGE_NAMES.HOME);
         break;
-      case PAGE_NAMES.STATS: selected = PAGE_NAMES.STATS;
-        //navigation.navigate("Stats");
-        console.log('Stats page');
+      case PAGE_NAMES.STATS: setPage(PAGE_NAMES.STATS);
+        //navigation.navigate(PAGE_NAMES.STATS);
         break;
-      case PAGE_NAMES.PROFILE: selected = PAGE_NAMES.PROFILE;
-        //navigation.navigate("Profile");
-        console.log('Profile page');
+      case PAGE_NAMES.PROFILE: setPage(PAGE_NAMES.PROFILE);
+        //navigation.navigate(PAGE_NAMES.PROFILE);
         break;
     }
   };
@@ -40,7 +36,7 @@ const Navigationbar = ({ navigation }) => {
     <View style={styles.tabBarStyle}>
       <Pressable onPress={() => handlePress(PAGE_NAMES.HOME)}>
         {
-          selected == PAGE_NAMES.HOME ? (
+          page == PAGE_NAMES.HOME ? (
             <Ionicons name="ios-home-sharp" size={24} color={Primarycolor1} />
           ) : (
             <Ionicons name="ios-home-outline" size={24} color={Primarycolor1} />
@@ -50,7 +46,7 @@ const Navigationbar = ({ navigation }) => {
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.STATS)}>
         {
-          selected == PAGE_NAMES.STATS ? (
+          page === PAGE_NAMES.STATS ? (
             <Ionicons
               name="stats-chart-sharp"
               size={22}
@@ -69,7 +65,7 @@ const Navigationbar = ({ navigation }) => {
       <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
         <View>
           {
-            selected == PAGE_NAMES.PROFILE ? (
+            page === PAGE_NAMES.PROFILE ? (
               <Ionicons
                 name="person-circle-sharp"
                 size={24}
