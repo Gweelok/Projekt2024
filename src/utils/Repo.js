@@ -772,9 +772,8 @@ export async function getSearchedItems(searchText) {
     try {
         const fetchSnapshot = async (query) => {
             const snapshot = await get(query);
-            return snapshot.val() || [];
+            return snapshot.val() || {};
         }
-        const searchInput = searchText.toLowerCase()
         const allItems = await getAllItems()
 
         const [productsSnapshot, brandsSnapshot, modelsSnapshot, categoriesSnapshot] = await Promise.all([
@@ -784,18 +783,20 @@ export async function getSearchedItems(searchText) {
             fetchSnapshot(categoryQuery)
         ])
         const filteredItems = allItems.filter((item) => {
-            const productName = productsSnapshot[item.productId].productName
-            const brandName = brandsSnapshot[item.brandId].brandName
-            const modelName = modelsSnapshot[item.modelId].modelName
-            const categoryName = categoriesSnapshot[item.categoryId].categoryName
-
-            return searchInput.includes(productName) || searchInput.includes(brandName) ||
-            searchInput.includes(modelName) || searchInput.includes(categoryName) 
+            const productName = productsSnapshot[item.itemproduct]?.productName
+            const brandName = brandsSnapshot[item.itemBrand]?.brandName
+            const modelName = modelsSnapshot[item.itemModel]?.modelName
+            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName
+            return productName === searchText ||
+                brandName === searchText ||
+                modelName === searchText ||
+                categoryName === searchText
         })
         
         return filteredItems
     } catch (error) {
         console.error(`Error fetching data for item with name ${searchText}: `, error);
+        return []
     }
 }
 
