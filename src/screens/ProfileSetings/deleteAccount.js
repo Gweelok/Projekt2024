@@ -3,6 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import {Buttons, HeaderText} from "../../styles/Stylesheet";
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 import React from "react";
+import GlobalStyle from "../../styles/GlobalStyle";
+import BackButton from "../../componets/BackButton";
+import BackButtonHomemade from "../../componets/BackButton";
 
 // eslint-disable-next-line react/prop-types
 const  DeleteAccount=({navigation})=>{
@@ -17,17 +20,10 @@ const  DeleteAccount=({navigation})=>{
 
         return(
 
-    // eslint-disable-next-line react/react-in-jsx-scope
-    <View style={styles1.container}>
-
-            {/* Headline */}
-            <Text style={[HeaderText.Header]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
-
-
-
-        <View style={styles1.buttonContainer}>
+        <View style={GlobalStyle.BodyWrapper}>
+            <Text style={[HeaderText.Header,{marginTop: 40, marginLeft: 0, marginRight: 0}]}>{t('DeleteAccount.Header',currentLanguage)} </Text>
             <View >
-                <TouchableOpacity style={[Buttons.main_button]}
+                <TouchableOpacity style={[Buttons.main_button,{marginTop: 50}]}
                     onPress={deleteacount}
                 >
                     <Text  style={[Buttons.main_buttonText]}> {t('DeleteAccount.MainButton',currentLanguage)}</Text>
@@ -41,21 +37,11 @@ const  DeleteAccount=({navigation})=>{
                     <Text   style={[Buttons.secondary_buttonText]}>   {t('DeleteAccount.SecondaryButton',currentLanguage)}</Text>
                 </TouchableOpacity>
             </View>
-    </View>
+
 );
 
 }
 const styles1 = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
 
-    buttonContainer: {
-        flexDirection: 'column',
-        marginLeft:30,
-        marginTop:70,
-        justifyContent: 'center',
-        width: '80%',
-    },
 });
   export default DeleteAccount;

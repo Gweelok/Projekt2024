@@ -18,13 +18,14 @@ import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
 import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
 import { items } from "../utils/Testdata";
-import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/Statcalculate";
+import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
   let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 , itemsDonated: 0, itemsCollected: 0});
   const navigation = useNavigation();
-//Get current user
+
+  //Get current user
 const userCurrent = props.user;
 //Get all products
 const products = props.products;

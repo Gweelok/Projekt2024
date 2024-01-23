@@ -223,7 +223,7 @@ export default function App() {
               <Stack.Screen
                 name="DeleteAccount"
                 component={DeleteAccount}
-                options={{ animation: "none" }}
+                options={{ animation: "none",headerShown: false }}
               />
 
               <Stack.Screen
@@ -254,7 +254,7 @@ export default function App() {
               <Stack.Screen
                   name="VisitedUptainerStat"
                   component={VisitedUptainerStat}
-                  options={{ animation: "none" }}
+                  options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Stats"
@@ -319,7 +319,7 @@ export default function App() {
               <Stack.Screen
                 name="LogoutConfirmation"
                 component={LogoutConfirmation}
-                options={{ animation: "none" }}
+                options={{ animation: "none",headerShown:false }}
               />
               <Stack.Screen
                 name="PrivacyPolicy"
@@ -329,7 +329,7 @@ export default function App() {
               <Stack.Screen
                 name="UptainerDetails"
                 component={UptainerDetails}
-                options={{ headerShown: true, animation: "none" }}
+                options={{ headerShown: false, animation: "none" }}
               />
               <Stack.Screen
                 name="ProductSaved"
