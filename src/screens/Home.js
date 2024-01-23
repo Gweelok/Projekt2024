@@ -13,6 +13,7 @@ import SearchFilter from './SearchFilter';
 import { firebaseAurth } from "../utils/Firebase";
 import { getItemsByName } from '../utils/Repo';
 import { useEffect } from "react";
+import SearchedItems from "../componets/SearchedItems";
 
 
 
@@ -20,7 +21,18 @@ const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
+  const [itemSelected, setItemSelected] = useState(false)
+  const [userLocation, setUserLocation] = useState(null)
 
+  const endSearch = async () => {
+    setSearchText("")
+    setItemSelected(false)
+  }
+  const handleSearch = async (input) =>{
+    setSearchText(input)
+    if (itemSelected) { setItemSelected(false) }
+    
+  }
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
   console.log("start current useeffect " + firebaseAurth.currentUser);
   (async () => {
@@ -31,7 +43,7 @@ const Home = ({ navigation }) => {
       console.log("status good");
       //				let loc = await Location.getLastKnownPositionAsync({});
       let loc = await Location.getCurrentPositionAsync({});
-      setuserLocation(loc.coords)
+      setUserLocation(loc.coords)
     }
   })();
 
@@ -64,17 +76,22 @@ const Home = ({ navigation }) => {
       <View style={[GlobalStyle.BodyWrapper]}>
         <View style={{zIndex: 1}}>
           <SearchBox
-            onChangeText={setSearchText}
+            onChangeText={handleSearch}
             value={searchText}
             placeholderText={"SearchField.productPlaceholder"}
           />
-          {searchText ?
+          {(searchText && !itemSelected) ?
             <SearchFilter 
               data={searchResults} 
               input={searchText}
               isLoading={isLoading}
+              setItemSelected={setItemSelected}
+              setSearchText={setSearchText}
             />
             : null
+          }
+          {(searchText && itemSelected) &&
+          <SearchedItems endSearch={endSearch} navigation={navigation} search={searchText} userLocation={userLocation}/>
           }
         </View>
         <SortUptainers navigation={navigation} />
