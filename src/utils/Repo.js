@@ -871,6 +871,19 @@ export async function deleteImage(imagePath){
     });
 }
 
+export async function getImage(imagePath) {
+    const storage = getStorage();
+    const imageRef = ref_storage(storage, imagePath);
+
+    try {
+        const url = await getDownloadURL(imageRef)
+        return url
+    } catch (err){
+        console.log("Error while downloading image => ", err);
+        const url = "https://via.placeholder.com/200x200"
+        return url
+    }
+}
         /**********************/
         /****** Update ********/
         /**********************/
