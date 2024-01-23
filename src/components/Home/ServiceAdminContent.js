@@ -1,6 +1,6 @@
 import { View, StyleSheet} from "react-native"
 import UptainerList from "./UptainerList"
-import Navigationbar from "./Navigationbar"
+import Navigationbar from "../organisms/Navigationbar"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 
 const ServiceAdminContent = ({navigation}) => {

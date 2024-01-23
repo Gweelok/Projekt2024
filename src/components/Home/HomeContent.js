@@ -2,7 +2,7 @@ import { Pressable, View, Text, StyleSheet } from "react-native"
 import { useState } from "react"
 import { Primarycolor1, Primarycolor2 } from "../../styles/styleSheet"
 import { windowWidth } from "../../utils/Dimensions"
-import ServiceAdminContent from "../Home/ServiceAdminContent"
+import ServiceAdminContent from "./ServiceAdminContent"
 const HomeContent = ({navigation}) => {
     const [showServiceAdmin, setShowServiceAdmin] = useState(false);
 

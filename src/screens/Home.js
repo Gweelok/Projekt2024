@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native"
-import HomeContent from "../components/Home/HomeContent"
+import HomeContent from "../components/home/HomeContent"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 
 const Home = ({navigation}) => {
