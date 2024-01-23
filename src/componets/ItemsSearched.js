@@ -7,20 +7,7 @@ import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
 
-const ItemsSearched = ({navigation, product, item, index, userLocation, endSearch , uptainer, setItemImageUrl}) =>{
-    const storage = getStorage()
-    useEffect(()=>{
-        (async ()=>{        
-            if( !item.imageUrl ) {
-                
-                const imageRef = ref(storage, item.itemImage)
-                const image = await getDownloadURL(imageRef)
-                setItemImageUrl(product.productId, image)
-            }
-
-        })()
-    }, [])
-
+const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptainer = {}}) =>{
     return (
         <TouchableOpacity onPress={() => {
                 navigation.navigate("DetailView", {
@@ -36,10 +23,10 @@ const ItemsSearched = ({navigation, product, item, index, userLocation, endSearc
           } style={style.mainContainer}>
             <View key={index}>
                 <View style={style.container1}>
-                    <Text style={style.productName}>{product.productName}</Text>
-                    {(!!userLocation && !!uptainer) && <Distance userLocation={userLocation} uptainer={uptainer}/>}
+                    <Text style={style.uptainerCity}>{uptainer.uptainerCity}</Text>
+                    {(!!userLocation && !!uptainer.uptainerLat) && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
-                {!!uptainer &&<Text style={style.uptainer}>{uptainer.uptainerName} / {uptainer.uptainerStreet}</Text>}
+                <Text style={style.uptainer}>{uptainer.uptainerStreet}</Text>
                 {!!item?.imageUrl && <Image source={{uri: item.imageUrl}} style={style.image}></Image>}
             </View>
         </TouchableOpacity>
@@ -52,13 +39,14 @@ const style = StyleSheet.create({
         marginTop: 8
     },
     container1: {
+        fontFamily: 'space-grotesk',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginRight: 5
         
     },
-    productName: {
+    uptainerCity: {
         color: Primarycolor1,
         fontSize: 16
     },

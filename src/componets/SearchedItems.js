@@ -1,5 +1,5 @@
 import ScrollViewComponent from "./atoms/ScrollViewComponent"
-import { getAllItems, getAllItemsByProductIds, getAllProducts, getAllUptainers } from "../utils/Repo"
+import { getAllUptainers, getImage, getSearchedItems } from "../utils/Repo"
 import { useEffect, useState } from "react"
 import { StyleSheet, View, Text } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
@@ -10,54 +10,43 @@ import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Styleshee
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds } from "../utils/uptainersUtils"
 
-const SearchedProducts = ({navigation, search, userLocation, endSearch}) =>{
+const SearchedProducts = ({navigation, search, userLocation, endSearch, setIsLoading}) =>{
     const [allProducts, setAllProducts] = useState(null)
-    const [filteredProducts, setfilteredProducts] = useState([])
+    const [searchedData, setSearchedData] = useState([])
     const { currentLanguage, setLanguage } = useLanguage()
-    const [allItems, setAllItems] = useState(null);
     const [allUptainers, setAllUptainers] = useState(null);
     const [loading, setLoading] = useState(false)
 
-    const setItemImageUrl = (id, imageUrl) => {
-        setAllItems(items => {
-            items[id] = {
-                ...items[id],
-                imageUrl
-            }
-            
-            return items
-        })
-    }
-
     useEffect(()=>{
-        if(!allProducts){
-            (async () =>{
-                const retrivedProducts = await getAllProducts()
-                setAllProducts(retrivedProducts)
-                const items = await getAllItemsByProductIds()
-                setAllItems(items)
-                const uptainers = await getAllUptainers()
-                const setupUptainers = await setUptainersByIds(uptainers)
-                setAllUptainers(setupUptainers)
-                const filteredPs = await filterProducts(retrivedProducts, search, items, setupUptainers)
-                setfilteredProducts(filteredPs)
-            })()
-        } else {
+        (async () =>{
+            const uptainers = await getAllUptainers()
+            const setupUptainers = await setUptainersByIds(uptainers)
+            setAllUptainers(setupUptainers)
+            const searchedItems = await getSearchedItems(search)
+            
+            // fliter valid items 
+            const validItems = searchedItems.filter((item) => setupUptainers[item.itemUptainer])
 
-            (async () =>{
-                const filteredPs = await filterProducts(allProducts, search, allItems, allUptainers)
-                setfilteredProducts(filteredPs)
-            })()
-        }
+            const dataByImages = await Promise.all(validItems.map(async(item, index) => {
+                const imageUrl = await getImage(item.itemImage)
+                return {...item, imageUrl}
+            }))
+            setIsLoading(false)
+            setSearchedData(dataByImages)
+        })()
+        
 
-    }, [search])
+    }, [])
 
     return (
         <View style={style.container}>
             <ScrollViewComponent>
-                <Text style={style.productsMatch}>{filteredProducts.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
-                {(!!filteredProducts.length && !!allItems && allUptainers) && ( filteredProducts.map((product, index) =>(
-                    <ItemsSearched setItemImageUrl={setItemImageUrl} uptainer={allUptainers[allItems[product.productId]?.itemUptainer]}  endSearch={endSearch} navigation={navigation} product={product} index={index} item={allItems[product.productId]} userLocation={userLocation}/>
+                <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
+                {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
+                    <ItemsSearched 
+                    uptainer={allUptainers[item.itemUptainer]}
+                    endSearch={endSearch} navigation={navigation} index={index}
+                    item={item} userLocation={userLocation}/>
                 )))}
                 
 

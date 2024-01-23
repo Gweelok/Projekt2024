@@ -80,7 +80,7 @@ const Home = ({ navigation }) => {
             value={searchText}
             placeholderText={"SearchField.productPlaceholder"}
           />
-          {(searchText && !itemSelected) ?
+          {(searchText && !itemSelected) || isLoading ?
             <SearchFilter 
               data={searchResults} 
               input={searchText}
@@ -90,8 +90,9 @@ const Home = ({ navigation }) => {
             />
             : null
           }
-          {(searchText && itemSelected) &&
-          <SearchedItems endSearch={endSearch} navigation={navigation} search={searchText} userLocation={userLocation}/>
+          {((searchText && itemSelected) && !isLoading) &&
+          <SearchedItems endSearch={endSearch} navigation={navigation}
+            search={searchText} userLocation={userLocation} setIsLoading={setIsLoading}/>
           }
         </View>
         <SortUptainers navigation={navigation} />
