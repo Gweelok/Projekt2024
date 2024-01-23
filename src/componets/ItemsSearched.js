@@ -7,7 +7,7 @@ import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
 
-const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptainer = {}}) =>{
+const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptainer}) =>{
     return (
         <TouchableOpacity onPress={() => {
                 navigation.navigate("DetailView", {
@@ -24,7 +24,7 @@ const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptai
             <View key={index}>
                 <View style={style.container1}>
                     <Text style={style.uptainerCity}>{uptainer.uptainerCity}</Text>
-                    {(!!userLocation && !!uptainer.uptainerLat) && <Distance userLocation={userLocation} uptainer={uptainer}/>}
+                    {!!userLocation && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
                 <Text style={style.uptainer}>{uptainer.uptainerStreet}</Text>
                 {!!item?.imageUrl && <Image source={{uri: item.imageUrl}} style={style.image}></Image>}
@@ -48,7 +48,8 @@ const style = StyleSheet.create({
     },
     uptainerCity: {
         color: Primarycolor1,
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: "400"
     },
     uptainer: {
         color: Primarycolor1,

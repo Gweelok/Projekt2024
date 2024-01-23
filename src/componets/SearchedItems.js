@@ -57,7 +57,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, setIsLoa
 
 const style = StyleSheet.create({
     container: {
-        height: windowHeight,
+        height: windowHeight - 121,
         width: windowWidth,
         marginLeft: 5
     },
