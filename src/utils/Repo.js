@@ -629,50 +629,6 @@ export async function getAllItems() {
     }
 }
 
-export async function getAllItemsByProductIds() {
-    // retreives items and setup them all as object by product id
-    const db = firebaseGetDB;
-    const reference = ref(db, '/items');
-
-    try {
-        const snapshot = await get(reference);
-        const items = {};
-        snapshot.forEach((childSnapshot) => {
-            const itemId = childSnapshot.key;
-            const itemproduct = childSnapshot.val().itemproduct;
-            const itemBrand = childSnapshot.val().itemBrand;
-            const itemModel = childSnapshot.val().itemModel;
-            const itemCategory = childSnapshot.val().itemCategory;
-            const itemImage = childSnapshot.val().itemImage;
-            const itemDescription = childSnapshot.val().itemDescription;
-            const itemcondition = childSnapshot.val().itemcondition;
-            const itemUptainer = childSnapshot.val().itemUptainer;
-            const itemUser = childSnapshot.val().itemUser;
-            const itemTaken = childSnapshot.val().itemTaken;
-            const itemTakenDate = childSnapshot.val().itemTakenDate;
-            const itemTakenUser = childSnapshot.val().itemTakenUser;
-            items[itemproduct] = {
-                itemId: itemId,
-                itemproduct: itemproduct,
-                itemBrand: itemBrand,
-                itemModel: itemModel,
-                itemCategory: itemCategory,
-                itemImage: itemImage,
-                itemDescription: itemDescription,
-                itemcondition: itemcondition,
-                itemUptainer: itemUptainer,
-                itemUser: itemUser,
-                itemTaken: itemTaken,
-                itemTakenDate: itemTakenDate,
-                itemTakenUser: itemTakenUser,
-            }
-        });
-        return items;
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        return {};
-    }
-}
 export async function getItemById(itemId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/items/${itemId}`);
@@ -795,6 +751,52 @@ function compare(a, b) {
     if (keyA < keyB) return -1;
     if (keyA > keyB) return 1;
     return 0;
+}
+
+export async function getSearchedItems(searchText) {
+    const db = firebaseGetDB;
+    const productsReference = ref(db, '/products')
+    const brandsReference = ref(db, '/brands')
+    const modelsReference = ref(db, '/models')
+    const categoryReference = ref(db, '/categories')
+
+    //  Example:       products   productName inputText
+    const searchQuery = (reference, childKey, text) => 
+        query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
+
+    const productsQuery =  searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery =  searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery =  searchQuery(modelsReference, `modelName`, searchText)
+    const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
+
+    try {
+        const fetchSnapshot = async (query) => {
+            const snapshot = await get(query);
+            return snapshot.val() || [];
+        }
+        const searchInput = searchText.toLowerCase()
+        const allItems = await getAllItems()
+
+        const [productsSnapshot, brandsSnapshot, modelsSnapshot, categoriesSnapshot] = await Promise.all([
+            fetchSnapshot(productsQuery),
+            fetchSnapshot(brandsQuery),
+            fetchSnapshot(modelsQuery),
+            fetchSnapshot(categoryQuery)
+        ])
+        const filteredItems = allItems.filter((item) => {
+            const productName = productsSnapshot[item.productId].productName
+            const brandName = brandsSnapshot[item.brandId].brandName
+            const modelName = modelsSnapshot[item.modelId].modelName
+            const categoryName = categoriesSnapshot[item.categoryId].categoryName
+
+            return searchInput.includes(productName) || searchInput.includes(brandName) ||
+            searchInput.includes(modelName) || searchInput.includes(categoryName) 
+        })
+        
+        return filteredItems
+    } catch (error) {
+        console.error(`Error fetching data for item with name ${searchText}: `, error);
+    }
 }
 
     /********************/
