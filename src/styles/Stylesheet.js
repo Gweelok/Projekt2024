@@ -309,7 +309,7 @@ export const Backgroundstyle = StyleSheet.create({
     backgroundColor: Primarycolor3,
   },
   message_Screens: {
-    aliginItems: "center",
+    alignItems: "center",
     flex: 1,
     backgroundColor: Primarycolor1,
   },
