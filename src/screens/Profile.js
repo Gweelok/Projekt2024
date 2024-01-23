@@ -14,12 +14,13 @@ const Profile = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
   const { badgeCount } = React.useContext(BadgeContext);
   return (
-    <View style={[Backgroundstyle.interactive_screens, { paddingTop: 90 },GlobalStyle.BodyWrapper ,{flex:5}]}>
-      <ScrollViewComponent>
+    <View style={[Backgroundstyle.interactive_screens,GlobalStyle.BodyWrapper]}>
+      <ScrollViewComponent style={{ paddingTop: 90 }}>
         <View>
           <MenuItems
             msg={t("ProfileScreen.MySettings", currentLanguage)}
             onPress={() => navigation.navigate("MySettings")}
+            style={{marginTop: 10}}
           />
         </View>
         <View>
@@ -27,24 +28,28 @@ const Profile = ({ navigation }) => {
             msg={t("ProfileScreen.MyDrafts", currentLanguage)}
             onPress={() => navigation.navigate("MyDrafts")}
             badge={badgeCount > 0 ? badgeCount : null}
+            style={{marginTop: 10}}
           />
         </View>
         <View>
           <MenuItems
             msg={t("ProfileScreen.DataPolicy", currentLanguage)}
             onPress={() => navigation.navigate("DataPolicy")}
+            style={{marginTop: 10}}
           />
         </View>
         <View>
           <MenuItems
             msg={t("ProfileScreen.ContactUs", currentLanguage)}
             onPress={() => navigation.navigate("ContactUs")}
+            style={{marginTop: 10}}
           />
         </View>
         <View>
           <MenuItems
             msg={t("Profile.logout", currentLanguage)}
             onPress={() => navigation.navigate("LogoutConfirmation")}
+            style={{marginTop: 10}}
           />
         </View>
       </ScrollViewComponent>
