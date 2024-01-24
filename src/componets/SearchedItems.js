@@ -1,7 +1,7 @@
 import ScrollViewComponent from "./atoms/ScrollViewComponent"
 import { getAllUptainers, getImage, getSearchedItems } from "../utils/Repo"
 import { useEffect, useState } from "react"
-import { StyleSheet, View, Text, ActivityIndicator } from "react-native"
+import { StyleSheet, View, Text, ActivityIndicator, KeyboardAvoidingView, Platform } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { items, products } from "../utils/SeedData"
 import { filterProducts } from "../utils/productsUtils"
@@ -41,11 +41,11 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
     return (
         <View style={style.container}>
                 {loading ? (
-                <View style={style.loadingContainer}>
+                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={style.loadingContainer}>
                     <ActivityIndicator size='size'/>
-                </View>
+                </KeyboardAvoidingView>
                 ) : 
-                <ScrollViewComponent>
+                <ScrollViewComponent style={{width: windowWidth * 0.89}}>
                  
                     <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
                     {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
@@ -66,7 +66,14 @@ const style = StyleSheet.create({
     container: {
         height: windowHeight - 121,
         width: windowWidth,
-        marginLeft: 5
+    },
+    loadingContainer: {
+        
+        flex: 1,
+        marginRight: 35,
+        justifyContent: 'center',
+        
+        
     },
     productsMatch: {
         color: Primarycolor1,
@@ -75,14 +82,6 @@ const style = StyleSheet.create({
         marginBottom: 10,
 
     },
-    loadingContainer: {
-        height: windowHeight - 121,
-        flex: 1,
-        marginRight: 50,
-        justifyContent: 'center',
-
-        
-    }
 })
 
 export default SearchedProducts;

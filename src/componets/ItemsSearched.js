@@ -35,8 +35,9 @@ const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptai
 
 const style = StyleSheet.create({
     mainContainer: {
-        width: windowWidth * 0.9,
-        marginTop: 8
+        width: windowWidth * 0.89,
+        marginTop: 8,
+        marginLeft: 3
     },
     container1: {
         fontFamily: 'space-grotesk',
