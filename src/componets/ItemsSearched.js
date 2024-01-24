@@ -23,10 +23,10 @@ const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptai
           } style={style.mainContainer}>
             <View key={index}>
                 <View style={style.container1}>
-                    <Text style={style.uptainerCity}>{uptainer.uptainerCity}</Text>
+                    <Text style={style.uptainerName}>{uptainer.uptainerName}</Text>
                     {!!userLocation && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
-                <Text style={style.uptainer}>{uptainer.uptainerStreet}</Text>
+                <Text style={style.uptainerAddress}>{uptainer.uptainerStreet}, {uptainer.uptainerZip} {uptainer.uptainerCity}</Text>
                 {!!item?.imageUrl && <Image source={{uri: item.imageUrl}} style={style.image}></Image>}
             </View>
         </TouchableOpacity>
@@ -46,12 +46,12 @@ const style = StyleSheet.create({
         marginRight: 5
         
     },
-    uptainerCity: {
+    uptainerName: {
         color: Primarycolor1,
         fontSize: 16,
         fontWeight: "400"
     },
-    uptainer: {
+    uptainerAddress: {
         color: Primarycolor1,
         fontSize: 13
     },
