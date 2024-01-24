@@ -82,6 +82,8 @@ const StationDetailScreen = ({ route, navigation }) => {
                     id: stationDetail?.id,
                     name: stationDetail?.uptainerName,
                     location: stationDetail?.uptainerStreet,
+                    latitude: stationDetail?.uptainerLat,
+                    longitude:stationDetail?.uptainerLong
                     // Add other properties if needed
                   },
                 });
