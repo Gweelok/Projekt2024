@@ -1,7 +1,7 @@
 import ScrollViewComponent from "./atoms/ScrollViewComponent"
 import { getAllUptainers, getImage, getSearchedItems } from "../utils/Repo"
 import { useEffect, useState } from "react"
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, ActivityIndicator } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { items, products } from "../utils/SeedData"
 import { filterProducts } from "../utils/productsUtils"
@@ -10,12 +10,12 @@ import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Styleshee
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds } from "../utils/uptainersUtils"
 
-const SearchedProducts = ({navigation, search, userLocation, endSearch, setIsLoading}) =>{
+const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
     const [allProducts, setAllProducts] = useState(null)
     const [searchedData, setSearchedData] = useState([])
     const { currentLanguage, setLanguage } = useLanguage()
     const [allUptainers, setAllUptainers] = useState(null);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
         (async () =>{
@@ -31,7 +31,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, setIsLoa
                 const imageUrl = await getImage(item.itemImage)
                 return {...item, imageUrl}
             }))
-            setIsLoading(false)
+            setLoading(false)
             setSearchedData(dataByImages)
         })()
         
@@ -41,14 +41,22 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, setIsLoa
     return (
         <View style={style.container}>
             <ScrollViewComponent>
-                <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
-                {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
-                    <ItemsSearched 
-                    uptainer={allUptainers[item.itemUptainer]}
-                    endSearch={endSearch} navigation={navigation} index={index}
-                    item={item} userLocation={userLocation}/>
-                )))}
-                
+                {loading ?(
+                <View style={style.loadingContainer}>
+                    <ActivityIndicator size='size'/>
+                </View>
+                )
+                 : 
+                 <>
+                 <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
+                 {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
+                 <ItemsSearched 
+                 uptainer={allUptainers[item.itemUptainer]}
+                 endSearch={endSearch} navigation={navigation} index={index}
+                 item={item} userLocation={userLocation}/>
+                 )))}
+             
+             </>}
 
             </ScrollViewComponent>
         </View>
@@ -67,6 +75,13 @@ const style = StyleSheet.create({
         marginTop: 5,
         marginBottom: 10,
 
+    },
+    loadingContainer: {
+        width: windowWidth,
+        height: windowHeight - 121,
+        justifyContent: 'center',
+        alignItems: 'center'
+        
     }
 })
 
