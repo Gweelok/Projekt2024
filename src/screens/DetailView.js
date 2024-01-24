@@ -18,6 +18,7 @@ import { styles, Primarycolor1 } from "../styles/Stylesheet";
 import * as LinkingExpo from "expo-linking"; // Import Expo Linking
 import BackButton from "../componets/BackButton";
 import {t, useLanguage} from "../Languages/LanguageHandler";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const DetailViews = ({ navigation, route }) => {
   const details = route.params;
@@ -78,7 +79,7 @@ const DetailViews = ({ navigation, route }) => {
   };
 
   return (
-      <View style={Backgroundstyle.interactive_screens}>
+      <View style={[Backgroundstyle.interactive_screens, {paddingTop:10},  GlobalStyle.BodyWrapper, ]}>
         <ScrollViewComponent>
           <BackButton onPress={navigation.goBack} style={DetailView.backButton} />
           <View style={DetailView.container}>
@@ -110,6 +111,7 @@ const DetailViews = ({ navigation, route }) => {
                 style={{ color: Primarycolor1, textDecorationLine: "underline" }}
                 onPress={() => LinkingExpo.openURL("")}>
               {t("Detailviews.product", currentLanguage)}
+              
             </Text>
           </View>
         </ScrollViewComponent>
@@ -125,9 +127,9 @@ const DetailView = StyleSheet.create({
   },
 
   backButton: {
-    marginHorizontal: 15
-    //marginTop: 15, // Add margin to align with the picture
-    //left:15,
+    marginHorizontal:15,
+    // marginTop: 15, // Add margin to align with the picture
+    // left:15,
   },
 
   image: {
@@ -137,7 +139,7 @@ const DetailView = StyleSheet.create({
   },
 
   text: {
-    paddingTop: 10,
+    paddingTop: 3,
     width: "80%",
     height: 100,
     borderRadius: 1,
@@ -164,7 +166,7 @@ const DetailView = StyleSheet.create({
   product: {
     fontWeight: "bold",
     fontSize: 20,
-    marginBottom: 5,
+    marginBottom: 4,
   },
   infoContainer: {
     flexDirection: "row",
