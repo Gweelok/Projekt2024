@@ -81,13 +81,16 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
       <TouchableOpacity
         onPress={() => {
           setIsLoading(true);
+          console.log(uptainerData)
           navigation.navigate("UptainerDetails", {
-              uptainerData:{
-                  id: uptainerData?.id,
-                  name: uptainerData?.uptainerName,
-                  location: uptainerData?.uptainerStreet,
-                  imageUrl: uptainerData?.imageUrl,
-              },
+            uptainerData: {
+              id: uptainerData?.id,
+              name: uptainerData?.uptainerName,
+              location: uptainerData?.uptainerStreet,
+              imageUrl: uptainerData?.imageUrl,
+              latitude: uptainerData?.uptainerLatitude,
+              longitude: uptainerData?.uptainerLongitude
+            },
           });
         }}
       >
@@ -97,9 +100,9 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
             {uptainerData.uptainerStreet}
           </Text>
           {userLocation && (
-          <Text style={styling.distance}>
-            {calculateDistance({ latitude: userLocation.latitude, longitude: userLocation.longitude },
-            { latitude: parseFloat(uptainerData.uptainerLatitude), longitude: parseFloat(uptainerData.uptainerLongitude)})} km</Text>
+            <Text style={styling.distance}>
+              {calculateDistance({ latitude: userLocation.latitude, longitude: userLocation.longitude },
+                { latitude: parseFloat(uptainerData.uptainerLatitude), longitude: parseFloat(uptainerData.uptainerLongitude) })} km</Text>
           )}
         </View>
       </TouchableOpacity>
@@ -179,7 +182,7 @@ const styling = StyleSheet.create({
   },
   distance: {
     fontSize: 12,
-    color: Primarycolor1, 
+    color: Primarycolor1,
     marginTop: 5
   }
 });
