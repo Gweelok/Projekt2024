@@ -40,25 +40,24 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
 
     return (
         <View style={style.container}>
-            <ScrollViewComponent>
-                {loading ?(
+                {loading ? (
                 <View style={style.loadingContainer}>
                     <ActivityIndicator size='size'/>
                 </View>
-                )
-                 : 
-                 <>
-                 <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
-                 {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
-                 <ItemsSearched 
-                 uptainer={allUptainers[item.itemUptainer]}
-                 endSearch={endSearch} navigation={navigation} index={index}
-                 item={item} userLocation={userLocation}/>
-                 )))}
+                ) : 
+                <ScrollViewComponent>
+                 
+                    <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
+                    {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
+                    <ItemsSearched 
+                    uptainer={allUptainers[item.itemUptainer]}
+                    endSearch={endSearch} navigation={navigation} index={index}
+                    item={item} userLocation={userLocation}/>
+                    )))}
              
-             </>}
+                </ScrollViewComponent>
+                }
 
-            </ScrollViewComponent>
         </View>
     )
 }
@@ -77,10 +76,11 @@ const style = StyleSheet.create({
 
     },
     loadingContainer: {
-        width: windowWidth,
         height: windowHeight - 121,
+        flex: 1,
+        marginRight: 50,
         justifyContent: 'center',
-        alignItems: 'center'
+
         
     }
 })
