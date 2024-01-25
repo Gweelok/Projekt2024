@@ -3,7 +3,6 @@ import {
     View,
     Text,
     TouchableOpacity,
-    SafeAreaView,
     TextInput,
     StyleSheet,
     Modal,
@@ -11,11 +10,14 @@ import {
 import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
 import { Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Navigationbar from "../../componets/Navigationbar";
 import { Keyboard } from 'react-native';
 import { firebaseAurth } from "../../utils/Firebase";
 import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOut } from "firebase/auth";
+import Icon from 'react-native-vector-icons/Ionicons';
+import BackButton from "../../componets/BackButton";
+import GlobalStyle from "../../styles/GlobalStyle";
+import {extractMarginValues} from "react-native-ui-lib/src/commons/modifiers";
 
 
 const ChangePassword = ({ navigation }) => {
@@ -31,7 +33,6 @@ const ChangePassword = ({ navigation }) => {
 
     const handlePress = async () => {
         setErrorMessage('');
-
         const user = firebaseAurth.currentUser;
         Keyboard.dismiss();    
         try {
@@ -64,6 +65,8 @@ const ChangePassword = ({ navigation }) => {
         }
     };
 
+
+
     const togglePasswordVisibility = (field) => {
         switch (field) {
             case 'currentPassword':
@@ -91,33 +94,33 @@ const ChangePassword = ({ navigation }) => {
         const amILoggedIn = firebaseAurth.currentUser; //FOR SEEING IF LOG OUT INDEED HAPPENED, DELETE AFTER REVIEW/TESTING
         console.log("Am I Logged In: " + amILoggedIn); // ^ same here
     };
-
+    const navigateToAccountSettings = () => {
+        navigation.navigate("AccountSettings");
+    };
     return (
 
-        <SafeAreaView style={styles.container2}>
+
+        <View style={GlobalStyle.BodyWrapper}>
+
             <View style={customStyles.headerContainer}>
-                <TouchableOpacity style={styles.closeButton} onPress={() => navigation.navigate("AccountSettings")}>
-                    <Icon size={30} name="left" style={styles.closeButtonIcon} />
-                </TouchableOpacity>
-                <Text style={[HeaderText.Header,{marginLeft: 7,marginRight: 20}]}>
+                <BackButton onPress={navigateToAccountSettings}  />
+                <Text style={[HeaderText.Header,{marginLeft:0 ,marginRight: 0,}]}>
                     {t('ChangePasswordScreen.Header', currentLanguage)}
                 </Text>
             </View>
             {/* Current password */}
-            <View style={styles.form}>
-            <Text style={stylesGlobal.formLabel}>
+
+
+            <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
                 {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
             </Text>
                 <View style={styles.inputBox}>
-                    <View style={styles.inputContainer}>
+                    <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
                             secureTextEntry={!showCurrentPassword}
                             value={currentPassword}
                             onChangeText={setCurrentPassword}
-                            paddingRight={40}
-                            textAlignVertical="center"
-                            fontFamily="Arial"
                             placeholder="Current password"
                             placeholderTextColor="#8EA59E"
                         />
@@ -125,23 +128,21 @@ const ChangePassword = ({ navigation }) => {
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('currentPassword')}
                         >
-                            <Icon size={20} name={showCurrentPassword ? 'eye' : 'eyeo'} />
+                            <Icon size={18} name={showCurrentPassword ? 'ios-eye-off' : 'ios-eye'} />
                         </TouchableOpacity>
                     </View>
                 </View>
                {/* New password */}
-                <Text style={stylesGlobal.formLabel}>
+                <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
                     {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                 </Text>
                 <View style={styles.inputBox}>
-                    <View style={styles.inputContainer}>
+                    <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
                             secureTextEntry={!showNewPassword}
                             value={newPassword}
                             onChangeText={setNewPassword}
-                            paddingRight={40}
-                            textAlignVertical="center"
                             placeholder="New password"
                             placeholderTextColor="#8EA59E"
                         />
@@ -149,23 +150,22 @@ const ChangePassword = ({ navigation }) => {
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('newPassword')}
                         >
-                            <Icon size={20} name={showNewPassword ? 'eye' : 'eyeo'} />
+                            <Icon size={18} name={showNewPassword ? 'ios-eye-off' : 'ios-eye'} />
                         </TouchableOpacity>
                     </View>
                 </View>
                 {/* Confirm password */}
-                <Text style={stylesGlobal.formLabel}>
+                <Text style={[stylesGlobal.formLabel,{marginLeft:0}]}>
                     {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                 </Text>
-                <View style={styles.inputBox}>
-                    <View style={styles.inputContainer}>
+                <View style={[styles.inputBox,{flexdirection:'row'}]}>
+                    <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
                             secureTextEntry={!showConfirmPassword}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
-                            paddingRight={40}
-                            textAlignVertical="center"
+                            keyboardType={'default'}
                             placeholder="Confirm password"
                             placeholderTextColor="#8EA59E"                        
                             />
@@ -173,16 +173,18 @@ const ChangePassword = ({ navigation }) => {
                             style={customStyles.eyeIcon}
                             onPress={() => togglePasswordVisibility('confirmPassword')}
                         >
-                            <Icon size={20} name={showConfirmPassword ? 'eye' : 'eyeo'} />
+                            <Icon size={18} name={showConfirmPassword ? 'ios-eye-off' : 'ios-eye'} />
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
 
-            <TouchableOpacity style={Buttons.main_button} onPress={handlePress}>
+            <TouchableOpacity
+                style={[Buttons.main_button,{position: 'relativ'} ]}onPress={handlePress}>
+                <View>
                 <Text style={Buttons.main_buttonText}>
                     {t('ChangePasswordScreen.SavePassword', currentLanguage)}
                 </Text>
+            </View>
             </TouchableOpacity>
 
             {errorMessage !== '' && (
@@ -191,6 +193,8 @@ const ChangePassword = ({ navigation }) => {
                 </View>
             )}
 
+
+
             <Modal
                 transparent
                 visible={showSuccessPopup}
@@ -198,15 +202,19 @@ const ChangePassword = ({ navigation }) => {
                 onRequestClose={reloadPage}
             >
                 <View style={customStyles.successContainer}>
-                    <Text style={customStyles.successText}>
+                    <Text style={[customStyles.successText,{marginLeft:0}]}>
                         {t('ChangePasswordScreen.PasswordChanged', currentLanguage)}
                     </Text>
                     <TouchableOpacity style={customStyles.okButton} onPress={reloadPage}>
                         <Text style={customStyles.okButtonText}>OK</Text>
                     </TouchableOpacity>
                 </View>
+
+
             </Modal>
-        </SafeAreaView>
+            <Navigationbar navigation={navigation} />
+        </View>
+
 
     );
 };
@@ -219,19 +227,19 @@ const customStyles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: 10,
+        paddingLeft: 0,
         marginBottom: 20,
+        marginTop: 30,
     },
-    eyeIcon: {
-        position: 'absolute',
-        right: 10,
-        top: '50%',
-        transform: [{ translateY: -10 }],
-    },
+    
+
     inputText: {
-        fontSize: 17,
+        fontSize: 15,
         color: 'black',
         textAlignVertical: 'center',
+        flex:1,
+        fontFamily:'space-grotesk'
+
     },
     errorContainer: {
         backgroundColor: 'red',
@@ -258,6 +266,7 @@ const customStyles = StyleSheet.create({
         alignItems: 'center', // Center align text and button vertically
         borderRadius: 5,
     },
+
     successText: {
         color: 'white',
         fontSize: 16,

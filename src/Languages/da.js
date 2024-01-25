@@ -67,11 +67,11 @@ export default {
   },
 
   ChangePasswordScreen: {
-    Header: "Skift kodeordl",
+    Header: "Skift kodeord",
     SavePassword: "Gem kodeord",
-    CurrentPassword: "Nuvarende kodeord",
+    CurrentPassword: "Nuværende kodeord",
     NewPassword: "Nyt kodeord",
-    ConfirmPassword: "Bekraft nyt kodeord",
+    ConfirmPassword: "Bekræft nyt kodeord",
     PasswordMatchError:
       "Nuværende adgangskode og ny adgangskode kan ikke være det samme.",
     PasswordMismatchError:
