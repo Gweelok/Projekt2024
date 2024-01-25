@@ -108,7 +108,7 @@ const DetailViews = ({ navigation, route }) => {
             </TouchableOpacity>
             <Text
                 style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-                onPress={() => LinkingExpo.openURL("")}>
+                onPress={() => {LinkingExpo.openURL(""), navigation.navigate('ProductIsTakenScreen')}}>
               {t("Detailviews.product", currentLanguage)}
             </Text>
           </View>
