@@ -1,12 +1,13 @@
 import  React from 'react';
 import { StyleSheet, Modal, View, ActivityIndicator } from 'react-native';
+import { Primarycolor1 } from '../styles/Stylesheet';
 
 // 1. Create the Loader component, it has a single prompt which is false by default and if true the Modal will be visible 
 const LoadingScreen = ({ isLoaderShow = false }) => (
     //Modal presents content above everything else and ActivityIndicator is a component that shows a circular loading indicator
     <Modal transparent visible={isLoaderShow}>
         <View style={styles.MainContainer}>
-            <ActivityIndicator size='large' color='black' />
+            <ActivityIndicator size='large' color={Primarycolor1} />
         </View>
     </Modal>
 );
