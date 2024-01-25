@@ -24,11 +24,11 @@ const Home = ({ navigation }) => {
   const [itemSelected, setItemSelected] = useState(false)
   const [userLocation, setUserLocation] = useState(null)
 
-  const endSearch = async () => {
+  const endSearch = () => {
     setSearchText("")
     setItemSelected(false)
   }
-  const handleSearch = async (input) =>{
+  const handleSearch = (input) =>{
     setSearchText(input)
     if (itemSelected) { setItemSelected(false) }
     
@@ -74,26 +74,28 @@ const Home = ({ navigation }) => {
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={[GlobalStyle.BodyWrapper]}>
-        <View>
-          <SearchBox
-            onChangeText={handleSearch}
-            value={searchText}
-            placeholderText={"SearchField.productPlaceholder"}
-          />
-          {(searchText && !itemSelected) ?
-            <SearchFilter 
-              data={searchResults} 
-              input={searchText}
-              isLoading={isLoading}
-              setItemSelected={setItemSelected}
-              setSearchText={setSearchText}
+        <View>          
+          <View style={{zIndex: 1}}>
+            <SearchBox
+              onChangeText={handleSearch}
+              value={searchText}
+              placeholderText={"SearchField.productPlaceholder"}
             />
-            : null
-          }
-          {(searchText && itemSelected) &&
-          <SearchedItems endSearch={endSearch} navigation={navigation}
-            search={searchText} userLocation={userLocation}/>
-          }
+            {(searchText && !itemSelected) ?
+              <SearchFilter 
+                data={searchResults} 
+                input={searchText}
+                isLoading={isLoading}
+                setItemSelected={setItemSelected}
+                setSearchText={setSearchText}
+              />
+              : null
+            }
+          </View>
+            {(searchText && itemSelected) &&
+            <SearchedItems endSearch={endSearch} navigation={navigation}
+              search={searchText} userLocation={userLocation}/>
+            }
         </View>
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} /> 
