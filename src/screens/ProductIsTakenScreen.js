@@ -23,7 +23,7 @@ const ProductIsTakenScreen = ({ navigation, route, fetchUpdatedData }) => {
 
   const productIsTaken = async () => {
     try {
-      const itemId = productItem?.itemId;
+      const itemId = productItem?.data;
 
       if (itemId) {
         const itemData = {
