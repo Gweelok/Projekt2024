@@ -53,7 +53,6 @@ const DetailViews = ({ navigation, route }) => {
   };
 
   const displayTextValue = itemDescription;
-  const TagButton = "Tag";
 
   const openAddressOnMap = () => {
     const scheme = Platform.select({
