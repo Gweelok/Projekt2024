@@ -1,11 +1,13 @@
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet} from "react-native"
 import { useState } from 'react';
 import UptainerList from "./UptainerList"
+import Navigationbar from "../organisms/Navigationbar"
 import SearchBox from "./SearchBox"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 import GlobalStyle from "../../styles/GlobalStyle"
 
-const ServiceAdminContent = () => {
+const ServiceAdminContent = ({navigation}) => {
+   
     const [searchText, setSearchText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     
@@ -45,12 +47,14 @@ const ServiceAdminContent = () => {
 
             <View onTouchStart={closeSearch} style={style.container2} />
 
+            <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
     )
 }
 
 const style = StyleSheet.create({
     container: {
+        //Added height for the status bar to obtain the correct screen height.
         height: windowHeight,
         width: windowWidth,
         justifyContent: 'flex-start',
