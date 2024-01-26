@@ -26,10 +26,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
                 
-                // fliter valid items 
-                const validItems = searchedItems.filter((item) => setupUptainers[item.itemUptainer])
-                
-                const dataByImages = await Promise.all(validItems.map(async(item, index) => {
+                const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
                     const imageUrl = await getImage(item.itemImage)
                     return {...item, imageUrl}
                 }))

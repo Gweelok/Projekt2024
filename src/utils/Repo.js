@@ -786,11 +786,11 @@ export async function getSearchedItems(searchText) {
             const productName = productsSnapshot[item.itemproduct]?.productName
             const brandName = brandsSnapshot[item.itemBrand]?.brandName
             const modelName = modelsSnapshot[item.itemModel]?.modelName
-            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName
-            return productName === searchText ||
+            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName             
+            return (productName === searchText ||
                 brandName === searchText ||
                 modelName === searchText ||
-                categoryName === searchText
+                categoryName === searchText) && item.itemUptainer !== 'Draft'
         })
         
         return filteredItems
