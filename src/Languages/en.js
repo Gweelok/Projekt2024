@@ -276,6 +276,7 @@ export default {
   },
   Detailviews: {
     product: "Was the product not at the Uptainer?",
+    take: "Take",
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",
@@ -291,6 +292,5 @@ export default {
   PollQuestions: {
     Poll1Question1:
       "How many electronic devices have you bought the last year?",
-  },
-
+  }
 };

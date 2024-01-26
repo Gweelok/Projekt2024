@@ -291,9 +291,10 @@ export default {
   },
   Detailviews: {
     product: " Var produktet ikke i uptaineren?",
+    take: "Tag"
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find produkt",
-  },
+  }
 };

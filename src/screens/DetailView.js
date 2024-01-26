@@ -104,7 +104,7 @@ const DetailViews = ({ navigation, route }) => {
             <TouchableOpacity
                 onPress={handleTakePress}
                 style={DetailView.TagButton}>
-              <Text style={DetailView.Tag}>{TagButton}</Text>
+              <Text style={DetailView.Tag}>{t("Detailviews.take", currentLanguage)}</Text>
             </TouchableOpacity>
             <Text
                 style={{ color: Primarycolor1, textDecorationLine: "underline" }}
