@@ -18,23 +18,29 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        (async () =>{
-            const uptainers = await getAllUptainers()
-            const setupUptainers = await setUptainersByIds(uptainers)
-            setAllUptainers(setupUptainers)
-            const searchedItems = await getSearchedItems(search)
-            
-            // fliter valid items 
-            const validItems = searchedItems.filter((item) => setupUptainers[item.itemUptainer])
+        const fetchData = async () =>{
+            try {
 
-            const dataByImages = await Promise.all(validItems.map(async(item, index) => {
-                const imageUrl = await getImage(item.itemImage)
-                return {...item, imageUrl}
-            }))
-            setLoading(false)
-            setSearchedData(dataByImages)
-        })()
-        
+                const uptainers = await getAllUptainers()
+                const setupUptainers = await setUptainersByIds(uptainers)
+                setAllUptainers(setupUptainers)
+                const searchedItems = await getSearchedItems(search)
+                
+                // fliter valid items 
+                const validItems = searchedItems.filter((item) => setupUptainers[item.itemUptainer])
+                
+                const dataByImages = await Promise.all(validItems.map(async(item, index) => {
+                    const imageUrl = await getImage(item.itemImage)
+                    return {...item, imageUrl}
+                }))
+                setLoading(false)
+                setSearchedData(dataByImages)
+                } catch(error) {
+                    console.error('Error fetching data:', error.message);
+                    setLoading(false); // Set loading to false in case of an error
+                }
+            }
+            fetchData()
 
     }, [])
 
