@@ -181,7 +181,10 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           ]
         );
       }
-    } else { console.warn("No QR code scanned to save."); }
+    } else { 
+      console.warn("No QR code scanned to save.");
+      setIsLoading(false); 
+    }
   };
 
   return (
