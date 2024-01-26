@@ -112,7 +112,7 @@ const Add = ({ route, navigation }) => {
     ) {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
-      navigation.navigate("QRScanner", {
+      navigation.navigate("AddQRScanner", {
         product: product.productId,
         brand: brand.brandId,
         model: model.modelId,

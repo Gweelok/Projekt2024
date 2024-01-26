@@ -64,6 +64,7 @@ import Notifications from "./src/screens/ProfileSetings/Notifications";
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import TakeQRScanner from "./src/screens/form/TakeQRScanner";
+import AddQRScanner from "./src/screens/form/AddQRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 
@@ -233,8 +234,12 @@ export default function App() {
                 component={Add}
               />
               <Stack.Screen
-                name="QRScanner"
+                name="TakeQRScanner"
                 component={TakeQRScanner}
+              />
+              <Stack.Screen
+                name="AddQRScanner"
+                component={AddQRScanner}
               />
               <Stack.Screen
                 name="Products"

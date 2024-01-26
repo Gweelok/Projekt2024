@@ -44,7 +44,7 @@ const DetailViews = ({ navigation, route }) => {
       console.error("Error saving product to AsyncStorage:", error);
     }
 
-    navigation.navigate("QRScanner", {
+    navigation.navigate("TakeQRScanner", {
       product: productName,
       brand: brandName,
       description: itemDescription,
