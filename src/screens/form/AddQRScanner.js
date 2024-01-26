@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   View,
@@ -22,6 +22,9 @@ import {
   QRCodeExists,
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import { LoaderContext } from "../../componets/LoaderContext";
+import LoadingScreen from "../../componets/LoadingScreen";
+
 
 const QRScanner = ({ route, navigation, uptainerData }) => {
   const { currentLanguage } = useLanguage();
@@ -34,7 +37,8 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
   const [text, setText] = useState(); // Initialize scanned text with a default value
   const [scannedQRCode, setScannedQRCode] = useState(null);
   const [isActive, setIsActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
+
 
   const askForCameraPermission = async () => {
     // Made askForCameraPermission an async function
@@ -181,103 +185,107 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
   };
 
   return (
-    <ScrollViewComponent>
-      <SafeAreaView style={styles.container2}>
-        <View style={styles.header}>
-          <Text style={styles.headline}>
-            {t("QrScannerScreen.Scan", currentLanguage)}
-          </Text>
-          <TouchableOpacity style={styles.closeButton} onPress={handlePress} disabled={isLoading}>
-            <Icon size={30} name="close" style={styles.closeButtonIcon} />
-          </TouchableOpacity>
-        </View>
+    <ScrollViewComponent>  
+        <SafeAreaView style={styles.container2}>
 
-        <View style={styles.content}>
-          <Text style={styles.instruction}>
-            {t("QrScannerScreen.Header", currentLanguage)}
-          </Text>
+        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
-          {hasPermission ? (
-            <View style={styles.qrScannerFrame} >
-              <View style={styles.dashedBorder} >
-                <BarCodeScanner
-                  onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                  style={{ flex: 1 }}
-
-                />
-              </View >
-            </View>
-          ) : (
-            <Text style={{ margin: 10 }}>No access to the camera</Text>
-          )}
-
-          {/*<Text style={styles.maintext}>{text}</Text>*/}
-
-          <View style={styles.buttonsContainer}>
-            {scanned && (
-              <View>
-                <View style={{ marginBottom: 10 }}>
-                  {isActive ? (<Pressable
-                    onPress={handleSaveCode}
-                    disabled={isLoading}
-                    style={[
-                      Buttons.main_button,
-                      {
-                        borderWidth: 1,
-                        width: 220,
-                        marginHorizontal: 60,
-                      },
-                    ]}
-                  >
-                    <Text style={Buttons.main_buttonText}>
-                      {t("QrScannerScreen.SaveCode", currentLanguage)}
-                    </Text>
-                  </Pressable>) : (<Pressable
-                    onPress={handleSaveCode}
-                    disabled={isLoading}
-                    style={[
-                      Buttons.main_button,
-                      {
-                        backgroundColor: "red",
-                        borderWidth: 1,
-                        width: 220,
-                        marginHorizontal: 60,
-                      },
-                    ]}
-                  >
-                    <Text style={Buttons.main_buttonText}>
-                      {t("QrScannerScreen.SaveCode", currentLanguage)}
-                    </Text>
-                  </Pressable>
-                  )}
-                </View>
-                <View>
-                  <Pressable
-                    onPress={handleScanAgain}
-                    disabled={isLoading}
-                    style={[
-                      Buttons.secondary_button,
-                      {
-                        borderWidth: 2,
-                        width: 220,
-                        marginHorizontal: 60,
-                      },
-                    ]}
-                  >
-                    <Text style={Buttons.secondary_buttonText}>
-                      {t("QrScannerScreen.ScanAgain", currentLanguage)}
-                    </Text>
-                  </Pressable>
-                </View>
-              </View>
-            )}
+          <View style={styles.header}>
+            <Text style={styles.headline}>
+              {t("QrScannerScreen.Scan", currentLanguage)}
+            </Text>
+            <TouchableOpacity style={styles.closeButton} onPress={handlePress} disabled={isLoading}>
+              <Icon size={30} name="close" style={styles.closeButtonIcon} />
+            </TouchableOpacity>
           </View>
 
-          <Text style={styles.instruction}>
-            {t("QrScannerScreen.Bottom", currentLanguage)}
-          </Text>
-        </View>
-      </SafeAreaView>
+          <View style={styles.content}>
+            <Text style={styles.instruction}>
+              {t("QrScannerScreen.Header", currentLanguage)}
+            </Text>
+
+            {hasPermission ? (
+              <View style={styles.qrScannerFrame} >
+                <View style={styles.dashedBorder} >
+                  <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={{ flex: 1 }}
+
+                  />
+                </View >
+              </View>
+            ) : (
+              <Text style={{ margin: 10 }}>No access to the camera</Text>
+            )}
+
+            {/*<Text style={styles.maintext}>{text}</Text>*/}
+
+            <View style={styles.buttonsContainer}>
+              {scanned && (
+                <View>
+                  <View style={{ marginBottom: 10 }}>
+                    {isActive ? (<Pressable
+                      onPress={handleSaveCode}
+                      disabled={isLoading}
+                      style={[
+                        Buttons.main_button,
+                        {
+                          borderWidth: 1,
+                          width: 220,
+                          marginHorizontal: 60,
+                        },
+                      ]}
+                    >
+                      <Text style={Buttons.main_buttonText}>
+                        {t("QrScannerScreen.SaveCode", currentLanguage)}
+                      </Text>
+                    </Pressable>) : (<Pressable
+                      onPress={handleSaveCode}
+                      disabled={isLoading}
+                      style={[
+                        Buttons.main_button,
+                        {
+                          backgroundColor: "red",
+                          borderWidth: 1,
+                          width: 220,
+                          marginHorizontal: 60,
+                        },
+                      ]}
+                    >
+                      <Text style={Buttons.main_buttonText}>
+                        {t("QrScannerScreen.SaveCode", currentLanguage)}
+                      </Text>
+                    </Pressable>
+                    )}
+                  </View>
+                  <View>
+                    <Pressable
+                      onPress={handleScanAgain}
+                      disabled={isLoading}
+                      style={[
+                        Buttons.secondary_button,
+                        {
+                          borderWidth: 2,
+                          width: 220,
+                          marginHorizontal: 60,
+                        },
+                      ]}
+                    >
+                      <Text style={Buttons.secondary_buttonText}>
+                        {t("QrScannerScreen.ScanAgain", currentLanguage)}
+                      </Text>
+                    </Pressable>
+                  </View>
+                </View>
+              )}
+            </View>
+
+            <Text style={styles.instruction}>
+              {t("QrScannerScreen.Bottom", currentLanguage)}
+            </Text>
+          </View>
+
+        </SafeAreaView>
     </ScrollViewComponent>
   );
 };
