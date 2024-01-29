@@ -28,7 +28,7 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import { createItemDraft, getCurrentUser } from "../utils/Repo";
+import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
 import LoadingScreen from "../componets/LoadingScreen";
@@ -101,7 +101,8 @@ const Add = ({ route, navigation }) => {
         itemDescription: description ? description : itemData?.itemDescription,
         itemcondition: condition ? condition : itemData?.itemcondition,
       }
-      
+      await updateItemById(itemId, updatedData)
+      navigation.navigate("ProductSaved");
       console.log(updatedData)
     } else{
 
