@@ -90,20 +90,37 @@ const Add = ({ route, navigation }) => {
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
-    const response = await createItemDraft(
-      product.productId,
-      brand.brandId,
-      model.modelId,
-      category.categoryId,
-      image,
-      description,
-      condition
-    );
-    if (response.draftAdded){
-      navigation.navigate("ProductSaved");
-      setBadgeCount((prevCount) => prevCount + 1);
-    } else {
-      console.log('item darft limit exeeded')
+    const itemId = itemData?.itemId
+    if (itemId) {
+      const updatedData = {
+
+        itemproduct: product instanceof Object ? product.productId : itemData?.itemproduct,
+        itemBrand: brand instanceof Object ? brand.brandId : itemData?.itemBrand,
+        itemModel: model instanceof Object ? model.modelId : itemData?.itemModel,
+        itemCategory: category instanceof Object ? category.categoryId : itemData?.itemCategory,
+        itemDescription: description ? description : itemData?.itemDescription,
+        itemcondition: condition ? condition : itemData?.itemcondition,
+      }
+      
+      console.log(updatedData)
+    } else{
+
+      const response = await createItemDraft(
+          product.productId,
+          brand.brandId,
+          model.modelId,
+          category.categoryId,
+          image,
+          description,
+          condition
+        );
+        if (response.draftAdded){
+            navigation.navigate("ProductSaved");
+            setBadgeCount((prevCount) => prevCount + 1);
+        } else {
+          console.log('item darft limit exeeded')
+      }
+            
     }
     setIsLoading(false);
   };
