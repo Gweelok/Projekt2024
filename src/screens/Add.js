@@ -204,7 +204,7 @@ const Add = ({ route, navigation }) => {
 
           <CategoryDropdown
               onCategorySelect={setCategory}
-              data={itemData?.category}
+              data={itemData?.category ? itemData?.category: itemData?.itemCategory }
               isVisible={isCategoryDropdownVisible}
               onSkip={handleSkipCategoryDropdown}
               isProductDropdownVisible={isProductDropdownVisible}
