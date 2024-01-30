@@ -859,13 +859,35 @@ export async function updateUptainerById(uptainerId, newData) {
     }
 }
 
-export async function updateItemById(itemId, newData) {
+export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, newData);
+        let itemImage = null
+        if(newImage){
+          
+            const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
+            const newImagePath = itemId +"."+ fileExtension;
+            const uploadResp = await uploadToFirebase(newImage.uri, newImagePath, paths.Items, (v) =>
+                console.log("progress: ",v)
+                );
+            itemImage = paths.Items + newImagePath
+
+            console.log(uploadResp);
+            console.log(newImagePath);
+                    
+        }
+        const updatedData = itemImage ? {...newData, itemImage} : newData
+        await update(reference, updatedData);
         console.log(`Item with ID ${itemId} updated successfully.`);
+        return {
+            itemUpdated: true
+        }
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
+        return {
+            itemUpdated: false,
+            error
+        }
     }
 }
 export async function updateItemfromDraft(itemId, uptainerId) {
