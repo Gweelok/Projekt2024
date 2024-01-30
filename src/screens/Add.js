@@ -87,7 +87,7 @@ const Add = ({ route, navigation }) => {
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
-  console.log(itemData?.itemImage, image)
+  useEffect(()=> console.log(image, image instanceof Object ? image : null), [image])
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
@@ -102,8 +102,10 @@ const Add = ({ route, navigation }) => {
         itemDescription: description ? description : itemData?.itemDescription,
         itemcondition: condition ? condition : itemData?.itemcondition,
       }
-      await updateItemById(itemId, updatedData)
-      navigation.navigate("ProductSaved");
+      const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
+      if (res.itemUpdated){
+        navigation.navigate("ProductSaved");
+      }
       console.log(updatedData)
     } else{
 
