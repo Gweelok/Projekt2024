@@ -250,7 +250,7 @@ const Add = ({ route, navigation }) => {
 
           <ConditionDropdown
               onConditionSelect={setCondition}
-              data={itemData?.condition}
+              data={itemData?.condition ? itemData?.condition : itemData?.itemcondition}
               onSkip={handleSkipConditionDropdown}
               isVisible={isConditionDropdownVisible}
               setIsVisible={setIsConditionDropdownVisible}
