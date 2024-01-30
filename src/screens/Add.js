@@ -217,7 +217,7 @@ const Add = ({ route, navigation }) => {
           <ProductDropdown
               onProductSelect={setProduct}
               categorySelected={!!category} // Pass the state of category selection
-              data={itemData?.product}
+              data={itemData?.product ? itemData?.product : itemData?.itemproduct}
               setIsBrandDropdownVisible={setIsBrandDropdownVisible}
               isBrandDropdownVisible={isBrandDropdownVisible}
               onSkip={handleSkipProductDropdown}
