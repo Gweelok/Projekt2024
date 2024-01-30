@@ -35,6 +35,11 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
                 const modelsList = await getAllModels();
                 setModels(modelsList);
                 setFilteredModels(modelsList);
+                if (data) {
+                    modelsList.forEach(model =>{
+                        if (data === model.modelId) {setSelectedModel(model)}
+                    })
+                }
             } catch (error) {
                 console.log('Error:', error);
             }
