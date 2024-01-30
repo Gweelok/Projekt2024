@@ -87,6 +87,7 @@ const Add = ({ route, navigation }) => {
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
+  console.log(itemData?.itemImage, image)
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
@@ -196,7 +197,7 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl}/>
+            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? itemData?.imageUrl : null}/>
           </View>
 
           <CategoryDropdown
