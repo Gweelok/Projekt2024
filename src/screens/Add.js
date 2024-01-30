@@ -87,7 +87,7 @@ const Add = ({ route, navigation }) => {
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
-  useEffect(()=> console.log(image, image instanceof Object ? image : null), [image])
+  
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
