@@ -227,7 +227,7 @@ const Add = ({ route, navigation }) => {
           <BrandDropdown
               onBrandSelect={setBrand}
               productSelected={!!product}
-              data={itemData?.brand}
+              data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
               isVisible={isBrandDropdownVisible}
               setIsVisible={setIsBrandDropdownVisible}
               onSkip={handleSkipBrandDropdown}
