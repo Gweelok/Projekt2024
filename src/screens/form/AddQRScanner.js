@@ -4,10 +4,8 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-  Button,
   Alert,
   Pressable,
-  ScrollView,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appropriate icon library
@@ -26,15 +24,13 @@ import { LoaderContext } from "../../componets/LoaderContext";
 import LoadingScreen from "../../componets/LoadingScreen";
 
 
-const QRScanner = ({ route, navigation, uptainerData }) => {
+const QRScanner = ({ route, navigation }) => {
   const { currentLanguage } = useLanguage();
   const itemData = route.params;
-  //console.log("route.params: ", route.params);
 
   const handlePress = () => { navigation.goBack(); };
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState(); // Initialize scanned text with a default value
   const [scannedQRCode, setScannedQRCode] = useState(null);
   const [isActive, setIsActive] = useState(false);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -70,7 +66,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         ]
       );
     } else {
-      console.log("Type: " + type + "\nData: " + data);
+      //console.log("Type: " + type + "\nData: " + data);
       setIsActive(true);
       setScanned(true);
       setText(data);
@@ -79,8 +75,6 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
   const handleScanAgain = () => {
     setScanned(false);
-    // console.log("description: ", itemData?.description);
-    //setText('Not yet scanned'); // Reset the scanned text
     setScannedQRCode(null);
   };
 
@@ -95,7 +89,6 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         const scannedQRCodeObject = JSON.parse(qrCodeString);;
         const value = scannedQRCodeObject.props.value;
         console.log("value: ", value);
-        let navDir = "UptainerDetails";
 
         const uptainerId = await getUptainerFromQR(value);
         const uptainer = await getUptainerById(uptainerId);
@@ -174,7 +167,6 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
-                // Optionally, navigate or perform other actions after saving
                 setIsLoading(false);
               },
             },
@@ -220,8 +212,6 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             ) : (
               <Text style={{ margin: 10 }}>No access to the camera</Text>
             )}
-
-            {/*<Text style={styles.maintext}>{text}</Text>*/}
 
             <View style={styles.buttonsContainer}>
               {scanned && (
