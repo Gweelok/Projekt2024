@@ -611,7 +611,8 @@ export async function getAllItems() {
         const snapshot = await get(reference);
         const items = [];
         snapshot.forEach((childSnapshot) => {
-            const itemId = childSnapshot.key;
+            const itemData = childSnapshot.val();
+/*             const itemId = childSnapshot.key;
             const itemproduct = childSnapshot.val().itemproduct;
             const itemBrand = childSnapshot.val().itemBrand;
             const itemModel = childSnapshot.val().itemModel;
@@ -620,18 +621,9 @@ export async function getAllItems() {
             const itemDescription = childSnapshot.val().itemDescription;
             const itemcondition = childSnapshot.val().itemcondition;
             const itemUptainer = childSnapshot.val().itemUptainer;
-            const itemUser = childSnapshot.val().itemUser;
+            const itemUser = childSnapshot.val().itemUser; */
             items.push({
-                itemId: itemId,
-                itemproduct: itemproduct,
-                itemBrand: itemBrand,
-                itemModel: itemModel,
-                itemCategory: itemCategory,
-                itemImage: itemImage,
-                itemDescription: itemDescription,
-                itemcondition: itemcondition,
-                itemUptainer: itemUptainer,
-                itemUser: itemUser,
+                ...itemData, itemId: childSnapshot.key,
             });
         });
         return items;

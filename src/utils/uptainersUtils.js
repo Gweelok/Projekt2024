@@ -1,4 +1,4 @@
-import { items, products } from "../utils/Testdata";
+import { products } from "../utils/SeedData";
 import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
 
 export const calculateDistance = ({ latitude: lat1, longitude: lon1 }, { latitude: lat2, longitude: lon2 }) => {
@@ -54,7 +54,7 @@ export function Calculate_co2_Equivalent (co2_total) {
 
 export async function CalculateStatistic () {
     // Load all items from database
-    // const items = await getAllItems();
+    const items = await getAllItems();
     // Load all Uptainers from database
     const allUptainers = await getAllUptainers();
     const userCurrent = await getCurrentUser();
