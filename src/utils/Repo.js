@@ -278,7 +278,7 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
 
 }
 
-function writeToDatabase(refPath, data) {
+async function writeToDatabase(refPath, data) {
     const reference = ref(db, refPath);
     try {
         set(reference, data);
@@ -986,7 +986,7 @@ export async function signInUser(email, password, navigation){
     });
 }
 
-export async function createUser(email, password, navigation ,name = "John Doe") {
+export async function createUser(email, password, name = "John Doe") {
     try {
 
         let isAdmin = false;
@@ -1011,7 +1011,6 @@ export async function createUser(email, password, navigation ,name = "John Doe")
 
         };
         await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
-        navigation.navigate("Homepage");
       }
     } catch (error) {
         authErrors(error);
