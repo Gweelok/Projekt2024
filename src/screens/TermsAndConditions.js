@@ -1,7 +1,7 @@
 import React from "react";
 import { createUser } from "../utils/Repo";
 import { firebaseAurth } from "../utils/Firebase";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import { Backgroundstyle, styles, Buttons } from "../styles/Stylesheet";
 
 const TermsAndConditions = ({ navigation, route }) => {
@@ -23,6 +23,18 @@ const TermsAndConditions = ({ navigation, route }) => {
 
     if (firebaseAurth.currentUser !== null) {
       navigation.navigate("ProfileCreated");
+    } else {
+      Alert.alert(
+        //Add error text in Language if needed.....
+        {
+          text: 'An error occured while trying to authenticate user. Try to sign in again.',
+          onPress: () => {
+            navigation.navigate('SignIn');
+
+          },
+        },
+
+      );
     }
   };
 
