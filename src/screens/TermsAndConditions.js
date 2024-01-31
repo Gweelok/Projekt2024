@@ -49,7 +49,7 @@ const TermsAndConditions = ({ navigation, route }) => {
           {
             text: 'OK',
             onPress: () => {
-              navigation.navigate('Sign in');
+              navigation.goBack();
             },
           },
         ]
