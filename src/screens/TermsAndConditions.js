@@ -25,15 +25,16 @@ const TermsAndConditions = ({ navigation, route }) => {
       navigation.navigate("ProfileCreated");
     } else {
       Alert.alert(
-        //Add error text in Language if needed.....
-        {
-          text: 'An error occured while trying to authenticate user. Try to sign in again.',
-          onPress: () => {
-            navigation.navigate('SignIn');
-
+        'Error',
+        'An error occurred while trying to authenticate the user. Please try to sign in later.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('Sign in');
+            },
           },
-        },
-
+        ]
       );
     }
   };
