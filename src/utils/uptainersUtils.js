@@ -54,7 +54,8 @@ export function Calculate_co2_Equivalent (co2_total) {
 
 export async function CalculateStatistic () {
     // Load all items from database
-    const items = await getAllItems();
+  const items = await getAllItems();
+  console.log("items from firestore for calStats:", items)
     // Load all Uptainers from database
     const allUptainers = await getAllUptainers();
     const userCurrent = await getCurrentUser();
