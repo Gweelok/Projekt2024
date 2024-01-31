@@ -19,7 +19,11 @@ const TermsAndConditions = ({ navigation, route }) => {
   ];
 
   const handleAccept = async () => {
-    await createUser(email, password);
+    try {
+      await createUser(email, password);
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
 
     if (firebaseAurth.currentUser !== null) {
       navigation.navigate("ProfileCreated");
