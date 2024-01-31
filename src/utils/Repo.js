@@ -603,6 +603,7 @@ export async function getProductById(productId) {
         return null;
     }
 }
+
 export async function getAllItems() {
     const db = firebaseGetDB;
     const reference = ref(db, '/items');
@@ -611,8 +612,7 @@ export async function getAllItems() {
         const snapshot = await get(reference);
         const items = [];
         snapshot.forEach((childSnapshot) => {
-            const itemData = childSnapshot.val();
-/*             const itemId = childSnapshot.key;
+            const itemId = childSnapshot.key;
             const itemproduct = childSnapshot.val().itemproduct;
             const itemBrand = childSnapshot.val().itemBrand;
             const itemModel = childSnapshot.val().itemModel;
@@ -621,9 +621,18 @@ export async function getAllItems() {
             const itemDescription = childSnapshot.val().itemDescription;
             const itemcondition = childSnapshot.val().itemcondition;
             const itemUptainer = childSnapshot.val().itemUptainer;
-            const itemUser = childSnapshot.val().itemUser; */
+            const itemUser = childSnapshot.val().itemUser;
             items.push({
-                ...itemData, itemId: childSnapshot.key,
+                itemId: itemId,
+                itemproduct: itemproduct,
+                itemBrand: itemBrand,
+                itemModel: itemModel,
+                itemCategory: itemCategory,
+                itemImage: itemImage,
+                itemDescription: itemDescription,
+                itemcondition: itemcondition,
+                itemUptainer: itemUptainer,
+                itemUser: itemUser,
             });
         });
         return items;
@@ -632,6 +641,28 @@ export async function getAllItems() {
         return [];
     }
 }
+
+
+// getAllItems can be updated like this to automatically include all properties from the original object if the database structure changes.
+/* export async function getAllItems() {
+  const db = firebaseGetDB;
+  const reference = ref(db, "/items");
+  try {
+    const snapshot = await get(reference);
+    const items = [];
+    snapshot.forEach((childSnapshot) => {
+      const itemData = childSnapshot.val();
+      items.push({
+        ...itemData,
+        itemId: childSnapshot.key,
+      });
+    });
+    return items;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+} */
 export async function getItemById(itemId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/items/${itemId}`);
