@@ -17,11 +17,10 @@ import {Buttons, HeaderText, Primarycolor1} from "../../styles/Stylesheet";
 import Navigationbar from "../../componets/Navigationbar";
 import {t, useLanguage} from "../../Languages/LanguageHandler";
 
-const ArticlePage = ({ route }) => {
+const ArticlePage = ({ navigation , route }) => {
   const { title, content } = route.params;
   const screenWidth = Dimensions.get("window").width;
   const [imgHeight, setImgHeight] = useState(0);
-  const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const handlePress = () => {
     navigation.goBack();
@@ -66,7 +65,7 @@ const ArticlePage = ({ route }) => {
         </View>
 
         </ScrollViewComponent>
-        <Navigationbar/>
+        <Navigationbar navigation={navigation}/>
       </StatusBarComponent>
   );
 };
