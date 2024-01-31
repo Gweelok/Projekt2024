@@ -21,16 +21,30 @@ const TermsAndConditions = ({ navigation, route }) => {
   const handleAccept = async () => {
     try {
       await createUser(email, password);
+
+      if (firebaseAurth.currentUser !== null) {
+        navigation.navigate("ProfileCreated");
+      } else {
+        Alert.alert(
+          'Error',
+          'An error occurred while trying to authenticate the user. Please try to sign in later.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.navigate('Sign in');
+              },
+            },
+          ]
+        );
+      }
     } catch (error) {
       console.error('An error occurred:', error);
-    }
 
-    if (firebaseAurth.currentUser !== null) {
-      navigation.navigate("ProfileCreated");
-    } else {
+      const errorMessage = error.toString();
       Alert.alert(
         'Error',
-        'An error occurred while trying to authenticate the user. Please try to sign in later.',
+        `An error occurred: ${errorMessage}`,
         [
           {
             text: 'OK',
