@@ -932,7 +932,9 @@ export async function updateProductById(productId, newData) {
 export async function updateItemToTaken(itemId){
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, {itemTaken: true});
+        // set item taken to user
+        const user = getCurrentUser()
+        update(reference, {itemTaken: user.id}); 
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
