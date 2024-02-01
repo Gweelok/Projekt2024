@@ -7,11 +7,12 @@ import {
   Image,
   ImageBackground,
   Dimensions,
+  Linking
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Navigationbar from '../componets/Navigationbar';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import {getItemsInUptainer, getProductById, getBrandById, getAllUptainers, getUptainersByLocation} from '../utils/Repo';
+import { getItemsInUptainer, getProductById, getBrandById, getAllUptainers, getUptainersByLocation } from '../utils/Repo';
 import { styles, Backgroundstyle } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
@@ -24,6 +25,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const UptainerDetails = ({ navigation, route }) => {
+
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState('');
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -32,6 +34,7 @@ const UptainerDetails = ({ navigation, route }) => {
   const [sortedUptainers, setSortedUptainers] = useState([]);
   let uptainer = route.params.uptainerData || route.params;
   const [uptainersList, setUptainerList] = useState([]);
+
   useEffect(() => {
     console.log('Route params:', route.params); // Check the entire route.params object
     const scannedData = route.params?.scannedQRCodeData;
@@ -63,6 +66,7 @@ const UptainerDetails = ({ navigation, route }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
   useEffect(() => {
     const fetchItemList = async () => {
       // Fetch items in the uptainer
@@ -72,28 +76,28 @@ const UptainerDetails = ({ navigation, route }) => {
         const items = await getItemsInUptainer(uptainer.id);
 
         const updatedData = await Promise.all(
-            items.map(async (item) => {
-              const pathReference = ref(storage, item.itemImage);
-              const product = await getProductById(item.itemproduct);
-              const brand = await getBrandById(item.itemBrand);
+          items.map(async (item) => {
+            const pathReference = ref(storage, item.itemImage);
+            const product = await getProductById(item.itemproduct);
+            const brand = await getBrandById(item.itemBrand);
 
-              try {
-                const url = await getDownloadURL(pathReference);
+            try {
+              const url = await getDownloadURL(pathReference);
 
-                return {
-                  ...item,
-                  imageUrl: url,
-                  productName: product.productName,
-                  brandName: brand.brandName,
-                };
-              } catch (error) {
-                console.log('Error while downloading image => ', error);
-                return {
-                  ...item,
-                  imageUrl: 'https://via.placeholder.com/200x200',
-                };
-              }
-            })
+              return {
+                ...item,
+                imageUrl: url,
+                productName: product.productName,
+                brandName: brand.brandName,
+              };
+            } catch (error) {
+              console.log('Error while downloading image => ', error);
+              return {
+                ...item,
+                imageUrl: 'https://via.placeholder.com/200x200',
+              };
+            }
+          })
         );
 
         setData(updatedData);
@@ -122,28 +126,51 @@ const UptainerDetails = ({ navigation, route }) => {
 
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
 
+  const openAddressOnMap = () => {
+    const scheme = Platform.select({
+      ios: "maps://0,0?q=",
+      android: "geo:0,0?q=",
+    });
+    const latLng = `${uptainer.latitude},${uptainer.longitude}`;
+    console.log(uptainer);
+    const url = Platform.select({
+      ios: `${scheme}${uptainer.name}@${latLng}`,
+      android: `${scheme}${latLng}(${uptainer.name})`,
+    });
+    console.log(url);
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.log("Can't handle url: " + url);
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => console.error("An error occurred", err));
+  };
+
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
         {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <ScrollViewComponent
-            refreshing={refreshing}
-            onRefresh={onRefresh}>
+          refreshing={refreshing}
+          onRefresh={onRefresh}>
           <TouchableOpacity
-              style={style.backButton}
-              onPress={() => navigation.goBack()}>
+            style={style.backButton}
+            onPress={() => navigation.goBack()}>
             <Ionicons name="chevron-back" color="white" size={20} />
           </TouchableOpacity>
           <View>
             <ImageBackground
-                style={style.detailsImage}
-                source={{
-                  uri: uptainerImageUrl || 'https://via.placeholder.com/200x200', // Provide a placeholder if the URL is empty
-                }}
+              style={style.detailsImage}
+              source={{
+                uri: uptainerImageUrl || 'https://via.placeholder.com/200x200', // Provide a placeholder if the URL is empty
+              }}
             >
               <TouchableOpacity
-                  onPress={() => navigation.navigate('Map')}
-                  style={style.productLocation}>
+                onPress={() => openAddressOnMap()}
+                style={style.productLocation}>
                 <Text style={style.productAddress}>
                   {uptainer.name} / {uptainer.location}
                 </Text>
@@ -152,58 +179,58 @@ const UptainerDetails = ({ navigation, route }) => {
             </ImageBackground>
           </View>
           <View
-              style={{
-                flexDirection: 'row',
-                marginTop: 50,
-                width: windowWidth,
-                flexWrap: 'wrap',
-                padding: 10,
-              }}>
+            style={{
+              flexDirection: 'row',
+              marginTop: 50,
+              width: windowWidth,
+              flexWrap: 'wrap',
+              padding: 10,
+            }}>
             {data?.map((cur, i) => (
-                <TouchableOpacity
-                    key={i}
-                    style={{
-                      marginLeft: 0,
-                      marginBottom: 20,
-                      marginRight: 0,
+              <TouchableOpacity
+                key={i}
+                style={{
+                  marginLeft: 0,
+                  marginBottom: 20,
+                  marginRight: 0,
 
-                    }}
-                    onPress={() =>
-                        navigation.navigate('DetailView', {
-                          itemDescription: cur?.itemDescription,
-                          imageUrl: cur?.imageUrl,
-                          productName: cur?.productName,
-                          brandName: cur?.brandName,
-                          uptainer,
-                        })
-                    }>
-                  <Image
-                      style={style.moreProductsImage}
-                      source={{
-                        uri: cur?.imageUrl,
-                      }}
-                  />
-                  <Text
-                      style={[
-                        styles.bodyText,
-                        {
-                          fontWeight: '600',
-                          width: windowWidth / 2.7,
+                }}
+                onPress={() =>
+                  navigation.navigate('DetailView', {
+                    itemDescription: cur?.itemDescription,
+                    imageUrl: cur?.imageUrl,
+                    productName: cur?.productName,
+                    brandName: cur?.brandName,
+                    uptainer,
+                  })
+                }>
+                <Image
+                  style={style.moreProductsImage}
+                  source={{
+                    uri: cur?.imageUrl,
+                  }}
+                />
+                <Text
+                  style={[
+                    styles.bodyText,
+                    {
+                      fontWeight: '600',
+                      width: windowWidth / 2.7,
 
-                        },
-                      ]}>
-                    {cur?.productName}
-                  </Text>
-                </TouchableOpacity>
+                    },
+                  ]}>
+                  {cur?.productName}
+                </Text>
+              </TouchableOpacity>
             ))}
           </View>
 
           <View>
             {uptainerList.map((uptainer) => (
-                <SortSpecificUptainer
-                    key={uptainer.uptainerId}
-                    uptainerData={uptainer}
-                />
+              <SortSpecificUptainer
+                key={uptainer.uptainerId}
+                uptainerData={uptainer}
+              />
             ))}
           </View>
         </ScrollViewComponent>

@@ -100,9 +100,13 @@ const Add = ({ route, navigation }) => {
       description,
       condition
     );
-    navigation.navigate("ProductSaved");
+    if (response.draftAdded){
+      navigation.navigate("ProductSaved");
+      setBadgeCount((prevCount) => prevCount + 1);
+    } else {
+      console.log('item darft limit exeeded')
+    }
     setIsLoading(false);
-    setBadgeCount((prevCount) => prevCount + 1);
   };
 
   const addProductConditions = () => {
@@ -113,7 +117,7 @@ const Add = ({ route, navigation }) => {
     ) {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
-      navigation.navigate("QRScanner", {
+      navigation.navigate("AddQRScanner", {
         product: product.productId,
         brand: brand.brandId,
         model: model.modelId,

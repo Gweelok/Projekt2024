@@ -2,13 +2,16 @@ import { getAllUptainers } from "../utils/Repo";
 import React, { useEffect, useState } from "react";
 import { BoxLink } from "../styles/BoxLink";
 import * as Location from "expo-location";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import Uptainer from "./Uptainer";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "./atoms/ScrollViewComponent";
 import QuizPoll from "./atoms/QuizPoll";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { sortUptainersByDistance } from "../utils/uptainersUtils";
+import { Primarycolor1 } from "../styles/Stylesheet";
+import LoadingScreen from "./LoadingScreen";
+import { windowHeight, windowWidth } from "../utils/Dimensions";
 
 const SortUptainers = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
@@ -16,6 +19,9 @@ const SortUptainers = ({ navigation }) => {
   const [uptainersList, setUptainerList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const { currentLanguage, setLanguage } = useLanguage();
+  const [loading, setLoading] = useState(true)
+
+  const finishLoading = async () => setLoading(false)
 
   const fetchData = async () => {
     try {
@@ -144,18 +150,22 @@ const SortUptainers = ({ navigation }) => {
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
-    <View 
-      style={{ marginTop: 15 }}
-    >
+    <View style={{ marginTop: 15 }}>
+      {loading && 
+      <View style={{width: windowWidth, height: windowHeight - 145, alignSelf: 'center', }}>
+          <LoadingScreen isLoaderShow={loading}/>
+      </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
-        {uptainerList[0] && (
-          <Uptainer
+        {uptainerList[0]  && (
+            <Uptainer
             key={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
             userLocation={userLocation}
-          />
-        )}
+            finishLoading={finishLoading}
+            />
+          ) 
+          }
         {/* Display BoxLink component */}
         <BoxLink
           msg="Hvordan funger UPDROPP?"
