@@ -863,7 +863,7 @@ export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         let itemImage = null
-        if(newImage){
+        if(newImage && newImage?.uri){
           
             const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
             const newImagePath = itemId +"."+ fileExtension;

@@ -20,6 +20,7 @@ import {
   getUptainerFromQR,
   getUptainerById,
   QRCodeExists,
+  updateItemById,
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
@@ -94,22 +95,38 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         const value = scannedQRCodeObject.props.value;
         console.log("value: ", value);
         let navDir = "UptainerDetails";
-
-        try {
-          await createItem(
-              itemData?.image,
-              itemData?.category,
-              itemData?.product,
-              itemData?.brand,
-              itemData?.model,
-              itemData?.condition,
-              itemData?.description,
-              value // Assuming this is the uptainerQRCode value
-          );
-        } catch (error) {
-          console.log("can not create item. Error: ", error);
-        }
+        const itemId = itemData?.itemId
         const uptainerId = await getUptainerFromQR(value);
+        try {
+          if( itemId ){
+            const updatedData = {
+
+              itemproduct: itemData?.product,
+              itemBrand: itemData?.brand,
+              itemModel: itemData?.model,
+              itemCategory: itemData?.category,
+              itemDescription: itemData?.description,
+              itemcondition: itemData?.condition,
+              itemUptainer: uptainerId
+            }
+            await updateItemById(itemId, updatedData, itemData?.image)
+          } else {
+
+            await createItem(
+                itemData?.image,
+                itemData?.category,
+                itemData?.product,
+                itemData?.brand,
+                itemData?.model,
+                itemData?.condition,
+                itemData?.description,
+                value // Assuming this is the uptainerQRCode value
+            );
+          }
+          
+        } catch (error) {
+          console.log("can not Updropp item. Error: ", error);
+        }
         // Inside handleSaveCode after creating the item and obtaining uptainerId
         const uptainer = await getUptainerById(uptainerId);
         if (uptainer) {
