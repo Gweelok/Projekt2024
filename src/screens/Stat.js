@@ -169,9 +169,7 @@ const Stat = ({ navigation }) => {
     fetchData()
   }, []);
 
-  const handlePress = () => {
-    navigation.goBack();
-  };
+
   const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
   const [co2Data, setCO2Data] = useState({
     todayCO2Saved: 0,
@@ -306,12 +304,8 @@ const Stat = ({ navigation }) => {
                   alignSelf: "flex-start",
                 }}
             >
-              <BackButton onPress={handlePress} />
               <Text
-                  style={[
-                    HeaderText.Header,
-                    { fontFamily: "space-grotesk-Medium" },
-                  ]}
+                  style={[HeaderText.Header, { fontFamily: "space-grotesk-Medium" },{marginLeft: 0}]}
               >
                 <Text>{t("StatsPage.Header", currentLanguage)}</Text>
               </Text>
@@ -330,8 +324,7 @@ const Stat = ({ navigation }) => {
                           ? Buttons.main_button
                           : Buttons.secondary_button,
                     ]}
-                    onPress={() => handlePress1("main")}
-                >
+                   onPress={() => handlePress1("main")}>
                   <Text
                       style={
                         activeButton === "main"

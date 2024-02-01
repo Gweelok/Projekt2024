@@ -241,7 +241,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
                     ]}
                   >
                     <Text style={Buttons.main_buttonText}>
-                      {t("QrScannerScreen.SaveCode", currentLanguage)}
+                      {t("QrScannerScreen.Take", currentLanguage)}
                     </Text>
                   </Pressable>) : (<Pressable
                           onPress={handleSaveCode}

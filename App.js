@@ -63,7 +63,8 @@ import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
 import Notifications from "./src/screens/ProfileSetings/Notifications";
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
-import QRScanner from "./src/screens/form/QRScanner";
+import TakeQRScanner from "./src/screens/form/TakeQRScanner";
+import AddQRScanner from "./src/screens/form/AddQRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 
@@ -122,7 +123,7 @@ export default function App() {
       <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
           <NavigationContainer theme={navStyle}>
             <Stack.Navigator
-                initialRouteName="Homepage"
+                initialRouteName="LandingScreen"
                 screenOptions={{
                   headerShown: false, // This hides the header
                   animation: "none",
@@ -233,8 +234,12 @@ export default function App() {
                 component={Add}
               />
               <Stack.Screen
-                name="QRScanner"
-                component={QRScanner}
+                name="TakeQRScanner"
+                component={TakeQRScanner}
+              />
+              <Stack.Screen
+                name="AddQRScanner"
+                component={AddQRScanner}
               />
               <Stack.Screen
                 name="Products"

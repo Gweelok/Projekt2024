@@ -159,7 +159,8 @@ export default {
     ScanAgain: "Scan Again?",
     QRCodeNotFound1:"QR Code not found,so click on Tag to save to draft instead.",
     QRCodeNotFound:"QR Code not found, saved to draft instead.",
-    SaveCode: "Take",
+    SaveCode: "Updropp",
+    Take: "Take",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",
@@ -275,6 +276,7 @@ export default {
   },
   Detailviews: {
     product: "Was the product not at the Uptainer?",
+    take: "Take",
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",

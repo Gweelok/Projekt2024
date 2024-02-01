@@ -225,6 +225,15 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
     console.log("itemCondition:", itemCondition);
     const newItemKey = push(ref(db, paths.items)).key;
     try {
+        const user = await getCurrentUser();
+        const allItems = await getAllItems()
+        const userDraft = allItems.filter(item => (item.itemUser === user.id && item.itemUptainer === "Draft"))
+        if (userDraft.length >= 15){
+            return {
+                draftAdded: false,
+                message: "you can't exceed 15 draft items"
+            }
+        }
         let newImagePath = "Default.jpg"
 
         console.log("itemImage", itemImage);
@@ -243,7 +252,6 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
             }
 
     }
-        const user = await getCurrentUser();
 
         const itemData = {
             itemId: newItemKey,
@@ -259,6 +267,10 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
             itemTaken: false,
         };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+    return {
+        draftAdded: true,
+        message: `draft has been added`
+    }
     } catch (error) {
         console.error("Error creating item draft:", error);
     }
