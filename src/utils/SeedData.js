@@ -3,51 +3,58 @@ export const categories = [
   {
     categoryID: "1",
     categoryName: "Hi-fi equipment",
-    words: []
+    words: [],
+    brandsID: []
   },
   {
     categoryID: "2",
     categoryName: "Kitchen machines",
-    words: []
+    words: [],
+    brandsID: []
   },
   {
     categoryID: "3",
     categoryName: "Household machines",
-    words: []
+    words: [],
+    brandsID: []
   },
   {
     categoryID: "4",
     categoryName: "Tablet, smartphones, computers + equipment",
-    words: []
+    words: [],
+    brandsID: []
   },
   {
     categoryID: "5",
     categoryName: "Tv and game consoles",
-    words: []
+    words: [],
+    brandsID: []
   },
   {
     categoryID: "4.1",
     categoryName: "Phone Cases",
     words: [
-      "phone",
       "case"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.2",
     categoryName: "Phone Holders and Stands",
     words: [
-      "phone",
       "holder",
       "stand"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.3",
     categoryName: "Phone Wallets",
     words: [
-      "phone",
       "wallet"
+    ],
+    brandsID: [
+      "52"
     ]
   },
   {
@@ -56,7 +63,8 @@ export const categories = [
     words: [
       "tablet",
       "cover"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.5",
@@ -64,7 +72,8 @@ export const categories = [
     words: [
       "screen",
       "protector"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.6",
@@ -72,14 +81,16 @@ export const categories = [
     words: [
       "charger",
       "cable"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.7",
     categoryName: "Power Banks",
     words: [
       "power bank"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.8",
@@ -87,6 +98,9 @@ export const categories = [
     words: [
       "stylus",
       "pen"
+    ],
+    brandsID: [
+      "81"
     ]
   },
   {
@@ -95,7 +109,8 @@ export const categories = [
     words: [
       "selfie",
       "stick"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.10",
@@ -103,7 +118,8 @@ export const categories = [
     words: [
       "tripod",
       "mount"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.11",
@@ -111,15 +127,16 @@ export const categories = [
     words: [
       "storage",
       "device"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.12",
     categoryName: "Car Mounts",
     words: [
-      "car",
-      "mount"
-    ]
+      "car mount"
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.13",
@@ -127,7 +144,8 @@ export const categories = [
     words: [
       "wireless",
       "keyboard"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "5.1",
@@ -135,6 +153,9 @@ export const categories = [
     words: [
       "game",
       "controller"
+    ],
+    brandsID: [
+      "59"
     ]
   },
   {
@@ -144,6 +165,13 @@ export const categories = [
       "ar",
       "vr",
       "accessories"
+    ],
+    brandsID: [
+      "115",
+      "116",
+      "40",
+      "8",
+      "81"
     ]
   },
   {
@@ -152,7 +180,8 @@ export const categories = [
     words: [
       "cable",
       "organizer"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "2.1",
@@ -160,6 +189,18 @@ export const categories = [
     words: [
       "food",
       "processor"
+    ],
+    brandsID: [
+      "101",
+      "109",
+      "110",
+      "111",
+      "112",
+      "113",
+      "23",
+      "29",
+      "31",
+      "43"
     ]
   },
   {
@@ -167,6 +208,16 @@ export const categories = [
     categoryName: "Mixer",
     words: [
       "mixer"
+    ],
+    brandsID: [
+      "101",
+      "109",
+      "110",
+      "111",
+      "112",
+      "23",
+      "29",
+      "31"
     ]
   },
   {
@@ -175,6 +226,19 @@ export const categories = [
     words: [
       "blender",
       "Ninja"
+    ],
+    brandsID: [
+      "101",
+      "105",
+      "109",
+      "110",
+      "111",
+      "112",
+      "23",
+      "28",
+      "29",
+      "31",
+      "43"
     ]
   },
   {
@@ -184,6 +248,16 @@ export const categories = [
       "juicer",
       "juice",
       "Press"
+    ],
+    brandsID: [
+      "109",
+      "110",
+      "111",
+      "112",
+      "28",
+      "29",
+      "31",
+      "43"
     ]
   },
   {
@@ -195,6 +269,19 @@ export const categories = [
       "espresso",
       "KLF0",
       "grinder"
+    ],
+    brandsID: [
+      "101",
+      "106",
+      "107",
+      "110",
+      "111",
+      "112",
+      "113",
+      "23",
+      "29",
+      "31",
+      "43"
     ]
   },
   {
@@ -203,6 +290,18 @@ export const categories = [
     words: [
       "electric",
       "kettle"
+    ],
+    brandsID: [
+      "101",
+      "106",
+      "109",
+      "110",
+      "112",
+      "113",
+      "23",
+      "29",
+      "31",
+      "43"
     ]
   },
   {
@@ -254,6 +353,18 @@ export const categories = [
       "SpinWave",
       "CrossWave",
       "Vaporetto"
+    ],
+    brandsID: [
+      "109",
+      "114",
+      "31",
+      "40",
+      "41",
+      "42",
+      "43",
+      "48",
+      "88",
+      "96"
     ]
   },
   {
@@ -265,6 +376,14 @@ export const categories = [
       "Roborock",
       "Deebot",
       "Powerbot"
+    ],
+    brandsID: [
+      "40",
+      "43",
+      "44",
+      "46",
+      "49",
+      "94"
     ]
   },
   {
@@ -273,6 +392,12 @@ export const categories = [
     words: [
       "steam",
       "mop"
+    ],
+    brandsID: [
+      "100",
+      "31",
+      "48",
+      "50"
     ]
   },
   {
@@ -280,7 +405,8 @@ export const categories = [
     categoryName: "Apple Watch",
     words: [
       "apple watch"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "1.2",
@@ -302,8 +428,29 @@ export const categories = [
       "Move",
       "Go",
       "Pulse HR",
-      "Activité",
+      "Activit\u00e9",
       "Steel"
+    ],
+    brandsID: [
+      "101",
+      "109",
+      "110",
+      "112",
+      "115",
+      "117",
+      "121",
+      "23",
+      "29",
+      "31",
+      "40",
+      "43",
+      "47",
+      "52",
+      "58",
+      "83",
+      "84",
+      "85",
+      "88"
     ]
   },
   {
@@ -312,6 +459,10 @@ export const categories = [
     words: [
       "fitness",
       "tracker"
+    ],
+    brandsID: [
+      "47",
+      "83"
     ]
   },
   {
@@ -319,14 +470,16 @@ export const categories = [
     categoryName: "Smart Glasses",
     words: [
       "glasses"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "1.5",
     categoryName: "Smart Clothing",
     words: [
       "clothing"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "5.3",
@@ -344,6 +497,13 @@ export const categories = [
       "ps4",
       "ps5",
       "PSP"
+    ],
+    brandsID: [
+      "120",
+      "68",
+      "69",
+      "70",
+      "71"
     ]
   },
   {
@@ -351,7 +511,8 @@ export const categories = [
     categoryName: "Accessories",
     words: [
       "accessories"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "1.6",
@@ -380,6 +541,14 @@ export const categories = [
       "urBeats",
       "iBeats",
       "Beats Pro"
+    ],
+    brandsID: [
+      "121",
+      "23",
+      "49",
+      "5",
+      "52",
+      "8"
     ]
   },
   {
@@ -395,6 +564,13 @@ export const categories = [
       "Home Speaker",
       "SoundLink",
       "HomePod"
+    ],
+    brandsID: [
+      "121",
+      "49",
+      "5",
+      "52",
+      "8"
     ]
   },
   {
@@ -402,6 +578,9 @@ export const categories = [
     categoryName: "Soundbars",
     words: [
       "soundbar"
+    ],
+    brandsID: [
+      "8"
     ]
   },
   {
@@ -409,6 +588,10 @@ export const categories = [
     categoryName: "Audio Systems",
     words: [
       "audio"
+    ],
+    brandsID: [
+      "49",
+      "8"
     ]
   },
   {
@@ -433,6 +616,23 @@ export const categories = [
       "Olympus XZ",
       "Olympus SZ",
       "Olympus OM"
+    ],
+    brandsID: [
+      "101",
+      "106",
+      "110",
+      "112",
+      "23",
+      "29",
+      "31",
+      "40",
+      "43",
+      "5",
+      "73",
+      "77",
+      "78",
+      "79",
+      "81"
     ]
   },
   {
@@ -441,7 +641,8 @@ export const categories = [
     words: [
       "single-lens",
       "reflex"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "1.12",
@@ -449,7 +650,8 @@ export const categories = [
     words: [
       "mirrorless",
       "cameras"
-    ]
+    ],
+    brandsID: []
   },
   {
     categoryID: "4.15",
@@ -460,6 +662,12 @@ export const categories = [
       "oneplus",
       "galaxy",
       "Xiaomi Mi"
+    ],
+    brandsID: [
+      "118",
+      "16",
+      "47",
+      "75"
     ]
   },
   {
@@ -470,9 +678,14 @@ export const categories = [
       "iconia",
       "ipad",
       "Surface"
+    ],
+    brandsID: [
+      "52",
+      "57",
+      "60"
     ]
   },
-    {
+  {
     categoryID: "4.17",
     categoryName: "Laptops",
     words: [
@@ -498,20 +711,39 @@ export const categories = [
       "Swift",
       "IdeaPad",
       "Ideacentre"
+    ],
+    brandsID: [
+      "101",
+      "110",
+      "23",
+      "28",
+      "52",
+      "54",
+      "55",
+      "56",
+      "57",
+      "58",
+      "59",
+      "60",
+      "76"
     ]
   },
-    {
+  {
     categoryID: "4.18",
     categoryName: "Desktops",
     words: [
       "desktop"
-    ]
+    ],
+    brandsID: []
   },
-      {
+  {
     categoryID: "4.19",
     categoryName: "TV",
     words: [
       "tv"
+    ],
+    brandsID: [
+      "93"
     ]
   }
 ];
@@ -519,27 +751,27 @@ export const categories = [
 //Brands
 export const brands = [
   {
-    categoryID: 1,
+    brandID: 1,
     name: "Marshall",
     categoriesID: []
   },
   {
-    categoryID: 2,
+    brandID: 2,
     name: "Focal",
     categoriesID: []
   },
   {
-    categoryID: 3,
+    brandID: 3,
     name: "JBL",
     categoriesID: []
   },
   {
-    categoryID: 4,
+    brandID: 4,
     name: "Pioneer DJ",
     categoriesID: []
   },
   {
-    categoryID: 5,
+    brandID: 5,
     name: "Sony",
     categoriesID: [
       "1.10",
@@ -548,17 +780,17 @@ export const brands = [
     ]
   },
   {
-    categoryID: 6,
+    brandID: 6,
     name: "Yamaha",
     categoriesID: []
   },
   {
-    categoryID: 7,
+    brandID: 7,
     name: "Logitech",
     categoriesID: []
   },
   {
-    categoryID: 8,
+    brandID: 8,
     name: "Bose",
     categoriesID: [
       "1.6",
@@ -569,79 +801,79 @@ export const brands = [
     ]
   },
   {
-    categoryID: 9,
+    brandID: 9,
     name: "Sennheiser",
     categoriesID: []
   },
   {
-    categoryID: 10,
+    brandID: 10,
     name: "Audio-Technica",
     categoriesID: []
   },
   {
-    categoryID: 11,
+    brandID: 11,
     name: "American Audio",
     categoriesID: []
   },
   {
-    categoryID: 12,
+    brandID: 12,
     name: "Argon TT-2",
     categoriesID: []
   },
   {
-    categoryID: 13,
+    brandID: 13,
     name: "Audio Consulting",
     categoriesID: []
   },
   {
-    categoryID: 14,
+    brandID: 14,
     name: "Cobra",
     categoriesID: []
   },
   {
-    categoryID: 15,
+    brandID: 15,
     name: "Uniden",
     categoriesID: []
   },
   {
-    categoryID: 16,
+    brandID: 16,
     name: "Galaxy",
     categoriesID: [
       "4.15"
     ]
   },
   {
-    categoryID: 17,
+    brandID: 17,
     name: "Midland",
     categoriesID: []
   },
   {
-    categoryID: 18,
+    brandID: 18,
     name: "Crown Audio",
     categoriesID: []
   },
   {
-    categoryID: 19,
+    brandID: 19,
     name: "Niles",
     categoriesID: []
   },
   {
-    categoryID: 20,
+    brandID: 20,
     name: "McIntoch",
     categoriesID: []
   },
   {
-    categoryID: 21,
+    brandID: 21,
     name: "NAD Electronics",
     categoriesID: []
   },
   {
-    categoryID: 22,
+    brandID: 22,
     name: "LG",
     categoriesID: []
   },
   {
-    categoryID: 23,
+    brandID: 23,
     name: "Cuisinart",
     categoriesID: [
       "1.10",
@@ -656,27 +888,27 @@ export const brands = [
     ]
   },
   {
-    categoryID: 24,
+    brandID: 24,
     name: "Hamilton Beach",
     categoriesID: []
   },
   {
-    categoryID: 25,
+    brandID: 25,
     name: "Shark Ninja",
     categoriesID: []
   },
   {
-    categoryID: 26,
+    brandID: 26,
     name: "Kitchen Aid",
     categoriesID: []
   },
   {
-    categoryID: 27,
+    brandID: 27,
     name: "Wolf Gourmet",
     categoriesID: []
   },
   {
-    categoryID: 28,
+    brandID: 28,
     name: "Ninja",
     categoriesID: [
       "2.3",
@@ -685,7 +917,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 29,
+    brandID: 29,
     name: "Oster",
     categoriesID: [
       "1.10",
@@ -699,12 +931,12 @@ export const brands = [
     ]
   },
   {
-    categoryID: 30,
+    brandID: 30,
     name: "Magic Bullet",
     categoriesID: []
   },
   {
-    categoryID: 31,
+    brandID: 31,
     name: "Black & Decker",
     categoriesID: [
       "1.10",
@@ -720,47 +952,47 @@ export const brands = [
     ]
   },
   {
-    categoryID: 32,
+    brandID: 32,
     name: "Breville",
     categoriesID: []
   },
   {
-    categoryID: 33,
+    brandID: 33,
     name: "De'Longhi",
     categoriesID: []
   },
   {
-    categoryID: 34,
+    brandID: 34,
     name: "Alessi",
     categoriesID: []
   },
   {
-    categoryID: 35,
+    brandID: 35,
     name: "Ariete",
     categoriesID: []
   },
   {
-    categoryID: 36,
+    brandID: 36,
     name: "Beem",
     categoriesID: []
   },
   {
-    categoryID: 37,
+    brandID: 37,
     name: "Bialetti",
     categoriesID: []
   },
   {
-    categoryID: 38,
+    brandID: 38,
     name: "Cosori",
     categoriesID: []
   },
   {
-    categoryID: 39,
+    brandID: 39,
     name: "Bodum Bistro",
     categoriesID: []
   },
   {
-    categoryID: 40,
+    brandID: 40,
     name: "Miele",
     categoriesID: [
       "1.10",
@@ -771,21 +1003,21 @@ export const brands = [
     ]
   },
   {
-    categoryID: 41,
+    brandID: 41,
     name: "Dyson",
     categoriesID: [
       "3.1"
     ]
   },
   {
-    categoryID: 42,
+    brandID: 42,
     name: "Bosch",
     categoriesID: [
       "3.1"
     ]
   },
   {
-    categoryID: 43,
+    brandID: 43,
     name: "Philips",
     categoriesID: [
       "1.10",
@@ -800,26 +1032,26 @@ export const brands = [
     ]
   },
   {
-    categoryID: 44,
+    brandID: 44,
     name: "Roborock",
     categoriesID: [
       "3.2"
     ]
   },
   {
-    categoryID: 45,
+    brandID: 45,
     name: "Blaupunkt",
     categoriesID: []
   },
   {
-    categoryID: 46,
+    brandID: 46,
     name: "IRobot",
     categoriesID: [
       "3.2"
     ]
   },
   {
-    categoryID: 47,
+    brandID: 47,
     name: "Xiaomi",
     categoriesID: [
       "1.2",
@@ -828,7 +1060,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 48,
+    brandID: 48,
     name: "Bissell",
     categoriesID: [
       "3.1",
@@ -836,7 +1068,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 49,
+    brandID: 49,
     name: "Samsung",
     categoriesID: [
       "1.6",
@@ -846,19 +1078,19 @@ export const brands = [
     ]
   },
   {
-    categoryID: 50,
+    brandID: 50,
     name: "Hoover",
     categoriesID: [
       "3.3"
     ]
   },
   {
-    categoryID: 51,
+    brandID: 51,
     name: "Vileda",
     categoriesID: []
   },
   {
-    categoryID: 52,
+    brandID: 52,
     name: "Apple",
     categoriesID: [
       "1.2",
@@ -870,33 +1102,33 @@ export const brands = [
     ]
   },
   {
-    categoryID: 53,
+    brandID: 53,
     name: "Amazon",
     categoriesID: []
   },
   {
-    categoryID: 54,
+    brandID: 54,
     name: "Lenovo",
     categoriesID: [
       "4.17"
     ]
   },
   {
-    categoryID: 55,
+    brandID: 55,
     name: "Alienware",
     categoriesID: [
       "4.17"
     ]
   },
   {
-    categoryID: 56,
+    brandID: 56,
     name: "Dell",
     categoriesID: [
       "4.17"
     ]
   },
   {
-    categoryID: 57,
+    brandID: 57,
     name: "Acer",
     categoriesID: [
       "4.16",
@@ -904,7 +1136,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 58,
+    brandID: 58,
     name: "HP",
     categoriesID: [
       "1.2",
@@ -912,7 +1144,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 59,
+    brandID: 59,
     name: "Asus",
     categoriesID: [
       "4.17",
@@ -920,7 +1152,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 60,
+    brandID: 60,
     name: "Microsoft",
     categoriesID: [
       "4.16",
@@ -928,127 +1160,127 @@ export const brands = [
     ]
   },
   {
-    categoryID: 61,
+    brandID: 61,
     name: "SteelSeries",
     categoriesID: []
   },
   {
-    categoryID: 62,
+    brandID: 62,
     name: "Razer",
     categoriesID: []
   },
   {
-    categoryID: 63,
+    brandID: 63,
     name: "Zowie",
     categoriesID: []
   },
   {
-    categoryID: 64,
+    brandID: 64,
     name: "Roccat",
     categoriesID: []
   },
   {
-    categoryID: 65,
+    brandID: 65,
     name: "TCL",
     categoriesID: []
   },
   {
-    categoryID: 66,
+    brandID: 66,
     name: "Toshiba",
     categoriesID: []
   },
   {
-    categoryID: 67,
+    brandID: 67,
     name: "Vizio",
     categoriesID: []
   },
   {
-    categoryID: 68,
+    brandID: 68,
     name: "Sega",
     categoriesID: [
       "5.3"
     ]
   },
   {
-    categoryID: 69,
+    brandID: 69,
     name: "Nintendo",
     categoriesID: [
       "5.3"
     ]
   },
   {
-    categoryID: 70,
+    brandID: 70,
     name: "PlayStation",
     categoriesID: [
       "5.3"
     ]
   },
   {
-    categoryID: 71,
+    brandID: 71,
     name: "Xbox",
     categoriesID: [
       "5.3"
     ]
   },
   {
-    categoryID: 72,
+    brandID: 72,
     name: "Corsair",
     categoriesID: []
   },
   {
-    categoryID: 73,
+    brandID: 73,
     name: "Panasonic",
     categoriesID: [
       "1.10"
     ]
   },
   {
-    categoryID: 74,
+    brandID: 74,
     name: "Oppo",
     categoriesID: []
   },
   {
-    categoryID: 75,
+    brandID: 75,
     name: "OnePlus",
     categoriesID: [
       "4.15"
     ]
   },
   {
-    categoryID: 76,
+    brandID: 76,
     name: "MSI",
     categoriesID: [
       "4.17"
     ]
   },
   {
-    categoryID: 77,
+    brandID: 77,
     name: "Canon",
     categoriesID: [
       "1.10"
     ]
   },
   {
-    categoryID: 78,
+    brandID: 78,
     name: "Nikon",
     categoriesID: [
       "1.10"
     ]
   },
   {
-    categoryID: 79,
+    brandID: 79,
     name: "Fujifilm",
     categoriesID: [
       "1.10"
     ]
   },
   {
-    categoryID: 80,
+    brandID: 80,
     name: "Panasonic",
     categoriesID: []
   },
   {
-    categoryID: 81,
+    brandID: 81,
     name: "Olympus",
     categoriesID: [
       "1.10",
@@ -1057,12 +1289,12 @@ export const brands = [
     ]
   },
   {
-    categoryID: 82,
+    brandID: 82,
     name: "Leica",
     categoriesID: []
   },
   {
-    categoryID: 83,
+    brandID: 83,
     name: "Amazfit",
     categoriesID: [
       "1.2",
@@ -1070,31 +1302,31 @@ export const brands = [
     ]
   },
   {
-    categoryID: 84,
+    brandID: 84,
     name: "Fossil Gen",
     categoriesID: [
       "1.2"
     ]
   },
   {
-    categoryID: 85,
+    brandID: 85,
     name: "Withings",
     categoriesID: [
       "1.2"
     ]
   },
   {
-    categoryID: 86,
+    brandID: 86,
     name: "Miele",
     categoriesID: []
   },
   {
-    categoryID: 87,
+    brandID: 87,
     name: "Dyson",
     categoriesID: []
   },
   {
-    categoryID: 88,
+    brandID: 88,
     name: "Electrolux",
     categoriesID: [
       "1.2",
@@ -1102,75 +1334,75 @@ export const brands = [
     ]
   },
   {
-    categoryID: 89,
+    brandID: 89,
     name: "Bosch",
     categoriesID: []
   },
   {
-    categoryID: 90,
+    brandID: 90,
     name: "Philips",
     categoriesID: []
   },
   {
-    categoryID: 91,
+    brandID: 91,
     name: "iRobot",
     categoriesID: []
   },
   {
-    categoryID: 92,
+    brandID: 92,
     name: "Xiaomi",
     categoriesID: []
   },
   {
-    categoryID: 93,
+    brandID: 93,
     name: "Neato",
     categoriesID: [
       "4.19"
     ]
   },
   {
-    categoryID: 94,
+    brandID: 94,
     name: "Ecovacs",
     categoriesID: [
       "3.2"
     ]
   },
   {
-    categoryID: 95,
+    brandID: 95,
     name: "Samsung",
     categoriesID: []
   },
   {
-    categoryID: 96,
+    brandID: 96,
     name: "K\u00e4rcher",
     categoriesID: [
       "3.1"
     ]
   },
   {
-    categoryID: 97,
+    brandID: 97,
     name: "Bissell",
     categoriesID: []
   },
   {
-    categoryID: 98,
+    brandID: 98,
     name: "Black & Decker",
     categoriesID: []
   },
   {
-    categoryID: 99,
+    brandID: 99,
     name: "Hoover",
     categoriesID: []
   },
   {
-    categoryID: 100,
+    brandID: 100,
     name: "Russell Hobbs",
     categoriesID: [
       "3.3"
     ]
   },
   {
-    categoryID: 101,
+    brandID: 101,
     name: "KitchenAid",
     categoriesID: [
       "1.10",
@@ -1184,29 +1416,29 @@ export const brands = [
     ]
   },
   {
-    categoryID: 102,
+    brandID: 102,
     name: "Cuisinart",
     categoriesID: []
   },
   {
-    categoryID: 103,
+    brandID: 103,
     name: "Ninja",
     categoriesID: []
   },
   {
-    categoryID: 104,
+    brandID: 104,
     name: "Oster",
     categoriesID: []
   },
   {
-    categoryID: 105,
+    brandID: 105,
     name: "Vitamix",
     categoriesID: [
       "2.3"
     ]
   },
   {
-    categoryID: 106,
+    brandID: 106,
     name: "Keurig",
     categoriesID: [
       "1.10",
@@ -1215,19 +1447,19 @@ export const brands = [
     ]
   },
   {
-    categoryID: 107,
+    brandID: 107,
     name: "Nespresso",
     categoriesID: [
       "2.5"
     ]
   },
   {
-    categoryID: 108,
+    brandID: 108,
     name: "Philips",
     categoriesID: []
   },
   {
-    categoryID: 109,
+    brandID: 109,
     name: "Braun",
     categoriesID: [
       "1.2",
@@ -1240,7 +1472,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 110,
+    brandID: 110,
     name: "Krups",
     categoriesID: [
       "1.10",
@@ -1255,7 +1487,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 111,
+    brandID: 111,
     name: "Smeg",
     categoriesID: [
       "2.1",
@@ -1266,7 +1498,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 112,
+    brandID: 112,
     name: "Dash",
     categoriesID: [
       "1.10",
@@ -1280,7 +1512,7 @@ export const brands = [
     ]
   },
   {
-    categoryID: 113,
+    brandID: 113,
     name: "DeLonghi",
     categoriesID: [
       "2.1",
@@ -1289,14 +1521,14 @@ export const brands = [
     ]
   },
   {
-    categoryID: 114,
+    brandID: 114,
     name: "Polti",
     categoriesID: [
       "3.1"
     ]
   },
   {
-    categoryID: 115,
+    brandID: 115,
     name: "Fitbit",
     categoriesID: [
       "1.2",
@@ -1304,40 +1536,40 @@ export const brands = [
     ]
   },
   {
-    categoryID: 116,
+    brandID: 116,
     name: "Garmin",
     categoriesID: [
       "5.2"
     ]
   },
   {
-    categoryID: 117,
+    brandID: 117,
     name: "Fossil",
     categoriesID: [
       "1.2"
     ]
   },
   {
-    categoryID: 118,
+    brandID: 118,
     name: "Google",
     categoriesID: [
       "4.15"
     ]
   },
   {
-    categoryID: 119,
+    brandID: 119,
     name: "XBOX",
     categoriesID: []
   },
   {
-    categoryID: 120,
+    brandID: 120,
     name: "PS",
     categoriesID: [
       "5.3"
     ]
   },
   {
-    categoryID: 121,
+    brandID: 121,
     name: "Beats",
     categoriesID: [
       "1.2",
