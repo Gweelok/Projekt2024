@@ -79,10 +79,10 @@ const DetailViews = ({ navigation, route }) => {
   };
 
   return (
-      <View style={[Backgroundstyle.interactive_screens, {paddingTop:10},  GlobalStyle.BodyWrapper, ]}>
+      <View style={[Backgroundstyle.interactive_screens, {paddingTop:40},  ]}>
         <ScrollViewComponent>
           <BackButton onPress={navigation.goBack} style={DetailView.backButton} />
-          <View style={DetailView.container}>
+          <View style={[DetailView.container,GlobalStyle.BodyWrapper]}>
             <Image source={{ uri: imageUrl }} style={DetailView.image} />
             <View style={DetailView.infoContainer}>
               <View style={DetailView.leftInfo}>
@@ -130,12 +130,13 @@ const DetailView = StyleSheet.create({
     marginHorizontal:15,
     // marginTop: 15, // Add margin to align with the picture
     // left:15,
+   
   },
 
   image: {
     height: 300,
     width: 300,
-    marginTop: 15,
+    marginTop: 20,
   },
 
   text: {
@@ -145,6 +146,8 @@ const DetailView = StyleSheet.create({
     borderRadius: 1,
     marginTop: 15,
     marginRight: 30,
+    color: Primarycolor1
+    
   },
 
   TagButton: {
