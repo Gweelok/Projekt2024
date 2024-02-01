@@ -3,10 +3,12 @@ import { windowHeight, windowWidth } from "../../utils/Dimensions"
 //import UptainerContent from "../components/Uptainer/UptainerContent"
 import { Primarycolor1, styles, Buttons } from "../../styles/styleSheet"
 import { useState } from "react"
+import {createUptainerAnswers} from "../../utils/Repo"
 
-const UptainerTaskList = () => {
+const UptainerTaskList = ({ location }) => {
 
-    const dataTest = ['Task1', 'Task2', 'Task3', 'Task4', 'Task5', 'Task6', 'Task7', 'Task8', 'Task9', 'Task10', 'Task11', 'Task12', ];
+    const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?', ];
+    const [formvalid, setForm] = useState(true)
     const [newData, setData] = useState(dataTest.map((task) => newTask = {
         name: task,
         pressedYes: false,
@@ -17,13 +19,27 @@ const UptainerTaskList = () => {
         cur.pressedYes = true
         cur.pressedNo = false
         const result = [...newData]
-        setData(result)        
+        setData(result)
+        setForm(checkNumberAnswers(result))        
     };
     handlePressNo=(cur)=>{        
         cur.pressedYes = false
         cur.pressedNo = true
         const result = [...newData]
-        setData(result)        
+        setData(result)
+        setForm(checkNumberAnswers(result))        
+    };
+    handlePressConfirm=()=>{
+        const answersToDatabase = createAnswersData(newData, location.uptainerId)
+        console.log(answersToDatabase)
+        createUptainerAnswers(answersToDatabase)
+        const result = newData.map((task) =>  newTask = {
+            name: task.name,
+            pressedYes: false,
+            pressedNo: false,
+        
+        })
+        setData(result)
     };
     return (
         <View>
@@ -64,7 +80,9 @@ const UptainerTaskList = () => {
                 </View>
             </View>))}
             </ScrollView>
-            <TouchableOpacity 
+            <TouchableOpacity
+                disabled={formvalid}
+                onPress={() => handlePressConfirm()}
                 style={Buttons.main_button}>
                     <Text style={Buttons.main_buttonText}>Confirm</Text>
             </TouchableOpacity>
@@ -107,3 +125,41 @@ const styleLocal = StyleSheet.create({
 })
 
 export default UptainerTaskList
+
+function checkNumberAnswers(tasks) {
+    let numberAnswers = 0
+    for (let index in tasks) {
+        if ((tasks[index].pressedYes) || (tasks[index].pressedNo)) {
+            numberAnswers += 1
+        }
+    }
+    if (numberAnswers == tasks.length) {
+        return false
+    }
+    else {
+        return true
+    }
+}
+
+function createAnswersData (data, uptainerId) {    
+    const now = new Date();
+    const answers = data.map((task) => answer = {
+        task: task.name,
+        answer: checkAnswer(task)
+    })
+    const result = {
+        uptainerId: uptainerId,
+        date: now,
+        answers: answers,
+    };
+    return result
+}
+
+function checkAnswer (task) {
+    if (task.pressedYes) {
+        return "YES"
+    }
+    if (task.pressedNo) {
+        return "NO"
+    }
+}

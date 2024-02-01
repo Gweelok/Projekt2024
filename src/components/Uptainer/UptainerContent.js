@@ -1,13 +1,14 @@
 import { View } from "react-native"
 import UptainerInfo from "./UptainerInfo"
 import UptainerTaskList from "./UptainerTaskList"
+import Navigationbar from "../organisms/Navigationbar"
 
 
 const UptainerContent = ({ location }) => {
     return (
         <View>
             <UptainerInfo location={location}></UptainerInfo>                
-            <UptainerTaskList></UptainerTaskList>  
+            <UptainerTaskList location={location}></UptainerTaskList>
         </View>
     )
 }

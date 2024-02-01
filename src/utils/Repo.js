@@ -57,3 +57,21 @@ export async function signInUser(email, password, navigation){
       authErrors(error);
   });
 }
+
+export function createUptainerAnswers(data) {
+    const newAnswersKey = push(ref(db, "answers")).key;
+    console.log(newAnswersKey)
+    //writeToDatabase("answers" + "/" + newAnswersKey, data)
+}
+
+
+function writeToDatabase(refPath, data) {
+  const reference = ref(db, refPath);
+  try {
+      set(reference, data);
+      console.log(`Data written to ${refPath} successfully.`);
+  } catch (error) {
+      console.error(`Error writing data to ${refPath}: ${error.message}`);
+  }
+
+}
