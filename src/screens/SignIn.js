@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput , Pressable , Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, Pressable, Alert } from 'react-native';
 import {
     styles,
     Backgroundstyle,
@@ -8,7 +8,7 @@ import {
 }
     from '../styles/Stylesheet';
 import { Ionicons } from '@expo/vector-icons';
-import {t, useLanguage} from "../Languages/LanguageHandler"; // or any other icon library you prefer
+import { t, useLanguage } from "../Languages/LanguageHandler"; // or any other icon library you prefer
 import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
 import { firebaseAurth } from '../utils/Firebase';
 import GlobalStyle from "../styles/GlobalStyle";
@@ -53,7 +53,7 @@ const SignIn = ({ navigation }) => {
         // Check if email is empty
         if (email.trim() === "") {
             setShowError(true);
-            setErrorMessage([t("SignInScreen.fields",currentLanguage)]);
+            setErrorMessage([t("SignInScreen.fields", currentLanguage)]);
             setEmailValid(false);
             setPasswordCheck(true);
             return; // Return early since email is a prerequisite for password check
@@ -61,7 +61,7 @@ const SignIn = ({ navigation }) => {
 
         // Validate email format
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        if (!emailPattern.test(email) && email.trim()!=="") {
+        if (!emailPattern.test(email) && email.trim() !== "") {
             setShowError(true);
             setErrorMessage("Error msg");
             setEmailValid(false);
@@ -72,14 +72,14 @@ const SignIn = ({ navigation }) => {
         // Check if password is empty only if email is valid
         if (password.trim() === "") {
             setShowError(true);
-            setErrorMessage([t("SignInScreen.fields",currentLanguage)]);
+            setErrorMessage([t("SignInScreen.fields", currentLanguage)]);
             setPasswordCheck(false);
             setEmailValid(true);
             return; // Return early to ask for password input
         }
 
         // Validate password length
-        if (password.length < 8 && password.trim()!=="") {
+        if (password.length < 8 && password.trim() !== "") {
             setShowError(true);
             setErrorMessage("Error msg");
             setPasswordCheck(false);
@@ -88,8 +88,8 @@ const SignIn = ({ navigation }) => {
         }
 
         // If all validations pass
-            setShowError(false);
-            signInUser(email, password, navigation);
+        setShowError(false);
+        signInUser(email, password, navigation);
 
     };
 
@@ -106,80 +106,84 @@ const SignIn = ({ navigation }) => {
             setUserLogged(false);
         }
     });
-    if (userLogged) {
-        navigation.navigate("Homepage");
-    }
 
-    let Header= t('SignInScreen.Headline', currentLanguage);
+    useEffect(() => {
+        // Check if the user is logged in and navigate
+        if (userLogged) {
+          navigation.navigate('Homepage');
+        }
+    }, [userLogged, navigation]);
+
+    let Header = t('SignInScreen.Headline', currentLanguage);
 
     return (
         <View style={Backgroundstyle.informationScreens}>
             {showError && <ErrorBanner message={errorMessage} />}
-            <View style={{ alignSelf: "stretch", paddingLeft: 25}}>
-                <BackButton onPress={navigation.goBack}/>
+            <View style={{ alignSelf: "stretch", paddingLeft: 25 }}>
+                <BackButton onPress={navigation.goBack} />
             </View>
-        <View style={GlobalStyle.BodyWrapper}>
-            <Text style={[styles.Header_Primarycolor1,styles.Header]}>{Header}</Text>
-            <TextInput
-                placeholder="E-mail"
-                placeholderTextColor="#8EA59E"
-                value={email}
-                onChangeText={onChangeEmailHandler}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                clearButtonMode={"always"}
-                style={[styles.inputBox, (!emailValid && formSubmitted) && SignUpStyles.errorInputBox]}
-                />
-                {!emailValid && formSubmitted && <Text style={SignUpStyles.errorText}>{t("SignInScreen.validemail",currentLanguage)}</Text>}
-
-                <View style={[styles.inputBox , {flexDirection:"row"}, (!passwordCheck && formSubmitted) && SignUpStyles.errorInputBox]}>
+            <View style={GlobalStyle.BodyWrapper}>
+                <Text style={[styles.Header_Primarycolor1, styles.Header]}>{Header}</Text>
                 <TextInput
-                    value={password}
-                    onChangeText={CheckPassword}
-                    placeholder={`${t("SignUpScreen.password", currentLanguage)}`}
+                    placeholder="E-mail"
                     placeholderTextColor="#8EA59E"
-                    keyboardType={'default'}
-                    secureTextEntry={!showPassword}
-                    style={{flex:1 , fontFamily: 'space-grotesk',fontSize:15}}
+                    value={email}
+                    onChangeText={onChangeEmailHandler}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    clearButtonMode={"always"}
+                    style={[styles.inputBox, (!emailValid && formSubmitted) && SignUpStyles.errorInputBox]}
+                />
+                {!emailValid && formSubmitted && <Text style={SignUpStyles.errorText}>{t("SignInScreen.validemail", currentLanguage)}</Text>}
 
-                />
-                <Ionicons
-                    name={showPassword ? 'ios-eye-off' : 'ios-eye'}
-                    size={18}
-                    color={Primarycolor1}
-                    style={styles.Icon_container}
-                    onPress={togglePasswordVisibility}
-                />
+                <View style={[styles.inputBox, { flexDirection: "row" }, (!passwordCheck && formSubmitted) && SignUpStyles.errorInputBox]}>
+                    <TextInput
+                        value={password}
+                        onChangeText={CheckPassword}
+                        placeholder={`${t("SignUpScreen.password", currentLanguage)}`}
+                        placeholderTextColor="#8EA59E"
+                        keyboardType={'default'}
+                        secureTextEntry={!showPassword}
+                        style={{ flex: 1, fontFamily: 'space-grotesk', fontSize: 15 }}
+
+                    />
+                    <Ionicons
+                        name={showPassword ? 'ios-eye-off' : 'ios-eye'}
+                        size={18}
+                        color={Primarycolor1}
+                        style={styles.Icon_container}
+                        onPress={togglePasswordVisibility}
+                    />
+                </View>
+                { //Check on the password
+                    (!passwordCheck && formSubmitted) ? <Text style={SignUpStyles.errorText}>
+                        {t("SignInScreen.passwordmsg", currentLanguage)}</Text> : null}
+                <Pressable onPress={handleSubmit} style={Buttons.main_button}>
+                    <Text style={Buttons.main_buttonText}>{Header}</Text>
+                </Pressable>
+
+                <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
+                    <Text style={[styles.link, { marginTop: 15 }]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
+                </Pressable>
+
+                <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
+                    <View style={SignUpStyles.container}>
+                        <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
+                    </View>
+                </Pressable>
+
+                <Pressable onPress={handleSubmit} style={Buttons.buttongoogle}>
+                    <View style={SignUpStyles.container}>
+                        <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
+                    </View>
+                </Pressable>
+
+                <Pressable onPress={() => {
+                    navigation.navigate('SignUp')
+                }}>
+                    <Text style={styles.link}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
+                </Pressable>
             </View>
-            { //Check on the password
-                (!passwordCheck && formSubmitted) ? <Text style={SignUpStyles.errorText}>
-                    {t("SignInScreen.passwordmsg",currentLanguage)}</Text> : null }
-            <Pressable onPress={handleSubmit} style={Buttons.main_button}>
-                <Text style={Buttons.main_buttonText}>{Header}</Text>
-            </Pressable>
-
-            <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
-                <Text style={[styles.link, {marginTop: 15}]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
-            </Pressable>
-
-            <Pressable onPress={handleSubmit} style={Buttons.buttonfb}>
-                <View style={SignUpStyles.container}>
-                    <Text style={Buttons.SocialMediabuttonText}> Continue with Facebook</Text>
-                </View>
-            </Pressable>
-
-            <Pressable onPress={handleSubmit}  style={Buttons.buttongoogle}>
-                <View style={SignUpStyles.container}>
-                    <Text style={Buttons.SocialMediabuttonText}> Continue with Google</Text>
-                </View>
-            </Pressable>
-
-            <Pressable onPress={() => {
-                navigation.navigate('SignUp')
-            }}>
-                <Text style={styles.link}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
-            </Pressable>
-        </View>
         </View>
     );
 }
@@ -189,7 +193,7 @@ const SignUpStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-errorInputBox: {
+    errorInputBox: {
         borderColor: "#AA0000",
         borderWidth: 3,
     },
@@ -209,7 +213,7 @@ errorInputBox: {
         alignItems: "center",
         width: "100%",
         zIndex: 10,
-     },
+    },
 });
 
 export default SignIn;
