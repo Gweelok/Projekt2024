@@ -1,28 +1,60 @@
 import React from "react";
-import { createUser} from "../utils/Repo";
+import { createUser } from "../utils/Repo";
 import { firebaseAurth } from "../utils/Firebase";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import { Backgroundstyle, styles, Buttons } from "../styles/Stylesheet";
 
 const TermsAndConditions = ({ navigation, route }) => {
-    const { email, password } = route.params;
+  const { email, password } = route.params;
 
-    const terms = [
-      "You agree not to misuse the services.",
-      "All content is copyrighted and owned us.",
-      "Personal data shared will be protected.",
-      "You agree not to misuse the services.",
-      "Personal data shared will be protected.",
-      "All content is copyrighted and owned us.",
-      "You agree not to misuse the services.",
-      "All content is copyrighted and owned us."
+  const terms = [
+    "You agree not to misuse the services.",
+    "All content is copyrighted and owned us.",
+    "Personal data shared will be protected.",
+    "You agree not to misuse the services.",
+    "Personal data shared will be protected.",
+    "All content is copyrighted and owned us.",
+    "You agree not to misuse the services.",
+    "All content is copyrighted and owned us."
   ];
 
   const handleAccept = async () => {
+    try {
       await createUser(email, password);
+
       if (firebaseAurth.currentUser !== null) {
-          navigation.navigate("ProfileCreated");
+        navigation.navigate("ProfileCreated");
+      } else {
+        Alert.alert(
+          'Error',
+          'An error occurred while trying to authenticate the user. Please try to sign in later.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.navigate('Sign in');
+              },
+            },
+          ]
+        );
       }
+    } catch (error) {
+      console.error('An error occurred:', error);
+
+      const errorMessage = error.toString();
+      Alert.alert(
+        'Error',
+        `An error occurred: ${errorMessage}`,
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]
+      );
+    }
   };
 
   const renderTerm = ({ item, index }) => (
@@ -32,19 +64,19 @@ const TermsAndConditions = ({ navigation, route }) => {
   return (
     <View style={[Backgroundstyle.interactive_screens, { padding: 15 }]}>
       <Text style={[styles.Header, styles.Header_Primarycolor1, { fontSize: 25 }]}>
-        Terms and Conditions 
+        Terms and Conditions
       </Text>
-      <FlatList 
+      <FlatList
         data={terms}
         renderItem={renderTerm}
         keyExtractor={(item, index) => index.toString()}
-        style={{ marginVertical: 20, paddingHorizontal: 20 }}/>
-      <TouchableOpacity 
+        style={{ marginVertical: 20, paddingHorizontal: 20 }} />
+      <TouchableOpacity
         style={[Buttons.main_button, { marginBottom: 10 }]}
         onPress={handleAccept}>
         <Text style={Buttons.main_buttonText}>Accept</Text>
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={[Buttons.secondary_button, { marginBottom: 20 }]}
         onPress={() => navigation.goBack()}>
         <Text style={Buttons.secondary_buttonText}>Decline</Text>
