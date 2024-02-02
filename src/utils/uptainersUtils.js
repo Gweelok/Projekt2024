@@ -1,4 +1,4 @@
-import { products } from "../utils/SeedData";
+import { items, products } from "../utils/SeedData.js";
 import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
 
 export const calculateDistance = ({ latitude: lat1, longitude: lon1 }, { latitude: lat2, longitude: lon2 }) => {
@@ -95,7 +95,7 @@ export async function CalculateStatistic () {
       return acc;
     }, {});
 
-    for (const item of items) {
+    for (const item of items) { //for each item (remember async & await) && PromisAll
       const itemUptainer = allUptainersStat[item["itemUptainer"]];
       const productInfo = await getProductById(item["itemproduct"])
       //Counting how many times Uptainer was used for putting item

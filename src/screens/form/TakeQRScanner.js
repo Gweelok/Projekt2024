@@ -85,7 +85,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
     setScannedQRCode(null);
   };
 
-  const handleSaveCode = async () => {
+  const handleSaveCode = async () => { 
     if (scannedQRCode) {
       const qrCodeString = JSON.stringify(scannedQRCode);
       try {

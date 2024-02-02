@@ -642,27 +642,6 @@ export async function getAllItems() {
     }
 }
 
-
-// getAllItems can be updated like this to automatically include all properties from the original object if the database structure changes.
-/* export async function getAllItems() {
-  const db = firebaseGetDB;
-  const reference = ref(db, "/items");
-  try {
-    const snapshot = await get(reference);
-    const items = [];
-    snapshot.forEach((childSnapshot) => {
-      const itemData = childSnapshot.val();
-      items.push({
-        ...itemData,
-        itemId: childSnapshot.key,
-      });
-    });
-    return items;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
-  }
-} */
 export async function getItemById(itemId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/items/${itemId}`);
