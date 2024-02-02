@@ -74,7 +74,7 @@ const Add = ({ route, navigation }) => {
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
   const [condition, setCondition] = useState(
-    itemData?.condition || null
+    itemData?.condition ? itemData?.condition : itemData?.itemcondition || null
   );
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
