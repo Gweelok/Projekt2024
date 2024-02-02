@@ -933,7 +933,7 @@ export async function updateItemToTaken(itemId){
     const reference = ref(db, `/items/${itemId}`);
     try {
         // set item taken to user
-        const user = getCurrentUser()
+        const user = await getCurrentUser()
         update(reference, {itemTaken: user.id}); 
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
