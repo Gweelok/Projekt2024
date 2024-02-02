@@ -89,6 +89,7 @@ const Add = ({ route, navigation }) => {
   );
   
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
+  
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
     const itemId = itemData?.itemId
@@ -110,10 +111,10 @@ const Add = ({ route, navigation }) => {
     } else{
 
       const response = await createItemDraft(
-          product.productId,
-          brand.brandId,
-          model.modelId,
-          category.categoryId,
+          product?.productId,
+          brand?.brandId,
+          model?.modelId,
+          category?.categoryId,
           image,
           description,
           condition
