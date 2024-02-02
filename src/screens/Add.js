@@ -111,10 +111,10 @@ const Add = ({ route, navigation }) => {
     } else{
 
       const response = await createItemDraft(
-          product.productId,
-          brand.brandId,
-          model.modelId,
-          category.categoryId,
+          product?.productId,
+          brand?.brandId,
+          model?.modelId,
+          category?.categoryId,
           image,
           description,
           condition
