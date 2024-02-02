@@ -20,6 +20,7 @@ import {
   getUptainerFromQR,
   getUptainerById,
   QRCodeExists,
+  updateItemToTaken,
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 
@@ -96,16 +97,9 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         let navDir = "UptainerDetails";
 
         try {
-          await createItem(
-              itemData?.image,
-              itemData?.category,
-              itemData?.product,
-              itemData?.brand,
-              itemData?.model,
-              itemData?.condition,
-              itemData?.description,
-              value // Assuming this is the uptainerQRCode value
-          );
+          const itemId = itemData?.itemId
+          
+          await updateItemToTaken(itemId)
         } catch (error) {
           console.log("can not create item. Error: ", error);
         }
