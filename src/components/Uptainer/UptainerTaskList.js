@@ -3,7 +3,7 @@ import { windowHeight, windowWidth } from "../../utils/Dimensions"
 //import UptainerContent from "../components/Uptainer/UptainerContent"
 import { Primarycolor1, styles, Buttons } from "../../styles/styleSheet"
 import { useState } from "react"
-import {createUptainerAnswers} from "../../utils/Repo"
+import {createUptainerTaskAnswers} from "../../utils/Repo"
 
 const UptainerTaskList = ({ location }) => {
 
@@ -30,9 +30,9 @@ const UptainerTaskList = ({ location }) => {
         setForm(checkNumberAnswers(result))        
     };
     handlePressConfirm=()=>{
-        const answersToDatabase = createAnswersData(newData, location.uptainerId)
+        const answersToDatabase = createTaskAnswersData(newData, location.uptainerId)
         console.log(answersToDatabase)
-        createUptainerAnswers(answersToDatabase)
+        createUptainerTaskAnswers(answersToDatabase)
         const result = newData.map((task) =>  newTask = {
             name: task.name,
             pressedYes: false,
@@ -126,6 +126,7 @@ const styleLocal = StyleSheet.create({
 
 export default UptainerTaskList
 
+//function for checking number of answers
 function checkNumberAnswers(tasks) {
     let numberAnswers = 0
     for (let index in tasks) {
@@ -141,7 +142,8 @@ function checkNumberAnswers(tasks) {
     }
 }
 
-function createAnswersData (data, uptainerId) {    
+//function for creating data about answers for database
+function createTaskAnswersData (data, uptainerId) {    
     const now = new Date();
     const answers = data.map((task) => answer = {
         task: task.name,
@@ -149,12 +151,13 @@ function createAnswersData (data, uptainerId) {
     })
     const result = {
         uptainerId: uptainerId,
-        date: now,
-        answers: answers,
+        date: now.toLocaleString(),
+        taskAnswers: answers,
     };
     return result
 }
 
+//function for returm YES/NO
 function checkAnswer (task) {
     if (task.pressedYes) {
         return "YES"

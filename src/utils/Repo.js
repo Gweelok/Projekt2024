@@ -58,10 +58,9 @@ export async function signInUser(email, password, navigation){
   });
 }
 
-export function createUptainerAnswers(data) {
-    const newAnswersKey = push(ref(db, "answers")).key;
-    console.log(newAnswersKey)
-    //writeToDatabase("answers" + "/" + newAnswersKey, data)
+export function createUptainerTaskAnswers(data) {
+    const newAnswersKey = push(ref(db, "taskAnswers")).key;
+    writeToDatabase("taskAnswers" + "/" + newAnswersKey, data)
 }
 
 
