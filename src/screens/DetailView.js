@@ -49,6 +49,7 @@ const DetailViews = ({ navigation, route }) => {
       brand: brandName,
       description: itemDescription,
       image: imageUrl,
+      itemId: details?.data
     });
   };
 

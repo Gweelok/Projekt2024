@@ -74,7 +74,7 @@ const Add = ({ route, navigation }) => {
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
   const [condition, setCondition] = useState(
-    itemData?.condition || null
+    itemData?.condition ? itemData?.condition : itemData?.itemcondition || null
   );
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
@@ -139,12 +139,13 @@ const Add = ({ route, navigation }) => {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
       navigation.navigate("AddQRScanner", {
-        product: product.productId,
-        brand: brand.brandId,
-        model: model.modelId,
-        category: category.categoryId,
-        condition: condition,
-        description: description,
+        itemId: itemData?.itemId,
+        product: product instanceof Object ? product.productId : itemData?.itemproduct,
+        brand: brand instanceof Object ? brand.brandId : itemData?.itemBrand,
+        model: model instanceof Object ? model.modelId : itemData?.itemModel,
+        category: category instanceof Object ? category.categoryId : itemData?.itemCategory,
+        condition: condition ? condition : itemData?.itemcondition,
+        description: description ? description : itemData?.itemDescription,
         image: image,
       });
     }
