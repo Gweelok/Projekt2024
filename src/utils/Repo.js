@@ -1,7 +1,12 @@
 import { get, ref, query, push, set, update, remove, startAt, endAt, orderByChild } from "firebase/database";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+    EmailAuthProvider,
+    createUserWithEmailAndPassword,
+    reauthenticateWithCredential,
+    signInWithEmailAndPassword,
+    updateEmail,
+    updatePassword,
+    updateProfile,
 } from "firebase/auth";
 import {
     getStorage,
@@ -9,10 +14,11 @@ import {
     getDownloadURL,
     ref as ref_storage,
     deleteObject,
-  } from "firebase/storage";
+} from "firebase/storage";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
 import { categories, brands, stationData, products, items, models } from "./SeedData";
 import { generateQRCode } from './QRCodeGenerator'; // Import the QR code generator
+import { SecureStorage } from "./SecureStorage";
 
 const db = firebaseGetDB;
 
@@ -28,7 +34,7 @@ const paths = {
     products: "products",
     users: "users",
     Profils: "Profils/",    //for storage
-  };
+};
 
 export async function seedCheck() {
     try {
@@ -56,7 +62,7 @@ async function createSeedData() {
     console.log("Creating products");
     await Promise.all(products.map(product => createProduct(product)));
 
-    const brandList     = await getAllBrands();
+    const brandList = await getAllBrands();
     //const categoryList  = await getAllCategories();
     //const uptainerList  = await getAllUptainers();
     //const productList   = await getAllProducts();
@@ -83,9 +89,9 @@ async function createSeedData() {
     console.log("Done creating data");
 }
 
-        /********************/
-        /***** Create *******/
-        /********************/
+/********************/
+/***** Create *******/
+/********************/
 
 export async function createUptainer(data) {
     const newUptainerKey = push(ref(db, paths.uptainers)).key;
@@ -107,7 +113,7 @@ export async function createUptainer(data) {
 }
 
 
-export async function createItem(itemImage = "",categoryId = "",itemproduct = "",brandId = "",  itemModel = "",  itemcondition = "",itemDescription = "", uptainerQRCode = "") {
+export async function createItem(itemImage = "", categoryId = "", itemproduct = "", brandId = "", itemModel = "", itemcondition = "", itemDescription = "", uptainerQRCode = "") {
     console.log("createItem for QRScanner called with parameters:");
     console.log("itemImage:", itemImage);
     console.log("categoryId:", categoryId);
@@ -119,22 +125,22 @@ export async function createItem(itemImage = "",categoryId = "",itemproduct = ""
     console.log("uptainerQRCode:", uptainerQRCode);
     const newItemKey = push(ref(db, paths.items)).key;
     let newImagePath = "Default.jpg"
-    if(itemImage !== ""){
-        try{
-        const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
-        newImagePath = newItemKey +"."+ fileExtension;
-        const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
-            console.log("progress: ",v)
+    if (itemImage !== "") {
+        try {
+            const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
+            newImagePath = newItemKey + "." + fileExtension;
+            const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
+                console.log("progress: ", v)
             );
 
-        console.log(uploadResp);
-        console.log(newImagePath);
+            console.log(uploadResp);
+            console.log(newImagePath);
         } catch (error) {
             console.log("can not upload image. Error: ", error);
         }
 
     }
-    try{
+    try {
         const user = await getCurrentUser();
         console.log("uptainerQRCode before QRCodeExists:", uptainerQRCode);
         const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
@@ -228,7 +234,7 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
         const user = await getCurrentUser();
         const allItems = await getAllItems()
         const userDraft = allItems.filter(item => (item.itemUser === user.id && item.itemUptainer === "Draft"))
-        if (userDraft.length >= 15){
+        if (userDraft.length >= 15) {
             return {
                 draftAdded: false,
                 message: "you can't exceed 15 draft items"
@@ -237,21 +243,21 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
         let newImagePath = "Default.jpg"
 
         console.log("itemImage", itemImage);
-        if(itemImage !== ""){
-            try{
-            const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
-            newImagePath = newItemKey +"."+ fileExtension;
-            const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
-                console.log("progress: ",v)
+        if (itemImage !== "") {
+            try {
+                const fileExtension = itemImage.uri.substr(itemImage.uri.lastIndexOf('.') + 1);
+                newImagePath = newItemKey + "." + fileExtension;
+                const uploadResp = await uploadToFirebase(itemImage.uri, newImagePath, paths.Items, (v) =>
+                    console.log("progress: ", v)
                 );
 
-            console.log(uploadResp);
-            console.log(newImagePath);
+                console.log(uploadResp);
+                console.log(newImagePath);
             } catch (error) {
                 console.log("can not upload image. Error: ", error);
             }
 
-    }
+        }
 
         const itemData = {
             itemId: newItemKey,
@@ -266,11 +272,11 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
             itemUser: user.id,
             itemTaken: false,
         };
-    await writeToDatabase(paths.items + '/' + newItemKey, itemData);
-    return {
-        draftAdded: true,
-        message: `draft has been added`
-    }
+        await writeToDatabase(paths.items + '/' + newItemKey, itemData);
+        return {
+            draftAdded: true,
+            message: `draft has been added`
+        }
     } catch (error) {
         console.error("Error creating item draft:", error);
     }
@@ -290,18 +296,17 @@ async function writeToDatabase(refPath, data) {
 }
 
 
-        /********************/
-        /******* Get ********/
-        /********************/
+/********************/
+/******* Get ********/
+/********************/
 
-export async function getUptainerFromQR(QRcode){
+export async function getUptainerFromQR(QRcode) {
     const uptainerId = await QRCodeExists(QRcode);
     console.log("Result from getUptainerFromQR to QRCodeExists:", uptainerId);
-    if(uptainerId !== "Draft")
-    {
+    if (uptainerId !== "Draft") {
         console.log("Returning uptainerId:", uptainerId);
         return uptainerId;
-    }else{
+    } else {
         return null;
     }
 }
@@ -373,7 +378,7 @@ export async function getAllBrands() {
 }
 export async function getBrandById(brandId) {
     const db = firebaseGetDB;
-    const path=`/brands/${brandId}`;
+    const path = `/brands/${brandId}`;
     const reference = ref(db, path);
 
     try {
@@ -551,11 +556,11 @@ export async function getItemsInUptainer(uptainerId) {
         return items;
 
     } catch (error) {
-      // Handle error
-      console.error('Error fetching items:', error);
-      throw error;
+        // Handle error
+        console.error('Error fetching items:', error);
+        throw error;
     }
-  }
+}
 
 export async function getAllProducts() {
     const db = firebaseGetDB;
@@ -695,12 +700,12 @@ export async function getItemsByName(searchText) {
     const categoryReference = ref(db, '/categories')
 
     //  Example:       products   productName inputText
-    const searchQuery = (reference, childKey, text) => 
+    const searchQuery = (reference, childKey, text) =>
         query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
 
-    const productsQuery =  searchQuery(productsReference, `productName`, searchText)
-    const brandsQuery =  searchQuery(brandsReference, `brandName`, searchText)
-    const modelsQuery =  searchQuery(modelsReference, `modelName`, searchText)
+    const productsQuery = searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery = searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery = searchQuery(modelsReference, `modelName`, searchText)
     const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
 
     try {
@@ -730,10 +735,10 @@ export async function getItemsByName(searchText) {
 
         // eslint-disable-next-line react/prop-types
         let sortedData = combineSnapshots([
-        productsSnapshot, 
-        brandsSnapshot,
-        modelsSnapshot, 
-        categoriesSnapshot
+            productsSnapshot,
+            brandsSnapshot,
+            modelsSnapshot,
+            categoriesSnapshot
         ]).sort(compare);
 
         // Use a Set to track unique keys
@@ -764,9 +769,9 @@ function compare(a, b) {
     return 0;
 }
 
-    /********************/
-    /***** Delete *******/
-    /********************/
+/********************/
+/***** Delete *******/
+/********************/
 
 export async function deleteCategoryById(categoryId) {
     const reference = ref(db, `/categories/${categoryId}`);
@@ -823,7 +828,7 @@ export async function deleteProductById(productId) {
     }
 }
 
-export async function deleteImage(imagePath){
+export async function deleteImage(imagePath) {
     const storage = getStorage();
     const desertRef = ref_storage(storage, imagePath);
     deleteObject(desertRef).then(() => {
@@ -835,9 +840,9 @@ export async function deleteImage(imagePath){
     });
 }
 
-        /**********************/
-        /****** Update ********/
-        /**********************/
+/**********************/
+/****** Update ********/
+/**********************/
 
 export async function updateModelById(modelId, newData) {
     const reference = ref(db, `/models/${modelId}`);
@@ -863,20 +868,20 @@ export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         let itemImage = null
-        if(newImage){
-          
+        if (newImage) {
+
             const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
-            const newImagePath = itemId +"."+ fileExtension;
+            const newImagePath = itemId + "." + fileExtension;
             const uploadResp = await uploadToFirebase(newImage.uri, newImagePath, paths.Items, (v) =>
-                console.log("progress: ",v)
-                );
+                console.log("progress: ", v)
+            );
             itemImage = paths.Items + newImagePath
 
             console.log(uploadResp);
             console.log(newImagePath);
-                    
+
         }
-        const updatedData = itemImage ? {...newData, itemImage} : newData
+        const updatedData = itemImage ? { ...newData, itemImage } : newData
         await update(reference, updatedData);
         console.log(`Item with ID ${itemId} updated successfully.`);
         return {
@@ -893,7 +898,7 @@ export async function updateItemById(itemId, newData, newImage) {
 export async function updateItemfromDraft(itemId, uptainerId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, {itemUptainer: uptainerId});
+        update(reference, { itemUptainer: uptainerId });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -929,10 +934,10 @@ export async function updateProductById(productId, newData) {
         console.error(`Error updating product with ID ${productId}:`, error);
     }
 }
-export async function updateItemToTaken(itemId){
+export async function updateItemToTaken(itemId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, {itemTaken: true});
+        update(reference, { itemTaken: true });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -949,41 +954,45 @@ const uploadToFirebase = async (uri, name, path, onProgress) => {
     const imageRef = ref_storage(storage, `${path}${name}`);
     const uploadTask = uploadBytesResumable(imageRef, theBlob);
     return new Promise((resolve, reject) => {
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          onProgress && onProgress(progress);
-        },
-        (error) => {
-          // Handle unsuccessful uploads
-          console.log(error);
-          reject(error);
-        },
-        async () => {
-          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-          resolve({
-            downloadUrl,
-            metadata: uploadTask.snapshot.metadata,
-          });
-        }
-      );
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                onProgress && onProgress(progress);
+            },
+            (error) => {
+                // Handle unsuccessful uploads
+                console.log(error);
+                reject(error);
+            },
+            async () => {
+                const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+                resolve({
+                    downloadUrl,
+                    metadata: uploadTask.snapshot.metadata,
+                });
+            }
+        );
     });
-  };
+};
 /****************/
 /***** Auth *****/
 /****************/
-export async function signInUser(email, password, navigation){
+export async function signInUser(email, password, navigation) {
     signInWithEmailAndPassword(firebaseAurth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log('User logged in:', user);
-      navigation.navigate("Homepage");
-    })
-    .catch((error) => {
-        authErrors(error);
-    });
+        .then((userCredential) => {
+            const user = userCredential.user;
+            // save user password securly so we can use later to reauthenticate
+            SecureStorage.savePassword(password).then(() => {
+                console.log('User logged in:', user);
+                navigation.navigate("Homepage");
+            })
+
+        })
+        .catch((error) => {
+            authErrors(error);
+        });
 }
 
 export async function createUser(email, password, name = "John Doe") {
@@ -993,80 +1002,105 @@ export async function createUser(email, password, name = "John Doe") {
 
         // admin email
         if (email === "admin@updropp.dk") {
-          isAdmin = true;
+            isAdmin = true;
         }
 
-      const userCredential = await createUserWithEmailAndPassword(
-        firebaseAurth,
-        email,
-        password
-      );
+        const userCredential = await createUserWithEmailAndPassword(
+            firebaseAurth,
+            email,
+            password
+        );
 
-      if (userCredential) {
-        const userData = {
-          name: name,
-          email: email,
-          uuid: userCredential.user.uid,
-          isAdmin: isAdmin,
+        if (userCredential) {
+            const userData = {
+                name: name,
+                email: email,
+                uuid: userCredential.user.uid,
+                isAdmin: isAdmin,
 
-        };
-        await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
-      }
+            };
+            await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
+        }
     } catch (error) {
         authErrors(error);
     }
-  }
+}
 
 
 export async function getCurrentUser() {
-  try {
+    try {
 
-    const id = firebaseAurth.currentUser.uid;
-    const reference = ref(db, paths.users);
+        const id = firebaseAurth.currentUser.uid;
+        const reference = ref(db, paths.users + "/" + id);
 
-    const snapshot = await get(reference);
-    const modelData = snapshot.val();
+        const snapshot = await get(reference);
+        const userData = snapshot.val();
 
-
-    if (modelData) {
-        return{
-            id,
-            name: modelData.name,
-            email: modelData.email
+        if (!userData) {
+            throw ({ code: 'auth/user-not-found' })
         }
+
+
+        return userData
+
+    } catch (error) {
+        throw authErrors(error)
     }
-  } catch (error) {
-    authErrors(error);
-    return error;
-  }
 }
 
-// ToDo find user data and implement it to the function
-export async function updateAuthData(email, password, phoneNumber) {
-    const user = firebaseAurth.currentUser;
+// update Authentication user data
+// we can use firebase PhoneProvider Feature to update/verify/login using phone number
+async function updateAuthData(name, email, password) {
+    const currentPassword = await SecureStorage.getPassword()
+    const user = firebaseAurth.currentUser
+    const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword)
 
-    if (email && email !== user.email) {
-      await user.updateEmail(email);
+
+    await reauthenticateWithCredential(user, emailAuthCredential)
+
+
+    await updateProfile(user, {
+        displayName: name
+    })
+
+
+    await updateEmail(user, email)
+
+
+    if (password) {
+        await updatePassword(user, password)
     }
 
-    if (password) { // Password should always be updated if provided, as we can't retrieve the current password
-      await user.updatePassword(password);
+}
+
+// update realtime user data
+async function updateDatabaseData(name, email, phone, profilePic) {
+
+    const reference = ref(db, paths.users + "/" + firebaseAurth.currentUser.uid)
+    const user = await getCurrentUser()
+
+    await set(reference, {
+        ...user,
+        name: name,
+        email: email,
+        phone: phone
+    })
+
+}
+
+
+
+//add more info if needed
+export async function updateUserData(name, email, phone, profilePic, password) {
+    try {
+        await updateAuthData(name, email, password);
+        await updateDatabaseData(name, email, phone, profilePic);
+    } catch (error) {
+        throw authErrors(error)
     }
+}
 
-    if (phoneNumber && phoneNumber !== user.phoneNumber) {
-      await user.updatePhoneNumber(phoneNumber);
-    }
-  }
-
-
-
-  //add more info if needed
-  export async function updateUserData(email, password, phoneNumber, name, profilePic) {
-    await updateAuthData(email, password, phoneNumber);
-    await updateDatabaseData(name, profilePic);
-  }
-
-  export async function deleteUser(navigation) {
+export async function deleteUser(navigation) {
     const user = firebaseAurth.currentUser;
     // Delete the user from Firebase Authentication
     user
@@ -1083,25 +1117,25 @@ export async function updateAuthData(email, password, phoneNumber) {
     } catch (error) {
         console.error('Error deleting user from Realtime Database:', error);
         alert('Error', 'Error deleting user from Realtime Database: ' + error.message);
-      }
-  }
-
-
-    /**************/
-    /*** Checks ***/
-    /**************/
-
-    export async function QRCodeExists(qrCode) {
-        const uptainerList  = await getAllUptainers();
-        // console.log("Uptainer list: ", uptainerList);
-        const item = uptainerList.find(uptainer => uptainer.uptainerQR === qrCode);
-        if (item) {
-            console.log("Uptainer found: ", item);
-            return item.uptainerId;
-        } else {
-            return "Draft";
-        }
     }
+}
+
+
+/**************/
+/*** Checks ***/
+/**************/
+
+export async function QRCodeExists(qrCode) {
+    const uptainerList = await getAllUptainers();
+    // console.log("Uptainer list: ", uptainerList);
+    const item = uptainerList.find(uptainer => uptainer.uptainerQR === qrCode);
+    if (item) {
+        console.log("Uptainer found: ", item);
+        return item.uptainerId;
+    } else {
+        return "Draft";
+    }
+}
 
 /**************/
 /*** Errors ***/
@@ -1167,4 +1201,5 @@ function authErrors(error) {
     };
     const errorMessage = errorMessages[error.code] || 'An unknown error occurred during authentication.';
     alert(errorMessage);
+    return errorMessage
 }
