@@ -33,6 +33,15 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                 const categoriesList = await getAllCategories();
                 setCategories(categoriesList);
                 setFilteredCategories(categoriesList);
+                console.log(categoriesList)
+                if(data){
+
+                    categoriesList.forEach((cat)=> {
+                        if(cat.categoryId === data){
+                            setSelectedCategory(cat)
+                        }
+                    })
+                }
             } catch (error) {
                 console.log('Error:', error);
             }

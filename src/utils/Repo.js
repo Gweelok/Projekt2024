@@ -278,7 +278,7 @@ export async function createItemDraft(productId = "", brandId = "", modelId = ""
 
 }
 
-function writeToDatabase(refPath, data) {
+async function writeToDatabase(refPath, data) {
     const reference = ref(db, refPath);
     try {
         set(reference, data);
@@ -920,13 +920,35 @@ export async function updateUptainerById(uptainerId, newData) {
     }
 }
 
-export async function updateItemById(itemId, newData) {
+export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, newData);
+        let itemImage = null
+        if(newImage && newImage?.uri){
+          
+            const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
+            const newImagePath = itemId +"."+ fileExtension;
+            const uploadResp = await uploadToFirebase(newImage.uri, newImagePath, paths.Items, (v) =>
+                console.log("progress: ",v)
+                );
+            itemImage = paths.Items + newImagePath
+
+            console.log(uploadResp);
+            console.log(newImagePath);
+                    
+        }
+        const updatedData = itemImage ? {...newData, itemImage} : newData
+        await update(reference, updatedData);
         console.log(`Item with ID ${itemId} updated successfully.`);
+        return {
+            itemUpdated: true
+        }
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
+        return {
+            itemUpdated: false,
+            error
+        }
     }
 }
 export async function updateItemfromDraft(itemId, uptainerId) {
@@ -971,7 +993,9 @@ export async function updateProductById(productId, newData) {
 export async function updateItemToTaken(itemId){
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, {itemTaken: true});
+        // set item taken to user
+        const user = await getCurrentUser()
+        update(reference, {itemTaken: user.id}); 
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -1025,7 +1049,7 @@ export async function signInUser(email, password, navigation){
     });
 }
 
-export async function createUser(email, password, navigation ,name = "John Doe") {
+export async function createUser(email, password, name = "John Doe") {
     try {
 
         let isAdmin = false;
@@ -1050,7 +1074,6 @@ export async function createUser(email, password, navigation ,name = "John Doe")
 
         };
         await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
-        navigation.navigate("Homepage");
       }
     } catch (error) {
         authErrors(error);

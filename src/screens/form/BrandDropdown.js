@@ -37,6 +37,11 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
                 const brandsList = await getAllBrands();
                 setBrands(brandsList);
                 setFilteredBrands(brandsList);
+                if(data){
+                    brandsList.forEach(brand => {
+                        if(data === brand.brandId){ setSelectedBrand(brand)}
+                    })
+                }
             } catch (error) {
                 console.log('Error:', error);
             }

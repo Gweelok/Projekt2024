@@ -34,6 +34,11 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
                 const productsList = await getAllProducts();
                 setProducts(productsList);
                 setFilteredProducts(productsList);
+                if (data){
+                    productsList.forEach((prod) =>{
+                        if(prod.productId === data){ setSelectedProduct(prod)}
+                    })
+                }
             } catch (error) {
                 console.log("Error:", error);
             }
