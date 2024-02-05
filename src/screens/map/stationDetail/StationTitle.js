@@ -13,9 +13,10 @@ const StationTitle = ({ title, description }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 20,
+        marginLeft: 0,
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop:-10
     },
     title: {
         fontSize: 24,
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color : Primarycolor1,
         fontFamily: 'space-grotesk',
+        marginBottom:20
     },
 });
 
