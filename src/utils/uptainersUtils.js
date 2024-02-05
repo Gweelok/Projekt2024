@@ -4,9 +4,11 @@ import {
   getAllUptainers,
   getProductById,
   getCurrentUser,
+  getItemsFromUser,
   getDraftFromUser,
   getAllProducts,
 } from "../utils/Repo";
+import { t } from "../Languages/LanguageHandler.js";
 
 export const calculateDistance = (
   { latitude: lat1, longitude: lon1 },
@@ -67,82 +69,189 @@ export function Calculate_co2_Equivalent(co2_total) {
   };
 }
 
-// STATS CALCIULATIONS
-// Helper Functions
+// STATS CALCULATIONS
+
+// FETCH DATA FROM DATABASE
+// Fetches all items taken from the database
 async function fetchAllTakenItems() {
   const allItems = await getAllItems();
+  if (!allItems) return [];
   return allItems.filter((item) => item.itemTaken === true);
 }
 
+// Fetches all items taken by a user from the database
 async function fetchAllTakenItemsByUser(userId) {
-  const allItems = await getAllItems();
-  return allItems.filter(
+  const allUserItems = await getItemsFromUser(userId);
+  if (!allUserItems) return [];
+  return allUserItems.filter(
     (item) => item.itemTaken === true && item.itemTakenUser === userId
   );
 }
 
+// Fetches CO2 footprint of a product from the database
 async function fetchProductCO2(item) {
   const productInfo = await getProductById(item.itemproduct);
-  return productInfo.co2Footprint;
+  return productInfo.co2Footprint || 0;
 }
 
-// Updates general statistics based on a single item
-function updateGeneralStats(stats, co2Footprint, itemTakenDate) {
-    stats.allNumberTakenItems += 1;
-    stats.allTakenItemsCO2 += co2Footprint;
+//UPDATE STATS
+// Updates general statistics based on a single taken item by every user
+function updateGeneralStats(generalStats, co2Footprint, itemTakenDate) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
 
-    const yearMonthKey = `${itemTakenDate.getFullYear()}-${itemTakenDate.getMonth() + 1}`;
-    stats.allTakenItemsMonth[yearMonthKey] = (stats.allTakenItemsMonth[yearMonthKey] || 0) + 1;
+  const itemDate = new Date(itemTakenDate);
+  itemDate.setHours(0, 0, 0, 0);
+
+  generalStats.allNumberTakenItems += 1;
+  generalStats.allTakenItemsCO2 += co2Footprint;
+
+  if (itemDate.getTime() === today.getTime()) {
+    generalStats.todayNumberTakenItems += 1;
+    generalStats.todayTakenItemsCO2 += co2Footprint;
+  } else if (itemDate.getTime() === yesterday.getTime()) {
+    generalStats.yesterdayNumberTakenItems += 1;
+    generalStats.yesterdayTakenItemsCO2 += co2Footprint;
+  }
+
+  const yearMonthKey = `${itemDate.getFullYear()}-${itemDate.getMonth() + 1}`;
+  generalStats.allTakenItemsMonth[yearMonthKey] =
+    (generalStats.allTakenItemsMonth[yearMonthKey] || 0) + 1;
 }
 
-// Updates user-specific statistics based on a single item
-function updateUserStats(stats, co2Footprint, userId, item) {
-    if (item.itemTakenUser === userId) {
-        stats.userTakenItems += 1;
-        stats.userTakenItemsCO2 += co2Footprint;
-    }
+// Updates user statistics based on a single taken item
+function updateUserStats(stats, co2Footprint) {
+  stats.userTakenItems += 1;
+  stats.userTakenItemsCO2 += co2Footprint;
 }
 
-export async function calculateGeneralStats() {
-  const allTakenItems = await fetchAllTakenItems();
+// Updates uptainer statistics
+function updateUptainerStats(allUptainersStats, item, co2Footprint) {
+  const uptainer = allUptainersStats[item.itemUptainerId];
+  if (uptainer) {
+    uptainer.itemsReused += 1;
+    uptainer.savedCO2 += co2Footprint;
+  }
+}
 
+// PROCESS STATS
+// Processes general stats
+async function processGeneralStats(allItems) {
   let generalStats = {
-    allNumberTakenItems: allTakenItems.length,
+    allNumberTakenItems: 0,
     allTakenItemsCO2: 0,
     allTakenItemsMonth: {},
     todayNumberTakenItems: 0,
-    yesterdayNumberTakenItems: 0,
-    allTakenItemsCO2: 0,
     todayTakenItemsCO2: 0,
+    yesterdayNumberTakenItems: 0,
     yesterdayTakenItemsCO2: 0,
   };
 
   await Promise.all(
-    allTakenItems.map(async (item) => {
-      const co2Footprint = await fetchProductCO2(item);
-      stats.allTakenItemsCO2 += co2Footprint;
-
-      const itemTakenDate = new Date(item.itemTakenDate).toLocaleString();
-      const today = new Date().toLocaleDateString();
-      const yesterday = new Date(today - 86400000).toLocaleDateString();
-
-      const yearMonthKey = `${itemTakenDate.getFullYear()}-${
-        itemTakenDate.getMonth() + 1
-      }`;
-      stats.allTakenItemsMonth[yearMonthKey] =
-        (stats.allTakenItemsMonth[yearMonthKey] || 0) + 1;
-
-      if (itemTakenDate == today) {
-        generalStats.todayNumberTakenItems += 1;
-        generalStats.todayTakenItemsCO2 += co2Footprint;
-      }
-      if (itemTakenDate == yesterday) {
-        generalStats.yesterdayNumberTakenItems += 1;
-        generalStats.yesterdayTakenItemsCO2 += co2Footprint;
+    allItems.map(async (item) => {
+      try {
+        const co2Footprint = await fetchProductCO2(item);
+        updateGeneralStats(generalStats, co2Footprint, item.itemTakenDate);
+      } catch (error) {
+        console.error(`Errors occurred during processing general stats:`, error);
       }
     })
   );
+
+  return generalStats;
 }
+
+// Processes User Stats
+async function processUserStats(userId) {
+  let userStats = {
+    userTakenItems: 0,
+    userTakenItemsCO2: 0,
+  };
+
+  await Promise.all(
+    allUserTakenItems.map(async (item) => {
+      try {
+        const co2Footprint = await fetchProductCO2(item);
+        updateUserStats(userStats, co2Footprint);
+      } catch (error) {
+        console.error(`Error processing user item ${item.itemId}:`, error);
+      }
+    })
+  );
+
+  return userStats;
+}
+
+// Processes Uptainer Stats
+async function processUptainerStats(allItems, allUptainers) {
+  let allUptainersStats = allUptainers.reduce((acc, uptainer) => {
+    acc[uptainer.uptainerId] = {
+      uptainerCity: uptainer.uptainerCity,
+      uptainerName: uptainer.uptainerName,
+      uptainerStreet: uptainer.uptainerStreet,
+      uptainerId: uptainer.uptainerId,
+      itemsReused: 0,
+      savedCO2: 0,
+      numberUsers: 0,
+      uptainerDescription: uptainer.uptainerDescription,
+      uptainerImage: uptainer.uptainerImage,
+      uptainerLatitude: uptainer.uptainerLatitude,
+      uptainerLongitude: uptainer.uptainerLongitude,
+      uptainerQR: uptainer.uptainerQR,
+      uptainerZip: uptainer.uptainerZip,
+    };
+    return acc;
+  }, {});
+
+  await Promise.all(
+    allItems.map(async (item) => {
+      try {
+        if (item.itemTaken) {
+          const co2Footprint = await fetchProductCO2(item);
+          updateUptainerStats(allUptainersStats, item, co2Footprint);
+        }
+      } catch (error) {
+        console.error(`Errors occured during processing uptainer stats:`, error);
+      }
+    })
+  );
+
+  return allUptainersStats;
+}
+
+// STATS CALCULATIONS
+
+export async function calculateGeneralStatistics() {
+  const allTakenItems = await fetchAllTakenItems();
+  const generalStats = await processGeneralStats(allTakenItems);
+  return generalStats;
+}
+
+export async function calculateUserStatistics(userId) {
+  const allUserTakenItems = await fetchAllTakenItemsByUser(userId);
+  const userStats = await processUserStats(allUserTakenItems);
+  return userStats;
+}
+
+export async function calculateUptainerStatistics() {
+  const allUptainers = await getAllUptainers();
+  const allItems = await fetchAllTakenItems();
+  const allUptainersStats = await processUptainerStats(allItems, allUptainers);
+
+  const sortedUptainers = Object.values(allUptainersStats).sort(
+    (a, b) => b.itemsReused - a.itemsReused
+  );
+  const mostAchievingUptainers = sortedUptainers
+    .filter((uptainer) => uptainer.itemsReused > 0)
+    .sort((a, b) => b.savedCO2 - a.savedCO2)
+    .slice(0, 3);
+
+  return { sortedUptainers, mostAchievingUptainers };
+}
+
+// OLD STATS CALCULATIONS
 
 export async function CalculateStatistic() {
   // Load all items from database
