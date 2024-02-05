@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -28,19 +26,32 @@ import YourStats from "./YourStats";
 import GreenBox from "../styles/GreenBox";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
-import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
+import {
+  getAllItems,
+  getAllUptainers,
+  getProductById,
+  getCurrentUser,
+  getDraftFromUser,
+  getAllProducts,
+} from "../utils/Repo";
 import { items } from "../utils/Testdata";
-
+import { set } from "firebase/database";
+import {
+  calculateGeneralStatistics,
+  calculateUserStatistics,
+  calculateUptainerStatistics,
+} from "../utils/uptainersUtils";
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [userCurrent, setUserCurrent] = useState({});
   const [refreshing, setRefresh] = useState(false);
   const onRefresh = () => {
-
-    setRefresh(true)
-    setTimeout(() => { setRefresh(false) }, 1000)
-  }
+    setRefresh(true);
+    setTimeout(() => {
+      setRefresh(false);
+    }, 1000);
+  };
 
   const { currentLanguage } = useLanguage();
   let [data, setData] = useState({
@@ -49,7 +60,7 @@ const Stat = ({ navigation }) => {
     todayTakenItems: 0,
     yesterdayTakenItems: 0,
     allTakenItemsMonth: {},
-    top3Uptainers: {}
+    top3Uptainers: {},
   });
 
   const allItems = async () => {
@@ -114,33 +125,53 @@ const Stat = ({ navigation }) => {
         //Filter reused items, which have itemTakenDate. itemTakenDate should has format "YYYY-MM-DD" (like itemTakenDate: "2023-12-06")
         if (item.itemTakenDate) {
           const itemTakenDate = new Date(item.itemTakenDate);
-          if (itemTakenDate.toLocaleDateString() == today.toLocaleDateString()) {
-            todayNumberTakenItems += 1
+          if (
+            itemTakenDate.toLocaleDateString() == today.toLocaleDateString()
+          ) {
+            todayNumberTakenItems += 1;
           }
-          if (itemTakenDate.toLocaleDateString() == yesterday.toLocaleDateString()) {
-            yesterdayNumberTakenItems += 1
+          if (
+            itemTakenDate.toLocaleDateString() == yesterday.toLocaleDateString()
+          ) {
+            yesterdayNumberTakenItems += 1;
           }
-          if (allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()]) {
-            allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()] += 1
-          }
-          else {
-            allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()] = 1
+          if (
+            allTakenItemsMonth[
+              itemTakenDate.getFullYear().toString() +
+                "-" +
+                (itemTakenDate.getMonth() + 1).toString()
+            ]
+          ) {
+            allTakenItemsMonth[
+              itemTakenDate.getFullYear().toString() +
+                "-" +
+                (itemTakenDate.getMonth() + 1).toString()
+            ] += 1;
+          } else {
+            allTakenItemsMonth[
+              itemTakenDate.getFullYear().toString() +
+                "-" +
+                (itemTakenDate.getMonth() + 1).toString()
+            ] = 1;
           }
         }
       }
     }
     //Definition of the most popular Uptainer
-    const bestUptainerId = Object.entries(allUptainersStat).reduce((acc, curr) => acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr)[0];
+    const bestUptainerId = Object.entries(allUptainersStat).reduce(
+      (acc, curr) =>
+        acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr
+    )[0];
     const bestUptainer = allUptainersStat[bestUptainerId];
     const mostAchievingUptainers = Object.entries(allUptainersStat)
-        .map(([uptainerId, uptainer]) => ({
-          uptainerId,
-          uptainerName: uptainer.uptainerName,
-          uptainerLocation: `${uptainer.uptainerStreet},${uptainer.uptainerCity}`,
-          itemsReused: uptainer.itemsReused,
-          Co2Savings: uptainer.savedCO2,
-        }))
-        .sort((a, b) => b.Co2Savings - a.Co2Savings);
+      .map(([uptainerId, uptainer]) => ({
+        uptainerId,
+        uptainerName: uptainer.uptainerName,
+        uptainerLocation: `${uptainer.uptainerStreet},${uptainer.uptainerCity}`,
+        itemsReused: uptainer.itemsReused,
+        Co2Savings: uptainer.savedCO2,
+      }))
+      .sort((a, b) => b.Co2Savings - a.Co2Savings);
 
     //Create result after counting reused items
     let result;
@@ -150,14 +181,14 @@ const Stat = ({ navigation }) => {
       yesterdayTakenItems: yesterdayNumberTakenItems,
       allTakenItemsMonth: allTakenItemsMonth, //{"2023-Dec": 1, "2023-Jul": 1, "2023-Nov": 1, "2023-Sep": 1}
       bestUptainer: bestUptainer,
-      top3Uptainers: mostAchievingUptainers
-    }
+      top3Uptainers: mostAchievingUptainers,
+    };
     //Print for checking
     // console.log(result)
-    return result
-  }
+    return result;
+  };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     async function fetchData() {
       const result = await allItems();
       setData(result)
@@ -167,8 +198,42 @@ const Stat = ({ navigation }) => {
       setProducts(products);
     }
     fetchData()
-  }, []);
+  }, []); */
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const userCurrent = await getCurrentUser();
+        setUserCurrent(userCurrent);
+        const userId = userCurrent.id;
+
+        const products = await getAllProducts();
+        setProducts(products);
+
+        const allUptainers = await getAllUptainers();
+        const allItems = await getAllItems();
+
+        const generalStats = await calculateGeneralStatistics();
+        setData(generalStats);
+
+        //const userStats = await processUserStats(userCurrent.id);
+
+        /* setData((prevData) => ({
+          ...prevData,
+          userStats,
+        })); */
+
+        const uptainerStats = await calculateUptainerStatistics();
+        setData((prevData) => ({
+          ...prevData,
+          uptainerStats,
+        }));
+      } catch (error) {
+        console.log("Error", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
   const [co2Data, setCO2Data] = useState({
@@ -194,8 +259,8 @@ const Stat = ({ navigation }) => {
       }));
     }
 
-    const todaySavings = calculateSavings('today');
-    const yesterdaySavings = calculateSavings('yesterday');
+    const todaySavings = calculateSavings("today");
+    const yesterdaySavings = calculateSavings("yesterday");
 
     setCO2Data((prevData) => ({
       ...prevData,
@@ -239,27 +304,38 @@ const Stat = ({ navigation }) => {
     }
   };
 
-  const todayEquivalent = calculateCO2Equivalent(co2EquivalentFact, co2Data.todayCO2Saved);
-  const todaySavedConverted = convertCO2Saved(co2SavedFact, co2Data.todayCO2Saved);
+  const todayEquivalent = calculateCO2Equivalent(
+    co2EquivalentFact,
+    co2Data.todayCO2Saved
+  );
+  const todaySavedConverted = convertCO2Saved(
+    co2SavedFact,
+    co2Data.todayCO2Saved
+  );
 
-  const Calculate_co2_Equivalent = (co2_pers, co2_total, conv_factor, comparison) => {
+  const Calculate_co2_Equivalent = (
+    co2_pers,
+    co2_total,
+    conv_factor,
+    comparison
+  ) => {
     console.log(
-        "10 kg of CO2 is equivalent to approximately",
-        Math.round(10 * conv_factor),
-        comparison
+      "10 kg of CO2 is equivalent to approximately",
+      Math.round(10 * conv_factor),
+      comparison
     );
 
     console.log(
-        "Your personal CO2 contribution is equivalent to approximately",
-        Math.round(co2_pers * conv_factor),
-        comparison
+      "Your personal CO2 contribution is equivalent to approximately",
+      Math.round(co2_pers * conv_factor),
+      comparison
     );
     console.log(
-        "So",
-        co2_total,
-        "kg would amount to approximately",
-        Math.round(co2_total * conv_factor),
-        comparison
+      "So",
+      co2_total,
+      "kg would amount to approximately",
+      Math.round(co2_total * conv_factor),
+      comparison
     );
 
     const calc_pers = co2_pers * conv_factor;
@@ -277,10 +353,10 @@ const Stat = ({ navigation }) => {
   const comparison = "loads of washing and drying.";
 
   const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(
-      co2_pers,
-      co2_total,
-      conv_factor,
-      comparison
+    co2_pers,
+    co2_total,
+    conv_factor,
+    comparison
   );
 
   const handlePress1 = (button) => {
@@ -288,185 +364,207 @@ const Stat = ({ navigation }) => {
   };
 
   return (
-      <View
-          style={[
-            Backgroundstyle.interactive_screens,
-            GlobalStyle.BodyWrapper,
-            { flex: 1, justifyContent: "center" },
-          ]}
-      >
-        <SafeAreaView>
-          <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
-            <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  alignSelf: "flex-start",
-                }}
+    <View
+      style={[
+        Backgroundstyle.interactive_screens,
+        GlobalStyle.BodyWrapper,
+        { flex: 1, justifyContent: "center" },
+      ]}
+    >
+      <SafeAreaView>
+        <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              alignSelf: "flex-start",
+            }}
+          >
+            <Text
+              style={[
+                HeaderText.Header,
+                { fontFamily: "space-grotesk-Medium" },
+                { marginLeft: 0 },
+              ]}
             >
-              <Text
-                  style={[HeaderText.Header, { fontFamily: "space-grotesk-Medium" },{marginLeft: 0}]}
+              <Text>{t("StatsPage.Header", currentLanguage)}</Text>
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+            }}
+          >
+            <View style={{ width: "48%" }}>
+              <TouchableOpacity
+                style={[
+                  activeButton === "main"
+                    ? Buttons.main_button
+                    : Buttons.secondary_button,
+                ]}
+                onPress={() => handlePress1("main")}
               >
-                <Text>{t("StatsPage.Header", currentLanguage)}</Text>
-              </Text>
-            </View>
-            <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 10,
-                }}
-            >
-              <View style={{ width: "48%" }}>
-                <TouchableOpacity
-                    style={[
-                      activeButton === "main"
-                          ? Buttons.main_button
-                          : Buttons.secondary_button,
-                    ]}
-                   onPress={() => handlePress1("main")}>
-                  <Text
-                      style={
-                        activeButton === "main"
-                            ? Buttons.main_buttonText
-                            : Buttons.secondary_buttonText
-                      }
-                  >
-                    {t("StatsPage.MainButton", currentLanguage)}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View style={{ width: "48%" }}>
-                <TouchableOpacity
-                    style={[
-                      activeButton === "secondary"
-                          ? Buttons.main_button
-                          : Buttons.secondary_button,
-                    ]}
-                    onPress={() => handlePress1("secondary")}
+                <Text
+                  style={
+                    activeButton === "main"
+                      ? Buttons.main_buttonText
+                      : Buttons.secondary_buttonText
+                  }
                 >
-                  <Text
-                      style={
-                        activeButton === "secondary"
-                            ? Buttons.main_buttonText
-                            : Buttons.secondary_buttonText
-                      }
-                  >
-                    {t("StatsPage.SecondaryButton", currentLanguage)}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                  {t("StatsPage.MainButton", currentLanguage)}
+                </Text>
+              </TouchableOpacity>
             </View>
+            <View style={{ width: "48%" }}>
+              <TouchableOpacity
+                style={[
+                  activeButton === "secondary"
+                    ? Buttons.main_button
+                    : Buttons.secondary_button,
+                ]}
+                onPress={() => handlePress1("secondary")}
+              >
+                <Text
+                  style={
+                    activeButton === "secondary"
+                      ? Buttons.main_buttonText
+                      : Buttons.secondary_buttonText
+                  }
+                >
+                  {t("StatsPage.SecondaryButton", currentLanguage)}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
-            {activeButton === "main" ? (
-                <View style={{ justifyContent: "space-between", marginTop: 10 }}>
-                  <View style={{ marginTop: 15, marginBottom: 10 }}>
-                    <Text
-                        style={[
-                          styles.article_text,
-                          { fontWeight: "bold", fontSize: 18 },
-                        ]}
-                    >
-                      {t("StatsPage.AmountReduced", currentLanguage)}
-                    </Text>
+          {activeButton === "main" ? (
+            <View style={{ justifyContent: "space-between", marginTop: 10 }}>
+              <View style={{ marginTop: 15, marginBottom: 10 }}>
+                <Text
+                  style={[
+                    styles.article_text,
+                    { fontWeight: "bold", fontSize: 18 },
+                  ]}
+                >
+                  {t("StatsPage.AmountReduced", currentLanguage)}
+                </Text>
+              </View>
+              <View>
+                <View>
+                  <View>
+                    <GreenBox
+                      msg={t("StatsPage.SoFar", currentLanguage)}
+                      data={data.todayTakenItems}
+                      secondMsg={t("StatsPage.Yesterday", currentLanguage)}
+                      secondData={data.yesterdayTakenItems}
+                    />
                   </View>
                   <View>
-                    <View>
-                      <View>
-                        <GreenBox
-                            msg={t("StatsPage.SoFar", currentLanguage)}
-                            data={data.todayTakenItems}
-                            secondMsg={t("StatsPage.Yesterday", currentLanguage)}
-                            secondData={data.yesterdayTakenItems}
-                        />
-                      </View>
-                      <View>
-                        <GreenBox
-                            msg={t("StatsPage.InTotal", currentLanguage)}
-                            data={data.allTakenItems}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                  <View style={[{ height: 285 }]}>
-                    <ChartForStats value={data["allTakenItemsMonth"]} refreshing={refreshing} />
-                  </View>
-                  <View style={{ marginTop: 2, marginBottom: 20 }}>
-                    <Text
-                        style={[
-                          styles.article_text,
-                          { fontWeight: "bold", fontSize: 18 },
-                        ]}
-                    >
-                      {t("StatsPage.AmountCO2", currentLanguage)}
-                    </Text>
-                  </View>
-                  <View>
-                    <View>
-                      <GreenBox
-                          msg={t("StatsPage.SoFar", currentLanguage)}
-                          data={convertKgToTons(co2Data.todayCO2Saved)}
-                          secondMsg={t("StatsPage.Yesterday", currentLanguage)}
-                          secondData={convertKgToTons(co2Data.yesterdayCO2Saved)}
-                      />
-                    </View>
-                    <View>
-                      <GreenBox
-                          msg={t("StatsPage.InTotal", currentLanguage)}
-                          data={convertKgToTons(co2Data.totalCO2Saved)}
-                      />
-                    </View>
-                  </View>
-                  <View>
-                    <View
-                        style={[
-                          {
-                            flexDirection: "row",
-                            marginTop: 20,
-                            marginBottom: 3,
-                            marginRight: "4%",
-                          },
-                        ]}
-                    >
-                      <LightbulbIcon />
-                      <Text style={[styles.paragraph_text, { marginLeft: 5 }]}> {t('StatsPage.kgCO2', currentLanguage)}:{todayEquivalent}</Text>
-                    </View>
-                    <View
-                        style={[
-                          {
-                            flexDirection: "row",
-                            marginTop: 5,
-                            marginBottom: 3,
-                            marginRight: "4%",
-                          },
-                        ]}
-                    >
-                      <LightbulbIcon />
-                      <Text style={[styles.paragraph_text, { marginLeft: 5 }]}> {t('StatsPage.Amount', currentLanguage)}: {todaySavedConverted} </Text>
-                    </View>
-                  </View>
-                  <View style={[{ alignContent: "center", marginTop: 30 }]}>
-                    <Text style={styles.menuItem_text}>
-                      {t("StatsPage.BestAcheieve", currentLanguage)}
-                    </Text>
-                  </View>
-                  <StreetStat data={data.top3Uptainers[0]} pos={100} />
-                  <StreetStat data={data.top3Uptainers[1]} pos={75}/>
-                  <StreetStat data={data.top3Uptainers[2]} pos={50}/>
-                  <View style={[{ alignContent: "center", marginTop: 30 }]}>
-                    <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
-                      {t("StatsPage.MostVisitedUptainer", currentLanguage)}
-                    </Text>
-                    <VisitedUptainerStat navigation={navigation} value={data["bestUptainer"]} />
+                    <GreenBox
+                      msg={t("StatsPage.InTotal", currentLanguage)}
+                      data={data.allTakenItems}
+                    />
                   </View>
                 </View>
-            ) : (
-                <YourStats user={userCurrent} products = { products } uptainers={[data["bestUptainer"]]}/>
-            )}
-          </ScrollViewComponent>
-        </SafeAreaView>
-        <Navigationbar navigation={navigation} />
-      </View>
+              </View>
+              <View style={[{ height: 285 }]}>
+                <ChartForStats
+                  value={data["allTakenItemsMonth"]}
+                  refreshing={refreshing}
+                />
+              </View>
+              <View style={{ marginTop: 2, marginBottom: 20 }}>
+                <Text
+                  style={[
+                    styles.article_text,
+                    { fontWeight: "bold", fontSize: 18 },
+                  ]}
+                >
+                  {t("StatsPage.AmountCO2", currentLanguage)}
+                </Text>
+              </View>
+              <View>
+                <View>
+                  <GreenBox
+                    msg={t("StatsPage.SoFar", currentLanguage)}
+                    data={convertKgToTons(co2Data.todayCO2Saved)}
+                    secondMsg={t("StatsPage.Yesterday", currentLanguage)}
+                    secondData={convertKgToTons(co2Data.yesterdayCO2Saved)}
+                  />
+                </View>
+                <View>
+                  <GreenBox
+                    msg={t("StatsPage.InTotal", currentLanguage)}
+                    data={convertKgToTons(co2Data.totalCO2Saved)}
+                  />
+                </View>
+              </View>
+              <View>
+                <View
+                  style={[
+                    {
+                      flexDirection: "row",
+                      marginTop: 20,
+                      marginBottom: 3,
+                      marginRight: "4%",
+                    },
+                  ]}
+                >
+                  <LightbulbIcon />
+                  <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
+                    {" "}
+                    {t("StatsPage.kgCO2", currentLanguage)}:{todayEquivalent}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    {
+                      flexDirection: "row",
+                      marginTop: 5,
+                      marginBottom: 3,
+                      marginRight: "4%",
+                    },
+                  ]}
+                >
+                  <LightbulbIcon />
+                  <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
+                    {" "}
+                    {t("StatsPage.Amount", currentLanguage)}:{" "}
+                    {todaySavedConverted}{" "}
+                  </Text>
+                </View>
+              </View>
+              <View style={[{ alignContent: "center", marginTop: 30 }]}>
+                <Text style={styles.menuItem_text}>
+                  {t("StatsPage.BestAcheieve", currentLanguage)}
+                </Text>
+              </View>
+              <StreetStat data={data.top3Uptainers[0]} pos={100} />
+              <StreetStat data={data.top3Uptainers[1]} pos={75} />
+              <StreetStat data={data.top3Uptainers[2]} pos={50} />
+              <View style={[{ alignContent: "center", marginTop: 30 }]}>
+                <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
+                  {t("StatsPage.MostVisitedUptainer", currentLanguage)}
+                </Text>
+                <VisitedUptainerStat
+                  navigation={navigation}
+                  value={data["bestUptainer"]}
+                />
+              </View>
+            </View>
+          ) : (
+            <YourStats
+              user={userCurrent}
+              products={products}
+              uptainers={[data["bestUptainer"]]}
+            />
+          )}
+        </ScrollViewComponent>
+      </SafeAreaView>
+      <Navigationbar navigation={navigation} />
+    </View>
   );
 };
 
