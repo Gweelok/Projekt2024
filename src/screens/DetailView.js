@@ -140,12 +140,12 @@ const DetailView = StyleSheet.create({
   },
 
   text: {
-    paddingTop: 3,
+    paddingTop: 13,
     width: "80%",
     height: 100,
     borderRadius: 1,
-    marginTop: 15,
-    marginRight: 30,
+    marginTop: 0,
+    marginRight: 35,
     color: Primarycolor1
     
   },
@@ -170,6 +170,8 @@ const DetailView = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 4,
+
+   
   },
   infoContainer: {
     flexDirection: "row",
@@ -181,6 +183,7 @@ const DetailView = StyleSheet.create({
   leftInfo: {
     alignItems: "flex-start",
     width: "60%",
+    
   },
   rightInfo: {
     width: "40%",
