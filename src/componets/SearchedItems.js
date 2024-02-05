@@ -6,7 +6,7 @@ import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { items, products } from "../utils/SeedData"
 import { filterProducts } from "../utils/productsUtils"
 import { useLanguage, t } from "../Languages/LanguageHandler"
-import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
+import { Primarycolor1, Primarycolor2, Primarycolor3, dropdownStyles } from "../styles/Stylesheet"
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds } from "../utils/uptainersUtils"
 
@@ -16,7 +16,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
     const { currentLanguage, setLanguage } = useLanguage()
     const [allUptainers, setAllUptainers] = useState(null);
     const [loading, setLoading] = useState(true)
-
+    const [noProductFound, setNoProductFound] = useState(false)
     useEffect(()=>{
         const fetchData = async () =>{
             try {
@@ -25,7 +25,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
                 const setupUptainers = await setUptainersByIds(uptainers)
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
-                
+                if (!searchedItems.length) { setNoProductFound(true) }
                 const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
                     const imageUrl = await getImage(item.itemImage)
                     return {...item, imageUrl}
@@ -40,14 +40,17 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
             fetchData()
 
     }, [])
+    const renderError = () => <Text style={style.noProductFoundErr}>{t("SearchField.notProductFound", currentLanguage)}</Text>
 
     return (
-        <View style={style.container}>
+        <View style={noProductFound ? null : style.container}>
                 {loading ? (
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={style.loadingContainer}>
                     <ActivityIndicator size='size'/>
                 </KeyboardAvoidingView>
-                ) : 
+                ) :
+                noProductFound ? 
+                renderError() : 
                 <ScrollViewComponent style={{width: windowWidth * 0.89}}>
                  
                     <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
@@ -85,6 +88,19 @@ const style = StyleSheet.create({
         marginBottom: 10,
 
     },
+    noProductFoundErr: {
+        position: 'absolute',
+        fontSize: 16,
+        fontWeight: '500',
+        color: Primarycolor1,
+        backgroundColor: 'white',
+        paddingTop: 20,
+        paddingBottom: 40,
+        zIndex: 1,
+        paddingLeft: 5,
+        width: '100%',
+
+    }
 })
 
 export default SearchedProducts;
