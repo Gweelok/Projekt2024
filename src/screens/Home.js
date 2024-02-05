@@ -73,8 +73,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={[GlobalStyle.BodyWrapper]}>
-        <View>          
+      <View style={[GlobalStyle.BodyWrapper]}>         
           <View style={{zIndex: 1}}>
             <SearchBox
               onChangeText={handleSearch}
@@ -96,7 +95,6 @@ const Home = ({ navigation }) => {
             <SearchedItems endSearch={endSearch} navigation={navigation}
               search={searchText} userLocation={userLocation}/>
             }
-        </View>
         <SortUptainers navigation={navigation} />
         <Navigationbar navigation={navigation} /> 
       </View>
