@@ -9,7 +9,7 @@ import Navigationbar from "../componets/Navigationbar";
 import SortUptainers from "../componets/sortUptainers";
 import SearchBox from '../componets/SearchBox';
 
-import SearchFilter from './SearchFilter';
+import SearchFilter from '../componets/SearchFilter';
 
 import { firebaseAurth } from "../utils/Firebase";
 import { getItemsByName } from '../utils/Repo';
