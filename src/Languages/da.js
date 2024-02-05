@@ -296,6 +296,7 @@ export default {
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find produkt",
+    notProductFound: "Der er på nuværende tidspunkt ingen Uptainere med det produkt. Prøv igen en anden dag."
   },
   SearchHome: {
     productsMatch: "produkter matcher din søgning."
