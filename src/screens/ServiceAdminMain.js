@@ -1,26 +1,37 @@
-import { View, StyleSheet, Text} from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import Navigationbar from "../components/organisms/Navigationbar"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import Textgroup from "../components/molecules/TextGroup"
 import { windowHeight, windowWidth } from "../../src/utils/Dimensions"
 import GlobalStyle from "../styles/GlobalStyle"
 
-const ServiceAdminMain = ({navigation, route}) => {
+const ServiceAdminMain = ({ navigation, route }) => {
     const { location } = route.params;
 
-    const value = {
-        "text":"Main text but we try it a bit longer for testing",
-        "link":"link text but we try it for testing"
+    //Check if needed to be extracted later to language??
+    const textValue = {
+        "overview": {
+            "text": "Review the items in the Uptainer",
+            "link": "Overview"
+        },
+        "items": {
+            "text": "Review the reported items",
+            "link": "Reported items"
+        },
+        "condition": {
+            "text": "Review the conditions of the Uptainer",
+            "link": "Uptainer condition"
+        }
     }
-   
+
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
-            <UptainerInfo location={location}></UptainerInfo> 
+            <UptainerInfo location={location}></UptainerInfo>
 
-             <Textgroup value={value}></Textgroup>
-             <Textgroup value={value}></Textgroup>
-             <Textgroup value={value}></Textgroup>
-    
+            <Textgroup value={textValue.overview}></Textgroup>
+            <Textgroup value={textValue.items}></Textgroup>
+            <Textgroup value={textValue.condition}></Textgroup>
+
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
     )
