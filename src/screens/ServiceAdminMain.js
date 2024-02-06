@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text } from "react-native"
 import Navigationbar from "../components/organisms/Navigationbar"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
-import Textgroup from "../components/molecules/TextGroup"
+import TextLinkList  from "../components/organisms/TextLinkList"
 import { windowHeight, windowWidth } from "../../src/utils/Dimensions"
 import GlobalStyle from "../styles/GlobalStyle"
 
@@ -28,9 +28,7 @@ const ServiceAdminMain = ({ navigation, route }) => {
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <UptainerInfo location={location}></UptainerInfo>
 
-            <Textgroup value={textValue.overview}></Textgroup>
-            <Textgroup value={textValue.items}></Textgroup>
-            <Textgroup value={textValue.condition}></Textgroup>
+            <TextLinkList  textValue={textValue}></TextLinkList >
 
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
@@ -44,7 +42,7 @@ const style = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 50
-    },
+    }
 })
 
 export default ServiceAdminMain
