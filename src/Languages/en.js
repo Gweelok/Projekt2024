@@ -116,7 +116,10 @@ export default {
     ChangeCode: "Change password",
     Delete: "Delete account",
     Optional: "optional",
-    HandleSave: "Information saved",
+    HandleSave: {
+      Saved:"Information saved",
+      EmailExist:"Email is already in use"
+    },
     HandleDeleteAccount: "Account deleted",
     Language: "Language",
   },

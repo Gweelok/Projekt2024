@@ -26,6 +26,8 @@ import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
 import Navigationbar from "../../componets/Navigationbar";
 import { getCurrentUser, updateUserData } from '../../utils/Repo';
+import ErrorBanner from '../ErrorBanner';
+import { firebaseAurth } from '../../utils/Firebase';
 
 
 const AccountSettings = ({ navigation }) => {
@@ -34,17 +36,88 @@ const AccountSettings = ({ navigation }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [errorMessage, setErrorMessage] = useState('')
+    const [canSave, setcanSave] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+
+    const [isEmailValid, setisEmailValid] = useState(true)
+    const [isNameValid, setisNameValid] = useState(true)
+    const [isPhoneValid, setisPhoneValid] = useState(true)
+
 
     const handleBackPress = () => {
         navigation.navigate("MySettings");
-    };
+    }
+
+
+    const checkFields = () => {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+
+
+        if (!emailPattern.test(email)) {
+            setisEmailValid(false)
+            return false
+        } else {
+            setisEmailValid(true)
+        }
+
+        if (name && name.length < 4) {
+            setisNameValid(false)
+            return false
+        } else {
+            setisNameValid(true)
+        }
+
+        if (phone && phone.length < 8) {
+            setisPhoneValid(false)
+            return false
+        } else {
+            setisPhoneValid(true)
+        }
+
+        return true
+    }
+
+
+    // validate fields on changes
+    useEffect(() => {
+        if (!isLoading) {
+            setcanSave(checkFields())
+        }
+    }, [name, email, phone])
+
+    // get realtime user data once component is mounted
+    useEffect(() => {
+        getCurrentUser().then((user) => {
+            setName(user.name)
+            setEmail(user.email)
+            setPhone(user.phone)
+            setIsLoading(false)
+        }).catch(() => {
+            navigation.navigate("MySettings")
+        })
+    }, [])
+
+
+
 
     const handleSave = async () => {
-        updateUserData(name, email, phone).then(() => {
-            Alert.alert("Success", t('AccountSettingsScreen.HandleSave', currentLanguage));
-        }).catch(() => {
+        // disable save button and clear error message
+        setcanSave(false)
+        setErrorMessage("")
 
+        // update auth + realtime user data
+        updateUserData(name, email, phone).then(() => {
+            Alert.alert("Success", t('AccountSettingsScreen.HandleSave.Saved', currentLanguage));
+        }).catch((error) => {
+            if (error.code=="auth/email-already-in-use") {
+                setisEmailValid(false)
+                setErrorMessage(t('AccountSettingsScreen.HandleSave.EmailExist', currentLanguage))
+            }else{
+                setErrorMessage(error.message)
+            }
         })
+
     };
 
     /* complete this task her */
@@ -56,24 +129,16 @@ const AccountSettings = ({ navigation }) => {
         navigation.navigate('ChangePassword');
     };
 
-    useEffect(() => {
-        getCurrentUser().then((user) => {
-            setName(user.name)
-            setEmail(user.email)
-            setPhone(user.phone)
-        }).catch(() => {
-            navigation.navigate("MySettings")
-        })
-    }, [])
+
 
     return (
         <View>
             <ScrollViewComponent >
                 <View style={Backgroundstyle.interactive_screens}>
-                    <SafeAreaView style={GlobalStyle.BodyWrapper} >
+                    {errorMessage && <ErrorBanner message={errorMessage} />}
 
+                    <SafeAreaView style={GlobalStyle.BodyWrapper}>
                         <View style={[styles1.header]}>
-
                             {/* Back Button */}
                             <BackButton onPress={handleBackPress}></BackButton>
 
@@ -102,7 +167,7 @@ const AccountSettings = ({ navigation }) => {
                                     keyboardType="default"
                                     autoCapitalize="none"
                                     clearButtonMode={"always"}
-                                    style={styles.inputBox}
+                                    style={[styles.inputBox, !isNameValid && stylesGlobal.errorInputBox]}
                                 />
                             </CustomInput>
                             {/* email */}
@@ -116,7 +181,7 @@ const AccountSettings = ({ navigation }) => {
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                     clearButtonMode={"always"}
-                                    style={styles.inputBox}
+                                    style={[styles.inputBox, !isEmailValid && stylesGlobal.errorInputBox]}
                                 />
                             </CustomInput>
 
@@ -138,13 +203,13 @@ const AccountSettings = ({ navigation }) => {
                                     keyboardType="phone-pad"
                                     autoCapitalize="none"
                                     clearButtonMode={"always"}
-                                    style={styles.inputBox}
+                                    style={[styles.inputBox, !isPhoneValid && stylesGlobal.errorInputBox]}
                                 />
                             </CustomInput>
 
 
                             {/* Submit */}
-                            <TouchableOpacity onPress={handleSave} style={[Buttons.main_button, { marginTop: 10 }]}>
+                            <TouchableOpacity disabled={!canSave} onPress={handleSave} style={[Buttons.main_button, { marginTop: 10 }, !canSave && Buttons.disabled_button]}>
                                 <Text style={Buttons.main_buttonText}>{t('AccountSettingsScreen.Submit', currentLanguage)}</Text>
                             </TouchableOpacity>
                         </View>

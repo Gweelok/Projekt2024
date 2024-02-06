@@ -52,7 +52,10 @@ export default {
     ChangeCode: "Skift kode",
     Delete: "Slet konto",
     Optional: "valgfri",
-    HandleSave: "Oplysningerne er gemt",
+    HandleSave: {
+      Saved: "Oplysninger gemt",
+      EmailExist:"Email er allerede i brug"
+    },
     HandleDeleteAccount: "Konto er slettet",
     Language: "Sprog",
   },
@@ -60,7 +63,7 @@ export default {
     Header: "Er du sikker på at du vil slette din konto?",
     MainButton: "Slet min konto",
     SecondaryButton: "Annullér",
-    Main:"DeleteAccount",
+    Main: "DeleteAccount",
   },
   MySettingsScreen: {
     Header: "Mine indstillinger",
@@ -169,8 +172,8 @@ export default {
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
-    QRCodeNotFound:"QR Code ikke fundet, gemt til kladde i stedet.",
-    QRCodeNotFound1:"QR-koden blev ikke fundet, så klik på Tag for at gemme til kladde i stedet.",
+    QRCodeNotFound: "QR Code ikke fundet, gemt til kladde i stedet.",
+    QRCodeNotFound1: "QR-koden blev ikke fundet, så klik på Tag for at gemme til kladde i stedet.",
     SaveCode: "Updropp",
     Take: "Tag",
     Success: "Success",
@@ -192,7 +195,7 @@ export default {
   StationsScreen: {
     showProduct: "Vis produkter",
     showWay: "Vis vej",
-    NoUptainers:"Ingen Uptainere matcher din søgning.",
+    NoUptainers: "Ingen Uptainere matcher din søgning.",
 
   },
   ProductIsTakenScreen: {

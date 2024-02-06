@@ -981,14 +981,14 @@ const uploadToFirebase = async (uri, name, path, onProgress) => {
 /****************/
 export async function signInUser(email, password, navigation) {
     signInWithEmailAndPassword(firebaseAurth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             const user = userCredential.user;
-            // save user password securly so we can use later to reauthenticate
-            SecureStorage.savePassword(password).then(() => {
-                console.log('User logged in:', user);
-                navigation.navigate("Homepage");
-            })
 
+            // save user password securely so we can use later to reauthenticate
+            await SecureStorage.savePassword(password)
+
+            console.log('User logged in:', user);
+            navigation.navigate("Homepage");
         })
         .catch((error) => {
             authErrors(error);
@@ -1020,6 +1020,9 @@ export async function createUser(email, password, name = "John Doe") {
 
             };
             await writeToDatabase(paths.users + "/" + userCredential.user.uid, userData);
+
+            // save user password securely so we can use later to reauthenticate
+            await SecureStorage.savePassword(password)
         }
     } catch (error) {
         authErrors(error);
@@ -1074,6 +1077,7 @@ async function updateAuthData(name, email, password) {
 }
 
 // update realtime user data
+// 'profilePic' is not yet completed
 async function updateDatabaseData(name, email, phone, profilePic) {
 
     const reference = ref(db, paths.users + "/" + firebaseAurth.currentUser.uid)
@@ -1090,14 +1094,11 @@ async function updateDatabaseData(name, email, phone, profilePic) {
 
 
 
-//add more info if needed
+// use whenever you need to update realtime + auth user data
+// make sure to surround function call with try/catch
 export async function updateUserData(name, email, phone, profilePic, password) {
-    try {
-        await updateAuthData(name, email, password);
-        await updateDatabaseData(name, email, phone, profilePic);
-    } catch (error) {
-        throw authErrors(error)
-    }
+    await updateAuthData(name, email, password);
+    await updateDatabaseData(name, email, phone, profilePic);
 }
 
 export async function deleteUser(navigation) {
