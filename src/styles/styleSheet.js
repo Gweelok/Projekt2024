@@ -8,13 +8,6 @@ export const Primarycolor4 = "#8EA59E"; //SweetGreen
 // Stylesheet like CSS
 
 export const styles = StyleSheet.create({
-  //Links
-  link: {
-    color: Primarycolor1,
-    textDecorationLine: "underline",
-    textAlign: "center",
-    fontFamily: "space-grotesk",
-  },
   landingPageStyle: {
     flex: 1,
     marginTop: 20,
@@ -56,7 +49,6 @@ export const styles = StyleSheet.create({
   link: {
     color: Primarycolor1,
     textDecorationLine: "underline",
-    textAlign: "center",
     fontFamily: "space-grotesk",
   },
   //paragraph
