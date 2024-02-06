@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -8,7 +8,9 @@ import {
     Alert,
     Pressable,
     ScrollView,
-    SafeAreaView
+    SafeAreaView,
+    ActivityIndicator,
+    ActivityIndicatorBase
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { t, useLanguage } from "../../Languages/LanguageHandler";
@@ -28,6 +30,8 @@ import Navigationbar from "../../componets/Navigationbar";
 import { getCurrentUser, updateUserData } from '../../utils/Repo';
 import ErrorBanner from '../ErrorBanner';
 import { firebaseAurth } from '../../utils/Firebase';
+import { LoaderContext } from '../../componets/LoaderContext';
+import LoadingScreen from '../../componets/LoadingScreen';
 
 
 const AccountSettings = ({ navigation }) => {
@@ -38,12 +42,13 @@ const AccountSettings = ({ navigation }) => {
     const [phone, setPhone] = useState('');
     const [errorMessage, setErrorMessage] = useState('')
     const [canSave, setcanSave] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+
+    // using local Loading state instead of LoaderContext state to prevent re-execution of validate fields useEffect which relies on isLoading state
+    const [ isLoading, setIsLoading ] = useState(true)
 
     const [isEmailValid, setisEmailValid] = useState(true)
     const [isNameValid, setisNameValid] = useState(true)
     const [isPhoneValid, setisPhoneValid] = useState(true)
-
 
     const handleBackPress = () => {
         navigation.navigate("MySettings");
@@ -51,31 +56,33 @@ const AccountSettings = ({ navigation }) => {
 
 
     const checkFields = () => {
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
+        let isValid = true
 
-        if (!emailPattern.test(email)) {
+        if (email.trim()=="" || !emailPattern.test(email.trim())) {
             setisEmailValid(false)
-            return false
+            isValid = false
         } else {
             setisEmailValid(true)
         }
 
-        if (name && name.length < 4) {
+        if (name.trim()!="" && name.trim().length < 4) {
             setisNameValid(false)
-            return false
+            isValid = false
         } else {
             setisNameValid(true)
         }
 
-        if (phone && phone.length < 8) {
+        if (phone.trim()!="" && phone.trim().length < 8) {
             setisPhoneValid(false)
-            return false
+            isValid = false
         } else {
             setisPhoneValid(true)
         }
 
-        return true
+
+        return isValid
     }
 
 
@@ -103,17 +110,20 @@ const AccountSettings = ({ navigation }) => {
 
     const handleSave = async () => {
         // disable save button and clear error message
+        setIsLoading(true)
         setcanSave(false)
         setErrorMessage("")
 
         // update auth + realtime user data
         updateUserData(name, email, phone).then(() => {
+            setIsLoading(false)
             Alert.alert("Success", t('AccountSettingsScreen.HandleSave.Saved', currentLanguage));
         }).catch((error) => {
-            if (error.code=="auth/email-already-in-use") {
+            setIsLoading(false)
+            if (error.code == "auth/email-already-in-use") {
                 setisEmailValid(false)
                 setErrorMessage(t('AccountSettingsScreen.HandleSave.EmailExist', currentLanguage))
-            }else{
+            } else {
                 setErrorMessage(error.message)
             }
         })
@@ -130,10 +140,10 @@ const AccountSettings = ({ navigation }) => {
     };
 
 
-
     return (
         <View>
-            <ScrollViewComponent >
+            <LoadingScreen isLoaderShow={isLoading} />
+            <ScrollViewComponent>
                 <View style={Backgroundstyle.interactive_screens}>
                     {errorMessage && <ErrorBanner message={errorMessage} />}
 
@@ -167,6 +177,7 @@ const AccountSettings = ({ navigation }) => {
                                     keyboardType="default"
                                     autoCapitalize="none"
                                     clearButtonMode={"always"}
+                                    maxLength={30}
                                     style={[styles.inputBox, !isNameValid && stylesGlobal.errorInputBox]}
                                 />
                             </CustomInput>
@@ -181,6 +192,7 @@ const AccountSettings = ({ navigation }) => {
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                     clearButtonMode={"always"}
+                                    maxLength={30}
                                     style={[styles.inputBox, !isEmailValid && stylesGlobal.errorInputBox]}
                                 />
                             </CustomInput>
@@ -203,6 +215,7 @@ const AccountSettings = ({ navigation }) => {
                                     keyboardType="phone-pad"
                                     autoCapitalize="none"
                                     clearButtonMode={"always"}
+                                    maxLength={20}
                                     style={[styles.inputBox, !isPhoneValid && stylesGlobal.errorInputBox]}
                                 />
                             </CustomInput>
