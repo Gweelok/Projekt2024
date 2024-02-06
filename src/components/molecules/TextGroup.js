@@ -1,4 +1,5 @@
 import { View, StyleSheet, Text} from "react-native"
+import {styles} from "../../styles/styleSheet";
 
 const Textgroup = ({value}) => {
    
@@ -8,7 +9,7 @@ const Textgroup = ({value}) => {
         <View style={style.container}>
 
             <Text>{value.text}</Text>
-            <Text>{value.link}</Text> 
+            <Text style={styles.link}>{value.link}</Text> 
 
         </View>
     )
