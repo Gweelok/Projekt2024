@@ -3,17 +3,18 @@ import Navigationbar from "../components/organisms/Navigationbar"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import Textgroup from "../components/molecules/TextGroup"
 import { windowHeight, windowWidth } from "../../src/utils/Dimensions"
+import GlobalStyle from "../styles/GlobalStyle"
 
 const ServiceAdminMain = ({navigation, route}) => {
     const { location } = route.params;
 
     const value = {
-        "text":"Main text",
+        "text":"Main text but we try it a bit longer for testing purpose",
         "link":"link text"
     }
    
     return (
-        <View style={style.container}>
+        <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <UptainerInfo location={location}></UptainerInfo> 
 
              <Textgroup value={value}></Textgroup>
