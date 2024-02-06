@@ -70,9 +70,10 @@ export function Calculate_co2_Equivalent(co2_total) {
   };
 }
 
-// STATS CALCULATIONS
+// STATS CALCULATIONS:
 
-// FETCH DATA FROM DATABASE
+//----------------FETCH DATA FROM DATABASE-----------------//
+
 // Fetches all items taken from the database
 async function fetchAllTakenItems() {
   const allItems = await getAllItems();
@@ -83,7 +84,7 @@ async function fetchAllTakenItems() {
   return allTakenItems;
 }
 
-// Fetches all items taken by a user from the database -
+// Fetches all items taken by a user from the database.
 async function fetchAllItemsTakenByUser(userId) {
   const allItemsTakenByUser = await getAllItems();
   return (
@@ -99,8 +100,9 @@ async function fetchProductCO2(item) {
   return productInfo.co2Footprint || 0;
 }
 
-//UPDATE STATS
-// Updates general statistics based on a single taken item by every user
+//----------------------UPDATE STATS-----------------------//
+
+// Updates all stats based on all taken items by every user
 function updateGeneralStats(generalStats, co2Footprint, itemTakenDate) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -141,8 +143,10 @@ function updateUptainerStats(allUptainersStats, item, co2Footprint) {
   }
 }
 
-// PROCESS STATS
-// Processes general stats
+//----------------------PROCESS STATS-----------------------//
+// Process functions sets up the initial stats, 
+// and then updates them based on the data fetched from the DB.
+
 async function processGeneralStats(allItems) {
   let generalStats = {
     allNumberTakenItems: 0,
@@ -160,10 +164,7 @@ async function processGeneralStats(allItems) {
         const co2Footprint = await fetchProductCO2(item);
         updateGeneralStats(generalStats, co2Footprint, item.itemTakenDate);
       } catch (error) {
-        console.error(
-          `Errors occurred during processing general stats:`,
-          error
-        );
+        console.error(`Errors occurred during processing general stats:`, error);
       }
     })
   );
@@ -171,7 +172,6 @@ async function processGeneralStats(allItems) {
   return generalStats;
 }
 
-// Processes User Stats
 async function processUserStats(allUserTakenItems) {
   let userStats = {
     userTakenItems: 0,
@@ -192,7 +192,6 @@ async function processUserStats(allUserTakenItems) {
   return userStats;
 }
 
-// Processes Uptainer Stats
 async function processUptainerStats(allItems, allUptainers) {
   let allUptainersStats = allUptainers.reduce((acc, uptainer) => {
     acc[uptainer.uptainerId] = {
@@ -221,31 +220,30 @@ async function processUptainerStats(allItems, allUptainers) {
           updateUptainerStats(allUptainersStats, item, co2Footprint);
         }
       } catch (error) {
-        console.error(
-          `Errors occured during processing uptainer stats:`,
-          error
-        );
+        console.error(`Errors occured during processing uptainer stats:`,error);
       }
     })
   );
-
   return allUptainersStats;
 }
 
-// STATS CALCULATIONS
-async function calculateGeneralStatistics() {
+//----------------------CALCULATE STATS-----------------------//
+// Calculate functions call the process functions,
+// and return the final stats that will be used in the relevant components.
+
+async function calculateGeneralStats() {
   const allTakenItems = await fetchAllTakenItems();
   const generalStats = await processGeneralStats(allTakenItems);
   return generalStats;
 }
 
-export async function calculateUserStatistics(userId) {
+async function calculateUserStats(userId) {
   const allUserTakenItems = await fetchAllItemsTakenByUser(userId);
   const userStats = await processUserStats(allUserTakenItems);
   return userStats;
 }
 
-async function calculateUptainerStatistics() {
+async function calculateUptainerStats() {
   const allUptainers = await getAllUptainers();
   const allItems = await fetchAllTakenItems();
   const allUptainersStats = await processUptainerStats(allItems, allUptainers);
@@ -261,11 +259,13 @@ async function calculateUptainerStatistics() {
   return { sortedUptainers, mostAchievingUptainers };
 }
 
-export async function getAllStatistics() {
+// Exported functions return relevant stats that will be used in the components.
+// For Stat.js component
+export async function getAllStats() {
   try {
     let stats;
-    const generalStats = await calculateGeneralStatistics();
-    const uptainerStats = await calculateUptainerStatistics();
+    const generalStats = await calculateGeneralStats();
+    const uptainerStats = await calculateUptainerStats();
 
     stats = {
       allTakenItems: generalStats.allNumberTakenItems,
@@ -283,9 +283,10 @@ export async function getAllStatistics() {
   }
 }
 
-export async function getUserStatistics(userId) {
+// For YourStats.js component
+export async function getUserStats(userId) {
   try {
-    const userStats = await calculateUserStatistics(userId);
+    const userStats = await calculateUserStats(userId);
     return userStats;
   } catch (error) {
     console.error("Error calculating user statistics:", error);
@@ -293,8 +294,7 @@ export async function getUserStatistics(userId) {
   }
 }
 
-// OLD STATS CALCULATIONS
-
+// OLD STATS CALCULATIONS - CAN BE REMOVED AFTER TESTING
 /* export async function CalculateStatistic() {
   // Load all items from database
   const items = await getAllItems();

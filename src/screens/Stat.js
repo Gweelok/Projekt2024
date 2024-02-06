@@ -36,7 +36,7 @@ import {
 } from "../utils/Repo";
 import { items } from "../utils/Testdata";
 import { set } from "firebase/database";
-import { getAllStatistics } from "../utils/uptainersUtils";
+import { getAllStats } from "../utils/uptainersUtils";
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -190,7 +190,7 @@ const Stat = ({ navigation }) => {
         const userCurrent = await getCurrentUser();
         setUserCurrent(userCurrent);
 
-        const stats = await getAllStatistics(userCurrent.id);
+        const stats = await getAllStats(userCurrent.id);
         setData(stats);
 
         const products = await getAllProducts();
