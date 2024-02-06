@@ -1,1581 +1,296 @@
 //Categories
 export const categories = [
   {
-    categoryID: "1",
-    categoryName: "Hi-fi equipment",
-    words: [],
-    brandsID: []
+    categoryId: 1,
+    categoryName: "Smartphones"
   },
   {
-    categoryID: "2",
-    categoryName: "Kitchen machines",
-    words: [],
-    brandsID: []
+    categoryId: 2,
+    categoryName: "Laptops + accessories"
   },
   {
-    categoryID: "3",
-    categoryName: "Household machines",
-    words: [],
-    brandsID: []
+    categoryId: 3,
+    categoryName: "Tablets + accessories"
   },
   {
-    categoryID: "4",
-    categoryName: "Tablet, smartphones, computers + equipment",
-    words: [],
-    brandsID: []
+    categoryId: 4,
+    categoryName: "Camera"
   },
   {
-    categoryID: "5",
-    categoryName: "Tv and game consoles",
-    words: [],
-    brandsID: []
+    categoryId: 5,
+    categoryName: "Hi-fi Equipment"
   },
   {
-    categoryID: "4.1",
-    categoryName: "Phone Cases",
-    words: [
-      "case"
-    ],
-    brandsID: []
+    categoryId: 6,
+    categoryName: "Gaming"
   },
   {
-    categoryID: "4.2",
-    categoryName: "Phone Holders and Stands",
-    words: [
-      "holder",
-      "stand"
-    ],
-    brandsID: []
+    categoryId: 7,
+    categoryName: "Wearable Devices"
   },
   {
-    categoryID: "4.3",
-    categoryName: "Phone Wallets",
-    words: [
-      "wallet"
-    ],
-    brandsID: [
-      "52"
-    ]
+    categoryId: 8,
+    categoryName: "Household appliances"
   },
   {
-    categoryID: "4.4",
-    categoryName: "Tablet Covers",
-    words: [
-      "tablet",
-      "cover"
-    ],
-    brandsID: []
+    categoryId: 9,
+    categoryName: "Kitchen appliances"
   },
   {
-    categoryID: "4.5",
-    categoryName: "Screen Protectors",
-    words: [
-      "screen",
-      "protector"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.6",
-    categoryName: "Chargers and Cables",
-    words: [
-      "charger",
-      "cable"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.7",
-    categoryName: "Power Banks",
-    words: [
-      "power bank"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.8",
-    categoryName: "Stylus Pens",
-    words: [
-      "stylus",
-      "pen"
-    ],
-    brandsID: [
-      "81"
-    ]
-  },
-  {
-    categoryID: "4.9",
-    categoryName: "Selfie Sticks",
-    words: [
-      "selfie",
-      "stick"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.10",
-    categoryName: "Tripods and Mounts",
-    words: [
-      "tripod",
-      "mount"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.11",
-    categoryName: "Storage Devices",
-    words: [
-      "storage",
-      "device"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.12",
-    categoryName: "Car Mounts",
-    words: [
-      "car mount"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.13",
-    categoryName: "Wireless Keyboards",
-    words: [
-      "wireless",
-      "keyboard"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "5.1",
-    categoryName: "Game Controllers",
-    words: [
-      "game",
-      "controller"
-    ],
-    brandsID: [
-      "59"
-    ]
-  },
-  {
-    categoryID: "5.2",
-    categoryName: "AR and VR Accessories",
-    words: [
-      "ar",
-      "vr",
-      "accessories"
-    ],
-    brandsID: [
-      "115",
-      "116",
-      "40",
-      "8",
-      "81"
-    ]
-  },
-  {
-    categoryID: "4.14",
-    categoryName: "Cable Organizers",
-    words: [
-      "cable",
-      "organizer"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "2.1",
-    categoryName: "Food Processors",
-    words: [
-      "food",
-      "processor"
-    ],
-    brandsID: [
-      "101",
-      "109",
-      "110",
-      "111",
-      "112",
-      "113",
-      "23",
-      "29",
-      "31",
-      "43"
-    ]
-  },
-  {
-    categoryID: "2.2",
-    categoryName: "Mixer",
-    words: [
-      "mixer"
-    ],
-    brandsID: [
-      "101",
-      "109",
-      "110",
-      "111",
-      "112",
-      "23",
-      "29",
-      "31"
-    ]
-  },
-  {
-    categoryID: "2.3",
-    categoryName: "Blender",
-    words: [
-      "blender",
-      "Ninja"
-    ],
-    brandsID: [
-      "101",
-      "105",
-      "109",
-      "110",
-      "111",
-      "112",
-      "23",
-      "28",
-      "29",
-      "31",
-      "43"
-    ]
-  },
-  {
-    categoryID: "2.4",
-    categoryName: "Juicer",
-    words: [
-      "juicer",
-      "juice",
-      "Press"
-    ],
-    brandsID: [
-      "109",
-      "110",
-      "111",
-      "112",
-      "28",
-      "29",
-      "31",
-      "43"
-    ]
-  },
-  {
-    categoryID: "2.5",
-    categoryName: "Coffee maker",
-    words: [
-      "coffee",
-      "maker",
-      "espresso",
-      "KLF0",
-      "grinder"
-    ],
-    brandsID: [
-      "101",
-      "106",
-      "107",
-      "110",
-      "111",
-      "112",
-      "113",
-      "23",
-      "29",
-      "31",
-      "43"
-    ]
-  },
-  {
-    categoryID: "2.6",
-    categoryName: "Electric Kettle",
-    words: [
-      "electric",
-      "kettle"
-    ],
-    brandsID: [
-      "101",
-      "106",
-      "109",
-      "110",
-      "112",
-      "113",
-      "23",
-      "29",
-      "31",
-      "43"
-    ]
-  },
-  {
-    categoryID: "3.1",
-    categoryName: "Vacuum cleaner",
-    words: [
-      "vacuum",
-      "cleaner",
-      "Cyclone",
-      "V11 Absolute",
-      "V11 Animal",
-      "V10 Absolute",
-      "V10 Animal",
-      "Complete C2",
-      "Complete C3",
-      "Swing H1",
-      "Dynamic U1",
-      "Triflex HX1",
-      "Ball Animal",
-      "Small Ball",
-      "Cinetic Big",
-      "UltraOne",
-      "Pure",
-      "Ease C4",
-      "Ergorapido",
-      "TwinClean",
-      "Oxygen",
-      "UltraSilencer",
-      "Athlet Series",
-      "Relaxx'x Series",
-      "In'genius ProSilence",
-      "Runn'n Series",
-      "Zoo'o ProAnimal",
-      "GS-50 Power",
-      "GL-40 ProSilence",
-      "BGL8 Series",
-      "BGL4 Serie",
-      "BGL3 Series",
-      "Performer",
-      "PowerPro",
-      "SpeedPro",
-      "PowerLife",
-      "MiniVac",
-      "EasyLife",
-      "FC5000",
-      "FC6000",
-      "EasyFix",
-      "PowerFresh",
-      "SpinWave",
-      "CrossWave",
-      "Vaporetto"
-    ],
-    brandsID: [
-      "109",
-      "114",
-      "31",
-      "40",
-      "41",
-      "42",
-      "43",
-      "48",
-      "88",
-      "96"
-    ]
-  },
-  {
-    categoryID: "3.2",
-    categoryName: "Robot vacuums",
-    words: [
-      "robot vacuum",
-      "iRobot",
-      "Roborock",
-      "Deebot",
-      "Powerbot"
-    ],
-    brandsID: [
-      "40",
-      "43",
-      "44",
-      "46",
-      "49",
-      "94"
-    ]
-  },
-  {
-    categoryID: "3.3",
-    categoryName: "Steam mop",
-    words: [
-      "steam",
-      "mop"
-    ],
-    brandsID: [
-      "100",
-      "31",
-      "48",
-      "50"
-    ]
-  },
-  {
-    categoryID: "1.1",
-    categoryName: "Apple Watch",
-    words: [
-      "apple watch"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "1.2",
-    categoryName: "Smart Watch",
-    words: [
-      "watch",
-      "Amazfit",
-      "Ionic",
-      "Versa",
-      "Sense",
-      "Blaze",
-      "Surge",
-      "Fitbit One",
-      "Zip",
-      "Alta",
-      "Inspire",
-      "Hybrid HR",
-      "Flex",
-      "Move",
-      "Go",
-      "Pulse HR",
-      "Activit\u00e9",
-      "Steel"
-    ],
-    brandsID: [
-      "101",
-      "109",
-      "110",
-      "112",
-      "115",
-      "117",
-      "121",
-      "23",
-      "29",
-      "31",
-      "40",
-      "43",
-      "47",
-      "52",
-      "58",
-      "83",
-      "84",
-      "85",
-      "88"
-    ]
-  },
-  {
-    categoryID: "1.3",
-    categoryName: "Fitness Tracker",
-    words: [
-      "fitness",
-      "tracker"
-    ],
-    brandsID: [
-      "47",
-      "83"
-    ]
-  },
-  {
-    categoryID: "1.4",
-    categoryName: "Smart Glasses",
-    words: [
-      "glasses"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "1.5",
-    categoryName: "Smart Clothing",
-    words: [
-      "clothing"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "5.3",
-    categoryName: "Gaming Consoles",
-    words: [
-      "gaming",
-      "console",
-      "sega",
-      "nintendo",
-      "xbox",
-      "playstation",
-      "ps1",
-      "ps2",
-      "ps3",
-      "ps4",
-      "ps5",
-      "PSP"
-    ],
-    brandsID: [
-      "120",
-      "68",
-      "69",
-      "70",
-      "71"
-    ]
-  },
-  {
-    categoryID: "5.4",
-    categoryName: "Accessories",
-    words: [
-      "accessories"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "1.6",
-    categoryName: "Earphones and Headphones",
-    words: [
-      "earphone",
-      "headphone",
-      "AirPods",
-      "Sony WF",
-      "AKG",
-      "HW-",
-      "Level Link",
-      "WH-",
-      "WI-",
-      "MDR-",
-      "HT-",
-      "MHC-",
-      "CMT-",
-      "QuietComfort",
-      "SoundSport",
-      "Solo Pro",
-      "Beats EP",
-      "Powerbeats Pro",
-      "BeatsX",
-      "Tour2",
-      "urBeats",
-      "iBeats",
-      "Beats Pro"
-    ],
-    brandsID: [
-      "121",
-      "23",
-      "49",
-      "5",
-      "52",
-      "8"
-    ]
-  },
-  {
-    categoryID: "1.7",
-    categoryName: "Wireless Speakers",
-    words: [
-      "wireless",
-      "speakers",
-      "SRS",
-      "Radiant",
-      "SoundLink",
-      "SoundTouch",
-      "Home Speaker",
-      "SoundLink",
-      "HomePod"
-    ],
-    brandsID: [
-      "121",
-      "49",
-      "5",
-      "52",
-      "8"
-    ]
-  },
-  {
-    categoryID: "1.8",
-    categoryName: "Soundbars",
-    words: [
-      "soundbar"
-    ],
-    brandsID: [
-      "8"
-    ]
-  },
-  {
-    categoryID: "1.9",
-    categoryName: "Audio Systems",
-    words: [
-      "audio"
-    ],
-    brandsID: [
-      "49",
-      "8"
-    ]
-  },
-  {
-    categoryID: "1.10",
-    categoryName: "Digital Compact Cameras",
-    words: [
-      "digital",
-      "compact",
-      "camera",
-      "lumix",
-      "PowerShot",
-      "Cyber-shot",
-      "Alpha a",
-      "FinePix",
-      "Coolpix",
-      "Sony RX",
-      "Canon EOS",
-      "Nikon D",
-      "Nikon Z",
-      "Fujifilm X",
-      "Olympus SP",
-      "Olympus XZ",
-      "Olympus SZ",
-      "Olympus OM"
-    ],
-    brandsID: [
-      "101",
-      "106",
-      "110",
-      "112",
-      "23",
-      "29",
-      "31",
-      "40",
-      "43",
-      "5",
-      "73",
-      "77",
-      "78",
-      "79",
-      "81"
-    ]
-  },
-  {
-    categoryID: "1.11",
-    categoryName: "Digital Single-Lens Reflex Cameras (DSLR)",
-    words: [
-      "single-lens",
-      "reflex"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "1.12",
-    categoryName: "Mirrorless Cameras",
-    words: [
-      "mirrorless",
-      "cameras"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.15",
-    categoryName: "Smartphones",
-    words: [
-      "smartphones",
-      "pixel",
-      "oneplus",
-      "galaxy",
-      "Xiaomi Mi"
-    ],
-    brandsID: [
-      "118",
-      "16",
-      "47",
-      "75"
-    ]
-  },
-  {
-    categoryID: "4.16",
-    categoryName: "Tablets",
-    words: [
-      "tablets",
-      "iconia",
-      "ipad",
-      "Surface"
-    ],
-    brandsID: [
-      "52",
-      "57",
-      "60"
-    ]
-  },
-  {
-    categoryID: "4.17",
-    categoryName: "Laptops",
-    words: [
-      "laptop",
-      "macbook",
-      "Dell XPS",
-      "Inspiron",
-      "Precision",
-      "Chromebook",
-      "Spectre",
-      "Envy",
-      "Pavillion",
-      "ZBook",
-      "Stream",
-      "Chromebbok",
-      "HP x2",
-      "Zenbook",
-      "VivoBook",
-      "TUF",
-      "Chromebook",
-      "Transformer",
-      "Aspire",
-      "Swift",
-      "IdeaPad",
-      "Ideacentre"
-    ],
-    brandsID: [
-      "101",
-      "110",
-      "23",
-      "28",
-      "52",
-      "54",
-      "55",
-      "56",
-      "57",
-      "58",
-      "59",
-      "60",
-      "76"
-    ]
-  },
-  {
-    categoryID: "4.18",
-    categoryName: "Desktops",
-    words: [
-      "desktop"
-    ],
-    brandsID: []
-  },
-  {
-    categoryID: "4.19",
-    categoryName: "TV",
-    words: [
-      "tv"
-    ],
-    brandsID: [
-      "93"
-    ]
+    categoryId: 10,
+    categoryName: "Accessories"
   }
 ];
 
 //Brands
 export const brands = [
   {
-    brandID: 1,
-    name: "Marshall",
-    categoriesID: []
+    brandId: 1,
+    brandName: "Acer"
   },
   {
-    brandID: 2,
-    name: "Focal",
-    categoriesID: []
+    brandId: 2,
+    brandName: "Amazfit"
   },
   {
-    brandID: 3,
-    name: "JBL",
-    categoriesID: []
+    brandId: 3,
+    brandName: "Apple"
   },
   {
-    brandID: 4,
-    name: "Pioneer DJ",
-    categoriesID: []
+    brandId: 4,
+    brandName: "Asus"
   },
   {
-    brandID: 5,
-    name: "Sony",
-    categoriesID: [
-      "1.10",
-      "1.6",
-      "1.7"
-    ]
+    brandId: 5,
+    brandName: "Beats by Dr Dre"
   },
   {
-    brandID: 6,
-    name: "Yamaha",
-    categoriesID: []
+    brandId: 6,
+    brandName: "Bissell"
   },
   {
-    brandID: 7,
-    name: "Logitech",
-    categoriesID: []
+    brandId: 7,
+    brandName: "Black & Decker"
   },
   {
-    brandID: 8,
-    name: "Bose",
-    categoriesID: [
-      "1.6",
-      "1.7",
-      "1.8",
-      "1.9",
-      "5.2"
-    ]
+    brandId: 8,
+    brandName: "Bosch"
   },
   {
-    brandID: 9,
-    name: "Sennheiser",
-    categoriesID: []
+    brandId: 9,
+    brandName: "Bose"
   },
   {
-    brandID: 10,
-    name: "Audio-Technica",
-    categoriesID: []
+    brandId: 10,
+    brandName: "Braun"
   },
   {
-    brandID: 11,
-    name: "American Audio",
-    categoriesID: []
+    brandId: 11,
+    brandName: "Canon"
   },
   {
-    brandID: 12,
-    name: "Argon TT-2",
-    categoriesID: []
+    brandId: 12,
+    brandName: "Cuisinart"
   },
   {
-    brandID: 13,
-    name: "Audio Consulting",
-    categoriesID: []
+    brandId: 13,
+    brandName: "Dash"
   },
   {
-    brandID: 14,
-    name: "Cobra",
-    categoriesID: []
+    brandId: 14,
+    brandName: "DeLonghi"
   },
   {
-    brandID: 15,
-    name: "Uniden",
-    categoriesID: []
+    brandId: 15,
+    brandName: "Dell"
   },
   {
-    brandID: 16,
-    name: "Galaxy",
-    categoriesID: [
-      "4.15"
-    ]
+    brandId: 16,
+    brandName: "Dyson"
   },
   {
-    brandID: 17,
-    name: "Midland",
-    categoriesID: []
+    brandId: 17,
+    brandName: "Ecovacs"
   },
   {
-    brandID: 18,
-    name: "Crown Audio",
-    categoriesID: []
+    brandId: 18,
+    brandName: "Electrolux"
   },
   {
-    brandID: 19,
-    name: "Niles",
-    categoriesID: []
+    brandId: 19,
+    brandName: "Fitbit"
   },
   {
-    brandID: 20,
-    name: "McIntoch",
-    categoriesID: []
+    brandId: 20,
+    brandName: "Fossil Gen"
   },
   {
-    brandID: 21,
-    name: "NAD Electronics",
-    categoriesID: []
+    brandId: 21,
+    brandName: "Fujifilm"
   },
   {
-    brandID: 22,
-    name: "LG",
-    categoriesID: []
+    brandId: 22,
+    brandName: "Garmin"
   },
   {
-    brandID: 23,
-    name: "Cuisinart",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "1.6",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.5",
-      "2.6",
-      "4.17"
-    ]
+    brandId: 23,
+    brandName: "Google"
   },
   {
-    brandID: 24,
-    name: "Hamilton Beach",
-    categoriesID: []
+    brandId: 24,
+    brandName: "Google Pixel"
   },
   {
-    brandID: 25,
-    name: "Shark Ninja",
-    categoriesID: []
+    brandId: 25,
+    brandName: "HP"
   },
   {
-    brandID: 26,
-    name: "Kitchen Aid",
-    categoriesID: []
+    brandId: 26,
+    brandName: "Hoover"
   },
   {
-    brandID: 27,
-    name: "Wolf Gourmet",
-    categoriesID: []
+    brandId: 27,
+    brandName: "Huawei"
   },
   {
-    brandID: 28,
-    name: "Ninja",
-    categoriesID: [
-      "2.3",
-      "2.4",
-      "4.17"
-    ]
+    brandId: 28,
+    brandName: "Keurig"
   },
   {
-    brandID: 29,
-    name: "Oster",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.4",
-      "2.5",
-      "2.6"
-    ]
+    brandId: 29,
+    brandName: "KitchenAid"
   },
   {
-    brandID: 30,
-    name: "Magic Bullet",
-    categoriesID: []
+    brandId: 30,
+    brandName: "Krups"
   },
   {
-    brandID: 31,
-    name: "Black & Decker",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.4",
-      "2.5",
-      "2.6",
-      "3.1",
-      "3.3"
-    ]
+    brandId: 31,
+    brandName: "K\u00e4rcher"
   },
   {
-    brandID: 32,
-    name: "Breville",
-    categoriesID: []
+    brandId: 32,
+    brandName: "LG"
   },
   {
-    brandID: 33,
-    name: "De'Longhi",
-    categoriesID: []
+    brandId: 33,
+    brandName: "Leica"
   },
   {
-    brandID: 34,
-    name: "Alessi",
-    categoriesID: []
+    brandId: 34,
+    brandName: "Lenovo"
   },
   {
-    brandID: 35,
-    name: "Ariete",
-    categoriesID: []
+    brandId: 35,
+    brandName: "MSI"
   },
   {
-    brandID: 36,
-    name: "Beem",
-    categoriesID: []
+    brandId: 36,
+    brandName: "Microsoft"
   },
   {
-    brandID: 37,
-    name: "Bialetti",
-    categoriesID: []
+    brandId: 37,
+    brandName: "Microsoft Surface"
   },
   {
-    brandID: 38,
-    name: "Cosori",
-    categoriesID: []
+    brandId: 38,
+    brandName: "Miele"
   },
   {
-    brandID: 39,
-    name: "Bodum Bistro",
-    categoriesID: []
+    brandId: 39,
+    brandName: "Motorolla"
   },
   {
-    brandID: 40,
-    name: "Miele",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "3.1",
-      "3.2",
-      "5.2"
-    ]
+    brandId: 40,
+    brandName: "Neato"
   },
   {
-    brandID: 41,
-    name: "Dyson",
-    categoriesID: [
-      "3.1"
-    ]
+    brandId: 41,
+    brandName: "Nespresso"
   },
   {
-    brandID: 42,
-    name: "Bosch",
-    categoriesID: [
-      "3.1"
-    ]
+    brandId: 42,
+    brandName: "Nikon"
   },
   {
-    brandID: 43,
-    name: "Philips",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "2.1",
-      "2.3",
-      "2.4",
-      "2.5",
-      "2.6",
-      "3.1",
-      "3.2"
-    ]
+    brandId: 43,
+    brandName: "Ninja"
   },
   {
-    brandID: 44,
-    name: "Roborock",
-    categoriesID: [
-      "3.2"
-    ]
+    brandId: 44,
+    brandName: "Nintendo"
   },
   {
-    brandID: 45,
-    name: "Blaupunkt",
-    categoriesID: []
+    brandId: 45,
+    brandName: "Olympus"
   },
   {
-    brandID: 46,
-    name: "IRobot",
-    categoriesID: [
-      "3.2"
-    ]
+    brandId: 46,
+    brandName: "OnePlus"
   },
   {
-    brandID: 47,
-    name: "Xiaomi",
-    categoriesID: [
-      "1.2",
-      "1.3",
-      "4.15"
-    ]
+    brandId: 47,
+    brandName: "Oppo"
   },
   {
-    brandID: 48,
-    name: "Bissell",
-    categoriesID: [
-      "3.1",
-      "3.3"
-    ]
+    brandId: 48,
+    brandName: "Oster"
   },
   {
-    brandID: 49,
-    name: "Samsung",
-    categoriesID: [
-      "1.6",
-      "1.7",
-      "1.9",
-      "3.2"
-    ]
+    brandId: 49,
+    brandName: "Other"
   },
   {
-    brandID: 50,
-    name: "Hoover",
-    categoriesID: [
-      "3.3"
-    ]
+    brandId: 50,
+    brandName: "Panasonic"
   },
   {
-    brandID: 51,
-    name: "Vileda",
-    categoriesID: []
+    brandId: 51,
+    brandName: "Philips"
   },
   {
-    brandID: 52,
-    name: "Apple",
-    categoriesID: [
-      "1.2",
-      "1.6",
-      "1.7",
-      "4.16",
-      "4.17",
-      "4.3"
-    ]
+    brandId: 52,
+    brandName: "Russell Hobbs"
   },
   {
-    brandID: 53,
-    name: "Amazon",
-    categoriesID: []
+    brandId: 53,
+    brandName: "Samsung"
   },
   {
-    brandID: 54,
-    name: "Lenovo",
-    categoriesID: [
-      "4.17"
-    ]
+    brandId: 54,
+    brandName: "Sega"
   },
   {
-    brandID: 55,
-    name: "Alienware",
-    categoriesID: [
-      "4.17"
-    ]
+    brandId: 55,
+    brandName: "Smeg"
   },
   {
-    brandID: 56,
-    name: "Dell",
-    categoriesID: [
-      "4.17"
-    ]
+    brandId: 56,
+    brandName: "Sony"
   },
   {
-    brandID: 57,
-    name: "Acer",
-    categoriesID: [
-      "4.16",
-      "4.17"
-    ]
+    brandId: 57,
+    brandName: "Sony Xperia"
   },
   {
-    brandID: 58,
-    name: "HP",
-    categoriesID: [
-      "1.2",
-      "4.17"
-    ]
+    brandId: 58,
+    brandName: "Vitamix"
   },
   {
-    brandID: 59,
-    name: "Asus",
-    categoriesID: [
-      "4.17",
-      "5.1"
-    ]
+    brandId: 59,
+    brandName: "Withings"
   },
   {
-    brandID: 60,
-    name: "Microsoft",
-    categoriesID: [
-      "4.16",
-      "4.17"
-    ]
+    brandId: 60,
+    brandName: "Xiaomi"
   },
   {
-    brandID: 61,
-    name: "SteelSeries",
-    categoriesID: []
+    brandId: 61,
+    brandName: "iRobot"
   },
-  {
-    brandID: 62,
-    name: "Razer",
-    categoriesID: []
-  },
-  {
-    brandID: 63,
-    name: "Zowie",
-    categoriesID: []
-  },
-  {
-    brandID: 64,
-    name: "Roccat",
-    categoriesID: []
-  },
-  {
-    brandID: 65,
-    name: "TCL",
-    categoriesID: []
-  },
-  {
-    brandID: 66,
-    name: "Toshiba",
-    categoriesID: []
-  },
-  {
-    brandID: 67,
-    name: "Vizio",
-    categoriesID: []
-  },
-  {
-    brandID: 68,
-    name: "Sega",
-    categoriesID: [
-      "5.3"
-    ]
-  },
-  {
-    brandID: 69,
-    name: "Nintendo",
-    categoriesID: [
-      "5.3"
-    ]
-  },
-  {
-    brandID: 70,
-    name: "PlayStation",
-    categoriesID: [
-      "5.3"
-    ]
-  },
-  {
-    brandID: 71,
-    name: "Xbox",
-    categoriesID: [
-      "5.3"
-    ]
-  },
-  {
-    brandID: 72,
-    name: "Corsair",
-    categoriesID: []
-  },
-  {
-    brandID: 73,
-    name: "Panasonic",
-    categoriesID: [
-      "1.10"
-    ]
-  },
-  {
-    brandID: 74,
-    name: "Oppo",
-    categoriesID: []
-  },
-  {
-    brandID: 75,
-    name: "OnePlus",
-    categoriesID: [
-      "4.15"
-    ]
-  },
-  {
-    brandID: 76,
-    name: "MSI",
-    categoriesID: [
-      "4.17"
-    ]
-  },
-  {
-    brandID: 77,
-    name: "Canon",
-    categoriesID: [
-      "1.10"
-    ]
-  },
-  {
-    brandID: 78,
-    name: "Nikon",
-    categoriesID: [
-      "1.10"
-    ]
-  },
-  {
-    brandID: 79,
-    name: "Fujifilm",
-    categoriesID: [
-      "1.10"
-    ]
-  },
-  {
-    brandID: 80,
-    name: "Panasonic",
-    categoriesID: []
-  },
-  {
-    brandID: 81,
-    name: "Olympus",
-    categoriesID: [
-      "1.10",
-      "4.8",
-      "5.2"
-    ]
-  },
-  {
-    brandID: 82,
-    name: "Leica",
-    categoriesID: []
-  },
-  {
-    brandID: 83,
-    name: "Amazfit",
-    categoriesID: [
-      "1.2",
-      "1.3"
-    ]
-  },
-  {
-    brandID: 84,
-    name: "Fossil Gen",
-    categoriesID: [
-      "1.2"
-    ]
-  },
-  {
-    brandID: 85,
-    name: "Withings",
-    categoriesID: [
-      "1.2"
-    ]
-  },
-  {
-    brandID: 86,
-    name: "Miele",
-    categoriesID: []
-  },
-  {
-    brandID: 87,
-    name: "Dyson",
-    categoriesID: []
-  },
-  {
-    brandID: 88,
-    name: "Electrolux",
-    categoriesID: [
-      "1.2",
-      "3.1"
-    ]
-  },
-  {
-    brandID: 89,
-    name: "Bosch",
-    categoriesID: []
-  },
-  {
-    brandID: 90,
-    name: "Philips",
-    categoriesID: []
-  },
-  {
-    brandID: 91,
-    name: "iRobot",
-    categoriesID: []
-  },
-  {
-    brandID: 92,
-    name: "Xiaomi",
-    categoriesID: []
-  },
-  {
-    brandID: 93,
-    name: "Neato",
-    categoriesID: [
-      "4.19"
-    ]
-  },
-  {
-    brandID: 94,
-    name: "Ecovacs",
-    categoriesID: [
-      "3.2"
-    ]
-  },
-  {
-    brandID: 95,
-    name: "Samsung",
-    categoriesID: []
-  },
-  {
-    brandID: 96,
-    name: "K\u00e4rcher",
-    categoriesID: [
-      "3.1"
-    ]
-  },
-  {
-    brandID: 97,
-    name: "Bissell",
-    categoriesID: []
-  },
-  {
-    brandID: 98,
-    name: "Black & Decker",
-    categoriesID: []
-  },
-  {
-    brandID: 99,
-    name: "Hoover",
-    categoriesID: []
-  },
-  {
-    brandID: 100,
-    name: "Russell Hobbs",
-    categoriesID: [
-      "3.3"
-    ]
-  },
-  {
-    brandID: 101,
-    name: "KitchenAid",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.5",
-      "2.6",
-      "4.17"
-    ]
-  },
-  {
-    brandID: 102,
-    name: "Cuisinart",
-    categoriesID: []
-  },
-  {
-    brandID: 103,
-    name: "Ninja",
-    categoriesID: []
-  },
-  {
-    brandID: 104,
-    name: "Oster",
-    categoriesID: []
-  },
-  {
-    brandID: 105,
-    name: "Vitamix",
-    categoriesID: [
-      "2.3"
-    ]
-  },
-  {
-    brandID: 106,
-    name: "Keurig",
-    categoriesID: [
-      "1.10",
-      "2.5",
-      "2.6"
-    ]
-  },
-  {
-    brandID: 107,
-    name: "Nespresso",
-    categoriesID: [
-      "2.5"
-    ]
-  },
-  {
-    brandID: 108,
-    name: "Philips",
-    categoriesID: []
-  },
-  {
-    brandID: 109,
-    name: "Braun",
-    categoriesID: [
-      "1.2",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.4",
-      "2.6",
-      "3.1"
-    ]
-  },
-  {
-    brandID: 110,
-    name: "Krups",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.4",
-      "2.5",
-      "2.6",
-      "4.17"
-    ]
-  },
-  {
-    brandID: 111,
-    name: "Smeg",
-    categoriesID: [
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.4",
-      "2.5"
-    ]
-  },
-  {
-    brandID: 112,
-    name: "Dash",
-    categoriesID: [
-      "1.10",
-      "1.2",
-      "2.1",
-      "2.2",
-      "2.3",
-      "2.4",
-      "2.5",
-      "2.6"
-    ]
-  },
-  {
-    brandID: 113,
-    name: "DeLonghi",
-    categoriesID: [
-      "2.1",
-      "2.5",
-      "2.6"
-    ]
-  },
-  {
-    brandID: 114,
-    name: "Polti",
-    categoriesID: [
-      "3.1"
-    ]
-  },
-  {
-    brandID: 115,
-    name: "Fitbit",
-    categoriesID: [
-      "1.2",
-      "5.2"
-    ]
-  },
-  {
-    brandID: 116,
-    name: "Garmin",
-    categoriesID: [
-      "5.2"
-    ]
-  },
-  {
-    brandID: 117,
-    name: "Fossil",
-    categoriesID: [
-      "1.2"
-    ]
-  },
-  {
-    brandID: 118,
-    name: "Google",
-    categoriesID: [
-      "4.15"
-    ]
-  },
-  {
-    brandID: 119,
-    name: "XBOX",
-    categoriesID: []
-  },
-  {
-    brandID: 120,
-    name: "PS",
-    categoriesID: [
-      "5.3"
-    ]
-  },
-  {
-    brandID: 121,
-    name: "Beats",
-    categoriesID: [
-      "1.2",
-      "1.6",
-      "1.7"
-    ]
+    {
+    brandId: 62,
+    brandName: "Polti"
   }
 ];
 
@@ -1619,161 +334,275 @@ export const stationData = [
 //Products
 export const products = [
   {
-    id: 1,
-    catId: 1,
-    name: "Speakers",
-    co2Footprint: 10,
+    productId: 1,
+    categoryId: 1,
+    productName: "Smartphones",
+    co2Footprint: 100
   },
   {
-    id: 2,
-    catId: 1,
-    name: "Bluetooth speakers",
-    co2Footprint: 15,
+    productId: 2,
+    categoryId: 2,
+    productName: "Laptops",
+    co2Footprint: 300
   },
   {
-    id: 3,
-    catId: 1,
-    name: "Headset and Headphones",
-    co2Footprint: 20,
+    productId: 3,
+    categoryId: 2,
+    productName: "Laptop's Accessories",
+    co2Footprint: 20
   },
   {
-    id: 4,
-    catId: 1,
-    name: "Turntable",
-    co2Footprint: 30,
+    productId: 4,
+    categoryId: 3,
+    productName: "Tablets",
+    co2Footprint: 200
   },
   {
-    id: 5,
-    catId: 1,
-    name: "Radio",
-    co2Footprint: 50,
+    productId: 5,
+    categoryId: 3,
+    productName: "Tablet's Accessories",
+    co2Footprint: 20
   },
   {
-    id: 6,
-    catId: 1,
-    name: "Amplifier",
-    co2Footprint: 40,
+    productId: 6,
+    categoryId: 4,
+    productName: "Digital Compact Cameras",
+    co2Footprint: 80
   },
   {
-    id: 7,
-    catId: 1,
-    name: "Stereo",
-    co2Footprint: 80,
+    productId: 7,
+    categoryId: 4,
+    productName: "Digital Single-Lens Reflex Cameras (DSLR)",
+    co2Footprint: 120
   },
   {
-    id: 8,
-    catId: 2,
-    name: "Foodprocessor",
-    co2Footprint: 40,
+    productId: 8,
+    categoryId: 4,
+    productName: "Mirrorless Cameras",
+    co2Footprint: 130
   },
   {
-    id: 9,
-    catId: 2,
-    name: "Mixer",
-    co2Footprint: 20,
+    productId: 9,
+    categoryId: 4,
+    productName: "Other Cameras",
+    co2Footprint: 100
   },
   {
-    id: 10,
-    catId: 2,
-    name: "Blender",
-    co2Footprint: 30,
+    productId: 10,
+    categoryId: 5,
+    productName: "Earphones and Headphones",
+    co2Footprint: 50
   },
   {
-    id: 11,
-    catId: 2,
-    name: "Juicer",
-    co2Footprint: 40,
+    productId: 11,
+    categoryId: 5,
+    productName: "Wireless Speakers",
+    co2Footprint: 70
   },
   {
-    id: 12,
-    catId: 2,
-    name: "Coffee maker",
-    co2Footprint: 40,
+    productId: 12,
+    categoryId: 5,
+    productName: "Soundbars",
+    co2Footprint: 120
   },
   {
-    id: 13,
-    catId: 2,
-    name: "Electric kettle",
-    co2Footprint: 20,
+    productId: 13,
+    categoryId: 5,
+    productName: "Audio Systems",
+    co2Footprint: 200
   },
   {
-    id: 14,
-    catId: 3,
-    name: "Vacuum cleaner",
-    co2Footprint: 50,
+    productId: 14,
+    categoryId: 6,
+    productName: "Gaming Consoles",
+    co2Footprint: 300
   },
   {
-    id: 15,
-    catId: 3,
-    name: "Robot vacuums",
-    co2Footprint: 100,
+    productId: 15,
+    categoryId: 6,
+    productName: "Gaming Console's Accessories",
+    co2Footprint: 50
   },
   {
-    id: 16,
-    catId: 3,
-    name: "Steam mop",
-    co2Footprint: 10,
+    productId: 16,
+    categoryId: 7,
+    productName: "Apple Watch",
+    co2Footprint: 50
   },
   {
-    id: 17,
-    catId: 4,
-    name: "Tablet",
-    co2Footprint: 250,
+    productId: 17,
+    categoryId: 7,
+    productName: "Smart Watch",
+    co2Footprint: 50
   },
   {
-    id: 18,
-    catId: 4,
-    name: "Smartphone",
-    co2Footprint: 100,
+    productId: 18,
+    categoryId: 7,
+    productName: "Fitness Tracker",
+    co2Footprint: 40
   },
   {
-    id: 19,
-    catId: 4,
-    name: "Laptop",
-    co2Footprint: 300,
+    productId: 19,
+    categoryId: 7,
+    productName: "Smart Glasses",
+    co2Footprint: 70
   },
   {
-    id: 20,
-    catId: 4,
-    name: "Desktop computer",
-    co2Footprint: 450,
+    productId: 20,
+    categoryId: 7,
+    productName: "Smart Clothing",
+    co2Footprint: 60
   },
   {
-    id: 21,
-    catId: 4,
-    name: "Computer screen",
-    co2Footprint: 150,
+    productId: 21,
+    categoryId: 8,
+    productName: "Vacuum cleaner",
+    co2Footprint: 150
   },
   {
-    id: 22,
-    catId: 4,
-    name: "Keyboard",
-    co2Footprint: 60,
+    productId: 22,
+    categoryId: 8,
+    productName: "Robot vacuums",
+    co2Footprint: 140
   },
   {
-    id: 23,
-    catId: 4,
-    name: "Computer mouse",
-    co2Footprint: 20,
+    productId: 23,
+    categoryId: 8,
+    productName: "Steam mop",
+    co2Footprint: 110
   },
   {
-    id: 24,
-    catId: 5,
-    name: "Flatscreen tv (not smart)",
-    co2Footprint: 200,
+    productId: 24,
+    categoryId: 9,
+    productName: "Food Processors",
+    co2Footprint: 130
   },
   {
-    id: 25,
-    catId: 5,
-    name: "Smart tv",
-    co2Footprint: 300,
+    productId: 25,
+    categoryId: 9,
+    productName: "Mixer",
+    co2Footprint: 70
   },
   {
-    id: 26,
-    catId: 5,
-    name: "Gaming console",
-    co2Footprint: 250,
+    productId: 26,
+    categoryId: 9,
+    productName: "Blender",
+    co2Footprint: 60
   },
+  {
+    productId: 27,
+    categoryId: 9,
+    productName: "Juicer",
+    co2Footprint: 60
+  },
+  {
+    productId: 28,
+    categoryId: 9,
+    productName: "Coffee maker",
+    co2Footprint: 80
+  },
+  {
+    productId: 29,
+    categoryId: 9,
+    productName: "Electric Kettle",
+    co2Footprint: 60
+  },
+  {
+    productId: 30,
+    categoryId: 10,
+    productName: "Phone Cases",
+    co2Footprint: 20
+  },
+  {
+    productId: 31,
+    categoryId: 10,
+    productName: "Phone Holders and Stands",
+    co2Footprint: 20
+  },
+  {
+    productId: 32,
+    categoryId: 10,
+    productName: "Phone Wallets",
+    co2Footprint: 20
+  },
+  {
+    productId: 33,
+    categoryId: 10,
+    productName: "Tablet Covers",
+    co2Footprint: 20
+  },
+  {
+    productId: 34,
+    categoryId: 10,
+    productName: "Screen Protectors",
+    co2Footprint: 20
+  },
+  {
+    productId: 35,
+    categoryId: 10,
+    productName: "Chargers and Cables",
+    co2Footprint: 20
+  },
+  {
+    productId: 36,
+    categoryId: 10,
+    productName: "Power Banks",
+    co2Footprint: 20
+  },
+  {
+    productId: 37,
+    categoryId: 10,
+    productName: "Stylus Pens",
+    co2Footprint: 20
+  },
+  {
+    productId: 38,
+    categoryId: 10,
+    productName: "Selfie Sticks",
+    co2Footprint: 20
+  },
+  {
+    productId: 39,
+    categoryId: 10,
+    productName: "Tripods and Mounts",
+    co2Footprint: 20
+  },
+  {
+    productId: 40,
+    categoryId: 10,
+    productName: "Storage Devices",
+    co2Footprint: 20
+  },
+  {
+    productId: 41,
+    categoryId: 10,
+    productName: "Car Mounts",
+    co2Footprint: 20
+  },
+  {
+    productId: 42,
+    categoryId: 10,
+    productName: "Wireless Keyboards",
+    co2Footprint: 20
+  },
+  {
+    productId: 43,
+    categoryId: 10,
+    productName: "Game Controllers",
+    co2Footprint: 20
+  },
+  {
+    productId: 44,
+    categoryId: 10,
+    productName: "AR and VR Accessories",
+    co2Footprint: 20
+  },
+  {
+    productId: 45,
+    categoryId: 10,
+    productName: "Cable Organizers",
+    co2Footprint: 20
+  }
 ];
 
 //items
@@ -1873,7684 +702,7300 @@ export const items = [
 
 export const models = [
   {
-    modelID: "1",
-    modelName: "Krups 10-Cup Coffee Maker (Model: KM785D50)",
-    brandID: "110",
-    categoryID: "2.5"
+    modelId: 1,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone (1st Generation)"
   },
   {
-    modelID: "2",
-    modelName: "Krups 12-Cup Programmable Coffee Maker (Model: KM785D50)",
-    brandID: "110",
-    categoryID: "2.5"
+    modelId: 2,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 3G"
   },
   {
-    modelID: "3",
-    modelName: "Krups Espresso Machine (Model: XP344C51)",
-    brandID: "110",
-    categoryID: "2.5"
+    modelId: 3,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 3GS"
   },
   {
-    modelID: "4",
-    modelName: "Krups Single Serve Coffee Maker (Model: KM202850)",
-    brandID: "110",
-    categoryID: "2.5"
+    modelId: 4,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 4"
   },
   {
-    modelID: "5",
-    modelName: "Krups Coffee and Spice Grinder (Model: GX4100)",
-    brandID: "110",
-    categoryID: "2.5"
+    modelId: 5,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 4s"
   },
   {
-    modelID: "6",
-    modelName: "Krups Cool Touch Electric Kettle (Model: BW442D50)",
-    brandID: "110",
-    categoryID: "2.6"
+    modelId: 6,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 5c"
   },
   {
-    modelID: "7",
-    modelName: "Krups Precision Temperature Electric Kettle (Model: BW3140)",
-    brandID: "110",
-    categoryID: "4.17"
+    modelId: 7,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 5s"
   },
   {
-    modelID: "8",
-    modelName: "Krups Savoy Electric Kettle (Model: BW442D50)",
-    brandID: "110",
-    categoryID: "2.6"
+    modelId: 8,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 6"
   },
   {
-    modelID: "9",
-    modelName: "Krups Cordless Electric Kettle (Model: BW3110)",
-    brandID: "110",
-    categoryID: "2.6"
+    modelId: 9,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 6 Plus"
   },
   {
-    modelID: "10",
-    modelName: "Krups Stainless Steel Electric Kettle (Model: BW730D50)",
-    brandID: "110",
-    categoryID: "1.2"
+    modelId: 10,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 6s"
   },
   {
-    modelID: "11",
-    modelName: "Smeg 50's Retro Style Food Processor",
-    brandID: "111",
-    categoryID: "2.1"
+    modelId: 11,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 6s Plus"
   },
   {
-    modelID: "12",
-    modelName: "Smeg DFP14BSS 14-Cup Food Processor",
-    brandID: "111",
-    categoryID: "2.1"
+    modelId: 12,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone SE (1st generation)"
   },
   {
-    modelID: "13",
-    modelName: "Smeg SMF02 Stand Mixer with Food Grinder Accessory",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 13,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 7"
   },
   {
-    modelID: "14",
-    modelName: "Smeg SMF03 Stand Mixer with Pasta Roller Accessory",
-    brandID: "111",
-    categoryID: "2.2"
+    modelId: 14,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 7 Plus"
   },
   {
-    modelID: "15",
-    modelName: "Smeg SMF03 Stand Mixer with Food Grinder Accessory",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 15,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 8"
   },
   {
-    modelID: "16",
-    modelName: "Smeg SMF03 Stand Mixer with Citrus Juicer Accessory",
-    brandID: "111",
-    categoryID: "2.4"
+    modelId: 16,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 8 Plus"
   },
   {
-    modelID: "17",
-    modelName: "Smeg SMF03 Stand Mixer with Grater/Slicer/Shredder Accessory",
-    brandID: "111",
-    categoryID: "2.2"
+    modelId: 17,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone X"
   },
   {
-    modelID: "18",
-    modelName: "Smeg HBF01 Hand Blender with Chopper Accessory",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 18,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone XR"
   },
   {
-    modelID: "19",
-    modelName: "Smeg BLF01BLUS 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 19,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone XS"
   },
   {
-    modelID: "20",
-    modelName: "Smeg BLF01CRUS 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 20,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone XS Max"
   },
   {
-    modelID: "21",
-    modelName: "Smeg BLF01PKUS 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 21,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 11"
   },
   {
-    modelID: "22",
-    modelName: "Smeg BLF01PGUS 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 22,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 11 Pro"
   },
   {
-    modelID: "23",
-    modelName: "Smeg BLF01RDUS 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 23,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 11 Pro Max"
   },
   {
-    modelID: "24",
-    modelName: "Smeg BLF01SVUS 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 24,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone SE (2nd generation)"
   },
   {
-    modelID: "25",
-    modelName: "Smeg BLF01PGUK 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 25,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 12"
   },
   {
-    modelID: "26",
-    modelName: "Smeg BLF01RDUK 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 26,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 12 mini"
   },
   {
-    modelID: "27",
-    modelName: "Smeg BLF01SVUK 50's Retro Style Blender",
-    brandID: "111",
-    categoryID: "2.3"
+    modelId: 27,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 12 Pro"
   },
   {
-    modelID: "28",
-    modelName: "Smeg CJF01 Citrus Juicer",
-    brandID: "111",
-    categoryID: "2.4"
+    modelId: 28,
+    productId: 1,
+    brandId: 3,
+    modelName: "iPhone 12 Pro Max"
   },
   {
-    modelID: "29",
-    modelName: "Smeg SJF01 Slow Juicer",
-    brandID: "111",
-    categoryID: "2.4"
+    modelId: 29,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy"
   },
   {
-    modelID: "30",
-    modelName: "Smeg CJF01PBUK Retro Style Citrus Juicer",
-    brandID: "111",
-    categoryID: "2.4"
+    modelId: 30,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy S Series"
   },
   {
-    modelID: "31",
-    modelName: "Smeg SJF01PBUK Retro Style Slow Juicer",
-    brandID: "111",
-    categoryID: "2.4"
+    modelId: 31,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy Note Series"
   },
   {
-    modelID: "32",
-    modelName: "Smeg CJF01BLEU Retro Style Citrus Juicer",
-    brandID: "111",
-    categoryID: "2.4"
+    modelId: 32,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy A Series"
   },
   {
-    modelID: "33",
-    modelName: "Smeg DCF02 drip coffee maker",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 33,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy J Series"
   },
   {
-    modelID: "34",
-    modelName: "Smeg ECF01 espresso machine",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 34,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy M Series"
   },
   {
-    modelID: "35",
-    modelName: "Smeg CGF01 grinder",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 35,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy E Series"
   },
   {
-    modelID: "36",
-    modelName: "Smeg CMS6451X built-in coffee machine",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 36,
+    productId: 1,
+    brandId: 53,
+    modelName: "Samsung Galaxy Z Series (Foldable Phones)"
   },
   {
-    modelID: "37",
-    modelName: "Smeg KLF032",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 37,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 9 Pro"
   },
   {
-    modelID: "38",
-    modelName: "Smeg KLF043",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 38,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 9"
   },
   {
-    modelID: "39",
-    modelName: "Smeg KLF014",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 39,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 8T"
   },
   {
-    modelID: "40",
-    modelName: "Smeg KLF055",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 40,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 8 Pro"
   },
   {
-    modelID: "41",
-    modelName: "Smeg KLF03CRUS",
-    brandID: "111",
-    categoryID: "2.5"
+    modelId: 41,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 8, OnePlus Nord"
   },
   {
-    modelID: "42",
-    modelName: "Dash Chef Series 14-Cup Food Processor",
-    brandID: "112",
-    categoryID: "2.1"
+    modelId: 42,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 7T Pro"
   },
   {
-    modelID: "43",
-    modelName: "Dash Deluxe 12-Cup Food Processor",
-    brandID: "112",
-    categoryID: "2.1"
+    modelId: 43,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 7T"
   },
   {
-    modelID: "44",
-    modelName: "Dash Everyday Mini Food Processor",
-    brandID: "112",
-    categoryID: "2.1"
+    modelId: 44,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 7 Pro"
   },
   {
-    modelID: "45",
-    modelName: "Dash Go Everyday Mini Food Processor",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 45,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 7"
   },
   {
-    modelID: "46",
-    modelName: "Dash Express Mini Food Processor",
-    brandID: "112",
-    categoryID: "2.4"
+    modelId: 46,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 6T"
   },
   {
-    modelID: "47",
-    modelName: "Dash Stand Mixer",
-    brandID: "112",
-    categoryID: "2.2"
+    modelId: 47,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 6"
   },
   {
-    modelID: "48",
-    modelName: "Dash Everyday 3-Speed Hand Mixer",
-    brandID: "112",
-    categoryID: "2.2"
+    modelId: 48,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 5T"
   },
   {
-    modelID: "49",
-    modelName: "Dash Smart Store Compact Hand Mixer",
-    brandID: "112",
-    categoryID: "1.10"
+    modelId: 49,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 5"
   },
   {
-    modelID: "50",
-    modelName: "Dash Go Everyday Mixer",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 50,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 3T"
   },
   {
-    modelID: "51",
-    modelName: "Dash Masha 2X Hand Blender and Potato Masher",
-    brandID: "112",
-    categoryID: "2.3"
+    modelId: 51,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 3"
   },
   {
-    modelID: "52",
-    modelName: "Dash Chef Series Digital Blender",
-    brandID: "112",
-    categoryID: "1.10"
+    modelId: 52,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus 2"
   },
   {
-    modelID: "53",
-    modelName: "Dash Chef Series 64 oz Blender",
-    brandID: "112",
-    categoryID: "2.3"
+    modelId: 53,
+    productId: 1,
+    brandId: 46,
+    modelName: "OnePlus One"
   },
   {
-    modelID: "54",
-    modelName: "Dash Chef Series Power Blender",
-    brandID: "112",
-    categoryID: "2.3"
+    modelId: 54,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 6 Pro"
   },
   {
-    modelID: "55",
-    modelName: "Dash Arctic Chill Blender",
-    brandID: "112",
-    categoryID: "2.3"
+    modelId: 55,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 6"
   },
   {
-    modelID: "56",
-    modelName: "Dash Go Sport Blender",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 56,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 5a"
   },
   {
-    modelID: "57",
-    modelName: "Dash Go Everyday Blender",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 57,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 5"
   },
   {
-    modelID: "58",
-    modelName: "Dash Citrus Juicer",
-    brandID: "112",
-    categoryID: "2.4"
+    modelId: 58,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 4a 5G"
   },
   {
-    modelID: "59",
-    modelName: "Dash Go Dual Citrus Juicer",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 59,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 4a"
   },
   {
-    modelID: "60",
-    modelName: "Dash Premium Juicer",
-    brandID: "112",
-    categoryID: "2.4"
+    modelId: 60,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 4 XL"
   },
   {
-    modelID: "61",
-    modelName: "Dash Go Deluxe Compact Power Juicer",
-    brandID: "112",
-    categoryID: "1.10"
+    modelId: 61,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 4"
   },
   {
-    modelID: "62",
-    modelName: "Dash Express Coffee Maker",
-    brandID: "112",
-    categoryID: "2.5"
+    modelId: 62,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 3a XL"
   },
   {
-    modelID: "63",
-    modelName: "Dash Cold Brew Coffee Maker",
-    brandID: "112",
-    categoryID: "2.5"
+    modelId: 63,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 3a"
   },
   {
-    modelID: "64",
-    modelName: "Dash One Cup Coffee Maker",
-    brandID: "112",
-    categoryID: "2.5"
+    modelId: 64,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 3 XL"
   },
   {
-    modelID: "65",
-    modelName: "Dash Compact Cold Brew Coffee Maker",
-    brandID: "112",
-    categoryID: "1.10"
+    modelId: 65,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 3"
   },
   {
-    modelID: "66",
-    modelName: "Dash 1.7L Electric Kettle",
-    brandID: "112",
-    categoryID: "2.6"
+    modelId: 66,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 2 XL"
   },
   {
-    modelID: "67",
-    modelName: "Dash Stainless Steel Rapid Kettle",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 67,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel 2"
   },
   {
-    modelID: "68",
-    modelName: "Dash Go Everyday Electric Kettle",
-    brandID: "112",
-    categoryID: "1.2"
+    modelId: 68,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel XL"
   },
   {
-    modelID: "69",
-    modelName: "Dash Express Hot Pot Electric Kettle",
-    brandID: "112",
-    categoryID: "2.6"
+    modelId: 69,
+    productId: 1,
+    brandId: 23,
+    modelName: "Google Pixel"
   },
   {
-    modelID: "70",
-    modelName: "DeLonghi DFP950 Die-Cast Food Processor",
-    brandID: "113",
-    categoryID: "2.1"
+    modelId: 70,
+    productId: 1,
+    brandId: 49,
+    modelName: "Other"
   },
   {
-    modelID: "71",
-    modelName: "DeLonghi MultiFry FH1363 Food Processor",
-    brandID: "113",
-    categoryID: "2.1"
+    modelId: 71,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air M2 2022"
   },
   {
-    modelID: "72",
-    modelName: "DeLonghi PrimaDonna Exclusive ESAM 6900 Coffee Machine (includes a food processor attachment)",
-    brandID: "113",
-    categoryID: "2.5"
+    modelId: 72,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air M1 2020"
   },
   {
-    modelID: "73",
-    modelName: "DeLonghi Distinta Electric Stand Mixer",
-    brandID: "113",
-    categoryID: "2.6"
+    modelId: 73,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2019"
   },
   {
-    modelID: "74",
-    modelName: "DeLonghi MultiFry FH1363 Food Processor",
-    brandID: "113",
-    categoryID: "2.1"
+    modelId: 74,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2018"
   },
   {
-    modelID: "75",
-    modelName: "Black & Decker MX1500W 5-Speed Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 75,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2017"
   },
   {
-    modelID: "76",
-    modelName: "Black & Decker MX600T Helix Performance Premium Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 76,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2015"
   },
   {
-    modelID: "77",
-    modelName: "Black & Decker MX600BC Helix Performance Premium Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 77,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air  13-inch 2013"
   },
   {
-    modelID: "78",
-    modelName: "Black & Decker MX600G Helix Performance Premium Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 78,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2012"
   },
   {
-    modelID: "79",
-    modelName: "Black & Decker MX3200B 6-Speed Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 79,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2011"
   },
   {
-    modelID: "80",
-    modelName: "Black & Decker MX600P Helix Performance Premium Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 80,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook  Air 13-inch 2010"
   },
   {
-    modelID: "81",
-    modelName: "Black & Decker MX600H Helix Performance Premium Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 81,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Air 13-inch 2009"
   },
   {
-    modelID: "82",
-    modelName: "Black & Decker MX3200B 6-Speed Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 82,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Pro 13 inch"
   },
   {
-    modelID: "83",
-    modelName: "Black & Decker MX1500W 5-Speed Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 83,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Pro 14 inch"
   },
   {
-    modelID: "84",
-    modelName: "Black & Decker MX600T Helix Performance Premium Hand Mixer",
-    brandID: "31",
-    categoryID: "2.2"
+    modelId: 84,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Pro 15 inch"
   },
   {
-    modelID: "85",
-    modelName: "Black & Decker BL2010BG 10-Speed Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 85,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Pro 16 inch"
   },
   {
-    modelID: "86",
-    modelName: "Black & Decker BL2010BP 10-Speed Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 86,
+    productId: 2,
+    brandId: 3,
+    modelName: "Macbook Pro 17 inch"
   },
   {
-    modelID: "87",
-    modelName: "Black & Decker BL2010BG 10-Speed Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 87,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell XPS"
   },
   {
-    modelID: "88",
-    modelName: "Black & Decker BX225 300W Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 88,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Inspiron"
   },
   {
-    modelID: "89",
-    modelName: "Black & Decker BL2010BG 10-Speed Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 89,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Latitude (Business Laptops)"
   },
   {
-    modelID: "90",
-    modelName: "Black & Decker BL1110RG Crush Master Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 90,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Precision (Workstations)"
   },
   {
-    modelID: "91",
-    modelName: "Black & Decker BL1350DP-P Performance FusionBlade Digital Blender",
-    brandID: "31",
-    categoryID: "1.10"
+    modelId: 91,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Alienware (Gaming Laptops)"
   },
   {
-    modelID: "92",
-    modelName: "Black & Decker BX210 300W Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 92,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell G (Gaming Laptops)"
   },
   {
-    modelID: "93",
-    modelName: "Black & Decker BX210 300W Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 93,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Vostro (Small Business Laptops)"
   },
   {
-    modelID: "94",
-    modelName: "Black & Decker BX210 300W Blender",
-    brandID: "31",
-    categoryID: "2.3"
+    modelId: 94,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Chromebook"
   },
   {
-    modelID: "95",
-    modelName: "Black & Decker JE2200B 400-Watt Fruit and Vegetable Juice Extractor",
-    brandID: "31",
-    categoryID: "2.4"
+    modelId: 95,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell XPS 2in1"
   },
   {
-    modelID: "96",
-    modelName: "Black & Decker CJ630 32-Ounce Electric Citrus Juicer",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 96,
+    productId: 2,
+    brandId: 15,
+    modelName: "Dell Precision Mobile Workstations"
   },
   {
-    modelID: "97",
-    modelName: "Black & Decker JE2400BD 400-Watt Fruit and Vegetable Juice Extractor",
-    brandID: "31",
-    categoryID: "2.4"
+    modelId: 97,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Spectre"
   },
   {
-    modelID: "98",
-    modelName: "Black & Decker CJ625 34-Ounce Electric Citrus Juicer",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 98,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Envy"
   },
   {
-    modelID: "99",
-    modelName: "Black & Decker CJ650W 32-Ounce Electric Citrus Juicer",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 99,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Pavillion"
   },
   {
-    modelID: "100",
-    modelName: "Black & Decker CJ200B 32-Ounce Citrus Juicer",
-    brandID: "31",
-    categoryID: "2.4"
+    modelId: 100,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Omen (Gaming Laptops)"
   },
   {
-    modelID: "101",
-    modelName: "Black & Decker CJ6302 32-Ounce Electric Citrus Juicer",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 101,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP ProBook (Business Laptops)"
   },
   {
-    modelID: "102",
-    modelName: "Black & Decker JE2200 400-Watt Fruit and Vegetable Juice Extractor",
-    brandID: "31",
-    categoryID: "2.4"
+    modelId: 102,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP EliteBook (Business Laptops)"
   },
   {
-    modelID: "103",
-    modelName: "Black & Decker CJ200S 30-Watt 32-Ounce Citrus Juicer",
-    brandID: "31",
-    categoryID: "2.4"
+    modelId: 103,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP ZBook (Mobile Workstations)"
   },
   {
-    modelID: "104",
-    modelName: "Black & Decker JE2400BD 400-Watt Fruit and Vegetable Juice Extractor",
-    brandID: "31",
-    categoryID: "2.4"
+    modelId: 104,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Stream"
   },
   {
-    modelID: "105",
-    modelName: "Black & Decker DLX1050W 12-Cup Programmable Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 105,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Chromebbok"
   },
   {
-    modelID: "106",
-    modelName: "Black & Decker CM2035B 12-Cup Thermal Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 106,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP Dragonfly"
   },
   {
-    modelID: "107",
-    modelName: "Black & Decker CM2030B 12-Cup Thermal Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 107,
+    productId: 2,
+    brandId: 25,
+    modelName: "HP x2"
   },
   {
-    modelID: "108",
-    modelName: "Black & Decker CM1160B 12-Cup Programmable Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 108,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus Zenbook"
   },
   {
-    modelID: "109",
-    modelName: "Black & Decker CM4110S 12-Cup Digital Coffee Maker",
-    brandID: "31",
-    categoryID: "1.10"
+    modelId: 109,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus VivoBook"
   },
   {
-    modelID: "110",
-    modelName: "Black & Decker DCM600B 5-Cup Coffeemaker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 110,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus ROG (Republic of Gamers)"
   },
   {
-    modelID: "111",
-    modelName: "Black & Decker CM0700BZ 5-Cup Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 111,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus TUF"
   },
   {
-    modelID: "112",
-    modelName: "Black & Decker CM0700W 5-Cup Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 112,
+    productId: 2,
+    brandId: 4,
+    modelName: "ASUS ExpertBook (Business Laptops)"
   },
   {
-    modelID: "113",
-    modelName: "Black & Decker DCM600W 5-Cup Coffeemaker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 113,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus Chromebook"
   },
   {
-    modelID: "114",
-    modelName: "Black & Decker CM2030R 12-Cup Thermal Coffee Maker",
-    brandID: "31",
-    categoryID: "2.5"
+    modelId: 114,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus ProArt (Creative Professional Laptops)"
   },
   {
-    modelID: "115",
-    modelName: "Black & Decker KE1500BK 1.7-Liter Rapid Boil Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 115,
+    productId: 2,
+    brandId: 4,
+    modelName: "Asus Transformer"
   },
   {
-    modelID: "116",
-    modelName: "Black & Decker KE2000SD 1.7-Liter Stainless Steel Electric Kettle",
-    brandID: "31",
-    categoryID: "1.2"
+    modelId: 116,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer Aspire"
   },
   {
-    modelID: "117",
-    modelName: "Black & Decker KE3000S 1.7-Liter Rapid Boil Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 117,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer Swift"
   },
   {
-    modelID: "118",
-    modelName: "Black & Decker JC200 1.7-Liter Cordless Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 118,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer Predator (Gaming Laptops)"
   },
   {
-    modelID: "119",
-    modelName: "Black & Decker KE1600B 1.7-Liter Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 119,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer Chromebook"
   },
   {
-    modelID: "120",
-    modelName: "Black & Decker KE1517B 1.7-Liter Rapid Boil Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 120,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer TravelMate (Business Laptops)"
   },
   {
-    modelID: "121",
-    modelName: "Black & Decker KE1020SD 1.7-Liter Stainless Steel Electric Kettle",
-    brandID: "31",
-    categoryID: "1.2"
+    modelId: 121,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer ConceptD (Creative Professional Laptops)"
   },
   {
-    modelID: "122",
-    modelName: "Black & Decker KE5550S 1.7-Liter Cordless Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 122,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer Nitro (Gaming Laptops)"
   },
   {
-    modelID: "123",
-    modelName: "Black & Decker JC400 1.7-Liter Cordless Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 123,
+    productId: 2,
+    brandId: 1,
+    modelName: "Acer Spin (2in1 Laptops)"
   },
   {
-    modelID: "124",
-    modelName: "Black & Decker KE1500R 1.7-Liter Rapid Boil Electric Kettle",
-    brandID: "31",
-    categoryID: "2.6"
+    modelId: 124,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo Thinkpad (Business laptops)"
   },
   {
-    modelID: "125",
-    modelName: "Krups 14-Cup Food Processor (Model: FP3020)",
-    brandID: "110",
-    categoryID: "2.1"
+    modelId: 125,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo IdeaPad"
   },
   {
-    modelID: "126",
-    modelName: "Krups 8-Cup Food Processor (Model: FP404)",
-    brandID: "110",
-    categoryID: "2.1"
+    modelId: 126,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo Legion (Gaming laptops)"
   },
   {
-    modelID: "127",
-    modelName: "Krups Mini Food Processor (Model: GN492851)",
-    brandID: "110",
-    categoryID: "2.1"
+    modelId: 127,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo Yoga (2in1 laptops)"
   },
   {
-    modelID: "128",
-    modelName: "Krups Food Chopper (Model: GVA208)",
-    brandID: "110",
-    categoryID: "2.1"
+    modelId: 128,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo Chromebook"
   },
   {
-    modelID: "129",
-    modelName: "Krups 10-Cup Food Processor (Model: 394-70)",
-    brandID: "110",
-    categoryID: "2.1"
+    modelId: 129,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo V (Budget laptops)"
   },
   {
-    modelID: "130",
-    modelName: "Krups Hand Mixer with Turbo Boost (Model: GN492851)",
-    brandID: "110",
-    categoryID: "2.2"
+    modelId: 130,
+    productId: 2,
+    brandId: 34,
+    modelName: "Lenovo Ideacentre (All in one PCs)"
   },
   {
-    modelID: "131",
-    modelName: "Krups Stand Mixer (Model: KB5220)",
-    brandID: "110",
-    categoryID: "2.2"
+    modelId: 131,
+    productId: 2,
+    brandId: 36,
+    modelName: "Microsoft Surface Laptop"
   },
   {
-    modelID: "132",
-    modelName: "Krups Electric Hand Mixer (Model: GN502851)",
-    brandID: "110",
-    categoryID: "2.6"
+    modelId: 132,
+    productId: 2,
+    brandId: 36,
+    modelName: "Microsoft Surface Book  (2in1 Laptops)"
   },
   {
-    modelID: "133",
-    modelName: "Krups 10-Speed Stand Mixer (Model: KH734D50)",
-    brandID: "110",
-    categoryID: "2.2"
+    modelId: 133,
+    productId: 2,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro (2in1 Tablets)"
   },
   {
-    modelID: "134",
-    modelName: "Krups Digital Hand Mixer (Model: GN492851)",
-    brandID: "110",
-    categoryID: "1.10"
+    modelId: 134,
+    productId: 2,
+    brandId: 36,
+    modelName: "Microsoft Surface Go (Budget 2in1 Tablets)"
   },
   {
-    modelID: "135",
-    modelName: "Krups Countertop Blender with Glass Jar (Model:KB710D)",
-    brandID: "110",
-    categoryID: "2.3"
+    modelId: 135,
+    productId: 2,
+    brandId: 36,
+    modelName: "Microsoft Surface Studio"
   },
   {
-    modelID: "136",
-    modelName: "Krups High-Speed Blender (Model: KB790)",
-    brandID: "110",
-    categoryID: "2.3"
+    modelId: 136,
+    productId: 2,
+    brandId: 36,
+    modelName: "Microsoft Surface Hub"
   },
   {
-    modelID: "137",
-    modelName: "Krups Personal Blender (Model: GP211851)",
-    brandID: "110",
-    categoryID: "2.3"
+    modelId: 137,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI GS (Stealth- Gaming Laptops)"
   },
   {
-    modelID: "138",
-    modelName: "Krups PowerX Compact Blender (Model: KB203)",
-    brandID: "110",
-    categoryID: "1.10"
+    modelId: 138,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI GE (Raider- Gaming Laptops)"
   },
   {
-    modelID: "139",
-    modelName: "Krups Immersion Hand Blender (Model: GPA30842)",
-    brandID: "110",
-    categoryID: "2.3"
+    modelId: 139,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI GT (Titan- High Perfomance Laptops)"
   },
   {
-    modelID: "140",
-    modelName: "Krups Citrus Press (Model: ZX720)",
-    brandID: "110",
-    categoryID: "2.4"
+    modelId: 140,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI GP (Performance Gaming Laptops)"
   },
   {
-    modelID: "141",
-    modelName: "Krups Infinity Slow Juicer (Model: ZB601E51)",
-    brandID: "110",
-    categoryID: "2.4"
+    modelId: 141,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI Creator (Content Creation Laptops)"
   },
   {
-    modelID: "142",
-    modelName: "Krups Juice Extractor (Model: ZX720K)",
-    brandID: "110",
-    categoryID: "2.4"
+    modelId: 142,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI Prestige (Professional Laptops)"
   },
   {
-    modelID: "143",
-    modelName: "Krups Citrus Juicer (Model: ZX800)",
-    brandID: "110",
-    categoryID: "2.4"
+    modelId: 143,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI Modern (Slim and Lightweight Laptops)"
   },
   {
-    modelID: "144",
-    modelName: "Krups Compact Juicer (Model: ZX7000)",
-    brandID: "110",
-    categoryID: "1.10"
+    modelId: 144,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI Bravo (Affordable Gaming Laptops)"
   },
   {
-    modelID: "145",
-    modelName: "Philips Viva Collection Food Processor",
-    brandID: "43",
-    categoryID: "2.1"
+    modelId: 145,
+    productId: 2,
+    brandId: 35,
+    modelName: "MSI Alpha (Creator and Gaming Laptops)"
   },
   {
-    modelID: "146",
-    modelName: "Philips Avance Collection Food Processor",
-    brandID: "43",
-    categoryID: "2.1"
+    modelId: 146,
+    productId: 2,
+    brandId: 49,
+    modelName: "Other"
   },
   {
-    modelID: "147",
-    modelName: "Philips Daily Collection Food Processor",
-    brandID: "43",
-    categoryID: "2.1"
+    modelId: 147,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Air (4th generation)"
   },
   {
-    modelID: "148",
-    modelName: "Philips Compact Food Processor",
-    brandID: "43",
-    categoryID: "1.10"
+    modelId: 148,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Air (3rd generation)"
   },
   {
-    modelID: "149",
-    modelName: "Philips ProMix Hand Blender (Includes food processing attachments)",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 149,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Air 2 (2nd generation)"
   },
   {
-    modelID: "150",
-    modelName: "Philips Avance Collection Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 150,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Air (1st generation)"
   },
   {
-    modelID: "151",
-    modelName: "Philips Viva Collection Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 151,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 12.9-inch (5th generation)"
   },
   {
-    modelID: "152",
-    modelName: "Philips Daily Collection Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 152,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 11-inch (3rd generation)"
   },
   {
-    modelID: "153",
-    modelName: "Philips Mini Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 153,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 12.9-inch (4th generation)"
   },
   {
-    modelID: "154",
-    modelName: "Philips High-Speed Power Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 154,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 11-inch (2nd generation)"
   },
   {
-    modelID: "155",
-    modelName: "Philips ProMix Hand Blender (Includes blending attachments)",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 155,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 12.9-inch (3rd generation)"
   },
   {
-    modelID: "156",
-    modelName: "Philips HR3652/01 Avance Collection Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 156,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 11-inch (1st generation)"
   },
   {
-    modelID: "157",
-    modelName: "Philips HR2096/01 Avance Collection Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 157,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 12.9-inch (2nd generation)"
   },
   {
-    modelID: "158",
-    modelName: "Philips HR2172/00 Viva Collection Blender",
-    brandID: "43",
-    categoryID: "2.3"
+    modelId: 158,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad Pro 12.9-inch (1st generation)"
   },
   {
-    modelID: "159",
-    modelName: "Philips Viva Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 159,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad mini (6th generation)"
   },
   {
-    modelID: "160",
-    modelName: "Philips Avance Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 160,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad mini (5th generation)"
   },
   {
-    modelID: "161",
-    modelName: "Philips Daily Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 161,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad mini 4 (4th generation)"
   },
   {
-    modelID: "162",
-    modelName: "Philips Compact Juicer",
-    brandID: "43",
-    categoryID: "1.10"
+    modelId: 162,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad mini 3 (3rd generation)"
   },
   {
-    modelID: "163",
-    modelName: "Philips Micro Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 163,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad mini 2 (2nd generation)"
   },
   {
-    modelID: "164",
-    modelName: "Philips HR1918/81 Avance Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 164,
+    productId: 4,
+    brandId: 3,
+    modelName: "iPad mini (1st generation)"
   },
   {
-    modelID: "165",
-    modelName: "Philips HR1867/21 Viva Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 165,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S7+"
   },
   {
-    modelID: "166",
-    modelName: "Philips HR1832/01 Viva Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 166,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S7"
   },
   {
-    modelID: "167",
-    modelName: "Philips HR1836/01 Viva Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 167,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S6 Lite"
   },
   {
-    modelID: "168",
-    modelName: "Philips HR1855/31 Viva Collection Juicer",
-    brandID: "43",
-    categoryID: "2.4"
+    modelId: 168,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab A7"
   },
   {
-    modelID: "169",
-    modelName: "Philips Grind & Brew Coffee Maker",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 169,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab Active3"
   },
   {
-    modelID: "170",
-    modelName: "Philips 3200 Series LatteGo Espresso Machine",
-    brandID: "43",
-    categoryID: "1.2"
+    modelId: 170,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S6"
   },
   {
-    modelID: "171",
-    modelName: "Philips 2200 Series Espresso Machine",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 171,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S5e"
   },
   {
-    modelID: "172",
-    modelName: "Philips Senseo Original Coffee Pod Machine",
-    brandID: "43",
-    categoryID: "1.2"
+    modelId: 172,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab A 8.0"
   },
   {
-    modelID: "173",
-    modelName: "Philips EP1200/04 Series Espresso Machine",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 173,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab A 10.1"
   },
   {
-    modelID: "174",
-    modelName: "Philips 3100 Series Espresso Machine",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 174,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S4"
   },
   {
-    modelID: "175",
-    modelName: "Philips EP2200/10 Series Espresso Machine",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 175,
+    productId: 4,
+    brandId: 53,
+    modelName: "Samsung Galaxy Tab S3"
   },
   {
-    modelID: "176",
-    modelName: "Philips EP3241/54 LatteGo Series Espresso Machine",
-    brandID: "43",
-    categoryID: "1.2"
+    modelId: 176,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 10"
   },
   {
-    modelID: "177",
-    modelName: "Philips 3200 Series Espresso Machine",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 177,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 8"
   },
   {
-    modelID: "178",
-    modelName: "Philips Daily Collection Coffee Maker",
-    brandID: "43",
-    categoryID: "2.5"
+    modelId: 178,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia One 10"
   },
   {
-    modelID: "179",
-    modelName: "Philips HD9306/03 Daily Collection Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 179,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia One 8"
   },
   {
-    modelID: "180",
-    modelName: "Philips HD9350/90 Avance Collection Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 180,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 7"
   },
   {
-    modelID: "181",
-    modelName: "Philips HD4646/70 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 181,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 7 HD"
   },
   {
-    modelID: "182",
-    modelName: "Philips HD4646/70 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 182,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab A3"
   },
   {
-    modelID: "183",
-    modelName: "Philips HD4644/00 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 183,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 10 A3-A20"
   },
   {
-    modelID: "184",
-    modelName: "Philips HD9326/20 Avance Collection Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 184,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 8 W"
   },
   {
-    modelID: "185",
-    modelName: "Philips HD4646/40 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 185,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia One 7"
   },
   {
-    modelID: "186",
-    modelName: "Philips HD4646/20 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 186,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia One 8 B1-820"
   },
   {
-    modelID: "187",
-    modelName: "Philips HD4690/01 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 187,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab A1-850"
   },
   {
-    modelID: "188",
-    modelName: "Philips HD4690/21 Energy Efficient Kettle",
-    brandID: "43",
-    categoryID: "2.6"
+    modelId: 188,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab A1-840FHD"
   },
   {
-    modelID: "189",
-    modelName: "Braun FP3020 12-Cup Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 189,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia Tab 7 A1-713"
   },
   {
-    modelID: "190",
-    modelName: "Braun FP3020 12-Cup Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 190,
+    productId: 4,
+    brandId: 1,
+    modelName: "Acer Iconia W3"
   },
   {
-    modelID: "191",
-    modelName: "Braun FP5150 Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 191,
+    productId: 4,
+    brandId: 23,
+    modelName: "Google pixel tablet"
   },
   {
-    modelID: "192",
-    modelName: "Braun FPX3030 12-Cup Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 192,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface"
   },
   {
-    modelID: "193",
-    modelName: "Braun FPX3030 12-Cup Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 193,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface"
   },
   {
-    modelID: "194",
-    modelName: "Braun FP5160 Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 194,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface 2"
   },
   {
-    modelID: "195",
-    modelName: "Braun FPX3030 12-Cup Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 195,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface 3"
   },
   {
-    modelID: "196",
-    modelName: "Braun FPX3030 12-Cup Food Processor",
-    brandID: "109",
-    categoryID: "2.1"
+    modelId: 196,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface pro"
   },
   {
-    modelID: "197",
-    modelName: "Braun MultiMix 5 Hand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 197,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro"
   },
   {
-    modelID: "198",
-    modelName: "Braun MultiMix 3 Hand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 198,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 2"
   },
   {
-    modelID: "199",
-    modelName: "Braun MultiMix 1 Hand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 199,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 3"
   },
   {
-    modelID: "200",
-    modelName: "Braun HM5100 MultiMix Hand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 200,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 4"
   },
   {
-    modelID: "201",
-    modelName: "Braun MQ777 Multiquick 7 Hand Blender and Mixer",
-    brandID: "109",
-    categoryID: "2.3"
+    modelId: 201,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 5 (Surface Pro 2017)"
   },
   {
-    modelID: "202",
-    modelName: "Braun IdentityCollection Stand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 202,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 6"
   },
   {
-    modelID: "203",
-    modelName: "Braun Multimix 5 Stand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 203,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 7"
   },
   {
-    modelID: "204",
-    modelName: "Braun Multimix 3 Stand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 204,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro X"
   },
   {
-    modelID: "205",
-    modelName: "Braun Multimix 2 Stand Mixer",
-    brandID: "109",
-    categoryID: "2.2"
+    modelId: 205,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Pro 8"
   },
   {
-    modelID: "206",
-    modelName: "Braun MultiQuick 5 Hand Blender",
-    brandID: "109",
-    categoryID: "2.3"
+    modelId: 206,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Go"
   },
   {
-    modelID: "207",
-    modelName: "Braun PureMix Power Blender",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 207,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Go"
   },
   {
-    modelID: "208",
-    modelName: "Braun MultiQuick 9 Hand Blender",
-    brandID: "109",
-    categoryID: "2.3"
+    modelId: 208,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Go 2"
   },
   {
-    modelID: "209",
-    modelName: "Braun PureMix Blender with Glass Jug",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 209,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Go 3"
   },
   {
-    modelID: "210",
-    modelName: "Braun JB7352 PureMix Power Countertop Blender",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 210,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Book"
   },
   {
-    modelID: "211",
-    modelName: "Braun MQ725 Multiquick Hand Blender",
-    brandID: "109",
-    categoryID: "2.3"
+    modelId: 211,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Book"
   },
   {
-    modelID: "212",
-    modelName: "Braun JB7001BKS PureMix Power Countertop Blender",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 212,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Book 2"
   },
   {
-    modelID: "213",
-    modelName: "Braun MQ9037X Multiquick 9 Hand Blender",
-    brandID: "109",
-    categoryID: "2.3"
+    modelId: 213,
+    productId: 4,
+    brandId: 36,
+    modelName: "Microsoft Surface Book 3"
   },
   {
-    modelID: "214",
-    modelName: "Braun JB7200 PureMix Countertop Blender",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 214,
+    productId: 6,
+    brandId: 56,
+    modelName: "Sony Cyber-shot Series"
   },
   {
-    modelID: "215",
-    modelName: "Braun JB7350 PureMix Power Countertop Blender",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 215,
+    productId: 6,
+    brandId: 56,
+    modelName: "Sony RX Series"
   },
   {
-    modelID: "216",
-    modelName: "Braun J700 Multiquick 7 Juicer",
-    brandID: "109",
-    categoryID: "2.4"
+    modelId: 216,
+    productId: 6,
+    brandId: 11,
+    modelName: "Canon PowerShot G"
   },
   {
-    modelID: "217",
-    modelName: "Braun CJ3050 Citrus Juicer",
-    brandID: "109",
-    categoryID: "2.4"
+    modelId: 217,
+    productId: 6,
+    brandId: 11,
+    modelName: "Canon PowerShot SX"
   },
   {
-    modelID: "218",
-    modelName: "Braun J500 Multiquick 5 Juicer",
-    brandID: "109",
-    categoryID: "2.4"
+    modelId: 218,
+    productId: 6,
+    brandId: 11,
+    modelName: "Canon PowerShot ELPH"
   },
   {
-    modelID: "219",
-    modelName: "Braun MPZ22 Citromatic Citrus Juicer",
-    brandID: "109",
-    categoryID: "2.4"
+    modelId: 219,
+    productId: 6,
+    brandId: 42,
+    modelName: "Nikon Coolpix P1000"
   },
   {
-    modelID: "220",
-    modelName: "Braun J300 Multiquick 3 Juicer",
-    brandID: "109",
-    categoryID: "2.4"
+    modelId: 220,
+    productId: 6,
+    brandId: 42,
+    modelName: "Nikon Coolpix P950"
   },
   {
-    modelID: "221",
-    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 221,
+    productId: 6,
+    brandId: 42,
+    modelName: "Nikon Coolpix A1000"
   },
   {
-    modelID: "222",
-    modelName: "Braun KF7150BK BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 222,
+    productId: 6,
+    brandId: 42,
+    modelName: "Nikon Coolpix B600"
   },
   {
-    modelID: "223",
-    modelName: "Braun KF7000BK BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 223,
+    productId: 6,
+    brandId: 21,
+    modelName: "Fujifilm FinePix XP Series"
   },
   {
-    modelID: "224",
-    modelName: "Braun KF7175 BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 224,
+    productId: 6,
+    brandId: 21,
+    modelName: "Fujifilm FinePix XF Series"
   },
   {
-    modelID: "225",
-    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 225,
+    productId: 6,
+    brandId: 21,
+    modelName: "Fujifilm X100V"
   },
   {
-    modelID: "226",
-    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 226,
+    productId: 6,
+    brandId: 50,
+    modelName: "Panasonic Lumix GH5"
   },
   {
-    modelID: "227",
-    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 227,
+    productId: 6,
+    brandId: 50,
+    modelName: "Panasonic Lumix GH5S"
   },
   {
-    modelID: "228",
-    modelName: "Braun KF7150BK BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 228,
+    productId: 6,
+    brandId: 50,
+    modelName: "Panasonic Lumix G9"
   },
   {
-    modelID: "229",
-    modelName: "Braun KF7000BK BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 229,
+    productId: 6,
+    brandId: 50,
+    modelName: "Panasonic Lumix S1"
   },
   {
-    modelID: "230",
-    modelName: "Braun KF7175 BrewSense Drip Coffee Maker",
-    brandID: "109",
-    categoryID: "1.2"
+    modelId: 230,
+    productId: 6,
+    brandId: 50,
+    modelName: "Panasonic Lumix S1R"
   },
   {
-    modelID: "231",
-    modelName: "Braun WK600 Multiquick 6 Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 231,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus SP-100EE"
   },
   {
-    modelID: "232",
-    modelName: "Braun WK600 Multiquick 6 Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 232,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus SP-820UZ"
   },
   {
-    modelID: "233",
-    modelName: "Braun WK300 Multiquick 3 Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 233,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus SP-720UZ"
   },
   {
-    modelID: "234",
-    modelName: "Braun WK3110 PurEase Kettle",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 234,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus XZ-2"
   },
   {
-    modelID: "235",
-    modelName: "Braun WK500 Sommelier Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 235,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus XZ-1"
   },
   {
-    modelID: "236",
-    modelName: "Braun WK3110 PurEase Kettle",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 236,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus SZ-31MR"
   },
   {
-    modelID: "237",
-    modelName: "Braun WK600 Multiquick 6 Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 237,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus SZ-30MR"
   },
   {
-    modelID: "238",
-    modelName: "Braun WK500 Sommelier Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 238,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus VR-370"
   },
   {
-    modelID: "239",
-    modelName: "Braun WK300 Multiquick 3 Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 239,
+    productId: 6,
+    brandId: 45,
+    modelName: "Olympus VR-350"
   },
   {
-    modelID: "240",
-    modelName: "Braun WK3110 PurEase Kettle",
-    brandID: "109",
-    categoryID: "3.1"
+    modelId: 240,
+    productId: 7,
+    brandId: 11,
+    modelName: "Canon EOS 1D X Mark III"
   },
   {
-    modelID: "241",
-    modelName: "Braun WK500 Sommelier Kettle",
-    brandID: "109",
-    categoryID: "2.6"
+    modelId: 241,
+    productId: 7,
+    brandId: 11,
+    modelName: "Canon EOS 5D Mark IV"
   },
   {
-    modelID: "242",
-    modelName: "Black & Decker FP2500B PowerPro Wide-Mouth Food Processor",
-    brandID: "31",
-    categoryID: "3.1"
+    modelId: 242,
+    productId: 7,
+    brandId: 11,
+    modelName: "Canon EOS 6D Mark II"
   },
   {
-    modelID: "243",
-    modelName: "Black & Decker FP4200B PowerPro Wide-Mouth Food Processor",
-    brandID: "31",
-    categoryID: "3.1"
+    modelId: 243,
+    productId: 7,
+    brandId: 11,
+    modelName: "Canon EOS 90D"
   },
   {
-    modelID: "244",
-    modelName: "Black & Decker FP6010 Performance Dicing Food Processor",
-    brandID: "31",
-    categoryID: "2.1"
+    modelId: 244,
+    productId: 7,
+    brandId: 21,
+    modelName: "Fujifilm FinePix S1"
   },
   {
-    modelID: "245",
-    modelName: "Black & Decker FP1600B PowerPro Food Processor",
-    brandID: "31",
-    categoryID: "3.1"
+    modelId: 245,
+    productId: 7,
+    brandId: 21,
+    modelName: "Fujifilm FinePix S3 Pro"
   },
   {
-    modelID: "246",
-    modelName: "Black & Decker FP5050 PowerPro Wide-Mouth Food Processor",
-    brandID: "31",
-    categoryID: "3.1"
+    modelId: 246,
+    productId: 7,
+    brandId: 21,
+    modelName: "Fujifilm FinePix S5 Pro"
   },
   {
-    modelID: "247",
-    modelName: "Black & Decker FP3030 12-Cup Food Processor",
-    brandID: "31",
-    categoryID: "2.1"
+    modelId: 247,
+    productId: 8,
+    brandId: 56,
+    modelName: "Sony Alpha a1"
   },
   {
-    modelID: "248",
-    modelName: "Black & Decker FP6010 Performance Dicing Food Processor",
-    brandID: "31",
-    categoryID: "2.1"
+    modelId: 248,
+    productId: 8,
+    brandId: 56,
+    modelName: "Sony Alpha a9 II"
   },
   {
-    modelID: "249",
-    modelName: "Black & Decker FP2500B PowerPro Wide-Mouth Food Processor",
-    brandID: "31",
-    categoryID: "3.1"
+    modelId: 249,
+    productId: 8,
+    brandId: 56,
+    modelName: "Sony Alpha a7R IV"
   },
   {
-    modelID: "250",
-    modelName: "Black & Decker FP1600B PowerPro Food Processor",
-    brandID: "31",
-    categoryID: "3.1"
+    modelId: 250,
+    productId: 8,
+    brandId: 56,
+    modelName: "Sony Alpha a7S III"
   },
   {
-    modelID: "251",
-    modelName: "Ninja Professional BL610",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 251,
+    productId: 8,
+    brandId: 56,
+    modelName: "Sony Alpha a7 III"
   },
   {
-    modelID: "252",
-    modelName: "Ninja Smart Screen Duo CT661V",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 252,
+    productId: 8,
+    brandId: 56,
+    modelName: "Sony Alpha a7C"
   },
   {
-    modelID: "253",
-    modelName: "Ninja Master Prep QB1004",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 253,
+    productId: 8,
+    brandId: 11,
+    modelName: "Canon EOS M50 Mark II"
   },
   {
-    modelID: "254",
-    modelName: "Ninja Express Chop NJ110GR",
-    brandID: "28",
-    categoryID: "2.4"
+    modelId: 254,
+    productId: 8,
+    brandId: 11,
+    modelName: "Canon EOS M6 Mark II"
   },
   {
-    modelID: "255",
-    modelName: "Ninja Precision Processor NN310",
-    brandID: "28",
-    categoryID: "4.17"
+    modelId: 255,
+    productId: 8,
+    brandId: 11,
+    modelName: "Canon EOS M200"
   },
   {
-    modelID: "256",
-    modelName: "Ninja Professional BL610",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 256,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon DSLR Cameras"
   },
   {
-    modelID: "257",
-    modelName: "Ninja BL480 Nutri Ninja with Auto-iQ",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 257,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon D6"
   },
   {
-    modelID: "258",
-    modelName: "Ninja BL770 Mega Kitchen System",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 258,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon D850"
   },
   {
-    modelID: "259",
-    modelName: "Ninja BL610 Professional 1000W Blender",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 259,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon D750"
   },
   {
-    modelID: "260",
-    modelName: "Ninja BL660 Professional 1100W Blender",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 260,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon D5600"
   },
   {
-    modelID: "261",
-    modelName: "Ninja BL780 Supra Kitchen System",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 261,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon D3500"
   },
   {
-    modelID: "262",
-    modelName: "Ninja BL687CO Auto-iQ Total Boost",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 262,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon Z7 II"
   },
   {
-    modelID: "263",
-    modelName: "Ninja BL771 Mega Kitchen System",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 263,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon Z6 II"
   },
   {
-    modelID: "264",
-    modelName: "Ninja QB900B Master Prep",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 264,
+    productId: 8,
+    brandId: 42,
+    modelName: "Nikon Z50"
   },
   {
-    modelID: "265",
-    modelName: "Ninja CP301",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 265,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifilm X-T4"
   },
   {
-    modelID: "266",
-    modelName: "Ninja CM407",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 266,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifilm X-T3"
   },
   {
-    modelID: "267",
-    modelName: "Ninja CF091",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 267,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifilm X-Pro3"
   },
   {
-    modelID: "268",
-    modelName: "Ninja CE201",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 268,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifilm X-Pro2"
   },
   {
-    modelID: "269",
-    modelName: "Ninja CM401",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 269,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifilm X-E4"
   },
   {
-    modelID: "270",
-    modelName: "Ninja CM20",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 270,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifim X-E3"
   },
   {
-    modelID: "271",
-    modelName: "Ninja CF112",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 271,
+    productId: 8,
+    brandId: 21,
+    modelName: "Fujifilm X-A7"
   },
   {
-    modelID: "272",
-    modelName: "Ninja CF097",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 272,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GH5"
   },
   {
-    modelID: "273",
-    modelName: "Ninja CM400",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 273,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GH5S"
   },
   {
-    modelID: "274",
-    modelName: "Ninja CP301W",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 274,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix G9"
   },
   {
-    modelID: "275",
-    modelName: "Oster Pro 1200 Blender with Food Processor Attachment",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 275,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GH4"
   },
   {
-    modelID: "276",
-    modelName: "Oster Top Chop 4-Cup Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 276,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GH3"
   },
   {
-    modelID: "277",
-    modelName: "Oster Total Prep 10-Cup Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 277,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GX9"
   },
   {
-    modelID: "278",
-    modelName: "Oster Oskar 2-in-1 Salad Prep and Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 278,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GX8"
   },
   {
-    modelID: "279",
-    modelName: "Oster 2-Speed 10-Cup Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 279,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GX85 (GX80)"
   },
   {
-    modelID: "280",
-    modelName: "Oster Designer Kitchen Center Food Processor Attachment",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 280,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GX7"
   },
   {
-    modelID: "281",
-    modelName: "Oster 250-Watt 5-Speed Hand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 281,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix GM5"
   },
   {
-    modelID: "282",
-    modelName: "Oster 7-Speed Clean Start Hand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 282,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix S1"
   },
   {
-    modelID: "283",
-    modelName: "Oster 6-Speed Retractable Cord Hand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 283,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix S1R"
   },
   {
-    modelID: "284",
-    modelName: "Oster Planetary Stand Mixer with Stainless Steel Bowl",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 284,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix S5"
   },
   {
-    modelID: "285",
-    modelName: "Oster 12-Speed Planetary Stand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 285,
+    productId: 8,
+    brandId: 50,
+    modelName: "Panasonic Lumix S1H"
   },
   {
-    modelID: "286",
-    modelName: "Oster 4.5-Quart Tilt-Head Stand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 286,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus OM-D E-M1X"
   },
   {
-    modelID: "287",
-    modelName: "Oster Precise Blend 200 Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 287,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus OM-D E-M1 Mark III"
   },
   {
-    modelID: "288",
-    modelName: "Oster Pro 1200 Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 288,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus OM-D E-M5 Mark III"
   },
   {
-    modelID: "289",
-    modelName: "Oster Reverse Crush Counterforms Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 289,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus OM-D E-M10 Mark IV"
   },
   {
-    modelID: "290",
-    modelName: "Oster 10-Speed Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 290,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus OM-D E-M10 Mark III"
   },
   {
-    modelID: "291",
-    modelName: "Oster MyBlend Pro Series Personal Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 291,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus PEN-F"
   },
   {
-    modelID: "292",
-    modelName: "Oster Blend-N-Go MyBlend Blender",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 292,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus PEN E-PL10"
   },
   {
-    modelID: "293",
-    modelName: "Oster BLSTPB-WBL My Blend 250-Watt Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 293,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus PEN E-PL9"
   },
   {
-    modelID: "294",
-    modelName: "Oster JusSimple 5 Speed Easy Clean Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 294,
+    productId: 8,
+    brandId: 45,
+    modelName: "Olympus PEN E-PL8"
   },
   {
-    modelID: "295",
-    modelName: "Oster JusSimple 2-Speed Easy Clean Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 295,
+    productId: 10,
+    brandId: 3,
+    modelName: "AirPods (1st generation)"
   },
   {
-    modelID: "296",
-    modelName: "Oster Self-Cleaning Professional Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 296,
+    productId: 10,
+    brandId: 3,
+    modelName: "AirPods (2nd generation)"
   },
   {
-    modelID: "297",
-    modelName: "Oster Wide Mouth Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 297,
+    productId: 10,
+    brandId: 3,
+    modelName: "AirPods (3rd generation)"
   },
   {
-    modelID: "298",
-    modelName: "Oster 400W Wide Mouth Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 298,
+    productId: 10,
+    brandId: 3,
+    modelName: "AirPods Pro (1st generation)"
   },
   {
-    modelID: "299",
-    modelName: "Oster Juice and Blend 2 Go Compact Juice Extractor and Personal Blender",
-    brandID: "29",
-    categoryID: "1.10"
+    modelId: 299,
+    productId: 10,
+    brandId: 3,
+    modelName: "AirPods Pro (2nd generation)"
   },
   {
-    modelID: "300",
-    modelName: "Oster 12-Cup Programmable Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 300,
+    productId: 10,
+    brandId: 3,
+    modelName: "Airpods Max N/A"
   },
   {
-    modelID: "301",
-    modelName: "Oster 10-Cup Optimal Brew Thermal Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 301,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Galaxy Buds Pro"
   },
   {
-    modelID: "302",
-    modelName: "Oster 12-Cup Stainless Steel Coffee Maker",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 302,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Galaxy Buds Live"
   },
   {
-    modelID: "303",
-    modelName: "Oster 12-Cup Programmable Coffee Maker with Brew Strength Selector",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 303,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Galaxy Buds+"
   },
   {
-    modelID: "304",
-    modelName: "Oster Single Serve Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 304,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Galaxy Buds"
   },
   {
-    modelID: "305",
-    modelName: "Oster 12-Cup Drip Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 305,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung AKG N700NC"
   },
   {
-    modelID: "306",
-    modelName: "Oster 12-Cup Stainless Steel Thermal Coffee Maker",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 306,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung AKG Y500"
   },
   {
-    modelID: "307",
-    modelName: "Oster 12-Cup Coffee Maker BVST-JBXSS41",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 307,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung AKG Y100"
   },
   {
-    modelID: "308",
-    modelName: "Oster Prima Latte Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 308,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung AKG Y50"
   },
   {
-    modelID: "309",
-    modelName: "Oster Coffee Center 12-Cup Coffeemaker and Single Serve Brewer",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 309,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung AKG Y500NC"
   },
   {
-    modelID: "310",
-    modelName: "Oster Stainless Steel Electric Kettle",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 310,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung AKG Y600NC"
   },
   {
-    modelID: "311",
-    modelName: "Oster Illuminating Glass Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 311,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung SoundAlive Headphones (VariousModels)"
   },
   {
-    modelID: "312",
-    modelName: "Oster DuraCeramic Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 312,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level On Headphones"
   },
   {
-    modelID: "313",
-    modelName: "Oster BVST-EK18B Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 313,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level U Headphones"
   },
   {
-    modelID: "314",
-    modelName: "Oster BVSTKT3231 Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 314,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level Box Speakers"
   },
   {
-    modelID: "315",
-    modelName: "Oster 5965 Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 315,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level Over Headphones"
   },
   {
-    modelID: "316",
-    modelName: "Oster 1.7-Liter BVCB07-Z Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 316,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level Link"
   },
   {
-    modelID: "317",
-    modelName: "Oster BVSTK7051SS Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 317,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level In Earphones"
   },
   {
-    modelID: "318",
-    modelName: "Oster FPSTKT4073 Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 318,
+    productId: 10,
+    brandId: 53,
+    modelName: "Samsung Level Active Headphones"
   },
   {
-    modelID: "319",
-    modelName: "Vitamix E310 Explorian Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 319,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WH-1000XM4"
   },
   {
-    modelID: "320",
-    modelName: "Vitamix E320 Explorian Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 320,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WH-1000XM3"
   },
   {
-    modelID: "321",
-    modelName: "Vitamix 5200 Series Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 321,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WH-XB900N"
   },
   {
-    modelID: "322",
-    modelName: "Vitamix Professional Series 750 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 322,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WH-CH710N"
   },
   {
-    modelID: "323",
-    modelName: "Vitamix Ascent Series A2300 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 323,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WI-1000XM2"
   },
   {
-    modelID: "324",
-    modelName: "Vitamix Ascent Series A2500 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 324,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WI-C600N"
   },
   {
-    modelID: "325",
-    modelName: "Vitamix Ascent Series A3300 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 325,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony MDR-ZX110"
   },
   {
-    modelID: "326",
-    modelName: "Vitamix Ascent Series A3500 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 326,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony MDR-XB450"
   },
   {
-    modelID: "327",
-    modelName: "Vitamix 7500 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 327,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WH-XB700"
   },
   {
-    modelID: "328",
-    modelName: "Vitamix Pro 750 Heritage Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 328,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WF-1000XM4"
   },
   {
-    modelID: "329",
-    modelName: "Vitamix S30 Personal Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 329,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WF-1000XM3"
   },
   {
-    modelID: "330",
-    modelName: "Vitamix S50 Personal Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 330,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WF-SP800N"
   },
   {
-    modelID: "331",
-    modelName: "Vitamix S55 Personal Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 331,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WF-SP700N"
   },
   {
-    modelID: "332",
-    modelName: "Vitamix TurboBlend Two-Speed Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 332,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WF-1000X"
   },
   {
-    modelID: "333",
-    modelName: "Vitamix TurboBlend Three-Speed Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 333,
+    productId: 10,
+    brandId: 56,
+    modelName: "Sony WF-SP600N"
   },
   {
-    modelID: "334",
-    modelName: "Keurig K-Classic Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 334,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose QuietComfort 45"
   },
   {
-    modelID: "335",
-    modelName: "Keurig K-Elite Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 335,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose QuietComfort 35 II"
   },
   {
-    modelID: "336",
-    modelName: "Keurig K-Select Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 336,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose QuietComfort Earbuds"
   },
   {
-    modelID: "337",
-    modelName: "Keurig K-Compact Coffee Maker",
-    brandID: "106",
-    categoryID: "1.10"
+    modelId: 337,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose Sport Earbuds"
   },
   {
-    modelID: "338",
-    modelName: "Keurig K-Express Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 338,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose SoundSport Free"
   },
   {
-    modelID: "339",
-    modelName: "Keurig K-Cafe Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 339,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose SoundSport Wireless"
   },
   {
-    modelID: "340",
-    modelName: "Keurig K-Elite C Single Serve Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 340,
+    productId: 10,
+    brandId: 9,
+    modelName: "Bose Frames (Audio Sunglasses)"
   },
   {
-    modelID: "341",
-    modelName: "Keurig K-Mini Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 341,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Solo Pro"
   },
   {
-    modelID: "342",
-    modelName: "Keurig K-Classic K50 Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 342,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Solo3 Wireless"
   },
   {
-    modelID: "343",
-    modelName: "Keurig K-55 Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 343,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Solo2 Wireless"
   },
   {
-    modelID: "344",
-    modelName: "Keurig K-Duo Essentials Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 344,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Studio3 Wireless"
   },
   {
-    modelID: "345",
-    modelName: "Keurig K-Duo Plus Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 345,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Studio2 Wireless"
   },
   {
-    modelID: "346",
-    modelName: "Ninja Professional BL610",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 346,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats EP"
   },
   {
-    modelID: "347",
-    modelName: "Ninja Smart Screen Duo CT661V",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 347,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Powerbeats Pro"
   },
   {
-    modelID: "348",
-    modelName: "Ninja Master Prep QB1004",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 348,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Powerbeats High-Performance Wireless"
   },
   {
-    modelID: "349",
-    modelName: "Ninja Express Chop NJ110GR",
-    brandID: "28",
-    categoryID: "2.4"
+    modelId: 349,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Powerbeats3 Wireless"
   },
   {
-    modelID: "350",
-    modelName: "Ninja Precision Processor NN310",
-    brandID: "28",
-    categoryID: "4.17"
+    modelId: 350,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Flex"
   },
   {
-    modelID: "351",
-    modelName: "Ninja Professional BL610",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 351,
+    productId: 10,
+    brandId: 5,
+    modelName: "BeatsX"
   },
   {
-    modelID: "352",
-    modelName: "Ninja BL480 Nutri Ninja with Auto-iQ",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 352,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Tour2"
   },
   {
-    modelID: "353",
-    modelName: "Ninja BL770 Mega Kitchen System",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 353,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats urBeats"
   },
   {
-    modelID: "354",
-    modelName: "Ninja BL610 Professional 1000W Blender",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 354,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats iBeats"
   },
   {
-    modelID: "355",
-    modelName: "Ninja BL660 Professional 1100W Blender",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 355,
+    productId: 10,
+    brandId: 5,
+    modelName: "Beats Pro"
   },
   {
-    modelID: "356",
-    modelName: "Ninja BL780 Supra Kitchen System",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 356,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Galaxy Home"
   },
   {
-    modelID: "357",
-    modelName: "Ninja BL687CO Auto-iQ Total Boost",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 357,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Radiant360 R1"
   },
   {
-    modelID: "358",
-    modelName: "Ninja BL771 Mega Kitchen System",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 358,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Radiant360 R3"
   },
   {
-    modelID: "359",
-    modelName: "Ninja QB900B Master Prep",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 359,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Radiant360 R5"
   },
   {
-    modelID: "360",
-    modelName: "Ninja CP301",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 360,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Radiant360 R7"
   },
   {
-    modelID: "361",
-    modelName: "Ninja CM407",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 361,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Radiant360 R9"
   },
   {
-    modelID: "362",
-    modelName: "Ninja CF091",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 362,
+    productId: 11,
+    brandId: 53,
+    modelName: "Samsung Wireless Audio System"
   },
   {
-    modelID: "363",
-    modelName: "Ninja CE201",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 363,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB43"
   },
   {
-    modelID: "364",
-    modelName: "Ninja CM401",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 364,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB33"
   },
   {
-    modelID: "365",
-    modelName: "Ninja CM20",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 365,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB23"
   },
   {
-    modelID: "366",
-    modelName: "Ninja CF112",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 366,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB22"
   },
   {
-    modelID: "367",
-    modelName: "Ninja CF097",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 367,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB12"
   },
   {
-    modelID: "368",
-    modelName: "Ninja CM400",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 368,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB41"
   },
   {
-    modelID: "369",
-    modelName: "Ninja CP301W",
-    brandID: "28",
-    categoryID: "2.3"
+    modelId: 369,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB31"
   },
   {
-    modelID: "370",
-    modelName: "Oster Pro 1200 Blender with Food Processor Attachment",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 370,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB21"
   },
   {
-    modelID: "371",
-    modelName: "Oster Top Chop 4-Cup Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 371,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-XB10"
   },
   {
-    modelID: "372",
-    modelName: "Oster Total Prep 10-Cup Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 372,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-X9"
   },
   {
-    modelID: "373",
-    modelName: "Oster Oskar 2-in-1 Salad Prep and Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 373,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-X7"
   },
   {
-    modelID: "374",
-    modelName: "Oster 2-Speed 10-Cup Food Processor",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 374,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-X5"
   },
   {
-    modelID: "375",
-    modelName: "Oster Designer Kitchen Center Food Processor Attachment",
-    brandID: "29",
-    categoryID: "2.1"
+    modelId: 375,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-X2"
   },
   {
-    modelID: "376",
-    modelName: "Oster 250-Watt 5-Speed Hand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 376,
+    productId: 11,
+    brandId: 56,
+    modelName: "Sony SRS-X1"
   },
   {
-    modelID: "377",
-    modelName: "Oster 7-Speed Clean Start Hand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 377,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundLink Revolve+"
   },
   {
-    modelID: "378",
-    modelName: "Oster 6-Speed Retractable Cord Hand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 378,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundLink Revolve"
   },
   {
-    modelID: "379",
-    modelName: "Oster Planetary Stand Mixer with Stainless Steel Bowl",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 379,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundLink Mini II"
   },
   {
-    modelID: "380",
-    modelName: "Oster 12-Speed Planetary Stand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 380,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundLink Color II"
   },
   {
-    modelID: "381",
-    modelName: "Oster 4.5-Quart Tilt-Head Stand Mixer",
-    brandID: "29",
-    categoryID: "2.2"
+    modelId: 381,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundTouch 30"
   },
   {
-    modelID: "382",
-    modelName: "Oster Precise Blend 200 Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 382,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundTouch 20"
   },
   {
-    modelID: "383",
-    modelName: "Oster Pro 1200 Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 383,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundTouch 10"
   },
   {
-    modelID: "384",
-    modelName: "Oster Reverse Crush Counterforms Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 384,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose Home Speaker 500"
   },
   {
-    modelID: "385",
-    modelName: "Oster 10-Speed Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 385,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose Home Speaker 300"
   },
   {
-    modelID: "386",
-    modelName: "Oster MyBlend Pro Series Personal Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 386,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose SoundLink Micro"
   },
   {
-    modelID: "387",
-    modelName: "Oster Blend-N-Go MyBlend Blender",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 387,
+    productId: 11,
+    brandId: 9,
+    modelName: "Bose Portable Smart Speaker"
   },
   {
-    modelID: "388",
-    modelName: "Oster BLSTPB-WBL My Blend 250-Watt Blender",
-    brandID: "29",
-    categoryID: "2.3"
+    modelId: 388,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-Q950A"
   },
   {
-    modelID: "389",
-    modelName: "Oster JusSimple 5 Speed Easy Clean Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 389,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-Q900A"
   },
   {
-    modelID: "390",
-    modelName: "Oster JusSimple 2-Speed Easy Clean Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 390,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-Q800A"
   },
   {
-    modelID: "391",
-    modelName: "Oster Self-Cleaning Professional Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 391,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-Q70T"
   },
   {
-    modelID: "392",
-    modelName: "Oster Wide Mouth Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 392,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-Q60T"
   },
   {
-    modelID: "393",
-    modelName: "Oster 400W Wide Mouth Juice Extractor",
-    brandID: "29",
-    categoryID: "2.4"
+    modelId: 393,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-T650"
   },
   {
-    modelID: "394",
-    modelName: "Oster Juice and Blend 2 Go Compact Juice Extractor and Personal Blender",
-    brandID: "29",
-    categoryID: "1.10"
+    modelId: 394,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-T550"
   },
   {
-    modelID: "395",
-    modelName: "Oster 12-Cup Programmable Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 395,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-T450"
   },
   {
-    modelID: "396",
-    modelName: "Oster 10-Cup Optimal Brew Thermal Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 396,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-R450"
   },
   {
-    modelID: "397",
-    modelName: "Oster 12-Cup Stainless Steel Coffee Maker",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 397,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-N400"
   },
   {
-    modelID: "398",
-    modelName: "Oster 12-Cup Programmable Coffee Maker with Brew Strength Selector",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 398,
+    productId: 12,
+    brandId: 53,
+    modelName: "Samsung HW-J250"
   },
   {
-    modelID: "399",
-    modelName: "Oster Single Serve Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 399,
+    productId: 12,
+    brandId: 56,
+    modelName: "Sony HT-X8500"
   },
   {
-    modelID: "400",
-    modelName: "Oster 12-Cup Drip Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 400,
+    productId: 12,
+    brandId: 56,
+    modelName: "Sony HT-G700"
   },
   {
-    modelID: "401",
-    modelName: "Oster 12-Cup Stainless Steel Thermal Coffee Maker",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 401,
+    productId: 12,
+    brandId: 56,
+    modelName: "Sony HT-Z9F"
   },
   {
-    modelID: "402",
-    modelName: "Oster 12-Cup Coffee Maker BVST-JBXSS41",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 402,
+    productId: 12,
+    brandId: 56,
+    modelName: "Sony HT-ST5000"
   },
   {
-    modelID: "403",
-    modelName: "Oster Prima Latte Coffee Maker",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 403,
+    productId: 12,
+    brandId: 56,
+    modelName: "Sony HT-CT800"
   },
   {
-    modelID: "404",
-    modelName: "Oster Coffee Center 12-Cup Coffeemaker and Single Serve Brewer",
-    brandID: "29",
-    categoryID: "2.5"
+    modelId: 404,
+    productId: 12,
+    brandId: 9,
+    modelName: "Bose Smart Soundbar 900"
   },
   {
-    modelID: "405",
-    modelName: "Oster Stainless Steel Electric Kettle",
-    brandID: "29",
-    categoryID: "1.2"
+    modelId: 405,
+    productId: 12,
+    brandId: 9,
+    modelName: "Bose Smart Soundbar 700"
   },
   {
-    modelID: "406",
-    modelName: "Oster Illuminating Glass Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 406,
+    productId: 12,
+    brandId: 9,
+    modelName: "Bose SoundTouch 300"
   },
   {
-    modelID: "407",
-    modelName: "Oster DuraCeramic Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 407,
+    productId: 13,
+    brandId: 3,
+    modelName: "HomePod min N/A"
   },
   {
-    modelID: "408",
-    modelName: "Oster BVST-EK18B Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 408,
+    productId: 13,
+    brandId: 3,
+    modelName: "HomePod N/A"
   },
   {
-    modelID: "409",
-    modelName: "Oster BVSTKT3231 Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 409,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony MHC-V71D"
   },
   {
-    modelID: "410",
-    modelName: "Oster 5965 Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 410,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony MHC-M40D"
   },
   {
-    modelID: "411",
-    modelName: "Oster 1.7-Liter BVCB07-Z Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 411,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony MHC-V21D"
   },
   {
-    modelID: "412",
-    modelName: "Oster BVSTK7051SS Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 412,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony MHC-V11"
   },
   {
-    modelID: "413",
-    modelName: "Oster FPSTKT4073 Electric Kettle",
-    brandID: "29",
-    categoryID: "2.6"
+    modelId: 413,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony MHC-M60D"
   },
   {
-    modelID: "414",
-    modelName: "Vitamix E310 Explorian Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 414,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony MHC-M20"
   },
   {
-    modelID: "415",
-    modelName: "Vitamix E320 Explorian Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 415,
+    productId: 13,
+    brandId: 56,
+    modelName: "Sony CMT-SBT20B"
   },
   {
-    modelID: "416",
-    modelName: "Vitamix 5200 Series Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 416,
+    productId: 13,
+    brandId: 9,
+    modelName: "Bose Wave SoundTouch Music System IV"
   },
   {
-    modelID: "417",
-    modelName: "Vitamix Professional Series 750 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 417,
+    productId: 13,
+    brandId: 9,
+    modelName: "Bose Wave SoundTouch Music System III"
   },
   {
-    modelID: "418",
-    modelName: "Vitamix Ascent Series A2300 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 418,
+    productId: 14,
+    brandId: 56,
+    modelName: "PS5"
   },
   {
-    modelID: "419",
-    modelName: "Vitamix Ascent Series A2500 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 419,
+    productId: 14,
+    brandId: 56,
+    modelName: "PS4"
   },
   {
-    modelID: "420",
-    modelName: "Vitamix Ascent Series A3300 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 420,
+    productId: 14,
+    brandId: 56,
+    modelName: "PS3"
   },
   {
-    modelID: "421",
-    modelName: "Vitamix Ascent Series A3500 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 421,
+    productId: 14,
+    brandId: 56,
+    modelName: "PS2"
   },
   {
-    modelID: "422",
-    modelName: "Vitamix 7500 Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 422,
+    productId: 14,
+    brandId: 56,
+    modelName: "PS1"
   },
   {
-    modelID: "423",
-    modelName: "Vitamix Pro 750 Heritage Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 423,
+    productId: 14,
+    brandId: 56,
+    modelName: "PSP"
   },
   {
-    modelID: "424",
-    modelName: "Vitamix S30 Personal Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 424,
+    productId: 14,
+    brandId: 56,
+    modelName: "PlayStation Vita"
   },
   {
-    modelID: "425",
-    modelName: "Vitamix S50 Personal Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 425,
+    productId: 14,
+    brandId: 36,
+    modelName: "XBOX"
   },
   {
-    modelID: "426",
-    modelName: "Vitamix S55 Personal Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 426,
+    productId: 14,
+    brandId: 36,
+    modelName: "XBOX 360"
   },
   {
-    modelID: "427",
-    modelName: "Vitamix TurboBlend Two-Speed Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 427,
+    productId: 14,
+    brandId: 36,
+    modelName: "XBOX 720"
   },
   {
-    modelID: "428",
-    modelName: "Vitamix TurboBlend Three-Speed Blender",
-    brandID: "105",
-    categoryID: "2.3"
+    modelId: 428,
+    productId: 14,
+    brandId: 36,
+    modelName: "XBOX One"
   },
   {
-    modelID: "429",
-    modelName: "Keurig K-Classic Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 429,
+    productId: 14,
+    brandId: 36,
+    modelName: "XBOX Series X"
   },
   {
-    modelID: "430",
-    modelName: "Keurig K-Elite Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 430,
+    productId: 14,
+    brandId: 36,
+    modelName: "Xbox Series S"
   },
   {
-    modelID: "431",
-    modelName: "Keurig K-Select Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 431,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo DS"
   },
   {
-    modelID: "432",
-    modelName: "Keurig K-Compact Coffee Maker",
-    brandID: "106",
-    categoryID: "1.10"
+    modelId: 432,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo Wii"
   },
   {
-    modelID: "433",
-    modelName: "Keurig K-Express Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 433,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo Wii U"
   },
   {
-    modelID: "434",
-    modelName: "Keurig K-Cafe Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 434,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo GameCube"
   },
   {
-    modelID: "435",
-    modelName: "Keurig K-Elite C Single Serve Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 435,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo Game Boy"
   },
   {
-    modelID: "436",
-    modelName: "Keurig K-Mini Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 436,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo Switch"
   },
   {
-    modelID: "437",
-    modelName: "Keurig K-Classic K50 Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 437,
+    productId: 14,
+    brandId: 44,
+    modelName: "Nintendo Game Boy Color"
   },
   {
-    modelID: "438",
-    modelName: "Keurig K-55 Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 438,
+    productId: 14,
+    brandId: 54,
+    modelName: "Sega Saturn"
   },
   {
-    modelID: "439",
-    modelName: "Keurig K-Duo Essentials Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 439,
+    productId: 14,
+    brandId: 54,
+    modelName: "Sega Dreamcast"
   },
   {
-    modelID: "440",
-    modelName: "Keurig K-Duo Plus Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 440,
+    productId: 14,
+    brandId: 54,
+    modelName: "Sega Master System"
   },
   {
-    modelID: "441",
-    modelName: "Keurig K-Supreme Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 441,
+    productId: 14,
+    brandId: 54,
+    modelName: "Sega Genesis"
   },
   {
-    modelID: "442",
-    modelName: "Keurig K-Supreme Plus Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 442,
+    productId: 14,
+    brandId: 44,
+    modelName: "Super Nintendo Entertainment System (SNES)"
   },
   {
-    modelID: "443",
-    modelName: "Keurig K-Select Single Serve K80 Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 443,
+    productId: 14,
+    brandId: 49,
+    modelName: "Other"
   },
   {
-    modelID: "444",
-    modelName: "Keurig K-Classic K-250 Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 444,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 1"
   },
   {
-    modelID: "445",
-    modelName: "Keurig K-Compact K-35 Coffee Maker",
-    brandID: "106",
-    categoryID: "1.10"
+    modelId: 445,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 2"
   },
   {
-    modelID: "446",
-    modelName: "Keurig K-Slim Coffee Maker",
-    brandID: "106",
-    categoryID: "2.5"
+    modelId: 446,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 3 (GPS)"
   },
   {
-    modelID: "447",
-    modelName: "Keurig K-1500 Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 447,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 3 (GPS + Cellular)"
   },
   {
-    modelID: "448",
-    modelName: "Keurig K-Classic Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 448,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 4 (GPS)"
   },
   {
-    modelID: "449",
-    modelName: "Keurig K-Slim Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 449,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 4 (GPS + Cellular)"
   },
   {
-    modelID: "450",
-    modelName: "Keurig K-Select Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 450,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 5 (GPS)"
   },
   {
-    modelID: "451",
-    modelName: "Keurig K-Elite Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 451,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 5 (GPS + Cellular)"
   },
   {
-    modelID: "452",
-    modelName: "Keurig K-Supreme Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 452,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 6 (GPS)"
   },
   {
-    modelID: "453",
-    modelName: "Keurig K-Compact Electric Kettle",
-    brandID: "106",
-    categoryID: "1.10"
+    modelId: 453,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 6 (GPS + Cellular)"
   },
   {
-    modelID: "454",
-    modelName: "Keurig K-Mini Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 454,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch SE (GPS)"
   },
   {
-    modelID: "455",
-    modelName: "Keurig K-55 Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 455,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch SE (GPS + Cellular)"
   },
   {
-    modelID: "456",
-    modelName: "Keurig K-150 Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 456,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 7 (GPS)"
   },
   {
-    modelID: "457",
-    modelName: "Keurig K-425 Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 457,
+    productId: 16,
+    brandId: 3,
+    modelName: "Apple Watch Series 7 (GPS + Cellular)"
   },
   {
-    modelID: "458",
-    modelName: "Keurig K-475 Electric Kettle",
-    brandID: "106",
-    categoryID: "2.6"
+    modelId: 458,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Ionic"
   },
   {
-    modelID: "459",
-    modelName: "Nespresso Inissia",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 459,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Versa"
   },
   {
-    modelID: "460",
-    modelName: "Nespresso Pixie",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 460,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Versa Lite"
   },
   {
-    modelID: "461",
-    modelName: "Nespresso Essenza Mini",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 461,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Versa 2"
   },
   {
-    modelID: "462",
-    modelName: "Nespresso Citiz",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 462,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Versa 3"
   },
   {
-    modelID: "463",
-    modelName: "Nespresso Lattissima",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 463,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Sense"
   },
   {
-    modelID: "464",
-    modelName: "Nespresso Expert",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 464,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Blaze"
   },
   {
-    modelID: "465",
-    modelName: "Nespresso Creatista",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 465,
+    productId: 17,
+    brandId: 19,
+    modelName: "Fitbit Surge"
   },
   {
-    modelID: "466",
-    modelName: "Nespresso VertuoLine",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 466,
+    productId: 17,
+    brandId: 53,
+    modelName: "Samsung Galaxy Watch"
   },
   {
-    modelID: "467",
-    modelName: "Nespresso Maestria",
-    brandID: "107",
-    categoryID: "2.5"
+    modelId: 467,
+    productId: 17,
+    brandId: 53,
+    modelName: "Samsung Galaxy Watch Active"
   },
   {
-    modelID: "468",
-    modelName: "KitchenAid 7-Cup Food Processor",
-    brandID: "101",
-    categoryID: "2.1"
+    modelId: 468,
+    productId: 17,
+    brandId: 53,
+    modelName: "Samsung Galaxy Watch Active 2"
   },
   {
-    modelID: "469",
-    modelName: "KitchenAid 9-Cup Food Processor",
-    brandID: "101",
-    categoryID: "2.1"
+    modelId: 469,
+    productId: 17,
+    brandId: 53,
+    modelName: "Samsung Galaxy Watch 3"
   },
   {
-    modelID: "470",
-    modelName: "KitchenAid 11-Cup Food Processor",
-    brandID: "101",
-    categoryID: "2.1"
+    modelId: 470,
+    productId: 17,
+    brandId: 53,
+    modelName: "Samsung Galaxy Watch 4"
   },
   {
-    modelID: "471",
-    modelName: "KitchenAid 14-Cup Food Processor",
-    brandID: "101",
-    categoryID: "2.1"
+    modelId: 471,
+    productId: 17,
+    brandId: 53,
+    modelName: "Samsung Galaxy Watch 4 Classic"
   },
   {
-    modelID: "472",
-    modelName: "KitchenAid 16-Cup Pro Line Series Food Processor",
-    brandID: "101",
-    categoryID: "2.1"
+    modelId: 472,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 45"
   },
   {
-    modelID: "473",
-    modelName: "KitchenAid Classic Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 473,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 55"
   },
   {
-    modelID: "474",
-    modelName: "KitchenAid Artisan Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 474,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 245"
   },
   {
-    modelID: "475",
-    modelName: "KitchenAid Artisan Mini Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 475,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 645"
   },
   {
-    modelID: "476",
-    modelName: "KitchenAid Professional 600 Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 476,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 745"
   },
   {
-    modelID: "477",
-    modelName: "KitchenAid Professional 6000 HD Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 477,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 935"
   },
   {
-    modelID: "478",
-    modelName: "KitchenAid Professional 6500 Design Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 478,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Forerunner 945"
   },
   {
-    modelID: "479",
-    modelName: "KitchenAid Professional 5 Plus Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 479,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Fenix 3"
   },
   {
-    modelID: "480",
-    modelName: "KitchenAid Professional 7-Quart Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 480,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Fenix 5"
   },
   {
-    modelID: "481",
-    modelName: "KitchenAid Pro Line Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 481,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Fenix 6"
   },
   {
-    modelID: "482",
-    modelName: "KitchenAid Commercial Series Stand Mixer",
-    brandID: "101",
-    categoryID: "2.2"
+    modelId: 482,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Fenix 7"
   },
   {
-    modelID: "483",
-    modelName: "KitchenAid K150 3-Speed Ice Crushing Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 483,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Instinct"
   },
   {
-    modelID: "484",
-    modelName: "KitchenAid K400 Variable Speed Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 484,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Instinct Solar"
   },
   {
-    modelID: "485",
-    modelName: "KitchenAid KSB1575 Diamond 5-Speed Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 485,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Approach S20"
   },
   {
-    modelID: "486",
-    modelName: "KitchenAid KSB7068 Pro Line Series Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 486,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Approach S60"
   },
   {
-    modelID: "487",
-    modelName: "KitchenAid KSB1332 3-Speed Diamond Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 487,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Approach S62"
   },
   {
-    modelID: "488",
-    modelName: "KitchenAid KSB4027 High Performance SeriesBlender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 488,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Venu"
   },
   {
-    modelID: "489",
-    modelName: "KitchenAid KSB6060 High Performance Series Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 489,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Venu 2"
   },
   {
-    modelID: "490",
-    modelName: "KitchenAid KSB6068 Pro Line Series Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 490,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Venu 2S"
   },
   {
-    modelID: "491",
-    modelName: "KitchenAid KSB8270 Pro Line Series Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 491,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin MARQ Series (Various Models)"
   },
   {
-    modelID: "492",
-    modelName: "KitchenAid KSB8270 Commercial Series Blender",
-    brandID: "101",
-    categoryID: "2.3"
+    modelId: 492,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Legacy Series (Various Models)"
   },
   {
-    modelID: "493",
-    modelName: "KitchenAid 12-Cup Coffee Maker",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 493,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin D2 Series (Various Models)"
   },
   {
-    modelID: "494",
-    modelName: "KitchenAid 14-Cup Glass Carafe Coffee Maker",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 494,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Quatix Series (Various Models)"
   },
   {
-    modelID: "495",
-    modelName: "KitchenAid 14-Cup Digital Coffee Maker",
-    brandID: "101",
-    categoryID: "1.10"
+    modelId: 495,
+    productId: 17,
+    brandId: 22,
+    modelName: "Garmin Epix Series (Various Models)"
   },
   {
-    modelID: "496",
-    modelName: "KitchenAid 12-Cup Drip Coffee Maker",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 496,
+    productId: 17,
+    brandId: 60,
+    modelName: "Xiaomi Mi Watch Revolve"
   },
   {
-    modelID: "497",
-    modelName: "KitchenAid 8-Cup Coffee Maker",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 497,
+    productId: 17,
+    brandId: 60,
+    modelName: "Xiaomi Mi Watch Color"
   },
   {
-    modelID: "498",
-    modelName: "KitchenAid Cold Brew Coffee Maker",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 498,
+    productId: 17,
+    brandId: 60,
+    modelName: "Xiaomi Mi Watch"
   },
   {
-    modelID: "499",
-    modelName: "KitchenAid Siphon Coffee Brewer",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 499,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Bip"
   },
   {
-    modelID: "500",
-    modelName: "KitchenAid Precision Press Coffee Maker",
-    brandID: "101",
-    categoryID: "4.17"
+    modelId: 500,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Bip U"
   },
   {
-    modelID: "501",
-    modelName: "KitchenAid Pour Over Coffee Brewer",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 501,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Bip U Pro"
   },
   {
-    modelID: "502",
-    modelName: "KitchenAid Custom Pour Over Coffee Brewer",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 502,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Bip S"
   },
   {
-    modelID: "503",
-    modelName: "KitchenAid Personal Coffee Maker",
-    brandID: "101",
-    categoryID: "2.5"
+    modelId: 503,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Bip S Lite"
   },
   {
-    modelID: "504",
-    modelName: "KitchenAid 1.25-Liter Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 504,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit GTS"
   },
   {
-    modelID: "505",
-    modelName: "KitchenAid 1.5-Liter Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 505,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit GTS 2"
   },
   {
-    modelID: "506",
-    modelName: "KitchenAid 1.7-Liter Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 506,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit GTS 2e"
   },
   {
-    modelID: "507",
-    modelName: "KitchenAid Pro Line Series Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 507,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit GTS 3"
   },
   {
-    modelID: "508",
-    modelName: "KitchenAid Precision Gooseneck Digital Kettle",
-    brandID: "101",
-    categoryID: "4.17"
+    modelId: 508,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Verge"
   },
   {
-    modelID: "509",
-    modelName: "KitchenAid Artisan Series Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 509,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Verge Lite"
   },
   {
-    modelID: "510",
-    modelName: "KitchenAid Architect Series II Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 510,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Verge 2"
   },
   {
-    modelID: "511",
-    modelName: "KitchenAid Variable Temperature Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 511,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit T-Rex"
   },
   {
-    modelID: "512",
-    modelName: "KitchenAid Dual Wall Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 512,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit T-Rex Pro"
   },
   {
-    modelID: "513",
-    modelName: "KitchenAid Glass Electric Kettle",
-    brandID: "101",
-    categoryID: "2.6"
+    modelId: 513,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Stratos"
   },
   {
-    modelID: "514",
-    modelName: "KitchenAid Stainless Steel Electric Kettle",
-    brandID: "101",
-    categoryID: "1.2"
+    modelId: 514,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Stratos 2"
   },
   {
-    modelID: "515",
-    modelName: "Cuisinart Custom 14-Cup Food Processor (DFP14BCNY)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 515,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Stratos 3"
   },
   {
-    modelID: "516",
-    modelName: "Cuisinart Elite Collection 12-Cup Food Processor(FP-12DCN)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 516,
+    productId: 17,
+    brandId: 2,
+    modelName: "Xiaomi Amazfit Pace"
   },
   {
-    modelID: "517",
-    modelName: "Cuisinart Elemental 8-Cup Food Processor (FP-8SV)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 517,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTS"
   },
   {
-    modelID: "518",
-    modelName: "Cuisinart Mini-Prep Plus Food Processor (DLC2ABC)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 518,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTS 2"
   },
   {
-    modelID: "519",
-    modelName: "Cuisinart Pro Classic 7-Cup Food Processor (DLC10SY)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 519,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTS 2e"
   },
   {
-    modelID: "520",
-    modelName: "Cuisinart Prep 11 Plus 11-Cup Food Processor(DLC-2011CHBY)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 520,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTR"
   },
   {
-    modelID: "521",
-    modelName: "Cuisinart Mini-Prep Food Processor (DLC-1SS)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 521,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTR 2"
   },
   {
-    modelID: "522",
-    modelName: "Cuisinart Elemental 13-Cup Food Processor (FP-13DSV)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 522,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTR 2e"
   },
   {
-    modelID: "523",
-    modelName: "Cuisinart Mini-Prep Plus 4-Cup Food Processor (DLC-4CHB)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 523,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit GTR 3"
   },
   {
-    modelID: "524",
-    modelName: "Cuisinart Elemental 4-Cup Food Processor (FP-8GM)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 524,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Bip"
   },
   {
-    modelID: "525",
-    modelName: "Cuisinart Elite Collection 2.0 14-Cup Food Processor (FP-14DCN)",
-    brandID: "23",
-    categoryID: "2.1"
+    modelId: 525,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Bip U"
   },
   {
-    modelID: "526",
-    modelName: "Cuisinart Precision Master Stand Mixer (SM-50)",
-    brandID: "23",
-    categoryID: "4.17"
+    modelId: 526,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Bip U Pro"
   },
   {
-    modelID: "527",
-    modelName: "Cuisinart Precision Master Petite Stand Mixer (SM35)",
-    brandID: "23",
-    categoryID: "4.17"
+    modelId: 527,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Bip S"
   },
   {
-    modelID: "528",
-    modelName: "Cuisinart Power Advantage 7-Speed Hand Mixer (HM-70)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 528,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Bip S Lite"
   },
   {
-    modelID: "529",
-    modelName: "Cuisinart Power Advantage 5-Speed Hand Mixer (HM-50)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 529,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit T-Rex"
   },
   {
-    modelID: "530",
-    modelName: "Cuisinart 9-Speed Hand Mixer (HM-90S)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 530,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit T-Rex Pro"
   },
   {
-    modelID: "531",
-    modelName: "Cuisinart 7-Speed Hand Mixer (HM-70)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 531,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Verge"
   },
   {
-    modelID: "532",
-    modelName: "Cuisinart Power Advantage 5-Speed Hand Mixer (HM-50)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 532,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Verge Lite"
   },
   {
-    modelID: "533",
-    modelName: "Cuisinart 5.5-Quart Stand Mixer (SM-50)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 533,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Verge 2 (Xiaomi Watch Revolve)"
   },
   {
-    modelID: "534",
-    modelName: "Cuisinart 3.5-Quart Stand Mixer (SM-35)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 534,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Pace"
   },
   {
-    modelID: "535",
-    modelName: "Cuisinart 9-Speed Hand Mixer with Storage Case (HM-90BCS)",
-    brandID: "23",
-    categoryID: "2.2"
+    modelId: 535,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Stratos"
   },
   {
-    modelID: "536",
-    modelName: "Cuisinart Hurricane Pro 3.5 Peak HP Blender (CBT-2000)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 536,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Stratos 2"
   },
   {
-    modelID: "537",
-    modelName: "Cuisinart Hurricane Classic 2.25 Peak HP Blender (CBT-1500)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 537,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Stratos 3"
   },
   {
-    modelID: "538",
-    modelName: "Cuisinart SmartPower Duet Blender/Food Processor (BFP-703)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 538,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Neo"
   },
   {
-    modelID: "539",
-    modelName: "Cuisinart PowerEdge 700-Watt Blender (CBB-1200)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 539,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Pop"
   },
   {
-    modelID: "540",
-    modelName: "Cuisinart Compact Portable Blending/Chopping System (CPB-300)",
-    brandID: "23",
-    categoryID: "1.10"
+    modelId: 540,
+    productId: 17,
+    brandId: 2,
+    modelName: "Amazfit Pop Pro"
   },
   {
-    modelID: "541",
-    modelName: "Cuisinart Velocity Ultra Trio 1 HP Blender/Food Processor (BFP-650)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 541,
+    productId: 17,
+    brandId: 20,
+    modelName: "Fossil Gen 4 Smartwatch"
   },
   {
-    modelID: "542",
-    modelName: "Cuisinart ReMix 6.0 600-Watt Blender (SPB-8)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 542,
+    productId: 17,
+    brandId: 20,
+    modelName: "Fossil Gen 4 Sport Smartwatch"
   },
   {
-    modelID: "543",
-    modelName: "Cuisinart SmartPower 600-Watt Blender (SPB-7CH)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 543,
+    productId: 17,
+    brandId: 20,
+    modelName: "Fossil Gen 5 Smartwatch"
   },
   {
-    modelID: "544",
-    modelName: "Cuisinart SmartPower 7-Speed Electronic Blender (SPB-7)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 544,
+    productId: 17,
+    brandId: 20,
+    modelName: "Fossil Gen 5E Smartwatch"
   },
   {
-    modelID: "545",
-    modelName: "Cuisinart Dual Blender/Food Processor (BFP-10CH)",
-    brandID: "23",
-    categoryID: "2.3"
+    modelId: 545,
+    productId: 17,
+    brandId: 20,
+    modelName: "Fossil Gen 5 LTE Smartwatch"
   },
   {
-    modelID: "546",
-    modelName: "Cuisinart Brew Central 14-Cup Programmable Coffee Maker (DCC-3200)",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 546,
+    productId: 17,
+    brandId: 20,
+    modelName: "Fossil Gen 5E LTE Smartwatch"
   },
   {
-    modelID: "547",
-    modelName: "Cuisinart PerfecTemp 14-Cup Programmable Coffee Maker (DCC-3200P1)",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 547,
+    productId: 17,
+    brandId: 59,
+    modelName: "Withings ScanWatch"
   },
   {
-    modelID: "548",
-    modelName: "Cuisinart Grind & Brew Thermal 12-Cup Automatic Coffee Maker (DGB-900BC)",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 548,
+    productId: 17,
+    brandId: 59,
+    modelName: "Withings Move"
   },
   {
-    modelID: "549",
-    modelName: "Cuisinart SS-15P1 Coffee Center 12-Cup Coffeemaker and Single-Serve Brewer",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 549,
+    productId: 17,
+    brandId: 59,
+    modelName: "Withings Move ECG"
   },
   {
-    modelID: "550",
-    modelName: "Cuisinart PurePrecision 8-Cup Pour-Over Coffee Brewer (CPO-800)",
-    brandID: "23",
-    categoryID: "4.17"
+    modelId: 550,
+    productId: 17,
+    brandId: 59,
+    modelName: "Withings Move Timeless Chic"
   },
   {
-    modelID: "551",
-    modelName: "Cuisinart DCC-1100 12-Cup Programmable Coffee Maker",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 551,
+    productId: 17,
+    brandId: 59,
+    modelName: "Withings Move Timeless Chic ECG"
   },
   {
-    modelID: "552",
-    modelName: "Cuisinart DCC-450BK 4-Cup Coffeemaker with Stainless Steel Carafe",
-    brandID: "23",
-    categoryID: "1.2"
+    modelId: 552,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Flex"
   },
   {
-    modelID: "553",
-    modelName: "Cuisinart SS-10 Premium Single-Serve Coffeemaker",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 553,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Flex 2"
   },
   {
-    modelID: "554",
-    modelName: "Cuisinart DCC-1200 Brew Central 12-Cup Coffee Maker",
-    brandID: "23",
-    categoryID: "2.5"
+    modelId: 554,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit One"
   },
   {
-    modelID: "555",
-    modelName: "Cuisinart CHW-12 Coffee Plus 12-Cup Programmable Coffeemaker",
-    brandID: "23",
-    categoryID: "1.6"
+    modelId: 555,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Zip"
   },
   {
-    modelID: "556",
-    modelName: "Cuisinart CPK-17 PerfecTemp Electric Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 556,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Alta"
   },
   {
-    modelID: "557",
-    modelName: "Cuisinart CPK-17P1 PerfecTemp Electric Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 557,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Alta HR"
   },
   {
-    modelID: "558",
-    modelName: "Cuisinart JK-17 Cordless Electric Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 558,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Charge"
   },
   {
-    modelID: "559",
-    modelName: "Cuisinart CPK-17C Electric Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 559,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Charge HR"
   },
   {
-    modelID: "560",
-    modelName: "Cuisinart JK-17B Cordless Electric Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 560,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Charge 2"
   },
   {
-    modelID: "561",
-    modelName: "Cuisinart CPK-17W Cordless Electric Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 561,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Charge 3"
   },
   {
-    modelID: "562",
-    modelName: "Cuisinart DK-17 Cordless Stainless Steel Electric Kettle",
-    brandID: "23",
-    categoryID: "1.2"
+    modelId: 562,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Charge 4"
   },
   {
-    modelID: "563",
-    modelName: "Cuisinart JK-17 Cordless Electric Jug Kettle",
-    brandID: "23",
-    categoryID: "2.6"
+    modelId: 563,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Inspire"
   },
   {
-    modelID: "564",
-    modelName: "Miele Compact C1",
-    brandID: "40",
-    categoryID: "1.10"
+    modelId: 564,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Inspire HR"
   },
   {
-    modelID: "565",
-    modelName: "Miele Compact C2",
-    brandID: "40",
-    categoryID: "1.10"
+    modelId: 565,
+    productId: 18,
+    brandId: 19,
+    modelName: "Fitbit Inspire 2"
   },
   {
-    modelID: "566",
-    modelName: "Miele Compact C3",
-    brandID: "40",
-    categoryID: "1.10"
+    modelId: 566,
+    productId: 18,
+    brandId: 53,
+    modelName: "Samsung Galaxy Fit"
   },
   {
-    modelID: "567",
-    modelName: "Miele Complete C2",
-    brandID: "40",
-    categoryID: "3.1"
+    modelId: 567,
+    productId: 18,
+    brandId: 53,
+    modelName: "Samsung Galaxy Fit 2"
   },
   {
-    modelID: "568",
-    modelName: "Miele Complete C3",
-    brandID: "40",
-    categoryID: "3.1"
+    modelId: 568,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivosmart 4"
   },
   {
-    modelID: "569",
-    modelName: "Miele Blizzard CX1",
-    brandID: "40",
-    categoryID: "5.2"
+    modelId: 569,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivosmart 3"
   },
   {
-    modelID: "570",
-    modelName: "Miele Swing H1",
-    brandID: "40",
-    categoryID: "3.1"
+    modelId: 570,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivosmart HR"
   },
   {
-    modelID: "571",
-    modelName: "Miele Dynamic U1",
-    brandID: "40",
-    categoryID: "3.1"
+    modelId: 571,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivosmart HR+"
   },
   {
-    modelID: "572",
-    modelName: "Miele Triflex HX1",
-    brandID: "40",
-    categoryID: "1.2"
+    modelId: 572,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivofit 4"
   },
   {
-    modelID: "573",
-    modelName: "Miele RX2 Scout Robot Vacuum",
-    brandID: "40",
-    categoryID: "3.2"
+    modelId: 573,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivofit 3"
   },
   {
-    modelID: "574",
-    modelName: "Dyson V11 Absolute",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 574,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivofit Jr."
   },
   {
-    modelID: "575",
-    modelName: "Dyson V11 Animal",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 575,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivofit Jr. 2"
   },
   {
-    modelID: "576",
-    modelName: "Dyson V10 Absolute",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 576,
+    productId: 18,
+    brandId: 22,
+    modelName: "Garmin Vivofit Jr. 3"
   },
   {
-    modelID: "577",
-    modelName: "Dyson V10 Animal",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 577,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band"
   },
   {
-    modelID: "578",
-    modelName: "Dyson Cyclone V7 Animal",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 578,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band 1S (Mi Band Pulse)"
   },
   {
-    modelID: "579",
-    modelName: "Dyson Cyclone V7 Motorhead",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 579,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band 2"
   },
   {
-    modelID: "580",
-    modelName: "Dyson Ball Animal 2",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 580,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band 3"
   },
   {
-    modelID: "581",
-    modelName: "Dyson Small Ball Multi Floor",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 581,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band 4"
   },
   {
-    modelID: "582",
-    modelName: "Dyson Cinetic Big Ball Animal",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 582,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band 5"
   },
   {
-    modelID: "583",
-    modelName: "Dyson Cinetic Big Ball Multi Floor",
-    brandID: "41",
-    categoryID: "3.1"
+    modelId: 583,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Band 6"
   },
   {
-    modelID: "584",
-    modelName: "Electrolux UltraOne",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 584,
+    productId: 18,
+    brandId: 60,
+    modelName: "Xiaomi Mi Smart Band 7"
   },
   {
-    modelID: "585",
-    modelName: "Electrolux Purei9",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 585,
+    productId: 18,
+    brandId: 2,
+    modelName: "Amazfit Band 5"
   },
   {
-    modelID: "586",
-    modelName: "Electrolux Pure F9",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 586,
+    productId: 18,
+    brandId: 2,
+    modelName: "Amazfit Band 6"
   },
   {
-    modelID: "587",
-    modelName: "Electrolux Pure C9",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 587,
+    productId: 18,
+    brandId: 2,
+    modelName: "Amazfit Band 5S"
   },
   {
-    modelID: "588",
-    modelName: "Electrolux Ease C4",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 588,
+    productId: 18,
+    brandId: 2,
+    modelName: "Amazfit Cor"
   },
   {
-    modelID: "589",
-    modelName: "Electrolux Pure D9",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 589,
+    productId: 18,
+    brandId: 2,
+    modelName: "Amazfit Cor 2"
   },
   {
-    modelID: "590",
-    modelName: "Electrolux Ergorapido",
-    brandID: "88",
-    categoryID: "1.2"
+    modelId: 590,
+    productId: 18,
+    brandId: 2,
+    modelName: "Amazfit Cor 3"
   },
   {
-    modelID: "591",
-    modelName: "Electrolux TwinClean",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 591,
+    productId: 18,
+    brandId: 20,
+    modelName: "Fossil Hybrid HR Smartwatch"
   },
   {
-    modelID: "592",
-    modelName: "Electrolux Oxygen",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 592,
+    productId: 18,
+    brandId: 20,
+    modelName: "Fossil Hybrid HR Collider"
   },
   {
-    modelID: "593",
-    modelName: "Electrolux UltraSilencer",
-    brandID: "88",
-    categoryID: "3.1"
+    modelId: 593,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Go"
   },
   {
-    modelID: "594",
-    modelName: "Bosch Athlet Series",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 594,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Pulse HR"
   },
   {
-    modelID: "595",
-    modelName: "Bosch Relaxx'x Series",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 595,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Activit\u00e9"
   },
   {
-    modelID: "596",
-    modelName: "Bosch In'genius ProSilence",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 596,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Activit\u00e9 Steel"
   },
   {
-    modelID: "597",
-    modelName: "Bosch Runn'n Series",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 597,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Activit\u00e9 Pop"
   },
   {
-    modelID: "598",
-    modelName: "Bosch Zoo'o ProAnimal",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 598,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Activit\u00e9 Sapphire"
   },
   {
-    modelID: "599",
-    modelName: "Bosch GS-50 Power Silence",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 599,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Steel"
   },
   {
-    modelID: "600",
-    modelName: "Bosch GL-40 ProSilence",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 600,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Steel HR Sport"
   },
   {
-    modelID: "601",
-    modelName: "Bosch BGL8 Series",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 601,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Steel HR Sport Special Edition"
   },
   {
-    modelID: "602",
-    modelName: "Bosch BGL4 Series",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 602,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Steel HR"
   },
   {
-    modelID: "603",
-    modelName: "Bosch BGL3 Series",
-    brandID: "42",
-    categoryID: "3.1"
+    modelId: 603,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Steel HR Sapphire Signature"
   },
   {
-    modelID: "604",
-    modelName: "Philips Performer",
-    brandID: "43",
-    categoryID: "3.1"
+    modelId: 604,
+    productId: 18,
+    brandId: 59,
+    modelName: "Withings Steel HR Sport"
   },
-  {
-    modelID: "605",
-    modelName: "Philips PowerPro",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "606",
-    modelName: "Philips SpeedPro",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "607",
-    modelName: "Philips PowerLife",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "608",
-    modelName: "Philips MiniVac",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "609",
-    modelName: "Philips SmartPro Active Robot Vacuum",
-    brandID: "43",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "610",
-    modelName: "Philips EasyLife",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "611",
-    modelName: "Philips PowerPro Expert",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "612",
-    modelName: "Philips FC5000 Series",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "613",
-    modelName: "Philips FC6000 Series",
-    brandID: "43",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "614",
-    modelName: "iRobot Roomba 600 Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "615",
-    modelName: "iRobot Roomba 700 Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "616",
-    modelName: "iRobot Roomba 800 Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "617",
-    modelName: "iRobot Roomba 900 Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "618",
-    modelName: "iRobot Roomba i Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "619",
-    modelName: "iRobot Roomba s Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "620",
-    modelName: "iRobot Roomba j Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "621",
-    modelName: "iRobot Roomba e Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "622",
-    modelName: "iRobot Roomba 1 Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "623",
-    modelName: "iRobot Roomba t Series",
-    brandID: "46",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "624",
-    modelName: "Xiaomi Mi Robot Vacuum",
-    brandID: "47",
-    categoryID: "4.15"
-  },
-  {
-    modelID: "625",
-    modelName: "Xiaomi Mi Robot Vacuum 1S",
-    brandID: "47",
-    categoryID: "4.15"
-  },
-  {
-    modelID: "626",
-    modelName: "Xiaomi Mi Robot Vacuum Mop Pro",
-    brandID: "47",
-    categoryID: "4.15"
-  },
-  {
-    modelID: "627",
-    modelName: "Xiaomi Mi Robot Vacuum 2",
-    brandID: "47",
-    categoryID: "4.15"
-  },
-  {
-    modelID: "628",
-    modelName: "Roborock S5",
-    brandID: "44",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "629",
-    modelName: "Roborock S6",
-    brandID: "44",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "630",
-    modelName: "Roborock S4",
-    brandID: "44",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "631",
-    modelName: "Roborock S7",
-    brandID: "44",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "632",
-    modelName: "Roborock E4",
-    brandID: "44",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "633",
-    modelName: "Roborock C10",
-    brandID: "44",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "634",
-    modelName: "Neato Botvac D3",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "635",
-    modelName: "Neato Botvac D4",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "636",
-    modelName: "Neato Botvac D5",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "637",
-    modelName: "Neato Botvac D6",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "638",
-    modelName: "Neato Botvac D7",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "639",
-    modelName: "Neato Botvac Connected",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "640",
-    modelName: "Neato Botvac Connected D3",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "641",
-    modelName: "Neato Botvac Connected D4",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "642",
-    modelName: "Neato Botvac Connected D5",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "643",
-    modelName: "Neato Botvac Connected D6",
-    brandID: "93",
-    categoryID: "4.19"
-  },
-  {
-    modelID: "644",
-    modelName: "Ecovacs Deebot 711",
-    brandID: "94",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "645",
-    modelName: "Ecovacs Deebot 901",
-    brandID: "94",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "646",
-    modelName: "Ecovacs Deebot Ozmo 920",
-    brandID: "94",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "647",
-    modelName: "Ecovacs Deebot Ozmo T5",
-    brandID: "94",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "648",
-    modelName: "Ecovacs Deebot Ozmo 950",
-    brandID: "94",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "649",
-    modelName: "Ecovacs Deebot Ozmo 920",
-    brandID: "94",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "650",
-    modelName: "Samsung Powerbot VR7000",
-    brandID: "49",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "651",
-    modelName: "Samsung Powerbot VR7200",
-    brandID: "49",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "652",
-    modelName: "Samsung Powerbot R7070",
-    brandID: "49",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "653",
-    modelName: "Samsung Powerbot R7065",
-    brandID: "49",
-    categoryID: "3.2"
-  },
-  {
-    modelID: "654",
-    modelName: "K\u00e4rcher SC3 EasyFix",
-    brandID: "96",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "655",
-    modelName: "K\u00e4rcher SC4 EasyFix Premium",
-    brandID: "96",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "656",
-    modelName: "K\u00e4rcher SC5 EasyFix Premium",
-    brandID: "96",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "657",
-    modelName: "Bissell PowerFresh Deluxe",
-    brandID: "48",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "658",
-    modelName: "Bissell PowerFresh Slim",
-    brandID: "48",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "659",
-    modelName: "Bissell SpinWave",
-    brandID: "48",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "660",
-    modelName: "Bissell Vac & Steam",
-    brandID: "48",
-    categoryID: "3.3"
-  },
-  {
-    modelID: "661",
-    modelName: "Bissell CrossWave",
-    brandID: "48",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "662",
-    modelName: "Polti Vaporetto Smart 30_R",
-    brandID: "114",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "663",
-    modelName: "Polti Vaporetto SV440_Double",
-    brandID: "114",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "664",
-    modelName: "Polti Vaporetto Eco Pro 3.0",
-    brandID: "114",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "665",
-    modelName: "Polti Vaporetto Handy 20",
-    brandID: "114",
-    categoryID: "3.1"
-  },
-  {
-    modelID: "666",
-    modelName: "Black & Decker BDH1850SM Steam Mop",
-    brandID: "31",
-    categoryID: "3.3"
-  },
-  {
-    modelID: "667",
-    modelName: "Black & Decker BDH1760SM SmartSelect Steam Mop",
-    brandID: "31",
-    categoryID: "3.3"
-  },
-  {
-    modelID: "668",
-    modelName: "Black & Decker BDH1720SM SmartSelect Steam Mop",
-    brandID: "31",
-    categoryID: "3.3"
-  },
-  {
-    modelID: "669",
-    modelName: "Black & Decker BDH1720SM SmartSelect Deluxe Steam Mop",
-    brandID: "31",
-    categoryID: "3.3"
+    {
+    modelId: 605,
+    productId: 19,
+    brandId: 49,
+    modelName: "Smart Glasses"
   },
   {
-    modelID: "670",
-    modelName: "Black & Decker BDH1850SM 2-in-1 Steam Mop",
-    brandID: "31",
-    categoryID: "3.3"
+    modelId: 606,
+    productId: 20,
+    brandId: 49,
+    modelName: "Smart clothing"
   },
   {
-    modelID: "671",
-    modelName: "Black & Decker FSMH1321 7-in-1 Steam-Mop",
-    brandID: "31",
-    categoryID: "3.3"
+    modelId: 607,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Compact C1"
   },
   {
-    modelID: "672",
-    modelName: "Black & Decker BDH1760SM Lift & Reach Steam Mop",
-    brandID: "31",
-    categoryID: "3.3"
+    modelId: 608,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Compact C2"
   },
   {
-    modelID: "673",
-    modelName: "Hoover TwinTank Steam Mop",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 609,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Compact C3"
   },
   {
-    modelID: "674",
-    modelName: "Hoover WH20200 TwinTank Steam Mop",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 610,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Complete C2"
   },
   {
-    modelID: "675",
-    modelName: "Hoover WH20300 Canister Steam Cleaner",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 611,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Complete C3"
   },
   {
-    modelID: "676",
-    modelName: "Hoover WH20200 Canister Steam Cleaner",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 612,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Blizzard CX1"
   },
   {
-    modelID: "677",
-    modelName: "Hoover SSN1700 Steamjet Dual Head Steam Mop",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 613,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Swing H1"
   },
   {
-    modelID: "678",
-    modelName: "Hoover SSN1700 Steam Express Steam Mop",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 614,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Dynamic U1"
   },
   {
-    modelID: "679",
-    modelName: "Hoover WH20440CA Steam Scrub 2-in-1 Steam Mop",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 615,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele Triflex HX1"
   },
   {
-    modelID: "680",
-    modelName: "Hoover SSNH1000 Central Steam Handheld System",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 616,
+    productId: 21,
+    brandId: 38,
+    modelName: "Miele RX2 Scout Robot Vacuum"
   },
   {
-    modelID: "681",
-    modelName: "Hoover SSNH1300 SteamJet Handheld Steam Cleaner",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 617,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson V11 Absolute"
   },
   {
-    modelID: "682",
-    modelName: "Hoover WH20420CA TwinTank Steam Mop",
-    brandID: "50",
-    categoryID: "3.3"
+    modelId: 618,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson V11 Animal"
   },
   {
-    modelID: "683",
-    modelName: "Russell Hobbs RHSM1001-G Steam and Clean 11-in-1 Steam Mop",
-    brandID: "100",
-    categoryID: "3.3"
+    modelId: 619,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson V10 Absolute"
   },
   {
-    modelID: "684",
-    modelName: "Russell Hobbs RHMSM3002-G Steam and Clean 11-in-1 Steam Mop",
-    brandID: "100",
-    categoryID: "3.3"
+    modelId: 620,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson V10 Animal"
   },
   {
-    modelID: "685",
-    modelName: "Russell Hobbs RHSM1001-C Steam and Clean 11-in-1 Steam Mop",
-    brandID: "100",
-    categoryID: "3.3"
+    modelId: 621,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson Cyclone V7 Animal"
   },
   {
-    modelID: "686",
-    modelName: "Russell Hobbs RHMSM3002-C Steam and Clean 11-in-1 Steam Mop",
-    brandID: "100",
-    categoryID: "3.3"
+    modelId: 622,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson Cyclone V7 Motorhead"
   },
   {
-    modelID: "687",
-    modelName: "Russell Hobbs RHDSM7001-G Steam and Clean 11-in-1 Steam Mop",
-    brandID: "100",
-    categoryID: "3.3"
+    modelId: 623,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson Ball Animal 2"
   },
   {
-    modelID: "688",
-    modelName: "Russell Hobbs RHDSM7001-C Steam and Clean 11-in-1 Steam Mop",
-    brandID: "100",
-    categoryID: "3.3"
+    modelId: 624,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson Small Ball Multi Floor"
   },
   {
-    modelID: "689",
-    modelName: "Apple Watch Series 1",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 625,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson Cinetic Big Ball Animal"
   },
   {
-    modelID: "690",
-    modelName: "Apple Watch Series 2",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 626,
+    productId: 21,
+    brandId: 16,
+    modelName: "Dyson Cinetic Big Ball Multi Floor"
   },
   {
-    modelID: "691",
-    modelName: "Apple Watch Series 3 (GPS)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 627,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux UltraOne"
   },
   {
-    modelID: "692",
-    modelName: "Apple Watch Series 3 (GPS + Cellular)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 628,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Purei9"
   },
   {
-    modelID: "693",
-    modelName: "Apple Watch Series 4 (GPS)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 629,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Pure F9"
   },
   {
-    modelID: "694",
-    modelName: "Apple Watch Series 4 (GPS + Cellular)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 630,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Pure C9"
   },
   {
-    modelID: "695",
-    modelName: "Apple Watch Series 5 (GPS)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 631,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Ease C4"
   },
   {
-    modelID: "696",
-    modelName: "Apple Watch Series 5 (GPS + Cellular)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 632,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Pure D9"
   },
   {
-    modelID: "697",
-    modelName: "Apple Watch Series 6 (GPS)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 633,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Ergorapido"
   },
   {
-    modelID: "698",
-    modelName: "Apple Watch Series 6 (GPS + Cellular)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 634,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux TwinClean"
   },
   {
-    modelID: "699",
-    modelName: "Apple Watch SE (GPS)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 635,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux Oxygen"
   },
   {
-    modelID: "700",
-    modelName: "Apple Watch SE (GPS + Cellular)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 636,
+    productId: 21,
+    brandId: 18,
+    modelName: "Electrolux UltraSilencer"
   },
   {
-    modelID: "701",
-    modelName: "Apple Watch Series 7 (GPS)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 637,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch Athlet Series"
   },
   {
-    modelID: "702",
-    modelName: "Apple Watch Series 7 (GPS + Cellular)",
-    brandID: "52",
-    categoryID: "1.2"
+    modelId: 638,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch Relaxx'x Series"
   },
   {
-    modelID: "703",
-    modelName: "Fitbit Ionic",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 639,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch In'genius ProSilence"
   },
   {
-    modelID: "704",
-    modelName: "Fitbit Versa",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 640,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch Runn'n Series"
   },
   {
-    modelID: "705",
-    modelName: "Fitbit Versa Lite",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 641,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch Zoo'o ProAnimal"
   },
   {
-    modelID: "706",
-    modelName: "Fitbit Versa 2",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 642,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch GS-50 Power Silence"
   },
   {
-    modelID: "707",
-    modelName: "Fitbit Versa 3",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 643,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch GL-40 ProSilence"
   },
   {
-    modelID: "708",
-    modelName: "Fitbit Sense",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 644,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch BGL8 Series"
   },
   {
-    modelID: "709",
-    modelName: "Fitbit Blaze",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 645,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch BGL4 Series"
   },
   {
-    modelID: "710",
-    modelName: "Fitbit Surge",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 646,
+    productId: 21,
+    brandId: 8,
+    modelName: "Bosch BGL3 Series"
   },
   {
-    modelID: "711",
-    modelName: "Fitbit Flex",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 647,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips Performer"
   },
   {
-    modelID: "712",
-    modelName: "Fitbit Flex 2",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 648,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips PowerPro"
   },
   {
-    modelID: "713",
-    modelName: "Fitbit One",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 649,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips SpeedPro"
   },
   {
-    modelID: "714",
-    modelName: "Fitbit Zip",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 650,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips PowerLife"
   },
   {
-    modelID: "715",
-    modelName: "Fitbit Alta",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 651,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips MiniVac"
   },
   {
-    modelID: "716",
-    modelName: "Fitbit Alta HR",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 652,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips SmartPro Active Robot Vacuum"
   },
   {
-    modelID: "717",
-    modelName: "Fitbit Charge",
-    brandID: "115",
-    categoryID: "5.2"
+    modelId: 653,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips EasyLife"
   },
   {
-    modelID: "718",
-    modelName: "Fitbit Charge HR",
-    brandID: "115",
-    categoryID: "5.2"
+    modelId: 654,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips PowerPro Expert"
   },
   {
-    modelID: "719",
-    modelName: "Fitbit Charge 2",
-    brandID: "115",
-    categoryID: "5.2"
+    modelId: 655,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips FC5000 Series"
   },
   {
-    modelID: "720",
-    modelName: "Fitbit Charge 3",
-    brandID: "115",
-    categoryID: "5.2"
+    modelId: 656,
+    productId: 21,
+    brandId: 51,
+    modelName: "Philips FC6000 Series"
   },
   {
-    modelID: "721",
-    modelName: "Fitbit Charge 4",
-    brandID: "115",
-    categoryID: "5.2"
+    modelId: 657,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba 600 Series"
   },
   {
-    modelID: "722",
-    modelName: "Fitbit Inspire",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 658,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba 700 Series"
   },
   {
-    modelID: "723",
-    modelName: "Fitbit Inspire HR",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 659,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba 800 Series"
   },
   {
-    modelID: "724",
-    modelName: "Fitbit Inspire 2",
-    brandID: "115",
-    categoryID: "1.2"
+    modelId: 660,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba 900 Series"
   },
   {
-    modelID: "725",
-    modelName: "Samsung Galaxy Watch",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 661,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba i Series"
   },
   {
-    modelID: "726",
-    modelName: "Samsung Galaxy Watch Active",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 662,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba s Series"
   },
   {
-    modelID: "727",
-    modelName: "Samsung Galaxy Watch Active 2",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 663,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba j Series"
   },
   {
-    modelID: "728",
-    modelName: "Samsung Galaxy Watch 3",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 664,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba e Series"
   },
   {
-    modelID: "729",
-    modelName: "Samsung Galaxy Watch 4",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 665,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba 1 Series"
   },
   {
-    modelID: "730",
-    modelName: "Samsung Galaxy Watch 4 Classic",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 666,
+    productId: 22,
+    brandId: 61,
+    modelName: "iRobot Roomba t Series"
   },
   {
-    modelID: "731",
-    modelName: "Samsung Galaxy Fit",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 667,
+    productId: 22,
+    brandId: 60,
+    modelName: "Xiaomi Mi Robot Vacuum"
   },
   {
-    modelID: "732",
-    modelName: "Samsung Galaxy Fit 2",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 668,
+    productId: 22,
+    brandId: 60,
+    modelName: "Xiaomi Mi Robot Vacuum 1S"
   },
   {
-    modelID: "733",
-    modelName: "Garmin Forerunner 45",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 669,
+    productId: 22,
+    brandId: 60,
+    modelName: "Xiaomi Mi Robot Vacuum Mop Pro"
   },
   {
-    modelID: "734",
-    modelName: "Garmin Forerunner 55",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 670,
+    productId: 22,
+    brandId: 60,
+    modelName: "Xiaomi Mi Robot Vacuum 2"
   },
   {
-    modelID: "735",
-    modelName: "Garmin Forerunner 245",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 671,
+    productId: 22,
+    brandId: 60,
+    modelName: "Roborock S5"
   },
   {
-    modelID: "736",
-    modelName: "Garmin Forerunner 645",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 672,
+    productId: 22,
+    brandId: 60,
+    modelName: "Roborock S6"
   },
   {
-    modelID: "737",
-    modelName: "Garmin Forerunner 745",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 673,
+    productId: 22,
+    brandId: 60,
+    modelName: "Roborock S4"
   },
   {
-    modelID: "738",
-    modelName: "Garmin Forerunner 935",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 674,
+    productId: 22,
+    brandId: 60,
+    modelName: "Roborock S7"
   },
   {
-    modelID: "739",
-    modelName: "Garmin Forerunner 945",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 675,
+    productId: 22,
+    brandId: 60,
+    modelName: "Roborock E4"
   },
   {
-    modelID: "740",
-    modelName: "Garmin Fenix 3",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 676,
+    productId: 22,
+    brandId: 60,
+    modelName: "Roborock C10"
   },
   {
-    modelID: "741",
-    modelName: "Garmin Fenix 5",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 677,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac D3"
   },
   {
-    modelID: "742",
-    modelName: "Garmin Fenix 6",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 678,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac D4"
   },
   {
-    modelID: "743",
-    modelName: "Garmin Fenix 7",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 679,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac D5"
   },
   {
-    modelID: "744",
-    modelName: "Garmin Instinct",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 680,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac D6"
   },
   {
-    modelID: "745",
-    modelName: "Garmin Instinct Solar",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 681,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac D7"
   },
   {
-    modelID: "746",
-    modelName: "Garmin Approach S20",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 682,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac Connected"
   },
   {
-    modelID: "747",
-    modelName: "Garmin Approach S60",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 683,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac Connected D3"
   },
   {
-    modelID: "748",
-    modelName: "Garmin Approach S62",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 684,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac Connected D4"
   },
   {
-    modelID: "749",
-    modelName: "Garmin Venu",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 685,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac Connected D5"
   },
   {
-    modelID: "750",
-    modelName: "Garmin Venu 2",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 686,
+    productId: 22,
+    brandId: 40,
+    modelName: "Neato Botvac Connected D6"
   },
   {
-    modelID: "751",
-    modelName: "Garmin Venu 2S",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 687,
+    productId: 22,
+    brandId: 17,
+    modelName: "Ecovacs Deebot 711"
   },
   {
-    modelID: "752",
-    modelName: "Garmin MARQ Series (Various Models)",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 688,
+    productId: 22,
+    brandId: 17,
+    modelName: "Ecovacs Deebot 901"
   },
   {
-    modelID: "753",
-    modelName: "Garmin Legacy Series (Various Models)",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 689,
+    productId: 22,
+    brandId: 17,
+    modelName: "Ecovacs Deebot Ozmo 920"
   },
   {
-    modelID: "754",
-    modelName: "Garmin D2 Series (Various Models)",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 690,
+    productId: 22,
+    brandId: 17,
+    modelName: "Ecovacs Deebot Ozmo T5"
   },
   {
-    modelID: "755",
-    modelName: "Garmin Quatix Series (Various Models)",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 691,
+    productId: 22,
+    brandId: 17,
+    modelName: "Ecovacs Deebot Ozmo 950"
   },
   {
-    modelID: "756",
-    modelName: "Garmin Epix Series (Various Models)",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 692,
+    productId: 22,
+    brandId: 17,
+    modelName: "Ecovacs Deebot Ozmo 920"
   },
   {
-    modelID: "757",
-    modelName: "Garmin Vivosmart 4",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 693,
+    productId: 22,
+    brandId: 53,
+    modelName: "Samsung Powerbot VR7000"
   },
   {
-    modelID: "758",
-    modelName: "Garmin Vivosmart 3",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 694,
+    productId: 22,
+    brandId: 53,
+    modelName: "Samsung Powerbot VR7200"
   },
   {
-    modelID: "759",
-    modelName: "Garmin Vivosmart HR",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 695,
+    productId: 22,
+    brandId: 53,
+    modelName: "Samsung Powerbot R7070"
   },
   {
-    modelID: "760",
-    modelName: "Garmin Vivosmart HR+",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 696,
+    productId: 22,
+    brandId: 53,
+    modelName: "Samsung Powerbot R7065"
   },
   {
-    modelID: "761",
-    modelName: "Garmin Vivofit 4",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 697,
+    productId: 23,
+    brandId: 31,
+    modelName: "Kärcher SC3 EasyFix"
   },
   {
-    modelID: "762",
-    modelName: "Garmin Vivofit 3",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 698,
+    productId: 23,
+    brandId: 31,
+    modelName: "Kärcher SC4 EasyFix Premium"
   },
   {
-    modelID: "763",
-    modelName: "Garmin Vivofit Jr.",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 699,
+    productId: 23,
+    brandId: 31,
+    modelName: "Kärcher SC5 EasyFix Premium"
   },
   {
-    modelID: "764",
-    modelName: "Garmin Vivofit Jr. 2",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 700,
+    productId: 23,
+    brandId: 6,
+    modelName: "Bissell PowerFresh Deluxe"
   },
   {
-    modelID: "765",
-    modelName: "Garmin Vivofit Jr. 3",
-    brandID: "116",
-    categoryID: "5.2"
+    modelId: 701,
+    productId: 23,
+    brandId: 6,
+    modelName: "Bissell PowerFresh Slim"
   },
   {
-    modelID: "766",
-    modelName: "Xiaomi Mi Watch Revolve",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 702,
+    productId: 23,
+    brandId: 6,
+    modelName: "Bissell SpinWave"
   },
   {
-    modelID: "767",
-    modelName: "Xiaomi Mi Watch Color",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 703,
+    productId: 23,
+    brandId: 6,
+    modelName: "Bissell Vac & Steam"
   },
   {
-    modelID: "768",
-    modelName: "Xiaomi Mi Watch",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 704,
+    productId: 23,
+    brandId: 6,
+    modelName: "Bissell CrossWave"
   },
   {
-    modelID: "769",
-    modelName: "Xiaomi Amazfit Bip",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 705,
+    productId: 23,
+    brandId: 62,
+    modelName: "Polti Vaporetto Smart 30_R"
   },
   {
-    modelID: "770",
-    modelName: "Xiaomi Amazfit Bip U",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 706,
+    productId: 23,
+    brandId: 62,
+    modelName: "Polti Vaporetto SV440_Double"
   },
   {
-    modelID: "771",
-    modelName: "Xiaomi Amazfit Bip U Pro",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 707,
+    productId: 23,
+    brandId: 62,
+    modelName: "Polti Vaporetto Eco Pro 3.0"
   },
   {
-    modelID: "772",
-    modelName: "Xiaomi Amazfit Bip S",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 708,
+    productId: 23,
+    brandId: 62,
+    modelName: "Polti Vaporetto Handy 20"
   },
   {
-    modelID: "773",
-    modelName: "Xiaomi Amazfit Bip S Lite",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 709,
+    productId: 23,
+    brandId: 7,
+    modelName: "Black & Decker BDH1850SM Steam Mop"
   },
   {
-    modelID: "774",
-    modelName: "Xiaomi Amazfit GTS",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 710,
+    productId: 23,
+    brandId: 7,
+    modelName: "Black & Decker BDH1760SM SmartSelect Steam Mop: Black & Decker BDH1720SM SmartSelect Steam Mop"
   },
   {
-    modelID: "775",
-    modelName: "Xiaomi Amazfit GTS 2",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 711,
+    productId: 23,
+    brandId: 7,
+    modelName: "Black & Decker BDH1720SM SmartSelect Deluxe Steam Mop"
   },
   {
-    modelID: "776",
-    modelName: "Xiaomi Amazfit GTS 2e",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 712,
+    productId: 23,
+    brandId: 7,
+    modelName: "Black & Decker BDH1850SM 2-in-1 Steam Mop"
   },
   {
-    modelID: "777",
-    modelName: "Xiaomi Amazfit GTS 3",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 713,
+    productId: 23,
+    brandId: 7,
+    modelName: "Black & Decker FSMH1321 7-in-1 Steam-Mop"
   },
   {
-    modelID: "778",
-    modelName: "Xiaomi Amazfit Verge",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 714,
+    productId: 23,
+    brandId: 7,
+    modelName: "Black & Decker BDH1760SM Lift & Reach Steam Mop"
   },
   {
-    modelID: "779",
-    modelName: "Xiaomi Amazfit Verge Lite",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 715,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover TwinTank Steam Mop"
   },
   {
-    modelID: "780",
-    modelName: "Xiaomi Amazfit Verge 2",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 716,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover WH20200 TwinTank Steam Mop"
   },
   {
-    modelID: "781",
-    modelName: "Xiaomi Amazfit T-Rex",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 717,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover WH20300 Canister Steam Cleaner"
   },
   {
-    modelID: "782",
-    modelName: "Xiaomi Amazfit T-Rex Pro",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 718,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover WH20200 Canister Steam Cleaner"
   },
   {
-    modelID: "783",
-    modelName: "Xiaomi Amazfit Stratos",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 719,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover SSN1700 Steamjet Dual Head Steam Mop"
   },
   {
-    modelID: "784",
-    modelName: "Xiaomi Amazfit Stratos 2",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 720,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover SSN1700 Steam Express Steam Mop"
   },
   {
-    modelID: "785",
-    modelName: "Xiaomi Amazfit Stratos 3",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 721,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover WH20440CA Steam Scrub 2-in-1 Steam Mop"
   },
   {
-    modelID: "786",
-    modelName: "Xiaomi Amazfit Pace",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 722,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover SSNH1000 Central Steam Handheld System"
   },
   {
-    modelID: "787",
-    modelName: "Xiaomi Fitness Trackers",
-    brandID: "47",
-    categoryID: "1.3"
+    modelId: 723,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover SSNH1300 SteamJet Handheld Steam Cleaner"
   },
   {
-    modelID: "788",
-    modelName: "Xiaomi Mi Band",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 724,
+    productId: 23,
+    brandId: 26,
+    modelName: "Hoover WH20420CA TwinTank Steam Mop"
   },
   {
-    modelID: "789",
-    modelName: "Xiaomi Mi Band 1S (Mi Band Pulse)",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 725,
+    productId: 23,
+    brandId: 52,
+    modelName: "Russell Hobbs RHSM1001-G Steam and Clean 11-in-1 Steam Mop"
   },
   {
-    modelID: "790",
-    modelName: "Xiaomi Mi Band 2",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 726,
+    productId: 23,
+    brandId: 52,
+    modelName: "Russell Hobbs RHMSM3002-G Steam and Clean 11-in-1 Steam Mop"
   },
   {
-    modelID: "791",
-    modelName: "Xiaomi Mi Band 3",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 727,
+    productId: 23,
+    brandId: 52,
+    modelName: "Russell Hobbs RHSM1001-C Steam and Clean 11-in-1 Steam Mop"
   },
   {
-    modelID: "792",
-    modelName: "Xiaomi Mi Band 4",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 728,
+    productId: 23,
+    brandId: 52,
+    modelName: "Russell Hobbs RHMSM3002-C Steam and Clean 11-in-1 Steam Mop"
   },
   {
-    modelID: "793",
-    modelName: "Xiaomi Mi Band 5",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 729,
+    productId: 23,
+    brandId: 52,
+    modelName: "Russell Hobbs RHDSM7001-G Steam and Clean 11-in-1 Steam Mop"
   },
   {
-    modelID: "794",
-    modelName: "Xiaomi Mi Band 6",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 730,
+    productId: 23,
+    brandId: 52,
+    modelName: "Russell Hobbs RHDSM7001-C Steam and Clean 11-in-1 Steam Mop"
   },
   {
-    modelID: "795",
-    modelName: "Xiaomi Mi Smart Band 7",
-    brandID: "47",
-    categoryID: "4.15"
+    modelId: 731,
+    productId: 24,
+    brandId: 29,
+    modelName: "KitchenAid 7-Cup Food Processor"
   },
   {
-    modelID: "796",
-    modelName: "Amazfit GTS",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 732,
+    productId: 24,
+    brandId: 29,
+    modelName: "KitchenAid 9-Cup Food Processor"
   },
   {
-    modelID: "797",
-    modelName: "Amazfit GTS 2",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 733,
+    productId: 24,
+    brandId: 29,
+    modelName: "KitchenAid 11-Cup Food Processor"
   },
   {
-    modelID: "798",
-    modelName: "Amazfit GTS 2e",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 734,
+    productId: 24,
+    brandId: 29,
+    modelName: "KitchenAid 14-Cup Food Processor"
   },
   {
-    modelID: "799",
-    modelName: "Amazfit GTR",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 735,
+    productId: 24,
+    brandId: 29,
+    modelName: "KitchenAid 16-Cup Pro Line Series Food Processor"
   },
   {
-    modelID: "800",
-    modelName: "Amazfit GTR 2",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 736,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Custom 14-Cup Food Processor (DFP14BCNY)"
   },
   {
-    modelID: "801",
-    modelName: "Amazfit GTR 2e",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 737,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Elite Collection 12-Cup Food Processor(FP-12DCN)"
   },
   {
-    modelID: "802",
-    modelName: "Amazfit GTR 3",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 738,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Elemental 8-Cup Food Processor (FP-8SV)"
   },
   {
-    modelID: "803",
-    modelName: "Amazfit Bip",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 739,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Mini-Prep Plus Food Processor (DLC2ABC)"
   },
   {
-    modelID: "804",
-    modelName: "Amazfit Bip U",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 740,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Pro Classic 7-Cup Food Processor (DLC10SY)"
   },
   {
-    modelID: "805",
-    modelName: "Amazfit Bip U Pro",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 741,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Prep 11 Plus 11-Cup Food Processor(DLC-2011CHBY)"
   },
   {
-    modelID: "806",
-    modelName: "Amazfit Bip S",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 742,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Mini-Prep Food Processor (DLC-1SS)"
   },
   {
-    modelID: "807",
-    modelName: "Amazfit Bip S Lite",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 743,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Elemental 13-Cup Food Processor (FP-13DSV)"
   },
   {
-    modelID: "808",
-    modelName: "Amazfit T-Rex",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 744,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Mini-Prep Plus 4-Cup Food Processor (DLC-4CHB)"
   },
   {
-    modelID: "809",
-    modelName: "Amazfit T-Rex Pro",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 745,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Elemental 4-Cup Food Processor (FP-8GM)"
   },
   {
-    modelID: "810",
-    modelName: "Amazfit Verge",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 746,
+    productId: 24,
+    brandId: 12,
+    modelName: "Cuisinart Elite Collection 2.0 14-Cup Food Processor (FP-14DCN)"
   },
   {
-    modelID: "811",
-    modelName: "Amazfit Verge Lite",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 747,
+    productId: 24,
+    brandId: 43,
+    modelName: "Ninja Professional BL610"
   },
   {
-    modelID: "812",
-    modelName: "Amazfit Verge 2 (Xiaomi Watch Revolve)",
-    brandID: "47",
-    categoryID: "1.2"
+    modelId: 748,
+    productId: 24,
+    brandId: 43,
+    modelName: "Ninja Smart Screen Duo CT661V"
   },
   {
-    modelID: "813",
-    modelName: "Amazfit Pace",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 749,
+    productId: 24,
+    brandId: 43,
+    modelName: "Ninja Master Prep QB1004"
   },
   {
-    modelID: "814",
-    modelName: "Amazfit Stratos",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 750,
+    productId: 24,
+    brandId: 43,
+    modelName: "Ninja Express Chop NJ110GR"
   },
   {
-    modelID: "815",
-    modelName: "Amazfit Stratos 2",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 751,
+    productId: 24,
+    brandId: 43,
+    modelName: "Ninja Precision Processor NN310"
   },
   {
-    modelID: "816",
-    modelName: "Amazfit Stratos 3",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 752,
+    productId: 24,
+    brandId: 48,
+    modelName: "Oster Pro 1200 Blender with Food Processor Attachment"
   },
   {
-    modelID: "817",
-    modelName: "Amazfit Neo",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 753,
+    productId: 24,
+    brandId: 48,
+    modelName: "Oster Top Chop 4-Cup Food Processor"
   },
   {
-    modelID: "818",
-    modelName: "Amazfit Pop",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 754,
+    productId: 24,
+    brandId: 48,
+    modelName: "Oster Total Prep 10-Cup Food Processor"
   },
   {
-    modelID: "819",
-    modelName: "Amazfit Pop Pro",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 755,
+    productId: 24,
+    brandId: 48,
+    modelName: "Oster Oskar 2-in-1 Salad Prep and Food Processor"
   },
   {
-    modelID: "820",
-    modelName: "Amazfit Fitness Trackers",
-    brandID: "83",
-    categoryID: "1.3"
+    modelId: 756,
+    productId: 24,
+    brandId: 48,
+    modelName: "Oster 2-Speed 10-Cup Food Processor"
   },
   {
-    modelID: "821",
-    modelName: "Amazfit Band 5",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 757,
+    productId: 24,
+    brandId: 48,
+    modelName: "Oster Designer Kitchen Center Food Processor Attachment"
   },
   {
-    modelID: "822",
-    modelName: "Amazfit Band 6",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 758,
+    productId: 24,
+    brandId: 51,
+    modelName: "Philips Viva Collection Food Processor"
   },
   {
-    modelID: "823",
-    modelName: "Amazfit Band 5S",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 759,
+    productId: 24,
+    brandId: 51,
+    modelName: "Philips Avance Collection Food Processor"
   },
   {
-    modelID: "824",
-    modelName: "Amazfit Cor",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 760,
+    productId: 24,
+    brandId: 51,
+    modelName: "Philips Daily Collection Food Processor"
   },
   {
-    modelID: "825",
-    modelName: "Amazfit Cor 2",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 761,
+    productId: 24,
+    brandId: 51,
+    modelName: "Philips Compact Food Processor"
   },
   {
-    modelID: "826",
-    modelName: "Amazfit Cor 3",
-    brandID: "83",
-    categoryID: "1.2"
+    modelId: 762,
+    productId: 24,
+    brandId: 51,
+    modelName: "Philips ProMix Hand Blender (Includes food processing attachments"
   },
   {
-    modelID: "827",
-    modelName: "Fossil Gen 4 Smartwatch",
-    brandID: "84",
-    categoryID: "1.2"
+    modelId: 763,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FP3020 12-Cup Food Processor"
   },
   {
-    modelID: "828",
-    modelName: "Fossil Gen 4 Sport Smartwatch",
-    brandID: "84",
-    categoryID: "1.2"
+    modelId: 764,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FP3020 12-Cup Food Processor"
   },
   {
-    modelID: "829",
-    modelName: "Fossil Gen 5 Smartwatch",
-    brandID: "84",
-    categoryID: "1.2"
+    modelId: 765,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FP5150 Food Processor"
   },
   {
-    modelID: "830",
-    modelName: "Fossil Gen 5E Smartwatch",
-    brandID: "84",
-    categoryID: "1.2"
+    modelId: 766,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FPX3030 12-Cup Food Processor"
   },
   {
-    modelID: "831",
-    modelName: "Fossil Gen 5 LTE Smartwatch",
-    brandID: "84",
-    categoryID: "1.2"
+    modelId: 767,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FPX3030 12-Cup Food Processor"
   },
   {
-    modelID: "832",
-    modelName: "Fossil Gen 5E LTE Smartwatch",
-    brandID: "84",
-    categoryID: "1.2"
+    modelId: 768,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FP5160 Food Processor"
   },
   {
-    modelID: "833",
-    modelName: "Fossil Hybrid HR Smartwatch",
-    brandID: "117",
-    categoryID: "1.2"
+    modelId: 769,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FPX3030 12-Cup Food Processor"
   },
   {
-    modelID: "834",
-    modelName: "Fossil Hybrid HR Collider",
-    brandID: "117",
-    categoryID: "1.2"
+    modelId: 770,
+    productId: 24,
+    brandId: 10,
+    modelName: "Braun FPX3030 12-Cup Food Processor"
   },
   {
-    modelID: "835",
-    modelName: "Withings ScanWatch",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 771,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP6010 Performance Dicing Food Processor"
   },
   {
-    modelID: "836",
-    modelName: "Withings Move",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 772,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP1600B PowerPro Food Processor"
   },
   {
-    modelID: "837",
-    modelName: "Withings Move ECG",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 773,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP5050 PowerPro Wide-Mouth Food Processor"
   },
   {
-    modelID: "838",
-    modelName: "Withings Move Timeless Chic",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 774,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP3030 12-Cup Food Processor"
   },
   {
-    modelID: "839",
-    modelName: "Withings Move Timeless Chic ECG",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 775,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP6010 Performance Dicing Food Processor"
   },
   {
-    modelID: "840",
-    modelName: "Withings Go",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 776,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP2500B PowerPro Wide-Mouth Food Processor"
   },
   {
-    modelID: "841",
-    modelName: "Withings Pulse HR",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 777,
+    productId: 24,
+    brandId: 7,
+    modelName: "Black & Decker FP1600B PowerPro Food Processors"
   },
   {
-    modelID: "842",
-    modelName: "Withings Activit\u00e9",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 778,
+    productId: 24,
+    brandId: 30,
+    modelName: "Krups 14-Cup Food Processor (Model: FP3020)"
   },
   {
-    modelID: "843",
-    modelName: "Withings Activit\u00e9 Steel",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 779,
+    productId: 24,
+    brandId: 30,
+    modelName: "Krups 8-Cup Food Processor (Model: FP404)"
   },
   {
-    modelID: "844",
-    modelName: "Withings Activit\u00e9 Pop",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 780,
+    productId: 24,
+    brandId: 30,
+    modelName: "Krups Mini Food Processor (Model: GN492851)"
   },
   {
-    modelID: "845",
-    modelName: "Withings Activit\u00e9 Sapphire",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 781,
+    productId: 24,
+    brandId: 30,
+    modelName: "Krups Food Chopper (Model: GVA208)"
   },
   {
-    modelID: "846",
-    modelName: "Withings Steel",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 782,
+    productId: 24,
+    brandId: 30,
+    modelName: "Krups 10-Cup Food Processor (Model: 394-70)"
   },
   {
-    modelID: "847",
-    modelName: "Withings Steel HR Sport",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 783,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg 50's Retro Style Food Processor"
   },
   {
-    modelID: "848",
-    modelName: "Withings Steel HR Sport Special Edition",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 784,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg DFP14BSS 14-Cup Food Processor"
   },
   {
-    modelID: "849",
-    modelName: "Withings Steel HR",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 785,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg SMF02 Stand Mixer with Food Grinder Accessory"
   },
   {
-    modelID: "850",
-    modelName: "Withings Steel HR Sapphire Signature",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 786,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg SMF03 Stand Mixer with Pasta Roller Accessory"
   },
   {
-    modelID: "851",
-    modelName: "Withings Steel HR Sport",
-    brandID: "85",
-    categoryID: "1.2"
+    modelId: 787,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg SMF03 Stand Mixer with Food Grinder Accessory"
   },
   {
-    modelID: "852",
-    modelName: "PS5",
-    brandID: "120",
-    categoryID: "5.3"
+    modelId: 788,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg SMF03 Stand Mixer with Citrus Juicer Accessory"
   },
   {
-    modelID: "853",
-    modelName: "PS4",
-    brandID: "120",
-    categoryID: "5.3"
+    modelId: 789,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg SMF03 Stand Mixer with Grater/Slicer/Shredder Accessory"
   },
   {
-    modelID: "854",
-    modelName: "PS3",
-    brandID: "120",
-    categoryID: "5.3"
+    modelId: 790,
+    productId: 24,
+    brandId: 55,
+    modelName: "Smeg HBF01 Hand Blender with Chopper Accessory."
   },
   {
-    modelID: "855",
-    modelName: "PS2",
-    brandID: "120",
-    categoryID: "5.3"
+    modelId: 791,
+    productId: 24,
+    brandId: 13,
+    modelName: "Dash Chef Series 14-Cup Food Processor"
   },
   {
-    modelID: "856",
-    modelName: "PS1",
-    brandID: "120",
-    categoryID: "5.3"
+    modelId: 792,
+    productId: 24,
+    brandId: 13,
+    modelName: "Dash Deluxe 12-Cup Food Processor"
   },
   {
-    modelID: "857",
-    modelName: "PSP",
-    brandID: "120",
-    categoryID: "5.3"
+    modelId: 793,
+    productId: 24,
+    brandId: 13,
+    modelName: "Dash Everyday Mini Food Processor"
   },
   {
-    modelID: "858",
-    modelName: "PlayStation Vita",
-    brandID: "70",
-    categoryID: "5.3"
+    modelId: 794,
+    productId: 24,
+    brandId: 13,
+    modelName: "Dash Go Everyday Mini Food Processor"
   },
   {
-    modelID: "859",
-    modelName: "XBOX",
-    brandID: "71",
-    categoryID: "5.3"
+    modelId: 795,
+    productId: 24,
+    brandId: 13,
+    modelName: "Dash Express Mini Food Processor"
   },
   {
-    modelID: "860",
-    modelName: "XBOX 360",
-    brandID: "71",
-    categoryID: "5.3"
+    modelId: 796,
+    productId: 24,
+    brandId: 14,
+    modelName: "DeLonghi DFP950 Die-Cast Food Processor"
   },
   {
-    modelID: "861",
-    modelName: "XBOX 720",
-    brandID: "71",
-    categoryID: "5.3"
+    modelId: 797,
+    productId: 24,
+    brandId: 14,
+    modelName: "DeLonghi MultiFry FH1363 Food Processor"
   },
   {
-    modelID: "862",
-    modelName: "XBOX One",
-    brandID: "71",
-    categoryID: "5.3"
+    modelId: 798,
+    productId: 24,
+    brandId: 14,
+    modelName: "DeLonghi PrimaDonna Exclusive ESAM 6900 Coffee Machine (includes a food processor attachment)"
   },
   {
-    modelID: "863",
-    modelName: "XBOX Series X",
-    brandID: "71",
-    categoryID: "5.3"
+    modelId: 799,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Classic Series Stand Mixer"
   },
   {
-    modelID: "864",
-    modelName: "Xbox Series S",
-    brandID: "71",
-    categoryID: "5.3"
+    modelId: 800,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Artisan Series Stand Mixer"
   },
   {
-    modelID: "865",
-    modelName: "Nintendo DS",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 801,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Artisan Mini Stand Mixer"
   },
   {
-    modelID: "866",
-    modelName: "Nintendo Wii",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 802,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Professional 600 Series Stand Mixer"
   },
   {
-    modelID: "867",
-    modelName: "Nintendo Wii U",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 803,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Professional 6000 HD Stand Mixer"
   },
   {
-    modelID: "868",
-    modelName: "Nintendo GameCube",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 804,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Professional 6500 Design Series Stand Mixer"
   },
   {
-    modelID: "869",
-    modelName: "Nintendo Game Boy",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 805,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Professional 5 Plus Series Stand Mixer"
   },
   {
-    modelID: "870",
-    modelName: "Nintendo Switch",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 806,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Professional 7-Quart Stand Mixer"
   },
   {
-    modelID: "871",
-    modelName: "Nintendo Game Boy Color",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 807,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Pro Line Series Stand Mixer"
   },
   {
-    modelID: "872",
-    modelName: "Sega Saturn",
-    brandID: "68",
-    categoryID: "5.3"
+    modelId: 808,
+    productId: 25,
+    brandId: 29,
+    modelName: "KitchenAid Commercial Series Stand Mixer"
   },
   {
-    modelID: "873",
-    modelName: "Sega Dreamcast",
-    brandID: "68",
-    categoryID: "5.3"
+    modelId: 809,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart Precision Master Stand Mixer (SM-50)"
   },
   {
-    modelID: "874",
-    modelName: "Sega Master System",
-    brandID: "68",
-    categoryID: "5.3"
+    modelId: 810,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart Precision Master Petite Stand Mixer (SM35)"
   },
   {
-    modelID: "875",
-    modelName: "Sega Genesis",
-    brandID: "68",
-    categoryID: "5.3"
+    modelId: 811,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart Power Advantage 7-Speed Hand Mixer (HM-70)"
   },
   {
-    modelID: "876",
-    modelName: "Super Nintendo Entertainment System (SNES)",
-    brandID: "69",
-    categoryID: "5.3"
+    modelId: 812,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart Power Advantage 5-Speed Hand Mixer (HM-50)"
   },
   {
-    modelID: "877",
-    modelName: "AirPods (1st generation)",
-    brandID: "52",
-    categoryID: "1.6"
+    modelId: 813,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart 9-Speed Hand Mixer (HM-90S)"
   },
   {
-    modelID: "878",
-    modelName: "AirPods (2nd generation)",
-    brandID: "52",
-    categoryID: "1.6"
+    modelId: 814,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart 7-Speed Hand Mixer (HM-70)"
   },
   {
-    modelID: "879",
-    modelName: "AirPods (3rd generation)",
-    brandID: "52",
-    categoryID: "1.6"
+    modelId: 815,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart Power Advantage 5-Speed Hand Mixer (HM-50)"
   },
   {
-    modelID: "880",
-    modelName: "AirPods Pro (1st generation)",
-    brandID: "52",
-    categoryID: "1.6"
+    modelId: 816,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart 5.5-Quart Stand Mixer (SM-50)"
   },
   {
-    modelID: "881",
-    modelName: "AirPods Pro (2nd generation)",
-    brandID: "52",
-    categoryID: "1.6"
+    modelId: 817,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart 3.5-Quart Stand Mixer (SM-35)"
   },
   {
-    modelID: "882",
-    modelName: "Airpods Max",
-    brandID: "52",
-    categoryID: "1.6"
+    modelId: 818,
+    productId: 25,
+    brandId: 12,
+    modelName: "Cuisinart 9-Speed Hand Mixer with Storage Case (HM-90BCS)"
   },
   {
-    modelID: "883",
-    modelName: "HomePod min",
-    brandID: "52",
-    categoryID: "1.7"
+    modelId: 819,
+    productId: 25,
+    brandId: 48,
+    modelName: "Oster 250-Watt 5-Speed Hand Mixer"
   },
   {
-    modelID: "884",
-    modelName: "HomePod",
-    brandID: "52",
-    categoryID: "1.7"
+    modelId: 820,
+    productId: 25,
+    brandId: 48,
+    modelName: "Oster 7-Speed Clean Start Hand Mixer"
   },
   {
-    modelID: "885",
-    modelName: "Samsung Galaxy Buds Pro",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 821,
+    productId: 25,
+    brandId: 48,
+    modelName: "Oster 6-Speed Retractable Cord Hand Mixer"
   },
   {
-    modelID: "886",
-    modelName: "Samsung Galaxy Buds Live",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 822,
+    productId: 25,
+    brandId: 48,
+    modelName: "Oster Planetary Stand Mixer with Stainless Steel Bowl"
   },
   {
-    modelID: "887",
-    modelName: "Samsung Galaxy Buds+",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 823,
+    productId: 25,
+    brandId: 48,
+    modelName: "Oster 12-Speed Planetary Stand Mixer"
   },
   {
-    modelID: "888",
-    modelName: "Samsung Galaxy Buds",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 824,
+    productId: 25,
+    brandId: 48,
+    modelName: "Oster 4.5-Quart Tilt-Head Stand Mixer"
   },
   {
-    modelID: "889",
-    modelName: "Samsung AKG N700NC",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 825,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun MultiMix 5 Hand Mixer"
   },
   {
-    modelID: "890",
-    modelName: "Samsung AKG Y500",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 826,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun MultiMix 3 Hand Mixer"
   },
   {
-    modelID: "891",
-    modelName: "Samsung AKG Y100",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 827,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun MultiMix 1 Hand Mixer"
   },
   {
-    modelID: "892",
-    modelName: "Samsung AKG Y50",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 828,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun HM5100 MultiMix Hand Mixer"
   },
   {
-    modelID: "893",
-    modelName: "Samsung AKG Y500NC",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 829,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun MQ777 Multiquick 7 Hand Blender and Mixer"
   },
   {
-    modelID: "894",
-    modelName: "Samsung AKG Y600NC",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 830,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun IdentityCollection Stand Mixer"
   },
   {
-    modelID: "895",
-    modelName: "Samsung SoundAlive Headphones (Various Models)",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 831,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun Multimix 5 Stand Mixer"
   },
   {
-    modelID: "896",
-    modelName: "Samsung Level On Headphones",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 832,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun Multimix 3 Stand Mixer"
   },
   {
-    modelID: "897",
-    modelName: "Samsung Level U Headphones",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 833,
+    productId: 25,
+    brandId: 10,
+    modelName: "Braun Multimix 2 Stand Mixer"
   },
   {
-    modelID: "898",
-    modelName: "Samsung Level Box Speakers",
-    brandID: "49",
-    categoryID: "1.7"
+    modelId: 834,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX1500W 5-Speed Hand Mixer"
   },
   {
-    modelID: "899",
-    modelName: "Samsung Level Over Headphones",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 835,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX600T Helix Performance"
   },
   {
-    modelID: "900",
-    modelName: "Samsung Level Link",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 836,
+    productId: 25,
+    brandId: 7,
+    modelName: "Premium Hand Mixer"
   },
   {
-    modelID: "901",
-    modelName: "Samsung Level In Earphones",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 837,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX600BC Helix Performance Premium Hand Mixer"
   },
   {
-    modelID: "902",
-    modelName: "Samsung Galaxy Home",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 838,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX600G Helix Performance Premium Hand Mixer"
   },
   {
-    modelID: "903",
-    modelName: "Samsung Radiant360 R1",
-    brandID: "49",
-    categoryID: "1.7"
+    modelId: 839,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX3200B 6-Speed Hand Mixer"
   },
   {
-    modelID: "904",
-    modelName: "Samsung Radiant360 R3",
-    brandID: "49",
-    categoryID: "1.7"
+    modelId: 840,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX600P Helix Performance Premium Hand Mixer"
   },
   {
-    modelID: "905",
-    modelName: "Samsung Radiant360 R5",
-    brandID: "49",
-    categoryID: "1.7"
+    modelId: 841,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX600H Helix Performance Premium Hand Mixer"
   },
   {
-    modelID: "906",
-    modelName: "Samsung Radiant360 R7",
-    brandID: "49",
-    categoryID: "1.7"
+    modelId: 842,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX3200B 6-Speed Hand Mixer"
   },
   {
-    modelID: "907",
-    modelName: "Samsung Radiant360 R9",
-    brandID: "49",
-    categoryID: "1.7"
+    modelId: 843,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX1500W 5-Speed Hand Mixer"
   },
   {
-    modelID: "908",
-    modelName: "Samsung Wireless Audio System",
-    brandID: "49",
-    categoryID: "1.9"
+    modelId: 844,
+    productId: 25,
+    brandId: 7,
+    modelName: "Black & Decker MX600T Helix Performance Premium Hand Mixer"
   },
   {
-    modelID: "909",
-    modelName: "Samsung HW-Q950A",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 845,
+    productId: 25,
+    brandId: 30,
+    modelName: "Krups Hand Mixer with Turbo Boost (Model: GN492851)"
   },
   {
-    modelID: "910",
-    modelName: "Samsung HW-Q900A",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 846,
+    productId: 25,
+    brandId: 30,
+    modelName: "Krups Stand Mixer (Model: KB5220)"
   },
   {
-    modelID: "911",
-    modelName: "Samsung HW-Q800A",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 847,
+    productId: 25,
+    brandId: 30,
+    modelName: "Krups Electric Hand Mixer (Model: GN502851)"
   },
   {
-    modelID: "912",
-    modelName: "Samsung HW-Q70T",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 848,
+    productId: 25,
+    brandId: 30,
+    modelName: "Krups 10-Speed Stand Mixer (Model: KH734D50)"
   },
   {
-    modelID: "913",
-    modelName: "Samsung HW-Q60T",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 849,
+    productId: 25,
+    brandId: 30,
+    modelName: "Krups Digital Hand Mixer (Model: GN492851)"
   },
   {
-    modelID: "914",
-    modelName: "Samsung HW-T650",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 850,
+    productId: 25,
+    brandId: 13,
+    modelName: "Dash Stand Mixer"
   },
   {
-    modelID: "915",
-    modelName: "Samsung HW-T550",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 851,
+    productId: 25,
+    brandId: 13,
+    modelName: "Dash Everyday 3-Speed Hand Mixer"
   },
   {
-    modelID: "916",
-    modelName: "Samsung HW-T450",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 852,
+    productId: 25,
+    brandId: 13,
+    modelName: "Dash Smart Store Compact Hand Mixer"
   },
   {
-    modelID: "917",
-    modelName: "Samsung HW-R450",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 853,
+    productId: 25,
+    brandId: 13,
+    modelName: "Dash Go Everyday Mixer"
   },
   {
-    modelID: "918",
-    modelName: "Samsung HW-N400",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 854,
+    productId: 25,
+    brandId: 13,
+    modelName: "Dash Masha 2X Hand Blender and Potato Masher"
   },
   {
-    modelID: "919",
-    modelName: "Samsung HW-J250",
-    brandID: "49",
-    categoryID: "1.6"
+    modelId: 855,
+    productId: 25,
+    brandId: 14,
+    modelName: "DeLonghi Distinta Electric Stand Mixer"
   },
   {
-    modelID: "920",
-    modelName: "Sony WH-1000XM4",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 856,
+    productId: 25,
+    brandId: 14,
+    modelName: "DeLonghi MultiFry FH1363 Food Processor (includes a mixing function)"
   },
   {
-    modelID: "921",
-    modelName: "Sony WH-1000XM3",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 857,
+    productId: 25,
+    brandId: 14,
+    modelName: "DeLonghi Espresso Machine with Milk Frother (inc"
   },
   {
-    modelID: "922",
-    modelName: "Sony WH-XB900N",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 858,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid K150 3-Speed Ice Crushing Blender"
   },
   {
-    modelID: "923",
-    modelName: "Sony WH-CH710N",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 859,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid K400 Variable Speed Blender"
   },
   {
-    modelID: "924",
-    modelName: "Sony WI-1000XM2",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 860,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB1575 Diamond 5-Speed Blender"
   },
   {
-    modelID: "925",
-    modelName: "Sony WI-C600N",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 861,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB7068 Pro Line Series Blender"
   },
   {
-    modelID: "926",
-    modelName: "Sony MDR-ZX110",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 862,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB1332 3-Speed Diamond Blender"
   },
   {
-    modelID: "927",
-    modelName: "Sony MDR-XB450",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 863,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB4027 High Performance SeriesBlender"
   },
   {
-    modelID: "928",
-    modelName: "Sony WH-XB700",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 864,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB6060 High Performance Series Blender"
   },
   {
-    modelID: "929",
-    modelName: "Sony WF-1000XM4",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 865,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB6068 Pro Line Series Blender"
   },
   {
-    modelID: "930",
-    modelName: "Sony WF-1000XM3",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 866,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB8270 Pro Line Series Blender"
   },
   {
-    modelID: "931",
-    modelName: "Sony WF-SP800N",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 867,
+    productId: 26,
+    brandId: 29,
+    modelName: "KitchenAid KSB8270 Commercial Series Blender"
   },
   {
-    modelID: "932",
-    modelName: "Sony WF-SP700N",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 868,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart Hurricane Pro 3.5 Peak HP Blender (CBT-2000)"
   },
   {
-    modelID: "933",
-    modelName: "Sony WF-1000X",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 869,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart Hurricane Classic 2.25 Peak HP Blender (CBT-1500)"
   },
   {
-    modelID: "934",
-    modelName: "Sony WF-SP600N",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 870,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart SmartPower Duet Blender/Food Processor (BFP-703)"
   },
   {
-    modelID: "935",
-    modelName: "Sony SRS-XB43",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 871,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart PowerEdge 700-Watt Blender (CBB-1200)"
   },
   {
-    modelID: "936",
-    modelName: "Sony SRS-XB33",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 872,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart Compact Portable Blending/Chopping System (CPB-300)"
   },
   {
-    modelID: "937",
-    modelName: "Sony SRS-XB23",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 873,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart Velocity Ultra Trio 1 HP Blender/Food Processor (BFP-650)"
   },
   {
-    modelID: "938",
-    modelName: "Sony SRS-XB22",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 874,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart ReMix 6.0 600-Watt Blender (SPB-8)"
   },
   {
-    modelID: "939",
-    modelName: "Sony SRS-XB12",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 875,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart SmartPower 600-Watt Blender (SPB-7CH)"
   },
   {
-    modelID: "940",
-    modelName: "Sony SRS-XB41",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 876,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart SmartPower 7-Speed Electronic Blender (SPB-7)"
   },
   {
-    modelID: "941",
-    modelName: "Sony SRS-XB31",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 877,
+    productId: 26,
+    brandId: 12,
+    modelName: "Cuisinart Dual Blender/Food Processor (BFP-10CH)"
   },
   {
-    modelID: "942",
-    modelName: "Sony SRS-XB21",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 878,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja Professional BL610"
   },
   {
-    modelID: "943",
-    modelName: "Sony SRS-XB10",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 879,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL480 Nutri Ninja with Auto-iQ"
   },
   {
-    modelID: "944",
-    modelName: "Sony SRS-X9",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 880,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL770 Mega Kitchen System"
   },
   {
-    modelID: "945",
-    modelName: "Sony SRS-X7",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 881,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL610 Professional 1000W Blender"
   },
   {
-    modelID: "946",
-    modelName: "Sony SRS-X5",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 882,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL660 Professional 1100W Blender"
   },
   {
-    modelID: "947",
-    modelName: "Sony SRS-X2",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 883,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL780 Supra Kitchen System"
   },
   {
-    modelID: "948",
-    modelName: "Sony SRS-X1",
-    brandID: "5",
-    categoryID: "1.7"
+    modelId: 884,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL687CO Auto-iQ Total Boost"
   },
   {
-    modelID: "949",
-    modelName: "Sony HT-X8500",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 885,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja BL771 Mega Kitchen System"
   },
   {
-    modelID: "950",
-    modelName: "Sony HT-G700",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 886,
+    productId: 26,
+    brandId: 43,
+    modelName: "Ninja QB900B Master Prep"
   },
   {
-    modelID: "951",
-    modelName: "Sony HT-Z9F",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 887,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster Precise Blend 200 Blender"
   },
   {
-    modelID: "952",
-    modelName: "Sony HT-ST5000",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 888,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster Pro 1200 Blender"
   },
   {
-    modelID: "953",
-    modelName: "Sony HT-CT800",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 889,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster Reverse Crush Counterforms Blender"
   },
   {
-    modelID: "954",
-    modelName: "Sony MHC-V71D",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 890,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster 10-Speed Blender"
   },
   {
-    modelID: "955",
-    modelName: "Sony MHC-M40D",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 891,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster MyBlend Pro Series Personal Blender"
   },
   {
-    modelID: "956",
-    modelName: "Sony MHC-V21D",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 892,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster Blend-N-Go MyBlend Blender"
   },
   {
-    modelID: "957",
-    modelName: "Sony MHC-V11",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 893,
+    productId: 26,
+    brandId: 48,
+    modelName: "Oster BLSTPB-WBL My Blend 250-Watt Blender"
   },
   {
-    modelID: "958",
-    modelName: "Sony MHC-M60D",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 894,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix E310 Explorian Blender"
   },
   {
-    modelID: "959",
-    modelName: "Sony MHC-M20",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 895,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix E320 Explorian Blender"
   },
   {
-    modelID: "960",
-    modelName: "Sony CMT-SBT20B",
-    brandID: "5",
-    categoryID: "1.6"
+    modelId: 896,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix 5200 Series Blender"
   },
   {
-    modelID: "961",
-    modelName: "Bose QuietComfort 45",
-    brandID: "8",
-    categoryID: "1.6"
+    modelId: 897,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix Professional Series 750 Blender"
   },
   {
-    modelID: "962",
-    modelName: "Bose QuietComfort 35 II",
-    brandID: "8",
-    categoryID: "1.6"
+    modelId: 898,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix Ascent Series A2300 Blender"
   },
   {
-    modelID: "963",
-    modelName: "Bose QuietComfort Earbuds",
-    brandID: "8",
-    categoryID: "1.6"
+    modelId: 899,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix Ascent Series A2500 Blender"
   },
   {
-    modelID: "964",
-    modelName: "Bose Sport Earbuds",
-    brandID: "8",
-    categoryID: "5.2"
+    modelId: 900,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix Ascent Series A3300 Blender"
   },
   {
-    modelID: "965",
-    modelName: "Bose SoundSport Free",
-    brandID: "8",
-    categoryID: "1.6"
+    modelId: 901,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix Ascent Series A3500 Blender"
   },
   {
-    modelID: "966",
-    modelName: "Bose SoundSport Wireless",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 902,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix 7500 Blender"
   },
   {
-    modelID: "967",
-    modelName: "Bose Frames (Audio Sunglasses)",
-    brandID: "8",
-    categoryID: "1.9"
+    modelId: 903,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix Pro 750 Heritage Blender"
   },
   {
-    modelID: "968",
-    modelName: "Bose SoundLink Revolve+",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 904,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix S30 Personal Blender"
   },
   {
-    modelID: "969",
-    modelName: "Bose SoundLink Revolve",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 905,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix S50 Personal Blender"
   },
   {
-    modelID: "970",
-    modelName: "Bose SoundLink Mini II",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 906,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix S55 Personal Blender"
   },
   {
-    modelID: "971",
-    modelName: "Bose SoundLink Color II",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 907,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix TurboBlend Two-Speed Blender"
   },
   {
-    modelID: "972",
-    modelName: "Bose SoundTouch 30",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 908,
+    productId: 26,
+    brandId: 58,
+    modelName: "Vitamix TurboBlend Three-Speed Blender"
   },
   {
-    modelID: "973",
-    modelName: "Bose SoundTouch 20",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 909,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips Avance Collection Blender"
   },
   {
-    modelID: "974",
-    modelName: "Bose SoundTouch 10",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 910,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips Viva Collection Blender"
   },
   {
-    modelID: "975",
-    modelName: "Bose Home Speaker 500",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 911,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips Daily Collection Blender"
   },
   {
-    modelID: "976",
-    modelName: "Bose Home Speaker 300",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 912,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips Mini Blender"
   },
   {
-    modelID: "977",
-    modelName: "Bose SoundLink Micro",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 913,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips High-Speed Power Blender"
   },
   {
-    modelID: "978",
-    modelName: "Bose Portable Smart Speaker",
-    brandID: "8",
-    categoryID: "5.2"
+    modelId: 914,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips ProMix Hand Blender (Includes blending attachments)"
   },
   {
-    modelID: "979",
-    modelName: "Bose Smart Soundbar 900",
-    brandID: "8",
-    categoryID: "1.8"
+    modelId: 915,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips HR3652/01 Avance Collection Blender"
   },
   {
-    modelID: "980",
-    modelName: "Bose Smart Soundbar 700",
-    brandID: "8",
-    categoryID: "1.8"
+    modelId: 916,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips HR2096/01 Avance Collection Blender"
   },
   {
-    modelID: "981",
-    modelName: "Bose SoundTouch 300",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 917,
+    productId: 26,
+    brandId: 51,
+    modelName: "Philips HR2172/00 Viva Collection Blender"
   },
   {
-    modelID: "982",
-    modelName: "Bose Wave SoundTouch Music System IV",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 918,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun MultiQuick 5 Hand Blender"
   },
   {
-    modelID: "983",
-    modelName: "Bose Wave SoundTouch Music System III",
-    brandID: "8",
-    categoryID: "1.7"
+    modelId: 919,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun PureMix Power Blender"
   },
   {
-    modelID: "984",
-    modelName: "Beats Solo Pro",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 920,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun MultiQuick 9 Hand Blender"
   },
   {
-    modelID: "985",
-    modelName: "Beats Solo3 Wireless",
-    brandID: "121",
-    categoryID: "1.7"
+    modelId: 921,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun PureMix Blender with Glass Jug"
   },
   {
-    modelID: "986",
-    modelName: "Beats Solo2 Wireless",
-    brandID: "121",
-    categoryID: "1.7"
+    modelId: 922,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun JB7352 PureMix Power Countertop Blender"
   },
   {
-    modelID: "987",
-    modelName: "Beats Studio3 Wireless",
-    brandID: "121",
-    categoryID: "1.7"
+    modelId: 923,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun MQ725 Multiquick Hand Blender"
   },
   {
-    modelID: "988",
-    modelName: "Beats Studio2 Wireless",
-    brandID: "121",
-    categoryID: "1.7"
+    modelId: 924,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun JB7001BKS PureMix Power Countertop"
   },
   {
-    modelID: "989",
-    modelName: "Beats EP",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 925,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun MQ9037X Multiquick 9 Hand Blender"
   },
   {
-    modelID: "990",
-    modelName: "Beats Powerbeats Pro",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 926,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun JB7200 PureMix Countertop Blender"
   },
   {
-    modelID: "991",
-    modelName: "Beats Powerbeats High-Performance Wireless",
-    brandID: "121",
-    categoryID: "1.7"
+    modelId: 927,
+    productId: 26,
+    brandId: 10,
+    modelName: "Braun JB7350 PureMix Power Countertop Blender"
   },
   {
-    modelID: "992",
-    modelName: "Beats Powerbeats3 Wireless",
-    brandID: "121",
-    categoryID: "1.7"
+    modelId: 928,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BL2010BG 10-Speed Blender"
   },
   {
-    modelID: "993",
-    modelName: "Beats Flex",
-    brandID: "121",
-    categoryID: "1.2"
+    modelId: 929,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BL2010BP 10-Speed Blender"
   },
   {
-    modelID: "994",
-    modelName: "BeatsX",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 930,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BL2010BG 10-Speed Blender"
   },
   {
-    modelID: "995",
-    modelName: "Beats Tour2",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 931,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BX225 300W Blender"
   },
   {
-    modelID: "996",
-    modelName: "Beats urBeats",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 932,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BL2010BG 10-Speed Blender"
   },
   {
-    modelID: "997",
-    modelName: "Beats iBeats",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 933,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BL1110RG Crush Master Blender"
   },
   {
-    modelID: "998",
-    modelName: "Beats Pro",
-    brandID: "121",
-    categoryID: "1.6"
+    modelId: 934,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BL1350DP-P Performance"
   },
   {
-    modelID: "999",
-    modelName: "Sony Cyber-shot Series",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 935,
+    productId: 26,
+    brandId: 7,
+    modelName: "FusionBlade Digital Blender"
   },
   {
-    modelID: "1000",
-    modelName: "Sony RX Series",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 936,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BX210 300W Blender"
   },
   {
-    modelID: "1001",
-    modelName: "Sony Alpha a1",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 937,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BX210 300W Blender"
   },
   {
-    modelID: "1002",
-    modelName: "Sony Alpha a9 II",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 938,
+    productId: 26,
+    brandId: 7,
+    modelName: "Black & Decker BX210 300W Blender"
   },
   {
-    modelID: "1003",
-    modelName: "Sony Alpha a7R IV",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 939,
+    productId: 26,
+    brandId: 30,
+    modelName: "Krups Countertop Blender with Glass Jar (Model:KB710D)"
   },
   {
-    modelID: "1004",
-    modelName: "Sony Alpha a7S III",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 940,
+    productId: 26,
+    brandId: 30,
+    modelName: "Krups High-Speed Blender (Model: KB790)"
   },
   {
-    modelID: "1005",
-    modelName: "Sony Alpha a7 III",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 941,
+    productId: 26,
+    brandId: 30,
+    modelName: "Krups Personal Blender (Model: GP211851)"
   },
   {
-    modelID: "1006",
-    modelName: "Sony Alpha a7C",
-    brandID: "5",
-    categoryID: "1.10"
+    modelId: 942,
+    productId: 26,
+    brandId: 30,
+    modelName: "Krups PowerX Compact Blender (Model: KB203)"
   },
   {
-    modelID: "1007",
-    modelName: "Canon PowerShot G",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 943,
+    productId: 26,
+    brandId: 30,
+    modelName: "Krups Immersion Hand Blender (Model: GPA30842)"
   },
   {
-    modelID: "1008",
-    modelName: "Canon PowerShot SX",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 944,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01BLUS 50's Retro Style Blender"
   },
   {
-    modelID: "1009",
-    modelName: "Canon PowerShot ELPH",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 945,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01CRUS 50's Retro Style Blender"
   },
   {
-    modelID: "1010",
-    modelName: "Canon EOS 1D X Mark III",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 946,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01PKUS 50's Retro Style Blender"
   },
   {
-    modelID: "1011",
-    modelName: "Canon EOS 5D Mark IV",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 947,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01PGUS 50's Retro Style Blender"
   },
   {
-    modelID: "1012",
-    modelName: "Canon EOS 6D Mark II",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 948,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01RDUS 50's Retro Style Blender"
   },
   {
-    modelID: "1013",
-    modelName: "Canon EOS 90D",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 949,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01SVUS 50's Retro Style Blender"
   },
   {
-    modelID: "1014",
-    modelName: "Canon EOS M50 Mark II",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 950,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01PGUK 50's Retro Style Blender"
   },
   {
-    modelID: "1015",
-    modelName: "Canon EOS M6 Mark II",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 951,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01RDUK 50's Retro Style Blender"
   },
   {
-    modelID: "1016",
-    modelName: "Canon EOS M200",
-    brandID: "77",
-    categoryID: "1.10"
+    modelId: 952,
+    productId: 26,
+    brandId: 55,
+    modelName: "Smeg BLF01SVUK 50's Retro Style Blender"
   },
   {
-    modelID: "1017",
-    modelName: "Nikon D6",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 953,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Chef Series Digital Blender"
   },
   {
-    modelID: "1018",
-    modelName: "Nikon D850",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 954,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Chef Series 64 oz Blender"
   },
   {
-    modelID: "1019",
-    modelName: "Nikon D750",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 955,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Chef Series Power Blender"
   },
   {
-    modelID: "1020",
-    modelName: "Nikon D5600",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 956,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Arctic Chill Blender"
   },
   {
-    modelID: "1021",
-    modelName: "Nikon D3500",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 957,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Go Sport Blender"
   },
   {
-    modelID: "1022",
-    modelName: "Nikon Z7 II",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 958,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Go Everyday Blender"
   },
   {
-    modelID: "1023",
-    modelName: "Nikon Z6 II",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 959,
+    productId: 26,
+    brandId: 13,
+    modelName: "Dash Chef Series High-Speed Blender"
   },
   {
-    modelID: "1024",
-    modelName: "Nikon Z50",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 960,
+    productId: 26,
+    brandId: 14,
+    modelName: "DeLonghi DHB716 380W Immersion Blender"
   },
   {
-    modelID: "1025",
-    modelName: "Nikon Coolpix P1000",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 961,
+    productId: 26,
+    brandId: 14,
+    modelName: "DeLonghi DHB900 Hand Blender"
   },
   {
-    modelID: "1026",
-    modelName: "Nikon Coolpix P950",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 962,
+    productId: 27,
+    brandId: 48,
+    modelName: "Oster JusSimple 5 Speed Easy Clean Juice Extractor"
   },
   {
-    modelID: "1027",
-    modelName: "Nikon Coolpix A1000",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 963,
+    productId: 27,
+    brandId: 48,
+    modelName: "Oster JusSimple 2-Speed Easy Clean Juice Extractor"
   },
   {
-    modelID: "1028",
-    modelName: "Nikon Coolpix B600",
-    brandID: "78",
-    categoryID: "1.10"
+    modelId: 964,
+    productId: 27,
+    brandId: 48,
+    modelName: "Oster Self-Cleaning Professional Juice Extractor"
   },
   {
-    modelID: "1029",
-    modelName: "Fujifilm FinePix XP Series",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 965,
+    productId: 27,
+    brandId: 48,
+    modelName: "Oster Wide Mouth Juice Extractor"
   },
   {
-    modelID: "1030",
-    modelName: "Fujifilm FinePix XF Series",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 966,
+    productId: 27,
+    brandId: 48,
+    modelName: "Oster 400W Wide Mouth Juice Extractor"
   },
   {
-    modelID: "1031",
-    modelName: "Fujifilm X100V",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 967,
+    productId: 27,
+    brandId: 48,
+    modelName: "Oster Juice and Blend 2 Go Compact Juice Extractor and Personal Blender"
   },
   {
-    modelID: "1032",
-    modelName: "Fujifilm FinePix S1",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 968,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips Viva Collection Juicer"
   },
   {
-    modelID: "1033",
-    modelName: "Fujifilm FinePix S3 Pro",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 969,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips Avance Collection Juicer"
   },
   {
-    modelID: "1034",
-    modelName: "Fujifilm FinePix S5 Pro",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 970,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips Daily Collection Juicer"
   },
   {
-    modelID: "1035",
-    modelName: "Fujifilm X-T4",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 971,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips Compact Juicer"
   },
   {
-    modelID: "1036",
-    modelName: "Fujifilm X-T3",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 972,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips Micro Juicer"
   },
   {
-    modelID: "1037",
-    modelName: "Fujifilm X-Pro3",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 973,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips HR1918/81 Avance Collection Juicer"
   },
   {
-    modelID: "1038",
-    modelName: "Fujifilm X-Pro2",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 974,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips HR1867/21 Viva Collection Juicer"
   },
   {
-    modelID: "1039",
-    modelName: "Fujifilm X-E4",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 975,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips HR1832/01 Viva Collection Juicer"
   },
   {
-    modelID: "1040",
-    modelName: "Fujifilm X-E3",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 976,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips HR1836/01 Viva Collection Juicer"
   },
   {
-    modelID: "1041",
-    modelName: "Fujifilm X-A7",
-    brandID: "79",
-    categoryID: "1.10"
+    modelId: 977,
+    productId: 27,
+    brandId: 51,
+    modelName: "Philips HR1855/31 Viva Collection Juicer"
   },
   {
-    modelID: "1042",
-    modelName: "Panasonic Lumix GH5",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 978,
+    productId: 27,
+    brandId: 10,
+    modelName: "Braun J700 Multiquick 7 Juicer"
   },
   {
-    modelID: "1043",
-    modelName: "Panasonic Lumix GH5S",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 979,
+    productId: 27,
+    brandId: 10,
+    modelName: "Braun CJ3050 Citrus Juicer"
   },
   {
-    modelID: "1044",
-    modelName: "Panasonic Lumix G9",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 980,
+    productId: 27,
+    brandId: 10,
+    modelName: "Braun J500 Multiquick 5 Juicer"
   },
   {
-    modelID: "1045",
-    modelName: "Panasonic Lumix S1",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 981,
+    productId: 27,
+    brandId: 10,
+    modelName: "Braun MPZ22 Citromatic Citrus Juicer"
   },
   {
-    modelID: "1046",
-    modelName: "Panasonic Lumix S1R",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 982,
+    productId: 27,
+    brandId: 10,
+    modelName: "Braun J300 Multiquick 3 Juicer"
   },
   {
-    modelID: "1047",
-    modelName: "Panasonic Lumix GH4",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 983,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker JE2200B 400-Watt Fruit and Vegetable Juice Extractor"
   },
   {
-    modelID: "1048",
-    modelName: "Panasonic Lumix GH3",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 984,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker CJ630 32-Ounce Electric Citrus Juicer"
   },
   {
-    modelID: "1049",
-    modelName: "Panasonic Lumix GX9",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 985,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker JE2400BD 400-Watt Fruit and Vegetable Juice Extractor"
   },
   {
-    modelID: "1050",
-    modelName: "Panasonic Lumix GX8",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 986,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker CJ625 34-Ounce Electric Citrus Juicer"
   },
   {
-    modelID: "1051",
-    modelName: "Panasonic Lumix GX85 (GX80)",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 987,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker CJ650W 32-Ounce Electric Citrus Juicer"
   },
   {
-    modelID: "1052",
-    modelName: "Panasonic Lumix GX7",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 988,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker CJ200B 32-Ounce Citrus Juicer"
   },
   {
-    modelID: "1053",
-    modelName: "Panasonic Lumix GM5",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 989,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker CJ6302 32-Ounce Electric Citrus Juicer"
   },
   {
-    modelID: "1054",
-    modelName: "Panasonic Lumix S5",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 990,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker JE2200 400-Watt Fruit and Vegetable Juice Extractor"
   },
   {
-    modelID: "1055",
-    modelName: "Panasonic Lumix S1H",
-    brandID: "73",
-    categoryID: "1.10"
+    modelId: 991,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker CJ200S 30-Watt 32-Ounce Citrus Juicer"
   },
   {
-    modelID: "1056",
-    modelName: "Olympus SP-100EE",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 992,
+    productId: 27,
+    brandId: 7,
+    modelName: "Black & Decker JE2400BD 400-Watt Fruit and Vegetable Juice Extractor"
   },
   {
-    modelID: "1057",
-    modelName: "Olympus SP-820UZ",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 993,
+    productId: 27,
+    brandId: 30,
+    modelName: "Krups Citrus Press (Model: ZX720)"
   },
   {
-    modelID: "1058",
-    modelName: "Olympus SP-720UZ",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 994,
+    productId: 27,
+    brandId: 30,
+    modelName: "Krups Infinity Slow Juicer (Model: ZB601E51)"
   },
   {
-    modelID: "1059",
-    modelName: "Olympus XZ-2",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 995,
+    productId: 27,
+    brandId: 30,
+    modelName: "Krups Juice Extractor (Model: ZX720K)"
   },
   {
-    modelID: "1060",
-    modelName: "Olympus XZ-1",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 996,
+    productId: 27,
+    brandId: 30,
+    modelName: "Krups Citrus Juicer (Model: ZX800)"
   },
   {
-    modelID: "1061",
-    modelName: "Olympus SZ-31MR",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 997,
+    productId: 27,
+    brandId: 30,
+    modelName: "Krups Compact Juicer (Model: ZX7000)"
   },
   {
-    modelID: "1062",
-    modelName: "Olympus SZ-30MR",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 998,
+    productId: 27,
+    brandId: 55,
+    modelName: "Smeg CJF01 Citrus Juicer"
   },
   {
-    modelID: "1063",
-    modelName: "Olympus VR-370",
-    brandID: "81",
-    categoryID: "5.2"
+    modelId: 999,
+    productId: 27,
+    brandId: 55,
+    modelName: "Smeg SJF01 Slow Juicer"
   },
   {
-    modelID: "1064",
-    modelName: "Olympus VR-350",
-    brandID: "81",
-    categoryID: "5.2"
+    modelId: 1000,
+    productId: 27,
+    brandId: 55,
+    modelName: "Smeg CJF01PBUK Retro Style Citrus Juicer"
   },
   {
-    modelID: "1065",
-    modelName: "Olympus OM-D E-M1X",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 1001,
+    productId: 27,
+    brandId: 55,
+    modelName: "Smeg SJF01PBUK Retro Style Slow Juicer"
   },
   {
-    modelID: "1066",
-    modelName: "Olympus OM-D E-M1 Mark III",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 1002,
+    productId: 27,
+    brandId: 55,
+    modelName: "Smeg CJF01BLEU Retro Style Citrus Juicer"
   },
   {
-    modelID: "1067",
-    modelName: "Olympus OM-D E-M5 Mark III",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 1003,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Citrus Juicer"
   },
   {
-    modelID: "1068",
-    modelName: "Olympus OM-D E-M10 Mark IV",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 1004,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Go Dual Citrus Juicer"
   },
   {
-    modelID: "1069",
-    modelName: "Olympus OM-D E-M10 Mark III",
-    brandID: "81",
-    categoryID: "1.10"
+    modelId: 1005,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Premium Juicer"
   },
   {
-    modelID: "1070",
-    modelName: "Olympus PEN-F",
-    brandID: "81",
-    categoryID: "4.8"
+    modelId: 1006,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Go Deluxe Compact Power Juicer"
   },
   {
-    modelID: "1071",
-    modelName: "Olympus PEN E-PL10",
-    brandID: "81",
-    categoryID: "4.8"
+    modelId: 1007,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Coffee makers:"
   },
   {
-    modelID: "1072",
-    modelName: "Olympus PEN E-PL9",
-    brandID: "81",
-    categoryID: "4.8"
+    modelId: 1008,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Express Coffee Maker"
   },
   {
-    modelID: "1073",
-    modelName: "Olympus PEN E-PL8",
-    brandID: "81",
-    categoryID: "4.8"
+    modelId: 1009,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Cold Brew Coffee Maker"
   },
   {
-    modelID: "1074",
-    modelName: "iPad Air (4th generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1010,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash One Cup Coffee Maker"
   },
   {
-    modelID: "1075",
-    modelName: "iPad Air (3rd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1011,
+    productId: 27,
+    brandId: 13,
+    modelName: "Dash Compact Cold Brew Coffee Maker"
   },
   {
-    modelID: "1076",
-    modelName: "iPad Air 2 (2nd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1012,
+    productId: 27,
+    brandId: 14,
+    modelName: "DeLonghi Electric Citrus Juicer"
   },
   {
-    modelID: "1077",
-    modelName: "iPad Air (1st generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1013,
+    productId: 27,
+    brandId: 14,
+    modelName: "DeLonghi Multifruit Juicer"
   },
   {
-    modelID: "1078",
-    modelName: "iPad Pro 12.9-inch (5th generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1014,
+    productId: 27,
+    brandId: 14,
+    modelName: "DeLonghi Centrifugal Juicer"
   },
   {
-    modelID: "1079",
-    modelName: "iPad Pro 11-inch (3rd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1015,
+    productId: 27,
+    brandId: 14,
+    modelName: "DeLonghi Juice Extractor"
   },
   {
-    modelID: "1080",
-    modelName: "iPad Pro 12.9-inch (4th generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1016,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid 12-Cup Coffee Maker"
   },
   {
-    modelID: "1081",
-    modelName: "iPad Pro 11-inch (2nd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1017,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid 14-Cup Glass Carafe Coffee Maker"
   },
   {
-    modelID: "1082",
-    modelName: "iPad Pro 12.9-inch (3rd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1018,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid 14-Cup Digital Coffee Maker"
   },
   {
-    modelID: "1083",
-    modelName: "iPad Pro 11-inch (1st generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1019,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid 12-Cup Drip Coffee Maker"
   },
   {
-    modelID: "1084",
-    modelName: "iPad Pro 12.9-inch (2nd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1020,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid 8-Cup Coffee Maker"
   },
   {
-    modelID: "1085",
-    modelName: "iPad Pro 12.9-inch (1st generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1021,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid Cold Brew Coffee Maker"
   },
   {
-    modelID: "1086",
-    modelName: "iPad mini (6th generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1022,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid Siphon Coffee Brewer"
   },
   {
-    modelID: "1087",
-    modelName: "iPad mini (5th generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1023,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid Precision Press Coffee Maker"
   },
   {
-    modelID: "1088",
-    modelName: "iPad mini 4 (4th generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1024,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid Pour Over Coffee Brewer"
   },
   {
-    modelID: "1089",
-    modelName: "iPad mini 3 (3rd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1025,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid Custom Pour Over Coffee Brewer"
   },
   {
-    modelID: "1090",
-    modelName: "iPad mini 2 (2nd generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1026,
+    productId: 28,
+    brandId: 29,
+    modelName: "KitchenAid Personal Coffee Maker"
   },
   {
-    modelID: "1091",
-    modelName: "iPad mini (1st generation)",
-    brandID: "52",
-    categoryID: "4.16"
+    modelId: 1027,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CP301"
   },
   {
-    modelID: "1092",
-    modelName: "Samsung Galaxy Tab S7+",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1028,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CM407"
   },
   {
-    modelID: "1093",
-    modelName: "Samsung Galaxy Tab S7",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1029,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CF091"
   },
   {
-    modelID: "1094",
-    modelName: "Samsung Galaxy Tab S6 Lite",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1030,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CE201"
   },
   {
-    modelID: "1095",
-    modelName: "Samsung Galaxy Tab A7",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1031,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CM401"
   },
   {
-    modelID: "1096",
-    modelName: "Samsung Galaxy Tab Active3",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1032,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CM20"
   },
   {
-    modelID: "1097",
-    modelName: "Samsung Galaxy Tab S6",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1033,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CF112"
   },
   {
-    modelID: "1098",
-    modelName: "Samsung Galaxy Tab S5e",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1034,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CF097"
   },
   {
-    modelID: "1099",
-    modelName: "Samsung Galaxy Tab A 8.0",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1035,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CM400"
   },
   {
-    modelID: "1100",
-    modelName: "Samsung Galaxy Tab A 10.1",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1036,
+    productId: 28,
+    brandId: 43,
+    modelName: "Ninja CP301W"
   },
   {
-    modelID: "1101",
-    modelName: "Samsung Galaxy Tab S4",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1037,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster 12-Cup Programmable Coffee Maker"
   },
   {
-    modelID: "1102",
-    modelName: "Samsung Galaxy Tab S3",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1038,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster 10-Cup Optimal Brew Thermal Coffee Maker Oster 12-Cup Stainless Steel Coffee Maker"
   },
   {
-    modelID: "1103",
-    modelName: "Acer Iconia Tab 10",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1039,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster 12-Cup Programmable Coffee Maker with Brew Strength Selector"
   },
   {
-    modelID: "1104",
-    modelName: "Acer Iconia Tab 8",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1040,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster Single Serve Coffee Maker"
   },
   {
-    modelID: "1105",
-    modelName: "Acer Iconia One 10",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1041,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster 12-Cup Drip Coffee Maker"
   },
   {
-    modelID: "1106",
-    modelName: "Acer Iconia One 8",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1042,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster 12-Cup Stainless Steel Thermal Coffee Maker"
   },
   {
-    modelID: "1107",
-    modelName: "Acer Iconia Tab 7",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1043,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster 12-Cup Coffee Maker BVST-JBXSS41"
   },
   {
-    modelID: "1108",
-    modelName: "Acer Iconia Tab 7 HD",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1044,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster Prima Latte Coffee Maker"
   },
   {
-    modelID: "1109",
-    modelName: "Acer Iconia Tab A3",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1045,
+    productId: 28,
+    brandId: 48,
+    modelName: "Oster Coffee Center 12-Cup Coffeemaker and Single Serve Brewer"
   },
   {
-    modelID: "1110",
-    modelName: "Acer Iconia Tab 10 A3-A20",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1046,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Classic Coffee Maker"
   },
   {
-    modelID: "1111",
-    modelName: "Acer Iconia Tab 8 W",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1047,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Elite Coffee Maker"
   },
   {
-    modelID: "1112",
-    modelName: "Acer Iconia One 7",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1048,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Select Coffee Maker"
   },
   {
-    modelID: "1113",
-    modelName: "Acer Iconia One 8 B1-820",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1049,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Compact Coffee Maker"
   },
   {
-    modelID: "1114",
-    modelName: "Acer Iconia Tab A1-850",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1050,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Express Coffee Maker"
   },
   {
-    modelID: "1115",
-    modelName: "Acer Iconia Tab A1-840FHD",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1051,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Cafe Coffee Maker"
   },
   {
-    modelID: "1116",
-    modelName: "Acer Iconia Tab 7 A1-713",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1052,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Elite C Single Serve Coffee Maker"
   },
   {
-    modelID: "1117",
-    modelName: "Acer Iconia W3",
-    brandID: "57",
-    categoryID: "4.16"
+    modelId: 1053,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Mini Coffee Maker"
   },
   {
-    modelID: "1118",
-    modelName: "Google Pixel Tablet",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1054,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Classic K50 Coffee Maker"
   },
   {
-    modelID: "1119",
-    modelName: "Microsoft Surface",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1055,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-55 Coffee Maker"
   },
   {
-    modelID: "1120",
-    modelName: "Microsoft Surface 2",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1056,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Duo Essentials Coffee Maker"
   },
   {
-    modelID: "1121",
-    modelName: "Microsoft Surface 3",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1057,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Duo Plus Coffee Maker"
   },
   {
-    modelID: "1122",
-    modelName: "Microsoft Surface Pro",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1058,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Supreme Coffee Maker"
   },
   {
-    modelID: "1123",
-    modelName: "Microsoft Surface Pro 2",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1059,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Supreme Plus Coffee Maker"
   },
   {
-    modelID: "1124",
-    modelName: "Microsoft Surface Pro 3",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1060,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Select Single Serve K80 Coffee Maker"
   },
   {
-    modelID: "1125",
-    modelName: "Microsoft Surface Pro 4",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1061,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Classic K-250 Coffee Maker"
   },
   {
-    modelID: "1126",
-    modelName: "Microsoft Surface Pro 5 (Surface Pro 2017)",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1062,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Compact K-35 Coffee Maker"
   },
   {
-    modelID: "1127",
-    modelName: "Microsoft Surface Pro 6",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1063,
+    productId: 28,
+    brandId: 28,
+    modelName: "Keurig K-Slim Coffee Maker"
   },
   {
-    modelID: "1128",
-    modelName: "Microsoft Surface Pro 7",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1064,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Inissia"
   },
   {
-    modelID: "1129",
-    modelName: "Microsoft Surface Pro X",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1065,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Pixie"
   },
   {
-    modelID: "1130",
-    modelName: "Microsoft Surface Pro 8",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1066,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Essenza Mini"
   },
   {
-    modelID: "1131",
-    modelName: "Microsoft Surface Go",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1067,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Citiz"
   },
   {
-    modelID: "1132",
-    modelName: "Microsoft Surface Go 2",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1068,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Lattissima"
   },
   {
-    modelID: "1133",
-    modelName: "Microsoft Surface Go 3",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1069,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Expert"
   },
   {
-    modelID: "1134",
-    modelName: "Microsoft Surface Book",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1070,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Creatista"
   },
   {
-    modelID: "1135",
-    modelName: "Microsoft Surface Book 2",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1071,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso VertuoLine"
   },
   {
-    modelID: "1136",
-    modelName: "Microsoft Surface Book 3",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1072,
+    productId: 28,
+    brandId: 41,
+    modelName: "Nespresso Maestria"
   },
   {
-    modelID: "1137",
-    modelName: "Macbook Air M2 2022",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1073,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips Grind & Brew Coffee Maker"
   },
   {
-    modelID: "1138",
-    modelName: "Macbook Air M1 2020",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1074,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips 3200 Series LatteGo Espresso Machine"
   },
   {
-    modelID: "1139",
-    modelName: "Macbook Air 13-inch 2019",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1075,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips 2200 Series Espresso Machine"
   },
   {
-    modelID: "1140",
-    modelName: "Macbook Air 13-inch 2018",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1076,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips Senseo Original Coffee Pod Machine"
   },
   {
-    modelID: "1141",
-    modelName: "Macbook Air 13-inch 2017",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1077,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips EP1200/04 Series Espresso Machine"
   },
   {
-    modelID: "1142",
-    modelName: "Macbook Air 13-inch 2015",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1078,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips 3100 Series Espresso Machine"
   },
   {
-    modelID: "1143",
-    modelName: "Macbook Air 13-inch 2013",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1079,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips EP2200/10 Series Espresso Machine"
   },
   {
-    modelID: "1144",
-    modelName: "Macbook Air 13-inch 2012",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1080,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips EP3241/54 LatteGo Series Espresso Machine"
   },
   {
-    modelID: "1145",
-    modelName: "Macbook Air 13-inch 2011",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1081,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips 3200 Series Espresso Machine"
   },
   {
-    modelID: "1146",
-    modelName: "Macbook Air 13-inch 2010",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1082,
+    productId: 28,
+    brandId: 51,
+    modelName: "Philips Daily Collection Coffee Maker"
   },
   {
-    modelID: "1147",
-    modelName: "Macbook Air 13-inch 2009",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1083,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1148",
-    modelName: "Macbook Pro 13 inch",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1084,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF7150BK BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1149",
-    modelName: "Macbook Pro 14 inch",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1085,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF7000BK BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1150",
-    modelName: "Macbook Pro 15 inch",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1086,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF7175 BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1151",
-    modelName: "Macbook Pro 16 inch",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1087,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1152",
-    modelName: "Macbook Pro 17 inch",
-    brandID: "52",
-    categoryID: "4.17"
+    modelId: 1088,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1153",
-    modelName: "Dell XPS",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1089,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF6050WH BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1154",
-    modelName: "Dell Inspiron",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1090,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF7150BK BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1155",
-    modelName: "Dell Latitude (Business Laptops)",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1091,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF7000BK BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1156",
-    modelName: "Dell Precision (Workstations)",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1092,
+    productId: 28,
+    brandId: 10,
+    modelName: "Braun KF7175 BrewSense Drip Coffee Maker"
   },
   {
-    modelID: "1157",
-    modelName: "Dell Alienware (Gaming Laptops)",
-    brandID: "55",
-    categoryID: "4.17"
+    modelId: 1093,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker DLX1050W 12-Cup Programmable Coffee Maker"
   },
   {
-    modelID: "1158",
-    modelName: "Dell G (Gaming Laptops)",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1094,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM2035B 12-Cup Thermal Coffee Maker"
   },
   {
-    modelID: "1159",
-    modelName: "Dell Vostro (Small Business Laptops)",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1095,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM2030B 12-Cup Thermal Coffee Maker"
   },
   {
-    modelID: "1160",
-    modelName: "Dell Chromebook",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1096,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM1160B 12-Cup Programmable Coffee Maker"
   },
   {
-    modelID: "1161",
-    modelName: "Dell XPS 2in1",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1097,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM4110S 12-Cup Digital Coffee Maker"
   },
   {
-    modelID: "1162",
-    modelName: "Dell Precision Mobile Workstations",
-    brandID: "56",
-    categoryID: "4.17"
+    modelId: 1098,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker DCM600B 5-Cup Coffeemaker"
   },
   {
-    modelID: "1163",
-    modelName: "HP Spectre",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1099,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM0700BZ 5-Cup Coffee Maker"
   },
   {
-    modelID: "1164",
-    modelName: "HP Envy",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1100,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM0700W 5-Cup Coffee Maker"
   },
   {
-    modelID: "1165",
-    modelName: "HP Pavillion",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1101,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker DCM600W 5-Cup Coffeemaker"
   },
   {
-    modelID: "1166",
-    modelName: "HP Omen (Gaming Laptops)",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1102,
+    productId: 28,
+    brandId: 7,
+    modelName: "Black & Decker CM2030R 12-Cup Thermal Coffee Maker"
   },
   {
-    modelID: "1167",
-    modelName: "HP ProBook (Business Laptops)",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1103,
+    productId: 28,
+    brandId: 30,
+    modelName: "Krups 10-Cup Coffee Maker (Model: KM785D50)"
   },
   {
-    modelID: "1168",
-    modelName: "HP EliteBook (Business Laptops)",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1104,
+    productId: 28,
+    brandId: 30,
+    modelName: "Krups 12-Cup Programmable Coffee Maker (Model: KM785D50)"
   },
   {
-    modelID: "1169",
-    modelName: "HP ZBook (Mobile Workstations)",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1105,
+    productId: 28,
+    brandId: 30,
+    modelName: "Krups Espresso Machine (Model: XP344C51)"
   },
   {
-    modelID: "1170",
-    modelName: "HP Stream",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1106,
+    productId: 28,
+    brandId: 30,
+    modelName: "Krups Single Serve Coffee Maker (Model: KM202850)"
   },
   {
-    modelID: "1171",
-    modelName: "HP Chromebbok",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1107,
+    productId: 28,
+    brandId: 30,
+    modelName: "Krups Coffee and Spice Grinder (Model: GX4100)"
   },
   {
-    modelID: "1172",
-    modelName: "HP Dragonfly",
-    brandID: "58",
-    categoryID: "1.2"
+    modelId: 1108,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg DCF02 drip coffee maker"
   },
   {
-    modelID: "1173",
-    modelName: "HP x2",
-    brandID: "58",
-    categoryID: "4.17"
+    modelId: 1109,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg ECF01 espresso machine"
   },
   {
-    modelID: "1174",
-    modelName: "Asus Zenbook",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1110,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg CGF01 grinder"
   },
   {
-    modelID: "1175",
-    modelName: "Asus VivoBook",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1111,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg CMS6451X built-in coffee machine"
   },
   {
-    modelID: "1176",
-    modelName: "Asus ROG (Republic of Gamers)",
-    brandID: "59",
-    categoryID: "5.1"
+    modelId: 1112,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg Electric Kettles:"
   },
   {
-    modelID: "1177",
-    modelName: "Asus TUF",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1113,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg KLF032"
   },
   {
-    modelID: "1178",
-    modelName: "ASUS ExpertBook (Business Laptops)",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1114,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg KLF043"
   },
   {
-    modelID: "1179",
-    modelName: "Asus Chromebook",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1115,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg KLF014"
   },
   {
-    modelID: "1180",
-    modelName: "Asus ProArt (Creative Professional Laptops)",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1116,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg KLF055"
   },
   {
-    modelID: "1181",
-    modelName: "Asus Transformer",
-    brandID: "59",
-    categoryID: "4.17"
+    modelId: 1117,
+    productId: 28,
+    brandId: 55,
+    modelName: "Smeg KLF03CRUS"
   },
   {
-    modelID: "1182",
-    modelName: "Acer Aspire",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1118,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi ECAM22110SB Magnifica XS Fully Automatic Espresso Machine"
   },
   {
-    modelID: "1183",
-    modelName: "Acer Swift",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1119,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi ESAM3300 Magnifica Super-Automatic Espresso Machine"
   },
   {
-    modelID: "1184",
-    modelName: "Acer Predator (Gaming Laptops)",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1120,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi EC155M Manual Espresso Machine"
   },
   {
-    modelID: "1185",
-    modelName: "Acer Chromebook",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1121,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi EC680M Dedica 15-Bar Pump Espresso Machine"
   },
   {
-    modelID: "1186",
-    modelName: "Acer TravelMate (Business Laptops)",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1122,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi Dinamica Automatic Coffee & Espresso Machine"
   },
   {
-    modelID: "1187",
-    modelName: "Acer ConceptD (Creative Professional Laptops)",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1123,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi BCO430 Combination Pump Espresso and Drip Coffee Machine"
   },
   {
-    modelID: "1188",
-    modelName: "Acer Nitro (Gaming Laptops)",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1124,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi ECAM23210SB Magnifica S Fully Automatic Espresso Machine"
   },
   {
-    modelID: "1189",
-    modelName: "Acer Spin (2in1 Laptops)",
-    brandID: "57",
-    categoryID: "4.17"
+    modelId: 1125,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi ECP3420 Bar Pump Espresso and Cappuccino Machine"
   },
   {
-    modelID: "1190",
-    modelName: "Lenovo Thinkpad (Business laptops)",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1126,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi ECAM28465M Prima Donna Fully Automatic Espresso Machine"
   },
   {
-    modelID: "1191",
-    modelName: "Lenovo IdeaPad",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1127,
+    productId: 28,
+    brandId: 14,
+    modelName: "DeLonghi ESAM04110S Magnifica Compact Fully Automatic Espresso Machine."
   },
   {
-    modelID: "1192",
-    modelName: "Lenovo Legion (Gaming laptops)",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1128,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid 1.25-Liter Electric Kettle"
   },
   {
-    modelID: "1193",
-    modelName: "Lenovo Yoga (2in1 laptops)",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1129,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid 1.5-Liter Electric Kettle"
   },
   {
-    modelID: "1194",
-    modelName: "Lenovo Chromebook",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1130,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid 1.7-Liter Electric Kettle"
   },
   {
-    modelID: "1195",
-    modelName: "Lenovo V (Budget laptops)",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1131,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Pro Line Series Electric Kettle"
   },
   {
-    modelID: "1196",
-    modelName: "Lenovo Ideacentre (All in one PCs)",
-    brandID: "54",
-    categoryID: "4.17"
+    modelId: 1132,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Precision Gooseneck Digital Kettle"
   },
   {
-    modelID: "1197",
-    modelName: "Microsoft Surface Laptop",
-    brandID: "60",
-    categoryID: "4.17"
+    modelId: 1133,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Artisan Series Electric Kettle"
   },
   {
-    modelID: "1198",
-    modelName: "Microsoft Surface Book (2in1 Laptops)",
-    brandID: "60",
-    categoryID: "4.17"
+    modelId: 1134,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Architect Series II Electric Kettle"
   },
   {
-    modelID: "1199",
-    modelName: "Microsoft Surface Pro (2in1 Tablets)",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1135,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Variable Temperature Electric Kettle"
   },
   {
-    modelID: "1200",
-    modelName: "Microsoft Surface Go (Budget 2in1 Tablets)",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1136,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Dual Wall Electric Kettle"
   },
   {
-    modelID: "1201",
-    modelName: "Microsoft Surface Studio",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1137,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Glass Electric Kettle"
   },
   {
-    modelID: "1202",
-    modelName: "Microsoft Surface Hub",
-    brandID: "60",
-    categoryID: "4.16"
+    modelId: 1138,
+    productId: 29,
+    brandId: 29,
+    modelName: "KitchenAid Stainless Steel Electric Kettle"
   },
   {
-    modelID: "1203",
-    modelName: "MSI GS (Stealth- Gaming Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1139,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart CPK-17 PerfecTemp Electric Kettle"
   },
   {
-    modelID: "1204",
-    modelName: "MSI GE (Raider- Gaming Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1140,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart CPK-17P1 PerfecTemp Electric Kettle"
   },
   {
-    modelID: "1205",
-    modelName: "MSI GT (Titan- High Performance Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1141,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart JK-17 Cordless Electric Kettle"
   },
   {
-    modelID: "1206",
-    modelName: "MSI GP (Performance Gaming Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1142,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart CPK-17C Electric Kettle"
   },
   {
-    modelID: "1207",
-    modelName: "MSI Creator (Content Creation Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1143,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart JK-17B Cordless Electric Kettle"
   },
   {
-    modelID: "1208",
-    modelName: "MSI Prestige (Professional Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1144,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart CPK-17W Cordless Electric Kettle"
   },
   {
-    modelID: "1209",
-    modelName: "MSI Modern (Slim and Lightweight Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1145,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart DK-17 Cordless Stainless Steel Electric Kettle"
   },
   {
-    modelID: "1210",
-    modelName: "MSI Bravo (Affordable Gaming Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1146,
+    productId: 29,
+    brandId: 12,
+    modelName: "Cuisinart JK-17 Cordless Electric Jug Kettle"
   },
   {
-    modelID: "1211",
-    modelName: "MSI Alpha (Creator and Gaming Laptops)",
-    brandID: "76",
-    categoryID: "4.17"
+    modelId: 1147,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster Stainless Steel Electric Kettle"
   },
   {
-    modelID: "1212",
-    modelName: "iPhone (1st Generation)",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1148,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster Illuminating Glass Electric Kettle"
   },
   {
-    modelID: "1213",
-    modelName: "iPhone 3G",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1149,
+    productId: 29,
+    brandId: 1,
+    modelName: "Oster DuraCeramic Electric Kettle"
   },
   {
-    modelID: "1214",
-    modelName: "iPhone 3GS",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1150,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster BVST-EK18B Electric Kettle"
   },
   {
-    modelID: "1215",
-    modelName: "iPhone 4",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1151,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster BVSTKT3231 Electric Kettle"
   },
   {
-    modelID: "1216",
-    modelName: "iPhone 4s",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1152,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster 5965 Electric Kettle"
   },
   {
-    modelID: "1217",
-    modelName: "iPhone 5c",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1153,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster 1.7-Liter BVCB07-Z Electric Kettle"
   },
   {
-    modelID: "1218",
-    modelName: "iPhone 5s",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1154,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster BVSTK7051SS Electric Kettle"
   },
   {
-    modelID: "1219",
-    modelName: "iPhone 6",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1155,
+    productId: 29,
+    brandId: 48,
+    modelName: "Oster FPSTKT4073 Electric Kettle"
   },
   {
-    modelID: "1220",
-    modelName: "iPhone 6 Plus",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1156,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-1500 Electric Kettle"
   },
   {
-    modelID: "1221",
-    modelName: "iPhone 6s",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1157,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Classic Electric Kettle"
   },
   {
-    modelID: "1222",
-    modelName: "iPhone 6s Plus",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1158,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Slim Electric Kettle"
   },
   {
-    modelID: "1223",
-    modelName: "iPhone SE (1st generation)",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1159,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Select Electric Kettle"
   },
   {
-    modelID: "1224",
-    modelName: "iPhone 7",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1160,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Elite Electric Kettle"
   },
   {
-    modelID: "1225",
-    modelName: "iPhone 7 Plus",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1161,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Supreme Electric Kettle"
   },
   {
-    modelID: "1226",
-    modelName: "iPhone 8",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1162,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Compact Electric Kettle"
   },
   {
-    modelID: "1227",
-    modelName: "iPhone 8 Plus",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1163,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-Mini Electric Kettle"
   },
   {
-    modelID: "1228",
-    modelName: "iPhone X",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1164,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-55 Electric Kettle"
   },
   {
-    modelID: "1229",
-    modelName: "iPhone XR",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1165,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-150 Electric Kettle"
   },
   {
-    modelID: "1230",
-    modelName: "iPhone XS",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1166,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-425 Electric Kettle"
   },
   {
-    modelID: "1231",
-    modelName: "iPhone XS Max",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1167,
+    productId: 29,
+    brandId: 28,
+    modelName: "Keurig K-475 Electric Kettle"
   },
   {
-    modelID: "1232",
-    modelName: "iPhone 11",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1168,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD9306/03 Daily Collection Kettle"
   },
   {
-    modelID: "1233",
-    modelName: "iPhone 11 Pro",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1169,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD9350/90 Avance Collection Kettle"
   },
   {
-    modelID: "1234",
-    modelName: "iPhone 11 Pro Max",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1170,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4646/70 Energy Efficient Kettle"
   },
   {
-    modelID: "1235",
-    modelName: "iPhone SE (2nd generation)",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1171,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4646/70 Energy Efficient Kettle"
   },
   {
-    modelID: "1236",
-    modelName: "iPhone 12",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1172,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4644/00 Energy Efficient Kettle"
   },
   {
-    modelID: "1237",
-    modelName: "iPhone 12 mini",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1173,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD9326/20 Avance Collection Kettle"
   },
   {
-    modelID: "1238",
-    modelName: "iPhone 12 Pro",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1174,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4646/40 Energy Efficient Kettle"
   },
   {
-    modelID: "1239",
-    modelName: "iPhone 12 Pro Max",
-    brandID: "52",
-    categoryID: "4.3"
+    modelId: 1175,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4646/20 Energy Efficient Kettle"
   },
   {
-    modelID: "1240",
-    modelName: "Samsung Galaxy: Samsung Galaxy S Series",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1176,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4690/01 Energy Efficient Kettle"
   },
   {
-    modelID: "1241",
-    modelName: "Samsung Galaxy Note Series",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1177,
+    productId: 29,
+    brandId: 51,
+    modelName: "Philips HD4690/21 Energy Efficient Kettle"
   },
   {
-    modelID: "1242",
-    modelName: "Samsung Galaxy A Series",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1178,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK600 Multiquick 6 Kettle"
   },
   {
-    modelID: "1243",
-    modelName: "Samsung Galaxy J Series",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1179,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK300 Multiquick 3 Kettle"
   },
   {
-    modelID: "1244",
-    modelName: "Samsung Galaxy M Series",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1180,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK3110 PurEase Kettle"
   },
   {
-    modelID: "1245",
-    modelName: "Samsung Galaxy E Series",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1181,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK500 Sommelier Kettle"
   },
   {
-    modelID: "1246",
-    modelName: "Samsung Galaxy Z Series (Foldable Phones)",
-    brandID: "16",
-    categoryID: "4.15"
+    modelId: 1182,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK3110 PurEase Kettle"
   },
   {
-    modelID: "1247",
-    modelName: "OnePlus 9 Pro",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1183,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK600 Multiquick 6 Kettle"
   },
   {
-    modelID: "1248",
-    modelName: "OnePlus 9",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1184,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK500 Sommelier Kettle"
   },
   {
-    modelID: "1249",
-    modelName: "OnePlus 8T",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1185,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK300 Multiquick 3 Kettle"
   },
   {
-    modelID: "1250",
-    modelName: "OnePlus 8 Pro",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1186,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK3110 PurEase Kettle"
   },
   {
-    modelID: "1251",
-    modelName: "OnePlus 8",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1187,
+    productId: 29,
+    brandId: 10,
+    modelName: "Braun WK500 Sommelier Kettle"
   },
   {
-    modelID: "1252",
-    modelName: "OnePlus Nord",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1188,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE1500BK 1.7-Liter Rapid Boil Electric Kettle"
   },
   {
-    modelID: "1253",
-    modelName: "OnePlus 7T Pro",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1189,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE2000SD 1.7-Liter Stainless Steel Electric Kettle"
   },
   {
-    modelID: "1254",
-    modelName: "OnePlus 7T",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1190,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE3000S 1.7-Liter Rapid Boil Electric Kettle"
   },
   {
-    modelID: "1255",
-    modelName: "OnePlus 7 Pro",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1191,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker JC200 1.7-Liter Cordless Electric Kettle"
   },
   {
-    modelID: "1256",
-    modelName: "OnePlus 7",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1192,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE1600B 1.7-Liter Electric Kettle"
   },
   {
-    modelID: "1257",
-    modelName: "OnePlus 6T",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1193,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE1517B 1.7-Liter Rapid Boil Electric Kettle"
   },
   {
-    modelID: "1258",
-    modelName: "OnePlus 6",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1194,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE1020SD 1.7-Liter Stainless Steel Electric Kettle"
   },
   {
-    modelID: "1259",
-    modelName: "OnePlus 5T",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1195,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE5550S 1.7-Liter Cordless Electric Kettle"
   },
   {
-    modelID: "1260",
-    modelName: "OnePlus 5",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1196,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker JC400 1.7-Liter Cordless Electric Kettle"
   },
   {
-    modelID: "1261",
-    modelName: "OnePlus 3T",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1197,
+    productId: 29,
+    brandId: 7,
+    modelName: "Black & Decker KE1500R 1.7-Liter Rapid Boil Electric Kettle"
   },
   {
-    modelID: "1262",
-    modelName: "OnePlus 3",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1198,
+    productId: 29,
+    brandId: 30,
+    modelName: "Krups Cool Touch Electric Kettle (Model: BW442D50)"
   },
   {
-    modelID: "1263",
-    modelName: "OnePlus 2",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1199,
+    productId: 29,
+    brandId: 30,
+    modelName: "Krups Precision Temperature Electric Kettle (Model: BW3140)"
   },
   {
-    modelID: "1264",
-    modelName: "OnePlus One",
-    brandID: "75",
-    categoryID: "4.15"
+    modelId: 1200,
+    productId: 29,
+    brandId: 30,
+    modelName: "Krups Savoy Electric Kettle (Model: BW442D50)"
   },
   {
-    modelID: "1265",
-    modelName: "Google Pixel 6 Pro",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1201,
+    productId: 29,
+    brandId: 30,
+    modelName: "Krups Cordless Electric Kettle (Model: BW3110)"
   },
   {
-    modelID: "1266",
-    modelName: "Google Pixel 6",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1202,
+    productId: 29,
+    brandId: 30,
+    modelName: "Krups Stainless Steel Electric Kettle (Model: BW730D50)"
   },
   {
-    modelID: "1267",
-    modelName: "Google Pixel 5a",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1203,
+    productId: 29,
+    brandId: 13,
+    modelName: "Dash 1.7L Electric Kettle"
   },
   {
-    modelID: "1268",
-    modelName: "Google Pixel 5",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1204,
+    productId: 29,
+    brandId: 13,
+    modelName: "Dash Stainless Steel Rapid Kettle"
   },
   {
-    modelID: "1269",
-    modelName: "Google Pixel 4a 5G",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1205,
+    productId: 29,
+    brandId: 13,
+    modelName: "Dash Go Everyday Electric Kettle"
   },
   {
-    modelID: "1270",
-    modelName: "Google Pixel 4a",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1206,
+    productId: 29,
+    brandId: 13,
+    modelName: "Dash Express Hot Pot Electric Kettle"
   },
   {
-    modelID: "1271",
-    modelName: "Google Pixel 4 XL",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1207,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi Icona Vintage Kettle"
   },
   {
-    modelID: "1272",
-    modelName: "Google Pixel 4",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1208,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi Brillante Kettle"
   },
   {
-    modelID: "1273",
-    modelName: "Google Pixel 3a XL",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1209,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi Avvolta Kettle"
   },
   {
-    modelID: "1274",
-    modelName: "Google Pixel 3a",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1210,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi Distinta Kettle"
   },
   {
-    modelID: "1275",
-    modelName: "Google Pixel 3 XL",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1211,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi Scultura Kettle"
   },
   {
-    modelID: "1276",
-    modelName: "Google Pixel 3",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1212,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi BCO410 Espresso and Coffee Maker"
   },
   {
-    modelID: "1277",
-    modelName: "Google Pixel 2 XL",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1213,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi KBJ3001 Brillante Kettle"
   },
   {
-    modelID: "1278",
-    modelName: "Google Pixel 2",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1214,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi KBO1301W Icona Kettle"
   },
   {
-    modelID: "1279",
-    modelName: "Google Pixel XL",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1215,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi KBJ3001W Brillante Kettle"
   },
   {
-    modelID: "1280",
-    modelName: "Google Pixel",
-    brandID: "118",
-    categoryID: "4.15"
+    modelId: 1216,
+    productId: 29,
+    brandId: 14,
+    modelName: "DeLonghi KBX3016 Argento Flora Kettle."
   }
 ]
 
