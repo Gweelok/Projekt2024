@@ -187,11 +187,11 @@ const Stat = ({ navigation }) => {
   useEffect(() => {
     async function fetchData() {
       try {
+        const stats = await getAllStats();
+        setData(stats);
+
         const userCurrent = await getCurrentUser();
         setUserCurrent(userCurrent);
-
-        const stats = await getAllStats(userCurrent.id);
-        setData(stats);
 
         const products = await getAllProducts();
         setProducts(products);

@@ -16,22 +16,55 @@ import Icon2 from "react-native-vector-icons/FontAwesome";
 import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
-import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
+import {
+  getAllItems,
+  getItemsFromUser,
+  getCurrentUser,
+  getAllProducts,
+} from "../utils/Repo";
 import { items } from "../utils/Testdata";
-import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
+import {
+  Calculate_co2_Equivalent,
+  convertKgToTons,
+  getUserStats,
+} from "../utils/uptainersUtils";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
-  let [co2Data, setCO2Data] = useState({ TotalCo2Footprint: 0 , itemsDonated: 0, itemsCollected: 0});
+  let [co2Data, setCO2Data] = useState({
+    TotalCo2Footprint: 0,
+    itemsDonated: 0,
+    itemsTaken: 0,
+  });
   const navigation = useNavigation();
 
   //Get current user
-const userCurrent = props.user;
-//Get all products
-const products = props.products;
-//Get info about uptainers
-const uptainers = props.uptainers;
+  const userCurrent = props.user;
+  //Get all products
+  const products = props.products;
+  //Get info about uptainers
+  const uptainers = props.uptainers;
+
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const userId = userCurrent.id;
+    if (!userId) {
+      console.log("User not found.");
+      return;
+    }
+    const userStats = await getUserStats(userId);
+    setCO2Data((prevData) => ({
+      ...prevData,
+      TotalCo2Footprint: userStats.userTakenItemsCO2 + userStats.collectedUserItemsCO2,
+      itemsDonated: userStats.userDonatedItems,
+      itemsTaken: userStats.userTakenItems,
+    }));
+  }
+
+  /*    useEffect(() => {
     fetchData();
   }, []);
   async function fetchData() {
@@ -70,9 +103,11 @@ const uptainers = props.uptainers;
       itemsDonated: itemsDonated,
       itemsCollected: itemsCollected
     }));
-  }
+  }  */
 
-  const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(co2Data.TotalCo2Footprint)
+  const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(
+    co2Data.TotalCo2Footprint
+  );
 
   return (
     <ScrollViewComponent>
@@ -107,7 +142,7 @@ const uptainers = props.uptainers;
               {t("StatsPage.ItemsCollected", currentLanguage)}
             </Text>
             <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
-              {co2Data.itemsCollected}
+              {co2Data.itemsTaken}
             </Text>
           </View>
         </View>
@@ -151,7 +186,8 @@ const uptainers = props.uptainers;
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
               {" "}
-              {t('StatsPage.kgCO2', currentLanguage)} {personalEquivalent} {t('StatsPage.Fact_equavalent', currentLanguage)}
+              {t("StatsPage.kgCO2", currentLanguage)} {personalEquivalent}{" "}
+              {t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
           <View
@@ -168,7 +204,11 @@ const uptainers = props.uptainers;
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
               {" "}
-              {t('StatsPage.Amount_first_part', currentLanguage)} {convertKgToTons(co2Data.TotalCo2Footprint)} {t('StatsPage.Amount_second_part', currentLanguage)} {totalEquivalent} {t('StatsPage.Fact_equavalent', currentLanguage)}
+              {t("StatsPage.Amount_first_part", currentLanguage)}{" "}
+              {convertKgToTons(co2Data.TotalCo2Footprint)}{" "}
+              {t("StatsPage.Amount_second_part", currentLanguage)}{" "}
+              {totalEquivalent}{" "}
+              {t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
         </View>
@@ -254,7 +294,9 @@ const uptainers = props.uptainers;
             {t("StatsPage.MostVisitedUptainer", currentLanguage)}
           </Text>
         </View>
-        {uptainers.map(uptainer => <YourVisitedUptainer value={uptainer}/>)} 
+        {uptainers.map((uptainer) => (
+          <YourVisitedUptainer value={uptainer} />
+        ))}
         <View style={{ marginTop: 25, marginBottom: 10 }}>
           <Text
             style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}
