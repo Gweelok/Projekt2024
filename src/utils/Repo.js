@@ -777,12 +777,12 @@ export async function getSearchedItems(searchText) {
     const categoryReference = ref(db, '/categories')
 
     //  Example:       products   productName inputText
-    const searchQuery = (reference, childKey, text) =>
+    const searchQuery = (reference, childKey, text) => 
         query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
 
-    const productsQuery = searchQuery(productsReference, `productName`, searchText)
-    const brandsQuery = searchQuery(brandsReference, `brandName`, searchText)
-    const modelsQuery = searchQuery(modelsReference, `modelName`, searchText)
+    const productsQuery =  searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery =  searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery =  searchQuery(modelsReference, `modelName`, searchText)
     const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
 
     try {
@@ -802,13 +802,13 @@ export async function getSearchedItems(searchText) {
             const productName = productsSnapshot[item.itemproduct]?.productName
             const brandName = brandsSnapshot[item.itemBrand]?.brandName
             const modelName = modelsSnapshot[item.itemModel]?.modelName
-            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName
+            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName             
             return (productName === searchText ||
                 brandName === searchText ||
                 modelName === searchText ||
                 categoryName === searchText) && item.itemUptainer !== 'Draft'
         })
-
+        
         return filteredItems
     } catch (error) {
         console.error(`Error fetching data for item with name ${searchText}: `, error);
@@ -816,9 +816,9 @@ export async function getSearchedItems(searchText) {
     }
 }
 
-/********************/
-/***** Delete *******/
-/********************/
+    /********************/
+    /***** Delete *******/
+    /********************/
 
 export async function deleteCategoryById(categoryId) {
     const reference = ref(db, `/categories/${categoryId}`);
