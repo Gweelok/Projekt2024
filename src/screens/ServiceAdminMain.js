@@ -9,8 +9,8 @@ const ServiceAdminMain = ({navigation, route}) => {
     const { location } = route.params;
 
     const value = {
-        "text":"Main text but we try it a bit longer for testing purpose",
-        "link":"link text"
+        "text":"Main text but we try it a bit longer for testing",
+        "link":"link text but we try it for testing"
     }
    
     return (
