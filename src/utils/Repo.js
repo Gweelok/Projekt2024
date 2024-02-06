@@ -769,6 +769,53 @@ function compare(a, b) {
     return 0;
 }
 
+export async function getSearchedItems(searchText) {
+    const db = firebaseGetDB;
+    const productsReference = ref(db, '/products')
+    const brandsReference = ref(db, '/brands')
+    const modelsReference = ref(db, '/models')
+    const categoryReference = ref(db, '/categories')
+
+    //  Example:       products   productName inputText
+    const searchQuery = (reference, childKey, text) =>
+        query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
+
+    const productsQuery = searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery = searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery = searchQuery(modelsReference, `modelName`, searchText)
+    const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
+
+    try {
+        const fetchSnapshot = async (query) => {
+            const snapshot = await get(query);
+            return snapshot.val() || {};
+        }
+        const allItems = await getAllItems()
+
+        const [productsSnapshot, brandsSnapshot, modelsSnapshot, categoriesSnapshot] = await Promise.all([
+            fetchSnapshot(productsQuery),
+            fetchSnapshot(brandsQuery),
+            fetchSnapshot(modelsQuery),
+            fetchSnapshot(categoryQuery)
+        ])
+        const filteredItems = allItems.filter((item) => {
+            const productName = productsSnapshot[item.itemproduct]?.productName
+            const brandName = brandsSnapshot[item.itemBrand]?.brandName
+            const modelName = modelsSnapshot[item.itemModel]?.modelName
+            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName
+            return (productName === searchText ||
+                brandName === searchText ||
+                modelName === searchText ||
+                categoryName === searchText) && item.itemUptainer !== 'Draft'
+        })
+
+        return filteredItems
+    } catch (error) {
+        console.error(`Error fetching data for item with name ${searchText}: `, error);
+        return []
+    }
+}
+
 /********************/
 /***** Delete *******/
 /********************/
@@ -843,6 +890,19 @@ export async function deleteImage(imagePath) {
 /**********************/
 /****** Update ********/
 /**********************/
+export async function getImage(imagePath) {
+    const storage = getStorage();
+    const imageRef = ref_storage(storage, imagePath);
+
+    try {
+        const url = await getDownloadURL(imageRef)
+        return url
+    } catch (err) {
+        console.log("Error while downloading image => ", err);
+        const url = "https://via.placeholder.com/200x200"
+        return url
+    }
+}
 
 export async function updateModelById(modelId, newData) {
     const reference = ref(db, `/models/${modelId}`);
@@ -868,7 +928,7 @@ export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         let itemImage = null
-        if (newImage) {
+        if (newImage && newImage?.uri) {
 
             const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
             const newImagePath = itemId + "." + fileExtension;
@@ -937,7 +997,9 @@ export async function updateProductById(productId, newData) {
 export async function updateItemToTaken(itemId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, { itemTaken: true });
+        // set item taken to user
+        const user = await getCurrentUser()
+        update(reference, { itemTaken: user.id });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
