@@ -9,6 +9,7 @@ import {
   getAllProducts,
 } from "../utils/Repo";
 import { t } from "../Languages/LanguageHandler.js";
+import { FA5Style } from "@expo/vector-icons/build/FontAwesome5.js";
 
 export const calculateDistance = (
   { latitude: lat1, longitude: lon1 },
@@ -75,16 +76,20 @@ export function Calculate_co2_Equivalent(co2_total) {
 // Fetches all items taken from the database
 async function fetchAllTakenItems() {
   const allItems = await getAllItems();
-  if (!allItems) return [];
-  return allItems.filter((item) => item.itemTaken === true);
+  if (allItems) return [];
+  console.log("allitems from repo:", allItems);
+  const allTakenItems = allItems.filter((item) => item.itemTaken !== false);
+  console.log("allTakenItems:", allTakenItems);
+  return allTakenItems;
 }
 
-// Fetches all items taken by a user from the database
-async function fetchAllTakenItemsByUser(userId) {
-  const allUserItems = await getItemsFromUser(userId);
-  if (!allUserItems) return [];
-  return allUserItems.filter(
-    (item) => item.itemTaken === true && item.itemTakenUser === userId
+// Fetches all items taken by a user from the database -
+async function fetchAllItemsTakenByUser(userId) {
+  const allItemsTakenByUser = await getAllItems();
+  return (
+    allItemsTakenByUser.filter(
+      (item) => item.itemTaken !== false && item.itemTakenUser === userId
+    ) || []
   );
 }
 
@@ -155,7 +160,10 @@ async function processGeneralStats(allItems) {
         const co2Footprint = await fetchProductCO2(item);
         updateGeneralStats(generalStats, co2Footprint, item.itemTakenDate);
       } catch (error) {
-        console.error(`Errors occurred during processing general stats:`, error);
+        console.error(
+          `Errors occurred during processing general stats:`,
+          error
+        );
       }
     })
   );
@@ -164,7 +172,7 @@ async function processGeneralStats(allItems) {
 }
 
 // Processes User Stats
-async function processUserStats(userId) {
+async function processUserStats(allUserTakenItems) {
   let userStats = {
     userTakenItems: 0,
     userTakenItemsCO2: 0,
@@ -213,7 +221,10 @@ async function processUptainerStats(allItems, allUptainers) {
           updateUptainerStats(allUptainersStats, item, co2Footprint);
         }
       } catch (error) {
-        console.error(`Errors occured during processing uptainer stats:`, error);
+        console.error(
+          `Errors occured during processing uptainer stats:`,
+          error
+        );
       }
     })
   );
@@ -222,20 +233,19 @@ async function processUptainerStats(allItems, allUptainers) {
 }
 
 // STATS CALCULATIONS
-
-export async function calculateGeneralStatistics() {
+async function calculateGeneralStatistics() {
   const allTakenItems = await fetchAllTakenItems();
   const generalStats = await processGeneralStats(allTakenItems);
   return generalStats;
 }
 
 export async function calculateUserStatistics(userId) {
-  const allUserTakenItems = await fetchAllTakenItemsByUser(userId);
+  const allUserTakenItems = await fetchAllItemsTakenByUser(userId);
   const userStats = await processUserStats(allUserTakenItems);
   return userStats;
 }
 
-export async function calculateUptainerStatistics() {
+async function calculateUptainerStatistics() {
   const allUptainers = await getAllUptainers();
   const allItems = await fetchAllTakenItems();
   const allUptainersStats = await processUptainerStats(allItems, allUptainers);
@@ -251,9 +261,41 @@ export async function calculateUptainerStatistics() {
   return { sortedUptainers, mostAchievingUptainers };
 }
 
+export async function getAllStatistics() {
+  try {
+    let stats;
+    const generalStats = await calculateGeneralStatistics();
+    const uptainerStats = await calculateUptainerStatistics();
+
+    stats = {
+      allTakenItems: generalStats.allNumberTakenItems,
+      todayTakenItems: generalStats.todayNumberTakenItems,
+      yesterdayTakenItems: generalStats.yesterdayNumberTakenItems,
+      allTakenItemsMonth: generalStats.allTakenItemsMonth,
+      bestUptainer: uptainerStats.sortedUptainers[0],
+      top3Uptainers: uptainerStats.mostAchievingUptainers,
+    };
+    console.log("stats:", stats);
+    return stats;
+  } catch (error) {
+    console.error("Error calculating statistics:", error);
+    throw error;
+  }
+}
+
+export async function getUserStatistics(userId) {
+  try {
+    const userStats = await calculateUserStatistics(userId);
+    return userStats;
+  } catch (error) {
+    console.error("Error calculating user statistics:", error);
+    throw error;
+  }
+}
+
 // OLD STATS CALCULATIONS
 
-export async function CalculateStatistic() {
+/* export async function CalculateStatistic() {
   // Load all items from database
   const items = await getAllItems();
   // test getAllItems from repo:
@@ -398,4 +440,4 @@ export async function CalculateStatistic() {
   //Print for checking
   //console.log(result)
   return result;
-}
+} */

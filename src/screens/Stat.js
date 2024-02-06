@@ -36,11 +36,7 @@ import {
 } from "../utils/Repo";
 import { items } from "../utils/Testdata";
 import { set } from "firebase/database";
-import {
-  calculateGeneralStatistics,
-  calculateUserStatistics,
-  calculateUptainerStatistics,
-} from "../utils/uptainersUtils";
+import { getAllStatistics } from "../utils/uptainersUtils";
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -188,6 +184,25 @@ const Stat = ({ navigation }) => {
     return result;
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const userCurrent = await getCurrentUser();
+        setUserCurrent(userCurrent);
+
+        const stats = await getAllStatistics(userCurrent.id);
+        setData(stats);
+
+        const products = await getAllProducts();
+        setProducts(products);
+      } catch (error) {
+        console.error("Error fetching data for statistics:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // OLD USE EFEECT
   /*   useEffect(() => {
     async function fetchData() {
       const result = await allItems();
@@ -199,41 +214,6 @@ const Stat = ({ navigation }) => {
     }
     fetchData()
   }, []); */
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userCurrent = await getCurrentUser();
-        setUserCurrent(userCurrent);
-        const userId = userCurrent.id;
-
-        const products = await getAllProducts();
-        setProducts(products);
-
-        const allUptainers = await getAllUptainers();
-        const allItems = await getAllItems();
-
-        const generalStats = await calculateGeneralStatistics();
-        setData(generalStats);
-
-        //const userStats = await processUserStats(userCurrent.id);
-
-        /* setData((prevData) => ({
-          ...prevData,
-          userStats,
-        })); */
-
-        const uptainerStats = await calculateUptainerStatistics();
-        setData((prevData) => ({
-          ...prevData,
-          uptainerStats,
-        }));
-      } catch (error) {
-        console.log("Error", error);
-      }
-    }
-    fetchData();
-  }, []);
 
   const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
   const [co2Data, setCO2Data] = useState({
