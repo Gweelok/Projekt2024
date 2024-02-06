@@ -77,7 +77,7 @@ const UptainerList = ({ searchValue }) => {
     const handleUptainerPress = (location) => {
         // Handle the press event, e.g., navigate to a detailed view
         console.log(`Uptainer ${location.uptainerName} pressed`);
-        navigation.navigate("Uptainer", { location: location });
+        navigation.navigate("ServiceAdminMain", { location: location });
     };
 
     /*useEffect for first retriving location
