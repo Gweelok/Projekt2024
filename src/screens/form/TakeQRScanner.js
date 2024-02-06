@@ -4,8 +4,10 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
+  Button,
   Alert,
   Pressable,
+  ScrollView,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appropriate icon library
@@ -18,24 +20,29 @@ import {
   getUptainerFromQR,
   getUptainerById,
   QRCodeExists,
+  updateItemToTaken,
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
-import LoadingScreen from "../../componets/LoadingScreen";
 
-const QRScanner = ({ route, navigation }) => {
-  const { currentLanguage } = useLanguage();
+const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;
+  console.log("route.params: ", route.params);
 
-  const handlePress = () => { navigation.goBack(); };
+  const { currentLanguage } = useLanguage();
+  const [loading, setLoading] = useState(false);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const screenNavigation = { screenFrom: "QRScanner" };
+
+  const handlePress = () => {
+    navigation.goBack();
+  };
+
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState(); // Initialize scanned text with a default value
   const [scannedQRCode, setScannedQRCode] = useState(null);
   const [isActive, setIsActive] = useState(false);
-  const { isLoading, setIsLoading } = useContext(LoaderContext);
-
-
   const askForCameraPermission = async () => {
     // Made askForCameraPermission an async function
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -54,19 +61,19 @@ const QRScanner = ({ route, navigation }) => {
     if (scannedQRCodeExist === "Draft") {
       setIsActive(false);
       Alert.alert(
-        t("QrScannerScreen.QRCodeNotFound1", currentLanguage),
-        t("QrScannerScreen.ScanAgain", currentLanguage),
-        [
-          {
-            text: t("QrScannerScreen.OK", currentLanguage),
-            onPress: () => {
+          t("QrScannerScreen.QRCodeNotFound1", currentLanguage),
+          t("QrScannerScreen.ScanAgain", currentLanguage),
+          [
+            {
+              text: t("QrScannerScreen.OK", currentLanguage),
+              onPress: () => {
               //  console.log("Type: " + type + "\nData: " + data);
+              },
             },
-          },
-        ]
+          ]
       );
     } else {
-      //console.log("Type: " + type + "\nData: " + data);
+      console.log("Type: " + type + "\nData: " + data);
       setIsActive(true);
       setScanned(true);
       setText(data);
@@ -75,14 +82,14 @@ const QRScanner = ({ route, navigation }) => {
 
   const handleScanAgain = () => {
     setScanned(false);
+    // console.log("description: ", itemData?.description);
+    //setText('Not yet scanned'); // Reset the scanned text
     setScannedQRCode(null);
   };
 
   const handleSaveCode = async () => {
     setIsLoading(true);
-
     if (scannedQRCode) {
-
       const qrCodeString = JSON.stringify(scannedQRCode);
       try {
         await AsyncStorage.setItem("scannedQRCode", qrCodeString);
@@ -97,18 +104,11 @@ const QRScanner = ({ route, navigation }) => {
           setIsActive(true);
 
           try {
-            await createItem(
-              itemData?.image,
-              itemData?.category,
-              itemData?.product,
-              itemData?.brand,
-              itemData?.model,
-              itemData?.condition,
-              itemData?.description,
-              value // Assuming this is the uptainerQRCode value
-            );
+            const itemId = itemData?.itemId
+          
+          await updateItemToTaken(itemId)
           } catch (error) {
-            console.log("can not create item. Error: ", error);
+            console.log("can not change item to taken. Error: ", error);
           }
 
           Alert.alert(
@@ -133,7 +133,9 @@ const QRScanner = ({ route, navigation }) => {
               },
             ]
           );
-        } else {
+        }
+
+        else {
 
           if (!uptainerId) {
             setIsActive(false);
@@ -142,22 +144,20 @@ const QRScanner = ({ route, navigation }) => {
             console.log("Condition met, navDir set to:", navDir1);
 
             Alert.alert(
-              t("QrScannerScreen.QRCodeNotFound", currentLanguage),
-              t("QrScannerScreen.ScanAgain", currentLanguage),
-              [
-                {
-                  text: t("QrScannerScreen.OK", currentLanguage),
-                  onPress: () => {
-                    navigation.navigate(navDir1, uptainer);
-                    setIsLoading(true);
+                t("QrScannerScreen.QRCodeNotFound", currentLanguage),
+                t("QrScannerScreen.ScanAgain", currentLanguage),
+                [
+                  {
+                    text: t("QrScannerScreen.OK", currentLanguage),
+                    onPress: () => {
+                      navigation.navigate(navDir1, uptainer);
+                    },
                   },
-                },
-              ]
+                ]
             );
           }
-
         }
-      } catch (error) {
+    }catch (error) {
         console.error("Error saving scanned QR code:", error);
 
         Alert.alert(
@@ -167,29 +167,35 @@ const QRScanner = ({ route, navigation }) => {
             {
               text: t("QrScannerScreen.OK", currentLanguage),
               onPress: () => {
-                setIsLoading(false);
+                // Optionally, navigate or perform other actions after saving
               },
             },
           ]
         );
       }
-    } else { 
+    } else {
       console.warn("No QR code scanned to save.");
-      setIsLoading(false); 
     }
+  };
+
+  const handleQRScan = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("UptainerDetails", {
+        itemData: "Sample Scanned Data",
+      });
+    }, 3000);
   };
 
   return (
     <ScrollViewComponent>
       <SafeAreaView style={styles.container2}>
-
-      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-
         <View style={styles.header}>
           <Text style={styles.headline}>
             {t("QrScannerScreen.Scan", currentLanguage)}
           </Text>
-          <TouchableOpacity style={styles.closeButton} onPress={handlePress} disabled={isLoading}>
+          <TouchableOpacity style={styles.closeButton} onPress={handlePress}>
             <Icon size={30} name="close" style={styles.closeButtonIcon} />
           </TouchableOpacity>
         </View>
@@ -203,7 +209,7 @@ const QRScanner = ({ route, navigation }) => {
             <View style={styles.qrScannerFrame} >
               <View style={styles.dashedBorder} >
                 <BarCodeScanner
-                  onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                  onBarCodeScanned={ scanned ? undefined : handleBarCodeScanned}
                   style={{ flex: 1 }}
 
                 />
@@ -221,7 +227,6 @@ const QRScanner = ({ route, navigation }) => {
                 <View style={{ marginBottom: 10 }}>
                   {isActive ? (<Pressable
                     onPress={handleSaveCode}
-                    disabled={isLoading}
                     style={[
                       Buttons.main_button,
                       {
@@ -235,8 +240,7 @@ const QRScanner = ({ route, navigation }) => {
                       {t("QrScannerScreen.Take", currentLanguage)}
                     </Text>
                   </Pressable>) : (<Pressable
-                    onPress={handleSaveCode}
-                    disabled={isLoading}
+                          onPress={handleSaveCode}
                     style={[
                       Buttons.main_button,
                       {
@@ -254,9 +258,8 @@ const QRScanner = ({ route, navigation }) => {
                   )}
                 </View>
                 <View>
-                  <Pressable
+                <Pressable
                     onPress={handleScanAgain}
-                    disabled={isLoading}
                     style={[
                       Buttons.secondary_button,
                       {
@@ -279,7 +282,6 @@ const QRScanner = ({ route, navigation }) => {
             {t("QrScannerScreen.Bottom", currentLanguage)}
           </Text>
         </View>
-
       </SafeAreaView>
     </ScrollViewComponent>
   );

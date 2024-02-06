@@ -5,7 +5,7 @@ import { Divider } from "react-native-elements";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { Primarycolor1, dropdownStyles } from "../styles/Stylesheet";
 
-const SearchFilter = ({ data = [], input,  error, isLoading }) => { 
+const SearchFilter = ({ data = [], input,  error, isLoading, setItemSelected, setSearchText }) => { 
   const { currentLanguage } = useLanguage();
 
   const renderItem = ({ item, index }) => {
@@ -18,7 +18,11 @@ const SearchFilter = ({ data = [], input,  error, isLoading }) => {
         <>
           <Text
             key={item.brandName || item.productName || item.categoryName || item.modelName}
-            onPress={() => console.log('selectedItem', item)}
+            onPress={() => {
+              setItemSelected(true)
+              setSearchText(itemName)
+              console.log('selectedItem', item)
+            }}
             style={dropdownStyles.dropdownSearchFieldList}
           > 
             <Text style={[dropdownStyles.dropdownFilterTextHome, { color: Primarycolor1 }]}>{input}</Text>

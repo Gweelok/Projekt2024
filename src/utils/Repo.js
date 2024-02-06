@@ -645,6 +645,7 @@ export async function getAllItems() {
         return [];
     }
 }
+
 export async function getItemById(itemId) {
     const db = firebaseGetDB;
     const reference = ref(db, `/items/${itemId}`);
@@ -887,9 +888,6 @@ export async function deleteImage(imagePath) {
     });
 }
 
-/**********************/
-/****** Update ********/
-/**********************/
 export async function getImage(imagePath) {
     const storage = getStorage();
     const imageRef = ref_storage(storage, imagePath);
@@ -897,12 +895,14 @@ export async function getImage(imagePath) {
     try {
         const url = await getDownloadURL(imageRef)
         return url
-    } catch (err) {
         console.log("Error while downloading image => ", err);
         const url = "https://via.placeholder.com/200x200"
         return url
     }
 }
+        /**********************/
+        /****** Update ********/
+        /**********************/
 
 export async function updateModelById(modelId, newData) {
     const reference = ref(db, `/models/${modelId}`);
@@ -928,8 +928,8 @@ export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         let itemImage = null
-        if (newImage && newImage?.uri) {
-
+        if(newImage && newImage?.uri){
+          
             const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
             const newImagePath = itemId + "." + fileExtension;
             const uploadResp = await uploadToFirebase(newImage.uri, newImagePath, paths.Items, (v) =>
@@ -999,7 +999,7 @@ export async function updateItemToTaken(itemId) {
     try {
         // set item taken to user
         const user = await getCurrentUser()
-        update(reference, { itemTaken: user.id });
+        update(reference, {itemTaken: user.id}); 
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);

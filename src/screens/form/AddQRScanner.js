@@ -18,6 +18,7 @@ import {
   getUptainerFromQR,
   getUptainerById,
   QRCodeExists,
+  updateItemById,
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
@@ -89,7 +90,7 @@ const QRScanner = ({ route, navigation }) => {
         const scannedQRCodeObject = JSON.parse(qrCodeString);;
         const value = scannedQRCodeObject.props.value;
         console.log("value: ", value);
-
+        const itemId = itemData?.itemId
         const uptainerId = await getUptainerFromQR(value);
         const uptainer = await getUptainerById(uptainerId);
 
@@ -97,16 +98,31 @@ const QRScanner = ({ route, navigation }) => {
           setIsActive(true);
 
           try {
-            await createItem(
-              itemData?.image,
-              itemData?.category,
-              itemData?.product,
-              itemData?.brand,
-              itemData?.model,
-              itemData?.condition,
-              itemData?.description,
-              value // Assuming this is the uptainerQRCode value
-            );
+            if( itemId ){
+              const updatedData = {
+  
+                itemproduct: itemData?.product,
+                itemBrand: itemData?.brand,
+                itemModel: itemData?.model,
+                itemCategory: itemData?.category,
+                itemDescription: itemData?.description,
+                itemcondition: itemData?.condition,
+                itemUptainer: uptainerId
+              }
+              await updateItemById(itemId, updatedData, itemData?.image)
+            } else {
+  
+              await createItem(
+                  itemData?.image,
+                  itemData?.category,
+                  itemData?.product,
+                  itemData?.brand,
+                  itemData?.model,
+                  itemData?.condition,
+                  itemData?.description,
+                  value // Assuming this is the uptainerQRCode value
+              );
+            }
           } catch (error) {
             console.log("can not create item. Error: ", error);
           }

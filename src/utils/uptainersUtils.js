@@ -31,6 +31,14 @@ export const sortUptainersByDistance = (userLocation, uptainersList) => {
   return sortedList;
 };
 
+export const setUptainersByIds = async (uptainers) => {
+  let res = {}
+  uptainers.forEach(u => {
+      res[u.uptainerId] = u;
+
+  });
+  return res;
+}
 
 export function convertKgToTons (kg) {
     if (kg >= 1000) {
