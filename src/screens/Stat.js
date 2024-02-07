@@ -36,7 +36,7 @@ import {
 } from "../utils/Repo";
 import { items } from "../utils/Testdata";
 import { set } from "firebase/database";
-import { getAllStats } from "../utils/uptainersUtils";
+import { getAllItemAndUptainerStats, getAllCO2Stats} from "../utils/uptainersUtils";
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -59,7 +59,26 @@ const Stat = ({ navigation }) => {
     top3Uptainers: {},
   });
 
-  const allItems = async () => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const stats = await getAllItemAndUptainerStats();
+        setData(stats);
+
+        const userCurrent = await getCurrentUser();
+        setUserCurrent(userCurrent);
+
+        const products = await getAllProducts();
+        setProducts(products);
+      } catch (error) {
+        console.error("Error fetching data for items and uptainers:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // OLD Item Calculation - CAN BE REMOVED AFTER TESTING
+  /*   const allItems = async () => {
     // Load all items from database
     // const items = await getAllItems();
     // Load all Uptainers from database
@@ -182,25 +201,7 @@ const Stat = ({ navigation }) => {
     //Print for checking
     // console.log(result)
     return result;
-  };
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const stats = await getAllStats();
-        setData(stats);
-
-        const userCurrent = await getCurrentUser();
-        setUserCurrent(userCurrent);
-
-        const products = await getAllProducts();
-        setProducts(products);
-      } catch (error) {
-        console.error("Error fetching data for statistics:", error);
-      }
-    }
-    fetchData();
-  }, []);
+  }; */
 
   // OLD USE EFEECT - CAN BE REMOVED AFTER TESTING
   /*   useEffect(() => {
@@ -216,16 +217,32 @@ const Stat = ({ navigation }) => {
   }, []); */
 
   const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
+
   const [co2Data, setCO2Data] = useState({
     todayCO2Saved: 0,
     yesterdayCO2Saved: 0,
     totalCO2Saved: 0,
   });
+
   useEffect(() => {
     updateCO2Savings();
   }, []);
 
-  const updateCO2Savings = () => {
+  const updateCO2Savings = async () => {
+    try {
+      const totalCO2Savings = await getAllCO2Stats();
+      setCO2Data((prevData) => ({
+        ...prevData,
+        todayCO2Saved: totalCO2Savings.todayCO2Saved,
+        yesterdayCO2Saved: totalCO2Savings.yesterdayCO2Saved,
+        totalCO2Saved: totalCO2Savings.totalCO2Saved,
+      }));
+    } catch (error) {
+      console.error("Error fetching CO2 savings:", error);
+    }
+  };
+
+  /*   const updateCO2Savings = () => {
     const currentDate = new Date().toLocaleDateString();
 
     // Check if it's a new day
@@ -248,8 +265,9 @@ const Stat = ({ navigation }) => {
       yesterdayCO2Saved: prevData.yesterdayCO2Saved + yesterdaySavings,
       totalCO2Saved: prevData.totalCO2Saved + todaySavings,
     }));
-  };
+  }; */
 
+  // Prbably uncessary since calculiations are done in uptainersUtils.js
   const calculateSavings = (type) => {
     const savings = products.reduce((acc, product) => {
       return acc + product.co2Footprint;
@@ -258,13 +276,14 @@ const Stat = ({ navigation }) => {
     return savings;
   };
 
-  const convertKgToTons = (kg) => {
+// NOT NEEDED HERE ANYMORE SINCE FETCHED DATA IS ALREADY SORTED - CAN BE REMOVED AFTER TESTING
+/*   const convertKgToTons = (kg) => {
     if (kg >= 1000) {
       return (kg / 1000).toFixed(2) + " t";
     } else {
       return kg + " kg";
     }
-  };
+  }; */
 
   const co2EquivalentFact = 10;
   const co2SavedFact = 4;
@@ -469,15 +488,15 @@ const Stat = ({ navigation }) => {
                 <View>
                   <GreenBox
                     msg={t("StatsPage.SoFar", currentLanguage)}
-                    data={convertKgToTons(co2Data.todayCO2Saved)}
+                    data={co2Data.todayCO2Saved}
                     secondMsg={t("StatsPage.Yesterday", currentLanguage)}
-                    secondData={convertKgToTons(co2Data.yesterdayCO2Saved)}
+                    secondData={co2Data.yesterdayCO2Saved}
                   />
                 </View>
                 <View>
                   <GreenBox
                     msg={t("StatsPage.InTotal", currentLanguage)}
-                    data={convertKgToTons(co2Data.totalCO2Saved)}
+                    data={co2Data.totalCO2Saved}
                   />
                 </View>
               </View>

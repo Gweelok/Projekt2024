@@ -50,11 +50,11 @@ export const sortUptainersByDistance = (userLocation, uptainersList) => {
   return sortedList;
 };
 
-export function convertKgToTons(kg) {
-  if (kg >= 1000) {
-    return (kg / 1000).toFixed(2) + " t";
+export function convertKgToTons(amountInKg) {
+  if (amountInKg >= 1000) {
+    return (amountInKg / 1000).toFixed(2) + " T.";
   } else {
-    return kg + " kg";
+    return amountInKg + " kg";
   }
 }
 
@@ -85,16 +85,18 @@ async function fetchAllTakenItems() {
 // Fetches all items taken by a user from the database.
 async function fetchAllItemsTakenByUser(userId) {
   const allItems = await getAllItems();
-  const allItemsTakenByUser = allItems
-    .filter((item) => item.itemTakenUser === userId && item.itemTaken !== false) || [];
-  console.log("allItemsTakenByUser:", allItemsTakenByUser);
+  const allItemsTakenByUser =
+    allItems.filter(
+      (item) => item.itemTakenUser === userId && item.itemTaken !== false
+    ) || [];
   return allItemsTakenByUser;
 }
 
 async function fetchAllItemsTakenFromUser(userId) {
   const allUserItems = await getItemsFromUser(userId);
-  const allItemsTakenFromUser = allUserItems.filter((item) => item.itemTaken !== false);
-  console.log("allItemsTakenFromUser:", allItemsTakenFromUser);
+  const allItemsTakenFromUser = allUserItems.filter(
+    (item) => item.itemTaken !== false
+  );
   return allItemsTakenFromUser;
 }
 
@@ -150,7 +152,7 @@ function updateUptainerStats(allUptainersStats, item, co2Footprint) {
 }
 
 //----------------------PROCESS STATS-----------------------//
-// Process functions sets up the initial stats, 
+// Process functions sets up the initial stats,
 // and then updates them based on the data fetched from the DB.
 
 async function processGeneralStats(allItems) {
@@ -163,18 +165,19 @@ async function processGeneralStats(allItems) {
     yesterdayNumberTakenItems: 0,
     yesterdayTakenItemsCO2: 0,
   };
-console.log("generalStats:", generalStats);
   await Promise.all(
     allItems.map(async (item) => {
       try {
         const co2Footprint = await fetchProductCO2(item);
         updateGeneralStats(generalStats, co2Footprint, item.itemTakenDate);
       } catch (error) {
-        console.error(`Errors occurred during processing general stats:`, error);
+        console.error(
+          `Errors occurred during processing general stats:`,
+          error
+        );
       }
     })
   );
-
   return generalStats;
 }
 
@@ -203,8 +206,8 @@ async function processUserStats(allTakenItemsByUser, allTakenItemsFromUser) {
       } catch (error) {
         console.error(`Error processing user item ${item.itemId}:`, error);
       }
-    }));
-
+    })
+  );
   return userStats;
 }
 
@@ -236,7 +239,10 @@ async function processUptainerStats(allItems, allUptainers) {
           updateUptainerStats(allUptainersStats, item, co2Footprint);
         }
       } catch (error) {
-        console.error(`Errors occured during processing uptainer stats:`,error);
+        console.error(
+          `Errors occured during processing uptainer stats:`,
+          error
+        );
       }
     })
   );
@@ -256,7 +262,10 @@ async function calculateGeneralStats() {
 async function calculateUserStats(userId) {
   const allUserTakenItems = await fetchAllItemsTakenByUser(userId);
   const allUserDonatedItems = await fetchAllItemsTakenFromUser(userId);
-  const userStats = await processUserStats(allUserTakenItems, allUserDonatedItems);
+  const userStats = await processUserStats(
+    allUserTakenItems,
+    allUserDonatedItems
+  );
   return userStats;
 }
 
@@ -276,9 +285,23 @@ async function calculateUptainerStats() {
   return { sortedUptainers, mostAchievingUptainers };
 }
 
+async function calculateTotalCO2Savings() {
+  const generalStats = await calculateGeneralStats();
+
+  const todayCO2Saved = convertKgToTons(generalStats.todayTakenItemsCO2);
+  const yesterdayCO2Saved = convertKgToTons(generalStats.yesterdayTakenItemsCO2);
+  const totalCO2Saved = convertKgToTons(generalStats.allTakenItemsCO2);
+
+  return {
+    todayCO2Saved,
+    yesterdayCO2Saved,
+    totalCO2Saved,
+  };
+}
+
 // Export functions return relevant stats that will be used in the components.
 // For Stat.js component
-export async function getAllStats() {
+export async function getAllItemAndUptainerStats() {
   try {
     let stats;
     const generalStats = await calculateGeneralStats();
@@ -292,7 +315,6 @@ export async function getAllStats() {
       bestUptainer: uptainerStats.sortedUptainers[0],
       top3Uptainers: uptainerStats.mostAchievingUptainers,
     };
-
     return stats;
   } catch (error) {
     console.error("Error calculating statistics:", error);
@@ -300,27 +322,46 @@ export async function getAllStats() {
   }
 }
 
-// For YourStats.js component
+
+// For Stat.js
+export async function getAllCO2Stats() {
+  try {
+    let co2Stats;
+    const calculatedCO2 = await calculateTotalCO2Savings();
+    co2Stats = {
+      todayCO2Saved: calculatedCO2.todayCO2Saved,
+      yesterdayCO2Saved: calculatedCO2.yesterdayCO2Saved,
+      totalCO2Saved: calculatedCO2.totalCO2Saved,
+    };
+    return co2Stats;
+  } catch (error) {
+    console.error("Error calculating CO2 statistics:", error);
+    throw error;
+  }
+}
+
+// For YourStats.js
 export async function getUserStats(userId) {
   try {
     let stats;
     const userStats = await calculateUserStats(userId);
-    console.log("userStats:", userStats);
     stats = {
       userTakenItems: userStats.userTakenItems,
-      userTakenItemsCO2: userStats.userTakenItemsCO2,
+      userTakenItemsCO2: convertKgToTons(userStats.userTakenItemsCO2),
       userDonatedItems: userStats.userDonatedItems,
       collectedUserItems: userStats.collectedUserItems,
-      collectedUserItemsCO2: userStats.collectedUserItemsCO2,
+      collectedUserItemsCO2: convertKgToTons(userStats.collectedUserItemsCO2),
+      totalC02Saved: convertKgToTons(userStats.userTakenItemsCO2 + userStats.collectedUserItemsCO2),
     };
-    return userStats;
+    return stats;
   } catch (error) {
     console.error("Error calculating user statistics:", error);
     throw error;
   }
 }
 
- /*  co2FootprintTaken: 0,
+
+/*  co2FootprintTaken: 0,
     co2FootprintNotTaken: 0,
     itemsDonated: 0,
     itemsCollected: 0, */

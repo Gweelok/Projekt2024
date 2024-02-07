@@ -58,7 +58,7 @@ const YourStats = (props) => {
     const userStats = await getUserStats(userId);
     setCO2Data((prevData) => ({
       ...prevData,
-      TotalCo2Footprint: userStats.userTakenItemsCO2 + userStats.collectedUserItemsCO2,
+      TotalCo2Footprint: userStats.totalC02Saved,
       itemsDonated: userStats.userDonatedItems,
       itemsTaken: userStats.userTakenItems,
     }));
@@ -166,7 +166,7 @@ const YourStats = (props) => {
 
         <View style={{}}>
           <GreenBox
-            data={co2Data.TotalCo2Footprint + " Kg."}
+            data={co2Data.TotalCo2Footprint}
             textStyle={{ height: 50 }}
             headerStyle={{ marginBottom: 30, marginTop: -30 }}
           />
