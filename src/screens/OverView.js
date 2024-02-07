@@ -6,11 +6,12 @@ import { getImage, getItemByUptainerId } from "../utils/Repo";
 import { useEffect, useState } from "react";
 
 const OverView = ({ route }) => {
-    //const { location } = route.params;
+    //const { location } = route.params;  <----- Use this later
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    //Should be replaced later with route param from Main-page
     const location = {
         "uptainerId": "-NbzQlf95xoexGIlcIpY",
         "url": "https://reactjs.org/logo-og.png",
@@ -18,11 +19,6 @@ const OverView = ({ route }) => {
         "uptainerStreet": "Tagensvej 16A",
         "uptainerCity": "Nörrebro"
     }
-
-    /*
-     <Image source={{ uri: 'https://reactjs.org/logo-og.png' }}
-                style={{ width: 100, height: 100 }} />
-    */
 
     async function fetchItem() {
         const fetchedItems = await getItemByUptainerId(location.uptainerId)
@@ -44,39 +40,38 @@ const OverView = ({ route }) => {
         fetchData();
     }, [location.uptainerId]);
 
-    const renderItem = ({  item: url }) => (
-        <View>
-            <Image source={{ uri: url }}
-                style={{ width: 100, height: 100 }} />
-        </View>
+    const renderItem = ({ item: url }) => (
+        <Image source={{ uri: url }} style={{ width: 100, height: 100, margin: 30 }} />
     );
 
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
-
             <UptainerInfo location={location} />
 
             {!isLoading && (
-                <FlatList
-                    data={imgUrlList}
-                    renderItem={renderItem}
-                    //keyExtractor={(imgUrlList, index) => index.toString()}
-                    numColumns={2} // Change this to the desired number of columns
-                />
+                <View style={style.list}>
+                    <FlatList
+                        data={imgUrlList}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                        numColumns={2}
+                    />
+                </View>
             )}
-
         </View>
-    )
-
-
+    );
 }
 
 const style = StyleSheet.create({
     container: {
         height: windowHeight,
         width: windowWidth,
-        marginTop: 40
+        marginTop: 40,
+        alignItems: 'center',
+    },
+    list: {
+        height: 300
     }
-})
+});
 
 export default OverView
