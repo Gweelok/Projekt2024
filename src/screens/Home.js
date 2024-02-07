@@ -23,6 +23,7 @@ const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [itemSelected, setItemSelected] = useState(false)
   const [userLocation, setUserLocation] = useState(null)
+  const [hideUptainers, setHideUptainers] = useState(false)
 
   const endSearch = () => {
     setSearchText("")
@@ -93,9 +94,9 @@ const Home = ({ navigation }) => {
           </View>
             {(searchText && itemSelected) &&
             <SearchedItems endSearch={endSearch} navigation={navigation}
-              search={searchText} userLocation={userLocation}/>
+              search={searchText} userLocation={userLocation} setHideUptainers={setHideUptainers}/>
             }
-        <SortUptainers navigation={navigation} />
+        <SortUptainers navigation={navigation} hideUptainers={hideUptainers} />
         <Navigationbar navigation={navigation} /> 
       </View>
     </View>

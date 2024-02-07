@@ -12,8 +12,9 @@ import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
+import OnHideView from "./atoms/OnHideView";
 
-const SortUptainers = ({ navigation }) => {
+const SortUptainers = ({ navigation, hideUptainers }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
@@ -157,15 +158,18 @@ const SortUptainers = ({ navigation }) => {
       </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
-        {uptainerList[0]  && (
+        <OnHideView hide={hideUptainers}>
+
+          {uptainerList[0]  && (
             <Uptainer
             key={uptainerList[0].uptainerId}
             uptainerData={uptainerList[0]}
             userLocation={userLocation}
             finishLoading={finishLoading}
             />
-          ) 
+            ) 
           }
+        </OnHideView>
         {/* Display BoxLink component */}
         <BoxLink
           msg="Hvordan funger UPDROPP?"
@@ -176,7 +180,10 @@ const SortUptainers = ({ navigation }) => {
         {/* Display the QuizComponent */}
         <QuizPoll data={PollData} />
         <QuizPoll data={QuizData} />
-        {renderUptainers()}
+        <OnHideView hide={hideUptainers}>
+
+          {renderUptainers()}
+        </OnHideView>
       </ScrollViewComponent>
     </View>
   );

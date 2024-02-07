@@ -10,7 +10,7 @@ import { Primarycolor1, Primarycolor2, Primarycolor3, dropdownStyles } from "../
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds } from "../utils/uptainersUtils"
 
-const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
+const SearchedProducts = ({navigation, search, userLocation, endSearch, setHideUptainers }) =>{
     const [allProducts, setAllProducts] = useState(null)
     const [searchedData, setSearchedData] = useState([])
     const { currentLanguage, setLanguage } = useLanguage()
@@ -25,7 +25,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, }) =>{
                 const setupUptainers = await setUptainersByIds(uptainers)
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
-                if (!searchedItems.length) { setNoProductFound(true) }
+                if (!searchedItems.length) { setNoProductFound(true); setHideUptainers(true) }
                 const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
                     const imageUrl = await getImage(item.itemImage)
                     return {...item, imageUrl}
@@ -89,13 +89,12 @@ const style = StyleSheet.create({
 
     },
     noProductFoundErr: {
-        position: 'absolute',
         fontSize: 16,
         fontWeight: '500',
         color: Primarycolor1,
         backgroundColor: 'white',
         paddingTop: 20,
-        paddingBottom: 40,
+        paddingBottom: 20,
         zIndex: 1,
         paddingLeft: 5,
         width: '100%',
