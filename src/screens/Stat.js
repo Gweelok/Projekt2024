@@ -50,7 +50,7 @@ const Stat = ({ navigation }) => {
   };
 
   const { currentLanguage } = useLanguage();
-  
+
   const [data, setData] = useState({
     bestUptainer: {},
     allTakenItems: 0,
@@ -268,7 +268,7 @@ const Stat = ({ navigation }) => {
     }));
   }; */
 
-  // Prbably uncessary since calculiations are done in uptainersUtils.js
+  // POSSIBLE UNNCESSARY CODE AFTER HERE - CAN BE REMOVED AFTER TESTING
   const calculateSavings = (type) => {
     const savings = products.reduce((acc, product) => {
       return acc + product.co2Footprint;
