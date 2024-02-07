@@ -28,7 +28,7 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import { createItemDraft, getCurrentUser } from "../utils/Repo";
+import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
 import LoadingScreen from "../componets/LoadingScreen";
@@ -74,7 +74,7 @@ const Add = ({ route, navigation }) => {
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
   const [condition, setCondition] = useState(
-    itemData?.condition || null
+    itemData?.condition ? itemData?.condition : itemData?.itemcondition || null
   );
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
@@ -87,23 +87,45 @@ const Add = ({ route, navigation }) => {
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
+  
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
+  
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
-    const response = await createItemDraft(
-      product.productId,
-      brand.brandId,
-      model.modelId,
-      category.categoryId,
-      image,
-      description,
-      condition
-    );
-    if (response.draftAdded){
-      navigation.navigate("ProductSaved");
-      setBadgeCount((prevCount) => prevCount + 1);
-    } else {
-      console.log('item darft limit exeeded')
+    const itemId = itemData?.itemId
+    if (itemId) {
+      const updatedData = {
+
+        itemproduct: product instanceof Object ? product.productId : itemData?.itemproduct,
+        itemBrand: brand instanceof Object ? brand.brandId : itemData?.itemBrand,
+        itemModel: model instanceof Object ? model.modelId : itemData?.itemModel,
+        itemCategory: category instanceof Object ? category.categoryId : itemData?.itemCategory,
+        itemDescription: description ? description : itemData?.itemDescription,
+        itemcondition: condition ? condition : itemData?.itemcondition,
+      }
+      const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
+      if (res.itemUpdated){
+        navigation.navigate("ProductSaved");
+      }
+      console.log(updatedData)
+    } else{
+
+      const response = await createItemDraft(
+          product?.productId,
+          brand?.brandId,
+          model?.modelId,
+          category?.categoryId,
+          image,
+          description,
+          condition
+        );
+        if (response.draftAdded){
+            navigation.navigate("ProductSaved");
+            setBadgeCount((prevCount) => prevCount + 1);
+        } else {
+          console.log('item darft limit exeeded')
+      }
+            
     }
     setIsLoading(false);
   };
@@ -117,12 +139,13 @@ const Add = ({ route, navigation }) => {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
       navigation.navigate("AddQRScanner", {
-        product: product.productId,
-        brand: brand.brandId,
-        model: model.modelId,
-        category: category.categoryId,
-        condition: condition,
-        description: description,
+        itemId: itemData?.itemId,
+        product: product instanceof Object ? product.productId : itemData?.itemproduct,
+        brand: brand instanceof Object ? brand.brandId : itemData?.itemBrand,
+        model: model instanceof Object ? model.modelId : itemData?.itemModel,
+        category: category instanceof Object ? category.categoryId : itemData?.itemCategory,
+        condition: condition ? condition : itemData?.itemcondition,
+        description: description ? description : itemData?.itemDescription,
         image: image,
       });
     }
@@ -178,12 +201,12 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.imageUrl}/>
+            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? itemData?.imageUrl : null}/>
           </View>
 
           <CategoryDropdown
               onCategorySelect={setCategory}
-              data={itemData?.category}
+              data={itemData?.category ? itemData?.category: itemData?.itemCategory }
               isVisible={isCategoryDropdownVisible}
               onSkip={handleSkipCategoryDropdown}
               isProductDropdownVisible={isProductDropdownVisible}
@@ -196,7 +219,7 @@ const Add = ({ route, navigation }) => {
           <ProductDropdown
               onProductSelect={setProduct}
               categorySelected={!!category} // Pass the state of category selection
-              data={itemData?.product}
+              data={itemData?.product ? itemData?.product : itemData?.itemproduct}
               setIsBrandDropdownVisible={setIsBrandDropdownVisible}
               isBrandDropdownVisible={isBrandDropdownVisible}
               onSkip={handleSkipProductDropdown}
@@ -206,7 +229,7 @@ const Add = ({ route, navigation }) => {
           <BrandDropdown
               onBrandSelect={setBrand}
               productSelected={!!product}
-              data={itemData?.brand}
+              data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
               isVisible={isBrandDropdownVisible}
               setIsVisible={setIsBrandDropdownVisible}
               onSkip={handleSkipBrandDropdown}
@@ -219,7 +242,7 @@ const Add = ({ route, navigation }) => {
           <ModelDropdown
               brandSelected={!!brand}
               onModelSelect={setModel}
-              data={itemData?.model}
+              data={itemData?.model ? itemData?.model : itemData?.itemModel}
               isVisible={isModelDropdownVisible}
               setIsVisible={setIsModelDropdownVisible}
               onSkip={handleSkipModelDropdown}
@@ -229,7 +252,7 @@ const Add = ({ route, navigation }) => {
 
           <ConditionDropdown
               onConditionSelect={setCondition}
-              data={itemData?.condition}
+              data={itemData?.condition ? itemData?.condition : itemData?.itemcondition}
               onSkip={handleSkipConditionDropdown}
               isVisible={isConditionDropdownVisible}
               setIsVisible={setIsConditionDropdownVisible}

@@ -83,9 +83,13 @@ const LandingScreen = ({ navigation }) => {
       setUserLogged(false);
     }
   });
-  if (userLogged) {
-    navigation.navigate("Homepage");
-  }
+
+  useEffect(() => {
+    // Check if the user is logged in and navigate accordingly
+    if (userLogged) {
+      navigation.navigate('Homepage');
+    }
+  }, [userLogged, navigation]);
 
   //Fn to change to langauge and display correct language
 
@@ -108,21 +112,21 @@ const LandingScreen = ({ navigation }) => {
         </View>
         {<Customize {...data[currentSlide]} />}
 
-      <Pressable onPress={nextSlideAndSignUp} style={styling.main_button}>
-        <Text style={Buttons.main_buttonText}>
-          {t("LandingScreen.continue", currentLanguage)}
-        </Text>
-      </Pressable>
-      <View style={styling.tabBarStyle}>
-        {data.map((element, index) => (
-          <Octicons
-            key={index}
-            name={`dot${index === currentSlide ? "-fill" : ""}`}
-            size={24}
-            color={Primarycolor1}
-          />
-        ))}
-      </View>
+        <Pressable onPress={nextSlideAndSignUp} style={styling.main_button}>
+          <Text style={Buttons.main_buttonText}>
+            {t("LandingScreen.continue", currentLanguage)}
+          </Text>
+        </Pressable>
+        <View style={styling.tabBarStyle}>
+          {data.map((element, index) => (
+            <Octicons
+              key={index}
+              name={`dot${index === currentSlide ? "-fill" : ""}`}
+              size={24}
+              color={Primarycolor1}
+            />
+          ))}
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -152,14 +156,14 @@ const styling = StyleSheet.create({
     marginLeft: "auto",
   },
   topBar: {
-    zIndex:1,
+    zIndex: 1,
     flexDirection: "row",
     alignSelf: "stretch",
     paddingHorizontal: 20,
     marginBottom: 10,
-    marginLeft:-8.5
+    marginLeft: -8.5
   },
-  main_button:{
+  main_button: {
     ...Buttons.main_button, width: "88.9%",
   },
   backButton: {

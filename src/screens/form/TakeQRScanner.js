@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   View,
@@ -20,8 +20,10 @@ import {
   getUptainerFromQR,
   getUptainerById,
   QRCodeExists,
+  updateItemToTaken,
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
+import { LoaderContext } from "../../componets/LoaderContext";
 
 const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;
@@ -29,7 +31,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
   const { currentLanguage } = useLanguage();
   const [loading, setLoading] = useState(false);
-
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   const screenNavigation = { screenFrom: "QRScanner" };
 
   const handlePress = () => {
@@ -85,7 +87,8 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
     setScannedQRCode(null);
   };
 
-  const handleSaveCode = async () => { 
+  const handleSaveCode = async () => {
+    setIsLoading(true);
     if (scannedQRCode) {
       const qrCodeString = JSON.stringify(scannedQRCode);
       try {
@@ -93,49 +96,42 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         const scannedQRCodeObject = JSON.parse(qrCodeString);;
         const value = scannedQRCodeObject.props.value;
         console.log("value: ", value);
-        let navDir = "UptainerDetails";
 
-        try {
-          await createItem(
-              itemData?.image,
-              itemData?.category,
-              itemData?.product,
-              itemData?.brand,
-              itemData?.model,
-              itemData?.condition,
-              itemData?.description,
-              value // Assuming this is the uptainerQRCode value
-          );
-        } catch (error) {
-          console.log("can not create item. Error: ", error);
-        }
         const uptainerId = await getUptainerFromQR(value);
-        // Inside handleSaveCode after creating the item and obtaining uptainerId
         const uptainer = await getUptainerById(uptainerId);
+
         if (uptainer) {
           setIsActive(true);
-          navigation.navigate('UptainerDetails', {
-            screenFrom: 'QRScanner',
-            uptainerData: {
-              id: uptainer.id,
-              name: uptainer.uptainerName,
-              location: uptainer.uptainerStreet, // or uptainer.uptainerCity if appropriate
-              imageUrl: uptainer.imageUrl, // Use appropriate image URL if available
-            },
-            scannedQRCodeData: scannedQRCodeObject.props.value, // Ensure this is defined correctly
-          });
-          Alert.alert(
-              t("QrScannerScreen.Success", currentLanguage),
-              t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
-              [
-                {
-                  text: t("QrScannerScreen.OK", currentLanguage),
-                  onPress: () => {
-                    navigation.navigate(navDir, uptainer);
 
-                  },
+          try {
+            const itemId = itemData?.itemId
+          
+          await updateItemToTaken(itemId)
+          } catch (error) {
+            console.log("can not change item to taken. Error: ", error);
+          }
+
+          Alert.alert(
+            t("QrScannerScreen.Success", currentLanguage),
+            t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
+            [
+              {
+                text: t("QrScannerScreen.OK", currentLanguage),
+                onPress: () => {
+                  navigation.navigate('UptainerDetails', {
+                    screenFrom: 'QRScanner',
+                    uptainerData: {
+                      id: uptainer.id,
+                      name: uptainer.uptainerName,
+                      location: uptainer.uptainerStreet, // or uptainer.uptainerCity if appropriate
+                      imageUrl: uptainer.imageUrl, // Use appropriate image URL if available
+                    },
+                    scannedQRCodeData: scannedQRCodeObject.props.value, // Ensure this is defined correctly
+                  });
+                  setIsLoading(false)
                 },
-              ]
+              },
+            ]
           );
         }
 
