@@ -778,12 +778,12 @@ export async function getSearchedItems(searchText) {
     const categoryReference = ref(db, '/categories')
 
     //  Example:       products   productName inputText
-    const searchQuery = (reference, childKey, text) => 
+    const searchQuery = (reference, childKey, text) =>
         query(reference, orderByChild(childKey), startAt(text), endAt(text + '\uf8ff'))
 
-    const productsQuery =  searchQuery(productsReference, `productName`, searchText)
-    const brandsQuery =  searchQuery(brandsReference, `brandName`, searchText)
-    const modelsQuery =  searchQuery(modelsReference, `modelName`, searchText)
+    const productsQuery = searchQuery(productsReference, `productName`, searchText)
+    const brandsQuery = searchQuery(brandsReference, `brandName`, searchText)
+    const modelsQuery = searchQuery(modelsReference, `modelName`, searchText)
     const categoryQuery = searchQuery(categoryReference, `categoryName`, searchText)
 
     try {
@@ -803,13 +803,13 @@ export async function getSearchedItems(searchText) {
             const productName = productsSnapshot[item.itemproduct]?.productName
             const brandName = brandsSnapshot[item.itemBrand]?.brandName
             const modelName = modelsSnapshot[item.itemModel]?.modelName
-            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName             
+            const categoryName = categoriesSnapshot[item.itemCategory]?.categoryName
             return (productName === searchText ||
                 brandName === searchText ||
                 modelName === searchText ||
                 categoryName === searchText) && item.itemUptainer !== 'Draft'
         })
-        
+
         return filteredItems
     } catch (error) {
         console.error(`Error fetching data for item with name ${searchText}: `, error);
@@ -817,9 +817,9 @@ export async function getSearchedItems(searchText) {
     }
 }
 
-    /********************/
-    /***** Delete *******/
-    /********************/
+/********************/
+/***** Delete *******/
+/********************/
 
 export async function deleteCategoryById(categoryId) {
     const reference = ref(db, `/categories/${categoryId}`);
@@ -895,15 +895,15 @@ export async function getImage(imagePath) {
     try {
         const url = await getDownloadURL(imageRef)
         return url.at
-    } catch (err){
+    } catch (err) {
         console.log("Error while downloading image => ", err);
         const url = "https://via.placeholder.com/200x200"
         return url
     }
 }
-        /**********************/
-        /****** Update ********/
-        /**********************/
+/**********************/
+/****** Update ********/
+/**********************/
 
 export async function updateModelById(modelId, newData) {
     const reference = ref(db, `/models/${modelId}`);
@@ -929,8 +929,8 @@ export async function updateItemById(itemId, newData, newImage) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         let itemImage = null
-        if(newImage && newImage?.uri){
-          
+        if (newImage && newImage?.uri) {
+
             const fileExtension = newImage.uri.substr(newImage.uri.lastIndexOf('.') + 1);
             const newImagePath = itemId + "." + fileExtension;
             const uploadResp = await uploadToFirebase(newImage.uri, newImagePath, paths.Items, (v) =>
@@ -1000,7 +1000,7 @@ export async function updateItemToTaken(itemId) {
     try {
         // set item taken to user
         const user = await getCurrentUser()
-        update(reference, {itemTaken: user.id}); 
+        update(reference, { itemTaken: user.id });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -1121,28 +1121,29 @@ async function updateAuthData(name, email, password) {
     const user = firebaseAurth.currentUser
     const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword)
 
-
     await reauthenticateWithCredential(user, emailAuthCredential)
 
+    if (name) {
+        await updateProfile(user, {
+            displayName: name
+        })
+    }
 
-    await updateProfile(user, {
-        displayName: name
-    })
 
-
-    await updateEmail(user, email)
+    if (email) {
+        await updateEmail(user, email)
+    }
 
 
     if (password) {
         await updatePassword(user, password)
+        await SecureStorage.savePassword(password)
     }
-
 }
 
 // update realtime user data
 // 'profilePic' is not yet completed
 async function updateDatabaseData(name, email, phone, profilePic) {
-
     const reference = ref(db, paths.users + "/" + firebaseAurth.currentUser.uid)
     const user = await getCurrentUser()
 
@@ -1152,16 +1153,18 @@ async function updateDatabaseData(name, email, phone, profilePic) {
         email: email,
         phone: phone
     })
-
 }
 
 
 
 // use whenever you need to update realtime + auth user data
 // make sure to surround function call with try/catch
-export async function updateUserData(name, email, phone, profilePic, password) {
+export async function updateUserData({ name="", email="", phone="", profilePic="", password="" }) {
     await updateAuthData(name, email, password);
-    await updateDatabaseData(name, email, phone, profilePic);
+    // exclude realtime database update since user is changing password only
+    if(!password){
+        await updateDatabaseData(name, email, phone, profilePic);
+    }
 }
 
 export async function deleteUser(navigation) {

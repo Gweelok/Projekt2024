@@ -182,6 +182,22 @@ export const styles = StyleSheet.create({
     backgroundColor: "white", // White background
     marginTop: 15, // Adjust the margin to lower the header
   },
+  HeaderFull: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  HeaderText: {
+    fontSize: 30,
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontFamily: "space-grotesk-Medium",
+    color: Primarycolor1,
+  },
+  divider: {
+    borderColor: Primarycolor1,
+    borderWidth: 1,
+    marginVertical: 20
+  },
   closeButton: {
     backgroundColor: Primarycolor1,
     padding: 3, // Decreased padding to make the button smaller
@@ -406,7 +422,6 @@ export const HeaderText = StyleSheet.create({
     marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
-
   },
   Header_Primarycolor1: {
     color: Primarycolor1,
