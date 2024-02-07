@@ -9,6 +9,7 @@ const PAGE_NAMES = {
   HOME: "Home",
   STATS: "Stats",
   PROFILE: "Profile",
+  QRSCANNER: "QRScanner", // For testing
 };
 
 const Navigationbar = ({ navigation }) => {
@@ -28,57 +29,67 @@ const Navigationbar = ({ navigation }) => {
       case PAGE_NAMES.PROFILE: setPage(PAGE_NAMES.PROFILE);
         //navigation.navigate(PAGE_NAMES.PROFILE);
         break;
+      case PAGE_NAMES.QRSCANNER: setPage(PAGE_NAMES.QRSCANNER); // For testing
+        navigation.navigate(PAGE_NAMES.QRSCANNER);
+        break;
     }
   };
 
   return (
-
     <View style={styles.tabBarStyle}>
       <Pressable onPress={() => handlePress(PAGE_NAMES.HOME)}>
-        {
-          page == PAGE_NAMES.HOME ? (
-            <Ionicons name="ios-home-sharp" size={24} color={Primarycolor1} />
-          ) : (
-            <Ionicons name="ios-home-outline" size={24} color={Primarycolor1} />
-          )
-        }
+        {page == PAGE_NAMES.HOME ? (
+          <Ionicons name="ios-home-sharp" size={24} color={Primarycolor1} />
+        ) : (
+          <Ionicons name="ios-home-outline" size={24} color={Primarycolor1} />
+        )}
       </Pressable>
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.STATS)}>
-        {
-          page === PAGE_NAMES.STATS ? (
-            <Ionicons
-              name="stats-chart-sharp"
-              size={22}
-              color={Primarycolor1}
-            />
-          ) : (
-            <Ionicons
-              name="stats-chart-outline"
-              size={24}
-              color={Primarycolor1}
-            />
-          )
-        }
+        {page === PAGE_NAMES.STATS ? (
+          <Ionicons name="stats-chart-sharp" size={22} color={Primarycolor1} />
+        ) : (
+          <Ionicons
+            name="stats-chart-outline"
+            size={24}
+            color={Primarycolor1}
+          />
+        )}
       </Pressable>
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
         <View>
-          {
-            page === PAGE_NAMES.PROFILE ? (
-              <Ionicons
-                name="person-circle-sharp"
-                size={24}
-                color={Primarycolor1}
-              />
-            ) : (
-              <Ionicons
-                name="person-circle-outline"
-                size={24}
-                color={Primarycolor1}
-              />
-            )
-          }
+          {page === PAGE_NAMES.PROFILE ? (
+            <Ionicons
+              name="person-circle-sharp"
+              size={24}
+              color={Primarycolor1}
+            />
+          ) : (
+            <Ionicons
+              name="person-circle-outline"
+              size={24}
+              color={Primarycolor1}
+            />
+          )}
+        </View>
+      </Pressable>
+      {/* For testing QR Scanner */}
+      <Pressable onPress={() => handlePress(PAGE_NAMES.QRSCANNER)}>
+        <View>
+          {page === PAGE_NAMES.QRSCANNER ? (
+            <Ionicons
+              name="qr-code-sharp"
+              size={24}
+              color={Primarycolor1}
+            />
+          ) : (
+            <Ionicons
+              name="qr-code-outline"
+              size={24}
+              color={Primarycolor1}
+            />
+          )}
         </View>
       </Pressable>
     </View>
