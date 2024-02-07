@@ -96,6 +96,7 @@ const AccountSettings = ({ navigation }) => {
 
     // get realtime user data once component is mounted
     useEffect(() => {
+        setIsLoading(true)
         getCurrentUser().then((user) => {
             setName(user.name)
             setEmail(user.email)
