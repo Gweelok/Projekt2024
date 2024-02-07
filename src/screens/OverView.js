@@ -30,21 +30,22 @@ const OverView = ({ route }) => {
     useEffect(() => {
         async function fetchData() {
             await renderItem();
+            console.log(itemList[1].itemImage)
         }
         fetchData(); 
-    }, [location.uptainerId]); // Trigger effect when location.uptainerId changes
-
-    useEffect(() => {
-        itemList.forEach(item => {
-            console.log(item.itemImage);
-        });
-    }, [itemList]); // Trigger effect when itemList changes
+    }, [location.uptainerId]);
 
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
-            <UptainerInfo location={location} ></UptainerInfo>
+            <UptainerInfo location={location} />
+            {itemList.map(item => (
+                <Image source={{ uri: item.itemImage }}
+                    style={{ width: 100, height: 100 }} />
+            ))}
         </View>
     )
+
+
 }
 
 const style = StyleSheet.create({
