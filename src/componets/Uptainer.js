@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { styles, Primarycolor1 } from "../styles/Stylesheet";
 import { React, useEffect, useState, useContext } from "react";
@@ -18,11 +19,10 @@ import {
 import { LoaderContext } from "../componets/LoaderContext";
 import { calculateDistance } from "../utils/uptainersUtils";
 
-const Uptainer = ({ uptainerData, userLocation }) => {
+const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
-
   useEffect(() => {
     const fetchItemList = async () => {
       const storage = getStorage();
@@ -56,7 +56,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             }
           })
         );
-
+        finishLoading()
         const doubleData = [...updatedData];
         setData(doubleData);
 
@@ -66,6 +66,7 @@ const Uptainer = ({ uptainerData, userLocation }) => {
         console.log("Error while fetching items => ", error);
       }
     };
+
 
     fetchItemList();
   }, []);
@@ -80,13 +81,16 @@ const Uptainer = ({ uptainerData, userLocation }) => {
       <TouchableOpacity
         onPress={() => {
           setIsLoading(true);
+          console.log(uptainerData)
           navigation.navigate("UptainerDetails", {
-              uptainerData:{
-                  id: uptainerData?.id,
-                  name: uptainerData?.uptainerName,
-                  location: uptainerData?.uptainerStreet,
-                  imageUrl: uptainerData?.imageUrl,
-              },
+            uptainerData: {
+              id: uptainerData?.id,
+              name: uptainerData?.uptainerName,
+              location: uptainerData?.uptainerStreet,
+              imageUrl: uptainerData?.imageUrl,
+              latitude: uptainerData?.uptainerLatitude,
+              longitude: uptainerData?.uptainerLongitude
+            },
           });
         }}
       >
@@ -96,9 +100,9 @@ const Uptainer = ({ uptainerData, userLocation }) => {
             {uptainerData.uptainerStreet}
           </Text>
           {userLocation && (
-          <Text style={styling.distance}>
-            {calculateDistance({ latitude: userLocation.latitude, longitude: userLocation.longitude },
-            { latitude: parseFloat(uptainerData.uptainerLatitude), longitude: parseFloat(uptainerData.uptainerLongitude)})} km</Text>
+            <Text style={styling.distance}>
+              {calculateDistance({ latitude: userLocation.latitude, longitude: userLocation.longitude },
+                { latitude: parseFloat(uptainerData.uptainerLatitude), longitude: parseFloat(uptainerData.uptainerLongitude) })} km</Text>
           )}
         </View>
       </TouchableOpacity>
@@ -125,10 +129,10 @@ const Uptainer = ({ uptainerData, userLocation }) => {
               }
             >
               <View style={styling.item}>
-                <Image
+                {item[0]?.imageUrl ? <Image
                   source={{ uri: item[0]?.imageUrl }}
                   style={styling.image}
-                />
+                />: <ActivityIndicator size='large' color={Primarycolor1}/>}
               </View>
             </TouchableOpacity>
             {/* Second Row */}
@@ -178,7 +182,7 @@ const styling = StyleSheet.create({
   },
   distance: {
     fontSize: 12,
-    color: Primarycolor1, 
+    color: Primarycolor1,
     marginTop: 5
   }
 });

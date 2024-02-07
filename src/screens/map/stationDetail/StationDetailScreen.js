@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigationbar from '../../../componets/Navigationbar';
-import {StyleSheet, StatusBar, Image, View, Dimensions, Platform, Linking, ScrollView} from "react-native";
+import {StyleSheet, StatusBar, Image, View, Dimensions, Platform, Linking, ScrollView,SafeAreaView} from "react-native";
 import BackButton from '../../../componets/BackButton';
 import StationTitle from "./StationTitle";
 import { Backgroundstyle } from "../../../styles/Stylesheet";
@@ -47,16 +47,16 @@ const StationDetailScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={Backgroundstyle.interactive_screens}>
-      <View style={GlobalStyle.BodyWrapper}>
-        <ScrollViewComponent>
-          <View style={styles.backButtonContainer}>
+      <View style={Backgroundstyle.interactive_screens}>
+        <ScrollViewComponent >
+          <SafeAreaView  style={GlobalStyle.BodyWrapper} >
+          <View >
             <BackButton onPress={navigation.goBack} />
           </View>
           <View style={styles.titleContainer}>
             <StationTitle
-              title={stationDetail?.name}
-              description={stationDetail?.address} //todo get title and description from backend
+              title={stationDetail?.uptainerName}
+              description={stationDetail?.uptainerStreet} //todo get title and description from backend
             />
           </View>
           <View style={styles.imageContainer}>
@@ -89,28 +89,26 @@ const StationDetailScreen = ({ route, navigation }) => {
               titleText={t("StationsScreen.showProduct", currentLanguage)}
             />
           </View>
+          </SafeAreaView>
         </ScrollViewComponent>
-
         <Navigationbar navigation={navigation} />
       </View>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
   backButtonContainer: {
     position: "absolute",
-    left: 20,
-    top: StatusBar.currentHeight + 20,
+    left: 19,
   },
   titleContainer: {
-    marginTop: StatusBar.currentHeight + 40,
+    marginTop: StatusBar.currentHeight ,
     alignItems: "center",
     justifyContent: "center",
   },
   imageContainer: {
     alignItems: "center",
-    marginTop: 50,
+   // marginTop: 50,
   },
   image: {
     width: imageSize,
@@ -118,12 +116,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 25,
   },
   buttonContainer2: {
-    // alignItems: 'center',
-    marginTop: 20,
+     alignItems: 'center',
+    marginTop: 30,
   },
 });
 
 export default StationDetailScreen;
+

@@ -63,7 +63,8 @@ import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
 import Notifications from "./src/screens/ProfileSetings/Notifications";
 
 import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
-import QRScanner from "./src/screens/form/QRScanner";
+import TakeQRScanner from "./src/screens/form/TakeQRScanner";
+import AddQRScanner from "./src/screens/form/AddQRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
 import ProductSaved from "./src/screens/form/ProductSaved";
 
@@ -121,248 +122,191 @@ export default function App() {
     <LoaderProvider>
       <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
           <NavigationContainer theme={navStyle}>
-            <Stack.Navigator initialRouteName="Homepage">
+            <Stack.Navigator
+                initialRouteName="LandingScreen"
+                screenOptions={{
+                  headerShown: false, // This hides the header
+                  animation: "none",
+                  gestureEnabled: false,
+                }}
+            >
               <Stack.Screen
                 name="SplashScreen"
                 component={SplashScreen}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
                 name="LoadingScreen"
                 component={LoadingScreen}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
                 name="Landingscreen"
                 component={LandingScreen}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
                 name="SignUp"
                 component={SignUpScreen}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
                 name="Sign in"
                 component={SignIn}
-                options={{ animation: "none", headerShown: false, headerLeft: null }}
               />
               <Stack.Screen
                 name="Homepage"
                 component={Home}
-                options={{
-                  headerShown: false,
-                  animation: "none",
-                  headerBackVisible: false,
-                }}
               />
+
               <Stack.Screen 
               name="DetailView" 
               options={{ animation: "none", headerShown: false,  }}
               component={DetailView} />
+n
               <Stack.Screen
                 name="Infopage"
                 component={ArticlePage}
-                options={{ headerShown: false, animation: "none" }}
               />
               <Stack.Screen
                 name="Map"
                 component={Map}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Profile"
                 component={Profile}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
                 name="ContactUs"
                 component={ContactUs}
-                options={{ animation: "none",headerShown:false, }}
               />
 
               <Stack.Screen
                 name="DataPolicy"
                 component={DataPolicy}
-                options={{ animation: "none" }}
               />
               <Stack.Screen
                 name="MyDrafts"
                 component={MyDrafts}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="MySettings"
                 component={MySettings}
-                options={{ animation: "none", headerShown: false }}
               />
 
               <Stack.Screen
                 name="ChangePassword"
                 component={ChangePassword}
-                options={{ animation: "none", headerShown: false }}
               />
 
               <Stack.Screen
                 name="DeleteAccount"
                 component={DeleteAccount}
-                options={{ animation: "none",headerShown: false }}
               />
 
               <Stack.Screen
                 name="AccountSettings"
                 component={AccountSettings}
-                options={{ animation: "none",headerShown: false, }}
               />
               <Stack.Screen
                 name="Notifications"
                 component={Notifications}
-                options={{ animation: "none" }}
               />
               <Stack.Screen
                 name="TermsAndConditions"
                 component={TermsAndConditions}
-                options={{ animation: "none" }}
               />
               <Stack.Screen
                 name="ProfileCreated"
                 component={ProfileCreated}
-                options={{ animation: "none" }}
               />
               <Stack.Screen
                   name="StatsInfo"
                   component={StatsInfo}
-                  options={{ animation: "none" }}
               />
               <Stack.Screen
                   name="VisitedUptainerStat"
                   component={VisitedUptainerStat}
-                  options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Stats"
                 component={Stat}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
                   name="YourStats"
                   component={YourStats}
-                  options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Add"
                 component={Add}
-                options={{
-                  animation: "none",
-                  headerShown: false,
-                  gestureEnabled: false,
-                }}
               />
               <Stack.Screen
-                name="QRScanner"
-                component={QRScanner}
-                options={{ animation: "none", headerShown: false }}
+                name="TakeQRScanner"
+                component={TakeQRScanner}
+              />
+              <Stack.Screen
+                name="AddQRScanner"
+                component={AddQRScanner}
               />
               <Stack.Screen
                 name="Products"
                 component={ProductScreen}
-                options={{ title: "Products", animation: "none" }}
               />
 
               <Stack.Screen
                 name="Pro"
                 component={ProScreen}
-                options={{ title: "Products", animation: "none" }}
               />
               <Stack.Screen
                 name="Bnd"
                 component={BndScreen}
-                options={{ title: "Brands", animation: "none" }}
               />
               <Stack.Screen
                 name="Mod"
                 component={ModScreen}
-                options={{ title: "Models", animation: "none" }}
               />
-              <Stack.Screen name="Stations" component={StationsScreen} />
+              <Stack.Screen
+                  name="Stations"
+                  component={StationsScreen} />
               <Stack.Screen
                 name="StationDetails"
                 component={StationDetailScreen}
-                options={{ headerShown: false }} // hides the header
               />
               <Stack.Screen
                 name="Thanks"
                 component={ThanksScreen}
-                options={{ headerShown: false, animation: "none" }}
               />
               <Stack.Screen
                 name="LogoutConfirmation"
                 component={LogoutConfirmation}
-                options={{ animation: "none",headerShown:false }}
               />
               <Stack.Screen
                 name="PrivacyPolicy"
                 component={PrivacyPolicy}
-                options={{ headerShown: true, animation: "none" }}
               />
               <Stack.Screen
                 name="UptainerDetails"
                 component={UptainerDetails}
-                options={{ headerShown: false, animation: "none" }}
               />
               <Stack.Screen
                 name="ProductSaved"
                 component={ProductSaved}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="ProductIsTakenScreen"
                 component={ProductIsTakenScreen}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="ProductTaken"
                 component={ProductTaken}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="ThankYouScreen"
                 component={ThankYouscreen}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="Camera"
                 component={CameraScreen}
-                options={{ animation: "none", headerShown: false }}
               />
               <Stack.Screen
                 name="ForgotPassword"
                 component={ForgotPassword}
-                options={{ animation: "none", headerShown: false }}
               />
             </Stack.Navigator>
           </NavigationContainer>
@@ -371,7 +315,6 @@ export default function App() {
     </LoaderProvider>
       </LanguageProvider>
   );
-
   //Screens
 
   // eslint-disable-next-line react/prop-types

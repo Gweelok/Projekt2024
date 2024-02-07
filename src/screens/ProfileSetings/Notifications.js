@@ -12,7 +12,7 @@ const Notifications = () => {
     const { currentLanguage } = useLanguage();
     return (
         <View>
-            <Text style={[styles.Header]}>{t('NotificationsScreen.Header', currentLanguage)}</Text>
+           {/* <Text style={[styles.Header]}>{t('NotificationsScreen.Header', currentLanguage)}</Text>*/}
         </View>
     );
 };

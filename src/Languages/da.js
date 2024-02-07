@@ -171,7 +171,8 @@ export default {
     ScanAgain: "Scan Igen?",
     QRCodeNotFound:"QR Code ikke fundet, gemt til kladde i stedet.",
     QRCodeNotFound1:"QR-koden blev ikke fundet, så klik på Tag for at gemme til kladde i stedet.",
-    SaveCode: "Tag",
+    SaveCode: "Updropp",
+    Take: "Tag",
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
@@ -289,10 +290,15 @@ export default {
     October: "Okt",
   },
   Detailviews: {
+
     product: "Var produktet ikke i uptaineren?",
+
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find produkt",
   },
+  SearchHome: {
+    productsMatch: "produkter matcher din søgning."
+  }
 };

@@ -45,16 +45,16 @@ const DetailViews = ({ navigation, route }) => {
       console.error("Error saving product to AsyncStorage:", error);
     }
 
-    navigation.navigate("QRScanner", {
+    navigation.navigate("TakeQRScanner", {
       product: productName,
       brand: brandName,
       description: itemDescription,
       image: imageUrl,
+      itemId: details?.data
     });
   };
 
   const displayTextValue = itemDescription;
-  const TagButton = "Tag";
 
   const openAddressOnMap = () => {
     const scheme = Platform.select({
@@ -105,11 +105,11 @@ const DetailViews = ({ navigation, route }) => {
             <TouchableOpacity
                 onPress={handleTakePress}
                 style={DetailView.TagButton}>
-              <Text style={DetailView.Tag}>{TagButton}</Text>
+              <Text style={DetailView.Tag}>{t("Detailviews.take", currentLanguage)}</Text>
             </TouchableOpacity>
             <Text
                 style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-                onPress={() => LinkingExpo.openURL("")}>
+                onPress={() => {navigation.navigate('ProductIsTakenScreen', details)}}>
               {t("Detailviews.product", currentLanguage)}
               
             </Text>
