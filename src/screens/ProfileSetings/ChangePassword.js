@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -6,10 +6,11 @@ import {
     TextInput,
     StyleSheet,
     Modal,
+    SafeAreaView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
-import { Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
+import { Backgroundstyle, Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
 import Navigationbar from "../../componets/Navigationbar";
 import { Keyboard } from 'react-native';
 import { firebaseAurth } from "../../utils/Firebase";
@@ -17,271 +18,246 @@ import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOu
 import Icon from 'react-native-vector-icons/Ionicons';
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
-import {extractMarginValues} from "react-native-ui-lib/src/commons/modifiers";
+import { extractMarginValues } from "react-native-ui-lib/src/commons/modifiers";
+import LoadingScreen from '../../componets/LoadingScreen';
+import { LoaderContext } from '../../componets/LoaderContext';
+import { Ionicons } from '@expo/vector-icons';
+import ErrorBanner from '../ErrorBanner';
+import { SecureStorage } from '../../utils/SecureStorage';
+import { updateUserData } from '../../utils/Repo';
 
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
+
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+    const [iscurrentPasswordValid, setiscurrentPasswordValid] = useState(true);
+    const [isnewPasswordValid, setisnewPasswordValid] = useState(true);
+    const [isconfirmPasswordValid, setisconfirmPasswordValid] = useState(true);
+
+    const [canSave, setcanSave] = useState(false)
+    const [isInit, setisInit] = useState(false)
     const [errorMessage, setErrorMessage] = useState('');
-    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const { isLoading, setIsLoading } = useContext(LoaderContext)
 
-    const handlePress = async () => {
-        setErrorMessage('');
-        const user = firebaseAurth.currentUser;
-        Keyboard.dismiss();    
-        try {
-            if (currentPassword === newPassword) {
-                setErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage));
-            } else if (newPassword !== confirmPassword) {
-                setErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage));
-            } else if (newPassword.length < 8) {
-                setErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
-            } else {
-                // Reauthenticate the user with their current password
-                const authCredential = EmailAuthProvider.credential(user.email, currentPassword);
-                await reauthenticateWithCredential(user, authCredential);
 
-                try {
-                    // Change the user's password
-                    await updatePassword(user, newPassword);
-                    setShowSuccessPopup(true);
+    const [showPassword, setShowPassword] = useState({
+        "currentPassword": false,
+        "newPassword": false,
+        "confirmPassword": false
+    })
 
-                    return;
-                } catch (passwordUpdateError) {
-                    console.error('Password Update Error:', passwordUpdateError.message);
-                    setErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
-                }
-            }
 
-        } catch (reauthenticationError) {
-            console.error('Reauthentication Error:', reauthenticationError.message);
-            setErrorMessage(t('ChangePasswordScreen.CurrentPasswordError', currentLanguage));
-        }
-    };
+
 
 
 
     const togglePasswordVisibility = (field) => {
-        switch (field) {
-            case 'currentPassword':
-                setShowCurrentPassword(!showCurrentPassword);
-                break;
-            case 'newPassword':
-                setShowNewPassword(!showNewPassword);
-                break;
-            case 'confirmPassword':
-                setShowConfirmPassword(!showConfirmPassword);
-                break;
-            default:
-                break;
+        setShowPassword((prevState) => ({
+            ...prevState,
+            [field]: !prevState[field]
+        }));
+    }
+
+
+    const handlePress = async () => {
+        setIsLoading(true)
+        setcanSave(false)
+        setErrorMessage("")
+
+        const oldPassword = await SecureStorage.getPassword()
+
+        if (currentPassword != oldPassword) {
+            setErrorMessage("Current Password is Incorrect")
+            setiscurrentPasswordValid(false)
+            setIsLoading(false)
+        } else if (currentPassword == newPassword) {
+            setErrorMessage("New Password cannot be the same as current Password")
+            setisnewPasswordValid(false)
+            setisconfirmPasswordValid(false)
+            setIsLoading(false)
+        } else {
+            updateUserData({ password:newPassword }).then(() => {
+                console.log("done");
+            }).catch((error) => {
+                setErrorMessage(error.message)
+            }).finally(() => {
+                setIsLoading(false)
+            })
         }
-    };
+    }
 
-    const reloadPage = async () => {
+    const reloadPage = () => {
 
-        await signOut(firebaseAurth);
-        setShowSuccessPopup(false);
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Sign in' }],
-        });
-        const amILoggedIn = firebaseAurth.currentUser; //FOR SEEING IF LOG OUT INDEED HAPPENED, DELETE AFTER REVIEW/TESTING
-        console.log("Am I Logged In: " + amILoggedIn); // ^ same here
-    };
-    const navigateToAccountSettings = () => {
-        navigation.navigate("AccountSettings");
-    };
+    }
+
+    const handleBackPress = () => {
+        // reset values when navigating back (component won't be unmounted)
+        setCurrentPassword("")
+        setNewPassword("")
+        setConfirmPassword("")
+        setisInit(false)
+        navigation.navigate("AccountSettings")
+    }
+
+
+    const checkFields = () => {
+        if (currentPassword.trim() == "" || currentPassword.trim().length < 8) {
+            setiscurrentPasswordValid(false)
+            return false
+        } else {
+            setiscurrentPasswordValid(true)
+        }
+
+        if (newPassword.trim().length < 8) {
+            setisnewPasswordValid(false)
+            return false
+        } else {
+            setisnewPasswordValid(true)
+        }
+
+
+        if (confirmPassword.trim() != newPassword.trim()) {
+            setisconfirmPasswordValid(false)
+            return false
+        } else {
+            setisconfirmPasswordValid(true)
+        }
+
+
+        return true
+    }
+
+
+    // validate fields once initialized
+    useEffect(() => {
+        if (isInit) {
+            setcanSave(checkFields())
+        } else {
+            setisInit(true)
+        }
+    }, [currentPassword, newPassword, confirmPassword])
+
+
+
     return (
+        <View style={Backgroundstyle.interactive_screens}>
+            <LoadingScreen isLoaderShow={isLoading} />
+            <SafeAreaView style={GlobalStyle.BodyWrapper}>
+                <View style={styles.HeaderFull}>
+                    <BackButton onPress={handleBackPress}></BackButton>
+                    <Text style={styles.HeaderText}>{t('AccountSettingsScreen.ChangeCode', currentLanguage)} </Text>
+                </View>
+                {errorMessage && <ErrorBanner message={errorMessage} />}
 
-
-        <View style={GlobalStyle.BodyWrapper}>
-
-            <View style={customStyles.headerContainer}>
-                <BackButton onPress={navigateToAccountSettings}  />
-                <Text style={[HeaderText.Header,{marginLeft:0 ,marginRight: 0,}]}>
-                    {t('ChangePasswordScreen.Header', currentLanguage)}
+                {/* Current password */}
+                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+                    {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
                 </Text>
-            </View>
-            {/* Current password */}
-
-
-            <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
-                {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
-            </Text>
-                <View style={styles.inputBox}>
+                <View style={[styles.inputBox, !iscurrentPasswordValid && stylesGlobal.errorInputBox]}>
                     <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
-                            secureTextEntry={!showCurrentPassword}
+                            secureTextEntry={!showPassword["currentPassword"]}
                             value={currentPassword}
                             onChangeText={setCurrentPassword}
                             placeholder="Current password"
                             placeholderTextColor="#8EA59E"
+                            keyboardType="default"
+                            autoCapitalize="none"
+                            maxLength={30}
                         />
-                        <TouchableOpacity
-                            style={customStyles.eyeIcon}
-                            onPress={() => togglePasswordVisibility('currentPassword')}
-                        >
-                            <Icon size={18} name={showCurrentPassword ? 'ios-eye-off' : 'ios-eye'} />
-                        </TouchableOpacity>
+
+                        <Ionicons
+                            name={showPassword["currentPassword"] ? 'ios-eye-off' : 'ios-eye'}
+                            size={18}
+                            color={Primarycolor1}
+                            style={styles.Icon_container}
+                            onPress={() => { togglePasswordVisibility("currentPassword") }}
+                        />
                     </View>
                 </View>
-               {/* New password */}
-                <Text style={[stylesGlobal.formLabel, {marginLeft:0}]}>
+                {/* New password */}
+                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                     {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                 </Text>
-                <View style={styles.inputBox}>
+                <View style={[styles.inputBox, !isnewPasswordValid && stylesGlobal.errorInputBox]}>
                     <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
-                            secureTextEntry={!showNewPassword}
+                            secureTextEntry={!showPassword["newPassword"]}
                             value={newPassword}
                             onChangeText={setNewPassword}
                             placeholder="New password"
                             placeholderTextColor="#8EA59E"
+                            keyboardType="default"
+                            autoCapitalize="none"
+                            maxLength={30}
                         />
-                        <TouchableOpacity
-                            style={customStyles.eyeIcon}
-                            onPress={() => togglePasswordVisibility('newPassword')}
-                        >
-                            <Icon size={18} name={showNewPassword ? 'ios-eye-off' : 'ios-eye'} />
-                        </TouchableOpacity>
+                        <Ionicons
+                            name={showPassword["newPassword"] ? 'ios-eye-off' : 'ios-eye'}
+                            size={18}
+                            color={Primarycolor1}
+                            style={styles.Icon_container}
+                            onPress={() => { togglePasswordVisibility("newPassword") }}
+                        />
                     </View>
                 </View>
                 {/* Confirm password */}
-                <Text style={[stylesGlobal.formLabel,{marginLeft:0}]}>
+                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                     {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                 </Text>
-                <View style={[styles.inputBox,{flexdirection:'row'}]}>
+                <View style={[styles.inputBox, { flexdirection: 'row' }, !isconfirmPasswordValid && stylesGlobal.errorInputBox]}>
                     <View style={styles.container}>
                         <TextInput
                             style={[styles.input, customStyles.inputText]}
-                            secureTextEntry={!showConfirmPassword}
+                            secureTextEntry={!showPassword["confirmPassword"]}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
-                            keyboardType={'default'}
                             placeholder="Confirm password"
-                            placeholderTextColor="#8EA59E"                        
-                            />
-                        <TouchableOpacity
-                            style={customStyles.eyeIcon}
-                            onPress={() => togglePasswordVisibility('confirmPassword')}
-                        >
-                            <Icon size={18} name={showConfirmPassword ? 'ios-eye-off' : 'ios-eye'} />
-                        </TouchableOpacity>
+                            placeholderTextColor="#8EA59E"
+                            keyboardType="default"
+                            autoCapitalize="none"
+                            maxLength={30}
+                        />
+                        <Ionicons
+                            name={showPassword["confirmPassword"] ? 'ios-eye-off' : 'ios-eye'}
+                            size={18}
+                            color={Primarycolor1}
+                            style={styles.Icon_container}
+                            onPress={() => { togglePasswordVisibility("confirmPassword") }}
+                        />
                     </View>
                 </View>
 
-            <TouchableOpacity
-                style={[Buttons.main_button,{position: 'relativ'} ]}onPress={handlePress}>
-                <View>
-                <Text style={Buttons.main_buttonText}>
-                    {t('ChangePasswordScreen.SavePassword', currentLanguage)}
-                </Text>
-            </View>
-            </TouchableOpacity>
-
-            {errorMessage !== '' && (
-                <View style={customStyles.errorContainer}>
-                    <Text style={customStyles.errorText}>{errorMessage}</Text>
-                </View>
-            )}
-
-
-
-            <Modal
-                transparent
-                visible={showSuccessPopup}
-                animationType="fade"
-                onRequestClose={reloadPage}
-            >
-                <View style={customStyles.successContainer}>
-                    <Text style={[customStyles.successText,{marginLeft:0}]}>
-                        {t('ChangePasswordScreen.PasswordChanged', currentLanguage)}
-                    </Text>
-                    <TouchableOpacity style={customStyles.okButton} onPress={reloadPage}>
-                        <Text style={customStyles.okButtonText}>OK</Text>
-                    </TouchableOpacity>
-                </View>
-
-
-            </Modal>
+                <TouchableOpacity
+                    disabled={!canSave}
+                    style={[Buttons.main_button, !canSave && Buttons.disabled_button]} onPress={handlePress}>
+                    <View>
+                        <Text style={Buttons.main_buttonText}>
+                            {t('ChangePasswordScreen.SavePassword', currentLanguage)}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </SafeAreaView>
             <Navigationbar navigation={navigation} />
         </View>
-
-
     );
 };
 
-ChangePassword.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
 
 const customStyles = StyleSheet.create({
-    headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingLeft: 0,
-        marginBottom: 20,
-        marginTop: 30,
-    },
-    
-
     inputText: {
         fontSize: 15,
         color: 'black',
         textAlignVertical: 'center',
-        flex:1,
-        fontFamily:'space-grotesk'
+        flex: 1,
+        fontFamily: 'space-grotesk'
 
-    },
-    errorContainer: {
-        backgroundColor: 'red',
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        marginVertical: 10,
-        borderRadius: 5,
-        alignItems: 'center',
-    },
-    errorText: {
-        color: 'white',
-        fontSize: 16,
-        textAlign: 'center',
-    },
-    successContainer: {
-        backgroundColor: 'green', // Set the background color to green
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        position: 'absolute', // Set position to absolute
-        bottom: 0, // Place it at the bottom of the screen
-        width: '100%', // Make it full width
-        flexDirection: 'row', // Align text and button in a row
-        justifyContent: 'space-between', // Space text and button evenly
-        alignItems: 'center', // Center align text and button vertically
-        borderRadius: 5,
-    },
-
-    successText: {
-        color: 'white',
-        fontSize: 16,
-        textAlign: 'center',
-    },
-    okButton: {
-        backgroundColor: 'rgba(0, 0, 0, 0.2)', // Slightly transparent background
-        borderRadius: 5,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-    },
-    okButtonText: {
-        color: 'white',
-        fontSize: 16,
-        textAlign: 'center',
     },
 });
 

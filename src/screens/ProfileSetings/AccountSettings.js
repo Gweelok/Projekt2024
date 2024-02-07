@@ -32,6 +32,7 @@ import ErrorBanner from '../ErrorBanner';
 import { firebaseAurth } from '../../utils/Firebase';
 import { LoaderContext } from '../../componets/LoaderContext';
 import LoadingScreen from '../../componets/LoadingScreen';
+import { Divider } from 'react-native-elements';
 
 
 const AccountSettings = ({ navigation }) => {
@@ -45,7 +46,7 @@ const AccountSettings = ({ navigation }) => {
 
     const { isLoading, setIsLoading } = useContext(LoaderContext)
     // using local Loading state instead of LoaderContext state to prevent re-execution of validate fields useEffect which relies on isLoading state
-    const [isInit, setisInit] = useState(true)
+    const [isInit, setisInit] = useState(false)
 
     const [isEmailValid, setisEmailValid] = useState(true)
     const [isNameValid, setisNameValid] = useState(true)
@@ -57,9 +58,13 @@ const AccountSettings = ({ navigation }) => {
 
 
     const checkFields = () => {
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+        const nameRegex = /^[A-Za-z\s]+$/
+        const phoneRegex = /^\d+$/
 
         let isValid = true
+
+
 
         if (email.trim() == "" || !emailPattern.test(email.trim())) {
             setisEmailValid(false)
@@ -68,14 +73,14 @@ const AccountSettings = ({ navigation }) => {
             setisEmailValid(true)
         }
 
-        if (name.trim() != "" && name.trim().length < 4) {
+        if (name && (name.trim().length < 4 || !nameRegex.test(name.trim()))) {
             setisNameValid(false)
             isValid = false
         } else {
             setisNameValid(true)
         }
 
-        if (phone.trim() != "" && phone.trim().length < 8) {
+        if (phone && (phone.trim().length < 8 || !phoneRegex.test(phone))) {
             setisPhoneValid(false)
             isValid = false
         } else {
@@ -89,25 +94,23 @@ const AccountSettings = ({ navigation }) => {
 
     // validate fields on changes
     useEffect(() => {
-        if (!isInit) {
+        if (isInit) {
             setcanSave(checkFields())
         }
     }, [name, email, phone])
 
     // get realtime user data once component is mounted
     useEffect(() => {
-        setIsLoading(true)
         getCurrentUser().then((user) => {
             setName(user.name)
             setEmail(user.email)
             setPhone(user.phone)
             setIsLoading(false)
-            setisInit(false)
+            setisInit(true)
         }).catch(() => {
             navigation.navigate("MySettings")
         })
     }, [])
-
 
 
 
@@ -118,7 +121,7 @@ const AccountSettings = ({ navigation }) => {
         setErrorMessage("")
 
         // update auth + realtime user data
-        updateUserData(name, email, phone).then(() => {
+        updateUserData({name:name, email:email, phone:phone}).then(() => {
             setIsLoading(false)
             Alert.alert("Success", t('AccountSettingsScreen.HandleSave.Saved', currentLanguage));
         }).catch((error) => {
@@ -144,148 +147,125 @@ const AccountSettings = ({ navigation }) => {
 
 
     return (
-        <View>
+        <View style={Backgroundstyle.interactive_screens}>
             <LoadingScreen isLoaderShow={isLoading} />
-            <ScrollViewComponent>
-                <View style={Backgroundstyle.interactive_screens}>
-                    {errorMessage && <ErrorBanner message={errorMessage} />}
 
-                    <SafeAreaView style={GlobalStyle.BodyWrapper}>
-                        <View style={[styles1.header]}>
-                            {/* Back Button */}
-                            <BackButton onPress={handleBackPress}></BackButton>
-
-                            {/* Headline */}
-                            <Text style={[HeaderText.Header, { marginTop: 1, marginLeft: "auto", marginRight: "auto", }]}>{t('AccountSettingsScreen.Header', currentLanguage)} </Text>
-                        </View>
-
-
-                        {/* Section 1 */}
-                        <View style={styles1.section}>
-                            {/* Name */}
-                            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}>
-                                <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginRight: 5 }]}>
-                                    {t("AccountSettingsScreen.Name", currentLanguage)}
-                                </Text>
-                                <Text style={[stylesGlobal.optionalText, { marginBottom: 5 }]}>
-                                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
-                                </Text>
-                            </View>
-                            <CustomInput>
-                                <TextInput
-                                    placeholder="Jane Doe"
-                                    placeholderTextColor="#8EA59E"
-                                    value={name}
-                                    onChangeText={setName}
-                                    keyboardType="default"
-                                    autoCapitalize="none"
-                                    clearButtonMode={"always"}
-                                    maxLength={30}
-                                    style={[styles.inputBox, !isNameValid && stylesGlobal.errorInputBox]}
-                                />
-                            </CustomInput>
-                            {/* email */}
-                            <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>{t('AccountSettingsScreen.Email', currentLanguage)}</Text>
-                            <CustomInput showStar={false}>
-                                <TextInput
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    placeholder="janedoe@example.com"
-                                    placeholderTextColor="#8EA59E"
-                                    keyboardType="email-address"
-                                    autoCapitalize="none"
-                                    clearButtonMode={"always"}
-                                    maxLength={30}
-                                    style={[styles.inputBox, !isEmailValid && stylesGlobal.errorInputBox]}
-                                />
-                            </CustomInput>
-
-                            {/* phone */}
-                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginRight: 5 }]}>
-                                    {t("AccountSettingsScreen.Tlf", currentLanguage)}
-                                </Text>
-                                <Text style={[stylesGlobal.optionalText, { marginLeft: 0, marginBottom: 5 }]}>
-                                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
-                                </Text>
-                            </View>
-                            <CustomInput>
-                                <TextInput
-                                    placeholder="00 00 00 00"
-                                    placeholderTextColor="#8EA59E"
-                                    value={phone}
-                                    onChangeText={setPhone}
-                                    keyboardType="phone-pad"
-                                    autoCapitalize="none"
-                                    clearButtonMode={"always"}
-                                    maxLength={20}
-                                    style={[styles.inputBox, !isPhoneValid && stylesGlobal.errorInputBox]}
-                                />
-                            </CustomInput>
-
-
-                            {/* Submit */}
-                            <TouchableOpacity disabled={!canSave} onPress={handleSave} style={[Buttons.main_button, { marginTop: 10 }, !canSave && Buttons.disabled_button]}>
-                                <Text style={Buttons.main_buttonText}>{t('AccountSettingsScreen.Submit', currentLanguage)}</Text>
-                            </TouchableOpacity>
-                        </View>
-
-
-
-                        {/* Section 2 */}
-                        {/* ChangeCode */}
-                        <View style={[styles1.section, { marginTop: 18 }]}>
-                            <MenuItems msg={t('AccountSettingsScreen.ChangeCode', currentLanguage)} onPress={handleChangePasswordPress} />
-                        </View>
-
-
-
-
-                        {/* Section 3 */}
-                        {/* Language */}
-
-                        <View style={{ flex: 10, marginTop: 10 }}>
-                            <View style={{ alignItems: "center", flex: 1, zIndex: 1 }}>
-                                <Text style={[styles.menuItem_text, { marginLeft: 0, marginBottom: 10, }]}>{t('AccountSettingsScreen.Language', currentLanguage)} </Text>
-                                <LanguageDropdown />
-                            </View>
-
-                            <View style={{ marginTop: 10 }}>
-                                <Pressable onPress={handleDeleteAccount}  >
-                                    <View style={[styles1.iconContainer]}>
-                                        <Icon name="delete" size={16} style={[styles1.iconStyle]} />
-                                        <Text style={styles1.deleteText}>{t('AccountSettingsScreen.Delete', currentLanguage)}</Text>
-                                    </View>
-                                </Pressable>
-                            </View>
-                        </View>
-                    </SafeAreaView>
+            <SafeAreaView style={GlobalStyle.BodyWrapper}>
+                <View style={styles.HeaderFull}>
+                    <BackButton onPress={handleBackPress}></BackButton>
+                    <Text style={styles.HeaderText}>{t('AccountSettingsScreen.Header', currentLanguage)} </Text>
                 </View>
-            </ScrollViewComponent>
+                {errorMessage && <ErrorBanner message={errorMessage} />}
+
+                <ScrollViewComponent>
+                    {/* Section 1 */}
+                    <View>
+                        {/* Name */}
+                        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}>
+                            <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginRight: 5 }]}>
+                                {t("AccountSettingsScreen.Name", currentLanguage)}
+                            </Text>
+                            <Text style={[stylesGlobal.optionalText, { marginBottom: 5 }]}>
+                                ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                            </Text>
+                        </View>
+                        <CustomInput>
+                            <TextInput
+                                placeholder="Jane Doe"
+                                placeholderTextColor="#8EA59E"
+                                value={name}
+                                onChangeText={setName}
+                                keyboardType="default"
+                                autoCapitalize="none"
+                                clearButtonMode={"always"}
+                                maxLength={30}
+                                style={[styles.inputBox, !isNameValid && stylesGlobal.errorInputBox]}
+                            />
+                        </CustomInput>
+                        {/* email */}
+                        <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>{t('AccountSettingsScreen.Email', currentLanguage)}</Text>
+                        <CustomInput showStar={false}>
+                            <TextInput
+                                value={email}
+                                onChangeText={setEmail}
+                                placeholder="janedoe@example.com"
+                                placeholderTextColor="#8EA59E"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                clearButtonMode={"always"}
+                                maxLength={30}
+                                style={[styles.inputBox, !isEmailValid && stylesGlobal.errorInputBox]}
+                            />
+                        </CustomInput>
+
+                        {/* phone */}
+                        <View style={{ flexDirection: "row", alignItems: "center" }}>
+                            <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginRight: 5 }]}>
+                                {t("AccountSettingsScreen.Tlf", currentLanguage)}
+                            </Text>
+                            <Text style={[stylesGlobal.optionalText, { marginLeft: 0, marginBottom: 5 }]}>
+                                ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                            </Text>
+                        </View>
+                        <CustomInput>
+                            <TextInput
+                                placeholder="00 00 00 00"
+                                placeholderTextColor="#8EA59E"
+                                value={phone}
+                                onChangeText={setPhone}
+                                keyboardType="phone-pad"
+                                autoCapitalize="none"
+                                clearButtonMode={"always"}
+                                maxLength={20}
+                                style={[styles.inputBox, !isPhoneValid && stylesGlobal.errorInputBox]}
+                            />
+                        </CustomInput>
+
+
+                        {/* Submit */}
+                        <TouchableOpacity disabled={!canSave} onPress={handleSave} style={[Buttons.main_button, { marginTop: 10 }, !canSave && Buttons.disabled_button]}>
+                            <Text style={Buttons.main_buttonText}>{t('AccountSettingsScreen.Submit', currentLanguage)}</Text>
+                        </TouchableOpacity>
+                    </View>
+
+
+
+                    {/* Section 2 */}
+                    {/* ChangeCode */}
+                    <Divider style={styles.divider}></Divider>
+                    <View>
+                        <MenuItems style={{marginBottom:0}} msg={t('AccountSettingsScreen.ChangeCode', currentLanguage)} onPress={handleChangePasswordPress} />
+                    </View>
+
+
+
+
+                    {/* Section 3 */}
+                    {/* Language */}
+                    <Divider style={styles.divider}></Divider>
+                    <View>
+                        <View style={{ alignItems: "center", flex: 1, zIndex: 1 }}>
+                            <Text style={[styles.menuItem_text, { marginLeft: 0, marginBottom: 10, }]}>{t('AccountSettingsScreen.Language', currentLanguage)} </Text>
+                            <LanguageDropdown />
+                        </View>
+
+                        <View style={{ marginTop: 10 }}>
+                            <Pressable onPress={handleDeleteAccount}  >
+                                <View style={[styles1.iconContainer]}>
+                                    <Icon name="delete" size={16} style={[styles1.iconStyle]} />
+                                    <Text style={styles1.deleteText}>{t('AccountSettingsScreen.Delete', currentLanguage)}</Text>
+                                </View>
+                            </Pressable>
+                        </View>
+                    </View>
+                </ScrollViewComponent>
+            </SafeAreaView >
             <Navigationbar navigation={navigation} />
-        </View>
+        </View >
     );
 };
 
 const styles1 = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        margin: 10,
-    },
-    header: {
-        flexDirection: "row",
-        justifyContent: 'flex-start',
-        paddingHorizontal: 5,
-        margin: -5,
-    },
-    section: {
-        borderBottomWidth: 1,
-        borderBottomColor: "#000",
-        paddingBottom: 17,
-        marginBottom: 8,
-    },
-
     iconContainer: {
         flexDirection: 'row',
         alignItems: "center",
