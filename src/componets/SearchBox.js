@@ -32,7 +32,6 @@ const SearchBox = ({ onChangeText, value, placeholderText }) => {
                 onBlur={handleBlur}
             />
             <Feather 
-                style={styles.searchIcon} 
                 name="search" 
                 size={22} 
                 color={isInputFocused ? Primarycolor1 : Primarycolor4}

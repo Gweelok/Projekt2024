@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 
 import { Backgroundstyle } from "../styles/Stylesheet";
@@ -8,18 +8,18 @@ import GlobalStyle from "../styles/GlobalStyle";
 import Navigationbar from "../componets/Navigationbar";
 import SortUptainers from "../componets/sortUptainers";
 import SearchBox from '../componets/SearchBox';
-import SearchFilter from './SearchFilter';
+
+import SearchFilter from '../componets/SearchFilter';
 
 import { firebaseAurth } from "../utils/Firebase";
 import { getItemsByName } from '../utils/Repo';
 import { useEffect } from "react";
 import SearchedItems from "../componets/SearchedItems";
 
-
-
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [notMatchingProduct, setNotMatchingProduct] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [itemSelected, setItemSelected] = useState(false)
   const [userLocation, setUserLocation] = useState(null)
@@ -48,18 +48,20 @@ const Home = ({ navigation }) => {
   })();
 
   useEffect(() => {
-
+    setNotMatchingProduct(false);
+    
     async function getItemsByTextFilter() {
       try {
         setIsLoading(true)
         const result = await getItemsByName(searchText)
         if (result.length === 0) {
+          setNotMatchingProduct(true)
           setSearchResults([])
         } else {
           setSearchResults(result)
         }
       } catch (error) {
-        console.log('Error', error);
+        console.log('Error', error, error);
       } finally {
         setIsLoading(false)
       }
