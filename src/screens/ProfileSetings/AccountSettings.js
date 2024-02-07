@@ -101,6 +101,7 @@ const AccountSettings = ({ navigation }) => {
             setName(user.name)
             setEmail(user.email)
             setPhone(user.phone)
+            setIsLoading(false)
             setisInit(false)
         }).catch(() => {
             navigation.navigate("MySettings")
