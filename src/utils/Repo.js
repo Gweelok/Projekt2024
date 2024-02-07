@@ -46,6 +46,29 @@ export async function getAllUptainers() {
   }
 }
 
+export async function getItemByUptainerId(uptainerId){
+  const db = firebaseGetDB;
+  const reference = ref(db, '/items');
+
+  try {
+    const snapshot = await get(reference);
+    const itemList = [];
+
+    snapshot.forEach((childSnapshot) => {
+      const item = childSnapshot.val();
+
+      if (item && item.itemUptainer === uptainerId) {
+        itemList.push(item);
+      }
+    });
+
+    return itemList;
+  } catch (error) {
+    console.error("Error getting items:", error);
+    throw error;
+  }
+}
+
 export async function signInUser(email, password, navigation){
   signInWithEmailAndPassword(firebaseAurth, email, password)
   .then((userCredential) => {
@@ -62,7 +85,6 @@ export function createUptainerTaskAnswers(data) {
     const newAnswersKey = push(ref(db, "taskAnswers")).key;
     writeToDatabase("taskAnswers" + "/" + newAnswersKey, data)
 }
-
 
 function writeToDatabase(refPath, data) {
   const reference = ref(db, refPath);
