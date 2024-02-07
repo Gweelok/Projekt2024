@@ -43,8 +43,9 @@ const AccountSettings = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState('')
     const [canSave, setcanSave] = useState(false)
 
+    const { isLoading, setIsLoading } = useContext(LoaderContext)
     // using local Loading state instead of LoaderContext state to prevent re-execution of validate fields useEffect which relies on isLoading state
-    const [ isLoading, setIsLoading ] = useState(true)
+    const [isInit, setisInit] = useState(true)
 
     const [isEmailValid, setisEmailValid] = useState(true)
     const [isNameValid, setisNameValid] = useState(true)
@@ -60,21 +61,21 @@ const AccountSettings = ({ navigation }) => {
 
         let isValid = true
 
-        if (email.trim()=="" || !emailPattern.test(email.trim())) {
+        if (email.trim() == "" || !emailPattern.test(email.trim())) {
             setisEmailValid(false)
             isValid = false
         } else {
             setisEmailValid(true)
         }
 
-        if (name.trim()!="" && name.trim().length < 4) {
+        if (name.trim() != "" && name.trim().length < 4) {
             setisNameValid(false)
             isValid = false
         } else {
             setisNameValid(true)
         }
 
-        if (phone.trim()!="" && phone.trim().length < 8) {
+        if (phone.trim() != "" && phone.trim().length < 8) {
             setisPhoneValid(false)
             isValid = false
         } else {
@@ -88,7 +89,7 @@ const AccountSettings = ({ navigation }) => {
 
     // validate fields on changes
     useEffect(() => {
-        if (!isLoading) {
+        if (!isInit) {
             setcanSave(checkFields())
         }
     }, [name, email, phone])
@@ -99,7 +100,7 @@ const AccountSettings = ({ navigation }) => {
             setName(user.name)
             setEmail(user.email)
             setPhone(user.phone)
-            setIsLoading(false)
+            setisInit(false)
         }).catch(() => {
             navigation.navigate("MySettings")
         })
