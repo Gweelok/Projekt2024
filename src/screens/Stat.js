@@ -202,7 +202,7 @@ const Stat = ({ navigation }) => {
     fetchData();
   }, []);
 
-  // OLD USE EFEECT
+  // OLD USE EFEECT - CAN BE REMOVED AFTER TESTING
   /*   useEffect(() => {
     async function fetchData() {
       const result = await allItems();

@@ -63,7 +63,7 @@ const YourStats = (props) => {
       itemsTaken: userStats.userTakenItems,
     }));
   }
-
+  // OLD USEEFFECT - CAN BE DELETED AFTER TESTING
   /*    useEffect(() => {
     fetchData();
   }, []);
