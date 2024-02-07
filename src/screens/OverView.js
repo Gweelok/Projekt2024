@@ -2,12 +2,13 @@ import { View, StyleSheet, Image } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import GlobalStyle from "../styles/GlobalStyle"
-import { getItemByUptainerId } from "../utils/Repo";
+import { getImage, getItemByUptainerId } from "../utils/Repo";
 import { useEffect, useState } from "react";
 
 const OverView = ({ route }) => {
     //const { location } = route.params;
     const [itemList, setItemList] = useState([]);
+    const [imgUrlList, setImgUrlList] = useState([]);
 
     const location = {
         "uptainerId": "-NbzQlf95xoexGIlcIpY",
@@ -30,16 +31,21 @@ const OverView = ({ route }) => {
     useEffect(() => {
         async function fetchData() {
             await renderItem();
-            console.log(itemList[1].itemImage)
+            const imgUrlPromises = itemList.map(async item => {
+                return await getImage(item.itemImage);
+            });
+            const imgUrlList = await Promise.all(imgUrlPromises);
+            setImgUrlList(imgUrlList);
+            console.log(imgUrlList)
         }
-        fetchData(); 
+        fetchData();
     }, [location.uptainerId]);
 
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <UptainerInfo location={location} />
-            {itemList.map(item => (
-                <Image source={{ uri: item.itemImage }}
+            {imgUrlList.map(item => (
+                <Image source={{ uri: item }}
                     style={{ width: 100, height: 100 }} />
             ))}
         </View>

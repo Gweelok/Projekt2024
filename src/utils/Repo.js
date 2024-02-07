@@ -77,7 +77,7 @@ export async function getImage(imagePath) {
       const url = await getDownloadURL(imageRef)
       return url
   } catch (err){
-      console.log("Error while downloading image => ", err);
+      //console.log("Error while downloading image => ", err);
       const url = "https://via.placeholder.com/200x200"
       return url
   }
