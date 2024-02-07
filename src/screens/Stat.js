@@ -50,7 +50,8 @@ const Stat = ({ navigation }) => {
   };
 
   const { currentLanguage } = useLanguage();
-  let [data, setData] = useState({
+  
+  const [data, setData] = useState({
     bestUptainer: {},
     allTakenItems: 0,
     todayTakenItems: 0,
