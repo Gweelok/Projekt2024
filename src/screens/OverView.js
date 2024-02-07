@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image } from "react-native"
+import { View, StyleSheet, Image, FlatList } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import GlobalStyle from "../styles/GlobalStyle"
@@ -9,6 +9,7 @@ const OverView = ({ route }) => {
     //const { location } = route.params;
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const location = {
         "uptainerId": "-NbzQlf95xoexGIlcIpY",
@@ -23,31 +24,47 @@ const OverView = ({ route }) => {
                 style={{ width: 100, height: 100 }} />
     */
 
-    async function renderItem() {
+    async function fetchItem() {
         const fetchedItems = await getItemByUptainerId(location.uptainerId)
         setItemList(fetchedItems);
     };
 
     useEffect(() => {
         async function fetchData() {
-            await renderItem();
+            setIsLoading(true)
+            await fetchItem();
             const imgUrlPromises = itemList.map(async item => {
                 return await getImage(item.itemImage);
             });
             const imgUrlList = await Promise.all(imgUrlPromises);
             setImgUrlList(imgUrlList);
-            console.log(imgUrlList)
+            imgUrlList.map(item => { console.log(item) })
+            setIsLoading(false)
         }
         fetchData();
     }, [location.uptainerId]);
 
+    const renderItem = ({  item: url }) => (
+        <View>
+            <Image source={{ uri: url }}
+                style={{ width: 100, height: 100 }} />
+        </View>
+    );
+
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
+
             <UptainerInfo location={location} />
-            {imgUrlList.map(item => (
-                <Image source={{ uri: item }}
-                    style={{ width: 100, height: 100 }} />
-            ))}
+
+            {!isLoading && (
+                <FlatList
+                    data={imgUrlList}
+                    renderItem={renderItem}
+                    //keyExtractor={(imgUrlList, index) => index.toString()}
+                    numColumns={2} // Change this to the desired number of columns
+                />
+            )}
+
         </View>
     )
 
