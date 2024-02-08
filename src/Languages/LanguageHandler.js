@@ -24,6 +24,10 @@ function getLanguageObject(currentLanguage) {
 
 
 export function t(key, currentLanguage) {
+  if (!isValidLanguage(currentLanguage)) {
+    throw new Error('Error: currentLanguage must be a valid string and should be either "en" for English or "da" for Danish.')
+  }
+
   const langObj = getLanguageObject(currentLanguage);
   const keys = key.split('.');
   
@@ -32,7 +36,6 @@ export function t(key, currentLanguage) {
   }
 
   let translation = langObj;
-
 
   for (const k of keys) {
     if (translation[k]) {
