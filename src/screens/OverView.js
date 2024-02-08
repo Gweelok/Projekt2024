@@ -10,11 +10,11 @@ import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { getImage, getItemByUptainerId, deleteItemById } from "../utils/Repo";
 
 const OverView = ({ route }) => {
-    //const { location } = route.params;  <----- Use this later
+    //const { location } = route.params;  <----- Use this later 
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [isDeleted, setIsDeleted] = useState(false);
+    const [deleteTrigger, setDeleteTrigger] = useState(false); // State to trigger refetch
 
     const buttonText = 'Delete';
     //Should be replaced later with route param from Main-page  
@@ -26,44 +26,55 @@ const OverView = ({ route }) => {
         "uptainerCity": "Nörrebro"
     }
 
-    async function fetchItem() {
+    async function fetchItems() {
         const fetchedItems = await getItemByUptainerId(location.uptainerId)
         setItemList(fetchedItems);
-    };
+    }
 
     useEffect(() => {
         async function fetchData() {
             setIsLoading(true)
-            await fetchItem();
-            const imgUrlPromises = itemList.map(async item => {
-                const imageUrl = await getImage(item.itemImage);
-                return { id: item.itemId, url: imageUrl };
-            });
-            const imgUrlList = await Promise.all(imgUrlPromises);
-            setImgUrlList(imgUrlList);
-            setIsLoading(false)
+            try {
+                await fetchItems();
+
+                const imgUrlPromises = itemList.map(async item => {
+                    const imageUrl = await getImage(item.itemImage);
+                    return { id: item.itemId, url: imageUrl };
+                });
+
+                const imgUrlList = await Promise.all(imgUrlPromises);
+                setImgUrlList(imgUrlList);
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                Alert.alert('Error', 'An error occurred while fetching data.');
+            } finally {
+                setIsLoading(false);
+            }
         }
         fetchData();
-    }, [location.uptainerId]);
+    }, [location.uptainerId, deleteTrigger]);
 
     async function handleLinkPress(itemId) {
-        setIsLoading(true);
         try {
-            setIsDeleted(await deleteItemById(itemId));
-            console.log(itemId)
-            //Check to se if item is deleted 
-            if(!isDeleted){throw new Error("An error occured while trying to remove item");}
-
-            setIsLoading(false);
+            setIsLoading(true);
+            if (!await deleteItemById(itemId)) {
+                throw new Error("An error occured while trying to remove item");
+            } else {
+                await fetchItems(); 
+                setDeleteTrigger(prev => !prev);
+            }
         } catch (error) {
             console.log(error)
             Alert.alert(
-                'Error', error.toString(), 
-                [{ text: 'OK' ,}], setIsLoading(false)
+                'Error', error.toString(),
+                [{ text: 'OK', }],
             );
+        } finally {
+            setIsLoading(false)
         }
     }
-
+    //For rendering Image & Link
     const renderItem = ({ item }) => (
         <View>
             <Image source={{ uri: item.url }} style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }} />
@@ -82,6 +93,7 @@ const OverView = ({ route }) => {
                 <View style={style.list}>
                     <FlatList
                         data={imgUrlList}
+                        extraData={itemList}
                         renderItem={renderItem}
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
