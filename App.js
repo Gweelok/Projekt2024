@@ -10,6 +10,7 @@ import { LanguageProvider } from './src/Languages/LanguageHandler';
 import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import Uptainer from './src/screens/Uptainer';
+import OverView from './src/screens/OverView'
 
 
 export default function App() {
@@ -34,6 +35,8 @@ export default function App() {
           <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
           <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
           <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
+          <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
