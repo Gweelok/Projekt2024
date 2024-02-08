@@ -14,6 +14,7 @@ const OverView = ({ route }) => {
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const buttonText = 'Delete';
     //Should be replaced later with route param from Main-page  
@@ -48,10 +49,11 @@ const OverView = ({ route }) => {
     async function handleLinkPress(itemId) {
         setIsLoading(true);
         try {
-            const isDeleted = await deleteItemById(31321331231);
+            setIsDeleted(await deleteItemById(itemId));
             console.log(itemId)
             //Check to se if item is deleted 
             if(!isDeleted){throw new Error("An error occured while trying to remove item");}
+
             setIsLoading(false);
         } catch (error) {
             console.log(error)
