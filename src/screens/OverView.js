@@ -10,49 +10,36 @@ import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { getImage, getItemByUptainerId, deleteItemById } from "../utils/Repo";
 
 const OverView = ({ route }) => {
-    //const { location } = route.params;  <----- Use this later 
+    const { location } = route.params;
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [deleteTrigger, setDeleteTrigger] = useState(false); // State to trigger refetch
+    const [deleteTrigger, setDeleteTrigger] = useState(false);
 
     const buttonText = 'Delete';
-    //Should be replaced later with route param from Main-page  
-    const location = {
-        "uptainerId": "-NbzQlf95xoexGIlcIpY",
-        "url": "https://reactjs.org/logo-og.png",
-        "uptainerName": "KU Lighthouse",
-        "uptainerStreet": "Tagensvej 16A",
-        "uptainerCity": "Nörrebro"
-    }
-
+  
     async function fetchItems() {
-        const fetchedItems = await getItemByUptainerId(location.uptainerId)
+        const fetchedItems = await getItemByUptainerId(location.uptainerId);
         setItemList(fetchedItems);
+    
+        // Get image URLs for each item
+        const imgUrlPromises = fetchedItems.map(async item => {
+            const imageUrl = await getImage(item.itemImage);
+            return { id: item.itemId, url: imageUrl };
+        });
+    
+        const imgUrlList = await Promise.all(imgUrlPromises);
+        setImgUrlList(imgUrlList);
     }
-
+    
     useEffect(() => {
-        async function fetchData() {
-            setIsLoading(true)
-            try {
-                await fetchItems();
-
-                const imgUrlPromises = itemList.map(async item => {
-                    const imageUrl = await getImage(item.itemImage);
-                    return { id: item.itemId, url: imageUrl };
-                });
-
-                const imgUrlList = await Promise.all(imgUrlPromises);
-                setImgUrlList(imgUrlList);
-
-            } catch (error) {
+        setIsLoading(true);
+        fetchItems()
+            .catch(error => {
                 console.error("Error fetching data:", error);
                 Alert.alert('Error', 'An error occurred while fetching data.');
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        fetchData();
+            })
+            .finally(() => setIsLoading(false));
     }, [location.uptainerId, deleteTrigger]);
 
     async function handleLinkPress(itemId) {
@@ -74,13 +61,14 @@ const OverView = ({ route }) => {
             setIsLoading(false)
         }
     }
+    
     //For rendering Image & Link
     const renderItem = ({ item }) => (
         <View>
             <Image source={{ uri: item.url }} style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }} />
 
             <TouchableOpacity disabled={isLoading} onPress={() => handleLinkPress(item.id)}>
-                <Text style={styles.link}>{buttonText}</Text>
+                <Text style={[styles.link, style.linkText]}>{buttonText}</Text>
             </TouchableOpacity >
         </View >
     );
@@ -113,6 +101,9 @@ const style = StyleSheet.create({
     },
     list: {
         height: 300
+    },
+    linkText:{
+        textAlign: 'center'
     }
 });
 
