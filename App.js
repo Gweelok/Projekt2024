@@ -4,7 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from "expo-font";
 
+//Providers
 import { LanguageProvider } from './src/Languages/LanguageHandler';
+import { LoaderProvider } from "./src/components/molecules/LoaderContext";
 
 //importing pages for navigation
 import Home from './src/screens/Home';
@@ -30,17 +32,19 @@ export default function App() {
 
   const Stack = createNativeStackNavigator()
   return (
-    <LanguageProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='Login'>
-          <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-          <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-          <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
-          <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
-          <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </LanguageProvider>
+    <LoaderProvider>
+      <LanguageProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='Login'>
+            <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+            <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+            <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
+            <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
+            <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </LanguageProvider>
+    </LoaderProvider>
   );
 }
 

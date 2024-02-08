@@ -1,7 +1,9 @@
 import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert } from "react-native"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
+import LoadingScreen from "./LoadingScreen";
+import {LoaderContext} from "../components/molecules/LoaderContext";
 
 import GlobalStyle from "../styles/GlobalStyle"
 import { styles } from "../styles/styleSheet"
@@ -13,25 +15,25 @@ const OverView = ({ route }) => {
     const { location } = route.params;
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const {isLoading, setIsLoading} = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
 
     const buttonText = 'Delete';
-  
+
     async function fetchItems() {
         const fetchedItems = await getItemByUptainerId(location.uptainerId);
         setItemList(fetchedItems);
-    
+
         // Get image URLs for each item
         const imgUrlPromises = fetchedItems.map(async item => {
             const imageUrl = await getImage(item.itemImage);
             return { id: item.itemId, url: imageUrl };
         });
-    
+
         const imgUrlList = await Promise.all(imgUrlPromises);
         setImgUrlList(imgUrlList);
     }
-    
+
     useEffect(() => {
         setIsLoading(true);
         fetchItems()
@@ -48,7 +50,7 @@ const OverView = ({ route }) => {
             if (!await deleteItemById(itemId)) {
                 throw new Error("An error occured while trying to remove item");
             } else {
-                await fetchItems(); 
+                await fetchItems();
                 setDeleteTrigger(prev => !prev);
             }
         } catch (error) {
@@ -61,7 +63,7 @@ const OverView = ({ route }) => {
             setIsLoading(false)
         }
     }
-    
+
     //For rendering Image & Link
     const renderItem = ({ item }) => (
         <View>
@@ -74,7 +76,11 @@ const OverView = ({ route }) => {
     );
 
     return (
+        
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
+
+            {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+
             <UptainerInfo location={location} />
 
             {!isLoading && (
@@ -102,7 +108,7 @@ const style = StyleSheet.create({
     list: {
         height: 300
     },
-    linkText:{
+    linkText: {
         textAlign: 'center'
     }
 });
