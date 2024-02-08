@@ -32,7 +32,7 @@ const UptainerList = () => {
                     uptainer.distance = calculateDistance(
                         { latitude: userLocation.latitude, longitude: userLocation.longitude },
                         { latitude: uptainerLatitude, longitude: uptainerLongitude }
-                    );                   
+                    );
                 });
                 // Sort the uptainerList based on distance
                 uptainerList.sort((a, b) => a.distance - b.distance);
@@ -64,7 +64,7 @@ const UptainerList = () => {
     const handleUptainerPress = (location) => {
         // Handle the press event, e.g., navigate to a detailed view
         console.log(`Uptainer ${location.uptainerName} pressed`);
-        navigation.navigate("Uptainer", { location: location });
+        navigation.navigate("ServiceAdminMain", { location: location });
     };
 
     /*useEffect for first retriving location
@@ -84,24 +84,24 @@ const UptainerList = () => {
             }
         }
         fetchUptainersData();
-    }, [searchValue, effectHasRun]);
+    }, [effectHasRun]);
 
     const renderUptainers = ({ item, index }) => {
         return (
             <View style={styles.itemContainer}>
-            <Uptainer
-                key={index}
-                location={item}
-                onPress={() => handleUptainerPress(item)}
-                index={index}
-                styling={[
-                    dropdownStyles.dropdownListItem2,
-                    styles.lastItem,
-                ]}
-                distance={item.distance}
-            />
-            
-            <Spacer height={25}></Spacer>
+                <Uptainer
+                    key={index}
+                    location={item}
+                    onPress={() => handleUptainerPress(item)}
+                    index={index}
+                    styling={[
+                        dropdownStyles.dropdownListItem2,
+                        styles.lastItem,
+                    ]}
+                    distance={item.distance}
+                />
+
+                <Spacer height={25}></Spacer>
             </View>
         );
     };
