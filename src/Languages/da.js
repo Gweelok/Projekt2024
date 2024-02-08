@@ -56,6 +56,10 @@ export default {
     EmailExist: "Email er allerede i brug",
     HandleDeleteAccount: "Konto er slettet",
     Language: "Sprog",
+    InvalidEmail: "Den angivne email-adresse er ugyldig.",
+    InvalidName: "Det angivne navn er ugyldigt.",
+    InvalidPhone: "Det angivne telefonnummer er ugyldigt.",
+    Error: "Der opstod en fejl under opdatering af indstillingerne. Prøv igen venligst!"
   },
   DeleteAccount: {
     Header: "Er du sikker på at du vil slette din konto?",
