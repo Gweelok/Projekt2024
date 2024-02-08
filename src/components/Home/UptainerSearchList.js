@@ -1,103 +1,45 @@
-import * as Location from 'expo-location';
+
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getAllUptainers } from "../../utils/Repo";
 import { dropdownStyles, Primarycolor1, Primarycolor4 } from "../../styles/styleSheet";
-import GlobalStyle from "../../styles/GlobalStyle"
-import { calculateDistance } from '../../utils/uptainersUtils';
 import Uptainer from './Uptainer';
 
-const UptainerSearchList = ({ searchValue }) => {
-    const [uptainers, setUptainers] = useState([]);
-    const [userLocation, setUserLocation] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [effectHasRun, setEffectHasRun] = useState(false);
+const UptainerSearchList = ({ searchText, loading, uptainers }) => {
+
+    const [sortedListed, setSortedList] = useState([]);
 
     //Temporary string for not found text
     const NO_UPTAINERS_FOUND = 'No uptainers found';
     const navigation = useNavigation();
 
-    const getUptainers = async () => {
-        try {
-            const uptainerList = await getAllUptainers();
-            // Check if userLocation is available
-            if (userLocation !== null) {
-                // Calculate distance for each uptainer and add it as a new property
-                uptainerList.forEach((uptainer) => {
-                    const uptainerLatitude = parseFloat(uptainer.uptainerLatitude);
-                    const uptainerLongitude = parseFloat(uptainer.uptainerLongitude)
-
-                    uptainer.distance = calculateDistance(
-                        { latitude: userLocation.latitude, longitude: userLocation.longitude },
-                        { latitude: uptainerLatitude, longitude: uptainerLongitude }
-                    );                   
-                });
-                // Sort the uptainerList based on distance
-                uptainerList.sort((a, b) => a.distance - b.distance);
-            }
-            //Filter uptainers by search-string if it's available.
-            if (searchValue.length !== 0) {
-                const filteredUptainerList = uptainerList.filter(item =>
-                    item.uptainerName.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerStreet.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerCity.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerZip.toString().includes(searchValue)
-                );
-                //Return filtered search
-                setUptainers(filteredUptainerList);
-                setLoading(false);
-                return;
-            }
-            //Return unfiltered search
-            setUptainers(uptainerList);
-            setLoading(false);
-        } catch (error) {
-            console.log("Error fetching uptainers:", error);
-            setLoading(false);
-        }
-    };
-
-    //Get location coords from user
-    const getUserLocation = async () => {
-        try {
-            const { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                return;
-            }
-            const location = await Location.getCurrentPositionAsync({});
-            setUserLocation(location.coords);
-        } catch (error) {
-            console.error('Error fetching location:', error);
-            Alert.alert('Error fetching location. Please try again.');
-            setLoading(false);
-        }
+    async function sortUptainers(uptainers) {
+        // Sort the uptainerList based on distance
+        uptainers.sort((a, b) => a.distance - b.distance);
+        //Filter uptainers by search-string if it's available.
+        const filteredUptainerList = uptainers.filter(item =>
+            item.uptainerName.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.uptainerStreet.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.uptainerCity.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.uptainerZip.toString().includes(searchText)
+        );
+        
+        return filteredUptainerList;
     };
 
     const handleUptainerPress = (location) => {
-        // Handle the press event, e.g., navigate to a detailed view
-        console.log(`Uptainer ${location.uptainerName} pressed`);
-        navigation.navigate("Uptainer", { location: location });
+        navigation.navigate("ServiceAdminMain", { location: location });
     };
 
-    /*useEffect for first retriving location
-     before fetching uptainer data */
     useEffect(() => {
-        async function fetchLocationCoords() {
-            await getUserLocation();
-            setEffectHasRun(true);
+        console.log('render')
+        async function sort(){
+            const filterdList = await sortUptainers(uptainers);
+            console.log(filterdList)
+            setSortedList(filterdList)
         }
-        fetchLocationCoords();
-    }, []);
-
-    useEffect(() => {
-        async function fetchUptainersData() {
-            if (effectHasRun) {
-                await getUptainers()
-            }
-        }
-        fetchUptainersData();
-    }, [searchValue, effectHasRun]);
+        sort();
+    }, [searchText]);
 
     const renderUptainers = ({ item, index }) => {
         return (
@@ -108,7 +50,7 @@ const UptainerSearchList = ({ searchValue }) => {
                 index={index}
                 styling={[
                     dropdownStyles.dropdownListItem2,
-                    index === uptainers.length - 1 ? styles.lastItem : null,
+                    index === sortedListed.length - 1 ? styles.lastItem : null,
                 ]}
                 distance={item.distance}
             />
@@ -116,21 +58,21 @@ const UptainerSearchList = ({ searchValue }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View>
             {loading ? (
                 <ActivityIndicator size='large' color='black' />
-            ) : uptainers.length !== 0 ? (
+            ) : sortedListed.length !== 0 && searchText.length !== 0 ? (
                 <FlatList
-                    data={uptainers}
+                    data={sortedListed}
                     keyExtractor={(item) => item.uptainerName}
                     style={[styles.uptainerList]}
                     renderItem={renderUptainers}
                 />
-            ) : (
+            ) : sortedListed.length === 0 && searchText.length > 0 ? (
                 <Text style={[styles.notFound]}>
                     {NO_UPTAINERS_FOUND}
                 </Text>
-            )}
+            ) : null} 
         </View>
     );
 
