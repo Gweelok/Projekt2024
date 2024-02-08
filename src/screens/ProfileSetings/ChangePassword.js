@@ -35,14 +35,13 @@ const ChangePassword = ({ navigation }) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [iscurrentPasswordValid, setiscurrentPasswordValid] = useState(true);
-    const [isnewPasswordValid, setisnewPasswordValid] = useState(true);
-    const [isconfirmPasswordValid, setisconfirmPasswordValid] = useState(true);
+    const [currentPasswordErrorMessage, setcurrentPasswordErrorMessage] = useState("");
+    const [newPasswordErrorMessage, setnewPasswordErrorMessage] = useState("");
+    const [confirmPasswordErrorMessage, setconfirmPasswordErrorMessage] = useState("");
 
     const [canSave, setcanSave] = useState(false)
     const [isInit, setisInit] = useState(false)
     const [bannerErrorMessage, setbannerErrorMessage] = useState("")
-    const [fieldErrorMessage, setfieldErrorMessage] = useState("")
     const { isLoading, setIsLoading } = useContext(LoaderContext)
 
     const [showPassword, setShowPassword] = useState({
@@ -72,11 +71,11 @@ const ChangePassword = ({ navigation }) => {
 
         if (currentPassword != oldPassword) {
             setbannerErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
-            setiscurrentPasswordValid(false)
+            setcurrentPasswordErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
             setIsLoading(false)
         } else if (currentPassword == newPassword) {
             setbannerErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
-            setisnewPasswordValid(false)
+            setnewPasswordErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
             setIsLoading(false)
         } else {
             updateUserData({ password: newPassword }).then(() => {
@@ -101,35 +100,45 @@ const ChangePassword = ({ navigation }) => {
 
 
     const checkFields = () => {
+        let isValid = true
 
-        if (currentPassword.trim() == "" || currentPassword.trim().length < 8) {
-            setfieldErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
-            setiscurrentPasswordValid(false)
-            return false
+        if (currentPassword) {
+            if (currentPassword.trim() == "" || currentPassword.trim().length < 8) {
+                setcurrentPasswordErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
+                isValid = false
+            } else {
+                setcurrentPasswordErrorMessage()
+            }
         } else {
-            setiscurrentPasswordValid(true)
-        }
-
-        if (newPassword.trim().length < 8) {
-            setfieldErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
-            setisnewPasswordValid(false)
-            return false
-        } else {
-            setisnewPasswordValid(true)
+            isValid = false
         }
 
 
-        if (confirmPassword.trim() != newPassword.trim()) {
-            setfieldErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage))
-            setisconfirmPasswordValid(false)
-            return false
+        if (newPassword) {
+            if (newPassword.trim().length < 8) {
+                setnewPasswordErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
+                isValid = false
+            } else {
+                setnewPasswordErrorMessage()
+            }
         } else {
-            setisconfirmPasswordValid(true)
+            isValid = false
         }
 
-        setfieldErrorMessage("")
 
-        return true
+        if (confirmPassword) {
+            if (confirmPassword.trim() != newPassword.trim()) {
+                setconfirmPasswordErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage))
+                isValid = false
+            } else {
+                setconfirmPasswordErrorMessage()
+            }
+        } else {
+            isValid = false
+        }
+
+
+        return isValid
     }
 
 
@@ -160,7 +169,7 @@ const ChangePassword = ({ navigation }) => {
                     <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                         {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
                     </Text>
-                    <View style={[styles.inputBox, !iscurrentPasswordValid && stylesGlobal.errorInputBox]}>
+                    <View style={[styles.inputBox, currentPasswordErrorMessage && stylesGlobal.errorInputBox]}>
                         <View style={styles.container}>
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
@@ -183,8 +192,8 @@ const ChangePassword = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    {!iscurrentPasswordValid && fieldErrorMessage && (
-                        <Text style={styles.errorText}>{fieldErrorMessage}</Text>
+                    {currentPasswordErrorMessage && (
+                        <Text style={styles.errorText}>{currentPasswordErrorMessage}</Text>
                     )}
                 </View>
 
@@ -195,7 +204,7 @@ const ChangePassword = ({ navigation }) => {
                     <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                         {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                     </Text>
-                    <View style={[styles.inputBox, !isnewPasswordValid && stylesGlobal.errorInputBox]}>
+                    <View style={[styles.inputBox, newPasswordErrorMessage && stylesGlobal.errorInputBox]}>
                         <View style={styles.container}>
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
@@ -217,8 +226,8 @@ const ChangePassword = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    {!isnewPasswordValid && fieldErrorMessage && (
-                        <Text style={styles.errorText}>{fieldErrorMessage}</Text>
+                    {newPasswordErrorMessage && (
+                        <Text style={styles.errorText}>{newPasswordErrorMessage}</Text>
                     )}
                 </View>
 
@@ -229,7 +238,7 @@ const ChangePassword = ({ navigation }) => {
                     <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                         {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                     </Text>
-                    <View style={[styles.inputBox, { flexdirection: 'row' }, !isconfirmPasswordValid && stylesGlobal.errorInputBox]}>
+                    <View style={[styles.inputBox, { flexdirection: 'row' }, confirmPasswordErrorMessage && stylesGlobal.errorInputBox]}>
                         <View style={styles.container}>
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
@@ -251,8 +260,8 @@ const ChangePassword = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    {!isconfirmPasswordValid && fieldErrorMessage && (
-                        <Text style={styles.errorText}>{fieldErrorMessage}</Text>
+                    {confirmPasswordErrorMessage && (
+                        <Text style={styles.errorText}>{confirmPasswordErrorMessage}</Text>
                     )}
                 </View>
 
