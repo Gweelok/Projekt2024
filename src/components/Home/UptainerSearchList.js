@@ -7,9 +7,8 @@ import { dropdownStyles, Primarycolor1, Primarycolor4 } from "../../styles/style
 import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
 import Uptainer from './Uptainer';
-import Spacer from '../atoms/Spacer';
 
-const UptainerList = ({ searchValue }) => {
+const UptainerSearchList = ({ searchValue }) => {
     const [uptainers, setUptainers] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -37,7 +36,19 @@ const UptainerList = ({ searchValue }) => {
                 // Sort the uptainerList based on distance
                 uptainerList.sort((a, b) => a.distance - b.distance);
             }
-           
+            //Filter uptainers by search-string if it's available.
+            if (searchValue.length !== 0) {
+                const filteredUptainerList = uptainerList.filter(item =>
+                    item.uptainerName.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    item.uptainerStreet.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    item.uptainerCity.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    item.uptainerZip.toString().includes(searchValue)
+                );
+                //Return filtered search
+                setUptainers(filteredUptainerList);
+                setLoading(false);
+                return;
+            }
             //Return unfiltered search
             setUptainers(uptainerList);
             setLoading(false);
@@ -90,7 +101,6 @@ const UptainerList = ({ searchValue }) => {
 
     const renderUptainers = ({ item, index }) => {
         return (
-            <View style={styles.itemContainer}>
             <Uptainer
                 key={index}
                 location={item}
@@ -98,13 +108,10 @@ const UptainerList = ({ searchValue }) => {
                 index={index}
                 styling={[
                     dropdownStyles.dropdownListItem2,
-                    styles.lastItem,
+                    index === uptainers.length - 1 ? styles.lastItem : null,
                 ]}
                 distance={item.distance}
             />
-            
-            <Spacer height={25}></Spacer>
-            </View>
         );
     };
 
@@ -131,11 +138,25 @@ const UptainerList = ({ searchValue }) => {
 
 const styles = StyleSheet.create(
     {
-        itemContainer: 20,
         lastItem: { borderBottomWidth: 3 },
         uptainerList: {
+            marginTop: 87,
             width: '100%',
         },
+        notFound: {
+            marginTop: 87,
+            borderWidth: 3,
+            minHeight: 80,
+            width: '100%',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+            backgroundColor: 'white',
+            borderColor: Primarycolor1,
+            color: Primarycolor4,
+            zIndex: 1,
+            justifyContent: 'center',
+            alignSelf: 'center'
+        }
     });
 
-export default UptainerList;
+export default UptainerSearchList;

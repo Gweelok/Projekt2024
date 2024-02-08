@@ -1,16 +1,17 @@
-import { View, StyleSheet} from "react-native"
+import { View, StyleSheet } from "react-native"
 import { useState } from 'react';
+import UptainerSearchList from "./UptainerSearchList"
 import UptainerList from "./UptainerList"
 import Navigationbar from "../organisms/Navigationbar"
 import SearchBox from "./SearchBox"
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 import GlobalStyle from "../../styles/GlobalStyle"
 
-const ServiceAdminContent = ({navigation}) => {
-   
+const ServiceAdminContent = ({ navigation }) => {
+
     const [searchText, setSearchText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
-    
+
     //Temporary placeholder for searchbox
     const FIND_UPTAINER = 'Find Uptainer';
 
@@ -24,28 +25,32 @@ const ServiceAdminContent = ({navigation}) => {
     };
 
     return (
-        <View style={style.container}>
+        <View style={[style.container, GlobalStyle.BodyWrapper]}>
 
             <View style={style.searchContainer} >
 
-                <View style={[GlobalStyle.BodyWrapper, style.searchBox]} onTouchStart={openSearch}>
+                <View style={[style.searchBox]} onTouchStart={openSearch}>
 
                     <SearchBox
                         onChangeText={(text) => setSearchText(text)}
-                        value={searchText} placeholderText={FIND_UPTAINER}>                              
+                        value={searchText} placeholderText={FIND_UPTAINER}>
                     </SearchBox>
 
                 </View>
 
                 {isSearching && (
                     <View>
-                        <UptainerList searchValue={searchText}></UptainerList>
+                        <UptainerSearchList searchValue={searchText}></UptainerSearchList>
                     </View>
                 )}
 
             </View>
 
-            <View onTouchStart={closeSearch} style={style.container2} />
+            <View style={style.list} >
+                <UptainerList></UptainerList>
+            </View>
+
+            <View style={style.container2} />
 
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
@@ -61,6 +66,8 @@ const style = StyleSheet.create({
         alignItems: 'center',
     },
     searchContainer: {
+        position: 'absolute',
+        zIndex: 1,
         width: '80%',
     },
     container2: {
@@ -73,6 +80,12 @@ const style = StyleSheet.create({
         marginTop: 50,
         width: '100%',
         flexDirection: 'row',
+    },
+    list: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '80%',
+        marginTop: 140
     }
 })
 
