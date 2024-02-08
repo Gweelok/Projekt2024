@@ -121,7 +121,7 @@ const AccountSettings = ({ navigation }) => {
         setErrorMessage("")
 
         // update auth + realtime user data
-        updateUserData({name:name, email:email, phone:phone}).then(() => {
+        updateUserData({ name: name, email: email, phone: phone }).then(() => {
             setIsLoading(false)
             Alert.alert("Success", t('AccountSettingsScreen.HandleSave.Saved', currentLanguage));
         }).catch((error) => {
@@ -234,7 +234,7 @@ const AccountSettings = ({ navigation }) => {
                     {/* ChangeCode */}
                     <Divider style={styles.divider}></Divider>
                     <View>
-                        <MenuItems style={{marginBottom:0}} msg={t('AccountSettingsScreen.ChangeCode', currentLanguage)} onPress={handleChangePasswordPress} />
+                        <MenuItems style={{ marginBottom: 0 }} msg={t('AccountSettingsScreen.ChangeCode', currentLanguage)} onPress={handleChangePasswordPress} />
                     </View>
 
 
