@@ -191,7 +191,7 @@ export const styles = StyleSheet.create({
       width: 250,
       height: 400,
       justifyContent: "center",
-      // alignItems: "center",
+      alignItems: "center",
       marginBottom: 20,
       //  backgroundColor: "darkgreen", // Dark green background for border
       borderRadius: 10, // Rounded corners

@@ -1,7 +1,7 @@
 // ButtonMolecule.js
 import React from "react";
-import PressableAtom from "../../atoms/QRScannerAtoms/PressableAtomQR"; // Adjust the path as needed
-import { Buttons } from "../../../styles/styleSheet"; // Assuming Buttons contains styles
+import PressableAtom from "../../atoms/QRScannerAtoms/PressableAtomQR";
+import { Buttons, styles } from "../../../styles/styleSheet"; 
 
 const ButtonMolecule = ({
   onPress,
@@ -14,8 +14,8 @@ const ButtonMolecule = ({
     <PressableAtom
       onPress={onPress}
       disabled={disabled}
-      style={[Buttons.main_button, buttonStyle]}
-      textStyle={[Buttons.main_buttonText, textStyle]}
+      style={buttonStyle}
+      textStyle={textStyle}
     >
       {title}
     </PressableAtom>
