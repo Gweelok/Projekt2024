@@ -9,7 +9,7 @@ import { calculateDistance } from '../../utils/uptainersUtils';
 import Uptainer from './Uptainer';
 import Spacer from '../atoms/Spacer';
 
-const UptainerList = ({ searchValue }) => {
+const UptainerList = () => {
     const [uptainers, setUptainers] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -37,8 +37,6 @@ const UptainerList = ({ searchValue }) => {
                 // Sort the uptainerList based on distance
                 uptainerList.sort((a, b) => a.distance - b.distance);
             }
-           
-            //Return unfiltered search
             setUptainers(uptainerList);
             setLoading(false);
         } catch (error) {

@@ -46,11 +46,11 @@ const ServiceAdminContent = ({ navigation }) => {
 
             </View>
 
-            <View style={style.list} >
+            <View style={style.list} onTouchStart={closeSearch}>
                 <UptainerList></UptainerList>
             </View>
 
-            <View style={style.container2} />
+            <View style={style.container2} onTouchStart={closeSearch}/>
 
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
