@@ -61,6 +61,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
     },
     searchContainer: {
+        marginTop: 45,
         width: '80%',
     },
     container2: {
