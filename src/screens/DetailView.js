@@ -50,7 +50,7 @@ const DetailViews = ({ navigation, route }) => {
       description: itemDescription,
       image: imageUrl,
       itemId: details?.data,
-      uptainer: uptainer ? uptainer : details?.itemUptainer 
+      uptainer: uptainer
     });
   };
 

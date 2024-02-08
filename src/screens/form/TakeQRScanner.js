@@ -79,7 +79,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
       setText(data);
     }
   };
-
+  console.log(itemData?.uptainer)
   const handleScanAgain = () => {
     setScanned(false);
     // console.log("description: ", itemData?.description);
@@ -102,7 +102,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
         if (uptainer) {
           setIsActive(true);
-          if(uptainerId === itemData?.uptainer){
+          if(uptainerId === itemData?.uptainer.uptainerId){
 
             try {
               const itemId = itemData?.itemId
@@ -137,7 +137,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           } else{
             Alert.alert(
               "can't take error",
-              "uptainer you scanned isn't the correct saved to item in DB",
+              "uptainer you scanned isn't the correct saved to item in DB: " + itemData.uptainer,
               [{
                 text: 'Okay',
                 onPress: ()=>{
