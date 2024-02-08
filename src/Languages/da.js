@@ -52,10 +52,8 @@ export default {
     ChangeCode: "Skift kode",
     Delete: "Slet konto",
     Optional: "valgfri",
-    HandleSave: {
-      Saved: "Oplysninger gemt",
-      EmailExist:"Email er allerede i brug"
-    },
+    Saved: "Oplysninger gemt",
+    EmailExist: "Email er allerede i brug",
     HandleDeleteAccount: "Konto er slettet",
     Language: "Sprog",
   },
