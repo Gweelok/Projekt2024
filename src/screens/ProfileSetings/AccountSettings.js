@@ -123,12 +123,12 @@ const AccountSettings = ({ navigation }) => {
         // update auth + realtime user data
         updateUserData({name:name, email:email, phone:phone}).then(() => {
             setIsLoading(false)
-            Alert.alert("Success", t('AccountSettingsScreen.HandleSave.Saved', currentLanguage));
+            Alert.alert("Success", t('AccountSettingsScreen.Saved', currentLanguage));
         }).catch((error) => {
             setIsLoading(false)
             if (error.code == "auth/email-already-in-use") {
                 setisEmailValid(false)
-                setErrorMessage(t('AccountSettingsScreen.HandleSave.EmailExist', currentLanguage))
+                setErrorMessage(t('AccountSettingsScreen.EmailExist', currentLanguage))
             } else {
                 setErrorMessage(error.message)
             }

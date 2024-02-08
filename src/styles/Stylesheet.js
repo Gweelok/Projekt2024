@@ -90,6 +90,11 @@ export const styles = StyleSheet.create({
     borderColor: "#AA0000",
     borderWidth: 3,
   },
+  errorText: {
+    color:"#AA0000",
+    marginTop:-15,
+    fontSize:14
+  },
   //Menu items
   menuItem: {
     width: "100%",

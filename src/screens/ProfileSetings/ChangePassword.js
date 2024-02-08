@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Modal,
     SafeAreaView,
+    Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
@@ -34,23 +35,21 @@ const ChangePassword = ({ navigation }) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-
     const [iscurrentPasswordValid, setiscurrentPasswordValid] = useState(true);
     const [isnewPasswordValid, setisnewPasswordValid] = useState(true);
     const [isconfirmPasswordValid, setisconfirmPasswordValid] = useState(true);
 
     const [canSave, setcanSave] = useState(false)
     const [isInit, setisInit] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('');
+    const [bannerErrorMessage, setbannerErrorMessage] = useState("")
+    const [fieldErrorMessage, setfieldErrorMessage] = useState("")
     const { isLoading, setIsLoading } = useContext(LoaderContext)
-
 
     const [showPassword, setShowPassword] = useState({
         "currentPassword": false,
         "newPassword": false,
         "confirmPassword": false
     })
-
 
 
 
@@ -67,32 +66,28 @@ const ChangePassword = ({ navigation }) => {
     const handlePress = async () => {
         setIsLoading(true)
         setcanSave(false)
-        setErrorMessage("")
+        setbannerErrorMessage("")
 
         const oldPassword = await SecureStorage.getPassword()
 
         if (currentPassword != oldPassword) {
-            setErrorMessage("Current Password is Incorrect")
+            setbannerErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
             setiscurrentPasswordValid(false)
             setIsLoading(false)
         } else if (currentPassword == newPassword) {
-            setErrorMessage("New Password cannot be the same as current Password")
+            setbannerErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
             setisnewPasswordValid(false)
-            setisconfirmPasswordValid(false)
             setIsLoading(false)
         } else {
-            updateUserData({ password:newPassword }).then(() => {
-                console.log("done");
-            }).catch((error) => {
-                setErrorMessage(error.message)
+            updateUserData({ password: newPassword }).then(() => {
+                Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage))
+                handleBackPress()
+            }).catch(() => {
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage))
             }).finally(() => {
                 setIsLoading(false)
             })
         }
-    }
-
-    const reloadPage = () => {
-
     }
 
     const handleBackPress = () => {
@@ -106,7 +101,9 @@ const ChangePassword = ({ navigation }) => {
 
 
     const checkFields = () => {
+
         if (currentPassword.trim() == "" || currentPassword.trim().length < 8) {
+            setfieldErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
             setiscurrentPasswordValid(false)
             return false
         } else {
@@ -114,6 +111,7 @@ const ChangePassword = ({ navigation }) => {
         }
 
         if (newPassword.trim().length < 8) {
+            setfieldErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
             setisnewPasswordValid(false)
             return false
         } else {
@@ -122,12 +120,14 @@ const ChangePassword = ({ navigation }) => {
 
 
         if (confirmPassword.trim() != newPassword.trim()) {
+            setfieldErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage))
             setisconfirmPasswordValid(false)
             return false
         } else {
             setisconfirmPasswordValid(true)
         }
 
+        setfieldErrorMessage("")
 
         return true
     }
@@ -152,87 +152,111 @@ const ChangePassword = ({ navigation }) => {
                     <BackButton onPress={handleBackPress}></BackButton>
                     <Text style={styles.HeaderText}>{t('AccountSettingsScreen.ChangeCode', currentLanguage)} </Text>
                 </View>
-                {errorMessage && <ErrorBanner message={errorMessage} />}
+                {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
 
-                {/* Current password */}
-                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
-                    {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
-                </Text>
-                <View style={[styles.inputBox, !iscurrentPasswordValid && stylesGlobal.errorInputBox]}>
-                    <View style={styles.container}>
-                        <TextInput
-                            style={[styles.input, customStyles.inputText]}
-                            secureTextEntry={!showPassword["currentPassword"]}
-                            value={currentPassword}
-                            onChangeText={setCurrentPassword}
-                            placeholder="Current password"
-                            placeholderTextColor="#8EA59E"
-                            keyboardType="default"
-                            autoCapitalize="none"
-                            maxLength={30}
-                        />
 
-                        <Ionicons
-                            name={showPassword["currentPassword"] ? 'ios-eye-off' : 'ios-eye'}
-                            size={18}
-                            color={Primarycolor1}
-                            style={styles.Icon_container}
-                            onPress={() => { togglePasswordVisibility("currentPassword") }}
-                        />
+                <View>
+                    {/* Current password */}
+                    <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+                        {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
+                    </Text>
+                    <View style={[styles.inputBox, !iscurrentPasswordValid && stylesGlobal.errorInputBox]}>
+                        <View style={styles.container}>
+                            <TextInput
+                                style={[styles.input, customStyles.inputText]}
+                                secureTextEntry={!showPassword["currentPassword"]}
+                                value={currentPassword}
+                                onChangeText={setCurrentPassword}
+                                placeholder={t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
+                                placeholderTextColor="#8EA59E"
+                                keyboardType="default"
+                                autoCapitalize="none"
+                                maxLength={30}
+                            />
+
+                            <Ionicons
+                                name={showPassword["currentPassword"] ? 'ios-eye-off' : 'ios-eye'}
+                                size={18}
+                                color={Primarycolor1}
+                                style={styles.Icon_container}
+                                onPress={() => { togglePasswordVisibility("currentPassword") }}
+                            />
+                        </View>
                     </View>
+                    {!iscurrentPasswordValid && fieldErrorMessage && (
+                        <Text style={styles.errorText}>{fieldErrorMessage}</Text>
+                    )}
                 </View>
-                {/* New password */}
-                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
-                    {t('ChangePasswordScreen.NewPassword', currentLanguage)}
-                </Text>
-                <View style={[styles.inputBox, !isnewPasswordValid && stylesGlobal.errorInputBox]}>
-                    <View style={styles.container}>
-                        <TextInput
-                            style={[styles.input, customStyles.inputText]}
-                            secureTextEntry={!showPassword["newPassword"]}
-                            value={newPassword}
-                            onChangeText={setNewPassword}
-                            placeholder="New password"
-                            placeholderTextColor="#8EA59E"
-                            keyboardType="default"
-                            autoCapitalize="none"
-                            maxLength={30}
-                        />
-                        <Ionicons
-                            name={showPassword["newPassword"] ? 'ios-eye-off' : 'ios-eye'}
-                            size={18}
-                            color={Primarycolor1}
-                            style={styles.Icon_container}
-                            onPress={() => { togglePasswordVisibility("newPassword") }}
-                        />
+
+
+
+                <View>
+                    {/* New password */}
+                    <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+                        {t('ChangePasswordScreen.NewPassword', currentLanguage)}
+                    </Text>
+                    <View style={[styles.inputBox, !isnewPasswordValid && stylesGlobal.errorInputBox]}>
+                        <View style={styles.container}>
+                            <TextInput
+                                style={[styles.input, customStyles.inputText]}
+                                secureTextEntry={!showPassword["newPassword"]}
+                                value={newPassword}
+                                onChangeText={setNewPassword}
+                                placeholder={t('ChangePasswordScreen.NewPassword', currentLanguage)}
+                                placeholderTextColor="#8EA59E"
+                                keyboardType="default"
+                                autoCapitalize="none"
+                                maxLength={30}
+                            />
+                            <Ionicons
+                                name={showPassword["newPassword"] ? 'ios-eye-off' : 'ios-eye'}
+                                size={18}
+                                color={Primarycolor1}
+                                style={styles.Icon_container}
+                                onPress={() => { togglePasswordVisibility("newPassword") }}
+                            />
+                        </View>
                     </View>
+                    {!isnewPasswordValid && fieldErrorMessage && (
+                        <Text style={styles.errorText}>{fieldErrorMessage}</Text>
+                    )}
                 </View>
-                {/* Confirm password */}
-                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
-                    {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
-                </Text>
-                <View style={[styles.inputBox, { flexdirection: 'row' }, !isconfirmPasswordValid && stylesGlobal.errorInputBox]}>
-                    <View style={styles.container}>
-                        <TextInput
-                            style={[styles.input, customStyles.inputText]}
-                            secureTextEntry={!showPassword["confirmPassword"]}
-                            value={confirmPassword}
-                            onChangeText={setConfirmPassword}
-                            placeholder="Confirm password"
-                            placeholderTextColor="#8EA59E"
-                            keyboardType="default"
-                            autoCapitalize="none"
-                            maxLength={30}
-                        />
-                        <Ionicons
-                            name={showPassword["confirmPassword"] ? 'ios-eye-off' : 'ios-eye'}
-                            size={18}
-                            color={Primarycolor1}
-                            style={styles.Icon_container}
-                            onPress={() => { togglePasswordVisibility("confirmPassword") }}
-                        />
+
+
+
+                <View>
+                    {/* Confirm password */}
+                    <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+                        {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
+                    </Text>
+                    <View style={[styles.inputBox, { flexdirection: 'row' }, !isconfirmPasswordValid && stylesGlobal.errorInputBox]}>
+                        <View style={styles.container}>
+                            <TextInput
+                                style={[styles.input, customStyles.inputText]}
+                                secureTextEntry={!showPassword["confirmPassword"]}
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                                placeholder={t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
+                                placeholderTextColor="#8EA59E"
+                                keyboardType="default"
+                                autoCapitalize="none"
+                                maxLength={30}
+                            />
+                            <Ionicons
+                                name={showPassword["confirmPassword"] ? 'ios-eye-off' : 'ios-eye'}
+                                size={18}
+                                color={Primarycolor1}
+                                style={styles.Icon_container}
+                                onPress={() => { togglePasswordVisibility("confirmPassword") }}
+                            />
+                        </View>
                     </View>
+                    {!isconfirmPasswordValid && fieldErrorMessage && (
+                        <Text style={styles.errorText}>{fieldErrorMessage}</Text>
+                    )}
                 </View>
+
+
 
                 <TouchableOpacity
                     disabled={!canSave}
