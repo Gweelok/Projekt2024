@@ -1,7 +1,8 @@
-import { View, StyleSheet, Image, FlatList } from "react-native"
+import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity } from "react-native"
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import GlobalStyle from "../styles/GlobalStyle"
+import { styles } from "../styles/styleSheet"
 import { getImage, getItemByUptainerId } from "../utils/Repo";
 import { useEffect, useState } from "react";
 
@@ -11,7 +12,8 @@ const OverView = ({ route }) => {
     const [imgUrlList, setImgUrlList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    //Should be replaced later with route param from Main-page
+    const buttonText = 'Delete';
+    //Should be replaced later with route param from Main-page  
     const location = {
         "uptainerId": "-NbzQlf95xoexGIlcIpY",
         "url": "https://reactjs.org/logo-og.png",
@@ -30,18 +32,28 @@ const OverView = ({ route }) => {
             setIsLoading(true)
             await fetchItem();
             const imgUrlPromises = itemList.map(async item => {
-                return await getImage(item.itemImage);
+                const imageUrl = await getImage(item.itemImage);
+                return { id: item.itemId, url: imageUrl };
             });
             const imgUrlList = await Promise.all(imgUrlPromises);
             setImgUrlList(imgUrlList);
-            imgUrlList.map(item => { console.log(item) })
             setIsLoading(false)
         }
         fetchData();
     }, [location.uptainerId]);
 
-    const renderItem = ({ item: url }) => (
-        <Image source={{ uri: url }} style={{ width: 100, height: 100, margin: 30 }} />
+    function handleLinkPress(itemId){
+        console.log(itemId)
+    }
+
+    const renderItem = ({ item }) => (
+        <View>
+            <Image source={{ uri: item.url }} style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }} />
+
+            <TouchableOpacity onPress={() => handleLinkPress(item.id)}>
+                <Text style={styles.link}>{buttonText}</Text>
+            </TouchableOpacity >
+        </View >
     );
 
     return (
