@@ -102,16 +102,17 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
         if (uptainer) {
           setIsActive(true);
+          if(uptainerId === itemData?.uptainer){
 
-          try {
-            const itemId = itemData?.itemId
-          
-          await updateItemToTaken(itemId)
-          } catch (error) {
-            console.log("can not change item to taken. Error: ", error);
-          }
-
-          Alert.alert(
+            try {
+              const itemId = itemData?.itemId
+              
+              await updateItemToTaken(itemId)
+            } catch (error) {
+              console.log("can not change item to taken. Error: ", error);
+            }
+            
+            Alert.alert(
             t("QrScannerScreen.Success", currentLanguage),
             t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
             [
@@ -132,7 +133,19 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
                 },
               },
             ]
-          );
+            );
+          } else{
+            Alert.alert(
+              "can't take error",
+              "uptainer you scanned isn't the correct saved to item in DB",
+              [{
+                text: 'Okay',
+                onPress: ()=>{
+                  setIsLoading(false)
+                }
+              }]
+            )
+          }
         }
 
         else {
