@@ -1,22 +1,21 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 import TextLink from "../molecules/TextLink";
 import Spacer from "../atoms/Spacer";
 
-const TextLinkList = ({ textValue }) => {
+const TextLinkList = ({ navigation, textValue }) => {
 
     return (
         <View style={style.container}>
 
-            <TextLink textValue={textValue.overview}></TextLink>
+                <TextLink path={'OverView'} navigation={navigation} textValue={textValue.overview}></TextLink>
 
-            <Spacer height={25}></Spacer>
+                <Spacer height={25}></Spacer>
 
-            <TextLink textValue={textValue.items}></TextLink>
+                <TextLink navigation={navigation} textValue={textValue.items}></TextLink>
 
-            <Spacer height={25}></Spacer>
+                <Spacer height={25}></Spacer>
 
-            <TextLink textValue={textValue.condition}></TextLink>
-
+                <TextLink navigation={navigation} textValue={textValue.condition}></TextLink>
         </View>
     )
 }

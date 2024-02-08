@@ -1,13 +1,16 @@
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet, Text, Touchable, TouchableOpacity } from "react-native"
 import { styles } from "../../styles/styleSheet";
 
-const TextLink = ({ textValue }) => {
+const TextLink = ({ path ,navigation, textValue }) => {
 
     return (
         <View>
 
             <Text style={style.textMargin}>{textValue.text}</Text>
-            <Text style={styles.link}>{textValue.link}</Text>
+
+            <TouchableOpacity onPress={() => { navigation.navigate(path) }}>
+                <Text style={styles.link}>{textValue.link}</Text>
+            </TouchableOpacity>
 
         </View>
     )
