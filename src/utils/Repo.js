@@ -125,15 +125,26 @@ function writeToDatabase(refPath, data) {
 
 /********************/
 /***** Delete *******/
-/********************/
+/********************/ 
 
 export async function deleteItemById(itemId) {
   const reference = ref(db, `/items/${itemId}`);
+
   try {
-    remove(reference);
-    console.log(`Item with ID ${itemId} deleted successfully.`);
+    // Attempt to delete the item directly
+    if (snapshot.exists()) {
+      // Attempt to delete the item directly
+      await remove(reference);
+      console.log(`Item with ID ${itemId} deleted successfully.`);
+      return true;
+    } else {
+      //If Id doesn't exist
+      console.log(`Item with ID ${itemId} does not exist.`);
+      return false;
+    }
   } catch (error) {
-    console.error(`Error deleting item with ID ${itemId}:`, error);
+    console.log(error)
+    return false;
   }
 }
 

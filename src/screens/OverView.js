@@ -1,10 +1,13 @@
-import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity } from "react-native"
-import { windowHeight, windowWidth } from "../utils/Dimensions"
+import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert } from "react-native"
+import { useEffect, useState } from "react";
+
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
+
 import GlobalStyle from "../styles/GlobalStyle"
 import { styles } from "../styles/styleSheet"
-import { getImage, getItemByUptainerId } from "../utils/Repo";
-import { useEffect, useState } from "react";
+
+import { windowHeight, windowWidth } from "../utils/Dimensions"
+import { getImage, getItemByUptainerId, deleteItemById } from "../utils/Repo";
 
 const OverView = ({ route }) => {
     //const { location } = route.params;  <----- Use this later
@@ -42,15 +45,28 @@ const OverView = ({ route }) => {
         fetchData();
     }, [location.uptainerId]);
 
-    function handleLinkPress(itemId){
-        console.log(itemId)
+    async function handleLinkPress(itemId) {
+        setIsLoading(true);
+        try {
+            const isDeleted = await deleteItemById(31321331231);
+            console.log(itemId)
+            //Check to se if item is deleted 
+            if(!isDeleted){throw new Error("An error occured while trying to remove item");}
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error)
+            Alert.alert(
+                'Error', error.toString(), 
+                [{ text: 'OK' ,}], setIsLoading(false)
+            );
+        }
     }
 
     const renderItem = ({ item }) => (
         <View>
             <Image source={{ uri: item.url }} style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }} />
 
-            <TouchableOpacity onPress={() => handleLinkPress(item.id)}>
+            <TouchableOpacity disabled={isLoading} onPress={() => handleLinkPress(item.id)}>
                 <Text style={styles.link}>{buttonText}</Text>
             </TouchableOpacity >
         </View >
