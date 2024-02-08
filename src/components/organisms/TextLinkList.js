@@ -1,9 +1,15 @@
-import { View, StyleSheet } from "react-native";
+import { TouchableOpacity, View, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import TextLink from "../molecules/TextLink";
 import Spacer from "../atoms/Spacer";
 
-const TextLinkList = ({ textValue }) => {
-
+const TextLinkList = ({ textValue, location }) => {
+    const navigation = useNavigation();
+    handlePress=()=>{
+        console.log('pressed')
+        console.log(location)       
+        navigation.navigate("Uptainer", { location: location });        
+    };
     return (
         <View style={style.container}>
 
@@ -15,8 +21,11 @@ const TextLinkList = ({ textValue }) => {
 
             <Spacer height={25}></Spacer>
 
+            <TouchableOpacity
+            onPress={handlePress}
+            >
             <TextLink textValue={textValue.condition}></TextLink>
-
+            </TouchableOpacity>
         </View>
     )
 }
