@@ -49,7 +49,8 @@ const DetailViews = ({ navigation, route }) => {
       brand: brandName,
       description: itemDescription,
       image: imageUrl,
-      itemId: details?.data
+      itemId: details?.data,
+      uptainer: uptainer ? uptainer : details?.itemUptainer 
     });
   };
 
