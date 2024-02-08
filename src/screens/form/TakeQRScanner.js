@@ -137,7 +137,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           } else{
             Alert.alert(
               "can't take error",
-              "uptainer you scanned isn't the correct saved to item in DB: " + itemData.uptainer,
+              `uptainer you scanned ${uptainer.uptainerName} isn't the correct one saved as item is saved in ${itemData?.uptainer.uptainerName}`,
               [{
                 text: 'Okay',
                 onPress: ()=>{
