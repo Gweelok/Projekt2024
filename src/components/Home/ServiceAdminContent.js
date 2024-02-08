@@ -26,35 +26,30 @@ const ServiceAdminContent = ({ navigation }) => {
 
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
-
-            <View style={style.searchContainer} >
-
-                <View style={[style.searchBox]} onTouchStart={openSearch}>
-
-                    <SearchBox
-                        onChangeText={(text) => setSearchText(text)}
-                        value={searchText} placeholderText={FIND_UPTAINER}>
-                    </SearchBox>
-
-                </View>
-
-                {isSearching && (
-                    <View>
-                        <UptainerSearchList searchValue={searchText}></UptainerSearchList>
-                    </View>
-                )}
-
-            </View>
-
-            <View style={style.list} onTouchStart={closeSearch}>
-                <UptainerList></UptainerList>
-            </View>
-
-            <View style={style.container2} onTouchStart={closeSearch}/>
-
-            <Navigationbar navigation={navigation} ></Navigationbar>
+          <View style={style.searchContainer}>
+            <TouchableOpacity style={style.searchBox} onPress={openSearch}>
+              <SearchBox
+                onChangeText={(text) => setSearchText(text)}
+                value={searchText}
+                placeholderText={FIND_UPTAINER}
+              />
+            </TouchableOpacity>
+            {isSearching && (
+              <View>
+                <UptainerSearchList searchValue={searchText} />
+              </View>
+            )}
+          </View>
+      
+          <TouchableOpacity style={style.list} onPress={closeSearch}>
+            <UptainerList />
+          </TouchableOpacity>
+      
+          <TouchableOpacity style={style.container2} onPress={closeSearch} />
+      
+          <Navigationbar navigation={navigation} />
         </View>
-    )
+    );
 }
 
 const style = StyleSheet.create({
