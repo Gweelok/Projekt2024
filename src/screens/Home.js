@@ -31,6 +31,7 @@ const Home = ({ navigation }) => {
   const handleSearch = (input) =>{
     setSearchText(input)
     if (itemSelected) { setItemSelected(false) }
+    if(noProductFoundErr) {setNoProductFoundErr (false)}
     
   }
   //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
