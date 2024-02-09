@@ -10,7 +10,11 @@ import { LanguageProvider } from './src/Languages/LanguageHandler';
 import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import Uptainer from './src/screens/Uptainer';
+<<<<<<< HEAD
 import QRScanner from './src/screens/QRScanner'; // For testing
+=======
+import ServiceAdminMain from './src/screens/ServiceAdminMain';
+>>>>>>> main
 
 
 export default function App() {
@@ -35,8 +39,12 @@ export default function App() {
           <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
           <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
           <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
+<<<<<<< HEAD
           {/* For testing */}
           <Stack.Screen options={{ headerShown: false }} name="QRScanner" component={QRScanner} /> 
+=======
+          <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
+>>>>>>> main
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
