@@ -120,6 +120,10 @@ export default {
     EmailExist: "Email is already in use",
     HandleDeleteAccount: "Account deleted",
     Language: "Language",
+    InvalidEmail:"The provided email address is invalid.",
+    InvalidName:"The name provided is invalid.",
+    InvalidPhone:"The phone number provided is invalid.",
+    Error:"An error occurred during updating the settings. Please try again!"
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",

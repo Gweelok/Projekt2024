@@ -1058,7 +1058,7 @@ export async function signInUser(email, password, navigation) {
         });
 }
 
-export async function createUser(email, password, name = "John Doe") {
+export async function createUser(email, password) {
     try {
 
         let isAdmin = false;
@@ -1076,7 +1076,6 @@ export async function createUser(email, password, name = "John Doe") {
 
         if (userCredential) {
             const userData = {
-                name: name,
                 email: email,
                 uuid: userCredential.user.uid,
                 isAdmin: isAdmin,
