@@ -7,29 +7,21 @@ import {
     StyleSheet,
     Alert,
     Pressable,
-    ScrollView,
-    SafeAreaView,
-    ActivityIndicator,
-    ActivityIndicatorBase
+    SafeAreaView
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign";
-import { Backgroundstyle, Buttons, HeaderText, styles, styles as stylesGlobal, Primarycolor1 } from "../../styles/Stylesheet";
-import { GoBackButton } from "../../styles/GoBackButton";
+import { Backgroundstyle, Buttons, styles, styles as stylesGlobal, Primarycolor1 } from "../../styles/Stylesheet";
 import MenuItems from "../../styles/MenuItems";
 import CustomInput from "../../componets/atoms/CustomInput";
-import ListLanguages from "./ListOfLanguages";
 import LanguageDropdown from "../../Languages/LanguageDropdown";
 // Import your icon components and language dropdown component
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
-import LanguageDropdownSettings from "../../Languages/LanguageDropdownSettings";
 import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
 import Navigationbar from "../../componets/Navigationbar";
 import { getCurrentUser, updateUserData } from '../../utils/Repo';
 import ErrorBanner from '../ErrorBanner';
-import { firebaseAurth } from '../../utils/Firebase';
 import { LoaderContext } from '../../componets/LoaderContext';
 import LoadingScreen from '../../componets/LoadingScreen';
 import { Divider } from 'react-native-elements';
