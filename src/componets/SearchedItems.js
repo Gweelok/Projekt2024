@@ -40,7 +40,6 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
             fetchData()
 
     }, [])
-    const renderError = () => <Text style={style.noProductFoundErr}>{t("SearchField.notProductFound", currentLanguage)}</Text>
 
     return (
         <View style={noProductFound ? null : style.container}>
