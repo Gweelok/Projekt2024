@@ -2,7 +2,7 @@ import { getAllUptainers } from "../utils/Repo";
 import React, { useEffect, useState } from "react";
 import { BoxLink } from "../styles/BoxLink";
 import * as Location from "expo-location";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
 import Uptainer from "./Uptainer";
 import GlobalStyle from "../styles/GlobalStyle";
 import ScrollViewComponent from "./atoms/ScrollViewComponent";
@@ -14,7 +14,7 @@ import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import OnHideView from "./atoms/OnHideView";
 
-const SortUptainers = ({ navigation, hideUptainers }) => {
+const SortUptainers = ({ navigation, noProductFound }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
@@ -146,7 +146,7 @@ const SortUptainers = ({ navigation, hideUptainers }) => {
       },
     ],
   };
-
+  const renderError = () => <Text style={style.noProductFoundErr}>{t("SearchField.notProductFound", currentLanguage)}</Text>
   // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
@@ -158,7 +158,8 @@ const SortUptainers = ({ navigation, hideUptainers }) => {
       </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
-        <OnHideView hide={hideUptainers}>
+        {noProductFound && renderError()}
+        <OnHideView hide={noProductFound}>
 
           {uptainerList[0]  && (
             <Uptainer
@@ -180,7 +181,7 @@ const SortUptainers = ({ navigation, hideUptainers }) => {
         {/* Display the QuizComponent */}
         <QuizPoll data={PollData} />
         <QuizPoll data={QuizData} />
-        <OnHideView hide={hideUptainers}>
+        <OnHideView hide={noProductFound}>
 
           {renderUptainers()}
         </OnHideView>
@@ -188,4 +189,19 @@ const SortUptainers = ({ navigation, hideUptainers }) => {
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  noProductFoundErr: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: Primarycolor1,
+    backgroundColor: 'white',
+    paddingTop: 20,
+    paddingBottom: 20,
+    zIndex: 1,
+    paddingLeft: 5,
+    width: '100%',
+
+}
+})
 export default SortUptainers;

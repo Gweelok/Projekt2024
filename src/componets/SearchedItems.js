@@ -10,13 +10,13 @@ import { Primarycolor1, Primarycolor2, Primarycolor3, dropdownStyles } from "../
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds } from "../utils/uptainersUtils"
 
-const SearchedProducts = ({navigation, search, userLocation, endSearch, setHideUptainers }) =>{
+const SearchedProducts = ({navigation, search, userLocation, endSearch, noProductFound, setNoProductFound }) =>{
     const [allProducts, setAllProducts] = useState(null)
     const [searchedData, setSearchedData] = useState([])
     const { currentLanguage, setLanguage } = useLanguage()
     const [allUptainers, setAllUptainers] = useState(null);
     const [loading, setLoading] = useState(true)
-    const [noProductFound, setNoProductFound] = useState(false)
+    
     useEffect(()=>{
         const fetchData = async () =>{
             try {
@@ -25,7 +25,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, setHideU
                 const setupUptainers = await setUptainersByIds(uptainers)
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
-                if (!searchedItems.length) { setNoProductFound(true); setHideUptainers(true) }
+                if (!searchedItems.length) { setNoProductFound(true)}
                 const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
                     const imageUrl = await getImage(item.itemImage)
                     return {...item, imageUrl}
@@ -50,7 +50,7 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, setHideU
                 </KeyboardAvoidingView>
                 ) :
                 noProductFound ? 
-                renderError() : 
+                null : 
                 <ScrollViewComponent style={{width: windowWidth * 0.89}}>
                  
                     <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
@@ -86,18 +86,6 @@ const style = StyleSheet.create({
         fontSize: 15,
         marginTop: 5,
         marginBottom: 10,
-
-    },
-    noProductFoundErr: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: Primarycolor1,
-        backgroundColor: 'white',
-        paddingTop: 20,
-        paddingBottom: 20,
-        zIndex: 1,
-        paddingLeft: 5,
-        width: '100%',
 
     }
 })
