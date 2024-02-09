@@ -394,12 +394,10 @@ export const HeaderText = StyleSheet.create({
   Header: {
     fontSize: 30,
     marginBottom: 10,
-
     marginTop: 15,
     marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
-
   },
   Header_Primarycolor1: {
     color: Primarycolor1,
@@ -451,7 +449,7 @@ export const dropdownStyles = StyleSheet.create({
     padding: 10,
     borderColor: Primarycolor1,
     width: '100%',
-    borderWidth:3,
+    borderWidth: 3,
     borderBottomWidth: 0,
   },
   dropdownSearchFieldListContainer: {

@@ -50,12 +50,22 @@ export const sortUptainersByDistance = (userLocation, uptainersList) => {
   return sortedList;
 };
 
+
 export function convertKgToTons(amountInKg) {
   if (amountInKg >= 1000) {
     return (amountInKg / 1000).toFixed(2) + " T.";
   } else {
     return amountInKg + " kg";
   }
+
+export const setUptainersByIds = async (uptainers) => {
+  let res = {}
+  uptainers.forEach(u => {
+      res[u.uptainerId] = u;
+
+  });
+  return res;
+
 }
 
 export function Calculate_co2_Equivalent(co2_total) {
@@ -485,6 +495,7 @@ export async function getUserStats(userId) {
   const sortedFiltredUptainers = sortedUptainers.filter(function (uptainer) {
     return uptainer["numberUsers"] > 0;
   });
+
 
   const mostAchievingUptainers = Object.entries(allUptainersStat)
     .map(([uptainerId, uptainer]) => ({
