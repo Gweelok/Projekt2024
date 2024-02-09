@@ -106,126 +106,6 @@ export const styles = StyleSheet.create({
     fontWeight: "300",
     fontFamily: "space-grotesk"
   },
-<<<<<<< HEAD
-    //Text for both menuitem and boxlink
-    menuItem_text: {
-      fontFamily: "space-grotesk-bold",
-      color: Primarycolor1,
-      fontSize: 20,
-      marginRight: "auto",
-    },
-    menuItem_arrow: {
-      color: Primarycolor1,
-    },
-    Icon_container: {
-      justifyContent: "center",
-      marginLeft: "auto",
-      alignItems: "center",
-    },
-  
-    //Box_Link
-    boxlink: {
-      paddingBottom: 10,
-      paddingTop: 10,
-      marginVertical: 10,
-      padding: 10,
-      borderColor: Primarycolor1,
-      backgroundColor: Primarycolor2,
-      flexDirection: "row",
-      minHeight: 80,
-      position: "relative",
-      alignContent: "center",
-      alignItems: "center",
-    },
-    boxlinkContainer: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    badgeContainer: {
-      position: "absolute",
-      backgroundColor: Primarycolor1,
-      width: 30,
-      height: 30,
-      justifyContent: "center",
-      alignItems: "center", // Adjust spacing as needed
-      marginLeft: 10,
-    },
-    badgeText: {
-      color: "white", // Customize the text color as needed
-      fontSize: 20,
-      fontWeight: "bold",
-    },
-    container2: {
-      top: "5%",
-      flex: 1,
-      backgroundColor: "white", // White background
-    },
-    header: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingVertical: 10, // Added padding to lower the header slightly
-      paddingHorizontal: 20,
-      backgroundColor: "white", // White background
-      marginTop: 15, // Adjust the margin to lower the header
-    },
-    closeButton: {
-      backgroundColor: Primarycolor1,
-      padding: 3, // Decreased padding to make the button smaller
-    },
-    closeButtonIcon: {
-      color: "white", // White text color
-    },
-    headline: {
-      fontSize: 24,
-      fontWeight: "bold",
-      color: Primarycolor1, // Dark green text color
-    },
-    content: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    qrScannerFrame: {
-      width: 250,
-      height: 400,
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 20,
-      //  backgroundColor: "darkgreen", // Dark green background for border
-      borderRadius: 10, // Rounded corners
-      position: "relative",
-      //  overflow: "hidden", // Hide overflow from dashed border
-    },
-    dashedBorder: {
-      width: "100%",
-      height: "100%",
-      borderColor: "white", // Dark green border color
-      borderWidth: 5, // Increase line thickness as needed
-      borderStyle: "dashed", // Dashed line style
-      borderRadius: 12, // Increase radius for larger dashes
-      marginTop: 20, // Adjust the space between dashes
-      borderSpacing: 90, // Adjust the space between dashes
-    },
-    buttonsContainer: {
-      display: "flex",
-    },
-    instruction: {
-      fontSize: 18,
-      //textAlign: "center",
-      marginHorizontal: 20,
-      marginTop: 5,
-      marginBottom: 5,
-      color: Primarycolor1, // Dark green text color
-    },
-  
-    //Headlines and body text
-    bodyText: {
-      textAlign: "left",
-    },
-  });
-=======
   //Text for both menuitem and boxlink
   menuItem_text: {
     fontFamily: "space-grotesk-bold",
@@ -344,7 +224,6 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
 });
->>>>>>> main
 
 // Dropdown
 export const dropdownStyles = StyleSheet.create({
@@ -396,7 +275,7 @@ export const Buttons = StyleSheet.create({
     borderColor: Primarycolor1,
     borderWidth: 4,
     width: "100%",
-    marginTop: "4%"
+    marginTop: "4%",
   },
   main_buttonText: {
     color: "white",
@@ -404,4 +283,20 @@ export const Buttons = StyleSheet.create({
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
-})
+  secondary_button: {
+    padding: 8,
+    marginLeft: "auto",
+    marginRight: "auto",
+    backgroundColor: Primarycolor3,
+    borderColor: Primarycolor1,
+    borderWidth: 4,
+    width: "100%",
+    marginTop: "4%",
+  },
+  secondary_buttonText: {
+    color: Primarycolor1,
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "space-grotesk-Medium",
+  },
+});

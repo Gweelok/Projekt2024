@@ -1,24 +1,26 @@
 // ButtonMolecule.js
 import React from "react";
-import PressableAtom from "../../atoms/QRScannerAtoms/PressableAtomQR";
-import { Buttons, styles } from "../../../styles/styleSheet"; 
+import PressableAtomQR from "../../atoms/QRScannerAtoms/PressableAtomQR";
 
 const ButtonMolecule = ({
-  onPress,
+  t,
   title,
+  currentLanguage,
+  onPress,
   disabled,
   buttonStyle,
   textStyle,
 }) => {
   return (
-    <PressableAtom
+    <PressableAtomQR
       onPress={onPress}
       disabled={disabled}
       style={buttonStyle}
       textStyle={textStyle}
+      buttonStyle={buttonStyle}
     >
-      {title}
-    </PressableAtom>
+      {t(title, currentLanguage)}
+    </PressableAtomQR>
   );
 };
 

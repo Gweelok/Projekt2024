@@ -1,16 +1,20 @@
-// HeaderMolecule.js
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import { View } from "react-native";
+import TextAtomQR from "../../atoms/QRScannerAtoms/TextAtomQR";
+import PressableIconAtomQR from "../../atoms/QRScannerAtoms/PressableIconAtomQR";
 import { styles } from "../../../styles/styleSheet";
 
-const HeaderMolecule = ({ title, onPressClose, currentLanguage, t }) => (
+const HeaderMoleculeQR = ({
+  t,
+  title,
+  currentLanguage,
+  iconName,
+  onIconPress,
+}) => (
   <View style={styles.header}>
-    <Text style={styles.headerTitle}>{t(title, currentLanguage)}</Text>
-    <TouchableOpacity style={styles.closeButton} onPress={onPressClose}>
-      <Icon name="close" size={30} style={styles.closeButtonIcon} />
-    </TouchableOpacity>
+    <TextAtomQR style={styles.headline} children={t(title, currentLanguage)} />
+    <PressableIconAtomQR name={iconName} onPress={onIconPress} />
   </View>
 );
 
-export default HeaderMolecule;
+export default HeaderMoleculeQR;
