@@ -1,33 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import QRScannerOrganism from "../components/organisms/QRScannerOrganisms/QRScannerOrganism";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import { LoaderContext } from "../../components/LoaderContext";
-import { generateQRCode } from "../../utils/QRCodeGenerator";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LoaderContext } from "../components/LoaderContext";
+import { generateQRCode } from "../utils/QRCodeGenerator";
 import {
   createItem,
   getUptainerFromQR,
   getUptainerById,
   QRCodeExists,
   updateItemById,
-} from "../../utils/Repo";
-
+} from "../utils/Repo";
 
 const QRScanner = ({ route, navigation }) => {
-  const { currentLanguage, setLanguage } = useLanguage();
+  const { currentLanguage } = useLanguage();
   const itemData = route.params;
+  const [hasPermission, setHasPermission] = useState(true);
+  const [scanned, setScanned] = useState(false);
+  const [scannedQRCode, setScannedQRCode] = useState(null);
+  const [isActive, setIsActive] = useState(false);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
 
   const handlePress = () => {
     console.log("Attempting to go back");
     //navigation.goBack();
     navigation.navigate("Home"); // For testing
   };
-  const [hasPermission, setHasPermission] = useState(true);
-  const [scanned, setScanned] = useState(false);
-  const [scannedQRCode, setScannedQRCode] = useState(null);
-  const [isActive, setIsActive] = useState(false);
-  const { isLoading, setIsLoading } = useContext(LoaderContext);
 
   const askForCameraPermission = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();

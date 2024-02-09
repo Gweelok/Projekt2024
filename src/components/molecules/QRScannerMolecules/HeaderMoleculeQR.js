@@ -1,8 +1,7 @@
 import React from "react";
-import { View } from "react-native";
-import TextAtomQR from "../../atoms/QRScannerAtoms/TextAtomQR";
+import { Text, View } from "react-native";
 import PressableIconAtomQR from "../../atoms/QRScannerAtoms/PressableIconAtomQR";
-import { styles } from "../../../styles/styleSheet";
+import { styles, QRScannerStyles } from "../../../styles/styleSheet";
 
 const HeaderMoleculeQR = ({
   t,
@@ -12,7 +11,11 @@ const HeaderMoleculeQR = ({
   onIconPress,
 }) => (
   <View style={styles.header}>
-    <TextAtomQR style={styles.headline} children={t(title, currentLanguage)} />
+    <Text
+      style={QRScannerStyles.QRScannerHeader}
+      children={t(title, currentLanguage)}
+    >
+    </Text>
     <PressableIconAtomQR name={iconName} onPress={onIconPress} />
   </View>
 );

@@ -1,13 +1,15 @@
 import React from "react";
-import { View, SafeAreaView } from "react-native";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import ButtonMolecule from "../../molecules/QRScannerMolecules/ButtonMoleculeQR";
-import QRScannerOrganism from "../../organisms/QRScannerOrganisms/QRScannerOrganism";
+import { Text, View, SafeAreaView } from "react-native";
 import { Buttons, styles } from "../../../styles/styleSheet";
-import TextAtomQR from "../../atoms/QRScannerAtoms/TextAtomQR";
+import ScrollViewComponent from "../../atoms/ScrollViewComponent";
 import LoadingScreen from "../../../components/LoadingScreen";
+import BarCodeScannerMoleculeQR from "../../molecules/QRScannerMolecules/BarCodeScannerMoleculeQR";
+import HeaderMoleculeQR from "../../molecules/QRScannerMolecules/HeaderMoleculeQR";
+import PressableAtomQR from "../../atoms/QRScannerAtoms/PressableAtomQR";
 
 const QRScannerOrganism = ({
+  t,
+  currentLanguage,
   hasPermission,
   scanned,
   handleBarCodeScanned,
@@ -15,81 +17,79 @@ const QRScannerOrganism = ({
   handleSaveCode,
   handlePress,
   isActive,
-  currentLanguage,
-  t,
   isLoading,
 }) => (
-  <SafeAreaView style={styles.container2}>
-    {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-    <View style={styles.header}>
-      <HeaderMolecule
-        title="QrScannerScreen.Scan"
-        iconName="close"
-        onIconPress={handlePress}
-        currentLanguage={currentLanguage}
-        t={t}
-      />
-    </View>
+  <ScrollViewComponent>
+    <SafeAreaView style={styles.container2}>
+      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
-    <View style={styles.content}>
-      <TextAtomQR style={styles.instruction}>
-        {t("QrScannerScreen.Header", currentLanguage)}
-      </TextAtomQR>
-      {hasPermission ? (
-        <View style={styles.qrScannerFrame}>
-          <View style={styles.dashedBorder}>
-            <BarCodeScanner
-              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-              style={{ flex: 1 }}
-            />
-          </View>
-        </View>
-      ) : (
-        <TextAtomQR style={{ margin: 10 }}>No access to the camera</TextAtomQR>
-      )}
-
-      <View style={styles.buttonsContainer}>
-        {scanned && (
-          <View style={{ marginBottom: 10 }}>
-            <ButtonMolecule
-              onPress={handleSaveCode}
-              title={t("QrScannerScreen.SaveCode", currentLanguage)}
-              disabled={!isActive || isLoading}
-              buttonStyle={[
-                Buttons.main_button,
-                {
-                  borderWidth: 1,
-                  width: 220,
-                  marginHorizontal: 60,
-                },
-              ]}
-              textStyle={Buttons.main_buttonText}
-            />
-
-            <ButtonMolecule
-              onPress={handleScanAgain}
-              title={t("QrScannerScreen.ScanAgain", currentLanguage)}
-              disabled={isLoading}
-              buttonStyle={[
-                Buttons.secondary_button,
-                {
-                  backgroundColor: "red",
-                  borderWidth: 1,
-                  width: 220,
-                  marginHorizontal: 60,
-                },
-              ]}
-              textStyle={Buttons.secondary_buttonText}
-            />
-          </View>
-        )}
+      <View>
+        <HeaderMoleculeQR
+          title="QrScannerScreen.Scan"
+          iconName="close"
+          onIconPress={handlePress}
+          currentLanguage={currentLanguage}
+          t={t}
+        />
       </View>
 
-      <TextAtomQR style={styles.instruction}>
-        {t("QrScannerScreen.Bottom", currentLanguage)}
-      </TextAtomQR>
-    </View>
-  </SafeAreaView>
+      <View style={styles.content}>
+        <Text style={styles.instruction}>
+          {t("QrScannerScreen.Header", currentLanguage)}
+        </Text>
+
+        <BarCodeScannerMoleculeQR
+          hasPermission={hasPermission}
+          handleBarCodeScanned={handleBarCodeScanned}
+          currentLanguage={currentLanguage}
+          t={t}
+        />
+
+        <View style={styles.buttonsContainer}>
+          {scanned && (
+            <View>
+              <View style={{ marginBottom: 10 }}>
+                <PressableAtomQR
+                  onPress={handleSaveCode}
+                  title={t("QrScannerScreen.SaveCode", currentLanguage)}
+                  disabled={!isActive || isLoading}
+                  buttonStyle={[
+                    Buttons.main_button,
+                    {
+                      borderWidth: 1,
+                      width: 220,
+                      marginHorizontal: 60,
+                    },
+                  ]}
+                  textStyle={Buttons.main_buttonText}
+                />
+
+                <PressableAtomQR
+                  onPress={handleScanAgain}
+                  title={t("QrScannerScreen.ScanAgain", currentLanguage)}
+                  disabled={isLoading}
+                  buttonStyle={[
+                    Buttons.secondary_button,
+                    {
+                      backgroundColor: "red",
+                      borderWidth: 1,
+                      width: 220,
+                      marginHorizontal: 60,
+                    },
+                  ]}
+                  textStyle={Buttons.secondary_buttonText}
+                />
+              </View>
+            </View>
+          )}
+        </View>
+
+        <Text style={styles.instruction}>
+          {t("QrScannerScreen.Bottom", currentLanguage)}
+        </Text>
+      </View>
+    </SafeAreaView>
+  </ScrollViewComponent>
 );
 
 export default QRScannerOrganism;

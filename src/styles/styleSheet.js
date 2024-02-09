@@ -300,3 +300,14 @@ export const Buttons = StyleSheet.create({
     fontFamily: "space-grotesk-Medium",
   },
 });
+
+//QR Scanner
+export const QRScannerStyles = StyleSheet.create({
+  QRScannerHeader: {
+    fontFamily: "space-grotesk-bold",
+    fontSize: 35,
+    color: Primarycolor1,
+    fontWeight: "bold",
+    marginBottom: 20,
+  }
+});

@@ -1,12 +1,21 @@
 import React from "react";
 import { Pressable, Text } from "react-native";
-import { Buttons, styles } from "../../../styles/styleSheet";
+import { Buttons } from "../../../styles/styleSheet";
 
-const PressableAtomQR = ({ onPress, children, buttonStyle, textStyle }) => {
+const PressableAtomQR = ({
+  onPress,
+  buttonStyle,
+  textStyle,
+  t,
+  title,
+  currentLanguage,
+  disabled,
+}) => {
   return (
-    <Pressable onPress={onPress} style={[Buttons.main_button, buttonStyle]}>
-      <Text style={textStyle}>{children}</Text>
+    <Pressable onPress={onPress} disabled={disabled} style={[Buttons.main_button, buttonStyle]}>
+      <Text style={textStyle}>{t(title, currentLanguage)}</Text>
     </Pressable>
+    
   );
 };
 
