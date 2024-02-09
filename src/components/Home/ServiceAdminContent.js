@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import { View, StyleSheet, TouchableOpacity } from "react-native"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import UptainerSearchList from "./UptainerSearchList"
 import UptainerList from "./UptainerList"
 import Navigationbar from "../organisms/Navigationbar"
@@ -10,46 +10,17 @@ import GlobalStyle from "../../styles/GlobalStyle"
 import { calculateDistance } from '../../utils/uptainersUtils';
 import { getAllUptainers } from "../../utils/Repo";
 
+const FIND_UPTAINER = 'Find Uptainer';
+
 const ServiceAdminContent = ({ navigation }) => {
 
   const [searchText, setSearchText] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
   const [uptainers, setUptainers] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [effectHasRun, setEffectHasRun] = useState(false);
 
-  //Temporary placeholder for searchbox
-  const FIND_UPTAINER = 'Find Uptainer';
-
-  const getUptainers = async () => {
-    try {
-      const uptainerList = await getAllUptainers();
-      // Check if userLocation is available
-      if (userLocation !== null) {
-        // Calculate distance for each uptainer and add it as a new property
-        uptainerList.forEach((uptainer) => {
-          const uptainerLatitude = parseFloat(uptainer.uptainerLatitude);
-          const uptainerLongitude = parseFloat(uptainer.uptainerLongitude)
-
-          uptainer.distance = calculateDistance(
-            { latitude: userLocation.latitude, longitude: userLocation.longitude },
-            { latitude: uptainerLatitude, longitude: uptainerLongitude }
-          );
-        });
-        // Sort the uptainerList based on distance
-        uptainerList.sort((a, b) => a.distance - b.distance);
-      }
-      setUptainers(uptainerList);
-      setLoading(false);
-    } catch (error) {
-      console.log("Error fetching uptainers:", error);
-      setLoading(false);
-    }
-  };
-
-  //Get location coords from user
-  const getUserLocation = async () => {
+  //Memoize the getUserLocation and fetchUptainers functions to prevent unnecessary re-renders
+  const getUserLocation = useCallback(async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -60,29 +31,44 @@ const ServiceAdminContent = ({ navigation }) => {
     } catch (error) {
       console.error('Error fetching location:', error);
       Alert.alert('Error fetching location. Please try again.');
-      setLoading(false);
     }
-  };
-
-  /*useEffect for first retriving location
-   before fetching uptainer data */
-  useEffect(() => {
-    async function fetchLocationCoords() {
-      await getUserLocation();
-      setEffectHasRun(true);
-    }
-    fetchLocationCoords();
   }, []);
 
-  useEffect(() => {
-    async function fetchUptainersData() {
-      if (effectHasRun) {
-        await getUptainers()
-      }
-    }
-    fetchUptainersData();
-  }, [effectHasRun]);
+  const fetchUptainers = useCallback(async () => {
+    try {
+      const uptainerList = await getAllUptainers();
+      if (userLocation) {
+        uptainerList.forEach(uptainer => {
+          const uptainerLatitude = parseFloat(uptainer.uptainerLatitude);
+          const uptainerLongitude = parseFloat(uptainer.uptainerLongitude);
 
+          uptainer.distance = calculateDistance(
+            { latitude: userLocation.latitude, longitude: userLocation.longitude },
+            { latitude: uptainerLatitude, longitude: uptainerLongitude }
+          );
+        });
+        uptainerList.sort((a, b) => a.distance - b.distance);
+      }
+      setUptainers(uptainerList);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error fetching uptainers:", error);
+      setLoading(false);
+    }
+  }, [userLocation]);
+
+  useEffect(() => {
+    getUserLocation();
+  }, [getUserLocation]);
+
+  useEffect(() => {
+    fetchUptainers();
+  }, [fetchUptainers]);
+
+  //memoized with useCallback to prevent unnecessary re-renders of child components
+  const handleSearchTextChange = useCallback(text => {
+    setSearchText(text);
+  }, []);
 
   return (
     <View style={[style.container, GlobalStyle.BodyWrapper]}>
@@ -101,8 +87,8 @@ const ServiceAdminContent = ({ navigation }) => {
           <UptainerSearchList
             searchText={searchText}
             loading={loading}
-            uptainers={uptainers} 
-            />
+            uptainers={uptainers}
+          />
         </View>
 
       </View>
