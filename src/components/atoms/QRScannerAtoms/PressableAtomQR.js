@@ -6,14 +6,12 @@ const PressableAtomQR = ({
   onPress,
   buttonStyle,
   textStyle,
-  t,
   title,
-  currentLanguage,
   disabled,
 }) => {
   return (
     <Pressable onPress={onPress} disabled={disabled} style={[Buttons.main_button, buttonStyle]}>
-      <Text style={textStyle}>{t(title, currentLanguage)}</Text>
+      <Text style={textStyle}>{title}</Text>
     </Pressable>
     
   );

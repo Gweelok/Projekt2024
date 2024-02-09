@@ -24,12 +24,13 @@ const QRScannerOrganism = ({
       {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
       <View>
+        {/*   Right now, the QR scanner is set up only for Adding.
+      If Taking will be implemented later, than the title here can be exported as a prop,
+      and in the screen level, it can be changed accordingly. */}
         <HeaderMoleculeQR
-          title="QrScannerScreen.Scan"
+          title={t("QrScannerScreen.Scan", currentLanguage)}
           iconName="close"
           onIconPress={handlePress}
-          currentLanguage={currentLanguage}
-          t={t}
         />
       </View>
 
@@ -42,6 +43,7 @@ const QRScannerOrganism = ({
           hasPermission={hasPermission}
           handleBarCodeScanned={handleBarCodeScanned}
           currentLanguage={currentLanguage}
+          scanned={scanned}
           t={t}
         />
 

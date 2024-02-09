@@ -4,16 +4,14 @@ import PressableIconAtomQR from "../../atoms/QRScannerAtoms/PressableIconAtomQR"
 import { styles, QRScannerStyles } from "../../../styles/styleSheet";
 
 const HeaderMoleculeQR = ({
-  t,
   title,
-  currentLanguage,
   iconName,
   onIconPress,
 }) => (
   <View style={styles.header}>
     <Text
       style={QRScannerStyles.QRScannerHeader}
-      children={t(title, currentLanguage)}
+      children={title}
     >
     </Text>
     <PressableIconAtomQR name={iconName} onPress={onIconPress} />

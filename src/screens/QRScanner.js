@@ -21,6 +21,7 @@ const QRScanner = ({ route, navigation }) => {
   const [scannedQRCode, setScannedQRCode] = useState(null);
   const [isActive, setIsActive] = useState(false);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const [text, setText] = useState("");
 
   const handlePress = () => {
     console.log("Attempting to go back");
