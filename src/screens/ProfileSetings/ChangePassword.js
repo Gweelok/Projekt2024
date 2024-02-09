@@ -5,21 +5,14 @@ import {
     TouchableOpacity,
     TextInput,
     StyleSheet,
-    Modal,
     SafeAreaView,
     Alert,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
 import { Backgroundstyle, Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
 import Navigationbar from "../../componets/Navigationbar";
-import { Keyboard } from 'react-native';
-import { firebaseAurth } from "../../utils/Firebase";
-import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, signOut } from "firebase/auth";
-import Icon from 'react-native-vector-icons/Ionicons';
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
-import { extractMarginValues } from "react-native-ui-lib/src/commons/modifiers";
 import LoadingScreen from '../../componets/LoadingScreen';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Ionicons } from '@expo/vector-icons';
