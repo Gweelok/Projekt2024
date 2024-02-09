@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Text,} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,6 @@ import {MenuItems} from "../../styles/MenuItems";
 import GlobalStyle from '../../styles/GlobalStyle'
 import BackButton from '../../componets/BackButton';
 import Navigationbar from '../../componets/Navigationbar';
-import { LoaderContext } from '../../componets/LoaderContext';
 
 const MY_SETTINGS_SCREEN = {
     AccountSettings: 'AccountSettings',
@@ -21,15 +20,14 @@ const MySettings = ({ navigation }) => {
     const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
 
     const backButtonPressed = () => navigation.goBack()
-    const { isLoading, setIsLoading } = useContext(LoaderContext)
-
 
     const handlePress = (selectedOption) => {
-        setIsLoading(true)
         if (selectedOption === MY_SETTINGS_SCREEN.AccountSettings) {
             navigation.navigate('AccountSettings');
         } else if (selectedOption === MY_SETTINGS_SCREEN.Notifications) {
             navigation.navigate('Notifications');
+        } else if (selectedOption === MY_SETTINGS_SCREEN.ChangePassword) {
+            navigation.navigate('ChangePassword');
         }
     };
 
