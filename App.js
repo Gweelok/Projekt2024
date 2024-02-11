@@ -10,7 +10,7 @@ import { LanguageProvider } from "./src/Languages/LanguageHandler";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 import Uptainer from "./src/screens/Uptainer";
-import QRScanner from "./src/screens/QRScanner"; // For testing
+import QRScanner from "./src/screens/QRScanner"; // For QR Scan testing, delete later
 import ServiceAdminMain from "./src/screens/ServiceAdminMain";
 
 export default function App() {
@@ -47,7 +47,7 @@ export default function App() {
               name="Uptainer"
               component={Uptainer}
             />
-            {/* For testing */}
+            {/* For QRScan testing, delete later */}
             <Stack.Screen
               options={{ headerShown: false }}
               name="QRScanner"

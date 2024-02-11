@@ -16,7 +16,7 @@ import {
 const QRScanner = ({ route, navigation }) => {
   const { currentLanguage } = useLanguage();
   const itemData = route.params;
-  const [hasPermission, setHasPermission] = useState(true);
+  const [hasPermission, setHasPermission] = useState(true); // True for testing, make it back to null after testing
   const [scanned, setScanned] = useState(false);
   const [scannedQRCode, setScannedQRCode] = useState(null);
   const [isActive, setIsActive] = useState(false);
@@ -25,8 +25,8 @@ const QRScanner = ({ route, navigation }) => {
 
   const handlePress = () => {
     console.log("Attempting to go back");
-    //navigation.goBack();
-    navigation.navigate("Home"); // For testing
+    navigation.goBack();
+    //navigation.navigate("Home"); // For testing
   };
 
   const askForCameraPermission = async () => {
