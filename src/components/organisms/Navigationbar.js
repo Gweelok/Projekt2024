@@ -9,7 +9,7 @@ const PAGE_NAMES = {
   HOME: "Home",
   STATS: "Stats",
   PROFILE: "Profile",
-  QRSCANNER: "QRScanner", // For testing
+  QRSCANNER: "QRScanner", // For testing of QRCodeScreen, should be deleted later
 };
 
 const Navigationbar = ({ navigation }) => {
@@ -29,7 +29,7 @@ const Navigationbar = ({ navigation }) => {
       case PAGE_NAMES.PROFILE: setPage(PAGE_NAMES.PROFILE);
         //navigation.navigate(PAGE_NAMES.PROFILE);
         break;
-      case PAGE_NAMES.QRSCANNER: setPage(PAGE_NAMES.QRSCANNER); // For testing
+      case PAGE_NAMES.QRSCANNER: setPage(PAGE_NAMES.QRSCANNER); // For testing QRCodeScreen, should be deleted later
         navigation.navigate(PAGE_NAMES.QRSCANNER);
         break;
     }
@@ -74,7 +74,7 @@ const Navigationbar = ({ navigation }) => {
           )}
         </View>
       </Pressable>
-      {/* For testing QR Scanner */}
+      {/* For testing QR Scanner, should be deleted later */}
       <Pressable onPress={() => handlePress(PAGE_NAMES.QRSCANNER)}>
         <View>
           {page === PAGE_NAMES.QRSCANNER ? (
