@@ -70,6 +70,7 @@ const QRScanner = ({ route, navigation }) => {
     setScannedQRCode(null);
   };
 
+  // This function is too long and should be refactored. See my suggestion below.
   const handleSaveCode = async () => {
     setIsLoading(true);
 
@@ -180,6 +181,90 @@ const QRScanner = ({ route, navigation }) => {
       setIsLoading(false);
     }
   };
+
+  // Suggestion for refactoring the handleSaveCode function
+  // Function to save QR code data to AsyncStorage
+/*   const saveQRCodeData = async (scannedQRCode) => {
+    const qrCodeString = JSON.stringify(scannedQRCode);
+    await AsyncStorage.setItem("scannedQRCode", qrCodeString);
+    return JSON.parse(qrCodeString);
+  };
+
+  // Function to process the QR code and determine the next steps
+  const processQRCode = async (scannedQRCodeObject, itemData) => {
+    const value = scannedQRCodeObject.props.value;
+    const itemId = itemData?.itemId;
+    const uptainerId = await getUptainerFromQR(value);
+    const uptainer = await getUptainerById(uptainerId);
+
+    if (uptainer) {
+      await handleSuccess(uptainerId, itemId, itemData, value, uptainer);
+    } else {
+      handleNoUptainerFound(uptainerId);
+    }
+  };
+
+  // Function to handle successful QR code processing
+  const handleSuccess = async (
+    uptainerId,
+    itemId,
+    itemData,
+    value,
+    uptainer
+  ) => {
+    if (itemId) {
+      await updateItem(itemId, itemData, uptainerId);
+    } else {
+      await createNewItem(itemData, value);
+    }
+    navigateToUptainerDetails(uptainer, scannedQRCodeObject.props.value);
+  };
+
+  // Navigation after successful processing
+  const navigateToUptainerDetails = (uptainer, qrCodeValue) => {
+    navigation.navigate("UptainerDetails", {
+      screenFrom: "QRScanner",
+      uptainerData: {
+        id: uptainer.id,
+        name: uptainer.uptainerName,
+        location: uptainer.uptainerStreet, // Adjust as needed
+        imageUrl: uptainer.imageUrl,
+      },
+      scannedQRCodeData: qrCodeValue,
+    });
+  };
+
+  // Function to handle the case when no uptainer is found
+  const handleNoUptainerFound = (uptainerId) => {
+    setIsActive(false);
+    showAlert("QRCodeNotFound", "ScanAgain");
+  };
+
+  // A generic function to show alerts
+  const showAlert = (titleKey, messageKey) => {
+    Alert.alert(t(titleKey, currentLanguage), t(messageKey, currentLanguage), [
+      { text: t("OK", currentLanguage), onPress: () => {} },
+    ]);
+  };
+
+  // The refactored handleSaveCode function
+  const handleSaveCode = async () => {
+    setIsLoading(true);
+
+    if (scannedQRCode) {
+      try {
+        const scannedQRCodeObject = await saveQRCodeData(scannedQRCode);
+        await processQRCode(scannedQRCodeObject, itemData);
+      } catch (error) {
+        console.error("Error processing QR code:", error);
+        showAlert("Error", "ErrorMsg1");
+      }
+    } else {
+      console.warn("No QR code scanned to save.");
+    }
+
+    setIsLoading(false);
+  }; */
 
   return (
     <QRScannerOrganism
