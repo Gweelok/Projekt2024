@@ -281,6 +281,7 @@ export default {
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find product",
+    notProductFound: "There are currently no Uptainers with that product. Please try again another day.",
     notMatchingProduct: "No products match your search.",
   },
 
