@@ -28,7 +28,7 @@ const ServiceAdminMain = ({ navigation, route }) => {
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <UptainerInfo location={location}></UptainerInfo>
 
-            <TextLinkList  textValue={textValue}></TextLinkList >
+            <TextLinkList navigation={navigation} location={location} textValue={textValue}></TextLinkList >
 
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
