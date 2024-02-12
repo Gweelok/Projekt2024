@@ -1,78 +1,15 @@
-import * as Location from 'expo-location';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getAllUptainers } from "../../utils/Repo";
-import { dropdownStyles, Primarycolor1, Primarycolor4 } from "../../styles/styleSheet";
-import GlobalStyle from "../../styles/GlobalStyle"
-import { calculateDistance } from '../../utils/uptainersUtils';
+import { dropdownStyles} from "../../styles/styleSheet";
 import Uptainer from './Uptainer';
+import Spacer from '../atoms/Spacer';
 
-const UptainerList = ({ searchValue }) => {
-    const [uptainers, setUptainers] = useState([]);
-    const [userLocation, setUserLocation] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [effectHasRun, setEffectHasRun] = useState(false);
-
+const UptainerList = ({loading, uptainers}) => {
+    
     //Temporary string for not found text
     const NO_UPTAINERS_FOUND = 'No uptainers found';
     const navigation = useNavigation();
-
-    const getUptainers = async () => {
-        try {
-            const uptainerList = await getAllUptainers();
-            // Check if userLocation is available
-            if (userLocation !== null) {
-                // Calculate distance for each uptainer and add it as a new property
-                uptainerList.forEach((uptainer) => {
-                    const uptainerLatitude = parseFloat(uptainer.uptainerLatitude);
-                    const uptainerLongitude = parseFloat(uptainer.uptainerLongitude)
-
-                    uptainer.distance = calculateDistance(
-                        { latitude: userLocation.latitude, longitude: userLocation.longitude },
-                        { latitude: uptainerLatitude, longitude: uptainerLongitude }
-                    );                   
-                });
-                // Sort the uptainerList based on distance
-                uptainerList.sort((a, b) => a.distance - b.distance);
-            }
-            //Filter uptainers by search-string if it's available.
-            if (searchValue.length !== 0) {
-                const filteredUptainerList = uptainerList.filter(item =>
-                    item.uptainerName.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerStreet.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerCity.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    item.uptainerZip.toString().includes(searchValue)
-                );
-                //Return filtered search
-                setUptainers(filteredUptainerList);
-                setLoading(false);
-                return;
-            }
-            //Return unfiltered search
-            setUptainers(uptainerList);
-            setLoading(false);
-        } catch (error) {
-            console.log("Error fetching uptainers:", error);
-            setLoading(false);
-        }
-    };
-
-    //Get location coords from user
-    const getUserLocation = async () => {
-        try {
-            const { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                return;
-            }
-            const location = await Location.getCurrentPositionAsync({});
-            setUserLocation(location.coords);
-        } catch (error) {
-            console.error('Error fetching location:', error);
-            Alert.alert('Error fetching location. Please try again.');
-            setLoading(false);
-        }
-    };
 
     const handleUptainerPress = (location) => {
         // Handle the press event, e.g., navigate to a detailed view
@@ -80,38 +17,23 @@ const UptainerList = ({ searchValue }) => {
         navigation.navigate("ServiceAdminMain", { location: location });
     };
 
-    /*useEffect for first retriving location
-     before fetching uptainer data */
-    useEffect(() => {
-        async function fetchLocationCoords() {
-            await getUserLocation();
-            setEffectHasRun(true);
-        }
-        fetchLocationCoords();
-    }, []);
-
-    useEffect(() => {
-        async function fetchUptainersData() {
-            if (effectHasRun) {
-                await getUptainers()
-            }
-        }
-        fetchUptainersData();
-    }, [searchValue, effectHasRun]);
-
     const renderUptainers = ({ item, index }) => {
         return (
-            <Uptainer
-                key={index}
-                location={item}
-                onPress={() => handleUptainerPress(item)}
-                index={index}
-                styling={[
-                    dropdownStyles.dropdownListItem2,
-                    index === uptainers.length - 1 ? styles.lastItem : null,
-                ]}
-                distance={item.distance}
-            />
+            <View>
+                <Uptainer
+                    key={index}
+                    location={item}
+                    onPress={() => handleUptainerPress(item)}
+                    index={index}
+                    styling={[
+                        dropdownStyles.dropdownListItem2,
+                        styles.lastItem,
+                    ]}
+                    distance={item.distance}
+                />
+
+                <Spacer height={25}></Spacer>
+            </View>
         );
     };
 
@@ -123,11 +45,11 @@ const UptainerList = ({ searchValue }) => {
                 <FlatList
                     data={uptainers}
                     keyExtractor={(item) => item.uptainerName}
-                    style={[GlobalStyle.BodyWrapper, styles.uptainerList]}
+                    style={[styles.uptainerList]}
                     renderItem={renderUptainers}
                 />
             ) : (
-                <Text style={[GlobalStyle.BodyWrapper, styles.notFound]}>
+                <Text style={[styles.notFound]}>
                     {NO_UPTAINERS_FOUND}
                 </Text>
             )}
@@ -138,27 +60,11 @@ const UptainerList = ({ searchValue }) => {
 
 const styles = StyleSheet.create(
     {
+        container: {height: 325},
         lastItem: { borderBottomWidth: 3 },
         uptainerList: {
-            position: 'absolute',
-            zIndex: 1,
-            marginTop: 87,
             width: '100%',
         },
-        notFound: {
-            marginTop: 87,
-            borderWidth: 3,
-            minHeight: 80,
-            width: '90%',
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            backgroundColor: 'white',
-            borderColor: Primarycolor1,
-            color: Primarycolor4,
-            zIndex: 1,
-            justifyContent: 'center',
-            alignSelf: 'center'
-        }
     });
 
 export default UptainerList;
