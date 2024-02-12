@@ -3,11 +3,11 @@ import { View, Text, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles} from "./Stylesheet";
 
-export const MenuItems = ({ msg, onPress, badge }) => {
+export const MenuItems = ({ msg, onPress, badge,style={} }) => {
   return (
       <View>
         <Pressable onPress={onPress}>
-          <View style={styles.menuItem}>
+          <View style={[styles.menuItem,style]}>
             <View style={styles.menuItemContent}>
               <Text style={styles.menuItem_text}>{msg}</Text>
             </View>

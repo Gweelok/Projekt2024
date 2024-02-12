@@ -116,9 +116,14 @@ export default {
     ChangeCode: "Change password",
     Delete: "Delete account",
     Optional: "optional",
-    HandleSave: "Information saved",
+    Saved: "Information saved",
+    EmailExist: "Email is already in use",
     HandleDeleteAccount: "Account deleted",
     Language: "Language",
+    InvalidEmail:"The provided email address is invalid.",
+    InvalidName:"The name provided is invalid.",
+    InvalidPhone:"The phone number provided is invalid.",
+    Error:"An error occurred during updating the settings. Please try again!"
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",
@@ -157,8 +162,8 @@ export default {
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
-    QRCodeNotFound1:"QR Code not found,so click on Tag to save to draft instead.",
-    QRCodeNotFound:"QR Code not found, saved to draft instead.",
+    QRCodeNotFound1: "QR Code not found,so click on Tag to save to draft instead.",
+    QRCodeNotFound: "QR Code not found, saved to draft instead.",
     SaveCode: "Updropp",
     Take: "Take",
     Success: "Success",
@@ -188,7 +193,7 @@ export default {
   StationsScreen: {
     showProduct: "Show product",
     showWay: "Show the way",
-    NoUptainers:"No Uptainer is matching your search.",
+    NoUptainers: "No Uptainer is matching your search.",
   },
   ProductIsTakenScreen: {
     apology:

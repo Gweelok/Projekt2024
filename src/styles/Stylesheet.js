@@ -86,6 +86,15 @@ export const styles = StyleSheet.create({
     backgroundColor: Primarycolor3,
     alignSelf: "stretch",
   },
+  errorInputBox: {
+    borderColor: "#AA0000",
+    borderWidth: 3,
+  },
+  errorText: {
+    color:"#AA0000",
+    marginTop:-15,
+    fontSize:14
+  },
   //Menu items
   menuItem: {
     width: "100%",
@@ -100,21 +109,21 @@ export const styles = StyleSheet.create({
   },
   // Form labels
   formLabel: {
-  fontFamily: "space-grotesk-bold",
-  color: Primarycolor1,
-  fontSize: 15,
-  marginLeft: 17,
-  marginBottom: 10,
-  marginTop: 5,
-  fontWeight: "bold",
-},
-// (optional) text style
-optionalText: {
-  color: Primarycolor1,
-  fontSize: 13,
-  fontWeight: "300",
-  fontFamily: "space-grotesk"
-},
+    fontFamily: "space-grotesk-bold",
+    color: Primarycolor1,
+    fontSize: 15,
+    marginLeft: 17,
+    marginBottom: 10,
+    marginTop: 5,
+    fontWeight: "bold",
+  },
+  // (optional) text style
+  optionalText: {
+    color: Primarycolor1,
+    fontSize: 13,
+    fontWeight: "300",
+    fontFamily: "space-grotesk"
+  },
   //Text for both menuitem and boxlink
   menuItem_text: {
     fontFamily: "space-grotesk-bold",
@@ -178,6 +187,22 @@ optionalText: {
     backgroundColor: "white", // White background
     marginTop: 15, // Adjust the margin to lower the header
   },
+  HeaderFull: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  HeaderText: {
+    fontSize: 30,
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontFamily: "space-grotesk-Medium",
+    color: Primarycolor1,
+  },
+  divider: {
+    borderColor: Primarycolor1,
+    borderWidth: 1,
+    marginVertical: 20
+  },
   closeButton: {
     backgroundColor: Primarycolor1,
     padding: 3, // Decreased padding to make the button smaller
@@ -231,7 +256,7 @@ optionalText: {
   //Headlines and body text
   bodyText: {
     textAlign: "left",
-  }, Bodywrapper: {backgroundColor: "white", flex: 1, top: "5%"}
+  }, Bodywrapper: { backgroundColor: "white", flex: 1, top: "5%" }
 
 });
 
@@ -350,6 +375,9 @@ export const Buttons = StyleSheet.create({
     width: "100%",
     marginTop: "4%"
   },
+  disabled_button: {
+    opacity: 0.4,
+  },
   main_buttonText: {
     color: "white",
     textAlign: "center",
@@ -420,7 +448,7 @@ export const dropdownStyles = StyleSheet.create({
     zIndex: 1,
     marginTop: 87,
     width: '100%',
-    maxHeight:250,
+    maxHeight: 250,
   },
   dropdownText: {
     ...styles.menuItem_text,
@@ -453,7 +481,7 @@ export const dropdownStyles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   dropdownSearchFieldListContainer: {
-    top: 40, 
+    top: 40,
     left: 0,
     right: 0,
     zIndex: 1,
