@@ -159,7 +159,7 @@ export default function App() {
               name="DetailView" 
               options={{ animation: "none", headerShown: false,  }}
               component={DetailView} />
-n
+
               <Stack.Screen
                 name="Infopage"
                 component={ArticlePage}
