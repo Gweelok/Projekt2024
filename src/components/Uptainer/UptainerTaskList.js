@@ -87,7 +87,7 @@ const UptainerTaskList = ({ location }) => {
                 disabled={formvalid}
                 onPress={() => handlePressConfirm()}
                 style={Buttons.main_button}>
-                    <Text style={Buttons.main_buttonText}>Confirm</Text>
+                    <Text style={Buttons.main_buttonText}>Task solved</Text>
             </TouchableOpacity>
         </View>
       )

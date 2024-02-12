@@ -1,31 +1,21 @@
-import { TouchableOpacity, View, StyleSheet } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 import TextLink from "../molecules/TextLink";
 import Spacer from "../atoms/Spacer";
 
-const TextLinkList = ({ textValue, location }) => {
-    const navigation = useNavigation();
-    handlePress=()=>{
-        console.log('pressed')
-        console.log(location)       
-        navigation.navigate("Uptainer", { location: location });        
-    };
+const TextLinkList = ({ location, navigation, textValue }) => {
+
     return (
         <View style={style.container}>
 
-            <TextLink textValue={textValue.overview}></TextLink>
+                <TextLink path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
 
-            <Spacer height={25}></Spacer>
+                <Spacer height={25}></Spacer>
 
-            <TextLink textValue={textValue.items}></TextLink>
+                <TextLink location={location} navigation={navigation} textValue={textValue.items}></TextLink>
 
-            <Spacer height={25}></Spacer>
+                <Spacer height={25}></Spacer>
 
-            <TouchableOpacity
-            onPress={handlePress}
-            >
-            <TextLink textValue={textValue.condition}></TextLink>
-            </TouchableOpacity>
+                <TextLink location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
         </View>
     )
 }
