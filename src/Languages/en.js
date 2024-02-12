@@ -139,15 +139,12 @@ export default {
     CurrentPassword: "Current Password",
     NewPassword: "New Password",
     ConfirmPassword: "Confirm New Password",
+    CurrentPasswordMatchError: "Current password is incorrect.",
     PasswordMatchError: "Current password and new password cannot be the same.",
-    PasswordMismatchError:
-      "Passwords don't match.",
+    PasswordMismatchError:"New Passwords don't match.",
     PasswordLengthError: "Password must be at least 8 characters long.",
-    PasswordChanged:
-      "Password changed successfully. You will be redirected to log in.",
-    CurrentPasswordError: "Current password is not correct.",
-    PasswordUpdateError:
-      "An error occurred during updating the password. Please try again!",
+    PasswordChanged:"Password changed successfully.",
+    PasswordUpdateError:"An error occurred during updating the password. Please try again!",
   },
 
   ProblemComponent: {
