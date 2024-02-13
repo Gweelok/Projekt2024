@@ -8,5 +8,27 @@ export default {
     fields: "Fields cannot be empty.",
     passwordmsg: "Your password must be at least 8 characters long.",
 
-  }
+  },
+  BrandDropdown: {
+    selectBrand: "Brand",
+    placeholder: "Choose brand",
+  },
+
+  ModelDropdown: {
+    selectModel: "Model",
+    placeholder: "Choose model",
+  },
+
+  ConditionDropdown: {
+    selectCondition: "Condition",
+    placeholder: "Choose condition",
+  },
+  ProductDropdown: {
+    selectProduct: "Product",
+    placeholder: "Choose product",
+  },
+  AccountSettingsScreen : {
+    
+    Optional: "optional",
+  },
 };
