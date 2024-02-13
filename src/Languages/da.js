@@ -290,7 +290,7 @@ export default {
     October: "Okt",
   },
   Detailviews: {
-
+    take: "Tag",
     product: "Var produktet ikke i uptaineren?",
 
   },

@@ -348,7 +348,7 @@ export const Buttons = StyleSheet.create({
     borderColor: Primarycolor1,
     borderWidth: 4,
     width: "100%",
-    marginTop: "4%"
+    marginTop: "4%",
   },
   main_buttonText: {
     color: "white",

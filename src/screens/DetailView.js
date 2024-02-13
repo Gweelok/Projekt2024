@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import Navigationbar from "../componets/Navigationbar";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { styles, Primarycolor1 } from "../styles/Stylesheet";
+import { styles, Buttons, Primarycolor1 } from "../styles/Stylesheet";
 import * as LinkingExpo from "expo-linking"; // Import Expo Linking
 import BackButton from "../componets/BackButton";
 import {t, useLanguage} from "../Languages/LanguageHandler";
@@ -79,44 +79,56 @@ const DetailViews = ({ navigation, route }) => {
   };
 
   return (
-      <View style={[Backgroundstyle.interactive_screens, {paddingTop:40},  ]}>
-        <ScrollViewComponent>
-          <BackButton onPress={navigation.goBack} style={DetailView.backButton} />
-          <View style={[DetailView.container,GlobalStyle.BodyWrapper]}>
-            <Image source={{ uri: imageUrl }} style={DetailView.image} />
-            <View style={DetailView.infoContainer}>
-              <View style={DetailView.leftInfo}>
-                <Text style={DetailView.product}>{productName}</Text>
-                <Text style={DetailView.brand}>{brandName}</Text>
-              </View>
-              <View style={DetailView.rightInfo}>
-                <TouchableOpacity
-                    onPress={openAddressOnMap}
-                    style={DetailView.locationContainer}>
-                  <Ionicons name="location" size={15} color={Primarycolor1} />
-                  <Text style={DetailView.location}>
-                    {uptainer.uptainerCity}, {uptainer.uptainerStreet},{" "}
-                    {uptainer.uptainerZip}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+    <View
+      style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper]}
+    >
+      <ScrollViewComponent>
+        <BackButton onPress={navigation.goBack} style={Buttons.backButton} />
+        <View style={[DetailView.container]}>
+          <Image source={{ uri: imageUrl }} style={DetailView.image} />
+          <View style={DetailView.infoContainer}>
+            <View style={DetailView.leftInfo}>
+              <Text style={DetailView.product}>{productName}</Text>
+              <Text>{brandName}</Text>
             </View>
-            <Text style={DetailView.text}>{displayTextValue}</Text>
-            <TouchableOpacity
-                onPress={handleTakePress}
-                style={DetailView.TagButton}>
-              <Text style={DetailView.Tag}>{t("Detailviews.take", currentLanguage)}</Text>
-            </TouchableOpacity>
-            <Text
-                style={{ color: Primarycolor1, textDecorationLine: "underline" }}
-                onPress={() => {navigation.navigate('ProductIsTakenScreen', details)}}>
-              {t("Detailviews.product", currentLanguage)}
-              
-            </Text>
+            <View style={DetailView.rightInfo}>
+              <TouchableOpacity
+                onPress={openAddressOnMap}
+                style={DetailView.locationContainer}
+              >
+                <Ionicons name="location" size={15} color={Primarycolor1} />
+                <Text style={DetailView.location}>
+                  {uptainer.uptainerCity}, {uptainer.uptainerStreet},{" "}
+                  {uptainer.uptainerZip}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </ScrollViewComponent>
-        <Navigationbar navigation={navigation} />
-      </View>
+          {displayTextValue && (
+            <Text style={DetailView.text}>{displayTextValue}</Text>
+          )}
+          <TouchableOpacity
+            onPress={handleTakePress}
+            style={Buttons.main_button}
+          >
+            <Text style={Buttons.main_buttonText}>
+              {t("Detailviews.take", currentLanguage)}
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={
+              (styles.link, { marginTop: 10, textDecorationLine: "underline" })
+            }
+            onPress={() => {
+              navigation.navigate("ProductIsTakenScreen", details);
+            }}
+          >
+            {t("Detailviews.product", currentLanguage)}
+          </Text>
+        </View>
+      </ScrollViewComponent>
+      <Navigationbar navigation={navigation} />
+    </View>
   );
 };
 
@@ -126,31 +138,22 @@ const DetailView = StyleSheet.create({
     alignItems: "center",
   },
 
-  backButton: {
-    marginHorizontal:15,
-    // marginTop: 15, // Add margin to align with the picture
-    // left:15,
-   
-  },
-
   image: {
     height: 300,
-    width: 300,
+    width: "100%",
     marginTop: 20,
   },
 
   text: {
     paddingTop: 13,
-    width: "80%",
     height: 100,
     borderRadius: 1,
     marginTop: 0,
     marginRight: 35,
-    color: Primarycolor1
-    
+    color: Primarycolor1  
   },
 
-  TagButton: {
+/*   TagButton: {
     backgroundColor: Primarycolor1,
     width: "100%",
     height: 50,
@@ -158,7 +161,7 @@ const DetailView = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
     textDecorationLine: "underline",
-  },
+  }, 
 
   Tag: {
     color: "white",
@@ -166,19 +169,22 @@ const DetailView = StyleSheet.create({
     fontSize: 20,
   },
 
+  */
+
   product: {
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 4,
-
-   
+    color: Primarycolor1, 
   },
+
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
     width: "90%",
     marginTop: 10,
+    marginBottom: 10,
   },
   leftInfo: {
     alignItems: "flex-start",
