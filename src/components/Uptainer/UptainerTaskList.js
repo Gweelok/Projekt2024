@@ -2,6 +2,7 @@ import { TouchableOpacity, View, StyleSheet, ScrollView, Text, RefreshControl } 
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 //import UptainerContent from "../components/Uptainer/UptainerContent"
 import { Primarycolor1, styles, Buttons } from "../../styles/styleSheet"
+import { useNavigation } from '@react-navigation/native';
 import { useState } from "react"
 import {createUptainerTaskAnswers} from "../../utils/Repo"
 
@@ -14,7 +15,8 @@ const UptainerTaskList = ({ location }) => {
         pressedYes: false,
         pressedNo: false,
     }))
-
+    const navigation = useNavigation();
+    
     handlePressYes=(cur)=>{       
         cur.pressedYes = true
         cur.pressedNo = false
@@ -40,6 +42,7 @@ const UptainerTaskList = ({ location }) => {
         
         })
         setData(result)
+        navigation.navigate("ServiceAdminMain", { location: location });
     };
     return (
         <View>
