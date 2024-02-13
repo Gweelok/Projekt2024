@@ -15,6 +15,7 @@ export const YourVisitedUptainer = (value) => {
     const { isLoading, setIsLoading } = useContext(LoaderContext);
 
     const uptainerData = value["value"]
+    const key=value["key"]
 
     // Create variables for information about uptainer
     let location = 'n/d';
@@ -29,7 +30,7 @@ export const YourVisitedUptainer = (value) => {
         zip = uptainerData["uptainerZip"];
     }
     return(
-        <View style={GlobalStyle}>
+        <View style={GlobalStyle} key={key}>
             <View>
                 <View>
                     <TouchableOpacity onPress={() => {

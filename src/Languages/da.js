@@ -258,6 +258,7 @@ export default {
     AmountCO2: "Mængden af CO2 sparet",
     Yesterday: "I går",
     kgCO2: "10 kg. CO2 er tilsvarende til",
+    kgCO2Amount:"kg. CO2 ville beløbe sig til ca",
     Amount_first_part: "Så",
     Amount_second_part: "svarer til",
     Fact_equavalent: "læs vask og tørring",

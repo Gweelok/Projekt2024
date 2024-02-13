@@ -31,83 +31,37 @@ import {
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
+  const navigation = useNavigation();
+
+
   let [co2Data, setCO2Data] = useState({
     TotalCo2Footprint: 0,
     itemsDonated: 0,
     itemsTaken: 0,
   });
-  const navigation = useNavigation();
 
-  //Get current user
-  const userCurrent = props.user;
-  //Get all products
-  const products = props.products;
-  //Get info about uptainers
-  const uptainers = props.uptainers;
+  const [co2Equivalent, setco2Equivalent] = useState({
+    co2_pers: 10,
+    personalEquivalent: 0,
+    totalEquivalent: 0
+  })
+
+  const uptainers = props.uptainers
+
+
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
-    const userId = userCurrent.id;
-    if (!userId) {
-      console.log("User not found.");
-      return;
-    }
-    const userStats = await getUserStats(userId);
-    setCO2Data((prevData) => ({
-      ...prevData,
-      TotalCo2Footprint: userStats.totalC02Saved,
-      itemsDonated: userStats.userDonatedItems,
-      itemsTaken: userStats.userTakenItems,
-    }));
-  }
-  // OLD USEEFFECT - CAN BE DELETED AFTER TESTING
-  /*    useEffect(() => {
-    fetchData();
-  }, []);
-  async function fetchData() {
-    //Filter items by user
-    const userItems = await getItemsFromUser(userCurrent.id);
-    // Initializing variables to hold CO2 footprint for taken and not taken items
-    let co2FootprintTaken = 0;
-    let co2FootprintNotTaken = 0;
-    let itemsDonated = 0;
-    let itemsCollected = 0;
-    // Loop through the items array and products arrays to calculate the total CO2 footprint
-    console.log("userItems", userItems)
-    userItems.forEach((item) => {
-      products.forEach((product) => {       
-        if (item.itemproduct === product.productId && item.itemTaken === true) {
-          co2FootprintTaken += parseInt(product.co2Footprint);
-        }else if(item.itemproduct === product.productId && item.itemTaken === false){
-          co2FootprintNotTaken += parseInt(product.co2Footprint);
-        }
+    getUserStats().then((userStats) => {
+      setCO2Data({
+        TotalCo2Footprint: userStats.totalC02Saved,
+        itemsDonated: userStats.userDonatedItems,
+        itemsTaken: userStats.userTakenItems,
       });
-      if(item.itemTaken === false){
-        itemsDonated+=1;
-      }
-      if(item.itemTaken === true){
-        itemsCollected+=1;
-      }
-    });
-    // Calculate the total CO2 footprint
-    const totalCO2Footprint = co2FootprintTaken + co2FootprintNotTaken;
-    console.log("CO2 footprint of taken items:", co2FootprintTaken);
-    console.log("CO2 footprint of not taken items:", co2FootprintNotTaken);
-    console.log("Total CO2 footprint:", totalCO2Footprint);
-    setCO2Data((prevData) => ({
-      ...prevData,
-      TotalCo2Footprint: totalCO2Footprint,
-      itemsDonated: itemsDonated,
-      itemsCollected: itemsCollected
-    }));
-  }  */
 
-  const { personalEquivalent, totalEquivalent } = Calculate_co2_Equivalent(
-    co2Data.TotalCo2Footprint
-  );
+      setco2Equivalent(Calculate_co2_Equivalent(userStats.totalC02Saved))
+    })
+  }, []);
+
 
   return (
     <ScrollViewComponent>
@@ -131,7 +85,7 @@ const YourStats = (props) => {
             >
               {t("StatsPage.ItemsDonated", currentLanguage)}
             </Text>
-            <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
+            <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
               {co2Data.itemsDonated}
             </Text>
           </View>
@@ -141,7 +95,7 @@ const YourStats = (props) => {
             >
               {t("StatsPage.ItemsCollected", currentLanguage)}
             </Text>
-            <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
+            <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
               {co2Data.itemsTaken}
             </Text>
           </View>
@@ -166,7 +120,7 @@ const YourStats = (props) => {
 
         <View style={{}}>
           <GreenBox
-            data={co2Data.TotalCo2Footprint}
+            data={convertKgToTons(co2Data.TotalCo2Footprint)}
             textStyle={{ height: 50 }}
             headerStyle={{ marginBottom: 30, marginTop: -30 }}
           />
@@ -185,9 +139,7 @@ const YourStats = (props) => {
           >
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-              {" "}
-              {t("StatsPage.kgCO2", currentLanguage)} {personalEquivalent}{" "}
-              {t("StatsPage.Fact_equavalent", currentLanguage)}
+              {co2Equivalent.co2_pers + " " + t("StatsPage.kgCO2", currentLanguage) + ": " + co2Equivalent.personalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
           <View
@@ -203,12 +155,7 @@ const YourStats = (props) => {
           >
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-              {" "}
-              {t("StatsPage.Amount_first_part", currentLanguage)}{" "}
-              {convertKgToTons(co2Data.TotalCo2Footprint)}{" "}
-              {t("StatsPage.Amount_second_part", currentLanguage)}{" "}
-              {totalEquivalent}{" "}
-              {t("StatsPage.Fact_equavalent", currentLanguage)}
+              {convertKgToTons(co2Data.TotalCo2Footprint) + " " + t("StatsPage.kgCO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
         </View>
@@ -294,8 +241,8 @@ const YourStats = (props) => {
             {t("StatsPage.MostVisitedUptainer", currentLanguage)}
           </Text>
         </View>
-        {uptainers.map((uptainer) => (
-          <YourVisitedUptainer value={uptainer} />
+        {uptainers.map((uptainer, index) => (
+          <YourVisitedUptainer key={index} value={uptainer} />
         ))}
         <View style={{ marginTop: 25, marginBottom: 10 }}>
           <Text

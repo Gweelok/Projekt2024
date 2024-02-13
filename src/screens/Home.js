@@ -33,19 +33,7 @@ const Home = ({ navigation }) => {
     if (itemSelected) { setItemSelected(false) }
     
   }
-  //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
-  console.log("start current useeffect " + firebaseAurth.currentUser);
-  (async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      console.log("Permission to access location was denied");
-    } else {
-      console.log("status good");
-      //				let loc = await Location.getLastKnownPositionAsync({});
-      let loc = await Location.getCurrentPositionAsync({});
-      setUserLocation(loc.coords)
-    }
-  })();
+
 
   useEffect(() => {
     setNotMatchingProduct(false);
