@@ -86,6 +86,27 @@ export async function getImage(imagePath) {
     return url
   }
 }
+export async function getAllCategories() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/categories');
+
+  try {
+      const snapshot = await get(reference);
+      const categories = [];
+      snapshot.forEach((childSnapshot) => {
+          const categoryId = childSnapshot.key;
+          const categoryName = childSnapshot.val().categoryName;
+          categories.push({
+              categoryId: categoryId,
+              categoryName: categoryName
+          });
+      });
+      return categories;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
 
 /****************/
 /***** Auth *****/
