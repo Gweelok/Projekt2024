@@ -31,4 +31,22 @@ export default {
     
     Optional: "optional",
   },
+  ImageUpload: {
+    chooseImage: "Choose image",
+  },
+  UpdroppForm: {
+    title: "Updropp",
+    uploadText: "Add image",
+    informativeText:
+      "Once you have filed in the Updropp form, scan the QR code on the Uptainer to drop off your item. If you have filed in the Updropp form beforehand, you can save a draft by clicking on the “Scan Later” button.",
+    scanLaterButton: "SCAN LATER",
+    scanButton: "UPDROPP",
+    addDraft: "Add draft",
+    viewUptainers: "View Uptainers nearby",
+    draftSavedtext: "Your draft is now saved",
+    noData: "Please fill all the required information",
+    camera: "Camera",
+    gallery: "Gallery",
+    chooseAction: "Choose an Action",
+  },
 };
