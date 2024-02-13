@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import { Buttons, styles, QRScannerStyles } from "../../../styles/styleSheet";
 import ScrollViewComponent from "../../atoms/ScrollViewComponent";
-import LoadingScreen from "../../LoadingScreen";
+import LoadingScreen from "../../../screens/LoadingScreen";
 import BarCodeScannerMoleculeQR from "../MoleculesQR/BarCodeScannerMoleculeQR";
 import HeaderMoleculeQR from "../MoleculesQR/HeaderMoleculeQR";
 
@@ -14,7 +14,7 @@ const QRScannerOrganism = ({
   handleBarCodeScanned,
   handleScanAgain,
   handleSaveCode,
-  handlePress,
+  handleIconPress,
   isActive,
   isLoading,
 }) => (
@@ -29,7 +29,7 @@ const QRScannerOrganism = ({
         <HeaderMoleculeQR
           title={t("QrScannerScreen.Scan", currentLanguage)}
           iconName="close"
-          onIconPress={handlePress}
+          onIconPress={handleIconPress}
         />
       </View>
 
@@ -59,20 +59,6 @@ const QRScannerOrganism = ({
                     {t("QrScannerScreen.SaveCode", currentLanguage)}
                   </Text>
                 </Pressable>
-                {/*                 <PressableAtomQR
-                  onPress={handleSaveCode}
-                  title={t("QrScannerScreen.SaveCode", currentLanguage)}
-                  disabled={!isActive || isLoading}
-                  buttonStyle={[
-                    Buttons.main_button,
-                    {
-                      borderWidth: 1,
-                      width: 220,
-                      marginHorizontal: 60,
-                    },
-                  ]}
-                  textStyle={Buttons.main_buttonText}
-                /> */}
 
                 <Pressable
                   onPress={handleScanAgain}
@@ -87,21 +73,6 @@ const QRScannerOrganism = ({
                   </Text>
                 </Pressable>
 
-                {/*    <PressableAtomQR
-                  onPress={handleScanAgain}
-                  title={t("QrScannerScreen.ScanAgain", currentLanguage)}
-                  disabled={isLoading}
-                  buttonStyle={[
-                    Buttons.secondary_button,
-                    {
-                      backgroundColor: "red",
-                      borderWidth: 1,
-                      width: 220,
-                      marginHorizontal: 60,
-                    },
-                  ]}
-                  textStyle={Buttons.secondary_buttonText}
-                /> */}
               </View>
             </View>
           )}

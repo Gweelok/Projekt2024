@@ -11,9 +11,9 @@ import { LoaderProvider } from "./src/components/molecules/LoaderContext";
 import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 import Uptainer from "./src/screens/Uptainer";
-import QRScanner from "./src/screens/QRScanner"; // For QR Scan testing, delete later
 import OverView from "./src/screens/OverView";
 import ServiceAdminMain from "./src/screens/ServiceAdminMain";
+import AddQRScanner from "./src/screens/AddQRScanner"; //For testing QR Scanner
 
 export default function App() {
   //Loading the font
@@ -33,7 +33,7 @@ export default function App() {
     <LoaderProvider>
       <LanguageProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="QRScanner">
+          <Stack.Navigator initialRouteName="AddQRScanner">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Home"
@@ -54,16 +54,16 @@ export default function App() {
               name="OverView"
               component={OverView}
             />
-            {/* For QRScan testing, delete later */}
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="QRScanner"
-              component={QRScanner}
-            />
             <Stack.Screen
               options={{ headerShown: false }}
               name="ServiceAdminMain"
               component={ServiceAdminMain}
+            />
+            {/*     For testing QR Scanner */}
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AddQRScanner"
+              component={AddQRScanner}
             />
           </Stack.Navigator>
         </NavigationContainer>

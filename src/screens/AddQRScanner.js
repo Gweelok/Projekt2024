@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import QRScannerOrganism from "../components/QRScanner/OrganismsQR/QRScannerOrganism";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import { LoaderContext } from "../components/LoaderContext";
+import { LoaderContext } from "../components/molecules/LoaderContext";
 import { generateQRCode } from "../utils/QRCodeGenerator";
 import {
   createItem,

@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/AntDesign";
 import { styles, QRScannerStyles } from "../../../styles/styleSheet";
 
 const HeaderMoleculeQR = ({ title, iconName, onIconPress }) => (
