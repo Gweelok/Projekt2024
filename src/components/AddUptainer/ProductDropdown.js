@@ -140,7 +140,6 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
 
 const productDropdownContainer = {
     container: {
-        flex: 1,
         flexDirection: "column",
     },
     validationErrorText: {
