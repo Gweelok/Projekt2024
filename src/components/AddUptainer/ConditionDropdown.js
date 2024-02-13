@@ -5,7 +5,6 @@ import { Primarycolor1, Primarycolor3, styles, styles as stylesGlobal } from "..
 import BackButton from "../atoms/BackButton"; // Make sure to import this if used
 import { useNavigation } from "@react-navigation/native";
 import {t,useLanguage} from "../../Languages/LanguageHandler";
-import {items} from "../../utils/SeedData";
 
 const ConditionDropdown = ({ onConditionSelect, data, isVisible }) => {
     const { currentLanguage } = useLanguage();
