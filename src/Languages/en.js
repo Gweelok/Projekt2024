@@ -116,9 +116,14 @@ export default {
     ChangeCode: "Change password",
     Delete: "Delete account",
     Optional: "optional",
-    HandleSave: "Information saved",
+    Saved: "Information saved",
+    EmailExist: "Email is already in use",
     HandleDeleteAccount: "Account deleted",
     Language: "Language",
+    InvalidEmail:"The provided email address is invalid.",
+    InvalidName:"The name provided is invalid.",
+    InvalidPhone:"The phone number provided is invalid.",
+    Error:"An error occurred during updating the settings. Please try again!"
   },
   DeleteAccount: {
     Header: "Are you sure you want to delete you account?",
@@ -134,15 +139,12 @@ export default {
     CurrentPassword: "Current Password",
     NewPassword: "New Password",
     ConfirmPassword: "Confirm New Password",
+    CurrentPasswordMatchError: "Current password is incorrect.",
     PasswordMatchError: "Current password and new password cannot be the same.",
-    PasswordMismatchError:
-      "Passwords don't match.",
+    PasswordMismatchError:"New Passwords don't match.",
     PasswordLengthError: "Password must be at least 8 characters long.",
-    PasswordChanged:
-      "Password changed successfully. You will be redirected to log in.",
-    CurrentPasswordError: "Current password is not correct.",
-    PasswordUpdateError:
-      "An error occurred during updating the password. Please try again!",
+    PasswordChanged:"Password changed successfully.",
+    PasswordUpdateError:"An error occurred during updating the password. Please try again!",
   },
 
   ProblemComponent: {
@@ -157,8 +159,8 @@ export default {
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
-    QRCodeNotFound1:"QR Code not found,so click on Tag to save to draft instead.",
-    QRCodeNotFound:"QR Code not found, saved to draft instead.",
+    QRCodeNotFound1: "QR Code not found,so click on Tag to save to draft instead.",
+    QRCodeNotFound: "QR Code not found, saved to draft instead.",
     SaveCode: "Updropp",
     Take: "Take",
     Success: "Success",
@@ -188,7 +190,7 @@ export default {
   StationsScreen: {
     showProduct: "Show product",
     showWay: "Show the way",
-    NoUptainers:"No Uptainer is matching your search.",
+    NoUptainers: "No Uptainer is matching your search.",
   },
   ProductIsTakenScreen: {
     apology:
@@ -281,6 +283,8 @@ export default {
   SearchField: {
     mapPlaceholder: "Find Uptainer",
     productPlaceholder: "Find product",
+    notProductFound: "There are currently no Uptainers with that product. Please try again another day.",
+    notMatchingProduct: "No products match your search.",
   },
 
   QuizQuestions: {

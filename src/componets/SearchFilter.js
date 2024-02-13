@@ -36,6 +36,7 @@ const SearchFilter = ({ data = [], input,  error, isLoading, setItemSelected, se
 
   const renderLoading = () => <ActivityIndicator size="small" />;
   const renderError = () => (<Text style={dropdownStyles.dropdownErrorText}>{t("SearchField.notMatchingProduct", currentLanguage)}</Text>)
+  
 
   return (
     <View

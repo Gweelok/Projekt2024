@@ -1,14 +1,15 @@
-import React from 'react';
-import { View, Text,} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { t, useLanguage } from '../../Languages/LanguageHandler';
 
-import {styles, Backgroundstyle} from "../../styles/Stylesheet";
-import {MenuItems} from "../../styles/MenuItems";
+import { styles, Backgroundstyle } from "../../styles/Stylesheet";
+import { MenuItems } from "../../styles/MenuItems";
 import GlobalStyle from '../../styles/GlobalStyle'
 import BackButton from '../../componets/BackButton';
 import Navigationbar from '../../componets/Navigationbar';
+import { LoaderContext } from '../../componets/LoaderContext';
 
 const MY_SETTINGS_SCREEN = {
     AccountSettings: 'AccountSettings',
@@ -18,10 +19,12 @@ const MY_SETTINGS_SCREEN = {
 
 const MySettings = ({ navigation }) => {
     const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
+    const { isLoading, setIsLoading } = useContext(LoaderContext)
 
     const backButtonPressed = () => navigation.goBack()
 
     const handlePress = (selectedOption) => {
+        setIsLoading(true)
         if (selectedOption === MY_SETTINGS_SCREEN.AccountSettings) {
             navigation.navigate('AccountSettings');
         } else if (selectedOption === MY_SETTINGS_SCREEN.Notifications) {
@@ -33,8 +36,8 @@ const MySettings = ({ navigation }) => {
 
     return (
         <View style={Backgroundstyle.interactive_screens}>
-            <View style={{ alignSelf: "stretch", paddingLeft: 25}}>
-                <BackButton onPress={backButtonPressed}/>
+            <View style={{ alignSelf: "stretch", paddingLeft: 25 }}>
+                <BackButton onPress={backButtonPressed} />
             </View>
             <View style={GlobalStyle.BodyWrapper}>
                 <Text style={[styles.Header_Primarycolor1, styles.Header]}>{t('MySettingsScreen.Header', currentLanguage)}</Text>
