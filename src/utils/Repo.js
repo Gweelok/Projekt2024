@@ -10,12 +10,6 @@ import {
   ref as ref_storage,
   deleteObject,
 } from "firebase/storage";
-  getStorage,
-  uploadBytesResumable,
-  getDownloadURL,
-  ref as ref_storage,
-  deleteObject,
-} from "firebase/storage";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
 
 const db = firebaseGetDB;

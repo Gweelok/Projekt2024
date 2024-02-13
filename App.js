@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
-import { LoaderProvider } from "./src/components/LoaderContext";
 //Providers
 import { LanguageProvider } from "./src/Languages/LanguageHandler";
 import { LoaderProvider } from "./src/components/molecules/LoaderContext";
@@ -13,7 +12,7 @@ import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 import Uptainer from "./src/screens/Uptainer";
 import QRScanner from "./src/screens/QRScanner"; // For QR Scan testing, delete later
-import OverView from './src/screens/OverView'
+import OverView from "./src/screens/OverView";
 import ServiceAdminMain from "./src/screens/ServiceAdminMain";
 
 export default function App() {
@@ -33,26 +32,29 @@ export default function App() {
   return (
     <LoaderProvider>
       <LanguageProvider>
-        <LoaderProvider>
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="QRScanner">
-              <Stack.Screen
+          <Stack.Navigator initialRouteName="QRScanner">
+            <Stack.Screen
               options={{ headerShown: false }}
               name="Home"
               component={Home}
             />
-              <Stack.Screen
+            <Stack.Screen
               options={{ headerShown: false }}
               name="Login"
               component={Login}
             />
-              <Stack.Screen
+            <Stack.Screen
               options={{ headerShown: false }}
               name="Uptainer"
               component={Uptainer}
             />
-            <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
-              {/* For QRScan testing, delete later */}
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="OverView"
+              component={OverView}
+            />
+            {/* For QRScan testing, delete later */}
             <Stack.Screen
               options={{ headerShown: false }}
               name="QRScanner"
@@ -63,10 +65,9 @@ export default function App() {
               name="ServiceAdminMain"
               component={ServiceAdminMain}
             />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </LoaderProvider>
-    </LanguageProvider>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </LanguageProvider>
     </LoaderProvider>
   );
 }

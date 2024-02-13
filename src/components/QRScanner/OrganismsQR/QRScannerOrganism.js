@@ -50,7 +50,6 @@ const QRScannerOrganism = ({
           {scanned && (
             <View>
               <View style={{ marginBottom: 10 }}>
-                
                 <Pressable
                   onPress={handleSaveCode}
                   disabled={!isActive || isLoading}
@@ -78,7 +77,10 @@ const QRScannerOrganism = ({
                 <Pressable
                   onPress={handleScanAgain}
                   disabled={isLoading}
-                  style={[Buttons.secondary_button, QRScannerStyles.QRScanAgainButton]}
+                  style={[
+                    Buttons.secondary_button,
+                    QRScannerStyles.QRScanAgainButton,
+                  ]}
                 >
                   <Text style={Buttons.secondary_buttonText}>
                     {t("QrScannerScreen.ScanAgain", currentLanguage)}

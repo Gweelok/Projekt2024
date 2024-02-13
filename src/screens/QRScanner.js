@@ -25,8 +25,8 @@ const QRScanner = ({ route, navigation }) => {
 
   const handlePress = () => {
     console.log("Attempting to go back");
-    navigation.goBack();
-    //navigation.navigate("Home"); // For testing
+    //navigation.goBack();
+    navigation.navigate("Home"); // For testing
   };
 
   const askForCameraPermission = async () => {
@@ -267,6 +267,7 @@ const QRScanner = ({ route, navigation }) => {
   }; */
 
   return (
+
     <QRScannerOrganism
       hasPermission={hasPermission}
       scanned={scanned}
