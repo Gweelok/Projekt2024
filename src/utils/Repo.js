@@ -10,15 +10,26 @@ import {
   ref as ref_storage,
   deleteObject,
 } from "firebase/storage";
+  getStorage,
+  uploadBytesResumable,
+  getDownloadURL,
+  ref as ref_storage,
+  deleteObject,
+} from "firebase/storage";
 import { firebaseGetDB, firebaseAurth } from "./Firebase";
 
 const db = firebaseGetDB;
+
+/********************/
+/******* Get ********/
+/********************/
 
 export async function getAllUptainers() {
   const db = firebaseGetDB;
   const reference = ref(db, "/uptainers");
 
   try {
+
     const snapshot = await get(reference);
     const uptainers = [];
 
@@ -45,11 +56,52 @@ export async function getAllUptainers() {
   }
 }
 
+export async function getItemByUptainerId(uptainerId) {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/items');
+
+  try {
+    const snapshot = await get(reference);
+    const itemList = [];
+
+    snapshot.forEach((childSnapshot) => {
+      const item = childSnapshot.val();
+
+      if (item && item.itemUptainer === uptainerId) {
+        itemList.push(item);
+      }
+    });
+
+    return itemList;
+  } catch (error) {
+    console.error("Error getting items:", error);
+    throw error;
+  }
+}
+
+export async function getImage(imagePath) {
+  const storage = getStorage();
+  const imageRef = ref_storage(storage, imagePath);
+
+  try {
+    const url = await getDownloadURL(imageRef)
+    return url
+  } catch (err) {
+    //console.log("Error while downloading image => ", err);
+    const url = "https://via.placeholder.com/200x200"
+    return url
+  }
+}
+
+/****************/
+/***** Auth *****/
+/****************/
+
 export async function signInUser(email, password, navigation) {
   signInWithEmailAndPassword(firebaseAurth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log("User logged in:", user);
+      console.log('User logged in:', user);
       navigation.navigate("Home");
     })
     .catch((error) => {
@@ -57,14 +109,20 @@ export async function signInUser(email, password, navigation) {
     });
 }
 
+/********************/
+/***** Create *******/
+/********************/
+
 export function createUptainerTaskAnswers(data) {
   const newAnswersKey = push(ref(db, "taskAnswers")).key;
-  writeToDatabase("taskAnswers" + "/" + newAnswersKey, data);
+  writeToDatabase("taskAnswers" + "/" + newAnswersKey, data)
 }
 
 function writeToDatabase(refPath, data) {
   const reference = ref(db, refPath);
   try {
+    set(reference, data);
+    console.log(`Data written to ${refPath} successfully.`);
     set(reference, data);
     console.log(`Data written to ${refPath} successfully.`);
   } catch (error) {
@@ -227,3 +285,33 @@ export async function getUptainerById(uptainerId) {
      };
    }
  }
+
+/********************/
+/***** Delete *******/
+/********************/ 
+
+export async function deleteItemById(itemId) {
+  const reference = ref(db, `/items/${itemId}`);
+
+  try {
+    const snapshot = await get(reference);
+    // Attempt to delete the item directly
+    if (snapshot.exists()) {
+      // Attempt to delete the item directly
+      await remove(reference);
+      console.log(`Item with ID ${itemId} deleted successfully.`);
+      return true;
+    } else {
+      //If Id doesn't exist 
+      console.log(`Item with ID ${itemId} does not exist.`);
+      return false;
+    }
+  } catch (error) {
+    console.log(error)
+    return false;
+  }
+}
+
+/**********************/
+/****** Update ********/
+/**********************/

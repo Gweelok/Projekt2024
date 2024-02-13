@@ -1,11 +1,10 @@
 import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
-import { Buttons, styles } from "../../../styles/styleSheet";
+import { Buttons, styles, QRScannerStyles } from "../../../styles/styleSheet";
 import ScrollViewComponent from "../../atoms/ScrollViewComponent";
-import LoadingScreen from "../../../components/LoadingScreen";
-import BarCodeScannerMoleculeQR from "../../molecules/QRScannerMolecules/BarCodeScannerMoleculeQR";
-import HeaderMoleculeQR from "../../molecules/QRScannerMolecules/HeaderMoleculeQR";
-import PressableAtomQR from "../../atoms/QRScannerAtoms/PressableAtomQR";
+import LoadingScreen from "../../LoadingScreen";
+import BarCodeScannerMoleculeQR from "../MoleculesQR/BarCodeScannerMoleculeQR";
+import HeaderMoleculeQR from "../MoleculesQR/HeaderMoleculeQR";
 
 const QRScannerOrganism = ({
   t,
@@ -51,7 +50,17 @@ const QRScannerOrganism = ({
           {scanned && (
             <View>
               <View style={{ marginBottom: 10 }}>
-                <PressableAtomQR
+                
+                <Pressable
+                  onPress={handleSaveCode}
+                  disabled={!isActive || isLoading}
+                  style={[Buttons.main_button, QRScannerStyles.QRScanButton]}
+                >
+                  <Text style={Buttons.main_buttonText}>
+                    {t("QrScannerScreen.SaveCode", currentLanguage)}
+                  </Text>
+                </Pressable>
+                {/*                 <PressableAtomQR
                   onPress={handleSaveCode}
                   title={t("QrScannerScreen.SaveCode", currentLanguage)}
                   disabled={!isActive || isLoading}
@@ -64,9 +73,19 @@ const QRScannerOrganism = ({
                     },
                   ]}
                   textStyle={Buttons.main_buttonText}
-                />
+                /> */}
 
-                <PressableAtomQR
+                <Pressable
+                  onPress={handleScanAgain}
+                  disabled={isLoading}
+                  style={[Buttons.secondary_button, QRScannerStyles.QRScanAgainButton]}
+                >
+                  <Text style={Buttons.secondary_buttonText}>
+                    {t("QrScannerScreen.ScanAgain", currentLanguage)}
+                  </Text>
+                </Pressable>
+
+                {/*    <PressableAtomQR
                   onPress={handleScanAgain}
                   title={t("QrScannerScreen.ScanAgain", currentLanguage)}
                   disabled={isLoading}
@@ -80,7 +99,7 @@ const QRScannerOrganism = ({
                     },
                   ]}
                   textStyle={Buttons.secondary_buttonText}
-                />
+                /> */}
               </View>
             </View>
           )}

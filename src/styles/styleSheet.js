@@ -309,5 +309,16 @@ export const QRScannerStyles = StyleSheet.create({
     color: Primarycolor1,
     fontWeight: "bold",
     marginBottom: 20,
-  }
+  },
+  QRScanButton: {
+    borderWidth: 1,
+    width: 220,
+    marginHorizontal: 60,
+  },
+  QRScanAgainButton: {
+    backgroundColor: "red",
+    borderWidth: 1,
+    width: 220,
+    marginHorizontal: 60,
+  },
 });
