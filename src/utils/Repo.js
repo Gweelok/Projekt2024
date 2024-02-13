@@ -108,6 +108,30 @@ export async function getAllCategories() {
   }
 }
 
+export async function getAllProducts() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/products');
+
+  try {
+      const snapshot = await get(reference);
+      const products = [];
+      snapshot.forEach((childSnapshot) => {
+          const productId = childSnapshot.key;
+          const productName = childSnapshot.val().productName;
+          const co2Footprint = childSnapshot.val().co2Footprint;
+          products.push({
+              productId: productId,
+              productName: productName,
+              co2Footprint: co2Footprint
+          });
+      });
+      return products;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
+
 /****************/
 /***** Auth *****/
 /****************/
