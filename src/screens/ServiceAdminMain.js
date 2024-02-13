@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet } from "react-native"
 import Navigationbar from "../components/organisms/Navigationbar"
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import TextLinkList  from "../components/organisms/TextLinkList"
