@@ -1,7 +1,7 @@
 import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert } from "react-native"
 import { useEffect, useState, useContext } from "react";
 
-import UptainerInfo from "../components/Uptainer/UptainerInfo"
+import UptainerInfo from "../components/atoms/UptainerInfo"
 import LoadingScreen from "./LoadingScreen";
 import {LoaderContext} from "../components/molecules/LoaderContext";
 
