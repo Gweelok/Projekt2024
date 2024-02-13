@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert } from "react-native"
+import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert, Pressable } from "react-native"
 import { useEffect, useState, useContext } from "react";
 
 import UptainerInfo from "../components/atoms/UptainerInfo"
@@ -6,12 +6,12 @@ import LoadingScreen from "./LoadingScreen";
 import {LoaderContext} from "../components/molecules/LoaderContext";
 
 import GlobalStyle from "../styles/GlobalStyle"
-import { styles } from "../styles/styleSheet"
+import { Primarycolor1, styles } from "../styles/styleSheet"
 
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { getImage, getItemByUptainerId, deleteItemById } from "../utils/Repo";
 
-const OverView = ({ route }) => {
+const OverView = ({ route, navigation }) => {
     const { location } = route.params;
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
@@ -94,6 +94,17 @@ const OverView = ({ route }) => {
                     />
                 </View>
             )}
+            <Pressable style={{
+                marginTop: 20,
+                padding: 20,
+                backgroundColor: Primarycolor1,
+               
+            }} onPress={()=>{
+                navigation.navigate('AddItem', {location})
+
+            }}>
+                <Text style={{ color: 'white'}}>Add Item</Text>
+            </Pressable>
         </View>
     );
 }
