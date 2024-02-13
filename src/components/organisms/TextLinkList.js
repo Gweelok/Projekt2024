@@ -6,15 +6,15 @@ const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
     return (
         <View style={style.container}>
 
-                <TextLink status={linkStatus.overview} path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
+                <TextLink status={true} path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
 
                 <Spacer height={25}></Spacer>
 
-                <TextLink status={linkStatus.reportedItems} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
+                <TextLink status={linkStatus.overview} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
 
                 <Spacer height={25}></Spacer>
 
-                <TextLink status={linkStatus.uptainerCondition} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
+                <TextLink status={linkStatus.reportedItems} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
         </View>
     )
 }
