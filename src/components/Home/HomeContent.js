@@ -32,7 +32,7 @@ const HomeContent = ({navigation}) => {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-
+        minHeight:'100%'
     },
     buttons: {
         marginTop: 100,

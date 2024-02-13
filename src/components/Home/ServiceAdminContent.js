@@ -71,7 +71,7 @@ const ServiceAdminContent = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={[style.container, GlobalStyle.BodyWrapper]}>
+    <View style={style.container}>
       <View style={style.searchContainer}>
 
         <TouchableOpacity style={style.searchBox}>
@@ -106,6 +106,8 @@ const ServiceAdminContent = ({ navigation }) => {
 
 const style = StyleSheet.create({
   container: {
+    height:'100%',
+    width:'100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },

@@ -14,7 +14,7 @@ const style = StyleSheet.create({
     container: {
         height: windowHeight,
         width: windowWidth,
-        minHeight: '100%'
+        
     }
 })
 
