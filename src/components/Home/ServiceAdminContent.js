@@ -94,9 +94,9 @@ const ServiceAdminContent = ({ navigation }) => {
       </View>
 
       {searchText.length === 0 ? (
-        <TouchableOpacity style={style.list}>
+        <View style={style.list}>
           <UptainerList loading={loading} uptainers={uptainers} />
-        </TouchableOpacity>
+        </View>
       ) : null}
 
       <Navigationbar navigation={navigation} />
@@ -106,9 +106,6 @@ const ServiceAdminContent = ({ navigation }) => {
 
 const style = StyleSheet.create({
   container: {
-    //Added height for the status bar to obtain the correct screen height.
-    height: windowHeight,
-    width: windowWidth,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
