@@ -132,6 +132,52 @@ export async function getAllProducts() {
   }
 }
 
+export async function getAllBrands() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/brands');
+
+  try {
+      const snapshot = await get(reference);
+      const brands = [];
+      snapshot.forEach((childSnapshot) => {
+          const brandId = childSnapshot.key;
+          const brandName = childSnapshot.val().brandName;
+          brands.push({
+              brandId: brandId,
+              brandName: brandName
+          });
+      });
+      return brands;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
+
+export async function getAllModels() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/models');
+
+  try {
+      const snapshot = await get(reference);
+      const models = [];
+      snapshot.forEach((childSnapshot) => {
+          const modelId = childSnapshot.key;
+          const modelName = childSnapshot.val().modelName;
+          const brandId = childSnapshot.val().brandId;
+          models.push({
+              modelId: modelId,
+              modelName: modelName,
+              brandId: brandId
+          });
+      });
+      return models;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
+
 /****************/
 /***** Auth *****/
 /****************/
