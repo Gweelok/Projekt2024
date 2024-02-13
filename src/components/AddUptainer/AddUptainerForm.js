@@ -147,11 +147,8 @@ import { windowHeight, windowWidth } from "../../utils/Dimensions";
     <View>
           <View
             style={{
-            //   paddingTop: 50,
               flex: 1,
-            //   marginHorizontal: 30,
-            //   height: windowHeight,
-              width: windowWidth * 0.7
+              width: windowWidth * 0.5
             }}
           >
             <View style={[{ marginBottom: 10 }]}>
@@ -166,9 +163,6 @@ import { windowHeight, windowWidth } from "../../utils/Dimensions";
                 isProductDropdownVisible={isProductDropdownVisible}
                 setIsProductDropdownVisible={setIsProductDropdownVisible}
             />
-  
-  
-  
   
             <ProductDropdown
                 onProductSelect={setProduct}
