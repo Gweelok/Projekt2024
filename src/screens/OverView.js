@@ -2,11 +2,12 @@ import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert } from
 import { useEffect, useState, useContext } from "react";
 
 import UptainerInfo from "../components/Uptainer/UptainerInfo"
+import NavgationButton from "../components/atoms/NavigationButton"
 import LoadingScreen from "./LoadingScreen";
-import {LoaderContext} from "../components/molecules/LoaderContext";
+import { LoaderContext } from "../components/molecules/LoaderContext";
 
 import GlobalStyle from "../styles/GlobalStyle"
-import { styles } from "../styles/styleSheet"
+import { styles, Buttons } from "../styles/styleSheet"
 
 import { windowHeight, windowWidth } from "../utils/Dimensions"
 import { getImage, getItemByUptainerId, deleteItemById } from "../utils/Repo";
@@ -15,10 +16,12 @@ const OverView = ({ route }) => {
     const { location } = route.params;
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
-    const {isLoading, setIsLoading} = useContext(LoaderContext);
+    const { isLoading, setIsLoading } = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
 
-    const buttonText = 'Delete';
+    const deleteButtonText = 'Delete';
+    const solvedButtonText = 'Task Solved';
+    const navigationPath = 'ServiceAdminMain'
 
     async function fetchItems() {
         const fetchedItems = await getItemByUptainerId(location.uptainerId);
@@ -70,13 +73,13 @@ const OverView = ({ route }) => {
             <Image source={{ uri: item.url }} style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }} />
 
             <TouchableOpacity disabled={isLoading} onPress={() => handleLinkPress(item.id)}>
-                <Text style={[styles.link, style.linkText]}>{buttonText}</Text>
+                <Text style={[styles.link, style.linkText]}>{deleteButtonText}</Text>
             </TouchableOpacity >
         </View >
     );
 
     return (
-        
+
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
 
             {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
@@ -94,6 +97,14 @@ const OverView = ({ route }) => {
                     />
                 </View>
             )}
+
+            <NavgationButton
+                path={navigationPath}
+                text={solvedButtonText}
+                location={location}
+                buttonStyle={Buttons.main_button}
+                textStyle={Buttons.main_buttonText}
+            />
         </View>
     );
 }
