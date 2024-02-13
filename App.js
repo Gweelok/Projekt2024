@@ -14,6 +14,7 @@ import Login from './src/screens/Login';
 import Uptainer from './src/screens/Uptainer';
 import OverView from './src/screens/OverView'
 import ServiceAdminMain from './src/screens/ServiceAdminMain';
+import AddUptainer from './src/screens/AddUptainer';
 
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
             <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
             <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
             <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
+            <Stack.Screen options={{ headerShown: false }} name="AddUptainer" component={AddUptainer} />
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>
