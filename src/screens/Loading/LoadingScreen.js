@@ -1,6 +1,6 @@
 import  React from 'react';
 import { StyleSheet, Modal, View, ActivityIndicator } from 'react-native';
-import { Primarycolor1 } from '../styles/styleSheet';
+import { Primarycolor1 } from '../../styles/styleSheet';
 
 // 1. Create the Loader component, it has a single prompt which is false by default and if true the Modal will be visible 
 const LoadingScreen = ({ isLoaderShow = false }) => (
