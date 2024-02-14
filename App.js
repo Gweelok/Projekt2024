@@ -7,13 +7,18 @@ import { useFonts } from "expo-font";
 //Providers
 import { LanguageProvider } from './src/Languages/LanguageHandler';
 import { LoaderProvider } from "./src/components/molecules/LoaderContext";
+import { SharedContextProvider } from './src/components/SharedContext';
 
-//importing pages for navigation
+//Pages for navigation
+//Auth
+import Login from './src/screens/Auth/Login';
+//Home
 import Home from './src/screens/Home/Home';
-import Login from './src/screens/Login';
-import Uptainer from './src/screens/Home/Uptainer';
+//ServiceAdmin
+import Uptainer from './src/screens/ServiceAdmin/Uptainer';
 import OverView from './src/screens/ServiceAdmin/OverView'
 import ServiceAdminMain from './src/screens/ServiceAdmin/ServiceAdminMain';
+import React, { createContext } from 'react';
 
 
 export default function App() {
@@ -34,17 +39,19 @@ export default function App() {
   return (
     <LoaderProvider>
       <LanguageProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login'>
-            <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-            <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-            <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
-            <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
-            <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <SharedContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName='Home'>
+              <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+              <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+              <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
+              <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
+              <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SharedContextProvider>
       </LanguageProvider>
-    </LoaderProvider>
+    </LoaderProvider >
   );
 }
 
