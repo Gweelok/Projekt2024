@@ -79,10 +79,8 @@ const DetailViews = ({ navigation, route }) => {
   };
 
   return (
-    <View
-      style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper]}
-    >
-      <ScrollViewComponent>
+    <View style={[Backgroundstyle.interactive_screens]}>
+      <ScrollViewComponent style={GlobalStyle.BodyWrapper}>
         <BackButton onPress={navigation.goBack} style={Buttons.backButton} />
         <View style={[DetailView.container]}>
           <Image source={{ uri: imageUrl }} style={DetailView.image} />
