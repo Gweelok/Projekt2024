@@ -13,6 +13,10 @@ export default {
     selectBrand: "Brand",
     placeholder: "Choose brand",
   },
+  CategoryDropdown: {
+    selectCategory: "Category",
+    placeholder: "Choose category",
+  },
 
   ModelDropdown: {
     selectModel: "Model",

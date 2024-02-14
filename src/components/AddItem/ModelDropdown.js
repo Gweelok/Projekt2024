@@ -77,15 +77,15 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
     const handleBack = () => {
         setIsModalVisible(false);
     };
-
+    const useEnglish = 'en'
     return (
         <CustomInput optionalMarginBottom>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop: 15 }]}>
-                    {t("ModelDropdown.selectModel", currentLanguage)}
+                    {t("ModelDropdown.selectModel", useEnglish)}
                 </Text>
                 <Text style={[stylesGlobal.optionalText, { marginLeft: 5, marginTop: 5 }]}>
-                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                    ({t("AccountSettingsScreen.Optional", useEnglish)})
                 </Text>
             </View>
             <View style={modelDropdownContainer.container}>
@@ -102,7 +102,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
                     disabled={!brandSelected}
                 >
                     <Text style={[modelDropdownContainer.dropdownText, !selectedModel && { color: "#8EA59E" }]}>
-                        {selectedModel?.modelName || (!brandSelected ? t("ModelDropdown.placeholder", currentLanguage) : "Model")}
+                        {selectedModel?.modelName || (!brandSelected ? t("ModelDropdown.placeholder", useEnglish) : "Model")}
                     </Text>
                     <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
                 </TouchableOpacity>
@@ -119,7 +119,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
                                     style={[modelDropdownContainer.input,{marginLeft:5}]}
                                     placeholderTextColor={Primarycolor4}
                                     onChangeText={handleSearch}
-                                    placeholder={t("DropdownScreen.Model", currentLanguage)}
+                                    placeholder={t("DropdownScreen.Model", useEnglish)}
                                 />
                             </View>
                             <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>

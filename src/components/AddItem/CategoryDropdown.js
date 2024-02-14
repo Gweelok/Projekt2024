@@ -71,11 +71,11 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
     const handleBack = () => {
         setIsModalVisible(false);
     };
-
+    const useEnglish = 'en'
     return (
         <View style={categoryDropdownContainer.container}>
             <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
-                {t('CategoryDropdown.selectCategory', currentLanguage)}
+                {t('CategoryDropdown.selectCategory', useEnglish)}
             </Text>
             <TouchableOpacity
                 style={categoryDropdownContainer.dropdownButton}
@@ -83,7 +83,7 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                     setIsModalVisible(true);
                 }}>
                 <Text style={[categoryDropdownContainer.dropdownText, !selectedCategory && { color: '#8EA59E' }]}>
-                    {selectedCategory ? selectedCategory.categoryName : t('CategoryDropdown.placeholder', currentLanguage)}
+                    {selectedCategory ? selectedCategory.categoryName : t('CategoryDropdown.placeholder', useEnglish)}
                 </Text>
                 <AntDesign name={isOpen ? 'up' : 'down'} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
@@ -102,7 +102,7 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
                                 style={[categoryDropdownContainer.input,{marginLeft:5}]}
                                 placeholderTextColor={Primarycolor4}
                                 onChangeText={handleSearch}
-                                placeholder={t("DropdownScreen.Category", currentLanguage)}
+                                placeholder={t("DropdownScreen.Category", useEnglish)}
                             />
                         </View>
                     </View>

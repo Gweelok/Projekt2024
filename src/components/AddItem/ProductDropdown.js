@@ -73,11 +73,12 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
     const handleSkip = () => {
         setIsModalVisible(false);
     };
+    const useEnglish = 'en'
 
     return (
         <View style={productDropdownContainer.container}>
             <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginTop: 15 }]}>
-                {t("ProductDropdown.selectProduct", currentLanguage)}
+                {t("ProductDropdown.selectProduct", useEnglish)}
             </Text>
             <TouchableOpacity
                 style={[
@@ -92,7 +93,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
                 disabled={!categorySelected}
             >
                 <Text style={[productDropdownContainer.dropdownText, !selectedProduct && { color: "#8EA59E" }]}>
-                    {selectedProduct ? selectedProduct.productName : t("ProductDropdown.placeholder", currentLanguage)}
+                    {selectedProduct ? selectedProduct.productName : t("ProductDropdown.placeholder", useEnglish)}
                 </Text>
                 <AntDesign name={isOpen ? "up" : "down"} size={20} style={styles.menuItem_arrow} />
             </TouchableOpacity>
@@ -111,7 +112,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
                                 style={[productDropdownContainer.input,{marginLeft:5}]}
                                 placeholderTextColor={Primarycolor4}
                                 onChangeText={handleSearch}
-                                placeholder={t('DropdownScreen.Product',currentLanguage)}
+                                placeholder={t('DropdownScreen.Product',useEnglish)}
                             />
                         </View>
                         <TouchableOpacity onPress={handleSkip} style={styles.badgeText}>

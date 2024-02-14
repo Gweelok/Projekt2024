@@ -74,14 +74,15 @@ const ImageUpload = ({ onImageSelect,data}) => {
       }
     }
   };
+  const useEnglish = 'en'
   return (
     <CustomInput optionalMarginBottom>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
       <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
-      {t("ImageUpload.chooseImage", currentLanguage)}
+      {t("ImageUpload.chooseImage", useEnglish)}
     </Text>
     <Text style={[stylesGlobal.optionalText,{marginLeft: 5, marginBottom: 5 }]}>
-    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+    ({t("AccountSettingsScreen.Optional", useEnglish)})
     </Text>
     </View>
       <View>
@@ -96,7 +97,7 @@ const ImageUpload = ({ onImageSelect,data}) => {
               <Ionicons name="images-outline" size={30} color="#8EA59E"/>
 
               <Text style={[UploadImageStyle.uploadText, {color: "#8EA59E"}]}>
-                {t("UpdroppForm.uploadText", currentLanguage)}
+                {t("UpdroppForm.uploadText", useEnglish)}
               </Text>
             </View>
           </TouchableOpacity>
@@ -146,7 +147,7 @@ const ImageUpload = ({ onImageSelect,data}) => {
           }}
         >
           <Text style={UploadImageStyle.galleryBottomText}>
-            {t("UpdroppForm.chooseAction", currentLanguage)}
+            {t("UpdroppForm.chooseAction", useEnglish)}
           </Text>
         </View>
 
@@ -171,7 +172,7 @@ const ImageUpload = ({ onImageSelect,data}) => {
               size={40}
             />
             <Text style={UploadImageStyle.actionText}>
-              {t("UpdroppForm.camera", currentLanguage)}
+              {t("UpdroppForm.camera", useEnglish)}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -185,7 +186,7 @@ const ImageUpload = ({ onImageSelect,data}) => {
               size={40}
             />
             <Text style={UploadImageStyle.actionText}>
-              {t("UpdroppForm.gallery", currentLanguage)}
+              {t("UpdroppForm.gallery", useEnglish)}
             </Text>
           </TouchableOpacity>
         </View>
