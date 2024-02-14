@@ -9,11 +9,11 @@ import { LanguageProvider } from './src/Languages/LanguageHandler';
 import { LoaderProvider } from "./src/components/molecules/LoaderContext";
 
 //importing pages for navigation
-import Home from './src/screens/Home';
+import Home from './src/screens/Home/Home';
 import Login from './src/screens/Login';
-import Uptainer from './src/screens/Uptainer';
-import OverView from './src/screens/OverView'
-import ServiceAdminMain from './src/screens/ServiceAdminMain';
+import Uptainer from './src/screens/Home/Uptainer';
+import OverView from './src/screens/ServiceAdmin/OverView'
+import ServiceAdminMain from './src/screens/ServiceAdmin/ServiceAdminMain';
 
 
 export default function App() {

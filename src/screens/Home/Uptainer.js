@@ -1,7 +1,7 @@
 import { Button, TouchableOpacity, TouchableHighlight, Pressable, View, StyleSheet, ScrollView, Text, RefreshControl } from "react-native"
-import { windowHeight, windowWidth } from "../utils/Dimensions"
-import UptainerContent from "../components/Uptainer/UptainerContent"
-import { Primarycolor1, Primarycolor2, styles, Buttons } from "../styles/styleSheet"
+import { windowHeight, windowWidth } from "../../utils/Dimensions"
+import UptainerContent from "../../components/Uptainer/UptainerContent"
+import { Primarycolor1, Primarycolor2, styles, Buttons } from "../../styles/styleSheet"
 import { useState } from "react"
 
 const Uptainer = ({route}) => {
@@ -12,6 +12,7 @@ const Uptainer = ({route}) => {
         style={styleLocal.container}
         >   
             <UptainerContent location={location}></UptainerContent>
+            
         </View>
     )
 }
