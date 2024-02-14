@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import QRScannerOrganism from "../components/QRScanner/OrganismsQR/QRScannerOrganism";
+import QRScannerOrganism from "../components/QRScanner/QRScannerOrganism";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { LoaderContext } from "../components/molecules/LoaderContext";
 import { generateQRCode } from "../utils/QRCodeGenerator";
@@ -184,7 +184,7 @@ const QRScanner = ({ route, navigation }) => {
 
   // Suggestion for refactoring the handleSaveCode function
   // Function to save QR code data to AsyncStorage
-/*   const saveQRCodeData = async (scannedQRCode) => {
+  /*   const saveQRCodeData = async (scannedQRCode) => {
     const qrCodeString = JSON.stringify(scannedQRCode);
     await AsyncStorage.setItem("scannedQRCode", qrCodeString);
     return JSON.parse(qrCodeString);
@@ -267,7 +267,6 @@ const QRScanner = ({ route, navigation }) => {
   }; */
 
   return (
-
     <QRScannerOrganism
       hasPermission={hasPermission}
       scanned={scanned}
@@ -278,7 +277,7 @@ const QRScanner = ({ route, navigation }) => {
       currentLanguage={currentLanguage}
       t={t}
       isLoading={isLoading}
-      handlePress={handlePress}
+      handleIconPress={handlePress}
     />
   );
 };

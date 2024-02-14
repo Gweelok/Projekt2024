@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View, SafeAreaView } from "react-native";
-import { Buttons, styles, QRScannerStyles } from "../../../styles/styleSheet";
-import ScrollViewComponent from "../../atoms/ScrollViewComponent";
-import LoadingScreen from "../../../screens/LoadingScreen";
-import BarCodeScannerMoleculeQR from "../MoleculesQR/BarCodeScannerMoleculeQR";
-import HeaderMoleculeQR from "../MoleculesQR/HeaderMoleculeQR";
+import { Text, View, SafeAreaView, Pressable } from "react-native";
+import { Buttons, styles, QRScannerStyles } from "../../styles/styleSheet";
+import ScrollViewComponent from "../atoms/ScrollViewComponent";
+import LoadingScreen from "../../screens/LoadingScreen";
+import BarCodeScanner from "./BarCodeScanner";
+import HeaderQR from "./HeaderQR";
 
 const QRScannerOrganism = ({
   t,
@@ -26,7 +26,7 @@ const QRScannerOrganism = ({
         {/*   Right now, the QR scanner is set up only for Adding.
       If Taking will be implemented later, than the title here can be exported as a prop,
       and in the screen level, it can be changed accordingly. */}
-        <HeaderMoleculeQR
+        <HeaderQR
           title={t("QrScannerScreen.Scan", currentLanguage)}
           iconName="close"
           onIconPress={handleIconPress}
@@ -38,7 +38,7 @@ const QRScannerOrganism = ({
           {t("QrScannerScreen.Header", currentLanguage)}
         </Text>
 
-        <BarCodeScannerMoleculeQR
+        <BarCodeScanner
           hasPermission={hasPermission}
           handleBarCodeScanned={handleBarCodeScanned}
           currentLanguage={currentLanguage}
@@ -72,7 +72,6 @@ const QRScannerOrganism = ({
                     {t("QrScannerScreen.ScanAgain", currentLanguage)}
                   </Text>
                 </Pressable>
-
               </View>
             </View>
           )}
