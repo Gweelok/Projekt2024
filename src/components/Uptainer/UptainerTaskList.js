@@ -1,52 +1,24 @@
-import { TouchableOpacity, View, StyleSheet, ScrollView, Text, RefreshControl } from "react-native"
-
-import NavigationButton from "../atoms/NavigationButton"
+import { TouchableOpacity, View, StyleSheet, ScrollView, Text } from "react-native"
 
 import { windowHeight } from "../../utils/Dimensions"
-import { Primarycolor1, styles, Buttons } from "../../styles/styleSheet"
-import { useNavigation } from '@react-navigation/native';
-import { useState } from "react"
-import { createUptainerTaskAnswers } from "../../utils/Repo"
+import { Primarycolor1, styles } from "../../styles/styleSheet"
 
-const UptainerTaskList = ({ location }) => {
-
-    const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?',];
-    const [formvalid, setForm] = useState(true)
-    const [newData, setData] = useState(dataTest.map((task) => newTask = {
-        name: task,
-        pressedYes: false,
-        pressedNo: false,
-    }))
-
-    const navigation = useNavigation();
+const UptainerTaskList = ({ newData, setData }) => {
 
     handlePressYes = (cur) => {
         cur.pressedYes = true
         cur.pressedNo = false
         const result = [...newData]
         setData(result)
-        setForm(checkNumberAnswers(result))
     };
+
     handlePressNo = (cur) => {
         cur.pressedYes = false
         cur.pressedNo = true
         const result = [...newData]
         setData(result)
-        setForm(checkNumberAnswers(result))
     };
-    handlePressConfirm = () => {
-        const answersToDatabase = createTaskAnswersData(newData, location.uptainerId)
-        console.log(answersToDatabase)
-        createUptainerTaskAnswers(answersToDatabase)
-        const result = newData.map((task) => newTask = {
-            name: task.name,
-            pressedYes: false,
-            pressedNo: false,
 
-        })
-        setData(result)
-        navigation.navigate("ServiceAdminMain", { location: location });
-    };
     return (
         <View>
             <ScrollView
@@ -74,6 +46,7 @@ const UptainerTaskList = ({ location }) => {
                                     ? styleLocal.textPressed
                                     : '']}>Y</Text>
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 onPress={() => handlePressNo(cur)}
                                 style={[styleLocal.buttons,
@@ -90,11 +63,6 @@ const UptainerTaskList = ({ location }) => {
                     </View>))}
 
             </ScrollView>
-
-            <NavigationButton
-                disabled={formvalid}
-                onPress={() => handlePressConfirm()}
-            ></NavigationButton>
 
         </View>
     )
@@ -135,44 +103,3 @@ const styleLocal = StyleSheet.create({
 })
 
 export default UptainerTaskList
-
-//function for checking number of answers
-function checkNumberAnswers(tasks) {
-    let numberAnswers = 0
-    for (let index in tasks) {
-        if ((tasks[index].pressedYes) || (tasks[index].pressedNo)) {
-            numberAnswers += 1
-        }
-    }
-    if (numberAnswers == tasks.length) {
-        return false
-    }
-    else {
-        return true
-    }
-}
-
-//function for creating data about answers for database
-function createTaskAnswersData(data, uptainerId) {
-    const now = new Date();
-    const answers = data.map((task) => answer = {
-        task: task.name,
-        answer: checkAnswer(task)
-    })
-    const result = {
-        uptainerId: uptainerId,
-        date: now.toLocaleString(),
-        taskAnswers: answers,
-    };
-    return result
-}
-
-//function for returm YES/NO
-function checkAnswer(task) {
-    if (task.pressedYes) {
-        return "YES"
-    }
-    if (task.pressedNo) {
-        return "NO"
-    }
-}
