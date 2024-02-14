@@ -7,13 +7,12 @@ import LoadingScreen from '../../screens/Loading/LoadingScreen';
 
 import { LoaderContext } from '../molecules/LoaderContext';
 import { Buttons, styles } from '../../styles/styleSheet';
-import { windowHeight, windowWidth } from '../../utils/Dimensions';
-import { getImage, getItemByUptainerId, deleteItemById  } from '../../utils/Repo';
+import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';
 
 const OverViewContent = ({ location }) => {
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
-    const {isLoading, setIsLoading} = useContext(LoaderContext);
+    const { isLoading, setIsLoading } = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
 
     const buttonText = 'Delete';
@@ -76,8 +75,9 @@ const OverViewContent = ({ location }) => {
     );
 
     return (
+        
 
-        <View>
+        <View style={style.container}>
 
             {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
@@ -101,18 +101,14 @@ const OverViewContent = ({ location }) => {
                 location={location}
                 buttonStyle={Buttons.main_button}
                 textStyle={Buttons.main_buttonText}
-
             />
         </View>
     );
 }
 
 const style = StyleSheet.create({
-    container: {
-        height: windowHeight,
-        width: windowWidth,
-        marginTop: 40,
-        alignItems: 'center',
+    container: { 
+        alignItems: 'center'
     },
     list: {
         height: 300
