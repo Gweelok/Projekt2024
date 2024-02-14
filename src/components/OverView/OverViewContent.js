@@ -6,6 +6,8 @@ import NavgationButton from '../atoms/NavigationButton';
 import LoadingScreen from '../../screens/Loading/LoadingScreen';
 
 import { LoaderContext } from '../molecules/LoaderContext';
+import { SharedContext } from '../SharedContext';
+
 import { Buttons, styles } from '../../styles/styleSheet';
 import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';
 
@@ -14,6 +16,7 @@ const OverViewContent = ({ location }) => {
     const [imgUrlList, setImgUrlList] = useState([]);
     const { isLoading, setIsLoading } = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
+    const { setIsSolved } = useContext(SharedContext);
 
     const buttonText = 'Delete';
     const solvedButtonText = 'Task Solved';
@@ -63,6 +66,18 @@ const OverViewContent = ({ location }) => {
         }
     }
 
+    const handleOverviewSolved = () => {
+        setIsSolved(prevState => ({
+            ...prevState,
+            overview: true
+        }));
+    };
+
+    // Call handleOverviewSolved wherever you need it
+    const onPressMarkSolved = () => {
+        handleOverviewSolved();
+    };
+
     //For rendering Image & Link
     const renderItem = ({ item }) => (
         <View>
@@ -75,7 +90,7 @@ const OverViewContent = ({ location }) => {
     );
 
     return (
-        
+
 
         <View style={style.container}>
 
@@ -101,13 +116,14 @@ const OverViewContent = ({ location }) => {
                 location={location}
                 buttonStyle={Buttons.main_button}
                 textStyle={Buttons.main_buttonText}
+                callback={onPressMarkSolved}
             />
         </View>
     );
 }
 
 const style = StyleSheet.create({
-    container: { 
+    container: {
         alignItems: 'center'
     },
     list: {

@@ -1,5 +1,7 @@
 import { View, StyleSheet } from "react-native"
-import { useState } from "react"
+import { useState, useContext } from "react"
+
+import { SharedContext } from '../../components/SharedContext';
 
 import Navigationbar from "../../components/organisms/Navigationbar"
 import UptainerInfo from "../../components/Uptainer/UptainerInfo"
@@ -10,10 +12,10 @@ import GlobalStyle from "../../styles/GlobalStyle"
 import { styles } from "../../styles/styleSheet"
 
 const ServiceAdminMain = ({ navigation, route }) => {
-    const [isSolved, setIsSolved] = useState({overview:false, reportedItems:false, uptainerCondition:false});
-
+    const { isSolved } = useContext(SharedContext);
+    const isAllSolved = Object.values(isSolved).every(flag => flag);
     const { location } = route.params;
-
+    console.log(isSolved)
     //Check if needed to be extracted later to language??
     const textValue = {
         "overview": {
