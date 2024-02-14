@@ -1,20 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, FlatList, Image, Text } from 'react-native';
+
 import UptainerInfo from '../Uptainer/UptainerInfo';
 import NavgationButton from '../atoms/NavigationButton';
-import LoadingScreen from '../../screens/LoadingScreen';
+import LoadingScreen from '../../screens/Loading/LoadingScreen';
+
 import { LoaderContext } from '../molecules/LoaderContext';
-import GlobalStyle from '../../styles/GlobalStyle';
-import { Buttons } from '../../styles/styleSheet';
-import { getItemByUptainerId } from '../../utils/Repo';
+import { Buttons, styles } from '../../styles/styleSheet';
+import { windowHeight, windowWidth } from '../../utils/Dimensions';
+import { getImage, getItemByUptainerId, deleteItemById  } from '../../utils/Repo';
 
 const OverViewContent = ({ location }) => {
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
-    const { isLoading, setIsLoading } = useContext(LoaderContext);
+    const {isLoading, setIsLoading} = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
 
-    const deleteButtonText = 'Delete';
+    const buttonText = 'Delete';
     const solvedButtonText = 'Task Solved';
     const navigationPath = 'ServiceAdminMain';
 
@@ -36,7 +38,7 @@ const OverViewContent = ({ location }) => {
         setIsLoading(true);
         fetchItems()
             .catch(error => {
-                console.error('Error fetching data:', error);
+                console.error("Error fetching data:", error);
                 Alert.alert('Error', 'An error occurred while fetching data.');
             })
             .finally(() => setIsLoading(false));
@@ -45,44 +47,79 @@ const OverViewContent = ({ location }) => {
     async function handleLinkPress(itemId) {
         try {
             setIsLoading(true);
-            if (!(await deleteItemById(itemId))) {
-                throw new Error('An error occurred while trying to remove item');
+            if (!await deleteItemById(itemId)) {
+                throw new Error("An error occured while trying to remove item");
             } else {
                 await fetchItems();
                 setDeleteTrigger(prev => !prev);
             }
         } catch (error) {
-            console.log(error);
-            Alert.alert('Error', error.toString(), [{ text: 'OK' }]);
+            console.log(error)
+            Alert.alert(
+                'Error', error.toString(),
+                [{ text: 'OK', }],
+            );
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
     }
 
+    //For rendering Image & Link
+    const renderItem = ({ item }) => (
+        <View>
+            <Image source={{ uri: item.url }} style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }} />
+
+            <TouchableOpacity disabled={isLoading} onPress={() => handleLinkPress(item.id)}>
+                <Text style={[styles.link, style.linkText]}>{buttonText}</Text>
+            </TouchableOpacity >
+        </View >
+    );
+
     return (
-        <View style={[style.container, GlobalStyle.BodyWrapper]}>
+
+        <View>
 
             {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
             <UptainerInfo location={location} />
+
             {!isLoading && (
-                <OverViewContent
-                    itemList={itemList}
-                    imgUrlList={imgUrlList}
-                    isLoading={isLoading}
-                    handleLinkPress={handleLinkPress}
-                />
+                <View style={style.list}>
+                    <FlatList
+                        data={imgUrlList}
+                        extraData={itemList}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                        numColumns={2}
+                    />
+                </View>
             )}
-            
+
             <NavgationButton
                 path={navigationPath}
                 text={solvedButtonText}
                 location={location}
                 buttonStyle={Buttons.main_button}
                 textStyle={Buttons.main_buttonText}
+
             />
         </View>
     );
-};
+}
+
+const style = StyleSheet.create({
+    container: {
+        height: windowHeight,
+        width: windowWidth,
+        marginTop: 40,
+        alignItems: 'center',
+    },
+    list: {
+        height: 300
+    },
+    linkText: {
+        textAlign: 'center'
+    }
+});
 
 export default OverViewContent;

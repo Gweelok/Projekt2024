@@ -36,9 +36,11 @@ const ServiceAdminMain = ({ navigation, route }) => {
 
             <TextLinkList navigation={navigation} location={location} textValue={textValue}
             linkStatus={isSolved}></TextLinkList >
+            
             {isSolved.overview && isSolved.reportedItems && isSolved.uptainerCondition &&
             <Text style={styles.paragraph_text}>Tasks list completed</Text>
             }
+
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
     )
