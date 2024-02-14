@@ -28,6 +28,7 @@ import {
   convertKgToTons,
   getUserStats,
 } from "../utils/uptainersUtils";
+import VisitedUptainerStat from "../componets/atoms/Stats/VisitedUptainerStat";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
@@ -46,9 +47,8 @@ const YourStats = (props) => {
     totalEquivalent: 0
   })
 
-  const uptainers = props.uptainers
 
-
+  const myMostVisitedUptainer = props.myMostVisitedUptainer
 
   useEffect(() => {
     getUserStats().then((userStats) => {
@@ -73,33 +73,26 @@ const YourStats = (props) => {
             {t("StatsPage.AmountReduced", currentLanguage)}
           </Text>
         </View>
-        <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-          <View
-            style={[
-              Backgroundstyle.informationScreens,
-              { paddingTop: 5, marginRight: 15 },
-            ]}
-          >
-            <Text
-              style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}
-            >
-              {t("StatsPage.ItemsDonated", currentLanguage)}
-            </Text>
-            <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
-              {co2Data.itemsDonated}
-            </Text>
-          </View>
-          <View style={[Backgroundstyle.informationScreens, { paddingTop: 5 }]}>
-            <Text
-              style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}
-            >
-              {t("StatsPage.ItemsCollected", currentLanguage)}
-            </Text>
-            <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
-              {co2Data.itemsTaken}
-            </Text>
+
+
+
+
+        <View>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+            <GreenBox
+              msg={t("StatsPage.ItemsDonated", currentLanguage)}
+              data={co2Data.itemsDonated}
+            />
+            <GreenBox
+              msg={t("StatsPage.ItemsCollected", currentLanguage)}
+              data={co2Data.itemsTaken}
+            />
           </View>
         </View>
+
+
+
+
         <View style={{ marginTop: 10 }}>
           <TouchableOpacity onPress={() => navigation.navigate("MyDrafts")}>
             <Text style={styles.link}>
@@ -118,13 +111,20 @@ const YourStats = (props) => {
           </Text>
         </View>
 
-        <View style={{}}>
-          <GreenBox
-            data={convertKgToTons(co2Data.TotalCo2Footprint)}
-            textStyle={{ height: 50 }}
-            headerStyle={{ marginBottom: 30, marginTop: -30 }}
-          />
+
+        <View>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+            <GreenBox
+              msg={t("StatsPage.InTotal", currentLanguage)}
+              data={convertKgToTons(co2Data.TotalCo2Footprint)}
+            />
+          </View>
         </View>
+
+
+
+
+
         <View>
           <View
             style={[
@@ -139,7 +139,7 @@ const YourStats = (props) => {
           >
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-              {co2Equivalent.co2_pers + " " + t("StatsPage.kgCO2", currentLanguage) + ": " + co2Equivalent.personalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
+              {convertKgToTons(co2Equivalent.co2_pers) + " " + t("StatsPage.CO2Equivalent", currentLanguage) + ": " + co2Equivalent.personalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
           <View
@@ -155,7 +155,7 @@ const YourStats = (props) => {
           >
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-              {convertKgToTons(co2Data.TotalCo2Footprint) + " " + t("StatsPage.kgCO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
+              {t("StatsPage.CO2AmountBefore", currentLanguage)+" "+convertKgToTons(co2Data.TotalCo2Footprint) + " " + t("StatsPage.CO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
         </View>
@@ -236,14 +236,20 @@ const YourStats = (props) => {
             }}
           />
         </View>
-        <View style={[{ alignContent: "center" }]}>
-          <Text style={[styles.menuItem_text, { marginBottom: 20 }]}>
-            {t("StatsPage.MostVisitedUptainer", currentLanguage)}
-          </Text>
-        </View>
-        {uptainers.map((uptainer, index) => (
-          <YourVisitedUptainer key={index} value={uptainer} />
-        ))}
+
+
+        {myMostVisitedUptainer &&
+          <View>
+            <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
+              {t("StatsPage.MyMostVisitedUptainer", currentLanguage)}
+            </Text>
+            <VisitedUptainerStat
+              navigation={navigation}
+              uptainer={myMostVisitedUptainer}
+            />
+          </View>
+        }
+
         <View style={{ marginTop: 25, marginBottom: 10 }}>
           <Text
             style={[styles.article_text, { fontWeight: "bold", fontSize: 18 }]}

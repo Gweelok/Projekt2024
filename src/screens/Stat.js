@@ -44,18 +44,13 @@ import { Divider } from "react-native-elements";
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [userCurrent, setUserCurrent] = useState({});
-  const [refreshing, setRefresh] = useState(false);
-  const onRefresh = () => {
-    setRefresh(true);
-    setTimeout(() => {
-      setRefresh(false);
-    }, 1000);
-  };
+
 
   const { currentLanguage } = useLanguage();
 
   const [data, setData] = useState({
-    bestUptainer: {},
+    myMostVisitedUptainer: null,
+    mostVisitedUptainer: null,
     allTakenItems: 0,
     todayTakenItems: 0,
     yesterdayTakenItems: 0,
@@ -101,6 +96,7 @@ const Stat = ({ navigation }) => {
     });
 
     setco2Equivalent(Calculate_co2_Equivalent(totalCO2Savings.totalCO2Saved))
+
   }
 
 
@@ -130,7 +126,7 @@ const Stat = ({ navigation }) => {
       ]}
     >
       <SafeAreaView>
-        <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
+        <ScrollViewComponent>
           <View
             style={{
               flexDirection: "row",
@@ -211,29 +207,21 @@ const Stat = ({ navigation }) => {
               </View>
 
 
-              <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-                <View
-                  style={[
-                    Backgroundstyle.informationScreens,
-                    { paddingTop: 5, marginRight: 15 },
-                  ]}
-                >
-                  <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
-                    {t("StatsPage.SoFar", currentLanguage)}
-                  </Text>
-                  <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
-                    {data.todayTakenItems}
-                  </Text>
+
+              <View>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+                  <GreenBox
+                    msg={t("StatsPage.SoFar", currentLanguage)}
+                    data={data.todayTakenItems}
+                  />
+                  <GreenBox
+                    msg={t("StatsPage.Yesterday", currentLanguage)}
+                    data={data.yesterdayTakenItems}
+                  />
                 </View>
-                <View style={[Backgroundstyle.informationScreens, { paddingTop: 5 }]}>
-                  <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
-                    {t("StatsPage.Yesterday", currentLanguage)}
-                  </Text>
-                  <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
-                    {data.yesterdayTakenItems}
-                  </Text>
-                </View>
-                <View>
+
+
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
                   <GreenBox
                     msg={t("StatsPage.InTotal", currentLanguage)}
                     data={data.allTakenItems}
@@ -241,15 +229,21 @@ const Stat = ({ navigation }) => {
                 </View>
               </View>
 
+              <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
 
 
 
               <View style={[{ height: 285 }]}>
                 <ChartForStats
-                  value={data["allTakenItemsMonth"]}
-                  refreshing={refreshing}
+                  value={data.allTakenItemsMonth}
                 />
               </View>
+
+
+              <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
+
+
+
               <View style={{ marginTop: 2, marginBottom: 20 }}>
                 <Text
                   style={[
@@ -260,22 +254,30 @@ const Stat = ({ navigation }) => {
                   {t("StatsPage.AmountCO2", currentLanguage)}
                 </Text>
               </View>
+
               <View>
-                <View>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
                   <GreenBox
                     msg={t("StatsPage.SoFar", currentLanguage)}
                     data={co2Data.todayCO2Saved}
-                    secondMsg={t("StatsPage.Yesterday", currentLanguage)}
-                    secondData={co2Data.yesterdayCO2Saved}
+                  />
+                  <GreenBox
+                    msg={t("StatsPage.Yesterday", currentLanguage)}
+                    data={co2Data.yesterdayCO2Saved}
                   />
                 </View>
-                <View>
+
+
+                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
                   <GreenBox
                     msg={t("StatsPage.InTotal", currentLanguage)}
                     data={convertKgToTons(co2Data.totalCO2Saved)}
                   />
                 </View>
               </View>
+
+
+
               <View>
                 <View
                   style={[
@@ -290,7 +292,7 @@ const Stat = ({ navigation }) => {
                 >
                   <LightbulbIcon />
                   <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-                    {co2Equivalent.co2_pers + " " + t("StatsPage.kgCO2", currentLanguage) + ": " + co2Equivalent.personalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
+                    {convertKgToTons(co2Equivalent.co2_pers) + " " + t("StatsPage.CO2Equivalent", currentLanguage) + ": " + co2Equivalent.personalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
                   </Text>
                 </View>
                 <View
@@ -305,7 +307,7 @@ const Stat = ({ navigation }) => {
                 >
                   <LightbulbIcon />
                   <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-                    {convertKgToTons(co2Data.totalCO2Saved) + " " + t("StatsPage.kgCO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
+                    {t("StatsPage.CO2AmountBefore", currentLanguage)+" "+convertKgToTons(co2Data.totalCO2Saved) + " " + t("StatsPage.CO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
                   </Text>
                 </View>
               </View>
@@ -322,15 +324,8 @@ const Stat = ({ navigation }) => {
 
                   {data.top3Uptainers.map((uptainer, index) => {
                     return (
-                      <View>
-                        <VisitedUptainerStat
-                          navigation={navigation}
-                          value={uptainer}
-                          key={index}
-                        />
-                        {index < data.top3Uptainers.length-1 &&
-                          <Divider color={Primarycolor1} width={1} style={{ marginVertical: 10 }}></Divider>
-                        }
+                      <View key={index}>
+                        <StreetStat uptainer={uptainer} />
                       </View>
                     )
                   })}
@@ -340,9 +335,7 @@ const Stat = ({ navigation }) => {
 
 
 
-
-
-              {data.bestUptainer &&
+              {data.mostVisitedUptainer &&
                 <View>
                   <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
                   <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
@@ -350,10 +343,12 @@ const Stat = ({ navigation }) => {
                   </Text>
                   <VisitedUptainerStat
                     navigation={navigation}
-                    value={data.bestUptainer}
+                    uptainer={data.mostVisitedUptainer}
                   />
                 </View>
               }
+
+
 
 
               <View>
@@ -364,9 +359,13 @@ const Stat = ({ navigation }) => {
             <YourStats
               user={userCurrent}
               products={products}
-              uptainers={[data["bestUptainer"]]}
+              myMostVisitedUptainer={data.myMostVisitedUptainer}
             />
           )}
+
+
+
+
         </ScrollViewComponent>
       </SafeAreaView>
       <Navigationbar navigation={navigation} />

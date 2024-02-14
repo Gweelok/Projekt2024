@@ -90,30 +90,30 @@ export function Calculate_co2_Equivalent(co2_total) {
 async function fetchAllTakenItems() {
   const allItems = await getAllItems();
   if (!allItems) return [];
-  const allTakenItems = allItems.filter((item) => item.itemTaken !== false);
+  const allTakenItems = allItems.filter((item) => item.itemTaken != false);
   return allTakenItems;
 }
 
 // Fetches all items taken by a user from the database.
 async function fetchAllItemsTakenByUser() {
   let userId = firebaseAurth.currentUser.uid
-  userId = "lywlgHhkOcXEa53j9jPADYoWmr22"
-  //const allItems = await getAllItems();
-  const allItems = TestItems
+  //userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const allItems = await getAllItems();
+  //const allItems = TestItems
   const allItemsTakenByUser =
     allItems.filter(
-      (item) => item.itemTakenUser === userId && item.itemTaken !== false
+      (item) => item.itemTaken != false && item.itemTaken == userId
     ) || [];
   return allItemsTakenByUser;
 }
 
 async function fetchAllItemsTakenFromUser() {
   let userId = firebaseAurth.currentUser.uid
-  userId = "lywlgHhkOcXEa53j9jPADYoWmr22"
-  //const allUserItems = await getItemsFromUser(userId);
-  const allUserItems = TestItems.filter((item) => item.itemUser === userId)
+  //userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const allUserItems = await getItemsFromUser(userId);
+  //const allUserItems = TestItems.filter((item) => item.itemUser === userId)
   const allItemsTakenFromUser = allUserItems.filter(
-    (item) => item.itemTaken !== false
+    (item) => item.itemTaken != false
   );
   return allItemsTakenFromUser;
 }
@@ -168,16 +168,7 @@ function updateGeneralStats(generalStats, totalco2Footprint, items) {
 }
 
 
-// Updates uptainer statistics
-function updateUptainerStats(allUptainersStats, items) {
-  items.map((item) => {
-    const uptainer = allUptainersStats[item.itemUptainer];
-    if (uptainer) {
-      uptainer.itemsReused += 1;
-      uptainer.savedCO2 += item.co2Footprint;
-    }
-  })
-}
+
 
 //----------------------PROCESS STATS-----------------------//
 // Process functions sets up the initial stats,
@@ -224,36 +215,6 @@ async function processUserStats(allTakenItemsByUser, allTakenItemsFromUser) {
   return userStats;
 }
 
-async function processUptainerStats(allItems, allUptainers) {
-  let allUptainersStats = allUptainers.reduce((acc, uptainer) => {
-    acc[uptainer.uptainerId] = {
-      uptainerCity: uptainer.uptainerCity,
-      uptainerName: uptainer.uptainerName,
-      uptainerStreet: uptainer.uptainerStreet,
-      uptainerId: uptainer.uptainerId,
-      itemsReused: 0,
-      savedCO2: 0,
-      numberUsers: 0,
-      uptainerDescription: uptainer.uptainerDescription,
-      uptainerImage: uptainer.uptainerImage,
-      uptainerLatitude: uptainer.uptainerLatitude,
-      uptainerLongitude: uptainer.uptainerLongitude,
-      uptainerQR: uptainer.uptainerQR,
-      uptainerZip: uptainer.uptainerZip,
-    };
-    return acc;
-  }, {});
-
-  try {
-    takenItems = allItems.filter((item) => item.itemTaken === true)
-    await fetchProductCO2(takenItems);
-    updateUptainerStats(allUptainersStats, takenItems);
-  } catch (error) {
-    console.error(`Errors occured during processing uptainer stats:`, error);
-  }
-
-  return allUptainersStats;
-}
 
 //----------------------CALCULATE STATS-----------------------//
 // Calculate functions call the process functions,
@@ -261,8 +222,8 @@ async function processUptainerStats(allItems, allUptainers) {
 
 export async function calculateGeneralStats() {
   const allTakenItems = await fetchAllTakenItems();
-  //const generalStats = await processGeneralStats(allTakenItems);
-  const generalStats = await processGeneralStats(TestItems.filter((item) => item.itemTaken === true));
+  //const generalStats = await processGeneralStats(TestItems.filter((item) => item.itemTaken != false));
+  const generalStats = await processGeneralStats(allTakenItems);
   return generalStats;
 }
 
@@ -278,17 +239,58 @@ async function calculateUserStats() {
 
 async function calculateUptainerStats() {
   const allUptainers = await getAllUptainers();
-  //const allItems = await fetchAllTakenItems();
-  const allItems = TestItems.filter((item) => item.itemTaken == true)
-  const allUptainersStats = await processUptainerStats(allItems, allUptainers);
-  
+  const allItems = await getAllItems()
+  //const allItems = TestItems
+  let userId = firebaseAurth.currentUser.uid
+  //userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+
+  const allUptainersStats = allUptainers.reduce((acc, uptainer) => {
+    acc[uptainer.uptainerId] = {
+      ...uptainer,
+      itemsReused: 0,
+      savedCO2: 0,
+      droppedItems: 0,
+      myDroppedItems: 0
+    };
+    return acc;
+  }, {});
+
+  await fetchProductCO2(allItems);
+
+  allItems.map((item) => {
+    const uptainer = allUptainersStats[item.itemUptainer];
+    if (uptainer) {
+      if (item.itemTaken) {
+        uptainer.itemsReused += 1
+        uptainer.savedCO2 += item.co2Footprint
+      }
+
+
+      if (item.itemUser == userId) {
+        uptainer.myDroppedItems += 1
+      }
+      uptainer.droppedItems += 1
+
+    }
+  })
+
+
   const sortedUptainers = (Object.values(allUptainersStats).sort(
     (a, b) => b.itemsReused - a.itemsReused
-  )).slice(0,3).filter((uptainer)=>uptainer.itemsReused>0)
+  )).slice(0, 3).filter((uptainer) => uptainer.itemsReused > 0)
 
-  const mostAchievingUptainers = sortedUptainers[0]
+  const mostVisitedUptainer = (Object.values(allUptainersStats).sort(
+    (a, b) => b.droppedItems - a.droppedItems
+  )).filter((uptainer) => uptainer.droppedItems > 0)[0]
 
-  return { sortedUptainers, mostAchievingUptainers };
+  const myMostVisitedUptainer = (Object.values(allUptainersStats).sort(
+    (a, b) => b.myDroppedItems - a.myDroppedItems
+  )).filter((uptainer) => uptainer.myDroppedItems > 0)[0]
+
+
+
+
+  return { sortedUptainers, mostVisitedUptainer, myMostVisitedUptainer }
 }
 
 async function calculateTotalCO2Savings(generalStats) {
@@ -308,26 +310,20 @@ async function calculateTotalCO2Savings(generalStats) {
 // Export functions return relevant stats that will be used in the components.
 // For Stat.js component
 export async function getAllItemAndUptainerStats(generalStats) {
-  try {
-    let stats;
-
-    const uptainerStats = await calculateUptainerStats();
+  const { sortedUptainers, mostVisitedUptainer, myMostVisitedUptainer } = await calculateUptainerStats();
 
 
-    stats = {
-      allTakenItems: generalStats.allNumberTakenItems,
-      todayTakenItems: generalStats.todayNumberTakenItems,
-      yesterdayTakenItems: generalStats.yesterdayNumberTakenItems,
-      allTakenItemsMonth: generalStats.allTakenItemsMonth,
-      bestUptainer: uptainerStats.mostAchievingUptainers,
-      top3Uptainers: uptainerStats.sortedUptainers,
-    };
+  const stats = {
+    allTakenItems: generalStats.allNumberTakenItems,
+    todayTakenItems: generalStats.todayNumberTakenItems,
+    yesterdayTakenItems: generalStats.yesterdayNumberTakenItems,
+    allTakenItemsMonth: generalStats.allTakenItemsMonth,
+    top3Uptainers: sortedUptainers,
+    mostVisitedUptainer: mostVisitedUptainer,
+    myMostVisitedUptainer: myMostVisitedUptainer
+  };
 
-    return stats;
-  } catch (error) {
-    console.error("Error calculating statistics:", error);
-    throw error;
-  }
+  return stats;
 }
 
 

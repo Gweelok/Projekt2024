@@ -773,41 +773,39 @@ export const Brands = [
    export const items = [
     {
       itemTakenDate: "2024-02-12",
-      itemTaken: true,
+      itemTaken: "lywlgHhkOcXEa53j9jPADYoWmr22",
       itemUptainer: "-NbzQlf95xoexGIlcIpX",
       itemproduct: "-NbzQlfHewkweUD_k_Ym",
       itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
-      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmr22",
     },
     {
       itemTakenDate: "2024-02-12",
-      itemTaken: true,
+      itemTaken: "lywlgHhkOcXEa53j9jPADYoWmr2s2",
       itemUptainer: "-NbzQlf95xoexGIlcIpX",
       itemproduct: "-NbzQlfCJqUDW4jtThUc",
       itemUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
-      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmr2s2",
     },
     {
       itemTakenDate: "2024-02-11",
-      itemTaken: true,
+      itemTaken: "lywlgHhkOcXEa53j9jPADYoWmrOs2",
       itemUptainer: "-NbzQlf95xoexGIlcIpX",
       itemproduct: "-NbzQlfCJqUDW4jtThUc",
       itemUser: "lywlgHhkOcXEa53j9jPADYoWmr22",
-      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrOs2",
     },
     {
       itemTakenDate: "2024-01-01",
-      itemTaken: false,
+      itemTaken: "lywlgHhkOcXEa53j9jPADYoWmrO2",
       itemUptainer: "-NbzQlf95xoexGIlcIpY",
       itemproduct: "-NbzQlfCJqUDW4jtThUc",
       itemUser: "lywlgHhkOcXEa53j9jPADYoWmr22",
-      itemTakenUser: "lywlgHhkOcXEa53j9jPADYoWmrO2",
     },
     {
       itemTakenDate: "2023-11-06",
       itemTaken: false,
-      itemUptainer: "-NbzQlf95xoexGIlcIpX",
+      itemUptainer: "-NbzQlf95xoexGIlcIpY",
       itemproduct: "-NbzQlfHewkweUD_k_Ym",
+      itemUser: "lywlgHhkOcXEa53j9jPADYoWmr22",
+
     },
     {
       itemTakenDate: "2023-09-06",
