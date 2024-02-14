@@ -180,7 +180,6 @@ const DetailView = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    width: "90%",
     marginTop: 10,
     marginBottom: 10,
   },
