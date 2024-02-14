@@ -84,12 +84,18 @@ const DetailViews = ({ navigation, route }) => {
         <BackButton onPress={navigation.goBack} style={Buttons.backButton} />
         <View style={[DetailView.container]}>
           <Image source={{ uri: imageUrl }} style={DetailView.image} />
-          <View style={DetailView.infoContainer}>
-            <View style={DetailView.leftInfo}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+            }}
+          >
+            <View style={{ width: "48%" }}>
               <Text style={DetailView.product}>{productName}</Text>
               <Text>{brandName}</Text>
             </View>
-            <View style={DetailView.rightInfo}>
+            <View style={{ width: "48%" }}>
               <TouchableOpacity
                 onPress={openAddressOnMap}
                 style={DetailView.locationContainer}
@@ -114,9 +120,7 @@ const DetailViews = ({ navigation, route }) => {
             </Text>
           </TouchableOpacity>
           <Text
-            style={
-              (styles.link, { marginTop: 10, textDecorationLine: "underline" })
-            }
+            style={[styles.link, { marginTop: 10 }]}
             onPress={() => {
               navigation.navigate("ProductIsTakenScreen", details);
             }}
@@ -133,7 +137,7 @@ const DetailViews = ({ navigation, route }) => {
 const DetailView = StyleSheet.create({
   container: {
     justifyContent: "center",
-    alignItems: "center",
+    //alignItems: "center",
   },
 
   image: {
@@ -148,10 +152,10 @@ const DetailView = StyleSheet.create({
     borderRadius: 1,
     marginTop: 0,
     marginRight: 35,
-    color: Primarycolor1  
+    color: Primarycolor1,
   },
 
-/*   TagButton: {
+  /*   TagButton: {
     backgroundColor: Primarycolor1,
     width: "100%",
     height: 50,
@@ -173,31 +177,34 @@ const DetailView = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 4,
-    color: Primarycolor1, 
+    color: Primarycolor1,
   },
 
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    //alignItems: "flex-start",
     marginTop: 10,
     marginBottom: 10,
   },
+
   leftInfo: {
     alignItems: "flex-start",
-    width: "60%",
-    
+    width: "48%",
   },
+
   rightInfo: {
-    width: "40%",
+    width: "48%",
   },
+
   location: {
     color: Primarycolor1,
-    textAlign: "right",
+    //textAlign: "right",
     textDecorationLine: "underline",
     marginTop: 5,
     fontSize: 12,
   },
+  
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
