@@ -14,6 +14,7 @@ import Login from './src/screens/Login';
 import Uptainer from './src/screens/Uptainer';
 import OverView from './src/screens/OverView'
 import ServiceAdminMain from './src/screens/ServiceAdminMain';
+import ReportedItems from './src/screens/ReportedItems';
 
 
 export default function App() {
@@ -35,12 +36,13 @@ export default function App() {
     <LoaderProvider>
       <LanguageProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login'>
+          <Stack.Navigator initialRouteName='ReportedItems'>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
             <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
             <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
             <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
+            <Stack.Screen options={{ headerShown: false }} name="ReportedItems" component={ReportedItems} />
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>
