@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
 import {
@@ -11,32 +10,21 @@ import {
   Backgroundstyle,
   HeaderText,
   Buttons,
-  Primarycolor1,
 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import BackButton from "../componets/BackButton";
 import GlobalStyle from "../styles/GlobalStyle";
-import Icon from "react-native-vector-icons/FontAwesome"; // Import the appropriate icon library
 import StreetStat from "../componets/atoms/Stats/StreetStat";
 import VisitedUptainerStat from "../componets/atoms/Stats/VisitedUptainerStat";
-import Svg, { Path } from "react-native-svg";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
 import YourStats from "./YourStats";
 import GreenBox from "../styles/GreenBox";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import ChartForStats from "../componets/atoms/Stats/ChartForStats";
 import {
-  getAllItems,
-  getAllUptainers,
-  getProductById,
   getCurrentUser,
-  getDraftFromUser,
   getAllProducts,
 } from "../utils/Repo";
-import { items } from "../utils/Testdata";
-import { set } from "firebase/database";
 import { getAllItemAndUptainerStats, getAllCO2Stats, calculateGeneralStats, Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
 import { BoxLink } from "../styles/BoxLink";
 

@@ -1,15 +1,9 @@
-import { items as TestItems } from "../utils/Testdata.js";
 import {
   getAllItems,
   getAllUptainers,
-  getProductById,
-  getCurrentUser,
   getItemsFromUser,
-  getDraftFromUser,
   getAllProducts,
 } from "../utils/Repo";
-import { t } from "../Languages/LanguageHandler.js";
-import { FA5Style } from "@expo/vector-icons/build/FontAwesome5.js";
 import { firebaseAurth } from "./Firebase.js";
 
 export const calculateDistance = (

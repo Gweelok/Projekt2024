@@ -1,11 +1,9 @@
 
-import { Pressable, Text, TouchableOpacity, View, } from "react-native";
+import { Text, TouchableOpacity, View, } from "react-native";
 import GlobalStyle from "../../../styles/GlobalStyle";
-import { Backgroundstyle, Buttons, Primarycolor1, Primarycolor2, Primarycolor3, Primarycolor4, styles } from "../../../styles/Stylesheet";
-import { React, useContext, useEffect } from "react";
-import { BoxLink } from "../../../styles/BoxLink";
+import { Backgroundstyle, Buttons, Primarycolor1, styles } from "../../../styles/Stylesheet";
+import { React, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { msg } from "@babel/core/lib/config/validation/option-assertions";
 import { t, useLanguage } from "../../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import { LoaderContext } from "../../LoaderContext";

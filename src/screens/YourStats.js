@@ -8,21 +8,12 @@ import {
   styles,
 } from "../styles/Stylesheet";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import GlobalStyle from "../styles/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
 import LightbulbIcon from "../componets/svg-components/LightbulbIcon";
 import Icon from "react-native-vector-icons/FontAwesome"; // for Facebook
 import Icon2 from "react-native-vector-icons/FontAwesome";
-import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
-import {
-  getAllItems,
-  getItemsFromUser,
-  getCurrentUser,
-  getAllProducts,
-} from "../utils/Repo";
-import { items } from "../utils/Testdata";
 import {
   Calculate_co2_Equivalent,
   convertKgToTons,
