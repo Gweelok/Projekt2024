@@ -39,7 +39,6 @@ import { items } from "../utils/Testdata";
 import { set } from "firebase/database";
 import { getAllItemAndUptainerStats, getAllCO2Stats, calculateGeneralStats, Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
 import { BoxLink } from "../styles/BoxLink";
-import { Divider } from "react-native-elements";
 
 const Stat = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -208,20 +207,19 @@ const Stat = ({ navigation }) => {
 
 
 
+
               <View>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+                <View>
                   <GreenBox
                     msg={t("StatsPage.SoFar", currentLanguage)}
                     data={data.todayTakenItems}
-                  />
-                  <GreenBox
-                    msg={t("StatsPage.Yesterday", currentLanguage)}
-                    data={data.yesterdayTakenItems}
+                    secondMsg={t("StatsPage.Yesterday", currentLanguage)}
+                    secondData={data.yesterdayTakenItems}
                   />
                 </View>
 
 
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+                <View>
                   <GreenBox
                     msg={t("StatsPage.InTotal", currentLanguage)}
                     data={data.allTakenItems}
@@ -229,7 +227,7 @@ const Stat = ({ navigation }) => {
                 </View>
               </View>
 
-              <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
+
 
 
 
@@ -240,42 +238,39 @@ const Stat = ({ navigation }) => {
               </View>
 
 
-              <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
 
 
-
-              <View style={{ marginTop: 2, marginBottom: 20 }}>
-                <Text
-                  style={[
-                    styles.article_text,
-                    { fontWeight: "bold", fontSize: 18 },
-                  ]}
-                >
-                  {t("StatsPage.AmountCO2", currentLanguage)}
-                </Text>
-              </View>
-
-              <View>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-                  <GreenBox
-                    msg={t("StatsPage.SoFar", currentLanguage)}
-                    data={co2Data.todayCO2Saved}
-                  />
-                  <GreenBox
-                    msg={t("StatsPage.Yesterday", currentLanguage)}
-                    data={co2Data.yesterdayCO2Saved}
-                  />
+              <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 2, marginBottom: 20 }}>
+                  <Text
+                    style={[
+                      styles.article_text,
+                      { fontWeight: "bold", fontSize: 18 },
+                    ]}
+                  >
+                    {t("StatsPage.AmountCO2", currentLanguage)}
+                  </Text>
                 </View>
 
+                <View>
+                  <View>
+                    <GreenBox
+                      msg={t("StatsPage.SoFar", currentLanguage)}
+                      data={co2Data.todayCO2Saved}
+                      secondMsg={t("StatsPage.Yesterday", currentLanguage)}
+                      secondData={co2Data.yesterdayCO2Saved}
+                    />
+                  </View>
 
-                <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-                  <GreenBox
-                    msg={t("StatsPage.InTotal", currentLanguage)}
-                    data={convertKgToTons(co2Data.totalCO2Saved)}
-                  />
+
+                  <View>
+                    <GreenBox
+                      msg={t("StatsPage.InTotal", currentLanguage)}
+                      data={convertKgToTons(co2Data.totalCO2Saved)}
+                    />
+                  </View>
                 </View>
               </View>
-
 
 
               <View>
@@ -307,7 +302,7 @@ const Stat = ({ navigation }) => {
                 >
                   <LightbulbIcon />
                   <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-                    {t("StatsPage.CO2AmountBefore", currentLanguage)+" "+convertKgToTons(co2Data.totalCO2Saved) + " " + t("StatsPage.CO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
+                    {t("StatsPage.CO2AmountBefore", currentLanguage) + " " + convertKgToTons(co2Data.totalCO2Saved) + " " + t("StatsPage.CO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
                   </Text>
                 </View>
               </View>
@@ -315,9 +310,7 @@ const Stat = ({ navigation }) => {
 
 
               {data.top3Uptainers.length != 0 &&
-                <View>
-                  <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
-
+                <View style={{ marginTop: 20 }}>
                   <Text style={styles.menuItem_text}>
                     {t("StatsPage.BestAcheieve", currentLanguage)}
                   </Text>
@@ -325,7 +318,7 @@ const Stat = ({ navigation }) => {
                   {data.top3Uptainers.map((uptainer, index) => {
                     return (
                       <View key={index}>
-                        <StreetStat uptainer={uptainer} />
+                        <StreetStat uptainer={uptainer} pos={100 - (index * 25)} />
                       </View>
                     )
                   })}
@@ -336,9 +329,8 @@ const Stat = ({ navigation }) => {
 
 
               {data.mostVisitedUptainer &&
-                <View>
-                  <Divider color={Primarycolor1} width={2} style={{ marginVertical: 20 }}></Divider>
-                  <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
+                <View style={{ marginTop: 20 }}>
+                  <Text style={styles.menuItem_text}>
                     {t("StatsPage.MostVisitedUptainer", currentLanguage)}
                   </Text>
                   <VisitedUptainerStat

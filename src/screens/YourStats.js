@@ -77,30 +77,45 @@ const YourStats = (props) => {
 
 
 
-        <View>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-            <GreenBox
-              msg={t("StatsPage.ItemsDonated", currentLanguage)}
-              data={co2Data.itemsDonated}
-            />
-            <GreenBox
-              msg={t("StatsPage.ItemsCollected", currentLanguage)}
-              data={co2Data.itemsTaken}
-            />
+
+        <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+          <View
+            style={[
+              Backgroundstyle.informationScreens,
+              { paddingTop: 5, marginRight: 15 },
+            ]}
+          >
+            <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
+              {t("StatsPage.ItemsDonated", currentLanguage)}
+            </Text>
+            <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
+              {co2Data.itemsDonated}
+            </Text>
+          </View>
+
+          <View style={[Backgroundstyle.informationScreens, { paddingTop: 5 }]}>
+            <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
+              {t("StatsPage.ItemsCollected", currentLanguage)}
+            </Text>
+            <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
+              {co2Data.itemsTaken}
+            </Text>
           </View>
         </View>
 
 
 
 
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginTop: 20 }}>
           <TouchableOpacity onPress={() => navigation.navigate("MyDrafts")}>
             <Text style={styles.link}>
               {t("StatsPage.Overview", currentLanguage)}
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ marginTop: 20, marginBottom: 20 }}>
+
+
+        <View style={{ marginTop: 20 }}>
           <Text
             style={[
               styles.article_text,
@@ -155,7 +170,7 @@ const YourStats = (props) => {
           >
             <LightbulbIcon />
             <Text style={[styles.paragraph_text, { marginLeft: 5 }]}>
-              {t("StatsPage.CO2AmountBefore", currentLanguage)+" "+convertKgToTons(co2Data.TotalCo2Footprint) + " " + t("StatsPage.CO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
+              {t("StatsPage.CO2AmountBefore", currentLanguage) + " " + convertKgToTons(co2Data.TotalCo2Footprint) + " " + t("StatsPage.CO2Amount", currentLanguage) + ": " + co2Equivalent.totalEquivalent + " " + t("StatsPage.Fact_equavalent", currentLanguage)}
             </Text>
           </View>
         </View>

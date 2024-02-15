@@ -20,49 +20,47 @@ export const VisitedUptainerStat = (props) => {
 
 
 
-
+    const handlePress = () => {
+        navigation.navigate("StatsInfo");
+    };
 
 
     return (
-        <View style={{ backgroundColor: Primarycolor4, borderRadius: 10, margin: 5 }}>
+        <View style={GlobalStyle}>
             <View>
-                <TouchableOpacity >
-                    <View style={styles.boxlink}>
-                        <View style={GlobalStyle.BodyWrapper}>
-                            <TouchableOpacity onPress={() => {
-                                setIsLoading(true);
-                                navigation.navigate("UptainerDetails", {
-                                    id: uptainer.uptainerId,
-                                    name: uptainer.uptainerName,
-                                    location: uptainer.uptainerStreet,
-                                    uptainerImage: uptainer.uptainerImage,
-                                    latitude:uptainer.uptainerLatitude,
-                                    longitude:uptainer.uptainerLongitude
-                                });
-                            }}>
-                                <Text style={styles.menuItem_text}>{uptainer.uptainerName} </Text>
-                                <Text style={[styles.menuItem_text, { fontFamily: "space-grotesk", fontSize: 15 }]}>
-                                    {uptainer.uptainerStreet}, {uptainer.uptainerCity}, {uptainer.uptainerZip}
-                                </Text>
-                            </TouchableOpacity>
+                <View>
+                    <TouchableOpacity >
+                        <View style={styles.boxlink}>
+                            <View style={GlobalStyle.BodyWrapper}>
+                                <TouchableOpacity onPress={() => {
+                                    setIsLoading(true);
+                                    navigation.navigate("UptainerDetails", {
+                                        id: uptainer.uptainerId,
+                                        name: uptainer.uptainerName,
+                                        location: uptainer.uptainerStreet,
+                                        uptainerImage: uptainer.uptainerImage,
+                                        latitude: uptainer.uptainerLatitude,
+                                        longitude: uptainer.uptainerLongitude
+                                    });
+                                }}>
+                                    <Text style={styles.menuItem_text}>{uptainer.uptainerStreet} </Text>
+                                    <Text style={[styles.menuItem_text, { fontFamily: "space-grotesk", fontSize: 15 }]}>{uptainer.uptainerStreet}, {uptainer.uptainerCity}, {uptainer.uptainerZip}  </Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.Icon_container}>
+                                <AntDesign name="right" size={30} style={styles.menuItem_arrow} />
+                            </View>
                         </View>
-                        <View style={styles.Icon_container}>
-                            <AntDesign name="right" size={30} style={styles.menuItem_arrow} />
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={GlobalStyle}>
 
-            <View style={{ marginBottom: 10 }}>
-                <View>
-                    <Text style={[Buttons.main_button, { marginTop: 0, borderWidth: 0, color: Primarycolor3 }]}>{uptainer.itemsReused} {t('StatsPage.ItemsReused', currentLanguage)}</Text>
+                    <Text style={[Buttons.main_button, { paddingTop: 9, height: 40, width: "100%", color: "white" }]}>{uptainer.itemsReused} {t('StatsPage.ItemsReused', currentLanguage)}</Text>
+                    <View style={GlobalStyle}>
+                        <Text style={[Backgroundstyle.informationScreens, { paddingTop: 9, height: 40, marginTop: 5, marginBottom: 40, paddingLeft: 10, width: "100%", color: Primarycolor1 }]}>{convertKgToTons(uptainer.savedCO2)}{t('StatsPage.CO2Save', currentLanguage)}</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={[Buttons.main_button, { marginTop: 0, borderWidth: 0, backgroundColor: Primarycolor2, color: Primarycolor1 }]}>{convertKgToTons(uptainer.savedCO2)}{t('StatsPage.CO2Save', currentLanguage)}</Text>
-                </View>
-                <View>
-                    <Text style={[Buttons.main_button, { marginTop: 0, borderWidth: 0, color: Primarycolor3 }]}>{uptainer.droppedItems} {t('StatsPage.Visits', currentLanguage)}</Text>
-                </View>
+
             </View>
         </View>
     )

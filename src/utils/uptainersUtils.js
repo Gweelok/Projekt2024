@@ -250,7 +250,8 @@ async function calculateUptainerStats() {
       itemsReused: 0,
       savedCO2: 0,
       droppedItems: 0,
-      myDroppedItems: 0
+      myDroppedItems: 0,
+      myTakenItems:0
     };
     return acc;
   }, {});
@@ -261,6 +262,10 @@ async function calculateUptainerStats() {
     const uptainer = allUptainersStats[item.itemUptainer];
     if (uptainer) {
       if (item.itemTaken) {
+        if(item.itemTaken==userId){
+          uptainer.myTakenItems+=1
+        }
+
         uptainer.itemsReused += 1
         uptainer.savedCO2 += item.co2Footprint
       }
@@ -269,6 +274,7 @@ async function calculateUptainerStats() {
       if (item.itemUser == userId) {
         uptainer.myDroppedItems += 1
       }
+
       uptainer.droppedItems += 1
 
     }
@@ -277,15 +283,15 @@ async function calculateUptainerStats() {
 
   const sortedUptainers = (Object.values(allUptainersStats).sort(
     (a, b) => b.itemsReused - a.itemsReused
-  )).slice(0, 3).filter((uptainer) => uptainer.itemsReused > 0)
+  )).slice(0, 3)
 
   const mostVisitedUptainer = (Object.values(allUptainersStats).sort(
-    (a, b) => b.droppedItems - a.droppedItems
-  )).filter((uptainer) => uptainer.droppedItems > 0)[0]
+    (a, b) => (b.droppedItems+b.itemsReused) - (a.droppedItems+a.itemsReused)
+  ))[0]
 
   const myMostVisitedUptainer = (Object.values(allUptainersStats).sort(
-    (a, b) => b.myDroppedItems - a.myDroppedItems
-  )).filter((uptainer) => uptainer.myDroppedItems > 0)[0]
+    (a, b) => (b.myDroppedItems+b.myTakenItems) - (a.myDroppedItems+a.myTakenItems)
+  ))[0]
 
 
 
