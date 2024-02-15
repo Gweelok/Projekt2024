@@ -9,12 +9,12 @@ const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
                 <TextLink status={true} path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
 
                 <Spacer height={25}></Spacer>
-
-                <TextLink status={linkStatus.overview} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
+                {/* Add correct path */}
+                <TextLink status={linkStatus.overview} path={'ServiceAdminMain'} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
 
                 <Spacer height={25}></Spacer>
-
-                <TextLink status={linkStatus.reportedItems} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
+                {/* Add linkStatus.reportedItems */}
+                <TextLink status={linkStatus.overview} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
         </View>
     )
 }

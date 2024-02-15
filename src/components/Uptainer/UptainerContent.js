@@ -12,7 +12,6 @@ const UptainerContent = ({ location }) => {
     const solvedButtonText = 'Task Solved';
     const navigationPath = 'ServiceAdminMain';
     const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?',];
-
     const [isSolved, setIsSolved] = useState(false);
     const [newData, setData] = useState(dataTest.map((task) => newTask = {
         name: task,
@@ -55,6 +54,7 @@ const UptainerContent = ({ location }) => {
             <UptainerTaskList location={location} newData={newData} setData={setData}></UptainerTaskList>
 
             <NavigationButton
+                disabled={!isSolved}
                 path={navigationPath}
                 text={solvedButtonText}
                 location={location}

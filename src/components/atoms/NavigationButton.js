@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
     @callback = pass function to button that will be executed before navigating
 */
 
-const NavgationButton = (({ path, text, location, buttonStyle, textStyle, callback }) => {
+const NavgationButton = (({ disabled,path, text, location, buttonStyle, textStyle, callback }) => {
     //access the navigation prop of the parent screen
     const navigation = useNavigation();
     
@@ -26,7 +26,7 @@ const NavgationButton = (({ path, text, location, buttonStyle, textStyle, callba
     }
 
     return (
-        <TouchableOpacity onPress={() => handlePress()} style={buttonStyle}>
+        <TouchableOpacity disabled={disabled} onPress={() => handlePress()} style={buttonStyle}>
             <Text style={textStyle}>{text}</Text>
         </TouchableOpacity>
     )
