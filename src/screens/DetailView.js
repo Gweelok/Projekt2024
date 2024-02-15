@@ -82,7 +82,7 @@ const DetailViews = ({ navigation, route }) => {
     <View style={[Backgroundstyle.interactive_screens]}>
       <ScrollViewComponent style={GlobalStyle.BodyWrapper}>
         <BackButton onPress={navigation.goBack} style={Buttons.backButton} />
-        <View style={[DetailView.container]}>
+        <View>
           <Image source={{ uri: imageUrl }} style={DetailView.image} />
           <View
             style={{
@@ -135,10 +135,10 @@ const DetailViews = ({ navigation, route }) => {
 };
 
 const DetailView = StyleSheet.create({
-  container: {
+  /* container: {
     justifyContent: "center",
     //alignItems: "center",
-  },
+  }, */
 
   image: {
     height: 300,
@@ -183,7 +183,7 @@ const DetailView = StyleSheet.create({
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    //alignItems: "flex-start",
+    alignItems: "flex-start",
     marginTop: 10,
     marginBottom: 10,
   },
