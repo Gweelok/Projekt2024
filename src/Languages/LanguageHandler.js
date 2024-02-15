@@ -51,7 +51,7 @@ export function t(key, currentLanguage) {
 
 
 export function LanguageProvider({ children }) {
-  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [currentLanguage, setCurrentLanguage] = useState('da');
 
 
   function setLanguage(lang) {
