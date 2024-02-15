@@ -27,7 +27,7 @@ const ServiceAdminMain = ({ navigation, route }) => {
             "link": "Reported items"
         },
         "condition": {
-            "text": "Review the conditions of the Uptainer",
+            "text": "Review the condition of the Uptainer",
             "link": "Uptainer condition"
         }
     }
