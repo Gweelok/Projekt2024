@@ -1,9 +1,11 @@
 import { View } from "react-native"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 
 import UptainerInfo from "./UptainerInfo"
 import UptainerTaskList from "./UptainerTaskList"
 import NavigationButton from "../atoms/NavigationButton"
+
+import { TaskContext } from '../../context/TaskContext';
 
 import { createUptainerTaskAnswers } from "../../utils/Repo"
 import { Buttons } from "../../styles/styleSheet"
@@ -12,7 +14,8 @@ const UptainerContent = ({ location }) => {
     const solvedButtonText = 'Task Solved';
     const navigationPath = 'ServiceAdminMain';
     const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?',];
-    const [isSolved, setIsSolved] = useState(false);
+    const { setIsSolved } = useContext(TaskContext);
+    const [isTasksSolved, setIsTasksSolved] = useState(false);
     const [newData, setData] = useState(dataTest.map((task) => newTask = {
         name: task,
         pressedYes: false,
@@ -38,13 +41,21 @@ const UptainerContent = ({ location }) => {
 
     useEffect(() => {
         const allTasksSolved = newData.every(task => task.pressedYes || task.pressedNo);
-        setIsSolved(allTasksSolved);
+        setIsTasksSolved(allTasksSolved);
     })
 
     async function handleConfirm() {
         const answersToDatabase = await createTaskAnswersData(newData, location.uptainerId)
         console.log(answersToDatabase)
         createUptainerTaskAnswers(answersToDatabase)
+        handleOverviewSolved();
+    };
+
+    const handleOverviewSolved = () => {
+        setIsSolved(prevState => ({
+            ...prevState,
+            uptainerCondition: true
+        }));
     };
 
     return (
@@ -54,7 +65,7 @@ const UptainerContent = ({ location }) => {
             <UptainerTaskList location={location} newData={newData} setData={setData}></UptainerTaskList>
 
             <NavigationButton
-                disabled={!isSolved}
+                disabled={!isTasksSolved}
                 path={navigationPath}
                 text={solvedButtonText}
                 location={location}

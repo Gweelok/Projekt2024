@@ -1,7 +1,7 @@
 // SharedContext.js
 import React, { createContext, useState } from 'react';
 
-const SharedContext = createContext();
+const TaskContext = createContext();
 
 const TaskContextProvider = ({ children }) => {
   const [isSolved, setIsSolved] = useState({
@@ -16,10 +16,10 @@ const TaskContextProvider = ({ children }) => {
 
 
   return (
-    <SharedContext.Provider value={{ isSolved, setIsSolved }}>
+    <TaskContext.Provider value={{ isSolved, setIsSolved }}>
       {children}
-    </SharedContext.Provider>
+    </TaskContext.Provider>
   );
 };
 
-export { SharedContext, TaskContextProvider };
+export { TaskContext, TaskContextProvider };

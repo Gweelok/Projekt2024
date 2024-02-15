@@ -6,7 +6,7 @@ import NavgationButton from '../atoms/NavigationButton';
 import LoadingScreen from '../../screens/Loading/LoadingScreen';
 
 import { LoaderContext } from '../molecules/LoaderContext';
-import { SharedContext } from '../../context/TaskContext';
+import { TaskContext } from '../../context/TaskContext';
 
 import { Buttons, styles } from '../../styles/styleSheet';
 import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';
@@ -16,7 +16,7 @@ const OverViewContent = ({ location }) => {
     const [imgUrlList, setImgUrlList] = useState([]);
     const { isLoading, setIsLoading } = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
-    const { setIsSolved } = useContext(SharedContext);
+    const { setIsSolved } = useContext(TaskContext);
 
     const buttonText = 'Delete';
     const solvedButtonText = 'Task Solved';
@@ -111,6 +111,7 @@ const OverViewContent = ({ location }) => {
             )}
 
             <NavgationButton
+                disabled={false}
                 path={navigationPath}
                 text={solvedButtonText}
                 location={location}

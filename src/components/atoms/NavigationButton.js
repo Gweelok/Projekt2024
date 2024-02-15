@@ -26,7 +26,7 @@ const NavgationButton = (({ disabled,path, text, location, buttonStyle, textStyl
     }
 
     return (
-        <TouchableOpacity disabled={disabled} onPress={() => handlePress()} style={buttonStyle}>
+        <TouchableOpacity disabled={disabled === undefined ? false : disabled} onPress={() => handlePress()} style={buttonStyle}>
             <Text style={textStyle}>{text}</Text>
         </TouchableOpacity>
     )
