@@ -53,4 +53,12 @@ export default {
     gallery: "Gallery",
     chooseAction: "Choose an Action",
   },
+  DropdownScreen: {
+    Category: "Search for category...",
+    Product: "Search for product...",
+    Model: "Search for model...",
+    Brand: "Search for brand...",
+    Condition: "Condition of the product",
+    Text: "You can elaborate on the condition of the item in the description field.",
+  },
 };
