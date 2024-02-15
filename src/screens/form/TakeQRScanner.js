@@ -24,6 +24,7 @@ import {
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;
@@ -202,8 +203,8 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
   };
 
   return (
-    <ScrollViewComponent>
-      <SafeAreaView style={styles.container2}>
+    <ScrollViewComponent style={ GlobalStyle.BodyWrapper }>
+      <SafeAreaView style={{marginTop: 40}}>
         <View style={styles.header}>
           <Text style={styles.headline}>
             {t("QrScannerScreen.Scan", currentLanguage)}
@@ -213,20 +214,18 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.content}>
-          <Text style={styles.instruction}>
+        <View>
+          <Text style={styles.paragraph_text}>
             {t("QrScannerScreen.Header", currentLanguage)}
           </Text>
 
           {hasPermission ? (
             <View style={styles.qrScannerFrame} >
-              <View style={styles.dashedBorder} >
                 <BarCodeScanner
                   onBarCodeScanned={ scanned ? undefined : handleBarCodeScanned}
                   style={{ flex: 1 }}
 
                 />
-              </View >
             </View>
           ) : (
             <Text style={{ margin: 10 }}>No access to the camera</Text>
@@ -237,33 +236,16 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           <View style={styles.buttonsContainer}>
             {scanned && (
               <View>
-                <View style={{ marginBottom: 10 }}>
+                <View>
                   {isActive ? (<Pressable
                     onPress={handleSaveCode}
-                    style={[
-                      Buttons.main_button,
-                      {
-                        borderWidth: 1,
-                        width: 220,
-                        marginHorizontal: 60,
-                      },
-                    ]}
-                  >
+                    style={Buttons.main_button}>
                     <Text style={Buttons.main_buttonText}>
                       {t("QrScannerScreen.Take", currentLanguage)}
                     </Text>
                   </Pressable>) : (<Pressable
                           onPress={handleSaveCode}
-                    style={[
-                      Buttons.main_button,
-                      {
-                        backgroundColor: "red",
-                        borderWidth: 1,
-                        width: 220,
-                        marginHorizontal: 60,
-                      },
-                    ]}
-                  >
+                    style={[Buttons.main_button, {backgroundColor: "red", borderColor: "red"}]}>
                     <Text style={Buttons.main_buttonText}>
                       {t("QrScannerScreen.SaveCode", currentLanguage)}
                     </Text>
@@ -273,15 +255,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
                 <View>
                 <Pressable
                     onPress={handleScanAgain}
-                    style={[
-                      Buttons.secondary_button,
-                      {
-                        borderWidth: 2,
-                        width: 220,
-                        marginHorizontal: 60,
-                      },
-                    ]}
-                  >
+                    style={Buttons.secondary_button}>
                     <Text style={Buttons.secondary_buttonText}>
                       {t("QrScannerScreen.ScanAgain", currentLanguage)}
                     </Text>
@@ -291,7 +265,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             )}
           </View>
 
-          <Text style={styles.instruction}>
+          <Text style={styles.paragraph_text}>
             {t("QrScannerScreen.Bottom", currentLanguage)}
           </Text>
         </View>
