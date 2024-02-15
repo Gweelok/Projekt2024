@@ -7,7 +7,7 @@ import { useFonts } from "expo-font";
 //Providers
 import { LanguageProvider } from './src/Languages/LanguageHandler';
 import { LoaderProvider } from "./src/components/molecules/LoaderContext";
-import { SharedContextProvider } from './src/components/SharedContext';
+import { TaskContextProvider } from './src/context/TaskContext';
 
 //Pages for navigation
 //Auth
@@ -18,7 +18,7 @@ import Home from './src/screens/Home/Home';
 import Uptainer from './src/screens/ServiceAdmin/Uptainer';
 import OverView from './src/screens/ServiceAdmin/OverView'
 import ServiceAdminMain from './src/screens/ServiceAdmin/ServiceAdminMain';
-import React, { createContext } from 'react';
+import React from 'react';
 
 
 export default function App() {
@@ -39,9 +39,9 @@ export default function App() {
   return (
     <LoaderProvider>
       <LanguageProvider>
-        <SharedContextProvider>
+        <TaskContextProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home'>
+            <Stack.Navigator initialRouteName='Login'>
               <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
               <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
               <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
@@ -49,7 +49,7 @@ export default function App() {
               <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
             </Stack.Navigator>
           </NavigationContainer>
-        </SharedContextProvider>
+        </TaskContextProvider>
       </LanguageProvider>
     </LoaderProvider >
   );

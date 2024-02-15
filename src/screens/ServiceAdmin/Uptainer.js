@@ -3,7 +3,7 @@ import { Button, TouchableOpacity, TouchableHighlight, Pressable, View, StyleShe
 import { windowHeight, windowWidth } from "../../utils/Dimensions"
 import UptainerContent from "../../components/Uptainer/UptainerContent"
 
-import { SharedContext } from '../../components/SharedContext';
+import { SharedContext } from '../../context/TaskContext';
 
 import { Primarycolor1, Primarycolor2, styles, Buttons } from "../../styles/styleSheet"
 import { useState, useContext } from "react"

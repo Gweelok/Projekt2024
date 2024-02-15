@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native"
 import { useState, useContext } from "react"
 
-import { SharedContext } from '../../components/SharedContext';
+import { SharedContext } from '../../context/TaskContext';
 
 import Navigationbar from "../../components/organisms/Navigationbar"
 import UptainerInfo from "../../components/Uptainer/UptainerInfo"

@@ -6,7 +6,7 @@ import NavgationButton from '../atoms/NavigationButton';
 import LoadingScreen from '../../screens/Loading/LoadingScreen';
 
 import { LoaderContext } from '../molecules/LoaderContext';
-import { SharedContext } from '../SharedContext';
+import { SharedContext } from '../../context/TaskContext';
 
 import { Buttons, styles } from '../../styles/styleSheet';
 import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';

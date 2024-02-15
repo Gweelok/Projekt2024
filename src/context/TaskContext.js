@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 
 const SharedContext = createContext();
 
-const SharedContextProvider = ({ children }) => {
+const TaskContextProvider = ({ children }) => {
   const [isSolved, setIsSolved] = useState({
     overview: false,
     reportedItems: false,
@@ -22,4 +22,4 @@ const SharedContextProvider = ({ children }) => {
   );
 };
 
-export { SharedContext, SharedContextProvider };
+export { SharedContext, TaskContextProvider };
