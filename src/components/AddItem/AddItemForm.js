@@ -148,6 +148,7 @@ import { windowHeight, windowWidth } from "../../utils/Dimensions";
           <View
             style={{
               flex: 1,
+              width: windowWidth * 0.84
             }}
           >
             <View style={[{ marginBottom: 10 }]}>
