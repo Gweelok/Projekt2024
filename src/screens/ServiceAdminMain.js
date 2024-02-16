@@ -4,6 +4,7 @@ import UptainerInfo from "../components/Uptainer/UptainerInfo"
 import TextLinkList  from "../components/organisms/TextLinkList"
 import { windowHeight, windowWidth } from "../../src/utils/Dimensions"
 import GlobalStyle from "../styles/GlobalStyle"
+import { styles } from "../styles/styleSheet"
 
 const ServiceAdminMain = ({ navigation, route }) => {
     const { location } = route.params;
@@ -19,17 +20,26 @@ const ServiceAdminMain = ({ navigation, route }) => {
             "link": "Reported items"
         },
         "condition": {
-            "text": "Review the conditions of the Uptainer",
+            "text": "Review the condition of the Uptainer",
             "link": "Uptainer condition"
         }
+    }
+
+    const linkStatus = {
+        "overview": true,
+        "reportedItems": true,
+        "uptainerCondition": false,
     }
 
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <UptainerInfo location={location}></UptainerInfo>
 
-            <TextLinkList navigation={navigation} location={location} textValue={textValue}></TextLinkList >
-
+            <TextLinkList navigation={navigation} location={location} textValue={textValue}
+            linkStatus={linkStatus}></TextLinkList >
+            {linkStatus.overview === true && linkStatus.reportedItems === true && linkStatus.uptainerCondition === true &&
+            <Text style={styles.paragraph_text}>Tasks list completed</Text>
+            }
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
     )
