@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Alert, FlatList, Image, Text } from
 
 import UptainerInfo from '../Uptainer/UptainerInfo';
 import NavgationButton from '../atoms/NavigationButton';
-import LoadingScreen from '../../screens/Loading/LoadingScreen';
+import LoadingScreen from '../../screens/LoadingScreen';
 
 import { LoaderContext } from '../molecules/LoaderContext';
 import { TaskContext } from '../../context/TaskContext';
@@ -114,7 +114,7 @@ const OverViewContent = ({ location }) => {
                 disabled={false}
                 path={navigationPath}
                 text={solvedButtonText}
-                location={location}
+                param={location}
                 buttonStyle={Buttons.main_button}
                 textStyle={Buttons.main_buttonText}
                 callback={onPressMarkSolved}

@@ -11,9 +11,9 @@ import { TaskContextProvider } from './src/context/TaskContext';
 
 //Pages for navigation
 //Auth
-import Login from './src/screens/Auth/Login';
+import Login from './src/screens/Login';
 //Home
-import Home from './src/screens/Home/Home';
+import Home from './src/screens/Home';
 //ServiceAdmin
 import Uptainer from './src/screens/ServiceAdmin/Uptainer';
 import OverView from './src/screens/ServiceAdmin/OverView'

@@ -9,7 +9,7 @@ import { Primarycolor1, Primarycolor2, styles, Buttons } from "../../styles/styl
 import { useState, useContext } from "react"
 
 const Uptainer = ({route}) => {
-    const { location } = route.params;
+    const { location = route.params?.param } = route.params || {};
 
     return (
         <View 

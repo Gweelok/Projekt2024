@@ -11,6 +11,7 @@ import { createUptainerTaskAnswers } from "../../utils/Repo"
 import { Buttons } from "../../styles/styleSheet"
 
 const UptainerContent = ({ location }) => {
+
     const solvedButtonText = 'Task Solved';
     const navigationPath = 'ServiceAdminMain';
     const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?',];
@@ -68,7 +69,7 @@ const UptainerContent = ({ location }) => {
                 disabled={!isTasksSolved}
                 path={navigationPath}
                 text={solvedButtonText}
-                location={location}
+                param={location}
                 buttonStyle={Buttons.main_button}
                 textStyle={Buttons.main_buttonText}
                 callback={handleConfirm}

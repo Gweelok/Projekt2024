@@ -7,7 +7,7 @@ import OverViewContent from '../../components/OverView/OverViewContent';
 
 const OverView = ({ route }) => {
     const { location } = route.params;
-
+   
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <OverViewContent location={location}></OverViewContent>

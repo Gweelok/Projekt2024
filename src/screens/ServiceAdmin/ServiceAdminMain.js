@@ -12,9 +12,11 @@ import GlobalStyle from "../../styles/GlobalStyle"
 import { styles } from "../../styles/styleSheet"
 
 const ServiceAdminMain = ({ navigation, route }) => {
+    
     const { isSolved } = useContext(TaskContext);
     const isAllSolved = Object.values(isSolved).every(flag => flag);
-    const { location } = route.params;
+    // Check if `location` exists, if not, fallback to `param`
+    const { location = route.params?.param } = route.params || {};
     console.log(isSolved)
     //Check if needed to be extracted later to language??
     const textValue = {
