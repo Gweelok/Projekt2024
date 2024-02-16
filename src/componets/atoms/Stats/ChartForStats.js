@@ -48,7 +48,6 @@ const ChartForStats = ({ value, refreshing }) => {
         if (refreshing || value) {
             const newOptions = retreiveChartOptions()
             chartRef.current.setOption(newOptions)
-            console.log('chart data retrieved')
         }
     }, [value, refreshing])
 
@@ -63,7 +62,6 @@ const ChartForStats = ({ value, refreshing }) => {
             const newOptions = retreiveChartOptions()
             chartRef.current.setOption(newOptions);
         }
-        console.log('updated')
     }, [refreshing])
 
     return (

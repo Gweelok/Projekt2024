@@ -50,7 +50,7 @@ export function convertKgToTons(amountInKg) {
   if (amountInKg >= 1000) {
     return (amountInKg / 1000).toFixed(2) + " T.";
   } else {
-    return amountInKg + " kg";
+    return amountInKg + " Kg.";
   }
 }
 export const setUptainersByIds = async (uptainers) => {
@@ -90,10 +90,8 @@ async function fetchAllTakenItems() {
 
 // Fetches all items taken by a user from the database.
 async function fetchAllItemsTakenByUser() {
-  let userId = firebaseAurth.currentUser.uid
-  //userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const userId = firebaseAurth.currentUser.uid
   const allItems = await getAllItems();
-  //const allItems = TestItems
   const allItemsTakenByUser =
     allItems.filter(
       (item) => item.itemTaken != false && item.itemTaken == userId
@@ -102,10 +100,8 @@ async function fetchAllItemsTakenByUser() {
 }
 
 async function fetchAllItemsTakenFromUser() {
-  let userId = firebaseAurth.currentUser.uid
-  //userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const userId = firebaseAurth.currentUser.uid
   const allUserItems = await getItemsFromUser(userId);
-  //const allUserItems = TestItems.filter((item) => item.itemUser === userId)
   const allItemsTakenFromUser = allUserItems.filter(
     (item) => item.itemTaken != false
   );
@@ -179,34 +175,20 @@ async function processGeneralStats(allTakenItems) {
     yesterdayTakenItemsCO2: 0,
   };
 
-  try {
-    const totalco2Footprint = await fetchProductCO2(allTakenItems);
-    updateGeneralStats(generalStats, totalco2Footprint, allTakenItems);
-  } catch (error) {
-    console.error(`Errors occurred during processing general stats:`, error);
-  }
+
+  const totalco2Footprint = await fetchProductCO2(allTakenItems);
+  updateGeneralStats(generalStats, totalco2Footprint, allTakenItems);
 
   return generalStats;
 }
 
 async function processUserStats(allTakenItemsByUser, allTakenItemsFromUser) {
-  let userStats = {
-    userTakenItems: 0,
-    userTakenItemsCO2: 0,
-    userDonatedItems: 0,
-    userDonatedItemsCO2: 0
+  return {
+    userTakenItems: allTakenItemsByUser.length,
+    userTakenItemsCO2: await fetchProductCO2(allTakenItemsByUser),
+    userDonatedItems: allTakenItemsFromUser.length,
+    userDonatedItemsCO2: await fetchProductCO2(allTakenItemsFromUser)
   }
-
-  try {
-    userStats.userTakenItems = allTakenItemsByUser.length;
-    userStats.userTakenItemsCO2 = await fetchProductCO2(allTakenItemsByUser);
-    userStats.userDonatedItems = allTakenItemsFromUser.length;
-    userStats.userDonatedItemsCO2 = await fetchProductCO2(allTakenItemsFromUser);
-  } catch (error) {
-    console.error(`Error processing user item ${item.itemId}:`, error);
-  }
-
-  return userStats;
 }
 
 
@@ -216,27 +198,24 @@ async function processUserStats(allTakenItemsByUser, allTakenItemsFromUser) {
 
 export async function calculateGeneralStats() {
   const allTakenItems = await fetchAllTakenItems();
-  //const generalStats = await processGeneralStats(TestItems.filter((item) => item.itemTaken != false));
-  const generalStats = await processGeneralStats(allTakenItems);
-  return generalStats;
+
+  return await processGeneralStats(allTakenItems)
 }
 
 async function calculateUserStats() {
   const allUserTakenItems = await fetchAllItemsTakenByUser();
   const allUserDonatedItems = await fetchAllItemsTakenFromUser();
-  const userStats = await processUserStats(
+
+  return await processUserStats(
     allUserTakenItems,
     allUserDonatedItems
-  );
-  return userStats;
+  )
 }
 
 async function calculateUptainerStats() {
   const allUptainers = await getAllUptainers();
   const allItems = await getAllItems()
-  //const allItems = TestItems
-  let userId = firebaseAurth.currentUser.uid
-  //userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const userId = firebaseAurth.currentUser.uid
 
   const allUptainersStats = allUptainers.reduce((acc, uptainer) => {
     acc[uptainer.uptainerId] = {
@@ -245,19 +224,22 @@ async function calculateUptainerStats() {
       savedCO2: 0,
       droppedItems: 0,
       myDroppedItems: 0,
-      myTakenItems:0
+      myTakenItems: 0
     };
     return acc;
   }, {});
 
+  // set co2Footprint to each item
   await fetchProductCO2(allItems);
 
+
+  // loop over items and make calculations
   allItems.map((item) => {
     const uptainer = allUptainersStats[item.itemUptainer];
     if (uptainer) {
       if (item.itemTaken) {
-        if(item.itemTaken==userId){
-          uptainer.myTakenItems+=1
+        if (item.itemTaken == userId) {
+          uptainer.myTakenItems += 1
         }
 
         uptainer.itemsReused += 1
@@ -270,7 +252,6 @@ async function calculateUptainerStats() {
       }
 
       uptainer.droppedItems += 1
-
     }
   })
 
@@ -280,11 +261,11 @@ async function calculateUptainerStats() {
   )).slice(0, 3)
 
   const mostVisitedUptainer = (Object.values(allUptainersStats).sort(
-    (a, b) => (b.droppedItems+b.itemsReused) - (a.droppedItems+a.itemsReused)
+    (a, b) => (b.droppedItems + b.itemsReused) - (a.droppedItems + a.itemsReused)
   ))[0]
 
   const myMostVisitedUptainer = (Object.values(allUptainersStats).sort(
-    (a, b) => (b.myDroppedItems+b.myTakenItems) - (a.myDroppedItems+a.myTakenItems)
+    (a, b) => (b.myDroppedItems + b.myTakenItems) - (a.myDroppedItems + a.myTakenItems)
   ))[0]
 
 
@@ -329,34 +310,21 @@ export async function getAllItemAndUptainerStats(generalStats) {
 
 // For Stat.js
 export async function getAllCO2Stats(generalStats) {
-  try {
-    let co2Stats;
-    const calculatedCO2 = await calculateTotalCO2Savings(generalStats);
-    co2Stats = {
-      todayCO2Saved: calculatedCO2.todayCO2Saved,
-      yesterdayCO2Saved: calculatedCO2.yesterdayCO2Saved,
-      totalCO2Saved: calculatedCO2.totalCO2Saved,
-    };
-    return co2Stats;
-  } catch (error) {
-    console.error("Error calculating CO2 statistics:", error);
-    throw error;
+  const calculatedCO2 = await calculateTotalCO2Savings(generalStats);
+
+  return {
+    todayCO2Saved: calculatedCO2.todayCO2Saved,
+    yesterdayCO2Saved: calculatedCO2.yesterdayCO2Saved,
+    totalCO2Saved: calculatedCO2.totalCO2Saved,
   }
 }
 
 // For YourStats.js
 export async function getUserStats() {
-  try {
-    let stats;
-    const userStats = await calculateUserStats();
-    stats = {
-      userTakenItems: userStats.userTakenItems,
-      userDonatedItems: userStats.userDonatedItems,
-      totalC02Saved: userStats.userTakenItemsCO2 + userStats.userDonatedItemsCO2,
-    };
-    return stats;
-  } catch (error) {
-    console.error("Error calculating user statistics:", error);
-    throw error;
+  const userStats = await calculateUserStats();
+  return {
+    userTakenItems: userStats.userTakenItems,
+    userDonatedItems: userStats.userDonatedItems,
+    totalC02Saved: userStats.userTakenItemsCO2 + userStats.userDonatedItemsCO2,
   }
 }

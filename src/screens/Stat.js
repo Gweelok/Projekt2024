@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import {
   styles,
@@ -25,15 +26,15 @@ import {
   getCurrentUser,
   getAllProducts,
 } from "../utils/Repo";
-import { getAllItemAndUptainerStats, getAllCO2Stats, calculateGeneralStats, Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
+import { getAllItemAndUptainerStats, getAllCO2Stats, calculateGeneralStats, Calculate_co2_Equivalent, convertKgToTons, getUserStats } from "../utils/uptainersUtils";
 import { BoxLink } from "../styles/BoxLink";
+import LoadingScreen from "../componets/LoadingScreen";
 
 const Stat = ({ navigation }) => {
-  const [products, setProducts] = useState([]);
-  const [userCurrent, setUserCurrent] = useState({});
-
-
   const { currentLanguage } = useLanguage();
+  const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
+  const [isLoading, setIsLoading] = useState(true)
+
 
   const [data, setData] = useState({
     myMostVisitedUptainer: null,
@@ -45,14 +46,13 @@ const Stat = ({ navigation }) => {
     top3Uptainers: [],
   });
 
-  const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
 
+  // Overall Stats
   const [co2Data, setCO2Data] = useState({
     todayCO2Saved: 0,
     yesterdayCO2Saved: 0,
     totalCO2Saved: 0,
-  });
-
+  })
   const [co2Equivalent, setco2Equivalent] = useState({
     co2_pers: 10,
     personalEquivalent: 0,
@@ -60,38 +60,54 @@ const Stat = ({ navigation }) => {
   })
 
 
+  // Yours Stats
+  const [userco2Data, setuserco2Data] = useState({
+    totalC02Saved: 0,
+    userDonatedItems: 0,
+    userTakenItems: 0
+  })
+  const [userco2Equivalent, setuserco2Equivalent] = useState({
+    co2_pers: 10,
+    personalEquivalent: 0,
+    totalEquivalent: 0
+  })
+
+
+
+
 
   const fetchData = async () => {
     const generalStats = await calculateGeneralStats()
-
-    const stats = await getAllItemAndUptainerStats(generalStats);
-    setData(stats);
-
-    const userCurrent = await getCurrentUser();
-    setUserCurrent(userCurrent);
-
-    const products = await getAllProducts();
-    setProducts(products);
+    const stats = await getAllItemAndUptainerStats(generalStats)
+    const totalCO2Savings = await getAllCO2Stats(generalStats)
 
 
-    const totalCO2Savings = await getAllCO2Stats(generalStats);
-
-    setCO2Data({
-      todayCO2Saved: totalCO2Savings.todayCO2Saved,
-      yesterdayCO2Saved: totalCO2Savings.yesterdayCO2Saved,
-      totalCO2Saved: totalCO2Savings.totalCO2Saved,
-    });
-
+    setData(stats)
+    setCO2Data(totalCO2Savings)
     setco2Equivalent(Calculate_co2_Equivalent(totalCO2Savings.totalCO2Saved))
+  }
+  const fetchUserData = async () => {
+    const userStats = await getUserStats()
 
+    setuserco2Data(userStats)
+    setuserco2Equivalent(Calculate_co2_Equivalent(userStats.totalC02Saved))
   }
 
 
+  const fetchAllData = async () => {
+    try {
+      await fetchData()
+      await fetchUserData()
+      setIsLoading(false)
+    } catch (error) {
+      Alert.alert("Error", error)
+      setIsLoading(false)
+    }
+  }
+
   useEffect(() => {
-    fetchData()
-  }, []);
-
-
+    fetchAllData()
+  }, [activeButton]);
 
 
 
@@ -112,6 +128,7 @@ const Stat = ({ navigation }) => {
         { flex: 1, justifyContent: "center" },
       ]}
     >
+      <LoadingScreen isLoaderShow={isLoading}></LoadingScreen>
       <SafeAreaView>
         <ScrollViewComponent>
           <View
@@ -337,9 +354,9 @@ const Stat = ({ navigation }) => {
             </View>
           ) : (
             <YourStats
-              user={userCurrent}
-              products={products}
               myMostVisitedUptainer={data.myMostVisitedUptainer}
+              userco2Data={userco2Data}
+              userco2Equivalent={userco2Equivalent}
             />
           )}
 
