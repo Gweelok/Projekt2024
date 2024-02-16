@@ -4,7 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import UptainerContent from "../components/Uptainer/UptainerContent";
 import UptainerInfo from "../components/Uptainer/UptainerInfo";
-import Navigationbar from "../components/molecules/Navigationbar";
+import LoadingScreen from "./LoadingScreen";
+import { LoaderContext } from "../components/molecules/LoaderContext";
+import Navigationbar from "../components/organisms/Navigationbar";
 import ScrollViewComponent from "../components/atoms/ScrollViewComponent";
 import {
   styles,
@@ -22,16 +24,20 @@ import {
 } from "../utils/Repo";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 
-const ReportedItems = ({ navigation }) => {
+const ReportedItems = ({ navigation, route }) => {
+  const { location } = route.params;
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const [itemList, setItemList] = useState([]);
   return (
-    <View style={Backgroundstyle.interactive_screens}>
+    <View>
       <View style={[GlobalStyle.BodyWrapper]}>
         <UptainerInfo location={location}></UptainerInfo>
         <ScrollViewComponent>
-       
           {/* <UptainerContent location={location}></UptainerContent> */}
         </ScrollViewComponent>
       </View>
     </View>
   );
 };
+
+export default ReportedItems;
