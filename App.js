@@ -13,7 +13,8 @@ import Login from "./src/screens/Login";
 import Uptainer from "./src/screens/Uptainer";
 import OverView from "./src/screens/OverView";
 import ServiceAdminMain from "./src/screens/ServiceAdminMain";
-import AddQRScanner from "./src/screens/AddQRScanner"; //For testing QR Scanner
+import AddQRScanner from "./src/screens/AddQRScanner"; //For testing QR Scannerimport AddItem from './src/screens/AddItem';
+
 
 export default function App() {
   //Loading the font
@@ -65,6 +66,7 @@ export default function App() {
               name="AddQRScanner"
               component={AddQRScanner}
             />
+            <Stack.Screen options={{ headerShown: false }} name="AddItem" component={AddItem} />
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>
