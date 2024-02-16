@@ -114,7 +114,7 @@ const DetailViews = ({ navigation, route }) => {
           )}
           <TouchableOpacity
             onPress={handleTakePress}
-            style={Buttons.main_button}
+            style={[Buttons.main_button, { marginTop: 20 }]}
           >
             <Text style={Buttons.main_buttonText}>
               {t("Detailviews.take", currentLanguage)}
