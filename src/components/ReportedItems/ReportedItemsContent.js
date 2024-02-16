@@ -18,6 +18,7 @@ import UptainerContent from "../Uptainer/UptainerContent";
 import UptainerInfo from "../Uptainer/UptainerInfo";
 import TextLink from "../molecules/TextLink";
 
+import LoadingScreen from "../../screens/LoadingScreen";
 import { LoaderContext } from "../molecules/LoaderContext";
 
 import {
@@ -41,9 +42,12 @@ const ReportedItemsContent = ({ location }) => {
   const [reportedItemsList, setreportedItemsList] = useState([]);
   const [imgUrlList, setImgUrlList] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
- 
 
   async function fetchReportedItems() {
+    if (!location || !location.uptainerId) {
+      console.error("location or location.uptainerId is undefined");
+      return; // Early return to avoid attempting to fetch with undefined uptainerId
+    }
     const reportedItems = await getItemsInUptainer(location.uptainerId);
     setreportedItemsList(reportedItems);
   }
@@ -61,7 +65,7 @@ const ReportedItemsContent = ({ location }) => {
   return (
     <View style={style.container}>
       {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-      <UptainerInfo location={location} />
+      {location && <UptainerInfo location={location} />}
       <ScrollViewComponent>
         {reportedItemsList.map((item, index) => {
           return (
