@@ -26,7 +26,6 @@ const ProductIsTakenScreen = ({ navigation, route, fetchUpdatedData }) => {
       const itemId = productItem?.data;
 
       if (itemId) {
-
         const itemData = {
           itemTaken: true, // Update itemTaken to true
         };

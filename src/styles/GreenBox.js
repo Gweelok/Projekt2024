@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Backgroundstyle, HeaderText, styles } from "./Stylesheet";
 
-export default GreenBox = ({
+export const GreenBox = ({
     msg,
     data,
     secondMsg,
@@ -39,3 +39,5 @@ export default GreenBox = ({
         </View>
     );
 };
+
+export default GreenBox;
