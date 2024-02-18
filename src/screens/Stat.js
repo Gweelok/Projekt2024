@@ -37,7 +37,7 @@ const Stat = ({ navigation }) => {
 
 
   const [data, setData] = useState({
-    myMostVisitedUptainer: null,
+    myMostVisitedUptainer: [],
     mostVisitedUptainer: null,
     allTakenItems: 0,
     todayTakenItems: 0,
@@ -64,7 +64,9 @@ const Stat = ({ navigation }) => {
   const [userco2Data, setuserco2Data] = useState({
     totalC02Saved: 0,
     userDonatedItems: 0,
-    userTakenItems: 0
+    userCollectedItems: 0,
+    userCollectedItemsCO2:0,
+    userDonatedItemsCO2:0
   })
   const [userco2Equivalent, setuserco2Equivalent] = useState({
     co2_pers: 10,
@@ -315,7 +317,7 @@ const Stat = ({ navigation }) => {
 
 
               {data.top3Uptainers.length != 0 &&
-                <View style={{ marginTop: 20 }}>
+                <View style={[{ alignContent: "center", marginTop: 30 }]}>
                   <Text style={styles.menuItem_text}>
                     {t("StatsPage.BestAcheieve", currentLanguage)}
                   </Text>
@@ -333,9 +335,10 @@ const Stat = ({ navigation }) => {
 
 
 
+
               {data.mostVisitedUptainer &&
-                <View style={{ marginTop: 20 }}>
-                  <Text style={styles.menuItem_text}>
+                <View style={[{ alignContent: "center", marginTop: 30 }]}>
+                  <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
                     {t("StatsPage.MostVisitedUptainer", currentLanguage)}
                   </Text>
                   <VisitedUptainerStat
@@ -348,9 +351,7 @@ const Stat = ({ navigation }) => {
 
 
 
-              <View>
-                <BoxLink msg={t('StatsPage.Info', currentLanguage)} onPress={() => { navigation.navigate("StatsInfo") }} style={GlobalStyle.BodyWrapper} />
-              </View>
+
             </View>
           ) : (
             <YourStats

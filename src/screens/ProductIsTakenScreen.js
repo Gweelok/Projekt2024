@@ -12,7 +12,7 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import { firebaseAurth, firebaseDB } from "../utils/Firebase";
+import { firebaseDB } from "../utils/Firebase";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -26,11 +26,9 @@ const ProductIsTakenScreen = ({ navigation, route, fetchUpdatedData }) => {
       const itemId = productItem?.data;
 
       if (itemId) {
-        const itemTakenDate=new Date()
-        
+
         const itemData = {
-          itemTaken: firebaseAurth.currentUser.uid, // Update itemTaken to user id
-          itemTakenDate:itemTakenDate.getFullYear()+"-"+(itemTakenDate.getMonth()+1)+"-"+itemTakenDate.getDate()
+          itemTaken: true, // Update itemTaken to true
         };
 
         // Reference to the Firebase database node where you store your items

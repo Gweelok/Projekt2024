@@ -306,7 +306,7 @@ const SignUpStyles = StyleSheet.create({
     marginTop: -10,
     marginBottom:13,
     marginLeft: 2,
-    textAlign: "auto"
+    textAlign: "start"
   }
 
 });

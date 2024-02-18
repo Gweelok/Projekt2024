@@ -8,6 +8,7 @@ import { t, useLanguage } from "../../../Languages/LanguageHandler";
 import { useNavigation } from "@react-navigation/native";
 import { LoaderContext } from "../../LoaderContext";
 import { convertKgToTons } from "../../../utils/uptainersUtils";
+import { BoxLink } from "../../../styles/BoxLink";
 
 export const VisitedUptainerStat = (props) => {
     const { currentLanguage } = useLanguage();
@@ -57,6 +58,10 @@ export const VisitedUptainerStat = (props) => {
                     <View style={GlobalStyle}>
                         <Text style={[Backgroundstyle.informationScreens, { paddingTop: 9, height: 40, marginTop: 5, marginBottom: 40, paddingLeft: 10, width: "100%", color: Primarycolor1 }]}>{convertKgToTons(uptainer.savedCO2)}{t('StatsPage.CO2Save', currentLanguage)}</Text>
                     </View>
+                </View>
+
+                <View>
+                    <BoxLink msg={t('StatsPage.Info', currentLanguage)} onPress={() => { navigation.navigate("StatsInfo") }} style={GlobalStyle.BodyWrapper} />
                 </View>
 
             </View>

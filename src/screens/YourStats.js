@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { Backgroundstyle, HeaderText, Primarycolor1, styles } from "../styles/Stylesheet";
@@ -11,6 +11,9 @@ import ArticleSlider from "./article/ArticleSlider";
 import GreenBox from "../styles/GreenBox";
 import { convertKgToTons, } from "../utils/uptainersUtils";
 import VisitedUptainerStat from "../componets/atoms/Stats/VisitedUptainerStat";
+import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
+import { getAllProducts, getItemsFromUser } from "../utils/Repo";
+import { firebaseAurth } from "../utils/Firebase";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
@@ -19,8 +22,58 @@ const YourStats = (props) => {
 
 
   const co2Data = props.userco2Data
+
+
   const co2Equivalent = props.userco2Equivalent
   const myMostVisitedUptainer = props.myMostVisitedUptainer
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  async function fetchData() {
+    //Filter items by user
+    const userItems = await getItemsFromUser(firebaseAurth.currentUser.uid);
+    const products = await getAllProducts()
+    // Initializing variables to hold CO2 footprint for taken and not taken items
+    let co2FootprintTaken = 0;
+    let co2FootprintNotTaken = 0;
+    let itemsDonated = 0;
+    let itemsCollected = 0;
+    // Loop through the items array and products arrays to calculate the total CO2 footprint
+    console.log("userItems", userItems)
+    userItems.forEach((item) => {
+      products.forEach((product) => {
+        if (item.itemproduct === product.productId && item.itemTaken != false) {
+          co2FootprintTaken += parseInt(product.co2Footprint);
+        } else if (item.itemproduct === product.productId && item.itemTaken === false) {
+          co2FootprintNotTaken += parseInt(product.co2Footprint);
+        }
+      });
+      if (item.itemTaken === false) {
+        itemsDonated += 1;
+      }
+      if (item.itemTaken != false) {
+        itemsCollected += 1;
+      }
+    });
+    // Calculate the total CO2 footprint
+    const totalCO2Footprint = co2FootprintTaken + co2FootprintNotTaken;
+    console.log("CO2 footprint of taken items:", co2FootprintTaken);
+    console.log("CO2 footprint of not taken items:", co2FootprintNotTaken);
+    console.log("Total CO2 footprint:", totalCO2Footprint);
+    /*
+    setCO2Data((prevData) => ({
+      ...prevData,
+      TotalCo2Footprint: totalCO2Footprint,
+      itemsDonated: itemsDonated,
+      itemsCollected: itemsCollected
+    }));
+    */
+
+    // sayf - i have already calculated everything in here:
+    console.log(co2Data);
+  }
 
 
 
@@ -48,7 +101,7 @@ const YourStats = (props) => {
           <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
             {t("StatsPage.ItemsDonated", currentLanguage)}
           </Text>
-          <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
+          <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
             {co2Data.userDonatedItems}
           </Text>
         </View>
@@ -57,8 +110,8 @@ const YourStats = (props) => {
           <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
             {t("StatsPage.ItemsCollected", currentLanguage)}
           </Text>
-          <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
-            {co2Data.userTakenItems}
+          <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
+            {co2Data.userCollectedItems}
           </Text>
         </View>
       </View>
@@ -66,7 +119,7 @@ const YourStats = (props) => {
 
 
 
-      <View style={{ marginTop: 20 }}>
+      <View style={{ marginTop: 10 }}>
         <TouchableOpacity onPress={() => navigation.navigate("MyDrafts")}>
           <Text style={styles.link}>
             {t("StatsPage.Overview", currentLanguage)}
@@ -75,7 +128,7 @@ const YourStats = (props) => {
       </View>
 
 
-      <View style={{ marginTop: 20 }}>
+      <View style={{ marginTop: 10 }}>
         <Text
           style={[
             styles.article_text,
@@ -90,6 +143,8 @@ const YourStats = (props) => {
       <View>
         <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
           <GreenBox
+            textStyle={{ height: 50 }}
+            headerStyle={{ marginBottom: 30, marginTop: -30 }}
             msg={t("StatsPage.InTotal", currentLanguage)}
             data={convertKgToTons(co2Data.totalC02Saved)}
           />
@@ -213,15 +268,19 @@ const YourStats = (props) => {
       </View>
 
 
-      {myMostVisitedUptainer &&
+      {myMostVisitedUptainer.length != 0 &&
         <View>
           <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
             {t("StatsPage.MyMostVisitedUptainer", currentLanguage)}
           </Text>
-          <VisitedUptainerStat
-            navigation={navigation}
-            uptainer={myMostVisitedUptainer}
-          />
+
+          {myMostVisitedUptainer.map((uptainer, index) => {
+            return (
+              <View key={index}>
+                <YourVisitedUptainer value={uptainer}></YourVisitedUptainer>
+              </View>
+            )
+          })}
         </View>
       }
 

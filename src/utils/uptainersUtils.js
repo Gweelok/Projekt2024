@@ -50,7 +50,7 @@ export function convertKgToTons(amountInKg) {
   if (amountInKg >= 1000) {
     return (amountInKg / 1000).toFixed(2) + " T.";
   } else {
-    return amountInKg + " Kg.";
+    return amountInKg + " kg";
   }
 }
 export const setUptainersByIds = async (uptainers) => {
@@ -83,7 +83,6 @@ export function Calculate_co2_Equivalent(co2_total) {
 // Fetches all items taken from the database
 async function fetchAllTakenItems() {
   const allItems = await getAllItems();
-  if (!allItems) return [];
   const allTakenItems = allItems.filter((item) => item.itemTaken != false);
   return allTakenItems;
 }
@@ -91,16 +90,18 @@ async function fetchAllTakenItems() {
 // Fetches all items taken by a user from the database.
 async function fetchAllItemsTakenByUser() {
   const userId = firebaseAurth.currentUser.uid
-  const allItems = await getAllItems();
+  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const allUserItems = await getItemsFromUser(userId);
   const allItemsTakenByUser =
-    allItems.filter(
-      (item) => item.itemTaken != false && item.itemTaken == userId
+    allUserItems.filter(
+      (item) => item.itemTaken == false
     ) || [];
   return allItemsTakenByUser;
 }
 
 async function fetchAllItemsTakenFromUser() {
   const userId = firebaseAurth.currentUser.uid
+  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
   const allUserItems = await getItemsFromUser(userId);
   const allItemsTakenFromUser = allUserItems.filter(
     (item) => item.itemTaken != false
@@ -182,12 +183,12 @@ async function processGeneralStats(allTakenItems) {
   return generalStats;
 }
 
-async function processUserStats(allTakenItemsByUser, allTakenItemsFromUser) {
+async function processUserStats(allUserCollectedItems, allUserDonatedItems) {
   return {
-    userTakenItems: allTakenItemsByUser.length,
-    userTakenItemsCO2: await fetchProductCO2(allTakenItemsByUser),
-    userDonatedItems: allTakenItemsFromUser.length,
-    userDonatedItemsCO2: await fetchProductCO2(allTakenItemsFromUser)
+    userCollectedItems: allUserCollectedItems.length,
+    userCollectedItemsCO2: await fetchProductCO2(allUserCollectedItems),
+    userDonatedItems: allUserDonatedItems.length,
+    userDonatedItemsCO2: await fetchProductCO2(allUserDonatedItems)
   }
 }
 
@@ -203,11 +204,11 @@ export async function calculateGeneralStats() {
 }
 
 async function calculateUserStats() {
-  const allUserTakenItems = await fetchAllItemsTakenByUser();
-  const allUserDonatedItems = await fetchAllItemsTakenFromUser();
+  const allUserCollectedItems = await fetchAllItemsTakenFromUser();
+  const allUserDonatedItems = await fetchAllItemsTakenByUser();
 
   return await processUserStats(
-    allUserTakenItems,
+    allUserCollectedItems,
     allUserDonatedItems
   )
 }
@@ -216,6 +217,7 @@ async function calculateUptainerStats() {
   const allUptainers = await getAllUptainers();
   const allItems = await getAllItems()
   const userId = firebaseAurth.currentUser.uid
+  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
 
   const allUptainersStats = allUptainers.reduce((acc, uptainer) => {
     acc[uptainer.uptainerId] = {
@@ -266,7 +268,7 @@ async function calculateUptainerStats() {
 
   const myMostVisitedUptainer = (Object.values(allUptainersStats).sort(
     (a, b) => (b.myDroppedItems + b.myTakenItems) - (a.myDroppedItems + a.myTakenItems)
-  ))[0]
+  )).slice(0, 3)
 
 
 
@@ -323,8 +325,10 @@ export async function getAllCO2Stats(generalStats) {
 export async function getUserStats() {
   const userStats = await calculateUserStats();
   return {
-    userTakenItems: userStats.userTakenItems,
+    userCollectedItems: userStats.userCollectedItems,
+    userCollectedItemsCO2: userStats.userCollectedItemsCO2,
     userDonatedItems: userStats.userDonatedItems,
-    totalC02Saved: userStats.userTakenItemsCO2 + userStats.userDonatedItemsCO2,
+    userDonatedItemsCO2: userStats.userDonatedItemsCO2,
+    totalC02Saved: userStats.userCollectedItemsCO2 + userStats.userDonatedItemsCO2,
   }
 }
