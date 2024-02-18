@@ -291,8 +291,9 @@ export default {
     October: "Okt",
   },
   Detailviews: {
-    product: " Var produktet ikke i uptaineren?",
-    take: "Tag"
+    take: "Tag",
+    product: "Var produktet ikke i uptaineren?",
+
   },
   SearchField: {
     mapPlaceholder: "Find Uptainer",
