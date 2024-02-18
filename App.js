@@ -14,7 +14,7 @@ import Uptainer from "./src/screens/Uptainer";
 import OverView from "./src/screens/OverView";
 import ServiceAdminMain from "./src/screens/ServiceAdminMain";
 import AddQRScanner from "./src/screens/AddQRScanner"; //For testing QR Scannerimport AddItem from './src/screens/AddItem';
-
+import AddItem from "./src/screens/AddItem";
 
 export default function App() {
   //Loading the font

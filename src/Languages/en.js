@@ -61,7 +61,6 @@ export default {
     Condition: "Condition of the product",
     Text: "You can elaborate on the condition of the item in the description field.",
   },
-  },
    QrScannerScreen: {
     Scan: "Scan to Updropp",
     Header: "Place the QR-code inside the frame to read it",
@@ -77,5 +76,5 @@ export default {
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",
-  },
+  }
 };

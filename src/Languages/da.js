@@ -55,9 +55,6 @@ export default {
     gallery: "Galleri",
     chooseAction: "Vælge en handling",
   },
-
-  },
-
   QrScannerScreen: {
     Scan: "Scan for at Updroppe",
     Header: "Placér QR-koden inden for rammen for at aflæse",
