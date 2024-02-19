@@ -23,8 +23,8 @@ export const sortUptainersByDistance = (userLocation, uptainersList) => {
 
   // Sort uptainersList by distance from userLocation
   const sortedList = uptainersList.slice().sort((a, b) => {
-    const distanceA = calculateDistance({ latitude, longitude }, {latitude: a.uptainerLongitude, longitude: a.uptainerLongitude});
-    const distanceB = calculateDistance({ latitude, longitude }, {latitude: b.uptainerLongitude, longitude: b.uptainerLongitude});
+    const distanceA = calculateDistance({ latitude, longitude }, {latitude: a.uptainerLatitude, longitude: a.uptainerLongitude});
+    const distanceB = calculateDistance({ latitude, longitude }, {latitude: b.uptainerLatitude, longitude: b.uptainerLongitude});
     return distanceA - distanceB;
   });
 
