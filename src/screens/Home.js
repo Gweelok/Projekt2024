@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, Alert } from "react-native";
 
 import { Backgroundstyle } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
     Permissions.getLocation().then((loc) => {
       setUserLocation(loc)
     }).catch(() => {
-      Alert.alert("Error", t("LocationPermession.error", currentLanguage))
+      Alert.alert("Error", t("LocationPermission.error", currentLanguage))
     }).finally(()=>{
       setIsLoading(false)
     })

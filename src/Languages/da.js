@@ -306,7 +306,7 @@ export default {
   SearchHome: {
     productsMatch: "produkter matcher din søgning."
   },
-  LocationPermession:{
+  LocationPermission:{
     error:"Placeringstilladelse nægtet. Venligst giv tilladelse til at få adgang til din placering for at bruge denne funktion"
   }
 };

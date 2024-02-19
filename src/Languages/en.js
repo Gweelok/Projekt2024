@@ -302,7 +302,7 @@ export default {
   SearchHome: {
     productsMatch: "products match your search."
   },
-  LocationPermession:{
+  LocationPermission:{
     error:"Location permission denied. Please grant permission to access your location to use this feature"
   }
 };
