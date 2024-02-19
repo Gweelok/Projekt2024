@@ -18,6 +18,7 @@ import {
 } from "../utils/Repo";
 import { LoaderContext } from "../componets/LoaderContext";
 import { calculateDistance } from "../utils/uptainersUtils";
+import { cacheImage, getCachedImage } from "../utils/Cache";
 
 const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
   const navigation = useNavigation();
@@ -35,26 +36,39 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
               const pathReference = ref(storage, item.itemImage);
               const product = await getProductById(item.itemproduct);
               const brand = await getBrandById(item.itemBrand);
-
+            
               try {
-                const url = await getDownloadURL(pathReference);
-                return {
-                  ...item,
-                  imageUrl: url,
-                  productName: product.productName,
-                  brandName: brand.brandName,
-                };
-              } catch (error) {
-                console.log("Error while downloading image => ", error);
-                return {
-                  ...item,
-                  imageUrl: "https://via.placeholder.com/200x200",
-                };
+                  const cachedImage = await getCachedImage(item.itemId)
+                  if (cachedImage){
+                    return {
+                      ...item,
+                      imageUrl: cachedImage,
+                      productName: product.productName,
+                      brandName: brand.brandName,
+                    };
+                  } else {
+                    const url = await getDownloadURL(pathReference);
+                    await cacheImage(item.itemId, url)
+                    return {
+                      ...item,
+                      imageUrl: url,
+                      productName: product.productName,
+                      brandName: brand.brandName,
+                    };
+                  }
+                  } catch (error) {
+                    console.log("Error while downloading image => ", error);
+                    return {
+                      ...item,
+                      imageUrl: "https://via.placeholder.com/200x200",
+                    };
+                  }
+              } else {
+                return null;
               }
-            } else {
-              return null;
-            }
-          })
+            
+            })
+            
         );
         finishLoading()
         const doubleData = [...updatedData];
