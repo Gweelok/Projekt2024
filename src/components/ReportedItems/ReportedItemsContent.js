@@ -1,55 +1,38 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  Button,
-  TouchableOpacity,
-  TouchableHighlight,
-  Pressable,
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  RefreshControl,
-  Image,
-} from "react-native";
+import { View, StyleSheet, Image, FlatList } from "react-native";
 
-import ScrollViewComponent from "../atoms/ScrollViewComponent";
-
-import UptainerContent from "../Uptainer/UptainerContent";
-import UptainerInfo from "../Uptainer/UptainerInfo";
-import TextLink from "../molecules/TextLink";
+import UptainerInfo from "../atoms/UptainerInfo";
 
 import LoadingScreen from "../../screens/LoadingScreen";
 import { LoaderContext } from "../molecules/LoaderContext";
+import NavgationButton from "../atoms/NavigationButton";
 
-import {
-  styles,
-  Buttons,
-  Backgroundstyle,
-  Primarycolor1,
-} from "../../styles/styleSheet";
-import GlobalStyle from "../../styles/GlobalStyle";
+import { getImage, getItemByUptainerId } from "../../utils/Repo";
 
-import {
-  getItemsInUptainer,
-  getItemById,
-  getProductById,
-  getUptainerById,
-} from "../../utils/Repo";
-import { useLanguage, t } from "../../Languages/LanguageHandler";
-import { set } from "firebase/database";
+import { windowHeight, windowWidth } from "../../utils/Dimensions";
+import { Buttons, styles } from "../../styles/styleSheet";
 
 const ReportedItemsContent = ({ location }) => {
-  const [reportedItemsList, setreportedItemsList] = useState([]);
+  const [reportedItemsList, setReportedItemsList] = useState([]);
   const [imgUrlList, setImgUrlList] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
 
+  const solvedButtonText = "Task Solved";
+  const navigationPath = "ServiceAdminMain";
+
+  //Right now reported items logic is not implemented.
+  //So the items that are fetched are all the items in the uptainer
   async function fetchReportedItems() {
-    if (!location || !location.uptainerId) {
-      console.error("location or location.uptainerId is undefined");
-      return; // Early return to avoid attempting to fetch with undefined uptainerId
-    }
-    const reportedItems = await getItemsInUptainer(location.uptainerId);
-    setreportedItemsList(reportedItems);
+    const reportedItems = await getItemByUptainerId(location.uptainerId);
+    setReportedItemsList(reportedItems);
+
+    const imgUrlPromises = reportedItems.map(async (item) => {
+      const imageUrl = await getImage(item.itemImage);
+      return { id: item.itemId, url: imageUrl };
+    });
+
+    const imgUrlList = await Promise.all(imgUrlPromises);
+    setImgUrlList(imgUrlList);
   }
 
   useEffect(() => {
@@ -62,25 +45,50 @@ const ReportedItemsContent = ({ location }) => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const onPressMarkSolved = () => {
+    //Not implemented yet
+  };
+
+  const renderReportedItem = ({ item }) => (
+    <View>
+      <Image
+        source={{ uri: item.url }}
+        style={{ width: 100, height: 100, margin: 20, marginBottom: 10 }}
+      />
+    </View>
+  );
+
   return (
     <View style={style.container}>
       {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+
       {location && <UptainerInfo location={location} />}
-      <ScrollViewComponent>
-        {reportedItemsList.map((item, index) => {
-          return (
-            <View key={index} style={style.list}>
-              <Text>{item.name}</Text>
-              <Image
-                style={{ width: 50, height: 50 }}
-                source={{
-                  uri: item.imgUrl,
-                }}
-              />
-            </View>
-          );
-        })}
-      </ScrollViewComponent>
+
+      {!isLoading && (
+        <View style={style.list}>
+          <FlatList
+            data={imgUrlList}
+            extraData={reportedItemsList}
+            renderItem={renderReportedItem}
+            //keyExtractor={(item, index) => index.toString()}
+            numColumns={2}
+          />
+        </View>
+      )}
+
+      {/* Not implemented yet. Is put just to see the style of page structure. 
+      Once the page is implemented, button styling needs to be updated.*/}
+      <View>
+        <NavgationButton
+          disabled={true}
+          path={navigationPath}
+          text={solvedButtonText}
+          param={location}
+          buttonStyle={Buttons.main_button}
+          textStyle={Buttons.main_buttonText}
+          callback={onPressMarkSolved}
+        />
+      </View>
     </View>
   );
 };
@@ -88,12 +96,12 @@ const ReportedItemsContent = ({ location }) => {
 const style = StyleSheet.create({
   container: {
     alignItems: "center",
+    top: "5%",
   },
   list: {
-    height: 300,
-  },
-  linkText: {
-    textAlign: "center",
+    height: windowHeight * 0.6, //Needs to be updated once the whole page is implemented.
+    width: windowWidth,
+    alignItems: "center",
   },
 });
 export default ReportedItemsContent;

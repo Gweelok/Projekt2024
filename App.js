@@ -37,7 +37,7 @@ export default function App() {
     <LoaderProvider>
       <LanguageProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='ReportedItems'>
+          <Stack.Navigator initialRouteName='Home'>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
             <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
