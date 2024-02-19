@@ -1,24 +1,26 @@
-import { View, StyleSheet, Image, FlatList, Text, TouchableOpacity, Alert, Pressable } from "react-native"
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
+import { View, StyleSheet, TouchableOpacity, Alert, FlatList, Image, Text } from 'react-native';
 
-import UptainerInfo from "../components/atoms/UptainerInfo"
-import LoadingScreen from "./LoadingScreen";
-import {LoaderContext} from "../components/molecules/LoaderContext";
+import UptainerInfo from '../atoms/UptainerInfo';
+import NavgationButton from '../atoms/NavigationButton';
+import LoadingScreen from '../../screens/LoadingScreen';
 
-import GlobalStyle from "../styles/GlobalStyle"
-import { Primarycolor1, styles } from "../styles/styleSheet"
+import { LoaderContext } from '../molecules/LoaderContext';
+import { TaskContext } from '../../context/TaskContext';
 
-import { windowHeight, windowWidth } from "../utils/Dimensions"
-import { getImage, getItemByUptainerId, deleteItemById } from "../utils/Repo";
+import { Buttons, styles } from '../../styles/styleSheet';
+import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';
 
-const OverView = ({ route, navigation }) => {
-    const { location } = route.params;
+const OverViewContent = ({ location }) => {
     const [itemList, setItemList] = useState([]);
     const [imgUrlList, setImgUrlList] = useState([]);
-    const {isLoading, setIsLoading} = useContext(LoaderContext);
+    const { isLoading, setIsLoading } = useContext(LoaderContext);
     const [deleteTrigger, setDeleteTrigger] = useState(false);
+    const { setIsSolved } = useContext(TaskContext);
 
     const buttonText = 'Delete';
+    const solvedButtonText = 'Task Solved';
+    const navigationPath = 'ServiceAdminMain';
 
     async function fetchItems() {
         const fetchedItems = await getItemByUptainerId(location.uptainerId);
@@ -64,6 +66,18 @@ const OverView = ({ route, navigation }) => {
         }
     }
 
+    const handleOverviewSolved = () => {
+        setIsSolved(prevState => ({
+            ...prevState,
+            overview: true
+        }));
+    };
+
+    // Call handleOverviewSolved wherever you need it
+    const onPressMarkSolved = () => {
+        handleOverviewSolved();
+    };
+
     //For rendering Image & Link
     const renderItem = ({ item }) => (
         <View>
@@ -76,8 +90,9 @@ const OverView = ({ route, navigation }) => {
     );
 
     return (
-        
-        <View style={[style.container, GlobalStyle.BodyWrapper]}>
+
+
+        <View style={style.container}>
 
             {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
@@ -94,27 +109,23 @@ const OverView = ({ route, navigation }) => {
                     />
                 </View>
             )}
-            <Pressable style={{
-                marginTop: 20,
-                padding: 20,
-                backgroundColor: Primarycolor1,
-               
-            }} onPress={()=>{
-                navigation.navigate('AddItem', {location})
 
-            }}>
-                <Text style={{ color: 'white'}}>Add Item</Text>
-            </Pressable>
+            <NavgationButton
+                disabled={false}
+                path={navigationPath}
+                text={solvedButtonText}
+                param={location}
+                buttonStyle={Buttons.main_button}
+                textStyle={Buttons.main_buttonText}
+                callback={onPressMarkSolved}
+            />
         </View>
     );
 }
 
 const style = StyleSheet.create({
     container: {
-        height: windowHeight,
-        width: windowWidth,
-        marginTop: 40,
-        alignItems: 'center',
+        alignItems: 'center'
     },
     list: {
         height: 300
@@ -124,4 +135,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default OverView
+export default OverViewContent;

@@ -1,14 +1,23 @@
 import { View, StyleSheet, Text } from "react-native"
-import Navigationbar from "../components/organisms/Navigationbar"
-import UptainerInfo from "../components/atoms/UptainerInfo"
-import TextLinkList  from "../components/organisms/TextLinkList"
-import { windowHeight, windowWidth } from "../../src/utils/Dimensions"
-import GlobalStyle from "../styles/GlobalStyle"
-import { styles } from "../styles/styleSheet"
+import { useContext } from "react"
+
+import { TaskContext } from '../../context/TaskContext';
+
+import Navigationbar from "../../components/organisms/Navigationbar"
+import UptainerInfo from "../../components/atoms/UptainerInfo"
+import TextLinkList from "../../components/organisms/TextLinkList"
+
+import { windowHeight, windowWidth } from "../../utils/Dimensions"
+import GlobalStyle from "../../styles/GlobalStyle"
+import { styles } from "../../styles/styleSheet"
 
 const ServiceAdminMain = ({ navigation, route }) => {
-    const { location } = route.params;
-
+    
+    const { isSolved } = useContext(TaskContext);
+    const isAllSolved = Object.values(isSolved).every(flag => flag);
+    // Check if `location` exists, if not, fallback to `param`
+    const { location = route.params?.param } = route.params || {};
+    console.log(isSolved)
     //Check if needed to be extracted later to language??
     const textValue = {
         "overview": {
@@ -25,21 +34,17 @@ const ServiceAdminMain = ({ navigation, route }) => {
         }
     }
 
-    const linkStatus = {
-        "overview": true,
-        "reportedItems": true,
-        "uptainerCondition": false,
-    }
-
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>
             <UptainerInfo location={location}></UptainerInfo>
 
             <TextLinkList navigation={navigation} location={location} textValue={textValue}
-            linkStatus={linkStatus}></TextLinkList >
-            {linkStatus.overview === true && linkStatus.reportedItems === true && linkStatus.uptainerCondition === true &&
-            <Text style={styles.paragraph_text}>Tasks list completed</Text>
+                linkStatus={isSolved}></TextLinkList >
+
+            {isSolved.overview && isSolved.reportedItems && isSolved.uptainerCondition &&
+                <Text style={[styles.paragraph_text, style.completedText]}>Tasks list completed</Text>
             }
+
             <Navigationbar navigation={navigation} ></Navigationbar>
         </View>
     )
@@ -52,6 +57,9 @@ const style = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 50
+    },
+    completedText:{
+        margin: 50
     }
 })
 

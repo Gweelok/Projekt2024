@@ -13,7 +13,8 @@ const Home = ({navigation}) => {
 const style = StyleSheet.create({
     container: {
         height: windowHeight,
-        width: windowWidth
+        width: windowWidth,
+        
     }
 })
 
