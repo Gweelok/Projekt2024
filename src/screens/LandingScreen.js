@@ -25,9 +25,8 @@ import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg"
 import LanguageDropdown from "../Languages/LanguageDropdown";
 const LandingScreen = ({ navigation }) => {
   // for multi language
-  const { currentLanguage, setLanguage } = useLanguage();
+  const { currentLanguage } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [userLogged, setUserLogged] = useState(false);
   const backButton =
     currentSlide === 0 ? null : (
       <BackButton onPress={() => setCurrentSlide(currentSlide - 1)} />
