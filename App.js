@@ -6,38 +6,25 @@
  *
  *  not implemented but wished i did: redux, or any other way to store values between screens
  * **/
-
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // base style import
-import { Text, Button } from "react-native-elements";
+import { Text } from "react-native-elements";
 
 // import from files
-import {
-  navStyle,
-  elementsStyles,
-  marginBottom,
-} from "./src/styles/Stylesheet";
+import {navStyle} from "./src/styles/Stylesheet";
 import { ChooseStation } from "./src/componets/molocules/stationOptions";
-import {
-  ChooseCatagories,
-  ChooseProducts,
-  ChooseModels,
-  ChooseBrands,
-} from "./src/componets/molocules/registerOptions";
-import { DashboardScreen } from "./src/screens/dashboardScreen";
+import {ChooseProducts,ChooseModels,ChooseBrands,} from "./src/componets/molocules/registerOptions";
 import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
-import { View } from "react-native-ui-lib";
 import { useFonts } from "expo-font";
 //importing pages for navigation
 import Home from "./src/screens/Home";
 import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
-import ProfilePage from "./src/screens/profilePages/ProfilePage";
 import ContactUs from "./src/screens/profilePages/ContactUs";
 import DataPolicy from "./src/screens/profilePages/DataPolicy";
 import LogoutConfirmation from "./src/screens/profilePages/LogoutConfirmation";
@@ -49,20 +36,14 @@ import DetailView from "./src/screens/DetailView";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen";
-import {
-  useLanguage,
-  LanguageProvider,
-  t,
-} from "./src/Languages/LanguageHandler";
+import {LanguageProvider,} from "./src/Languages/LanguageHandler";
 import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
-import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import UptainerDetails from "./src/screens/UptainerDetails";
 import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
 import Notifications from "./src/screens/ProfileSetings/Notifications";
 
-import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import TakeQRScanner from "./src/screens/form/TakeQRScanner";
 import AddQRScanner from "./src/screens/form/AddQRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
@@ -87,6 +68,7 @@ import YourStats from "./src/screens/YourStats";
 import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
 import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
 
+import { firebaseAurth } from "./src/utils/Firebase";
 
 console.log("Init App");
 const Stack = createNativeStackNavigator();
@@ -94,7 +76,19 @@ const Stack = createNativeStackNavigator();
 // Main function that everything runs in
 export default function App() {
 
-  const user = false;
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  // Handle user state changes
+  function onAuthState(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebaseAurth.onAuthStateChanged(onAuthState);
+    return subscriber; // Unsubscribe on unmount
+  }, []);
 
   // The notification badge for drafts
   const [badgeCount, setBadgeCount] = useState(0);
