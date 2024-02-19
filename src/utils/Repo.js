@@ -86,6 +86,97 @@ export async function getImage(imagePath) {
     return url
   }
 }
+export async function getAllCategories() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/categories');
+
+  try {
+      const snapshot = await get(reference);
+      const categories = [];
+      snapshot.forEach((childSnapshot) => {
+          const categoryId = childSnapshot.key;
+          const categoryName = childSnapshot.val().categoryName;
+          categories.push({
+              categoryId: categoryId,
+              categoryName: categoryName
+          });
+      });
+      return categories;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
+
+export async function getAllProducts() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/products');
+
+  try {
+      const snapshot = await get(reference);
+      const products = [];
+      snapshot.forEach((childSnapshot) => {
+          const productId = childSnapshot.key;
+          const productName = childSnapshot.val().productName;
+          const co2Footprint = childSnapshot.val().co2Footprint;
+          products.push({
+              productId: productId,
+              productName: productName,
+              co2Footprint: co2Footprint
+          });
+      });
+      return products;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
+
+export async function getAllBrands() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/brands');
+
+  try {
+      const snapshot = await get(reference);
+      const brands = [];
+      snapshot.forEach((childSnapshot) => {
+          const brandId = childSnapshot.key;
+          const brandName = childSnapshot.val().brandName;
+          brands.push({
+              brandId: brandId,
+              brandName: brandName
+          });
+      });
+      return brands;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
+
+export async function getAllModels() {
+  const db = firebaseGetDB;
+  const reference = ref(db, '/models');
+
+  try {
+      const snapshot = await get(reference);
+      const models = [];
+      snapshot.forEach((childSnapshot) => {
+          const modelId = childSnapshot.key;
+          const modelName = childSnapshot.val().modelName;
+          const brandId = childSnapshot.val().brandId;
+          models.push({
+              modelId: modelId,
+              modelName: modelName,
+              brandId: brandId
+          });
+      });
+      return models;
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+  }
+}
 
 /****************/
 /***** Auth *****/

@@ -1,5 +1,5 @@
 import { View } from "react-native"
-import UptainerInfo from "./UptainerInfo"
+import UptainerInfo from "../atoms/UptainerInfo"
 import UptainerTaskList from "./UptainerTaskList"
 import Navigationbar from "../organisms/Navigationbar"
 

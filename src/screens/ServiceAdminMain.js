@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text } from "react-native"
 import Navigationbar from "../components/organisms/Navigationbar"
-import UptainerInfo from "../components/Uptainer/UptainerInfo"
+import UptainerInfo from "../components/atoms/UptainerInfo"
 import TextLinkList  from "../components/organisms/TextLinkList"
 import { windowHeight, windowWidth } from "../../src/utils/Dimensions"
 import GlobalStyle from "../styles/GlobalStyle"
