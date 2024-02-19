@@ -1106,7 +1106,7 @@ export async function getCurrentUser() {
         }
 
 
-        return userData
+        return {...userData, id}
 
     } catch (error) {
         throw authErrors(error)
