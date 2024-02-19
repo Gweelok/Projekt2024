@@ -19,6 +19,7 @@ import Uptainer from './src/screens/ServiceAdmin/Uptainer';
 import OverView from './src/screens/ServiceAdmin/OverView'
 import ServiceAdminMain from './src/screens/ServiceAdmin/ServiceAdminMain';
 import React from 'react';
+import AddItem from './src/screens/AddItem';
 
 
 export default function App() {
@@ -47,7 +48,8 @@ export default function App() {
               <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
               <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
               <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
-            </Stack.Navigator>
+              <Stack.Screen options={{ headerShown: false }} name="AddItem" component={AddItem} />
+          </Stack.Navigator>
           </NavigationContainer>
         </TaskContextProvider>
       </LanguageProvider>

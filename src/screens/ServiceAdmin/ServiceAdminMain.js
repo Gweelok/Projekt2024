@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { TaskContext } from '../../context/TaskContext';
 
 import Navigationbar from "../../components/organisms/Navigationbar"
-import UptainerInfo from "../../components/Uptainer/UptainerInfo"
+import UptainerInfo from "../../components/atoms/UptainerInfo"
 import TextLinkList from "../../components/organisms/TextLinkList"
 
 import { windowHeight, windowWidth } from "../../utils/Dimensions"

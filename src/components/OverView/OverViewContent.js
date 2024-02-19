@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert, FlatList, Image, Text } from 'react-native';
 
-import UptainerInfo from '../Uptainer/UptainerInfo';
+import UptainerInfo from '../atoms/UptainerInfo';
 import NavgationButton from '../atoms/NavigationButton';
 import LoadingScreen from '../../screens/LoadingScreen';
 

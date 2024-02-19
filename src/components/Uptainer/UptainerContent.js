@@ -1,7 +1,7 @@
 import { View } from "react-native"
 import { useState, useEffect, useContext } from "react"
 
-import UptainerInfo from "./UptainerInfo"
+import UptainerInfo from "../atoms/UptainerInfo"
 import UptainerTaskList from "./UptainerTaskList"
 import NavigationButton from "../atoms/NavigationButton"
 
