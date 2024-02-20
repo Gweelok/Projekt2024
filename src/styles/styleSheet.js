@@ -223,6 +223,23 @@ export const styles = StyleSheet.create({
   bodyText: {
     textAlign: "left",
   },
+
+  //Buttons
+  main_button: {
+    padding: 8,
+    marginLeft: "auto",
+    marginRight: "auto",
+    backgroundColor: Primarycolor1,
+    borderColor: Primarycolor1,
+    borderWidth: 4,
+    width: "100%",
+    marginTop: "4%"
+  },
+  main_buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "space-grotesk-Medium"},
 });
 
 // Dropdown
@@ -266,6 +283,7 @@ export const dropdownStyles = StyleSheet.create({
     borderBottomWidth: 0,
   },
 });
+
 export const Buttons = StyleSheet.create({
   main_button: {
     padding: 8,
@@ -274,7 +292,7 @@ export const Buttons = StyleSheet.create({
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
     borderWidth: 4,
-    width: "100%",
+    minWidth: "75%",
     marginTop: "4%"
   },
   main_buttonText: {

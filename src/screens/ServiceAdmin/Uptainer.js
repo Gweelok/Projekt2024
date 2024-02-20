@@ -1,17 +1,22 @@
 import { Button, TouchableOpacity, TouchableHighlight, Pressable, View, StyleSheet, ScrollView, Text, RefreshControl } from "react-native"
-import { windowHeight, windowWidth } from "../utils/Dimensions"
-import UptainerContent from "../components/Uptainer/UptainerContent"
-import { Primarycolor1, Primarycolor2, styles, Buttons } from "../styles/styleSheet"
-import { useState } from "react"
+
+import { windowHeight, windowWidth } from "../../utils/Dimensions"
+import UptainerContent from "../../components/Uptainer/UptainerContent"
+
+import { SharedContext } from '../../context/TaskContext';
+
+import { Primarycolor1, Primarycolor2, styles, Buttons } from "../../styles/styleSheet"
+import { useState, useContext } from "react"
 
 const Uptainer = ({route}) => {
-    const { location } = route.params;
+    const { location = route.params?.param } = route.params || {};
 
     return (
         <View 
         style={styleLocal.container}
         >   
             <UptainerContent location={location}></UptainerContent>
+            
         </View>
     )
 }

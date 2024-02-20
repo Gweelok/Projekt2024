@@ -16,7 +16,7 @@ const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
         <Spacer height={25}></Spacer>
 
         <TextLink
-          status={linkStatus.reportedItems}
+          status={linkStatus.overview}
           path={"ReportedItems"}
           location={location}
           navigation={navigation}
