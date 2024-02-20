@@ -63,7 +63,6 @@ import CameraScreen from "./src/screens/form/CameraScreen";
 import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
-//import ProductDropdown from "./src/screens/form/ProductDropdown";
 import YourStats from "./src/screens/YourStats";
 import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
 import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
@@ -79,6 +78,7 @@ export default function App() {
   //______ Code for handling auto-sign in ______________________
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const [badgeCount, setBadgeCount] = useState(0);
   const [fontsLoaded] = useFonts({
     "space-grotesk": require("./assets/fonts/SpaceGrotesk-Regular.ttf"),
     "space-grotesk-bold": require("./assets/fonts/SpaceGrotesk-Bold.ttf"),
@@ -98,16 +98,13 @@ export default function App() {
 
   //_____________________________________________________________
 
-  // The notification badge for drafts
-  const [badgeCount, setBadgeCount] = useState(0);
-
   if (!fontsLoaded || initializing) {
     // Font is not yet loaded, return null or a loading screen
     return null;
   }
+
   // Main navigation of all the views
   return (
-    //
     <LanguageProvider>
       <LoaderProvider>
         <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
@@ -117,7 +114,7 @@ export default function App() {
               <Stack.Navigator
                 initialRouteName="HomePage"
                 screenOptions={{
-                  headerShown: false, // This hides the header
+                  headerShown: false, 
                   animation: "none",
                   gestureEnabled: false,
                 }}
@@ -283,7 +280,7 @@ export default function App() {
 
               </Stack.Navigator>) : (
               <Stack.Navigator
-                initialRouteName="LandingScreen"
+                initialRouteName="SplashScreen"
                 screenOptions={{
                   headerShown: false, // This hides the header
                   animation: "none",
