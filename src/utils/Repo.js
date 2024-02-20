@@ -50,23 +50,6 @@ export async function getAllUptainers() {
   }
 }
 
-export async function getItemsInUptainer(uptainerId) {
-  let items = [];
-  try {
-    // TODO doesnt filter out itemTaken yet should be with this when data in DB is corret
-    // items = (await getAllItems()).filter(item => item.itemUptainer === uptainerId && item.itemTaken === false);
-    items = (await getAllItems()).filter(
-      (item) => item.itemUptainer === uptainerId
-    );
-
-    return items;
-  } catch (error) {
-    // Handle error
-    console.error("Error fetching items:", error);
-    throw error;
-  }
-}
-
 export async function getItemByUptainerId(uptainerId) {
   const db = firebaseGetDB;
   const reference = ref(db, '/items');

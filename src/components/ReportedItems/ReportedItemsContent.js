@@ -70,7 +70,7 @@ const ReportedItemsContent = ({ location }) => {
             data={imgUrlList}
             extraData={reportedItemsList}
             renderItem={renderReportedItem}
-            //keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item, index) => index.toString()}
             numColumns={2}
           />
         </View>
