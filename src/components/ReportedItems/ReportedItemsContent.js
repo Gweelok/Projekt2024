@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import { View, StyleSheet, Image, FlatList } from "react-native";
 
 import UptainerInfo from "../atoms/UptainerInfo";
-
-import LoadingScreen from "../../screens/LoadingScreen";
-import { LoaderContext } from "../molecules/LoaderContext";
 import NavgationButton from "../atoms/NavigationButton";
+import LoadingScreen from "../../screens/LoadingScreen";
+
+import { LoaderContext } from "../molecules/LoaderContext";
+import { TaskContext } from "../../context/TaskContext";
 
 import { getImage, getItemByUptainerId } from "../../utils/Repo";
 
@@ -16,6 +17,7 @@ const ReportedItemsContent = ({ location }) => {
   const [reportedItemsList, setReportedItemsList] = useState([]);
   const [imgUrlList, setImgUrlList] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const { setIsSolved } = useContext(TaskContext);
 
   const solvedButtonText = "Task Solved";
   const navigationPath = "ServiceAdminMain";
@@ -46,7 +48,14 @@ const ReportedItemsContent = ({ location }) => {
   }, []);
 
   const onPressMarkSolved = () => {
-    //Not implemented yet
+    handleReportedItemsSolved();
+  };
+
+  const handleReportedItemsSolved = () => {
+    setIsSolved((prevState) => ({
+      ...prevState,
+      reportedItems: true,
+    }));
   };
 
   const renderReportedItem = ({ item }) => (
@@ -80,7 +89,7 @@ const ReportedItemsContent = ({ location }) => {
       Once the page is implemented, button styling needs to be updated.*/}
       <View>
         <NavgationButton
-          disabled={true}
+          disabled={false}
           path={navigationPath}
           text={solvedButtonText}
           param={location}
