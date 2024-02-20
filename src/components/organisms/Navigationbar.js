@@ -32,53 +32,42 @@ const Navigationbar = ({ navigation }) => {
   };
 
   return (
-
     <View style={styles.tabBarStyle}>
       <Pressable onPress={() => handlePress(PAGE_NAMES.HOME)}>
-        {
-          page == PAGE_NAMES.HOME ? (
-            <Ionicons name="ios-home-sharp" size={24} color={Primarycolor1} />
-          ) : (
-            <Ionicons name="ios-home-outline" size={24} color={Primarycolor1} />
-          )
-        }
+        {page == PAGE_NAMES.HOME ? (
+          <Ionicons name="ios-home-sharp" size={24} color={Primarycolor1} />
+        ) : (
+          <Ionicons name="ios-home-outline" size={24} color={Primarycolor1} />
+        )}
       </Pressable>
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.STATS)}>
-        {
-          page === PAGE_NAMES.STATS ? (
-            <Ionicons
-              name="stats-chart-sharp"
-              size={22}
-              color={Primarycolor1}
-            />
-          ) : (
-            <Ionicons
-              name="stats-chart-outline"
-              size={24}
-              color={Primarycolor1}
-            />
-          )
-        }
+        {page === PAGE_NAMES.STATS ? (
+          <Ionicons name="stats-chart-sharp" size={22} color={Primarycolor1} />
+        ) : (
+          <Ionicons
+            name="stats-chart-outline"
+            size={24}
+            color={Primarycolor1}
+          />
+        )}
       </Pressable>
 
       <Pressable onPress={() => handlePress(PAGE_NAMES.PROFILE)}>
         <View>
-          {
-            page === PAGE_NAMES.PROFILE ? (
-              <Ionicons
-                name="person-circle-sharp"
-                size={24}
-                color={Primarycolor1}
-              />
-            ) : (
-              <Ionicons
-                name="person-circle-outline"
-                size={24}
-                color={Primarycolor1}
-              />
-            )
-          }
+          {page === PAGE_NAMES.PROFILE ? (
+            <Ionicons
+              name="person-circle-sharp"
+              size={24}
+              color={Primarycolor1}
+            />
+          ) : (
+            <Ionicons
+              name="person-circle-outline"
+              size={24}
+              color={Primarycolor1}
+            />
+          )}
         </View>
       </Pressable>
     </View>

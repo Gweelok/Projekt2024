@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
-
 //Providers
-import { LanguageProvider } from './src/Languages/LanguageHandler';
+import { LanguageProvider } from "./src/Languages/LanguageHandler";
 import { LoaderProvider } from "./src/components/molecules/LoaderContext";
 import { TaskContextProvider } from './src/context/TaskContext';
 
@@ -20,10 +19,9 @@ import OverView from './src/screens/ServiceAdmin/OverView'
 import ServiceAdminMain from './src/screens/ServiceAdmin/ServiceAdminMain';
 import React from 'react';
 import AddItem from './src/screens/AddItem';
-
+import AddQRScanner from "./src/screens/AddQRScanner";
 
 export default function App() {
-
   //Loading the font
   const [fontsLoaded] = useFonts({
     "space-grotesk": require("./assets/fonts/SpaceGrotesk-Regular.ttf"),
@@ -36,19 +34,44 @@ export default function App() {
     return null;
   }
 
-  const Stack = createNativeStackNavigator()
+  const Stack = createNativeStackNavigator();
   return (
     <LoaderProvider>
       <LanguageProvider>
         <TaskContextProvider>
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName='Login'>
-              <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-              <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-              <Stack.Screen options={{ headerShown: false }} name="ServiceAdminMain" component={ServiceAdminMain} />
-              <Stack.Screen options={{ headerShown: false }} name="Uptainer" component={Uptainer} />
-              <Stack.Screen options={{ headerShown: false }} name="OverView" component={OverView} />
-              <Stack.Screen options={{ headerShown: false }} name="AddItem" component={AddItem} />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={Home}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={Login}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="ServiceAdminMain"
+              component={ServiceAdminMain}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Uptainer"
+              component={Uptainer}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="OverView"
+              component={OverView}
+            />
+            <Stack.Screen options={{ headerShown: false }} name="AddItem" component={AddItem} />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AddQRScanner"
+              component={AddQRScanner}
+            />
           </Stack.Navigator>
           </NavigationContainer>
         </TaskContextProvider>
@@ -60,8 +83,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
