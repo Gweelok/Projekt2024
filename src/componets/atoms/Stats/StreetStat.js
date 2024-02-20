@@ -17,7 +17,7 @@ const StreetStat = (props) => {
             <View style={GlobalStyle}>
                 <Text
                     style={[Backgroundstyle.message_Screens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${props.pos}%`, color: "white" }]}>
-                    {uptainer.itemsReused} {t('StatsPage.ItemsReused', currentLanguage)}
+                    {uptainer.takenItems} {t('StatsPage.ItemsReused', currentLanguage)}
                 </Text>
             </View>
             <View style={GlobalStyle}>

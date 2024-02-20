@@ -18,12 +18,6 @@ export const VisitedUptainerStat = (props) => {
 
 
 
-
-    const handlePress = () => {
-        navigation.navigate("StatsInfo");
-    };
-
-
     return (
         <View style={GlobalStyle}>
             <View>
@@ -53,8 +47,7 @@ export const VisitedUptainerStat = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={GlobalStyle}>
-
-                    <Text style={[Buttons.main_button, { paddingTop: 9, height: 40, width: "100%", color: "white" }]}>{uptainer.itemsReused} {t('StatsPage.ItemsReused', currentLanguage)}</Text>
+                    <Text style={[Buttons.main_button, { paddingTop: 9, height: 40, width: "100%", color: "white" }]}>{uptainer.takenItems} {t('StatsPage.ItemsReused', currentLanguage)}</Text>
                     <View style={GlobalStyle}>
                         <Text style={[Backgroundstyle.informationScreens, { paddingTop: 9, height: 40, marginTop: 5, marginBottom: 40, paddingLeft: 10, width: "100%", color: Primarycolor1 }]}>{convertKgToTons(uptainer.savedCO2)}{t('StatsPage.CO2Save', currentLanguage)}</Text>
                     </View>

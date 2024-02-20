@@ -50,7 +50,7 @@ export function convertKgToTons(amountInKg) {
   if (amountInKg >= 1000) {
     return (amountInKg / 1000).toFixed(2) + " T.";
   } else {
-    return amountInKg + " kg";
+    return amountInKg + " Kg.";
   }
 }
 export const setUptainersByIds = async (uptainers) => {
@@ -87,30 +87,14 @@ async function fetchAllTakenItems() {
   return allTakenItems;
 }
 
-// Fetches all items taken by a user from the database.
-async function fetchAllItemsTakenByUser() {
-  const userId = firebaseAurth.currentUser.uid
-  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
-  const allUserItems = await getItemsFromUser(userId);
-  const allItemsTakenByUser =
-    allUserItems.filter(
-      (item) => item.itemTaken == false
-    ) || [];
-  return allItemsTakenByUser;
-}
 
-async function fetchAllItemsTakenFromUser() {
-  const userId = firebaseAurth.currentUser.uid
-  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
-  const allUserItems = await getItemsFromUser(userId);
-  const allItemsTakenFromUser = allUserItems.filter(
-    (item) => item.itemTaken != false
-  );
-  return allItemsTakenFromUser;
-}
 
 // Fetches CO2 footprint of a product from the database
 async function fetchProductCO2(items) {
+  if (items.length == 0) {
+    return 0
+  }
+
   let totalco2Footprint = 0
   const products = await getAllProducts()
 
@@ -127,33 +111,8 @@ async function fetchProductCO2(items) {
 //----------------------UPDATE STATS-----------------------//
 
 // Updates all stats based on all taken items by every user
-function updateGeneralStats(generalStats, totalco2Footprint, items) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
+function updateGeneralStats(generalStats, items) {
 
-
-
-  generalStats.allNumberTakenItems = items.length;
-  generalStats.allTakenItemsCO2 = totalco2Footprint;
-
-  items.map((item) => {
-    const itemDate = new Date(item.itemTakenDate);
-    itemDate.setHours(0, 0, 0, 0);
-
-    if (itemDate.getTime() === today.getTime()) {
-      generalStats.todayNumberTakenItems += 1;
-      generalStats.todayTakenItemsCO2 += item.co2Footprint;
-    } else if (itemDate.getTime() === yesterday.getTime()) {
-      generalStats.yesterdayNumberTakenItems += 1;
-      generalStats.yesterdayTakenItemsCO2 += item.co2Footprint;
-    }
-
-
-    const yearMonthKey = `${itemDate.getFullYear()}-${itemDate.getMonth() + 1}`;
-    generalStats.allTakenItemsMonth[yearMonthKey] = (generalStats.allTakenItemsMonth[yearMonthKey] || 0) + 1;
-  })
 
 
 }
@@ -161,12 +120,14 @@ function updateGeneralStats(generalStats, totalco2Footprint, items) {
 
 
 
-//----------------------PROCESS STATS-----------------------//
-// Process functions sets up the initial stats,
-// and then updates them based on the data fetched from the DB.
 
-async function processGeneralStats(allTakenItems) {
-  let generalStats = {
+
+//----------------------CALCULATE STATS-----------------------//
+// Calculate functions call the process functions,
+// and return the final stats that will be used in the relevant components.
+
+export async function calculateGeneralStats() {
+  const generalStats = {
     allNumberTakenItems: 0,
     allTakenItemsCO2: 0,
     allTakenItemsMonth: {},
@@ -177,52 +138,57 @@ async function processGeneralStats(allTakenItems) {
   };
 
 
-  const totalco2Footprint = await fetchProductCO2(allTakenItems);
-  updateGeneralStats(generalStats, totalco2Footprint, allTakenItems);
+  const allTakenItems = await fetchAllTakenItems();
+  const totalTakenco2Footprint = await fetchProductCO2(allTakenItems);
+  const today = new Date();
+  const yesterday = new Date(today);
+  today.setHours(0, 0, 0, 0);
+  yesterday.setDate(today.getDate() - 1);
+
+
+
+
+  generalStats.allNumberTakenItems = allTakenItems.length;
+  generalStats.allTakenItemsCO2 = totalTakenco2Footprint;
+
+
+
+
+  allTakenItems.map((item) => {
+    if (item.itemTakenDate) {
+      const itemDate = new Date(item.itemTakenDate);
+      itemDate.setHours(0, 0, 0, 0);
+
+      if (itemDate.getTime() === today.getTime()) {
+        generalStats.todayNumberTakenItems += 1;
+        generalStats.todayTakenItemsCO2 += item.co2Footprint;
+      } else if (itemDate.getTime() === yesterday.getTime()) {
+        generalStats.yesterdayNumberTakenItems += 1;
+        generalStats.yesterdayTakenItemsCO2 += item.co2Footprint;
+      }
+
+
+      const yearMonthKey = `${itemDate.getFullYear()}-${itemDate.getMonth() + 1}`;
+      generalStats.allTakenItemsMonth[yearMonthKey] = (generalStats.allTakenItemsMonth[yearMonthKey] || 0) + 1;
+    }
+  })
 
   return generalStats;
 }
 
-async function processUserStats(allUserCollectedItems, allUserDonatedItems) {
-  return {
-    userCollectedItems: allUserCollectedItems.length,
-    userCollectedItemsCO2: await fetchProductCO2(allUserCollectedItems),
-    userDonatedItems: allUserDonatedItems.length,
-    userDonatedItemsCO2: await fetchProductCO2(allUserDonatedItems)
-  }
-}
-
-
-//----------------------CALCULATE STATS-----------------------//
-// Calculate functions call the process functions,
-// and return the final stats that will be used in the relevant components.
-
-export async function calculateGeneralStats() {
-  const allTakenItems = await fetchAllTakenItems();
-
-  return await processGeneralStats(allTakenItems)
-}
-
-async function calculateUserStats() {
-  const allUserCollectedItems = await fetchAllItemsTakenFromUser();
-  const allUserDonatedItems = await fetchAllItemsTakenByUser();
-
-  return await processUserStats(
-    allUserCollectedItems,
-    allUserDonatedItems
-  )
-}
 
 async function calculateUptainerStats() {
   const allUptainers = await getAllUptainers();
   const allItems = await getAllItems()
+  const currentMonth = new Date().getMonth()
   const userId = firebaseAurth.currentUser.uid
   //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
 
   const allUptainersStats = allUptainers.reduce((acc, uptainer) => {
     acc[uptainer.uptainerId] = {
       ...uptainer,
-      itemsReused: 0,
+      takenItems: 0,
+      takenItemsThisMonth: 0,
       savedCO2: 0,
       droppedItems: 0,
       myDroppedItems: 0,
@@ -244,66 +210,70 @@ async function calculateUptainerStats() {
           uptainer.myTakenItems += 1
         }
 
-        uptainer.itemsReused += 1
+        const itemDate = new Date(item.itemTakenDate)
+        if (itemDate.getMonth() == currentMonth) {
+          uptainer.takenItemsThisMonth++
+        }
+
+        uptainer.takenItems += 1
         uptainer.savedCO2 += item.co2Footprint
+      } else {
+        if (item.itemUser == userId) {
+          uptainer.myDroppedItems += 1
+        }
+
+        uptainer.droppedItems += 1
       }
-
-
-      if (item.itemUser == userId) {
-        uptainer.myDroppedItems += 1
-      }
-
-      uptainer.droppedItems += 1
     }
   })
 
 
-  const sortedUptainers = (Object.values(allUptainersStats).sort(
-    (a, b) => b.itemsReused - a.itemsReused
+  const sortedUptainersThisMonth = (Object.values(allUptainersStats).sort(
+    (a, b) => b.takenItemsThisMonth - a.takenItemsThisMonth
   )).slice(0, 3)
 
-  const mostVisitedUptainer = (Object.values(allUptainersStats).sort(
-    (a, b) => (b.droppedItems + b.itemsReused) - (a.droppedItems + a.itemsReused)
-  ))[0]
+  // currently not used in Stats
+  const sortedUptainers = (Object.values(allUptainersStats).sort(
+    (a, b) => b.takenItems - a.takenItems
+  )).slice(0, 3)
 
-  const myMostVisitedUptainer = (Object.values(allUptainersStats).sort(
+  // currently not used in Stats
+  const mostVisitedUptainers = (Object.values(allUptainersStats).sort(
+    (a, b) => (b.droppedItems + b.takenItems) - (a.droppedItems + a.takenItems)
+  )).slice(0, 3)
+
+  // most visited uptainer based on user dropped + taken items
+  const myMostVisitedUptainers = (Object.values(allUptainersStats).sort(
     (a, b) => (b.myDroppedItems + b.myTakenItems) - (a.myDroppedItems + a.myTakenItems)
   )).slice(0, 3)
 
 
 
 
-  return { sortedUptainers, mostVisitedUptainer, myMostVisitedUptainer }
-}
-
-async function calculateTotalCO2Savings(generalStats) {
-
-
-  const todayCO2Saved = convertKgToTons(generalStats.todayTakenItemsCO2);
-  const yesterdayCO2Saved = convertKgToTons(generalStats.yesterdayTakenItemsCO2);
-  const totalCO2Saved = generalStats.allTakenItemsCO2;
-
   return {
-    todayCO2Saved,
-    yesterdayCO2Saved,
-    totalCO2Saved,
-  };
+    sortedUptainers,
+    sortedUptainersThisMonth,
+    mostVisitedUptainers,
+    myMostVisitedUptainers
+  }
 }
+
+
 
 // Export functions return relevant stats that will be used in the components.
 // For Stat.js component
 export async function getAllItemAndUptainerStats(generalStats) {
-  const { sortedUptainers, mostVisitedUptainer, myMostVisitedUptainer } = await calculateUptainerStats();
-
+  const uptainerStats = await calculateUptainerStats();
 
   const stats = {
     allTakenItems: generalStats.allNumberTakenItems,
     todayTakenItems: generalStats.todayNumberTakenItems,
     yesterdayTakenItems: generalStats.yesterdayNumberTakenItems,
     allTakenItemsMonth: generalStats.allTakenItemsMonth,
-    top3Uptainers: sortedUptainers,
-    mostVisitedUptainer: mostVisitedUptainer,
-    myMostVisitedUptainer: myMostVisitedUptainer
+    top3Uptainers: uptainerStats.sortedUptainers,
+    top3UptainersThisMonth: uptainerStats.sortedUptainersThisMonth,
+    mostVisitedUptainers: uptainerStats.mostVisitedUptainers,
+    myMostVisitedUptainers: uptainerStats.myMostVisitedUptainers
   };
 
   return stats;
@@ -312,23 +282,47 @@ export async function getAllItemAndUptainerStats(generalStats) {
 
 // For Stat.js
 export async function getAllCO2Stats(generalStats) {
-  const calculatedCO2 = await calculateTotalCO2Savings(generalStats);
-
   return {
-    todayCO2Saved: calculatedCO2.todayCO2Saved,
-    yesterdayCO2Saved: calculatedCO2.yesterdayCO2Saved,
-    totalCO2Saved: calculatedCO2.totalCO2Saved,
+    todayCO2Saved: convertKgToTons(generalStats.todayTakenItemsCO2),
+    yesterdayCO2Saved: convertKgToTons(generalStats.yesterdayTakenItemsCO2),
+    totalCO2Saved: generalStats.allTakenItemsCO2
   }
 }
 
-// For YourStats.js
+
 export async function getUserStats() {
-  const userStats = await calculateUserStats();
+  var allUserCollectedItems = []
+  var allUserDonatedItems = []
+
+  const userId = firebaseAurth.currentUser.uid
+  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const allUserItems = await getItemsFromUser(userId);
+
+
+  allUserItems.map((item) => {
+    if (item.itemTaken) {
+      if (item.itemUser == userId) {
+        allUserCollectedItems.push(item)
+      }
+    } else {
+      allUserDonatedItems.push(item)
+    }
+  })
+
+
+
+
+  const userStats = {
+    userCollectedItems: allUserCollectedItems.length,
+    userCollectedItemsCO2: await fetchProductCO2(allUserCollectedItems),
+    userDonatedItems: allUserDonatedItems.length,
+    userDonatedItemsCO2: await fetchProductCO2(allUserDonatedItems)
+  }
+
+
+
   return {
-    userCollectedItems: userStats.userCollectedItems,
-    userCollectedItemsCO2: userStats.userCollectedItemsCO2,
-    userDonatedItems: userStats.userDonatedItems,
-    userDonatedItemsCO2: userStats.userDonatedItemsCO2,
-    totalC02Saved: userStats.userCollectedItemsCO2 + userStats.userDonatedItemsCO2,
+    ...userStats,
+    totalC02Saved: userStats.userCollectedItemsCO2 + userStats.userDonatedItemsCO2
   }
 }

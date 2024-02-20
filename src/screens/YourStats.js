@@ -25,55 +25,7 @@ const YourStats = (props) => {
 
 
   const co2Equivalent = props.userco2Equivalent
-  const myMostVisitedUptainer = props.myMostVisitedUptainer
-
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  async function fetchData() {
-    //Filter items by user
-    const userItems = await getItemsFromUser(firebaseAurth.currentUser.uid);
-    const products = await getAllProducts()
-    // Initializing variables to hold CO2 footprint for taken and not taken items
-    let co2FootprintTaken = 0;
-    let co2FootprintNotTaken = 0;
-    let itemsDonated = 0;
-    let itemsCollected = 0;
-    // Loop through the items array and products arrays to calculate the total CO2 footprint
-    console.log("userItems", userItems)
-    userItems.forEach((item) => {
-      products.forEach((product) => {
-        if (item.itemproduct === product.productId && item.itemTaken != false) {
-          co2FootprintTaken += parseInt(product.co2Footprint);
-        } else if (item.itemproduct === product.productId && item.itemTaken === false) {
-          co2FootprintNotTaken += parseInt(product.co2Footprint);
-        }
-      });
-      if (item.itemTaken === false) {
-        itemsDonated += 1;
-      }
-      if (item.itemTaken != false) {
-        itemsCollected += 1;
-      }
-    });
-    // Calculate the total CO2 footprint
-    const totalCO2Footprint = co2FootprintTaken + co2FootprintNotTaken;
-    console.log("CO2 footprint of taken items:", co2FootprintTaken);
-    console.log("CO2 footprint of not taken items:", co2FootprintNotTaken);
-    console.log("Total CO2 footprint:", totalCO2Footprint);
-    /*
-    setCO2Data((prevData) => ({
-      ...prevData,
-      TotalCo2Footprint: totalCO2Footprint,
-      itemsDonated: itemsDonated,
-      itemsCollected: itemsCollected
-    }));
-    */
-
-    // sayf - i have already calculated everything in here:
-    console.log(co2Data);
-  }
+  const myMostVisitedUptainers = props.myMostVisitedUptainers
 
 
 
@@ -92,16 +44,11 @@ const YourStats = (props) => {
 
 
       <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-        <View
-          style={[
-            Backgroundstyle.informationScreens,
-            { paddingTop: 5, marginRight: 15 },
-          ]}
-        >
+        <View style={[Backgroundstyle.informationScreens, { paddingTop: 5, marginRight: 15 }]}>
           <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
             {t("StatsPage.ItemsDonated", currentLanguage)}
           </Text>
-          <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
+          <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
             {co2Data.userDonatedItems}
           </Text>
         </View>
@@ -110,7 +57,7 @@ const YourStats = (props) => {
           <Text style={[styles.paragraph_text, { marginTop: 5, fontSize: 14 }]}>
             {t("StatsPage.ItemsCollected", currentLanguage)}
           </Text>
-          <Text style={[HeaderText.Header, { marginTop: 10, fontSize: 35 }]}>
+          <Text style={[HeaderText.Header, { marginLeft: 0, marginTop: 10, fontSize: 35 }]}>
             {co2Data.userCollectedItems}
           </Text>
         </View>
@@ -268,13 +215,13 @@ const YourStats = (props) => {
       </View>
 
 
-      {myMostVisitedUptainer.length != 0 &&
+      {myMostVisitedUptainers.length != 0 &&
         <View>
           <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
-            {t("StatsPage.MyMostVisitedUptainer", currentLanguage)}
+            {t("StatsPage.MyMostVisitedUptainers", currentLanguage)}
           </Text>
 
-          {myMostVisitedUptainer.map((uptainer, index) => {
+          {myMostVisitedUptainers.map((uptainer, index) => {
             return (
               <View key={index}>
                 <YourVisitedUptainer value={uptainer}></YourVisitedUptainer>

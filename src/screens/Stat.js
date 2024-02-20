@@ -29,21 +29,24 @@ import {
 import { getAllItemAndUptainerStats, getAllCO2Stats, calculateGeneralStats, Calculate_co2_Equivalent, convertKgToTons, getUserStats } from "../utils/uptainersUtils";
 import { BoxLink } from "../styles/BoxLink";
 import LoadingScreen from "../componets/LoadingScreen";
+import { useNavigation } from "@react-navigation/core";
 
-const Stat = ({ navigation }) => {
+const Stat = () => {
+  const navigation = useNavigation()
   const { currentLanguage } = useLanguage();
   const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
   const [isLoading, setIsLoading] = useState(true)
 
 
   const [data, setData] = useState({
-    myMostVisitedUptainer: [],
-    mostVisitedUptainer: null,
+    myMostVisitedUptainers: [],
+    mostVisitedUptainers: [], // not used
     allTakenItems: 0,
     todayTakenItems: 0,
     yesterdayTakenItems: 0,
     allTakenItemsMonth: {},
-    top3Uptainers: [],
+    top3Uptainers: [],  // not used
+    top3UptainersThisMonth:[]
   });
 
 
@@ -65,8 +68,8 @@ const Stat = ({ navigation }) => {
     totalC02Saved: 0,
     userDonatedItems: 0,
     userCollectedItems: 0,
-    userCollectedItemsCO2:0,
-    userDonatedItemsCO2:0
+    userCollectedItemsCO2: 0,
+    userDonatedItemsCO2: 0
   })
   const [userco2Equivalent, setuserco2Equivalent] = useState({
     co2_pers: 10,
@@ -84,10 +87,13 @@ const Stat = ({ navigation }) => {
     const totalCO2Savings = await getAllCO2Stats(generalStats)
 
 
+
     setData(stats)
     setCO2Data(totalCO2Savings)
     setco2Equivalent(Calculate_co2_Equivalent(totalCO2Savings.totalCO2Saved))
   }
+
+
   const fetchUserData = async () => {
     const userStats = await getUserStats()
 
@@ -301,7 +307,8 @@ const Stat = ({ navigation }) => {
                   style={[
                     {
                       flexDirection: "row",
-                      marginTop: 5,
+                      alignItems: "center",
+                      marginTop: 3,
                       marginBottom: 3,
                       marginRight: "4%",
                     },
@@ -316,13 +323,13 @@ const Stat = ({ navigation }) => {
 
 
 
-              {data.top3Uptainers.length != 0 &&
+              {data.top3UptainersThisMonth.length != 0 &&
                 <View style={[{ alignContent: "center", marginTop: 30 }]}>
                   <Text style={styles.menuItem_text}>
                     {t("StatsPage.BestAcheieve", currentLanguage)}
                   </Text>
 
-                  {data.top3Uptainers.map((uptainer, index) => {
+                  {data.top3UptainersThisMonth.map((uptainer, index) => {
                     return (
                       <View key={index}>
                         <StreetStat uptainer={uptainer} pos={100 - (index * 25)} />
@@ -336,14 +343,13 @@ const Stat = ({ navigation }) => {
 
 
 
-              {data.mostVisitedUptainer &&
+              {data.myMostVisitedUptainers.length != 0 &&
                 <View style={[{ alignContent: "center", marginTop: 30 }]}>
                   <Text style={[styles.menuItem_text, { marginBottom: 10 }]}>
-                    {t("StatsPage.MostVisitedUptainer", currentLanguage)}
+                    {t("StatsPage.MyMostVisitedUptainer", currentLanguage)}
                   </Text>
                   <VisitedUptainerStat
-                    navigation={navigation}
-                    uptainer={data.mostVisitedUptainer}
+                    uptainer={data.myMostVisitedUptainers[0]}
                   />
                 </View>
               }
@@ -355,7 +361,7 @@ const Stat = ({ navigation }) => {
             </View>
           ) : (
             <YourStats
-              myMostVisitedUptainer={data.myMostVisitedUptainer}
+              myMostVisitedUptainers={data.myMostVisitedUptainers}
               userco2Data={userco2Data}
               userco2Equivalent={userco2Equivalent}
             />
