@@ -77,7 +77,8 @@ export default function App() {
 
   //______ Code for handling auto-sign in ______________________
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
+  const [isActive, setIsActive] = useState(false);
   const [badgeCount, setBadgeCount] = useState(0);
   const [fontsLoaded] = useFonts({
     "space-grotesk": require("./assets/fonts/SpaceGrotesk-Regular.ttf"),
@@ -88,6 +89,7 @@ export default function App() {
   // Handle user state changes
   function onAuthState(user) {
     setUser(user);
+    if (user) { setIsActive(true) }
     if (initializing) setInitializing(false);
   }
 
@@ -114,7 +116,7 @@ export default function App() {
               <Stack.Navigator
                 initialRouteName="HomePage"
                 screenOptions={{
-                  headerShown: false, 
+                  headerShown: false,
                   animation: "none",
                   gestureEnabled: false,
                 }}
@@ -278,16 +280,33 @@ export default function App() {
                   component={ForgotPassword}
                 />
 
-              </Stack.Navigator>) : (
+              </Stack.Navigator>) : isActive && !user ? (
+                <Stack.Navigator
+                  initialRouteName={'Sign in'}
+                  screenOptions={{
+                    headerShown: false,
+                    animation: "none",
+                    gestureEnabled: false,
+                  }}
+                >
+                  <Stack.Screen
+                    name="Sign in"
+                    component={SignIn}
+                  />
+                  <Stack.Screen
+                    name="SignUp"
+                    component={SignUpScreen}
+                  />
+
+                </Stack.Navigator>) : (
               <Stack.Navigator
-                initialRouteName="SplashScreen"
+                initialRouteName={'SplashScreen'}
                 screenOptions={{
-                  headerShown: false, // This hides the header
+                  headerShown: false,
                   animation: "none",
                   gestureEnabled: false,
                 }}
               >
-
                 <Stack.Screen
                   name="SplashScreen"
                   component={SplashScreen}
