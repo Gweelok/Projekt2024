@@ -36,6 +36,8 @@ const paths = {
     Profils: "Profils/",    //for storage
 };
 
+const now = new Date().toLocaleDateString();
+
 export async function seedCheck() {
     try {
         const snapshot = await get(ref(db, '/'));
@@ -157,6 +159,7 @@ export async function createItem(itemImage = "", categoryId = "", itemproduct = 
             itemcondition: itemcondition,
             itemUser: user.id,
             itemUptainer: UptainerId,
+            itemGivenTime: now,
         };
         await writeToDatabase(paths.items + '/' + newItemKey, itemData);
     } catch (error) {
@@ -205,6 +208,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
+        itemGivenTime: now,
         itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
@@ -964,7 +968,7 @@ export async function updateItemById(itemId, newData, newImage) {
 export async function updateItemfromDraft(itemId, uptainerId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, { itemUptainer: uptainerId });
+        update(reference, { itemUptainer: uptainerId, itemGivenTime: now });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -1005,7 +1009,7 @@ export async function updateItemToTaken(itemId) {
     try {
         // set item taken to user
         const user = await getCurrentUser()
-        update(reference, { itemTaken: user.id });
+        update(reference, { itemTaken: user.id, itemTakenTime: now, });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
