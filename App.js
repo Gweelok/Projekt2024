@@ -6,15 +6,20 @@ import { useFonts } from "expo-font";
 //Providers
 import { LanguageProvider } from "./src/Languages/LanguageHandler";
 import { LoaderProvider } from "./src/components/molecules/LoaderContext";
+import { TaskContextProvider } from './src/context/TaskContext';
 
-//importing pages for navigation
-import Home from "./src/screens/Home";
-import Login from "./src/screens/Login";
-import Uptainer from "./src/screens/Uptainer";
-import OverView from "./src/screens/OverView";
-import ServiceAdminMain from "./src/screens/ServiceAdminMain";
-import AddQRScanner from "./src/screens/AddQRScanner"; //For testing QR Scannerimport AddItem from './src/screens/AddItem';
-import AddItem from "./src/screens/AddItem";
+//Pages for navigation
+//Auth
+import Login from './src/screens/Login';
+//Home
+import Home from './src/screens/Home';
+//ServiceAdmin
+import Uptainer from './src/screens/ServiceAdmin/Uptainer';
+import OverView from './src/screens/ServiceAdmin/OverView'
+import ServiceAdminMain from './src/screens/ServiceAdmin/ServiceAdminMain';
+import React from 'react';
+import AddItem from './src/screens/AddItem';
+import AddQRScanner from "./src/screens/AddQRScanner";
 
 export default function App() {
   //Loading the font
@@ -33,8 +38,9 @@ export default function App() {
   return (
     <LoaderProvider>
       <LanguageProvider>
+        <TaskContextProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="AddQRScanner">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Home"
@@ -47,6 +53,11 @@ export default function App() {
             />
             <Stack.Screen
               options={{ headerShown: false }}
+              name="ServiceAdminMain"
+              component={ServiceAdminMain}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
               name="Uptainer"
               component={Uptainer}
             />
@@ -55,22 +66,17 @@ export default function App() {
               name="OverView"
               component={OverView}
             />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="ServiceAdminMain"
-              component={ServiceAdminMain}
-            />
-            {/*     For testing QR Scanner */}
+            <Stack.Screen options={{ headerShown: false }} name="AddItem" component={AddItem} />
             <Stack.Screen
               options={{ headerShown: false }}
               name="AddQRScanner"
               component={AddQRScanner}
             />
-            <Stack.Screen options={{ headerShown: false }} name="AddItem" component={AddItem} />
           </Stack.Navigator>
-        </NavigationContainer>
+          </NavigationContainer>
+        </TaskContextProvider>
       </LanguageProvider>
-    </LoaderProvider>
+    </LoaderProvider >
   );
 }
 

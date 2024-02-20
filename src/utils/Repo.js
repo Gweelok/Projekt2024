@@ -198,12 +198,16 @@ export async function signInUser(email, password, navigation) {
 /***** Create *******/
 /********************/
 
-export function createUptainerTaskAnswers(data) {
+export async function createUptainerTaskAnswers(data) {
   const newAnswersKey = push(ref(db, "taskAnswers")).key;
-  writeToDatabase("taskAnswers" + "/" + newAnswersKey, data)
+  try {
+    await writeToDatabase("taskAnswers" + "/" + newAnswersKey, data)
+  }catch(error){
+    console.error(error);
+  }
 }
 
-function writeToDatabase(refPath, data) {
+async function writeToDatabase(refPath, data) {
   const reference = ref(db, refPath);
   try {
     set(reference, data);
@@ -373,7 +377,7 @@ export async function getUptainerById(uptainerId) {
 
 /********************/
 /***** Delete *******/
-/********************/ 
+/********************/
 
 export async function deleteItemById(itemId) {
   const reference = ref(db, `/items/${itemId}`);
