@@ -159,7 +159,7 @@ export async function createItem(itemImage = "", categoryId = "", itemproduct = 
             itemcondition: itemcondition,
             itemUser: user.id,
             itemUptainer: UptainerId,
-            itemGivenTime: now,
+            itemGivenDate: now,
         };
         await writeToDatabase(paths.items + '/' + newItemKey, itemData);
     } catch (error) {
@@ -208,7 +208,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
-        itemGivenTime: now,
+        itemGivenDate: now,
         itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
@@ -968,7 +968,7 @@ export async function updateItemById(itemId, newData, newImage) {
 export async function updateItemfromDraft(itemId, uptainerId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, { itemUptainer: uptainerId, itemGivenTime: now });
+        update(reference, { itemUptainer: uptainerId, itemGivenDate: now });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -1009,7 +1009,7 @@ export async function updateItemToTaken(itemId) {
     try {
         // set item taken to user
         const user = await getCurrentUser()
-        update(reference, { itemTaken: user.id, itemTakenTime: now, });
+        update(reference, { itemTaken: user.id, itemTakenDate: now, });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
