@@ -12,7 +12,7 @@ import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appr
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { generateQRCode } from "../../utils/QRCodeGenerator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Buttons, styles } from "../../styles/Stylesheet";
+import {Backgroundstyle, Buttons, styles} from "../../styles/Stylesheet";
 import {
   createItem,
   getUptainerFromQR,
@@ -23,6 +23,7 @@ import {
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
 import LoadingScreen from "../../componets/LoadingScreen";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 
 const QRScanner = ({ route, navigation }) => {
@@ -196,9 +197,8 @@ const QRScanner = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollViewComponent>  
-        <SafeAreaView style={styles.container2}>
-
+    <ScrollViewComponent style={ GlobalStyle.BodyWrapper }>
+        <View style={{marginTop: 40}}>
         {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
           <View style={styles.header}>
@@ -210,20 +210,17 @@ const QRScanner = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.content}>
-            <Text style={styles.instruction}>
+          <View>
+            <Text style={styles.paragraph_text}>
               {t("QrScannerScreen.Header", currentLanguage)}
             </Text>
 
             {hasPermission ? (
               <View style={styles.qrScannerFrame} >
-                <View style={styles.dashedBorder} >
                   <BarCodeScanner
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                    style={{ flex: 1 }}
-
+                    style={{ flex: 1 }} 
                   />
-                </View >
               </View>
             ) : (
               <Text style={{ margin: 10 }}>No access to the camera</Text>
@@ -232,35 +229,18 @@ const QRScanner = ({ route, navigation }) => {
             <View style={styles.buttonsContainer}>
               {scanned && (
                 <View>
-                  <View style={{ marginBottom: 10 }}>
+                  <View>
                     {isActive ? (<Pressable
                       onPress={handleSaveCode}
                       disabled={isLoading}
-                      style={[
-                        Buttons.main_button,
-                        {
-                          borderWidth: 1,
-                          width: 220,
-                          marginHorizontal: 60,
-                        },
-                      ]}
-                    >
+                      style={Buttons.main_button}>
                       <Text style={Buttons.main_buttonText}>
                         {t("QrScannerScreen.SaveCode", currentLanguage)}
                       </Text>
                     </Pressable>) : (<Pressable
                       onPress={handleSaveCode}
                       disabled={isLoading}
-                      style={[
-                        Buttons.main_button,
-                        {
-                          backgroundColor: "red",
-                          borderWidth: 1,
-                          width: 220,
-                          marginHorizontal: 60,
-                        },
-                      ]}
-                    >
+                      style={[Buttons.main_button, {backgroundColor: "red", borderColor: "red"} ]}>
                       <Text style={Buttons.main_buttonText}>
                         {t("QrScannerScreen.SaveCode", currentLanguage)}
                       </Text>
@@ -271,15 +251,7 @@ const QRScanner = ({ route, navigation }) => {
                     <Pressable
                       onPress={handleScanAgain}
                       disabled={isLoading}
-                      style={[
-                        Buttons.secondary_button,
-                        {
-                          borderWidth: 2,
-                          width: 220,
-                          marginHorizontal: 60,
-                        },
-                      ]}
-                    >
+                      style={Buttons.secondary_button}>
                       <Text style={Buttons.secondary_buttonText}>
                         {t("QrScannerScreen.ScanAgain", currentLanguage)}
                       </Text>
@@ -289,12 +261,12 @@ const QRScanner = ({ route, navigation }) => {
               )}
             </View>
 
-            <Text style={styles.instruction}>
+            <Text style={styles.paragraph_text}>
               {t("QrScannerScreen.Bottom", currentLanguage)}
             </Text>
           </View>
 
-        </SafeAreaView>
+        </View>
     </ScrollViewComponent>
   );
 };

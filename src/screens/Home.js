@@ -23,7 +23,7 @@ const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [itemSelected, setItemSelected] = useState(false)
   const [userLocation, setUserLocation] = useState(null)
-
+  const [noProductFoundErr, setNoProductFoundErr] = useState(false)
   const endSearch = () => {
     setSearchText("")
     setItemSelected(false)
@@ -31,6 +31,7 @@ const Home = ({ navigation }) => {
   const handleSearch = (input) =>{
     setSearchText(input)
     if (itemSelected) { setItemSelected(false) }
+    if(noProductFoundErr) {setNoProductFoundErr (false)}
     
   }
 
@@ -82,10 +83,10 @@ const Home = ({ navigation }) => {
             }
           </View>
             {(searchText && itemSelected) &&
-            <SearchedItems endSearch={endSearch} navigation={navigation}
-              search={searchText} userLocation={userLocation}/>
+            <SearchedItems endSearch={endSearch} navigation={navigation} setNoProductFound={setNoProductFoundErr}
+              search={searchText} userLocation={userLocation} noProductFound={noProductFoundErr}/>
             }
-        <SortUptainers navigation={navigation} />
+        <SortUptainers navigation={navigation} noProductFound={noProductFoundErr}/>
         <Navigationbar navigation={navigation} /> 
       </View>
     </View>

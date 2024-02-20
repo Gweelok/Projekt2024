@@ -7,7 +7,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
 import { inline } from "react-native-web/src/exports/StyleSheet/compiler";
 
-//		backgroundColor: '#fff',
+
 //Main colors
 export const Primarycolor1 = "#1c4b3d"; // DarkGreen
 export const Primarycolor2 = "#dae2e0"; //lightgreen
@@ -60,14 +60,13 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "space-grotesk",
   },
-  //paragraph
+  //paragraph - use for all paragraphs in the app on interactive screens
   paragraph_text: {
     fontFamily: "space-grotesk",
     color: Primarycolor1,
     fontSize: 16,
   },
   article_text: {
-    //fontFamily: "arial",
     color: Primarycolor1,
     fontSize: 16,
   },
@@ -86,6 +85,15 @@ export const styles = StyleSheet.create({
     backgroundColor: Primarycolor3,
     alignSelf: "stretch",
   },
+  errorInputBox: {
+    borderColor: "#AA0000",
+    borderWidth: 3,
+  },
+  errorText: {
+    color:"#AA0000",
+    marginTop:-15,
+    fontSize:14
+  },
   //Menu items
   menuItem: {
     width: "100%",
@@ -100,21 +108,21 @@ export const styles = StyleSheet.create({
   },
   // Form labels
   formLabel: {
-  fontFamily: "space-grotesk-bold",
-  color: Primarycolor1,
-  fontSize: 15,
-  marginLeft: 17,
-  marginBottom: 10,
-  marginTop: 5,
-  fontWeight: "bold",
-},
-// (optional) text style
-optionalText: {
-  color: Primarycolor1,
-  fontSize: 13,
-  fontWeight: "300",
-  fontFamily: "space-grotesk"
-},
+    fontFamily: "space-grotesk-bold",
+    color: Primarycolor1,
+    fontSize: 15,
+    marginLeft: 17,
+    marginBottom: 10,
+    marginTop: 5,
+    fontWeight: "bold",
+  },
+  // (optional) text style
+  optionalText: {
+    color: Primarycolor1,
+    fontSize: 13,
+    fontWeight: "300",
+    fontFamily: "space-grotesk"
+  },
   //Text for both menuitem and boxlink
   menuItem_text: {
     fontFamily: "space-grotesk-bold",
@@ -170,13 +178,29 @@ optionalText: {
     backgroundColor: "white", // White background
   },
   header: {
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 10, // Added padding to lower the header slightly
-    paddingHorizontal: 20,
     backgroundColor: "white", // White background
-    marginTop: 15, // Adjust the margin to lower the header
+    marginTop: 30, // Adjust the margin to lower the header
+    marginBottom: 10,
+  },
+  HeaderFull: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  HeaderText: {
+    fontSize: 30,
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontFamily: "space-grotesk-Medium",
+    color: Primarycolor1,
+  },
+  divider: {
+    borderColor: Primarycolor1,
+    borderWidth: 1,
+    marginVertical: 20
   },
   closeButton: {
     backgroundColor: Primarycolor1,
@@ -196,42 +220,20 @@ optionalText: {
     alignItems: "center",
   },
   qrScannerFrame: {
-    width: 250,
-    height: 400,
-    justifyContent: "center",
-    // alignItems: "center",
-    marginBottom: 20,
-    //  backgroundColor: "darkgreen", // Dark green background for border
-    borderRadius: 10, // Rounded corners
-    position: "relative",
-    //  overflow: "hidden", // Hide overflow from dashed border
-  },
-  dashedBorder: {
     width: "100%",
-    height: "100%",
-    borderColor: "white", // Dark green border color
-    borderWidth: 5, // Increase line thickness as needed
-    borderStyle: "dashed", // Dashed line style
-    borderRadius: 12, // Increase radius for larger dashes
-    marginTop: 20, // Adjust the space between dashes
-    borderSpacing: 90, // Adjust the space between dashes
+    flex: 1,
+    height: 400,
+    marginBottom: 20,
+    marginTop: 20,
   },
+
   buttonsContainer: {
     display: "flex",
   },
-  instruction: {
-    fontSize: 18,
-    //textAlign: "center",
-    marginHorizontal: 20,
-    marginTop: 5,
-    marginBottom: 5,
-    color: Primarycolor1, // Dark green text color
-  },
-
   //Headlines and body text
   bodyText: {
     textAlign: "left",
-  }, Bodywrapper: {backgroundColor: "white", flex: 1, top: "5%"}
+  }, Bodywrapper: { backgroundColor: "white", flex: 1, top: "5%" }
 
 });
 
@@ -348,7 +350,10 @@ export const Buttons = StyleSheet.create({
     borderColor: Primarycolor1,
     borderWidth: 4,
     width: "100%",
-    marginTop: "4%"
+    marginVertical: "4%"
+  },
+  disabled_button: {
+    opacity: 0.4,
   },
   main_buttonText: {
     color: "white",
@@ -364,7 +369,7 @@ export const Buttons = StyleSheet.create({
     borderColor: Primarycolor1,
     borderWidth: 4,
     width: "100%",
-    marginTop: "4%"
+    marginVertical: "2%"
   },
   secondary_buttonText: {
     color: Primarycolor1,
@@ -393,9 +398,9 @@ export const Buttons = StyleSheet.create({
 export const HeaderText = StyleSheet.create({
   Header: {
     fontSize: 30,
-    marginBottom: 10,
+    marginBottom: 15,
     marginTop: 15,
-    marginLeft: 20,
+   // marginLeft: 20,
     fontFamily: "space-grotesk-Medium",
     color: Primarycolor1,
   },
@@ -420,7 +425,7 @@ export const dropdownStyles = StyleSheet.create({
     zIndex: 1,
     marginTop: 87,
     width: '100%',
-    maxHeight:250,
+    maxHeight: 250,
   },
   dropdownText: {
     ...styles.menuItem_text,
@@ -453,7 +458,7 @@ export const dropdownStyles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   dropdownSearchFieldListContainer: {
-    top: 40, 
+    top: 40,
     left: 0,
     right: 0,
     zIndex: 1,
