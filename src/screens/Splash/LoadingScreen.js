@@ -13,14 +13,15 @@ const LoadingScreen = () => {
   useEffect(() => {
     async function checkFirstTime() {
       try {
-        const isFirstTime = await AsyncStorage.getItem('isFirstTime9');
+        //const isFirstTime = await AsyncStorage.getItem('isFirstTime9');
+        const isFirstTime = null
         console.log(isFirstTime);
         if (isFirstTime === null) {
           // It's the first time, show LandingScreen
           // Set isFirstTime to 'true' in AsyncStorage
           await AsyncStorage.setItem('isFirstTime9', 'true');
           setTimeout(() => {
-            navigation.navigate("Landingscreen");
+            navigation.navigate("LandingScreen");
           }, 2000);
         } else {
           // Not the first time, navigate to Sign in
