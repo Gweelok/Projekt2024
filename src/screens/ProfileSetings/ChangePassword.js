@@ -9,7 +9,7 @@ import {
     Alert,
 } from 'react-native';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
-import { Backgroundstyle, Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
+import { Backgroundstyle, Buttons, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
 import Navigationbar from "../../componets/Navigationbar";
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
@@ -20,10 +20,11 @@ import ErrorBanner from '../ErrorBanner';
 import { updateUserData } from '../../utils/Repo';
 import { firebaseAurth } from '../../utils/Firebase';
 
-
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
     const { isLoading, setIsLoading } = useContext(LoaderContext)
+    //For enabling button
+    const [isValid, setIsValid] = useState(false);
 
     //Password fields
     const [formData, setFormData] = useState({
@@ -53,10 +54,12 @@ const ChangePassword = ({ navigation }) => {
     //Update password function
     const handlePress = async () => {
         setIsLoading(true);
+        setIsValid(false);
 
         try {
             //Check fields
             const isValid = await checkFields();
+
             if (!isValid) {
                 return;
             } else {
@@ -66,7 +69,7 @@ const ChangePassword = ({ navigation }) => {
 
                 if (user !== null) {
                     //Updates password
-                    await updateUserData({ newPassword: formData.newPassword, currentPassword: formData.currentPassword , });
+                    await updateUserData({ newPassword: formData.newPassword, currentPassword: formData.currentPassword, });
                     Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage));
                     handleBackPress();
                 } else {
@@ -100,11 +103,11 @@ const ChangePassword = ({ navigation }) => {
     const checkFields = async () => {
 
         switch (true) {
-            case !formData.currentPassword || formData.currentPassword.trim().length < 8:
+            case formData.currentPassword.trim().length < 8:
                 setErrorIn('current');
                 setbannerErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
                 return false;
-            case !formData.newPassword || formData.newPassword.trim().length < 8:
+            case formData.newPassword.trim().length < 8:
                 setErrorIn('new');
                 setbannerErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
                 return false;
@@ -122,6 +125,18 @@ const ChangePassword = ({ navigation }) => {
                 return true;
         }
     };
+
+    //Enable button if true
+    useEffect(() => {
+        if (formData.currentPassword.trim().length < 8,
+            formData.newPassword.trim().length < 8,
+            formData.confirmPassword.trim().length < 8) {
+            setIsValid(true);
+        }
+        else {
+            setIsValid(false);
+        }
+    }, [formData.currentPassword, formData.newPassword, formData.confirmPassword])
 
 
     return (
@@ -245,8 +260,8 @@ const ChangePassword = ({ navigation }) => {
                 </View>
 
                 <TouchableOpacity
-                    disabled={false}
-                    style={[Buttons.main_button, false && Buttons.disabled_button]} onPress={handlePress}>
+                    disabled={isValid}
+                    style={[Buttons.main_button, isValid && Buttons.disabled_button]} onPress={handlePress}>
                     <View>
                         <Text style={Buttons.main_buttonText}>
                             {t('ChangePasswordScreen.SavePassword', currentLanguage)}
