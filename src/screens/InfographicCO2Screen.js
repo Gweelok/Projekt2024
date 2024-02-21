@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { styles, Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import CloudSvg from "../componets/svg-components/Cloud";
 import { Ionicons } from "@expo/vector-icons";
+import { LoaderContext } from "../componets/LoaderContext";
+import LoadingScreen from "../componets/LoadingScreen";
 
 const InfographicCO2Screen = ({ navigation }) => {
- 
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   const [c02Saved, setc02Saved] = useState(0);
   const { currentLanguage } = useLanguage();
 
@@ -16,14 +18,17 @@ const InfographicCO2Screen = ({ navigation }) => {
   });
 
   async function getc02Saved() {
+    setIsLoading(true);
     // This function will be used to get the saved c02 from the database.
     // For now, we are using a dummy value.
     setc02Saved(10);
+    setIsLoading(false);
   }
-    
+
   return (
-    <View style={[Backgroundstyle.informationScreens, GlobalStyle.BodyWrapper]}>
-      <View style={GlobalStyle.BodyWrapper}>
+    <View style={[GlobalStyle.BodyWrapper, Backgroundstyle.informationScreens]}>
+      <View >
+        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <View style={infoGraphicC02Style.cancelIconContainer}>
           <TouchableOpacity>
             <Ionicons
