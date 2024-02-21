@@ -1,6 +1,6 @@
 export default {
   loginScreen: {
-    header: "Log In", 
+    header: "Log In",
     login: "Log in",
     username: "Username",
     password: "Password",
@@ -61,4 +61,20 @@ export default {
     Condition: "Condition of the product",
     Text: "You can elaborate on the condition of the item in the description field.",
   },
+   QrScannerScreen: {
+    Scan: "Scan to Updropp",
+    Header: "Place the QR-code inside the frame to read it",
+    Bottom:
+      "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan Later",
+    Error: "Error",
+    ErrorMsg1: "An error occurred while saving the QR Code.",
+    ScanAgain: "Scan Again?",
+    QRCodeNotFound1:"QR Code not found,so click on Tag to save to draft instead.",
+    QRCodeNotFound:"QR Code not found, saved to draft instead.",
+    SaveCode: "Updropp",
+    Take: "Take",
+    Success: "Success",
+    QRCodeSavedSuccessfully: "QR Code saved successfully.",
+    OK: "OK",
+  }
 };

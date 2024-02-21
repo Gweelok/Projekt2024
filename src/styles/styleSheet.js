@@ -292,8 +292,13 @@ export const Buttons = StyleSheet.create({
     backgroundColor: Primarycolor1,
     borderColor: Primarycolor1,
     borderWidth: 4,
+<<<<<<< HEAD
+    width: "100%",
+    marginTop: "4%",
+=======
     minWidth: "75%",
     marginTop: "4%"
+>>>>>>> main
   },
   main_buttonText: {
     color: "white",
@@ -301,4 +306,42 @@ export const Buttons = StyleSheet.create({
     fontSize: 15,
     fontFamily: "space-grotesk-Medium",
   },
-})
+  secondary_button: {
+    padding: 8,
+    marginLeft: "auto",
+    marginRight: "auto",
+    backgroundColor: Primarycolor3,
+    borderColor: Primarycolor1,
+    borderWidth: 4,
+    width: "100%",
+    marginTop: "4%",
+  },
+  secondary_buttonText: {
+    color: Primarycolor1,
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "space-grotesk-Medium",
+  },
+});
+
+//QR Scanner
+export const QRScannerStyles = StyleSheet.create({
+  QRScannerHeader: {
+    fontFamily: "space-grotesk-bold",
+    fontSize: 35,
+    color: Primarycolor1,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  QRScanButton: {
+    borderWidth: 1,
+    width: 220,
+    marginHorizontal: 60,
+  },
+  QRScanAgainButton: {
+    backgroundColor: "red",
+    borderWidth: 1,
+    width: 220,
+    marginHorizontal: 60,
+  },
+});
