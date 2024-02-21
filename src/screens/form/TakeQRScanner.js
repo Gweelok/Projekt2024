@@ -62,11 +62,11 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
     if (scannedQRCodeExist === "Draft") {
       setIsActive(false);
       Alert.alert(
-          t("QrScannerScreen.QRCodeNotFound1", currentLanguage),
-          t("QrScannerScreen.ScanAgain", currentLanguage),
+          t("TakeQRScanner.QRCodeNotFound1", currentLanguage),
+          t("TakeQRScanner.ScanAgain", currentLanguage),
           [
             {
-              text: t("QrScannerScreen.OK", currentLanguage),
+              text: t("TakeQRScanner.OK", currentLanguage),
               onPress: () => {
               //  console.log("Type: " + type + "\nData: " + data);
               },
@@ -114,11 +114,11 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             }
             // Do we really need these alerts, feels like a bit breaking the flow.
             Alert.alert(
-            t("QrScannerScreen.Success", currentLanguage),
-            t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
+            t("TakeQRScanner.Success", currentLanguage),
+            t("TakeQRScanner.QRCodeSavedSuccessfully", currentLanguage),
             [
               {
-                text: t("QrScannerScreen.OK", currentLanguage),
+                text: t("TakeQRScanner.OK", currentLanguage),
                 onPress: () => {
                   navigation.navigate("InfographicCO2", {
                     // I am not sure if we still need to pass the uptainer data and scanned QR code data to the next screen
@@ -159,11 +159,11 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             console.log("Condition met, navDir set to:", navDir1);
 
             Alert.alert(
-                t("QrScannerScreen.QRCodeNotFound", currentLanguage),
-                t("QrScannerScreen.ScanAgain", currentLanguage),
+                t("TakeQRScanner.QRCodeNotFound", currentLanguage),
+                t("TakeQRScanner.ScanAgain", currentLanguage),
                 [
                   {
-                    text: t("QrScannerScreen.OK", currentLanguage),
+                    text: t("TakeQRScanner.OK", currentLanguage),
                     onPress: () => {
                       navigation.navigate(navDir1, uptainer);
                     },
@@ -176,11 +176,11 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
         console.error("Error saving scanned QR code:", error);
 
         Alert.alert(
-          t("QrScannerScreen.Error", currentLanguage),
-          t("QrScannerScreen.ErrorMsg1", currentLanguage),
+          t("TakeQRScanner.Error", currentLanguage),
+          t("TakeQRScanner.ErrorMsg1", currentLanguage),
           [
             {
-              text: t("QrScannerScreen.OK", currentLanguage),
+              text: t("TakeQRScanner.OK", currentLanguage),
               onPress: () => {
                 // Optionally, navigate or perform other actions after saving
               },
@@ -208,7 +208,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
       <SafeAreaView style={{marginTop: 40}}>
         <View style={styles.header}>
           <Text style={styles.headline}>
-            {t("QrScannerScreen.Scan", currentLanguage)}
+            {t("TakeQRScanner.Scan", currentLanguage)}
           </Text>
           <TouchableOpacity style={styles.closeButton} onPress={handlePress}>
             <Icon size={30} name="close" style={styles.closeButtonIcon} />
@@ -217,7 +217,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
 
         <View>
           <Text style={styles.paragraph_text}>
-            {t("QrScannerScreen.Header", currentLanguage)}
+            {t("TakeQRScanner.Header", currentLanguage)}
           </Text>
 
           {hasPermission ? (
@@ -242,13 +242,13 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
                     onPress={handleSaveCode}
                     style={Buttons.main_button}>
                     <Text style={Buttons.main_buttonText}>
-                      {t("QrScannerScreen.Take", currentLanguage)}
+                      {t("TakeQRScanner.Take", currentLanguage)}
                     </Text>
                   </Pressable>) : (<Pressable
                           onPress={handleSaveCode}
                     style={[Buttons.main_button, {backgroundColor: "red", borderColor: "red"}]}>
                     <Text style={Buttons.main_buttonText}>
-                      {t("QrScannerScreen.SaveCode", currentLanguage)}
+                      {t("TakeQRScanner.SaveCode", currentLanguage)}
                     </Text>
                   </Pressable>
                   )}
@@ -258,7 +258,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
                     onPress={handleScanAgain}
                     style={Buttons.secondary_button}>
                     <Text style={Buttons.secondary_buttonText}>
-                      {t("QrScannerScreen.ScanAgain", currentLanguage)}
+                      {t("TakeQRScanner.ScanAgain", currentLanguage)}
                     </Text>
                   </Pressable>
                 </View>
@@ -267,7 +267,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           </View>
 
           <Text style={styles.paragraph_text}>
-            {t("QrScannerScreen.Bottom", currentLanguage)}
+            {t("TakeQRScanner.Bottom", currentLanguage)}
           </Text>
         </View>
       </SafeAreaView>
