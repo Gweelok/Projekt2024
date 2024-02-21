@@ -1,8 +1,10 @@
 
 
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import en from './en';
 import da from './da';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from 'react-native';
 
 
 const LanguageContext = createContext();
@@ -30,7 +32,7 @@ export function t(key, currentLanguage) {
 
   const langObj = getLanguageObject(currentLanguage);
   const keys = key.split('.');
-  
+
   if (!isValidLanguage(currentLanguage)) {
     throw new Error('Error: currentLanguage must be a valid string and should be either "en" for English or "da" for Danish.')
   }
@@ -53,16 +55,30 @@ export function t(key, currentLanguage) {
 export function LanguageProvider({ children }) {
   const [currentLanguage, setCurrentLanguage] = useState('da');
 
+  useEffect(() => {
+    initLanguage()
+  }, [])
 
-  function setLanguage(lang) {
-    console.log('Language changing to:', lang);
+  async function initLanguage() {
+    const lang = await AsyncStorage.getItem("currentLanguagee")
+    if (lang) {
+      setCurrentLanguage(lang)
+    }
+  }
+
+
+  async function setLanguage(lang) {
+    try {
+      await AsyncStorage.setItem("currentLanguagee", lang)
+    } catch (error) {
+      Alert.alert("Error", t("AccountSettingsScreen.Error", lang))
+    }
     setCurrentLanguage(lang);
   }
 
 
   return (
     <LanguageContext.Provider value={{ currentLanguage, setLanguage }} >
-
       {children}
     </LanguageContext.Provider>
   );
