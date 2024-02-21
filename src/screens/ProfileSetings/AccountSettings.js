@@ -23,7 +23,6 @@ import Navigationbar from "../../componets/Navigationbar";
 import { getCurrentUser, updateUserData } from '../../utils/Repo';
 import ErrorBanner from '../ErrorBanner';
 import { LoaderContext } from '../../componets/LoaderContext';
-import LoadingScreen from '../../componets/LoadingScreen';
 import { Divider } from 'react-native-elements';
 
 
@@ -141,7 +140,6 @@ const AccountSettings = ({ navigation }) => {
 
     return (
         <View style={Backgroundstyle.interactive_screens}>
-            <LoadingScreen isLoaderShow={isLoading} />
 
             <SafeAreaView style={GlobalStyle.BodyWrapper}>
                 <View style={styles.HeaderFull}>
