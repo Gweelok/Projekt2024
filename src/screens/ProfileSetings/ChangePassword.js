@@ -17,35 +17,31 @@ import LoadingScreen from '../../componets/LoadingScreen';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
-import { SecureStorage } from '../../utils/SecureStorage';
 import { updateUserData } from '../../utils/Repo';
+import { firebaseAurth } from '../../utils/Firebase';
 
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
-
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
-    const [currentPasswordErrorMessage, setcurrentPasswordErrorMessage] = useState("");
-    const [newPasswordErrorMessage, setnewPasswordErrorMessage] = useState("");
-    const [confirmPasswordErrorMessage, setconfirmPasswordErrorMessage] = useState("");
-
-    const [canSave, setcanSave] = useState(false)
-    const [isInit, setisInit] = useState(false)
-    const [bannerErrorMessage, setbannerErrorMessage] = useState("")
     const { isLoading, setIsLoading } = useContext(LoaderContext)
 
+    //Password fields
+    const [formData, setFormData] = useState({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: ""
+    });
+
+    //Error states
+    const [bannerErrorMessage, setbannerErrorMessage] = useState("")
+    const [errorIn, setErrorIn] = useState('')
+
+    //Password field visibility
     const [showPassword, setShowPassword] = useState({
-        "currentPassword": false,
-        "newPassword": false,
-        "confirmPassword": false
+        currentPassword: false,
+        newPassword: false,
+        confirmPassword:false
     })
-
-
-
-
 
     const togglePasswordVisibility = (field) => {
         setShowPassword((prevState) => ({
@@ -54,96 +50,84 @@ const ChangePassword = ({ navigation }) => {
         }));
     }
 
-
+    //Update password function
     const handlePress = async () => {
-        setIsLoading(true)
-        setcanSave(false)
-        setbannerErrorMessage("")
+        setIsLoading(true);
 
-        const oldPassword = await SecureStorage.getPassword()
+        try {
+            //Check fields
+            const errorMessage = await checkFields();
+            if (errorMessage) {
+                throw new Error(errorMessage);
+            }
+            //Get current user
+            const user = firebaseAurth.currentUser;
 
-        if (currentPassword != oldPassword) {
-            setbannerErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
-            setcurrentPasswordErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
-            setIsLoading(false)
-        } else if (currentPassword == newPassword) {
-            setbannerErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
-            setnewPasswordErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
-            setIsLoading(false)
-        } else {
-            updateUserData({ password: newPassword }).then(() => {
-                Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage))
-                handleBackPress()
-            }).catch(() => {
-                setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage))
-            }).finally(() => {
-                setIsLoading(false)
-            })
+            if (!user) {
+                throw new Error('User not authenticated');
+            }
+
+            //Updates password
+            await updateUserData({ password: newPassword });
+            Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage));
+            handleBackPress();
+        } catch (error) {
+            if (error instanceof FirebaseError) {
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
+            } else {
+                console.error('Error changing password:', error.message);
+                Alert.alert('Error', 'Failed to change password. Please try again.');
+            }
+        } finally {
+            //Clear the states and navigate to settings
+            handleBackPress();
+            setIsLoading(false);
         }
-    }
+    };
 
     const handleBackPress = () => {
         // reset values when navigating back (component won't be unmounted)
-        setCurrentPassword("")
-        setNewPassword("")
-        setConfirmPassword("")
-        setisInit(false)
+        setFormData({
+            currentPassword: "",
+            newPassword: "",
+            confirmPassword: ""
+        });
         navigation.navigate("AccountSettings")
     }
 
+    //Checking input fields
+    const checkFields = async () => {
+        let error = null;
+        let errorMessage = null;
 
-    const checkFields = () => {
-        let isValid = true
-
-        if (currentPassword) {
-            if (currentPassword.trim() == "" || currentPassword.trim().length < 8) {
-                setcurrentPasswordErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
-                isValid = false
-            } else {
-                setcurrentPasswordErrorMessage()
-            }
-        } else {
-            isValid = false
+        switch (true) {
+            case !formData.currentPassword || formData.currentPassword.trim().length < 8:
+                setErrorIn('current');
+                errorMessage = t('ChangePasswordScreen.PasswordLengthError', currentLanguage);
+                break;
+            case !formData.newPassword || formData.newPassword.trim().length < 8:
+                setErrorIn('new');
+                errorMessage = t('ChangePasswordScreen.PasswordLengthError', currentLanguage);
+                break;
+            case formData.newPassword === formData.currentPassword:
+                setErrorIn('new');
+                errorMessage = t('ChangePasswordScreen.PasswordMismatchError', currentLanguage);
+                break;
+            case formData.confirmPassword !== formData.newPassword:
+                setErrorIn('confirm');
+                errorMessage = t('ChangePasswordScreen.PasswordMatchError', currentLanguage);
+                break;
+            default:
+                break;
         }
 
-
-        if (newPassword) {
-            if (newPassword.trim().length < 8) {
-                setnewPasswordErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage))
-                isValid = false
-            } else {
-                setnewPasswordErrorMessage()
-            }
-        } else {
-            isValid = false
+        if (errorMessage) {
+            setbannerErrorMessage(errorMessage);
+            error = errorMessage;
         }
 
-
-        if (confirmPassword) {
-            if (confirmPassword.trim() != newPassword.trim()) {
-                setconfirmPasswordErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage))
-                isValid = false
-            } else {
-                setconfirmPasswordErrorMessage()
-            }
-        } else {
-            isValid = false
-        }
-
-
-        return isValid
-    }
-
-
-    // validate fields once initialized
-    useEffect(() => {
-        if (isInit) {
-            setcanSave(checkFields())
-        } else {
-            setisInit(true)
-        }
-    }, [currentPassword, newPassword, confirmPassword])
-
+        return error; // Return null if fields are valid, otherwise return the error message
+    };
 
 
     return (
@@ -154,21 +138,22 @@ const ChangePassword = ({ navigation }) => {
                     <BackButton onPress={handleBackPress}></BackButton>
                     <Text style={styles.HeaderText}>{t('AccountSettingsScreen.ChangeCode', currentLanguage)} </Text>
                 </View>
-                {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
 
+                {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
 
                 <View>
                     {/* Current password */}
                     <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                         {t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
                     </Text>
-                    <View style={[styles.inputBox, currentPasswordErrorMessage && stylesGlobal.errorInputBox]}>
+
+                    <View style={[styles.inputBox, errorIn === 'current' && stylesGlobal.errorInputBox]}>
                         <View style={styles.container}>
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
                                 secureTextEntry={!showPassword["currentPassword"]}
                                 value={currentPassword}
-                                onChangeText={setCurrentPassword}
+                                onChangeText={(text) => setFormData({...formData, currentPassword: text})}
                                 placeholder={t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
                                 placeholderTextColor="#8EA59E"
                                 keyboardType="default"
@@ -185,25 +170,27 @@ const ChangePassword = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    {currentPasswordErrorMessage && (
-                        <Text style={styles.errorText}>{currentPasswordErrorMessage}</Text>
+
+                    {errorIn === 'current' && (
+                        <Text style={styles.errorText}>
+                            {bannerErrorMessage}
+                        </Text>
                     )}
                 </View>
-
-
 
                 <View>
                     {/* New password */}
                     <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                         {t('ChangePasswordScreen.NewPassword', currentLanguage)}
                     </Text>
-                    <View style={[styles.inputBox, newPasswordErrorMessage && stylesGlobal.errorInputBox]}>
+
+                    <View style={[styles.inputBox, errorIn === 'new' && stylesGlobal.errorInputBox]}>
                         <View style={styles.container}>
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
                                 secureTextEntry={!showPassword["newPassword"]}
                                 value={newPassword}
-                                onChangeText={setNewPassword}
+                                onChangeText={(text) => setFormData({...formData, newPassword: text})}
                                 placeholder={t('ChangePasswordScreen.NewPassword', currentLanguage)}
                                 placeholderTextColor="#8EA59E"
                                 keyboardType="default"
@@ -219,25 +206,27 @@ const ChangePassword = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    {newPasswordErrorMessage && (
-                        <Text style={styles.errorText}>{newPasswordErrorMessage}</Text>
+
+                    {errorIn === 'new' && (
+                        <Text style={styles.errorText}>
+                            {bannerErrorMessage}
+                        </Text>
                     )}
+
                 </View>
-
-
 
                 <View>
                     {/* Confirm password */}
                     <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
                         {t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                     </Text>
-                    <View style={[styles.inputBox, { flexdirection: 'row' }, confirmPasswordErrorMessage && stylesGlobal.errorInputBox]}>
+                    <View style={[styles.inputBox, { flexdirection: 'row' }, errorIn === 'confirm' && stylesGlobal.errorInputBox]}>
                         <View style={styles.container}>
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
                                 secureTextEntry={!showPassword["confirmPassword"]}
                                 value={confirmPassword}
-                                onChangeText={setConfirmPassword}
+                                onChangeText={(text) => setFormData({...formData, confirmPassword: text})}
                                 placeholder={t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                                 placeholderTextColor="#8EA59E"
                                 keyboardType="default"
@@ -253,16 +242,17 @@ const ChangePassword = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    {confirmPasswordErrorMessage && (
-                        <Text style={styles.errorText}>{confirmPasswordErrorMessage}</Text>
+
+                    {errorIn === 'confirm' && (
+                        <Text style={styles.errorText}>
+                            {bannerErrorMessage}
+                        </Text>
                     )}
                 </View>
 
-
-
                 <TouchableOpacity
-                    disabled={!canSave}
-                    style={[Buttons.main_button, !canSave && Buttons.disabled_button]} onPress={handlePress}>
+                    disabled={false}
+                    style={[Buttons.main_button, false && Buttons.disabled_button]} onPress={handlePress}>
                     <View>
                         <Text style={Buttons.main_buttonText}>
                             {t('ChangePasswordScreen.SavePassword', currentLanguage)}
