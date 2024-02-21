@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import { LoaderScreen } from 'react-native-ui-lib';
+import LoadingScreen from './LoadingScreen';
 
 // using context API, we can create a global loader.
 // create pass data  to pass data
@@ -10,6 +12,7 @@ export const LoaderProvider = ({ children }) => {
 
     return (
         <LoaderContext.Provider value={{ isLoading, setIsLoading }}>
+            {isLoading && <LoadingScreen isLoaderShow={isLoading}/>}
             {children}
         </LoaderContext.Provider>
     );
