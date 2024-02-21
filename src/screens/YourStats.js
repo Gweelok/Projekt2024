@@ -92,7 +92,6 @@ const YourStats = (props) => {
           <GreenBox
             textStyle={{ height: 50 }}
             headerStyle={{ marginBottom: 30, marginTop: -30 }}
-            msg={t("StatsPage.InTotal", currentLanguage)}
             data={convertKgToTons(co2Data.totalC02Saved)}
           />
         </View>

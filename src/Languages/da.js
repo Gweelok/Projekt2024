@@ -262,7 +262,7 @@ export default {
     CO2AmountBefore:"så",
     CO2Amount:"svarer til",
     Fact_equavalent: "læs vask og tørring",
-    BestAcheieve: "Bedst opnåede Uptainers denne måned",
+    BestAcheieve: "Denne måneds bedst præserende Uptainere",
     MostVisitedUptainer: "Mest besøgte Uptainer",
     MyMostVisitedUptainer: "Din mest besøgte Uptainer",
     MyMostVisitedUptainers: "Dine mest besøgte Uptainers",
