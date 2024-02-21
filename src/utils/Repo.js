@@ -1042,7 +1042,7 @@ const uploadToFirebase = async (uri, name, path, onProgress) => {
 /****************/
 /***** Auth *****/
 /****************/
-export async function signInUser(email, password ) {
+export async function signInUser(email, password) {
     signInWithEmailAndPassword(firebaseAurth, email, password)
         .then(async (userCredential) => {
             const user = userCredential.user;
@@ -1113,27 +1113,30 @@ export async function getCurrentUser() {
 // update Authentication user data
 // we can use firebase PhoneProvider Feature to update/verify/login using phone number
 async function updateAuthData(name, email, password) {
-    const currentPassword = await SecureStorage.getPassword()
-    const user = firebaseAurth.currentUser
-    const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword)
+    try {
+        const user = firebaseAurth.currentUser;
+        const emailAuthCredential = EmailAuthProvider.credential(user.email, password);
 
-    await reauthenticateWithCredential(user, emailAuthCredential)
+        await reauthenticateWithCredential(user, emailAuthCredential);
 
-    if (name) {
-        await updateProfile(user, {
-            displayName: name
-        })
-    }
+        if (name) {
+            await updateProfile(user, {
+                displayName: name
+            });
+        }
 
+        if (email) {
+            await updateEmail(user, email);
+        }
 
-    if (email) {
-        await updateEmail(user, email)
-    }
+        if (password) {
+            await updatePassword(user, password);
+        }
 
-
-    if (password) {
-        await updatePassword(user, password)
-        await SecureStorage.savePassword(password)
+        console.log('Authentication data updated successfully');
+    } catch (error) {
+        console.error('Error updating authentication data:', error);
+        throw error; // rethrowing the error to propagate it upwards if necessary
     }
 }
 
@@ -1155,13 +1158,22 @@ async function updateDatabaseData(name, email, phone, profilePic) {
 
 // use whenever you need to update realtime + auth user data
 // make sure to surround function call with try/catch
-export async function updateUserData({ name="", email="", phone="", profilePic="", password="" }) {
-    await updateAuthData(name, email, password);
-    // exclude realtime database update since user is changing password only
-    if(!password){
-        await updateDatabaseData(name, email, phone, profilePic);
+export async function updateUserData({ name = "", email = "", phone = "", profilePic = "", password = "" }) {
+    try {
+        await updateAuthData(name, email, password);
+
+        // Exclude realtime database update if the user is changing password only
+        if (!password) {
+            await updateDatabaseData(name, email, phone, profilePic);
+        }
+
+        console.log('User data updated successfully');
+    } catch (error) {
+        console.error('Error updating user data:', error);
+        throw error; // Rethrow the error to propagate it upwards if necessary
     }
 }
+
 
 export async function deleteUser(navigation) {
     const user = firebaseAurth.currentUser;

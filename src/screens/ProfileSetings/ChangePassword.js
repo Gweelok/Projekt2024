@@ -40,7 +40,7 @@ const ChangePassword = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState({
         currentPassword: false,
         newPassword: false,
-        confirmPassword:false
+        confirmPassword: false
     })
 
     const togglePasswordVisibility = (field) => {
@@ -56,31 +56,27 @@ const ChangePassword = ({ navigation }) => {
 
         try {
             //Check fields
-            const errorMessage = await checkFields();
-            if (errorMessage) {
-                throw new Error(errorMessage);
-            }
-            //Get current user
-            const user = firebaseAurth.currentUser;
-
-            if (!user) {
-                throw new Error('User not authenticated');
-            }
-
-            //Updates password
-            await updateUserData({ password: newPassword });
-            Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage));
-            handleBackPress();
-        } catch (error) {
-            if (error instanceof FirebaseError) {
-                setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
+            const isValid = await checkFields();
+            if (!isValid) {
+                return;
             } else {
-                console.error('Error changing password:', error.message);
-                Alert.alert('Error', 'Failed to change password. Please try again.');
+                console.log(errorIn)
+                //Get current user
+                const user = firebaseAurth.currentUser;
+
+                if (user !== null) {
+                    //Updates password
+                    await updateUserData({ password: formData.newPassword });
+                    Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage));
+                    handleBackPress();
+                } else {
+                    setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
+                }
             }
+        } catch (error) {
+            setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
+            console.error('Error changing password:', error.message);
         } finally {
-            //Clear the states and navigate to settings
-            handleBackPress();
             setIsLoading(false);
         }
     };
@@ -95,38 +91,31 @@ const ChangePassword = ({ navigation }) => {
         navigation.navigate("AccountSettings")
     }
 
-    //Checking input fields
+    //Checking input fields. Returns boolean
     const checkFields = async () => {
-        let error = null;
-        let errorMessage = null;
 
         switch (true) {
             case !formData.currentPassword || formData.currentPassword.trim().length < 8:
                 setErrorIn('current');
-                errorMessage = t('ChangePasswordScreen.PasswordLengthError', currentLanguage);
-                break;
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
+                return false;
             case !formData.newPassword || formData.newPassword.trim().length < 8:
                 setErrorIn('new');
-                errorMessage = t('ChangePasswordScreen.PasswordLengthError', currentLanguage);
-                break;
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordLengthError', currentLanguage));
+                return false;
             case formData.newPassword === formData.currentPassword:
                 setErrorIn('new');
-                errorMessage = t('ChangePasswordScreen.PasswordMismatchError', currentLanguage);
-                break;
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage));
+                return false;
             case formData.confirmPassword !== formData.newPassword:
                 setErrorIn('confirm');
-                errorMessage = t('ChangePasswordScreen.PasswordMatchError', currentLanguage);
-                break;
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordMismatchError', currentLanguage));
+                return false;
             default:
-                break;
+                setErrorIn();
+                setbannerErrorMessage();
+                return true;
         }
-
-        if (errorMessage) {
-            setbannerErrorMessage(errorMessage);
-            error = errorMessage;
-        }
-
-        return error; // Return null if fields are valid, otherwise return the error message
     };
 
 
@@ -152,8 +141,8 @@ const ChangePassword = ({ navigation }) => {
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
                                 secureTextEntry={!showPassword["currentPassword"]}
-                                value={currentPassword}
-                                onChangeText={(text) => setFormData({...formData, currentPassword: text})}
+                                value={formData.currentPassword}
+                                onChangeText={(text) => setFormData({ ...formData, currentPassword: text })}
                                 placeholder={t('ChangePasswordScreen.CurrentPassword', currentLanguage)}
                                 placeholderTextColor="#8EA59E"
                                 keyboardType="default"
@@ -189,8 +178,8 @@ const ChangePassword = ({ navigation }) => {
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
                                 secureTextEntry={!showPassword["newPassword"]}
-                                value={newPassword}
-                                onChangeText={(text) => setFormData({...formData, newPassword: text})}
+                                value={formData.newPassword}
+                                onChangeText={(text) => setFormData({ ...formData, newPassword: text })}
                                 placeholder={t('ChangePasswordScreen.NewPassword', currentLanguage)}
                                 placeholderTextColor="#8EA59E"
                                 keyboardType="default"
@@ -225,8 +214,8 @@ const ChangePassword = ({ navigation }) => {
                             <TextInput
                                 style={[styles.input, customStyles.inputText]}
                                 secureTextEntry={!showPassword["confirmPassword"]}
-                                value={confirmPassword}
-                                onChangeText={(text) => setFormData({...formData, confirmPassword: text})}
+                                value={formData.confirmPassword}
+                                onChangeText={(text) => setFormData({ ...formData, confirmPassword: text })}
                                 placeholder={t('ChangePasswordScreen.ConfirmPassword', currentLanguage)}
                                 placeholderTextColor="#8EA59E"
                                 keyboardType="default"
