@@ -66,7 +66,7 @@ const ChangePassword = ({ navigation }) => {
 
                 if (user !== null) {
                     //Updates password
-                    await updateUserData({ password: formData.newPassword });
+                    await updateUserData({ newPassword: formData.newPassword, currentPassword: formData.currentPassword , });
                     Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage));
                     handleBackPress();
                 } else {
@@ -74,8 +74,13 @@ const ChangePassword = ({ navigation }) => {
                 }
             }
         } catch (error) {
-            setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
-            console.error('Error changing password:', error.message);
+            if (error.code === 'auth/wrong-password') {
+                setbannerErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage));
+                setErrorIn('current')
+            } else {
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage));
+                console.error('Error changing password:', error.message);
+            }
         } finally {
             setIsLoading(false);
         }

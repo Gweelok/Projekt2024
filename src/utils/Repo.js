@@ -1112,10 +1112,10 @@ export async function getCurrentUser() {
 
 // update Authentication user data
 // we can use firebase PhoneProvider Feature to update/verify/login using phone number
-async function updateAuthData(name, email, password) {
+async function updateAuthData(name, email, newPassword, currentPassword) {
     try {
         const user = firebaseAurth.currentUser;
-        const emailAuthCredential = EmailAuthProvider.credential(user.email, password);
+        const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword);
 
         await reauthenticateWithCredential(user, emailAuthCredential);
 
@@ -1129,12 +1129,16 @@ async function updateAuthData(name, email, password) {
             await updateEmail(user, email);
         }
 
-        if (password) {
-            await updatePassword(user, password);
+        if (newPassword) {
+            await updatePassword(user, newPassword);
         }
 
         console.log('Authentication data updated successfully');
     } catch (error) {
+        if (error.code === 'auth/wrong-password') {
+            console.log('Incorrect current password');
+            // Display appropriate error message to the user
+        }
         console.error('Error updating authentication data:', error);
         throw error; // rethrowing the error to propagate it upwards if necessary
     }
@@ -1157,13 +1161,12 @@ async function updateDatabaseData(name, email, phone, profilePic) {
 
 
 // use whenever you need to update realtime + auth user data
-// make sure to surround function call with try/catch
-export async function updateUserData({ name = "", email = "", phone = "", profilePic = "", password = "" }) {
+export async function updateUserData({ name = "", email = "", phone = "", profilePic = "", newPassword = "", currentPassword }) {
     try {
-        await updateAuthData(name, email, password);
+        await updateAuthData(name, email, newPassword, currentPassword);
 
         // Exclude realtime database update if the user is changing password only
-        if (!password) {
+        if (!newPassword) {
             await updateDatabaseData(name, email, phone, profilePic);
         }
 
