@@ -124,7 +124,7 @@ export default function App() {
         <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
           <NavigationContainer theme={navStyle}>
             <Stack.Navigator
-              initialRouteName="InfographicCO2"
+              initialRouteName="Landingscreen"
               screenOptions={{
                 headerShown: false, // This hides the header
                 animation: "none",
