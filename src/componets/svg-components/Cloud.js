@@ -1,8 +1,8 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import Svg, { G, Path } from "react-native-svg";
 
-const CloudSvg = ({ iconText, textStyle, ...props }) => (
+const CloudSvg = ({ mainText, subText, ...props }) => (
   <View {...props}>
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,19 +26,28 @@ const CloudSvg = ({ iconText, textStyle, ...props }) => (
           stroke="none"
           fill="white"
         />
-        <Text style={[styles.text, textStyle]}>{iconText}</Text>
       </G>
     </Svg>
+    <Text style={[styles.mainText]}>
+      {mainText}
+      <Text style={styles.subText}>{subText}</Text>
+    </Text>
   </View>
 );
 export default CloudSvg;
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
+  mainText: {
+    fontSize: 50,
     fontWeight: "bold",
-        position: "absolute",
-        y: 20,
-        x: 80,
+    position: "absolute",
+    fontFamily: "space-grotesk",
+    top: 60, // Adjust this value to move the text vertically
+    left: 64, // Adjust this value to move the text horizontally
+    color: "white",
+    textAlign: "center",
+  },
+  subText: {
+    fontSize: 25,
   },
 });

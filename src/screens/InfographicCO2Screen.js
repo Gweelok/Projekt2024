@@ -1,58 +1,50 @@
-import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-} from "react-native";
-import BackButton from "../componets/BackButton";
-import {
-  Buttons,
-  styles,
-  Backgroundstyle,
-  Primarycolor1,
-  Primarycolor2,
-  Primarycolor3,
-} from "../styles/Stylesheet";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { styles, Backgroundstyle, Primarycolor1 } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
 import { useLanguage, t } from "../Languages/LanguageHandler";
-import CloudSvg from "../componets/svg-components/CloudCO2";
+import CloudSvg from "../componets/svg-components/Cloud";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 const InfographicCO2Screen = ({ navigation }) => {
+ 
+  const [c02Saved, setc02Saved] = useState(0);
   const { currentLanguage } = useLanguage();
+
+  useEffect(() => {
+    getc02Saved();
+  });
+
+  async function getc02Saved() {
+    // This function will be used to get the saved c02 from the database.
+    // For now, we are using a dummy value.
+    setc02Saved(10);
+  }
+    
   return (
     <View style={[Backgroundstyle.informationScreens, GlobalStyle.BodyWrapper]}>
-      <View>
-        <View style={infoGraphicStyle.cancelIconContainer}>
+      <View style={GlobalStyle.BodyWrapper}>
+        <View style={infoGraphicC02Style.cancelIconContainer}>
           <TouchableOpacity>
             <Ionicons
               onPress={() => navigation.navigate("Homepage")}
               name="close-outline"
               size={30}
               color="white"
-              style={infoGraphicStyle.cancelIcon}
             />
           </TouchableOpacity>
         </View>
-        <View style={infoGraphicStyle.svgContainer}>
+        <View style={infoGraphicC02Style.svgContainer}>
           <View>
-            <CloudSvg iconText="C02" textStyle={infoGraphicStyle.iconText} />
+            <CloudSvg mainText={"C0"} subText={"2"} />
           </View>
-          <View
-            style={{
-              justifyContent: "center",
-              marginTop: 50,
-              marginBottom: 50,
-            }}
-          >
-            <Text
-              style={infoGraphicStyle.messageText}
-            >
-              Product successfully taken.
-              {/* {t("thankYouScreen.header", currentLanguage)} */}
+          <View style={infoGraphicC02Style.messageTextContainer}>
+            <Text style={infoGraphicC02Style.messageText}>
+              {/* Dummy Text for now. */}
+              Product successfully taken. Thank you for saving {c02Saved} kg.
+              C02.
+              {/* The logic below will be used once the correct text implementation is done. */}
+              {/* {t("C02Message.header", currentLanguage)} */}
             </Text>
           </View>
         </View>
@@ -63,14 +55,11 @@ const InfographicCO2Screen = ({ navigation }) => {
 
 export default InfographicCO2Screen;
 
-const infoGraphicStyle = StyleSheet.create({
+const infoGraphicC02Style = StyleSheet.create({
   svgContainer: {
     width: "100%",
     alignItems: "center",
-    marginTop: 50,
-  },
-  cancelIcon: {
-    // top: 20,
+    marginTop: "35%",
   },
   cancelIconContainer: {
     position: "absolute",
@@ -78,17 +67,14 @@ const infoGraphicStyle = StyleSheet.create({
     right: 0,
     backgroundColor: Primarycolor1,
   },
-  iconText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-    zIndex: 100,
-    position: "absolute",
+  messageTextContainer: {
+    justifyContent: "center",
+    marginTop: "25%",
+    marginBottom: 50,
   },
   messageText: {
     color: Primarycolor1,
-    fontSize: 20,
-    margin: 20,
+    fontSize: 22,
     textAlign: "center",
   },
 });
