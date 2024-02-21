@@ -94,15 +94,17 @@ const AccountSettings = ({ navigation }) => {
 
     // get realtime user data once component is mounted
     useEffect(() => {
+        setIsLoading(true);
         getCurrentUser().then((user) => {
             setName(user.name)
             setEmail(user.email)
             setPhone(user.phone)
-            setIsLoading(false)
             setisInit(true)
         }).catch(() => {
             navigation.navigate("MySettings")
-        })
+        }).finally(() => {
+            setIsLoading(false);
+        });
     }, [])
 
 
@@ -140,138 +142,190 @@ const AccountSettings = ({ navigation }) => {
 
 
     return (
-        <View style={Backgroundstyle.interactive_screens}>
-            <LoadingScreen isLoaderShow={isLoading} />
+      <View style={Backgroundstyle.interactive_screens}>
+        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
-            <SafeAreaView style={GlobalStyle.BodyWrapper}>
-                <View style={styles.HeaderFull}>
-                    <BackButton onPress={handleBackPress}></BackButton>
-                    <Text style={styles.HeaderText}>{t('AccountSettingsScreen.Header', currentLanguage)} </Text>
+        <SafeAreaView style={GlobalStyle.BodyWrapper}>
+          <View style={styles.HeaderFull}>
+            <BackButton onPress={handleBackPress}></BackButton>
+            <Text style={styles.HeaderText}>
+              {t("AccountSettingsScreen.Header", currentLanguage)}{" "}
+            </Text>
+          </View>
+          {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
+
+          <ScrollViewComponent>
+            {/* Section 1 */}
+            <View>
+              <View>
+                {/* Name */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginTop: 20,
+                  }}
+                >
+                  <Text
+                    style={[
+                      stylesGlobal.formLabel,
+                      { marginLeft: 0, marginRight: 5 },
+                    ]}
+                  >
+                    {t("AccountSettingsScreen.Name", currentLanguage)}
+                  </Text>
+                  <Text
+                    style={[stylesGlobal.optionalText, { marginBottom: 5 }]}
+                  >
+                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                  </Text>
                 </View>
-                {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
+                <CustomInput>
+                  <TextInput
+                    placeholder="Jane Doe"
+                    placeholderTextColor="#8EA59E"
+                    value={name}
+                    onChangeText={setName}
+                    keyboardType="default"
+                    autoCapitalize="none"
+                    clearButtonMode={"always"}
+                    maxLength={30}
+                    style={[
+                      styles.inputBox,
+                      nameErrorMessage && stylesGlobal.errorInputBox,
+                    ]}
+                  />
+                </CustomInput>
+                {nameErrorMessage && (
+                  <Text style={styles.errorText}>{nameErrorMessage}</Text>
+                )}
+              </View>
 
-                <ScrollViewComponent>
-                    {/* Section 1 */}
-                    <View>
+              <View>
+                {/* email */}
+                <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>
+                  {t("AccountSettingsScreen.Email", currentLanguage)}
+                </Text>
+                <CustomInput showStar={false}>
+                  <TextInput
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholder="janedoe@example.com"
+                    placeholderTextColor="#8EA59E"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    clearButtonMode={"always"}
+                    maxLength={30}
+                    style={[
+                      styles.inputBox,
+                      emailErrorMessage && stylesGlobal.errorInputBox,
+                    ]}
+                  />
+                </CustomInput>
+                {emailErrorMessage && (
+                  <Text style={styles.errorText}>{emailErrorMessage}</Text>
+                )}
+              </View>
 
-                        <View>
-                            {/* Name */}
-                            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}>
-                                <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginRight: 5 }]}>
-                                    {t("AccountSettingsScreen.Name", currentLanguage)}
-                                </Text>
-                                <Text style={[stylesGlobal.optionalText, { marginBottom: 5 }]}>
-                                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
-                                </Text>
-                            </View>
-                            <CustomInput>
-                                <TextInput
-                                    placeholder="Jane Doe"
-                                    placeholderTextColor="#8EA59E"
-                                    value={name}
-                                    onChangeText={setName}
-                                    keyboardType="default"
-                                    autoCapitalize="none"
-                                    clearButtonMode={"always"}
-                                    maxLength={30}
-                                    style={[styles.inputBox, nameErrorMessage && stylesGlobal.errorInputBox]}
-                                />
-                            </CustomInput>
-                            {nameErrorMessage && (
-                                <Text style={styles.errorText}>{nameErrorMessage}</Text>
-                            )}
-                        </View>
+              <View>
+                {/* phone */}
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text
+                    style={[
+                      stylesGlobal.formLabel,
+                      { marginLeft: 0, marginRight: 5 },
+                    ]}
+                  >
+                    {t("AccountSettingsScreen.Tlf", currentLanguage)}
+                  </Text>
+                  <Text
+                    style={[
+                      stylesGlobal.optionalText,
+                      { marginLeft: 0, marginBottom: 5 },
+                    ]}
+                  >
+                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
+                  </Text>
+                </View>
+                <CustomInput>
+                  <TextInput
+                    placeholder="00 00 00 00"
+                    placeholderTextColor="#8EA59E"
+                    value={phone}
+                    onChangeText={setPhone}
+                    keyboardType="phone-pad"
+                    autoCapitalize="none"
+                    clearButtonMode={"always"}
+                    maxLength={20}
+                    style={[
+                      styles.inputBox,
+                      phoneErrorMessage && stylesGlobal.errorInputBox,
+                    ]}
+                  />
+                </CustomInput>
+                {phoneErrorMessage && (
+                  <Text style={styles.errorText}>{phoneErrorMessage}</Text>
+                )}
+              </View>
 
+              {/* Submit */}
+              <TouchableOpacity
+                disabled={!canSave}
+                onPress={handleSave}
+                style={[
+                  Buttons.main_button,
+                  { marginTop: 10 },
+                  !canSave && Buttons.disabled_button,
+                ]}
+              >
+                <Text style={Buttons.main_buttonText}>
+                  {t("AccountSettingsScreen.Submit", currentLanguage)}
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-                        <View>
-                            {/* email */}
-                            <Text style={[stylesGlobal.formLabel, { marginLeft: 0 }]}>{t('AccountSettingsScreen.Email', currentLanguage)}</Text>
-                            <CustomInput showStar={false}>
-                                <TextInput
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    placeholder="janedoe@example.com"
-                                    placeholderTextColor="#8EA59E"
-                                    keyboardType="email-address"
-                                    autoCapitalize="none"
-                                    clearButtonMode={"always"}
-                                    maxLength={30}
-                                    style={[styles.inputBox, emailErrorMessage && stylesGlobal.errorInputBox]}
-                                />
-                            </CustomInput>
-                            {emailErrorMessage && (
-                                <Text style={styles.errorText}>{emailErrorMessage}</Text>
-                            )}
-                        </View>
+            {/* Section 2 */}
+            {/* ChangeCode */}
+            <Divider style={styles.divider}></Divider>
+            <View>
+              <MenuItems
+                style={{ marginBottom: 0 }}
+                msg={t("AccountSettingsScreen.ChangeCode", currentLanguage)}
+                onPress={handleChangePasswordPress}
+              />
+            </View>
 
-                        <View>
-                            {/* phone */}
-                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                <Text style={[stylesGlobal.formLabel, { marginLeft: 0, marginRight: 5 }]}>
-                                    {t("AccountSettingsScreen.Tlf", currentLanguage)}
-                                </Text>
-                                <Text style={[stylesGlobal.optionalText, { marginLeft: 0, marginBottom: 5 }]}>
-                                    ({t("AccountSettingsScreen.Optional", currentLanguage)})
-                                </Text>
-                            </View>
-                            <CustomInput>
-                                <TextInput
-                                    placeholder="00 00 00 00"
-                                    placeholderTextColor="#8EA59E"
-                                    value={phone}
-                                    onChangeText={setPhone}
-                                    keyboardType="phone-pad"
-                                    autoCapitalize="none"
-                                    clearButtonMode={"always"}
-                                    maxLength={20}
-                                    style={[styles.inputBox, phoneErrorMessage && stylesGlobal.errorInputBox]}
-                                />
-                            </CustomInput>
-                            {phoneErrorMessage && (
-                                <Text style={styles.errorText}>{phoneErrorMessage}</Text>
-                            )}
-                        </View>
+            {/* Section 3 */}
+            {/* Language */}
+            <Divider style={styles.divider}></Divider>
+            <View>
+              <View style={{ alignItems: "center", flex: 1, zIndex: 1 }}>
+                <Text
+                  style={[
+                    styles.menuItem_text,
+                    { marginLeft: 0, marginBottom: 10 },
+                  ]}
+                >
+                  {t("AccountSettingsScreen.Language", currentLanguage)}{" "}
+                </Text>
+                <LanguageDropdown />
+              </View>
 
-                        {/* Submit */}
-                        <TouchableOpacity disabled={!canSave} onPress={handleSave} style={[Buttons.main_button, { marginTop: 10 }, !canSave && Buttons.disabled_button]}>
-                            <Text style={Buttons.main_buttonText}>{t('AccountSettingsScreen.Submit', currentLanguage)}</Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-
-                    {/* Section 2 */}
-                    {/* ChangeCode */}
-                    <Divider style={styles.divider}></Divider>
-                    <View>
-                        <MenuItems style={{ marginBottom: 0 }} msg={t('AccountSettingsScreen.ChangeCode', currentLanguage)} onPress={handleChangePasswordPress} />
-                    </View>
-
-
-
-
-                    {/* Section 3 */}
-                    {/* Language */}
-                    <Divider style={styles.divider}></Divider>
-                    <View>
-                        <View style={{ alignItems: "center", flex: 1, zIndex: 1 }}>
-                            <Text style={[styles.menuItem_text, { marginLeft: 0, marginBottom: 10, }]}>{t('AccountSettingsScreen.Language', currentLanguage)} </Text>
-                            <LanguageDropdown />
-                        </View>
-
-                        <View style={{ marginTop: 10 }}>
-                            <Pressable onPress={handleDeleteAccount}  >
-                                <View style={[styles1.iconContainer]}>
-                                    <Icon name="delete" size={16} style={[styles1.iconStyle]} />
-                                    <Text style={styles1.deleteText}>{t('AccountSettingsScreen.Delete', currentLanguage)}</Text>
-                                </View>
-                            </Pressable>
-                        </View>
-                    </View>
-                </ScrollViewComponent>
-            </SafeAreaView >
-            <Navigationbar navigation={navigation} />
-        </View >
+              <View style={{ marginTop: 10 }}>
+                <Pressable onPress={handleDeleteAccount}>
+                  <View style={[styles1.iconContainer]}>
+                    <Icon name="delete" size={16} style={[styles1.iconStyle]} />
+                    <Text style={styles1.deleteText}>
+                      {t("AccountSettingsScreen.Delete", currentLanguage)}
+                    </Text>
+                  </View>
+                </Pressable>
+              </View>
+            </View>
+          </ScrollViewComponent>
+        </SafeAreaView>
+        <Navigationbar navigation={navigation} />
+      </View>
     );
 };
 
