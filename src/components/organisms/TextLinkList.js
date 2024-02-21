@@ -5,42 +5,42 @@ import Spacer from "../atoms/Spacer";
 import { Entypo } from '@expo/vector-icons';
 import { Primarycolor1 } from "../../styles/styleSheet"
 
-
-const TextLinkList = ({ location, navigation, textValue, linkStatus,}) => {
+const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
     console.log(textValue);
-  return (
-      <View style={style.container}>
-
-              <TextLink status={linkStatus?.overview} path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
-              <Entypo name="check" size={22} color={Primarycolor1}style={style.checkbox}/>
-              <Spacer height={25}></Spacer>
-              {/* Add correct path */}
-              <TextLink status={linkStatus.overview} path={'ServiceAdminMain'} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
-              <Entypo name="check" size={22} color={Primarycolor1}style={style.checkbox}/>
-              <Spacer height={25}></Spacer>
-              {/* Add linkStatus.reportedItems */}
-              <TextLink status={linkStatus?.reportedItems} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
-              <Entypo name="check" size={22} color={Primarycolor1}style={style.checkbox}/> 
-      </View>
-  )
+    return (
+        <View style={styles.container}>
+            <View style={styles.checkboxContainer}>
+                <TextLink status={linkStatus?.overview} path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
+                <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>
+            </View>
+            <Spacer height={70}></Spacer>
+            {/* Add correct path */}
+            <View style={styles.checkboxContainer}>
+                <TextLink status={linkStatus.overview} path={'ServiceAdminMain'} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
+                <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>
+            </View>
+            <Spacer height={70}></Spacer>
+            {/* Add linkStatus.reportedItems */}
+            <View style={styles.checkboxContainer}>
+                <TextLink status={linkStatus?.reportedItems} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
+                <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/> 
+            </View>
+        </View> 
+    )
 }
 
-const style = StyleSheet.create({
-  container: {
-      marginTop: 40,
-  },
-  textMargin: {
-      marginBottom: 20,
-      textAlign: "right"
-  },
-  checkboxContainer: {
-      flexDirection: "row",
-      alignItems: "flex-start",
-      justifyContent: "space-between"
-  },
-  checkbox: {
-      paddingLeft: 20,
-  }
-})
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 40,
+    },
+    checkboxContainer: {
+        flexDirection: "row",
+        alignItems: "flex-start", // Center align items vertically
+        justifyContent: "space-between", // Align items to the start of the container
+    },
+    checkbox: {
+        paddingLeft: 5, // Adjust the marginLeft to position the icon closer to the text
+    }
+});
 
-export default TextLinkList 
+export default TextLinkList;
