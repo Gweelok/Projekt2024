@@ -19,6 +19,7 @@ import GreenBox from "../styles/GreenBox";
 import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
 import { items } from "../utils/Testdata";
 import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
+import {Screens} from "../utils/ScreenPaths";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
@@ -112,7 +113,7 @@ const uptainers = props.uptainers;
           </View>
         </View>
         <View style={{ marginTop: 10 }}>
-          <TouchableOpacity onPress={() => navigation.navigate("MyDrafts")}>
+          <TouchableOpacity onPress={() => navigation.navigate(Screens.MY_DRAFTS)}>
             <Text style={styles.link}>
               {t("StatsPage.Overview", currentLanguage)}
             </Text>

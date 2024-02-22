@@ -19,6 +19,7 @@ import * as LinkingExpo from "expo-linking"; // Import Expo Linking
 import BackButton from "../componets/BackButton";
 import {t, useLanguage} from "../Languages/LanguageHandler";
 import GlobalStyle from "../styles/GlobalStyle";
+import {Screens} from "../utils/ScreenPaths";
 
 const DetailViews = ({ navigation, route }) => {
   const details = route.params;
@@ -45,7 +46,7 @@ const DetailViews = ({ navigation, route }) => {
       console.error("Error saving product to AsyncStorage:", error);
     }
 
-    navigation.navigate("TakeQRScanner", {
+    navigation.navigate(Screens.TAKE_QR_SCANNER, {
       product: productName,
       brand: brandName,
       description: itemDescription,
@@ -123,7 +124,7 @@ const DetailViews = ({ navigation, route }) => {
           <Text
             style={[styles.link, { marginTop: 10 }]}
             onPress={() => {
-              navigation.navigate("ProductIsTakenScreen", details);
+              navigation.navigate(Screens.PRODUCT_IS_TAKEN, details);
             }}
           >
             {t("Detailviews.product", currentLanguage)}

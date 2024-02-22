@@ -9,6 +9,7 @@ import MenuItems from "../styles/MenuItems";
 import GlobalStyle from "../styles/GlobalStyle";
 import { BadgeContext } from "./form/BadgeContext";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
+import {Screens} from "../utils/ScreenPaths";
 
 const Profile = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
@@ -19,14 +20,14 @@ const Profile = ({ navigation }) => {
         <View>
           <MenuItems
             msg={t("ProfileScreen.MySettings", currentLanguage)}
-            onPress={() => navigation.navigate("MySettings")}
+            onPress={() => navigation.navigate(Screens.MY_SETTINGS)}
             style={{marginTop: 10}}
           />
         </View>
         <View>
           <MenuItems
             msg={t("ProfileScreen.MyDrafts", currentLanguage)}
-            onPress={() => navigation.navigate("MyDrafts")}
+            onPress={() => navigation.navigate(Screens.MY_DRAFTS)}
             badge={badgeCount > 0 ? badgeCount : null}
             style={{marginTop: 10}}
           />
@@ -34,21 +35,21 @@ const Profile = ({ navigation }) => {
         <View>
           <MenuItems
             msg={t("ProfileScreen.DataPolicy", currentLanguage)}
-            onPress={() => navigation.navigate("DataPolicy")}
+            onPress={() => navigation.navigate(Screens.DATA_POLICY)}
             style={{marginTop: 10}}
           />
         </View>
         <View>
           <MenuItems
             msg={t("ProfileScreen.ContactUs", currentLanguage)}
-            onPress={() => navigation.navigate("ContactUs")}
+            onPress={() => navigation.navigate(Screens.CONTACT_US)}
             style={{marginTop: 10}}
           />
         </View>
         <View>
           <MenuItems
             msg={t("Profile.logout", currentLanguage)}
-            onPress={() => navigation.navigate("LogoutConfirmation")}
+            onPress={() => navigation.navigate(Screens.LOGOUT_CONFIRMATION)}
             style={{marginTop: 10}}
           />
         </View>

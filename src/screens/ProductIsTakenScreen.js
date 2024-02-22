@@ -13,6 +13,8 @@ import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { firebaseDB } from "../utils/Firebase";
+import {Screens} from "../utils/ScreenPaths";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -39,7 +41,7 @@ const ProductIsTakenScreen = ({ navigation, route, fetchUpdatedData }) => {
         // Call the fetchUpdatedData function to refresh the data in the Uptainer component
         fetchUpdatedData();
 
-        navigation.navigate("ThankYouScreen");
+        navigation.navigate(Screens.THANK_YOU);
       } else {
         console.error("Item ID is missing.");
       }

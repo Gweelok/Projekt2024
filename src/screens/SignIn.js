@@ -16,6 +16,7 @@ import ForgotPassword from './ForgotPassword';
 import ErrorBanner from './ErrorBanner';
 import { onAuthStateChanged } from '@firebase/auth';
 import BackButton from "../componets/BackButton";
+import {Screens} from "../utils/ScreenPaths";
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');
@@ -110,7 +111,7 @@ const SignIn = ({ navigation }) => {
     useEffect(() => {
         // Check if the user is logged in and navigate
         if (userLogged) {
-          navigation.navigate('Homepage');
+          navigation.navigate(Screens.HOME);
         }
     }, [userLogged, navigation]);
 
@@ -162,7 +163,7 @@ const SignIn = ({ navigation }) => {
                     <Text style={Buttons.main_buttonText}>{Header}</Text>
                 </Pressable>
 
-                <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
+                <Pressable onPress={() => navigation.navigate(Screens.FORGOT_PASSWORD)}>
                     <Text style={[styles.link, { marginTop: 15 }]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
                 </Pressable>
 
@@ -179,7 +180,7 @@ const SignIn = ({ navigation }) => {
                 </Pressable>
 
                 <Pressable onPress={() => {
-                    navigation.navigate('SignUp')
+                    navigation.navigate(Screens.SIGN_UP)
                 }}>
                     <Text style={styles.link}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
                 </Pressable>

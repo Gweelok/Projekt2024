@@ -21,6 +21,7 @@ import LoadingScreen from '../componets/LoadingScreen';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
+import {Screens} from "../utils/ScreenPaths";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -208,7 +209,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
                 }}
                 onPress={() =>
-                  navigation.navigate('DetailView', {
+                  navigation.navigate(Screens.DETAIL_VIEW, {
                     itemDescription: cur?.itemDescription,
                     imageUrl: cur?.imageUrl,
                     productName: cur?.productName,

@@ -32,6 +32,8 @@ import BackButton from "../componets/BackButton";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 import { onAuthStateChanged } from "firebase/auth";
 import LanguageDropdown from "../Languages/LanguageDropdown";
+import {Screens} from "../utils/ScreenPaths";
+
 const LandingScreen = ({ navigation }) => {
   // for multi language
   const { currentLanguage, setLanguage } = useLanguage();
@@ -69,7 +71,7 @@ const LandingScreen = ({ navigation }) => {
 
   function nextSlideAndSignUp() {
     if (currentSlide + 2 > data.length) {
-      navigation.navigate("SignUp");
+      navigation.navigate(Screens.SIGN_UP);
     } else {
       setCurrentSlide((previousState) => previousState + 1);
     }
@@ -87,7 +89,7 @@ const LandingScreen = ({ navigation }) => {
   useEffect(() => {
     // Check if the user is logged in and navigate accordingly
     if (userLogged) {
-      navigation.navigate('Homepage');
+      navigation.navigate(Screens.HOME);
     }
   }, [userLogged, navigation]);
 
