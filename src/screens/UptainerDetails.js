@@ -17,7 +17,6 @@ import { styles, Backgroundstyle } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
 import { LoaderContext } from '../componets/LoaderContext';
-import LoadingScreen from '../componets/LoadingScreen';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
@@ -164,7 +163,6 @@ const UptainerDetails = ({ navigation, route }) => {
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <ScrollViewComponent
           refreshing={refreshing}
           onRefresh={onRefresh}>
