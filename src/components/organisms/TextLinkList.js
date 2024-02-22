@@ -17,14 +17,17 @@ const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
             {/* Add correct path */}
             <View style={styles.checkboxContainer}>
                 <TextLink status={linkStatus.overview} path={"ReportedItems"} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
-                {linkStatus.reportedItems && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>}
+                {linkStatus?.reportedItems && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>}
             </View>
             <Spacer height={70}></Spacer>
             {/* Add linkStatus.reportedItems */}
             <View style={styles.checkboxContainer}> 
                 <TextLink status={linkStatus?.reportedItems} path={"Uptainer"} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
-                {linkStatus?.reportedItems && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>} 
+                {linkStatus?.uptainerCondition && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>} 
             </View>
+            </View>
+                );
+            }
 
 const styles = StyleSheet.create({
     container: {
