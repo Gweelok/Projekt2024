@@ -78,6 +78,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
         const updatedData = await Promise.all(
           items.map(async (item) => {
+            if (!item.itemTaken) {
             const pathReference = ref(storage, item.itemImage);
             const product = await getProductById(item.itemproduct);
             const brand = await getBrandById(item.itemBrand);
@@ -109,7 +110,7 @@ const UptainerDetails = ({ navigation, route }) => {
                 imageUrl: 'https://via.placeholder.com/200x200',
               };
             }
-          })
+          }})
         );
 
         setData(updatedData);

@@ -626,6 +626,7 @@ export async function getAllItems() {
             const itemcondition = childSnapshot.val().itemcondition;
             const itemUptainer = childSnapshot.val().itemUptainer;
             const itemUser = childSnapshot.val().itemUser;
+            const itemTaken = childSnapshot.val().itemTaken;
             items.push({
                 itemId: itemId,
                 itemproduct: itemproduct,
@@ -637,6 +638,7 @@ export async function getAllItems() {
                 itemcondition: itemcondition,
                 itemUptainer: itemUptainer,
                 itemUser: itemUser,
+                itemTaken: itemTaken,
             });
         });
         return items;
