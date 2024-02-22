@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Camera } from "expo-camera";
 import { useNavigation } from "@react-navigation/core";
 import { Ionicons } from "@expo/vector-icons";
+import { Screens } from "../../utils/ScreenPaths";
 
 const CameraScreen = () => {
   const navigation = useNavigation();
@@ -22,7 +23,7 @@ const CameraScreen = () => {
     const photo = await cameraRef.takePictureAsync();
 
     if (photo?.uri) {
-      navigation.navigate("Add", photo);
+      navigation.navigate(Screens.ADD, photo);
     }
   };
 

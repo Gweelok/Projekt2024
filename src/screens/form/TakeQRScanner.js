@@ -25,6 +25,7 @@ import {
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
 import GlobalStyle from "../../styles/GlobalStyle";
+import { Screens } from "../../utils/ScreenPaths";
 
 const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;
@@ -120,7 +121,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
               {
                 text: t("QrScannerScreen.OK", currentLanguage),
                 onPress: () => {
-                  navigation.navigate('UptainerDetails', {
+                  navigation.navigate(Screens.UPTAINER_DETAILS, {
                     screenFrom: 'QRScanner',
                     uptainerData: {
                       id: uptainer.id,
@@ -154,8 +155,6 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
           if (!uptainerId) {
             setIsActive(false);
             console.log("uptainerId before condition:", uptainerId);
-            const navDir1 = "MyDrafts";
-            console.log("Condition met, navDir set to:", navDir1);
 
             Alert.alert(
                 t("QrScannerScreen.QRCodeNotFound", currentLanguage),
@@ -164,7 +163,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
                   {
                     text: t("QrScannerScreen.OK", currentLanguage),
                     onPress: () => {
-                      navigation.navigate(navDir1, uptainer);
+                      navigation.navigate(Screens.MY_DRAFTS, uptainer);
                     },
                   },
                 ]
@@ -196,7 +195,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigation.navigate("UptainerDetails", {
+      navigation.navigate(Screens.UPTAINER_DETAILS, {
         itemData: "Sample Scanned Data",
       });
     }, 3000);
