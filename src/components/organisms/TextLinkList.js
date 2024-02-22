@@ -10,20 +10,20 @@ const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
     return (
         <View style={styles.container}>
             <View style={styles.checkboxContainer}>
-                <TextLink status={linkStatus?.overview} path={'OverView'} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
-                <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>
+                <TextLink status={linkStatus?.overview} path={"OverView"} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
+                {linkStatus?.overview && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>}
             </View>
             <Spacer height={70}></Spacer>
             {/* Add correct path */}
             <View style={styles.checkboxContainer}>
-                <TextLink status={linkStatus.overview} path={'ServiceAdminMain'} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
-                <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>
+                <TextLink status={linkStatus.overview} path={"ReportedItems"} location={location} navigation={navigation} textValue={textValue.items}></TextLink>
+                {linkStatus.overview && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>}
             </View>
             <Spacer height={70}></Spacer>
             {/* Add linkStatus.reportedItems */}
             <View style={styles.checkboxContainer}>
-                <TextLink status={linkStatus?.reportedItems} path={'Uptainer'} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
-                <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/> 
+                <TextLink status={linkStatus?.reportedItems} path={"Uptainer"} location={location} navigation={navigation} textValue={textValue.condition}></TextLink>
+                {linkStatus?.reportedItems && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>} 
             </View>
         </View> 
     )
@@ -44,3 +44,4 @@ const styles = StyleSheet.create({
 });
 
 export default TextLinkList;
+
