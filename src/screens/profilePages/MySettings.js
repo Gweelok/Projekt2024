@@ -10,6 +10,7 @@ import GlobalStyle from '../../styles/GlobalStyle'
 import BackButton from '../../componets/BackButton';
 import Navigationbar from '../../componets/Navigationbar';
 import { LoaderContext } from '../../componets/LoaderContext';
+import { Screens } from "../../utils/ScreenPaths";
 
 const MY_SETTINGS_SCREEN = {
     AccountSettings: 'AccountSettings',
@@ -26,11 +27,11 @@ const MySettings = ({ navigation }) => {
     const handlePress = (selectedOption) => {
         setIsLoading(true)
         if (selectedOption === MY_SETTINGS_SCREEN.AccountSettings) {
-            navigation.navigate('AccountSettings');
+            navigation.navigate(Screens.ACCOUNT_SETTINGS);
         } else if (selectedOption === MY_SETTINGS_SCREEN.Notifications) {
-            navigation.navigate('Notifications');
+            navigation.navigate(Screens.NOTIFICATIONS);
         } else if (selectedOption === MY_SETTINGS_SCREEN.ChangePassword) {
-            navigation.navigate('ChangePassword');
+            navigation.navigate(Screens.HANGE_PASSWORD);
         }
     };
 

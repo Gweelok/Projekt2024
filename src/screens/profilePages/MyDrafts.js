@@ -29,6 +29,7 @@ import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 import GlobalStyle from "../../styles/GlobalStyle";
 
 import Navigationbar from "../../componets/Navigationbar";
+import { Screens } from "../../utils/ScreenPaths";
 
 
 const MyDrafts = ({navigation}) => {
@@ -38,7 +39,7 @@ const MyDrafts = ({navigation}) => {
   const [ popupOpen, setPopupOpen ]= useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const handlePress = () => {
-    navigation.navigate("Profile");
+    navigation.navigate(Screens.PROFILE);
   };
 
   const closePopup = ()=>{
@@ -145,7 +146,7 @@ const MyDrafts = ({navigation}) => {
               props={cur}
               onPress={() => {
                 //needs to be update in the furture|does not delete the draft from the database
-                navigation.navigate("QRScanner", {
+                navigation.navigate(Screens.ADD_QR_SCANNER, {
                   product: cur.product.productId,
                   brand: cur.brand.brandId,
                   model: cur.model.modelId,
@@ -157,7 +158,7 @@ const MyDrafts = ({navigation}) => {
 
               }}
               onDraftPress={() => {
-                navigation.push("Add", { itemData: cur });
+                navigation.push(Screens.ADD, { itemData: cur });
               }}
               onCancelPress={() => {
                 setSelectedDraft(cur)

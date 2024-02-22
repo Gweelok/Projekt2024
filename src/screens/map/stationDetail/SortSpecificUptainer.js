@@ -15,6 +15,7 @@ import {
     getBrandById,
 } from "../../../utils/Repo";
 import { LoaderContext } from "../../../componets/LoaderContext";
+import { Screens } from "../../../utils/ScreenPaths";
 
 const SortSpecificUptainer = ({ uptainerData }) => {
     const navigation = useNavigation();
@@ -72,7 +73,7 @@ const SortSpecificUptainer = ({ uptainerData }) => {
         <TouchableOpacity
             key={item.itemId}
             onPress={() => {
-                navigation.navigate("DetailView", {
+                navigation.navigate(Screens.DETAIL_VIEW, {
                     data: item.itemId || "",
                     itemDescription: item.itemDescription || "",
                     brandName: item.brandName || "",

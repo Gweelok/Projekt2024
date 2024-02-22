@@ -25,6 +25,7 @@ import ErrorBanner from '../ErrorBanner';
 import { LoaderContext } from '../../componets/LoaderContext';
 import LoadingScreen from '../../componets/LoadingScreen';
 import { Divider } from 'react-native-elements';
+import { Screens } from "../../utils/ScreenPaths";
 
 
 const AccountSettings = ({ navigation }) => {
@@ -45,7 +46,7 @@ const AccountSettings = ({ navigation }) => {
     const [phoneErrorMessage, setphoneErrorMessage] = useState("")
 
     const handleBackPress = () => {
-        navigation.navigate("MySettings");
+        navigation.navigate(Screens.MY_SETTINGS);
     }
 
 
@@ -101,7 +102,7 @@ const AccountSettings = ({ navigation }) => {
             setIsLoading(false)
             setisInit(true)
         }).catch(() => {
-            navigation.navigate("MySettings")
+            navigation.navigate(Screens.MY_SETTINGS)
         })
     }, [])
 
@@ -131,11 +132,11 @@ const AccountSettings = ({ navigation }) => {
 
     /* complete this task her */
     const handleDeleteAccount = () => {
-        navigation.navigate('DeleteAccount');
+        navigation.navigate(Screens.DELETE_ACCOUNT);
     };
     /* complete this task her */
     const handleChangePasswordPress = () => {
-        navigation.navigate('ChangePassword');
+        navigation.navigate(Screens.CHANGE_PASSWORD);
     };
 
 
