@@ -10,13 +10,22 @@ const TaskContextProvider = ({ children }) => {
     uptainerCondition: false,
   });
 
+  const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?',];
+
+  const uptainerTaskList = dataTest.map((task) => newTask = {
+    name: task,
+    pressedYes: false,
+    pressedNo: false,
+});
+
+
   const handleOverviewSolved = () => setIsSolved({ ...isSolved, overview: true });
   const handleReportedItemsSolved = () => setIsSolved({ ...isSolved, reportedItems: true });
   const handleUptainerConditionSolved = () => setIsSolved({ ...isSolved, uptainerCondition: true });
 
 
   return (
-    <TaskContext.Provider value={{ isSolved, setIsSolved }}>
+    <TaskContext.Provider value={{ isSolved, uptainerTaskList, setIsSolved }}>
       {children}
     </TaskContext.Provider>
   );

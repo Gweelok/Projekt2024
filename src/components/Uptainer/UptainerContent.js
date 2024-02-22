@@ -14,14 +14,9 @@ const UptainerContent = ({ location }) => {
 
     const solvedButtonText = 'Task Solved';
     const navigationPath = 'ServiceAdminMain';
-    const dataTest = ['is the Uptainer undamaged?', 'is the Uptainer clean?', 'is the Uptainer organized?',];
-    const { setIsSolved } = useContext(TaskContext);
+    const { setIsSolved, uptainerTaskList } = useContext(TaskContext);
     const [isTasksSolved, setIsTasksSolved] = useState(false);
-    const [newData, setData] = useState(dataTest.map((task) => newTask = {
-        name: task,
-        pressedYes: false,
-        pressedNo: false,
-    }))
+    const [newData, setData] = useState(uptainerTaskList)
 
     //function for creating data about answers for database
     async function createTaskAnswersData(data, uptainerId) {
