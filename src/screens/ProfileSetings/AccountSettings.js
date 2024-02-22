@@ -93,7 +93,6 @@ const AccountSettings = ({ navigation }) => {
 
     // get realtime user data once component is mounted
     useEffect(() => {
-        setIsLoading(true);
         getCurrentUser().then((user) => {
             setName(user.name)
             setEmail(user.email)
@@ -101,9 +100,7 @@ const AccountSettings = ({ navigation }) => {
             setisInit(true)
         }).catch(() => {
             navigation.navigate("MySettings")
-        }).finally(() => {
-            setIsLoading(false);
-        });
+        })
     }, [])
 
 
@@ -142,7 +139,6 @@ const AccountSettings = ({ navigation }) => {
 
     return (
       <View style={Backgroundstyle.interactive_screens}>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
         <SafeAreaView style={GlobalStyle.BodyWrapper}>
           <View style={styles.HeaderFull}>
