@@ -20,9 +20,9 @@ const SortUptainers = ({ navigation, noProductFound }) => {
   const [uptainersList, setUptainerList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const { currentLanguage, setLanguage } = useLanguage();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
-  const finishLoading = async () => setLoading(false)
+  const finishLoading = async () => setLoading(false);
 
   const fetchData = async () => {
     try {
@@ -85,11 +85,17 @@ const SortUptainers = ({ navigation, noProductFound }) => {
     const displayedUptainers = userLocation
       ? sortedUptainers.slice(1)
       : uptainersList.slice(1);
-
-    // Render Uptainer components
-    return displayedUptainers.map((item) => (
-      <Uptainer key={item.uptainerId} uptainerData={item} userLocation={userLocation} />
+    const renderedUptainerItems = displayedUptainers.map((item) => (
+      <Uptainer
+        key={item.uptainerId}
+        uptainerData={item}
+        userLocation={userLocation}
+      />
     ));
+    console.log("renderUptainers", renderedUptainerItems);
+    console.log("userLocation", userLocation);
+    // Render Uptainer components
+    return renderedUptainerItems;
   };
 
   // Navigation function to info page
@@ -146,30 +152,39 @@ const SortUptainers = ({ navigation, noProductFound }) => {
       },
     ],
   };
-  const renderError = () => <Text style={style.noProductFoundErr}>{t("SearchField.notProductFound", currentLanguage)}</Text>
+  const renderError = () => (
+    <Text style={style.noProductFoundErr}>
+      {t("SearchField.notProductFound", currentLanguage)}
+    </Text>
+  );
   // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
     <View style={{ marginTop: 15 }}>
-      {loading && 
-      <View style={{width: windowWidth, height: windowHeight - 145, alignSelf: 'center', }}>
-          <LoadingScreen isLoaderShow={loading}/>
-      </View>}
+      {loading && (
+        <View
+          style={{
+            width: windowWidth,
+            height: windowHeight - 145,
+            alignSelf: "center",
+          }}
+        >
+          <LoadingScreen isLoaderShow={loading} />
+        </View>
+      )}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}
         {noProductFound && renderError()}
         <OnHideView hide={noProductFound}>
-
-          {uptainerList[0]  && (
+          {uptainerList[0] && (
             <Uptainer
-            key={uptainerList[0].uptainerId}
-            uptainerData={uptainerList[0]}
-            userLocation={userLocation}
-            finishLoading={finishLoading}
+              key={uptainerList[0].uptainerId}
+              uptainerData={uptainerList[0]}
+              userLocation={userLocation}
+              finishLoading={finishLoading}
             />
-            ) 
-          }
+          )}
         </OnHideView>
         {/* Display BoxLink component */}
         <BoxLink
@@ -181,10 +196,7 @@ const SortUptainers = ({ navigation, noProductFound }) => {
         {/* Display the QuizComponent */}
         <QuizPoll data={PollData} />
         <QuizPoll data={QuizData} />
-        <OnHideView hide={noProductFound}>
-
-          {renderUptainers()}
-        </OnHideView>
+        <OnHideView hide={noProductFound}>{renderUptainers()}</OnHideView>
       </ScrollViewComponent>
     </View>
   );
@@ -193,15 +205,14 @@ const SortUptainers = ({ navigation, noProductFound }) => {
 const style = StyleSheet.create({
   noProductFoundErr: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     color: Primarycolor1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingTop: 20,
     paddingBottom: 20,
     zIndex: 1,
     paddingLeft: 5,
-    width: '100%',
-
-}
-})
+    width: "100%",
+  },
+});
 export default SortUptainers;
