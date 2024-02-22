@@ -10,7 +10,7 @@ const TextLinkList = ({ location, navigation, textValue, linkStatus }) => {
     return (
         <View style={styles.container}>
             <View style={styles.checkboxContainer}>
-                <TextLink status={linkStatus?.overview} path={"OverView"} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
+                <TextLink status={true} path={"OverView"} location={location} navigation={navigation} textValue={textValue.overview}></TextLink>
                 {linkStatus?.overview && <Entypo name="check" size={22} color={Primarycolor1} style={styles.checkbox}/>}
             </View>
             <Spacer height={70}></Spacer>
