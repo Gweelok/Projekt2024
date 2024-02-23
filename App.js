@@ -86,6 +86,7 @@ import LoadingScreen from "./src/screens/Splash/LoadingScreen";
 import YourStats from "./src/screens/YourStats";
 import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
 import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
+import InfographicCO2Screen from "./src/screens/InfographicCO2Screen";
 
 
 console.log("start");
@@ -118,202 +119,102 @@ export default function App() {
   // Main navigation of all the views
   return (
     //
-      <LanguageProvider>
-    <LoaderProvider>
-      <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
+    <LanguageProvider>
+      <LoaderProvider>
+        <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
           <NavigationContainer theme={navStyle}>
             <Stack.Navigator
-                initialRouteName="LandingScreen"
-                screenOptions={{
-                  headerShown: false, // This hides the header
-                  animation: "none",
-                  gestureEnabled: false,
-                }}
+              initialRouteName="Landingscreen"
+              screenOptions={{
+                headerShown: false, // This hides the header
+                animation: "none",
+                gestureEnabled: false,
+              }}
             >
-              <Stack.Screen
-                name="SplashScreen"
-                component={SplashScreen}
-              />
-              <Stack.Screen
-                name="LoadingScreen"
-                component={LoadingScreen}
-              />
-              <Stack.Screen
-                name="Landingscreen"
-                component={LandingScreen}
-              />
-              <Stack.Screen
-                name="SignUp"
-                component={SignUpScreen}
-              />
-              <Stack.Screen
-                name="Sign in"
-                component={SignIn}
-              />
-              <Stack.Screen
-                name="Homepage"
-                component={Home}
-              />
-
-              <Stack.Screen 
-              name="DetailView" 
-              options={{ animation: "none", headerShown: false,  }}
-              component={DetailView} />
+              <Stack.Screen name="SplashScreen" component={SplashScreen} />
+              <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
+              <Stack.Screen name="Landingscreen" component={LandingScreen} />
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
+              <Stack.Screen name="Sign in" component={SignIn} />
+              <Stack.Screen name="Homepage" component={Home} />
 
               <Stack.Screen
-                name="Infopage"
-                component={ArticlePage}
-              />
-              <Stack.Screen
-                name="Map"
-                component={Map}
-              />
-              <Stack.Screen
-                name="Profile"
-                component={Profile}
-              />
-              <Stack.Screen
-                name="ContactUs"
-                component={ContactUs}
+                name="DetailView"
+                options={{ animation: "none", headerShown: false }}
+                component={DetailView}
               />
 
-              <Stack.Screen
-                name="DataPolicy"
-                component={DataPolicy}
-              />
-              <Stack.Screen
-                name="MyDrafts"
-                component={MyDrafts}
-              />
-              <Stack.Screen
-                name="MySettings"
-                component={MySettings}
-              />
+              <Stack.Screen name="Infopage" component={ArticlePage} />
+              <Stack.Screen name="Map" component={Map} />
+              <Stack.Screen name="Profile" component={Profile} />
+              <Stack.Screen name="ContactUs" component={ContactUs} />
 
-              <Stack.Screen
-                name="ChangePassword"
-                component={ChangePassword}
-              />
+              <Stack.Screen name="DataPolicy" component={DataPolicy} />
+              <Stack.Screen name="MyDrafts" component={MyDrafts} />
+              <Stack.Screen name="MySettings" component={MySettings} />
 
-              <Stack.Screen
-                name="DeleteAccount"
-                component={DeleteAccount}
-              />
+              <Stack.Screen name="ChangePassword" component={ChangePassword} />
+
+              <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
 
               <Stack.Screen
                 name="AccountSettings"
                 component={AccountSettings}
               />
-              <Stack.Screen
-                name="Notifications"
-                component={Notifications}
-              />
+              <Stack.Screen name="Notifications" component={Notifications} />
               <Stack.Screen
                 name="TermsAndConditions"
                 component={TermsAndConditions}
               />
+              <Stack.Screen name="ProfileCreated" component={ProfileCreated} />
+              <Stack.Screen name="StatsInfo" component={StatsInfo} />
               <Stack.Screen
-                name="ProfileCreated"
-                component={ProfileCreated}
+                name="VisitedUptainerStat"
+                component={VisitedUptainerStat}
               />
-              <Stack.Screen
-                  name="StatsInfo"
-                  component={StatsInfo}
-              />
-              <Stack.Screen
-                  name="VisitedUptainerStat"
-                  component={VisitedUptainerStat}
-              />
-              <Stack.Screen
-                name="Stats"
-                component={Stat}
-              />
-              <Stack.Screen
-                  name="YourStats"
-                  component={YourStats}
-              />
-              <Stack.Screen
-                name="Add"
-                component={Add}
-              />
-              <Stack.Screen
-                name="TakeQRScanner"
-                component={TakeQRScanner}
-              />
-              <Stack.Screen
-                name="AddQRScanner"
-                component={AddQRScanner}
-              />
-              <Stack.Screen
-                name="Products"
-                component={ProductScreen}
-              />
+              <Stack.Screen name="Stats" component={Stat} />
+              <Stack.Screen name="YourStats" component={YourStats} />
+              <Stack.Screen name="Add" component={Add} />
+              <Stack.Screen name="TakeQRScanner" component={TakeQRScanner} />
+              <Stack.Screen name="AddQRScanner" component={AddQRScanner} />
+              <Stack.Screen name="Products" component={ProductScreen} />
 
-              <Stack.Screen
-                name="Pro"
-                component={ProScreen}
-              />
-              <Stack.Screen
-                name="Bnd"
-                component={BndScreen}
-              />
-              <Stack.Screen
-                name="Mod"
-                component={ModScreen}
-              />
-              <Stack.Screen
-                  name="Stations"
-                  component={StationsScreen} />
+              <Stack.Screen name="Pro" component={ProScreen} />
+              <Stack.Screen name="Bnd" component={BndScreen} />
+              <Stack.Screen name="Mod" component={ModScreen} />
+              <Stack.Screen name="Stations" component={StationsScreen} />
               <Stack.Screen
                 name="StationDetails"
                 component={StationDetailScreen}
               />
-              <Stack.Screen
-                name="Thanks"
-                component={ThanksScreen}
-              />
+              <Stack.Screen name="Thanks" component={ThanksScreen} />
               <Stack.Screen
                 name="LogoutConfirmation"
                 component={LogoutConfirmation}
               />
-              <Stack.Screen
-                name="PrivacyPolicy"
-                component={PrivacyPolicy}
-              />
+              <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
               <Stack.Screen
                 name="UptainerDetails"
                 component={UptainerDetails}
               />
-              <Stack.Screen
-                name="ProductSaved"
-                component={ProductSaved}
-              />
+              <Stack.Screen name="ProductSaved" component={ProductSaved} />
               <Stack.Screen
                 name="ProductIsTakenScreen"
                 component={ProductIsTakenScreen}
               />
+              <Stack.Screen name="ProductTaken" component={ProductTaken} />
+              <Stack.Screen name="ThankYouScreen" component={ThankYouscreen} />
+              <Stack.Screen name="Camera" component={CameraScreen} />
+              <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
               <Stack.Screen
-                name="ProductTaken"
-                component={ProductTaken}
-              />
-              <Stack.Screen
-                name="ThankYouScreen"
-                component={ThankYouscreen}
-              />
-              <Stack.Screen
-                name="Camera"
-                component={CameraScreen}
-              />
-              <Stack.Screen
-                name="ForgotPassword"
-                component={ForgotPassword}
+                name="InfographicCO2"
+                component={InfographicCO2Screen}
               />
             </Stack.Navigator>
           </NavigationContainer>
-
-      </BadgeContext.Provider>
-    </LoaderProvider>
-      </LanguageProvider>
+        </BadgeContext.Provider>
+      </LoaderProvider>
+    </LanguageProvider>
   );
   //Screens
 

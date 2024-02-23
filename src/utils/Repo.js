@@ -141,6 +141,7 @@ export async function createItem(itemImage = "", categoryId = "", itemproduct = 
 
     }
     try {
+        const givenDate = new Date().toISOString();
         const user = await getCurrentUser();
         console.log("uptainerQRCode before QRCodeExists:", uptainerQRCode);
         const UptainerId = await QRCodeExists(uptainerQRCode); //function to check if QR code exists if not, saved as draft
@@ -157,6 +158,7 @@ export async function createItem(itemImage = "", categoryId = "", itemproduct = 
             itemcondition: itemcondition,
             itemUser: user.id,
             itemUptainer: UptainerId,
+            itemGivenDate: givenDate,
         };
         await writeToDatabase(paths.items + '/' + newItemKey, itemData);
     } catch (error) {
@@ -192,7 +194,7 @@ export async function createModel(data, brand) {
 
 export async function createItemSeedata(item, categories, products, brands, uptainers, models) {
 
-
+    const givenDate = new Date().toISOString();
     const newItemKey = push(ref(db, paths.items)).key;
     const itemQRCode = generateQRCode(item.itemQR);
     const itemData = {
@@ -205,6 +207,7 @@ export async function createItemSeedata(item, categories, products, brands, upta
         itemDescription: item.itemDescription,
         itemcondition: item.itemCondition,
         itemUptainer: uptainers,
+        itemGivenDate: givenDate,
         itemQR: itemQRCode, // Use the generated QR code
     };
     await writeToDatabase(paths.items + '/' + newItemKey, itemData);
@@ -608,6 +611,7 @@ export async function getProductById(productId) {
         return null;
     }
 }
+
 export async function getAllItems() {
     const db = firebaseGetDB;
     const reference = ref(db, '/items');
@@ -627,6 +631,7 @@ export async function getAllItems() {
             const itemUptainer = childSnapshot.val().itemUptainer;
             const itemUser = childSnapshot.val().itemUser;
             const itemTaken = childSnapshot.val().itemTaken;
+            const itemTakenDate = childSnapshot.val().itemTakenDate;
             items.push({
                 itemId: itemId,
                 itemproduct: itemproduct,
@@ -638,7 +643,8 @@ export async function getAllItems() {
                 itemcondition: itemcondition,
                 itemUptainer: itemUptainer,
                 itemUser: itemUser,
-                itemTaken: itemTaken,
+                itemTaken:itemTaken,
+                itemTakenDate:itemTakenDate
             });
         });
         return items;
@@ -961,7 +967,8 @@ export async function updateItemById(itemId, newData, newImage) {
 export async function updateItemfromDraft(itemId, uptainerId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
-        update(reference, { itemUptainer: uptainerId });
+        const givenDate = new Date().toISOString();
+        update(reference, { itemUptainer: uptainerId, itemGivenDate: givenDate });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
@@ -1001,8 +1008,9 @@ export async function updateItemToTaken(itemId) {
     const reference = ref(db, `/items/${itemId}`);
     try {
         // set item taken to user
+        const takenDate = new Date().toISOString();
         const user = await getCurrentUser()
-        update(reference, { itemTaken: user.id });
+        update(reference, { itemTaken: user.id, itemTakenDate: takenDate, });
         console.log(`Item with ID ${itemId} updated successfully.`);
     } catch (error) {
         console.error(`Error updating item with ID ${itemId}:`, error);
