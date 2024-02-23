@@ -1,19 +1,27 @@
-import { items, products } from "../utils/Testdata";
-import { getAllItems, getAllUptainers, getProductById, getCurrentUser, getDraftFromUser, getAllProducts } from "../utils/Repo";
+import {
+  getAllItems,
+  getAllUptainers,
+  getItemsFromUser,
+  getAllProducts,
+} from "../utils/Repo";
+import { firebaseAurth } from "./Firebase.js";
 
-export const calculateDistance = ({ latitude: lat1, longitude: lon1 }, { latitude: lat2, longitude: lon2 }) => {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLon = (lon2 - lon1) * (Math.PI / 180);
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance.toFixed(2);
+export const calculateDistance = (
+  { latitude: lat1, longitude: lon1 },
+  { latitude: lat2, longitude: lon2 }
+) => {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c;
+  return distance.toFixed(2);
 };
 
 // Function to sort the Uptainers list by distance based on the user's location
@@ -31,156 +39,284 @@ export const sortUptainersByDistance = (userLocation, uptainersList) => {
   return sortedList;
 };
 
+
+export function convertKgToTons(amountInKg) {
+  if (amountInKg >= 1000) {
+    return (amountInKg / 1000).toFixed(2) + " T.";
+  } else {
+    return amountInKg + " Kg.";
+  }
+}
 export const setUptainersByIds = async (uptainers) => {
   let res = {}
   uptainers.forEach(u => {
-      res[u.uptainerId] = u;
+    res[u.uptainerId] = u;
 
   });
   return res;
+
 }
 
-export function convertKgToTons (kg) {
-    if (kg >= 1000) {
-      return (kg / 1000).toFixed(2) + " t";
-    } else {
-      return kg + " kg";
-    }
+export function Calculate_co2_Equivalent(co2_total) {
+  const co2_pers = 10;
+  const conv_factor = 4 / 10;
+  const calc_pers = co2_pers * conv_factor;
+  const calc_total = co2_total * conv_factor;
+
+  return {
+    co2_pers: co2_pers,
+    personalEquivalent: Math.round(calc_pers),
+    totalEquivalent: Math.round(calc_total),
   };
+}
 
-export function Calculate_co2_Equivalent (co2_total) {
-    const co2_pers = 10;
-    const conv_factor = 4 / 10;
-    const calc_pers = co2_pers * conv_factor;
-    const calc_total = co2_total * conv_factor;
+// STATS CALCULATIONS:
 
-    return {
-      personalEquivalent: Math.round(calc_pers),
-      totalEquivalent: Math.round(calc_total),
-    };
-  };
+//----------------FETCH DATA FROM DATABASE-----------------//
 
-export async function CalculateStatistic () {
-    // Load all items from database
-    // const items = await getAllItems();
-    // Load all Uptainers from database
-    const allUptainers = await getAllUptainers();
-    const userCurrent = await getCurrentUser();
-    // Create variables for counting
-    let allNumberTakenItems = 0;
-    let todayNumberTakenItems = 0;
-    let yesterdayNumberTakenItems = 0;
-    let allTakenItemsCO2 = 0;
-    let todayTakenItemsCO2 = 0;
-    let yesterdayTakenItemsCO2 = 0;
+// Fetches all items taken from the database
+async function fetchAllTakenItems() {
+  const allItems = await getAllItems();
+  const allTakenItems = allItems.filter((item) => item.itemTaken != false);
+  return allTakenItems;
+}
 
-    //Date today
-    const today = new Date();
 
-    //Date yersterday
-    const yesterday = new Date(today - 86400000);
 
-    //Create a dictionary for counting reused items by month
-    const allTakenItemsMonth = {};
-    //Create all Uptainers in allUptainersStat
-    const allUptainersStat = allUptainers.reduce((acc, uptainer) => {
-      acc[uptainer.uptainerId] = {
-        uptainerCity: uptainer.uptainerCity,
-        uptainerName: uptainer.uptainerName,
-        uptainerStreet: uptainer.uptainerStreet,
-        uptainerId: uptainer.uptainerId,
-        itemsReused: 0,
-        savedCO2: 0,
-        numberUsers: 0,
-        uptainerDescription: uptainer.uptainerDescription,
-        uptainerImage: uptainer.uptainerImage,
-        uptainerLatitude: uptainer.uptainerLatitude,
-        uptainerLongitude: uptainer.uptainerLongitude,
-        uptainerQR: uptainer.uptainerQR,
-        uptainerZip: uptainer.uptainerZip,
-      };
-      return acc;
-    }, {});
-
-    for (const item of items) {
-      const itemUptainer = allUptainersStat[item["itemUptainer"]];
-      const productInfo = await getProductById(item["itemproduct"])
-      //Counting how many times Uptainer was used for putting item
-      if (itemUptainer) {
-        if (item["itemUser"] == userCurrent["id"]) {
-          itemUptainer["numberUsers"] += 1;
-        }
-      }
-      //Filter items, which was taken
-      if (item.itemTaken == true) {
-        //Counting how many times Uptainer was used for taking item
-        if (itemUptainer) {
-          if (item["itemTakenUser"] == userCurrent["id"]) {
-            itemUptainer["numberUsers"] += 1;
-          }
-          itemUptainer["itemsReused"] += 1;
-          //Getting info about co2Footprint this item
-          //const productInfo = await getProductById(item["itemproduct"]);
-          itemUptainer["savedCO2"] += productInfo["co2Footprint"];
-        }
-        allNumberTakenItems += 1;
-        allTakenItemsCO2 += productInfo["co2Footprint"]
-        //Filter reused items, which have itemTakenDate. itemTakenDate should has format "YYYY-MM-DD" (like itemTakenDate: "2023-12-06")
-        if (item.itemTakenDate) {
-          const itemTakenDate = new Date(item.itemTakenDate);
-          if (itemTakenDate.toLocaleDateString() == today.toLocaleDateString()) {
-            todayNumberTakenItems += 1
-            todayTakenItemsCO2 += productInfo["co2Footprint"]
-          }
-          if (itemTakenDate.toLocaleDateString() == yesterday.toLocaleDateString()) {
-            yesterdayNumberTakenItems += 1
-            yesterdayTakenItemsCO2 += productInfo["co2Footprint"]
-          }
-          if (allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()]) {
-            allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()] += 1
-          }
-          else {
-            allTakenItemsMonth[itemTakenDate.getFullYear().toString() + "-" + (itemTakenDate.getMonth() + 1).toString()] = 1
-          }
-        }
-      }
-    }
-    //Definition of the most popular Uptainer
-    //const bestUptainerId = Object.entries(allUptainersStat).reduce((acc, curr) => acc[1]["numberUsers"] > curr[1]["numberUsers"] ? acc : curr)[0];
-    //const bestUptainer = allUptainersStat[bestUptainerId];
-    //Sorting by number of users
-    const sortedUptainers = Object.values(allUptainersStat).sort(function(uptainer1, uptainer2){
-      return uptainer2["numberUsers"] - uptainer1["numberUsers"]
-    })
-    //Filtering uptainers with number of users > 0
-    const sortedFiltredUptainers = sortedUptainers.filter(function(uptainer){
-      return uptainer["numberUsers"] > 0
-    })
-
-    const mostAchievingUptainers = Object.entries(allUptainersStat)
-      .map(([uptainerId, uptainer]) => ({
-        uptainerId,
-        uptainerName: uptainer.uptainerName,
-        uptainerLocation: `${uptainer.uptainerStreet},${uptainer.uptainerCity}`,
-        itemsReused: uptainer.itemsReused,
-        Co2Savings: uptainer.savedCO2,
-      }))
-      .sort((a, b) => b.Co2Savings - a.Co2Savings);
-
-    //Create result after counting reused items
-    result = {
-      allTakenItems: allNumberTakenItems,
-      allTakenItemsCO2: allTakenItemsCO2,
-      todayTakenItems: todayNumberTakenItems,
-      todayTakenItemsCO2: todayTakenItemsCO2,
-      yesterdayTakenItems: yesterdayNumberTakenItems,
-      yesterdayTakenItemsCO2: yesterdayTakenItemsCO2,
-      allTakenItemsMonth: allTakenItemsMonth, //{"2023-Dec": 1, "2023-Jul": 1, "2023-Nov": 1, "2023-Sep": 1}
-      //bestUptainer: bestUptainer,
-      bestUptainers: sortedFiltredUptainers,
-      top3Uptainers: mostAchievingUptainers
-    }
-    //Print for checking
-    //console.log(result)
-    return result
+// Fetches CO2 footprint of a product from the database
+async function fetchProductCO2(items) {
+  if (items.length == 0) {
+    return 0
   }
+
+  let totalco2Footprint = 0
+  const products = await getAllProducts()
+
+
+  for (let a = 0; a < items.length; a++) {
+    const co2Footprint = products.find((product) => product.productId === items[a].itemproduct)?.co2Footprint || 0
+    items[a].co2Footprint = co2Footprint
+    totalco2Footprint += co2Footprint
+  }
+
+  return totalco2Footprint
+}
+
+//----------------------UPDATE STATS-----------------------//
+
+// Updates all stats based on all taken items by every user
+function updateGeneralStats(generalStats, items) {
+
+
+
+}
+
+
+
+
+
+
+//----------------------CALCULATE STATS-----------------------//
+// Calculate functions call the process functions,
+// and return the final stats that will be used in the relevant components.
+
+export async function calculateGeneralStats() {
+  const generalStats = {
+    allNumberTakenItems: 0,
+    allTakenItemsCO2: 0,
+    allTakenItemsMonth: {},
+    todayNumberTakenItems: 0,
+    todayTakenItemsCO2: 0,
+    yesterdayNumberTakenItems: 0,
+    yesterdayTakenItemsCO2: 0,
+  };
+
+
+  const allTakenItems = await fetchAllTakenItems();
+  const totalTakenco2Footprint = await fetchProductCO2(allTakenItems);
+  const today = new Date();
+  const yesterday = new Date(today);
+  today.setHours(0, 0, 0, 0);
+  yesterday.setDate(today.getDate() - 1);
+
+
+
+
+  generalStats.allNumberTakenItems = allTakenItems.length;
+  generalStats.allTakenItemsCO2 = totalTakenco2Footprint;
+
+
+
+
+  allTakenItems.map((item) => {
+    if (item.itemTakenDate) {
+      const itemDate = new Date(item.itemTakenDate);
+      itemDate.setHours(0, 0, 0, 0);
+
+      if (itemDate.getTime() === today.getTime()) {
+        generalStats.todayNumberTakenItems += 1;
+        generalStats.todayTakenItemsCO2 += item.co2Footprint;
+      } else if (itemDate.getTime() === yesterday.getTime()) {
+        generalStats.yesterdayNumberTakenItems += 1;
+        generalStats.yesterdayTakenItemsCO2 += item.co2Footprint;
+      }
+
+
+      const yearMonthKey = `${itemDate.getFullYear()}-${itemDate.getMonth() + 1}`;
+      generalStats.allTakenItemsMonth[yearMonthKey] = (generalStats.allTakenItemsMonth[yearMonthKey] || 0) + 1;
+    }
+  })
+
+  return generalStats;
+}
+
+
+async function calculateUptainerStats() {
+  const allUptainers = await getAllUptainers();
+  const allItems = await getAllItems()
+  const currentMonth = new Date().getMonth()
+  const userId = firebaseAurth.currentUser.uid
+  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+
+  const allUptainersStats = allUptainers.reduce((acc, uptainer) => {
+    acc[uptainer.uptainerId] = {
+      ...uptainer,
+      takenItems: 0,
+      takenItemsThisMonth: 0,
+      savedCO2: 0,
+      droppedItems: 0,
+      myDroppedItems: 0,
+      myTakenItems: 0
+    };
+    return acc;
+  }, {});
+
+  // set co2Footprint to each item
+  await fetchProductCO2(allItems);
+
+
+  // loop over items and make calculations
+  allItems.map((item) => {
+    const uptainer = allUptainersStats[item.itemUptainer];
+    if (uptainer) {
+      if (item.itemTaken) {
+        if (item.itemTaken == userId) {
+          uptainer.myTakenItems += 1
+        }
+
+        const itemDate = new Date(item.itemTakenDate)
+        if (itemDate.getMonth() == currentMonth) {
+          uptainer.takenItemsThisMonth++
+        }
+
+        uptainer.takenItems += 1
+        uptainer.savedCO2 += item.co2Footprint
+      } else {
+        if (item.itemUser == userId) {
+          uptainer.myDroppedItems += 1
+        }
+
+        uptainer.droppedItems += 1
+      }
+    }
+  })
+
+
+  const sortedUptainersThisMonth = (Object.values(allUptainersStats).sort(
+    (a, b) => b.takenItemsThisMonth - a.takenItemsThisMonth
+  )).slice(0, 3)
+
+  // currently not used in Stats
+  const sortedUptainers = (Object.values(allUptainersStats).sort(
+    (a, b) => b.takenItems - a.takenItems
+  )).slice(0, 3)
+
+  // currently not used in Stats
+  const mostVisitedUptainers = (Object.values(allUptainersStats).sort(
+    (a, b) => (b.droppedItems + b.takenItems) - (a.droppedItems + a.takenItems)
+  )).slice(0, 3)
+
+  // most visited uptainer based on user dropped + taken items
+  const myMostVisitedUptainers = (Object.values(allUptainersStats).sort(
+    (a, b) => (b.myDroppedItems + b.myTakenItems) - (a.myDroppedItems + a.myTakenItems)
+  )).slice(0, 3)
+
+
+
+
+  return {
+    sortedUptainers,
+    sortedUptainersThisMonth,
+    mostVisitedUptainers,
+    myMostVisitedUptainers
+  }
+}
+
+
+
+// Export functions return relevant stats that will be used in the components.
+// For Stat.js component
+export async function getAllItemAndUptainerStats(generalStats) {
+  const uptainerStats = await calculateUptainerStats();
+
+  const stats = {
+    allTakenItems: generalStats.allNumberTakenItems,
+    todayTakenItems: generalStats.todayNumberTakenItems,
+    yesterdayTakenItems: generalStats.yesterdayNumberTakenItems,
+    allTakenItemsMonth: generalStats.allTakenItemsMonth,
+    top3Uptainers: uptainerStats.sortedUptainers,
+    top3UptainersThisMonth: uptainerStats.sortedUptainersThisMonth,
+    mostVisitedUptainers: uptainerStats.mostVisitedUptainers,
+    myMostVisitedUptainers: uptainerStats.myMostVisitedUptainers
+  };
+
+  return stats;
+}
+
+
+// For Stat.js
+export async function getAllCO2Stats(generalStats) {
+  return {
+    todayCO2Saved: convertKgToTons(generalStats.todayTakenItemsCO2),
+    yesterdayCO2Saved: convertKgToTons(generalStats.yesterdayTakenItemsCO2),
+    totalCO2Saved: generalStats.allTakenItemsCO2
+  }
+}
+
+
+export async function getUserStats() {
+  var allUserCollectedItems = []
+  var allUserDonatedItems = []
+
+  const userId = firebaseAurth.currentUser.uid
+  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
+  const allUserItems = await getItemsFromUser(userId);
+
+
+  allUserItems.map((item) => {
+    if (item.itemTaken) {
+      if (item.itemUser == userId) {
+        allUserCollectedItems.push(item)
+      }
+    } else {
+      allUserDonatedItems.push(item)
+    }
+  })
+
+
+
+
+  const userStats = {
+    userCollectedItems: allUserCollectedItems.length,
+    userCollectedItemsCO2: await fetchProductCO2(allUserCollectedItems),
+    userDonatedItems: allUserDonatedItems.length,
+    userDonatedItemsCO2: await fetchProductCO2(allUserDonatedItems)
+  }
+
+
+
+  return {
+    ...userStats,
+    totalC02Saved: userStats.userCollectedItemsCO2 + userStats.userDonatedItemsCO2
+  }
+}

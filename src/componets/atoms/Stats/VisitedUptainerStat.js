@@ -1,40 +1,24 @@
 
-import {Pressable, Text, TouchableOpacity, View,} from "react-native";
+import { Text, TouchableOpacity, View, } from "react-native";
 import GlobalStyle from "../../../styles/GlobalStyle";
-import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
-import {React, useContext, useEffect} from "react";
-import {BoxLink} from "../../../styles/BoxLink";
-import {AntDesign} from "@expo/vector-icons";
-import {msg} from "@babel/core/lib/config/validation/option-assertions";
-import { t, useLanguage} from "../../../Languages/LanguageHandler";
-import {useNavigation} from "@react-navigation/native";
-import { LoaderContext } from "../../../componets/LoaderContext";
+import { Backgroundstyle, Buttons, Primarycolor1, styles } from "../../../styles/Stylesheet";
+import { React, useContext } from "react";
+import { AntDesign } from "@expo/vector-icons";
+import { t, useLanguage } from "../../../Languages/LanguageHandler";
+import { useNavigation } from "@react-navigation/native";
+import { LoaderContext } from "../../LoaderContext";
+import { convertKgToTons } from "../../../utils/uptainersUtils";
+import { BoxLink } from "../../../styles/BoxLink";
 
-export const VisitedUptainerStat = (value) => {
+export const VisitedUptainerStat = (props) => {
     const { currentLanguage } = useLanguage();
     const navigation = useNavigation();
     const { isLoading, setIsLoading } = useContext(LoaderContext);
-    const bestUptainers = value["value"];
-
-    // Create variables for information about uptainer
-    let location = 'n/d';
-    let address = 'n/d';
-    let city = 'n/d';
-    let zip = 'n/d';
+    const uptainer = props.uptainer;
 
 
-    if(bestUptainers.length !== 0){
-        location = bestUptainers["uptainerName"];
-        address = bestUptainers["uptainerStreet"];
-        city = bestUptainers["uptainerCity"];
-        zip = bestUptainers["uptainerZip"];
-    }
 
-    const handlePress = () => {
-        navigation.navigate("StatsInfo");
-    };
-
-    return(
+    return (
         <View style={GlobalStyle}>
             <View>
                 <View>
@@ -44,14 +28,16 @@ export const VisitedUptainerStat = (value) => {
                                 <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
                                     navigation.navigate("UptainerDetails", {
-                                        id: bestUptainers?.id,
-                                        name: bestUptainers?.uptainerName,
-                                        location: bestUptainers?.uptainerStreet,
-                                        imageUrl: bestUptainers?.imageUrl,
+                                        id: uptainer.uptainerId,
+                                        name: uptainer.uptainerName,
+                                        location: uptainer.uptainerStreet,
+                                        uptainerImage: uptainer.uptainerImage,
+                                        latitude: uptainer.uptainerLatitude,
+                                        longitude: uptainer.uptainerLongitude
                                     });
                                 }}>
-                                    <Text style={styles.menuItem_text}>{location} </Text>
-                                    <Text style={[styles.menuItem_text,{   fontFamily: "space-grotesk",fontSize: 15}]}>{address}, {city}, {zip}  </Text>
+                                    <Text style={styles.menuItem_text}>{uptainer.uptainerStreet} </Text>
+                                    <Text style={[styles.menuItem_text, { fontFamily: "space-grotesk", fontSize: 15 }]}>{uptainer.uptainerStreet}, {uptainer.uptainerCity}, {uptainer.uptainerZip}  </Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.Icon_container}>
@@ -61,18 +47,16 @@ export const VisitedUptainerStat = (value) => {
                     </TouchableOpacity>
                 </View>
                 <View style={GlobalStyle}>
-
-                    <Text style={[Buttons.main_button,{paddingTop: 9, height:40, width: "100%", color:"white"}]}>{bestUptainers["itemsReused"]} {t('StatsPage.ItemsRecicled', currentLanguage)}</Text>
+                    <Text style={[Buttons.main_button, { paddingTop: 9, height: 40, width: "100%", color: "white" }]}>{uptainer.takenItems} {t('StatsPage.ItemsReused', currentLanguage)}</Text>
+                    <View style={GlobalStyle}>
+                        <Text style={[Backgroundstyle.informationScreens, { paddingTop: 9, height: 40, marginTop: 5, marginBottom: 40, paddingLeft: 10, width: "100%", color: Primarycolor1 }]}>{convertKgToTons(uptainer.savedCO2)}{t('StatsPage.CO2Save', currentLanguage)}</Text>
+                    </View>
                 </View>
-                <View style={GlobalStyle}>
-                    <Text style={[Backgroundstyle.informationScreens,{paddingTop: 9, height:40, marginTop:5, marginBottom:40, paddingLeft:10, width: "100%", color:Primarycolor1}]}>{bestUptainers["savedCO2"]} kg {t('StatsPage.CO2Save', currentLanguage)}</Text>
 
+                <View>
+                    <BoxLink msg={t('StatsPage.Info', currentLanguage)} onPress={() => { navigation.navigate("StatsInfo") }} style={GlobalStyle.BodyWrapper} />
                 </View>
-            </View>
 
-            <View>
-
-                <BoxLink msg={t('StatsPage.Info', currentLanguage)} onPress={handlePress} style={GlobalStyle.BodyWrapper} />
             </View>
         </View>
     )

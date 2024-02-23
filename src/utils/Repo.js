@@ -608,6 +608,7 @@ export async function getProductById(productId) {
         return null;
     }
 }
+
 export async function getAllItems() {
     const db = firebaseGetDB;
     const reference = ref(db, '/items');
@@ -626,6 +627,8 @@ export async function getAllItems() {
             const itemcondition = childSnapshot.val().itemcondition;
             const itemUptainer = childSnapshot.val().itemUptainer;
             const itemUser = childSnapshot.val().itemUser;
+            const itemTaken = childSnapshot.val().itemTaken;
+            const itemTakenDate = childSnapshot.val().itemTakenDate;
             items.push({
                 itemId: itemId,
                 itemproduct: itemproduct,
@@ -637,6 +640,8 @@ export async function getAllItems() {
                 itemcondition: itemcondition,
                 itemUptainer: itemUptainer,
                 itemUser: itemUser,
+                itemTaken:itemTaken,
+                itemTakenDate:itemTakenDate
             });
         });
         return items;
