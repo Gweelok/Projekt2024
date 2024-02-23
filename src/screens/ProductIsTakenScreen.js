@@ -13,7 +13,7 @@ import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import { firebaseDB } from "../utils/Firebase";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;

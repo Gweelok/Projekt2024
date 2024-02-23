@@ -25,7 +25,7 @@ import {
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
 import GlobalStyle from "../../styles/GlobalStyle";
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 const QRScanner = ({ route, navigation, uptainerData }) => {
   const itemData = route.params;

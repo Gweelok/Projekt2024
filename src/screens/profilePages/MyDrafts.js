@@ -29,7 +29,7 @@ import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 import GlobalStyle from "../../styles/GlobalStyle";
 
 import Navigationbar from "../../componets/Navigationbar";
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 
 const MyDrafts = ({navigation}) => {

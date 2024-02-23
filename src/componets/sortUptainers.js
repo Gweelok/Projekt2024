@@ -13,7 +13,7 @@ import { Primarycolor1 } from "../styles/Stylesheet";
 import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import OnHideView from "./atoms/OnHideView";
-import { Screens } from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const SortUptainers = ({ navigation, noProductFound }) => {
   const [userLocation, setUserLocation] = useState(null);

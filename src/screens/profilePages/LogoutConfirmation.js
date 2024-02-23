@@ -5,7 +5,7 @@ import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { firebaseAurth } from "../../utils/Firebase";
 import { signOut } from "firebase/auth";
 import GlobalStyle from "../../styles/GlobalStyle";
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 const LogoutConfirmation = ({ navigation }) => {
   const { currentLanguage } = useLanguage();

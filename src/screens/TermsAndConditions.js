@@ -3,7 +3,7 @@ import { createUser } from "../utils/Repo";
 import { firebaseAurth } from "../utils/Firebase";
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import { Backgroundstyle, styles, Buttons } from "../styles/Stylesheet";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const TermsAndConditions = ({ navigation, route }) => {
   const { email, password } = route.params;

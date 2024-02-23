@@ -15,7 +15,7 @@ import {
     getBrandById,
 } from "../../../utils/Repo";
 import { LoaderContext } from "../../../componets/LoaderContext";
-import { Screens } from "../../../utils/ScreenPaths";
+import Screens from "../../../utils/ScreenPaths";
 
 const SortSpecificUptainer = ({ uptainerData }) => {
     const navigation = useNavigation();

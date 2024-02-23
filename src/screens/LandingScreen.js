@@ -32,7 +32,7 @@ import BackButton from "../componets/BackButton";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 import { onAuthStateChanged } from "firebase/auth";
 import LanguageDropdown from "../Languages/LanguageDropdown";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language

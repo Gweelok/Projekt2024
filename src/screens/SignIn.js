@@ -16,7 +16,7 @@ import ForgotPassword from './ForgotPassword';
 import ErrorBanner from './ErrorBanner';
 import { onAuthStateChanged } from '@firebase/auth';
 import BackButton from "../componets/BackButton";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');

@@ -17,7 +17,7 @@ import * as Location from 'expo-location';
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
 import { calculateDistance } from '../../../utils/uptainersUtils';
 import SearchedLocation from './SearchedLocation';
-import { Screens } from "../../../utils/ScreenPaths";
+import Screens from "../../../utils/ScreenPaths";
 
 
 const stationData = [

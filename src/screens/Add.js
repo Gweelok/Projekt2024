@@ -32,7 +32,7 @@ import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
 import LoadingScreen from "../componets/LoadingScreen";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;

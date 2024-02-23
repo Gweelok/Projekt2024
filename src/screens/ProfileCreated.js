@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { Backgroundstyle, Primarycolor3 } from '../styles/Stylesheet';
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const ProfileCreated = ({ navigation }) => {
   const opacityAnim = useRef(new Animated.Value(0)).current;  // opacity animation

@@ -6,7 +6,7 @@ import React from "react";
 import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
 import BackButtonHomemade from "../../componets/BackButton";
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 // eslint-disable-next-line react/prop-types
 const  DeleteAccount=({navigation})=>{

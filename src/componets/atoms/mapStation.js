@@ -23,7 +23,7 @@ import { Button, ListItem } from "react-native-elements";
 import { styles, elementsStyles } from "../../../src/styles/Stylesheet";
 
 import MapView, { Marker } from "react-native-maps";
-import { Screens } from "../../utils/ScreenPaths"
+import Screens from "../../utils/ScreenPaths"
 
 //
 // const GOOGLE_MAPS_APIKEY = '...';

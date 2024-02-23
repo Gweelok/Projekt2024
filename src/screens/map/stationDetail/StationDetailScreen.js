@@ -9,7 +9,7 @@ import WhiteColorButton from "./WhiteColorButton";
 import GlobalStyle from "../../../styles/GlobalStyle";
 import ScrollViewComponent from "../../../componets/atoms/ScrollViewComponent";
 import { t, useLanguage } from "../../../Languages/LanguageHandler";
-import { Screens } from "../../../utils/ScreenPaths";
+import Screens from "../../../utils/ScreenPaths";
 
 const { width } = Dimensions.get('window');
 const imageSize = width * 0.85;

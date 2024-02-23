@@ -19,7 +19,7 @@ import {
 import { LoaderContext } from "../componets/LoaderContext";
 import { calculateDistance } from "../utils/uptainersUtils";
 import { cacheImage, getCachedImage } from "../utils/Cache";
-import { Screens } from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
   const navigation = useNavigation();

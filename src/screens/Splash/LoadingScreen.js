@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Primarycolor1, Primarycolor2 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 const LoadingScreen = () => {
   const navigation = useNavigation();

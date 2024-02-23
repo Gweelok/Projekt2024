@@ -25,7 +25,7 @@ import ErrorBanner from '../ErrorBanner';
 import { LoaderContext } from '../../componets/LoaderContext';
 import LoadingScreen from '../../componets/LoadingScreen';
 import { Divider } from 'react-native-elements';
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 
 const AccountSettings = ({ navigation }) => {

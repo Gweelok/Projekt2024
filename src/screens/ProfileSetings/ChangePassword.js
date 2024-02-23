@@ -19,7 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
 import { SecureStorage } from '../../utils/SecureStorage';
 import { updateUserData } from '../../utils/Repo';
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 
 const ChangePassword = ({ navigation }) => {

@@ -19,7 +19,7 @@ import GreenBox from "../styles/GreenBox";
 import { getAllItems, getItemsFromUser, getCurrentUser, getAllProducts } from "../utils/Repo";
 import { items } from "../utils/Testdata";
 import { Calculate_co2_Equivalent, convertKgToTons } from "../utils/uptainersUtils";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();

@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
 import { BadgeContext } from "../screens/form/BadgeContext";
-import { Screens } from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 //Page_names
 const PAGE_NAMES = {

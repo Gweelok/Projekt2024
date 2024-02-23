@@ -10,7 +10,7 @@ import GlobalStyle from '../../styles/GlobalStyle'
 import BackButton from '../../componets/BackButton';
 import Navigationbar from '../../componets/Navigationbar';
 import { LoaderContext } from '../../componets/LoaderContext';
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 const MY_SETTINGS_SCREEN = {
     AccountSettings: 'AccountSettings',

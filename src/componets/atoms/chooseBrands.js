@@ -8,7 +8,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 // import from files
 import { RegRender } from '../../../src/utils/RenderData'
 import { RegisterItem } from './registerItem'
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 export const ChooseBrands = ({navigation,route}) => {
 	const [data, setData] = useState(null)

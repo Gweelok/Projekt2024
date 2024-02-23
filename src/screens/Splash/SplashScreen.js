@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Image } from "react-native";
 import { Primarycolor1 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 const SplashScreen = () => {
   const navigation = useNavigation();

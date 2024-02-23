@@ -22,7 +22,7 @@ import CustomInput from "../componets/atoms/CustomInput";
 import GlobalStyle from "../styles/GlobalStyle";
 import BackButton from "../componets/BackButton";
 import ErrorBanner from "./ErrorBanner";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const SignUpScreen = ({ navigation }) => {
   // State variables using React Hooks

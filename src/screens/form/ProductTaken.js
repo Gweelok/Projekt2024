@@ -10,7 +10,7 @@ import Navigationbar from "../../componets/Navigationbar";
 import { Pressable } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { Animated } from "react-native";
-import { Screens } from "../../utils/ScreenPaths";
+import Screens from "../../utils/ScreenPaths";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;

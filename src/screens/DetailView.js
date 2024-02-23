@@ -19,7 +19,7 @@ import * as LinkingExpo from "expo-linking"; // Import Expo Linking
 import BackButton from "../componets/BackButton";
 import {t, useLanguage} from "../Languages/LanguageHandler";
 import GlobalStyle from "../styles/GlobalStyle";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const DetailViews = ({ navigation, route }) => {
   const details = route.params;

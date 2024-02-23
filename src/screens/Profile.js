@@ -9,7 +9,7 @@ import MenuItems from "../styles/MenuItems";
 import GlobalStyle from "../styles/GlobalStyle";
 import { BadgeContext } from "./form/BadgeContext";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import {Screens} from "../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 const Profile = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
