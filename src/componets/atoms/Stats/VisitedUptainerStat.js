@@ -9,6 +9,7 @@ import {msg} from "@babel/core/lib/config/validation/option-assertions";
 import { t, useLanguage} from "../../../Languages/LanguageHandler";
 import {useNavigation} from "@react-navigation/native";
 import { LoaderContext } from "../../../componets/LoaderContext";
+import { Screens } from "../../../utils/ScreenPaths";
 
 export const VisitedUptainerStat = (value) => {
     const { currentLanguage } = useLanguage();
@@ -31,7 +32,7 @@ export const VisitedUptainerStat = (value) => {
     }
 
     const handlePress = () => {
-        navigation.navigate("StatsInfo");
+        navigation.navigate(Screens.STATS_INFO);
     };
 
     return(
@@ -43,7 +44,7 @@ export const VisitedUptainerStat = (value) => {
                             <View style={GlobalStyle.BodyWrapper}>
                                 <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
-                                    navigation.navigate("UptainerDetails", {
+                                    navigation.navigate(Screens.UPTAINER_DETAILS , {
                                         id: bestUptainers?.id,
                                         name: bestUptainers?.uptainerName,
                                         location: bestUptainers?.uptainerStreet,

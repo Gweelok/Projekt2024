@@ -8,7 +8,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 // import from files
 import { RegRender } from '../../../src/utils/RenderData'
 import { RegisterItem } from './registerItem'
-
+import { Screens } from "../../utils/ScreenPaths";
 
 export const ChooseBrands = ({navigation,route}) => {
 	const [data, setData] = useState(null)
@@ -23,7 +23,7 @@ export const ChooseBrands = ({navigation,route}) => {
 	return (
 		<>
 			<RegRender data = {data} navigation = {navigation} rid={3} />
-			<RegisterItem navigation= {navigation} navplace={'Stations'} id={reg} name={'Products'} />
+			<RegisterItem navigation= {navigation} navplace={Screens.STATIONS} id={reg} name={'Products'} />
 		</>
 	)
 }

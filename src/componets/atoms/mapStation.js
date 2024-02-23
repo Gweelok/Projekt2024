@@ -23,6 +23,7 @@ import { Button, ListItem } from "react-native-elements";
 import { styles, elementsStyles } from "../../../src/styles/Stylesheet";
 
 import MapView, { Marker } from "react-native-maps";
+import { Screens } from "../../utils/ScreenPaths"
 
 //
 // const GOOGLE_MAPS_APIKEY = '...';
@@ -302,7 +303,7 @@ export const ChooseStation = ({ navigation, route }) => {
             "Items"
           );
           setTimeout(
-            () => navigation.navigate("Thanks", { estId: selected }),
+            () => navigation.navigate(Screens.THANKS, { estId: selected }),
             2000
           );
           // If button is pressed: Redirect to "registrering item"

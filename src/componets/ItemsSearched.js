@@ -6,11 +6,12 @@ import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
+import { Screens } from "../utils/ScreenPaths";
 
 const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptainer}) =>{
     return (
         <TouchableOpacity onPress={() => {
-                navigation.navigate("DetailView", {
+                navigation.navigate(Screens.DETAIL_VIEW, {
                 data: item?.itemId,
                 itemDescription: item?.itemDescription,
                 brandName: item?.brandName,

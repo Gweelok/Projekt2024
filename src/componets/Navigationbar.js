@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Primarycolor1, Primarycolor2 } from "../styles/Stylesheet";
 import { BadgeContext } from "../screens/form/BadgeContext";
+import { Screens } from "../utils/ScreenPaths";
 
 //Page_names
 const PAGE_NAMES = {
@@ -27,19 +28,19 @@ const Navigationbar = ({ navigation }) => {
   const handlePress = (iconName) => {
     if (iconName == PAGE_NAMES.HOME) {
       selected = PAGE_NAMES.HOME;
-      navigation.navigate("Homepage");
+      navigation.navigate(Screens.HOME);
     } else if (iconName == PAGE_NAMES.MAP) {
       selected = PAGE_NAMES.MAP;
-      navigation.navigate("Map");
+      navigation.navigate(Screens.MAP);
     } else if (iconName == PAGE_NAMES.ADD) {
       selected = PAGE_NAMES.ADD;
-      navigation.push("Add");
+      navigation.push(Screens.ADD);
     } else if (iconName == PAGE_NAMES.STATS) {
       selected = PAGE_NAMES.STATS;
-      navigation.navigate("Stats");
+      navigation.navigate(Screens.STATS);
     } else if (iconName == PAGE_NAMES.PROFILE) {
       selected = PAGE_NAMES.PROFILE;
-      navigation.navigate("Profile");
+      navigation.navigate(Screens.PROFILE);
     }
   };
 
