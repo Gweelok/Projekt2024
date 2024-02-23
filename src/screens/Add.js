@@ -132,9 +132,9 @@ const Add = ({ route, navigation }) => {
 
   const addProductConditions = () => {
     if (
-      !product.productId ||
+      !product?.productId ||
       !condition ||
-      !category.categoryId
+      !category?.categoryId
     ) {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
@@ -201,7 +201,7 @@ const Add = ({ route, navigation }) => {
           </Text>
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? itemData?.imageUrl : null}/>
+            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null}/>
           </View>
 
           <CategoryDropdown
