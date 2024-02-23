@@ -13,8 +13,7 @@ const LoadingScreen = () => {
   useEffect(() => {
     async function checkFirstTime() {
       try {
-        //const isFirstTime = await AsyncStorage.getItem('isFirstTime9');
-        const isFirstTime = null
+        const isFirstTime = await AsyncStorage.getItem('isFirstTime9');
         console.log(isFirstTime);
         if (isFirstTime === null) {
           // It's the first time, show LandingScreen
