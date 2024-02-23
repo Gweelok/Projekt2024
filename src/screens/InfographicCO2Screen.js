@@ -6,7 +6,6 @@ import { useLanguage, t } from "../Languages/LanguageHandler";
 import CloudSvg from "../componets/svg-components/Cloud";
 import Icon from "react-native-vector-icons/AntDesign";
 import { LoaderContext } from "../componets/LoaderContext";
-import LoadingScreen from "../componets/LoadingScreen";
 
 const InfographicCO2Screen = ({ navigation }) => {
   const { isLoading, setIsLoading } = useContext(LoaderContext);
@@ -28,7 +27,6 @@ const InfographicCO2Screen = ({ navigation }) => {
   return (
     <View style={[GlobalStyle.BodyWrapper, Backgroundstyle.informationScreens]}>
       <View>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <View style={infoGraphicC02Style.cancelIconContainer}>
           <TouchableOpacity
             style={styles.closeButton}
