@@ -85,16 +85,15 @@ const SortUptainers = ({ navigation, noProductFound }) => {
     const displayedUptainers = userLocation
       ? sortedUptainers.slice(1)
       : uptainersList.slice(1);
+
     // Render Uptainer components
-    const renderedUptainers = displayedUptainers.map((uptainer) => (
+    return displayedUptainers.map((item) => (
       <Uptainer
-        key={uptainer.uptainerId}
-        uptainerData={uptainer}
+        key={item.uptainerId}
+        uptainerData={item}
         userLocation={userLocation}
-        finishLoading={finishLoading}
       />
     ));
-    return renderedUptainers;
   };
 
   // Navigation function to info page
