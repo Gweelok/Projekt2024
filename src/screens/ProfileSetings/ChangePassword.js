@@ -17,8 +17,7 @@ import LoadingScreen from '../../componets/LoadingScreen';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
-import { updateUserData } from '../../utils/Repo';
-import { firebaseAurth } from '../../utils/Firebase';
+import { updateUserPassword } from '../../utils/Repo';
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -65,7 +64,7 @@ const ChangePassword = ({ navigation }) => {
             setnewPasswordErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
             setIsLoading(false)
         } else {
-            updateUserData({ newPassword: newPassword, currentPassword: currentPassword }).then(() => {
+            updateUserPassword({ newPassword: newPassword, currentPassword: currentPassword }).then(() => {
                 Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage))
                 handleBackPress()
             }).catch((error) => {

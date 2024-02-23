@@ -113,6 +113,11 @@ const AccountSettings = ({ navigation }) => {
         setcanSave(false)
         setbannerErrorMessage("")
 
+        /*
+            User should re-type password before being able to reach
+            the code below.
+        */
+
         // update auth + realtime user data
         updateUserData({ name: name, email: email, phone: phone }).then(() => {
             Alert.alert("Success", t('AccountSettingsScreen.Saved', currentLanguage));

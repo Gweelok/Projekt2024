@@ -1112,13 +1112,13 @@ export async function getCurrentUser() {
 
 // update Authentication user data
 // we can use firebase PhoneProvider Feature to update/verify/login using phone number
-async function updateAuthData(name, email, newPassword, currentPassword) {
+async function updateAuthData(name, email) {
     try {
         const user = firebaseAurth.currentUser;
-        const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword);
-
-        await reauthenticateWithCredential(user, emailAuthCredential);
-
+        /*
+            ADD RE_AUTH HERE.
+            Should also use multifactoring.
+        */
         if (name) {
             await updateProfile(user, {
                 displayName: name
@@ -1129,11 +1129,29 @@ async function updateAuthData(name, email, newPassword, currentPassword) {
             await updateEmail(user, email);
         }
 
+        console.log('Authentication data updated successfully');
+    } catch (error) {
+        console.error('Error updating authentication data:', error);
+        throw error; // rethrowing the error to propagate it upwards if necessary
+    }
+}
+
+async function updateAuthPassword(newPassword, currentPassword) {
+    try {
+
+        /*
+            Should also use multifactoring.
+        */
+        const user = firebaseAurth.currentUser;
+        const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword);
+
+        await reauthenticateWithCredential(user, emailAuthCredential);
+
         if (newPassword) {
             await updatePassword(user, newPassword);
         }
 
-        console.log('Authentication data updated successfully');
+        console.log('Password updated successfully');
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
             console.log('Incorrect current password');
@@ -1161,16 +1179,26 @@ async function updateDatabaseData(name, email, phone, profilePic) {
 
 
 // use whenever you need to update realtime + auth user data
-export async function updateUserData({ name = "", email = "", phone = "", profilePic = "", newPassword = "", currentPassword }) {
+export async function updateUserData({ name = "", email = "", phone = "", profilePic = "" }) {
     try {
-        await updateAuthData(name, email, newPassword, currentPassword);
+        await updateAuthData(name, email);
 
         // Exclude realtime database update if the user is changing password only
-        if (!newPassword) {
-            await updateDatabaseData(name, email, phone, profilePic);
-        }
+        await updateDatabaseData(name, email, phone, profilePic);
 
         console.log('User data updated successfully');
+    } catch (error) {
+        console.error('Error updating user data:', error);
+        throw error; // Rethrow the error to propagate it upwards if necessary
+    }
+}
+
+// use whenever you need to update auth user password
+export async function updateUserPassword({ newPassword = "", currentPassword = "" }) {
+    try {
+        await updateAuthPassword(newPassword, currentPassword);
+
+        console.log('User password updated successfully');
     } catch (error) {
         console.error('Error updating user data:', error);
         throw error; // Rethrow the error to propagate it upwards if necessary
