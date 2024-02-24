@@ -69,13 +69,11 @@ const Add = ({ route, navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
 
   const [image, setImage] = useState(itemData?.imageUrl || "");
-  const [category, setCategory] = useState(itemData?.category || null);
-  const [product, setProduct] = useState(itemData?.product || null);
+  const [category, setCategory] = useState(itemData?.category || "");
+  const [product, setProduct] = useState(itemData?.product || "");
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
-  const [condition, setCondition] = useState(
-    itemData?.condition ? itemData?.condition : itemData?.itemcondition || null
-  );
+  const [condition, setCondition] = useState(itemData?.itemcondition || "");
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
   const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(true);
@@ -92,6 +90,7 @@ const Add = ({ route, navigation }) => {
   
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
+
     const itemId = itemData?.itemId
     if (itemId) {
       const updatedData = {
@@ -104,6 +103,9 @@ const Add = ({ route, navigation }) => {
         itemcondition: condition ? condition : itemData?.itemcondition,
       }
       const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
+
+      setIsLoading(false);
+      
       if (res.itemUpdated){
         navigation.navigate("ProductSaved");
       }
@@ -119,15 +121,18 @@ const Add = ({ route, navigation }) => {
           description,
           condition
         );
+
+        setIsLoading(false);
+
         if (response.draftAdded){
             navigation.navigate("ProductSaved");
             setBadgeCount((prevCount) => prevCount + 1);
         } else {
-          console.log('item darft limit exeeded')
+          Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
       }
             
     }
-    setIsLoading(false);
+    
   };
 
   const addProductConditions = () => {
@@ -147,6 +152,7 @@ const Add = ({ route, navigation }) => {
         condition: condition ? condition : itemData?.itemcondition,
         description: description ? description : itemData?.itemDescription,
         image: image,
+        itemUptainer:itemData?.itemUptainer
       });
     }
   };

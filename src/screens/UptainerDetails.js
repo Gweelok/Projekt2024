@@ -21,11 +21,13 @@ import LoadingScreen from '../componets/LoadingScreen';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
+import ProductAlert from '../componets/ProductAlert';
+import { CommonActions } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const UptainerDetails = ({ navigation, route }) => {
+const UptainerDetails = ({ route, navigation }) => {
 
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState('');
@@ -33,25 +35,18 @@ const UptainerDetails = ({ navigation, route }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
-  let uptainer = route.params.uptainerData || route.params;
   const [uptainersList, setUptainerList] = useState([]);
 
-  useEffect(() => {
-    console.log('Route params:', route.params); // Check the entire route.params object
-    const scannedData = route.params?.scannedQRCodeData;
-    if (scannedData) {
-      console.log('Scanned QR code data:', scannedData);
-      // Handle the scanned data here
-    } else {
-      console.log('Scanned QR code data is undefined or not passed correctly');
-    }
-  }, [route.params?.scannedQRCodeData]);
+  const uptainer = route.params.uptainerData || route.params;
+  const scannedData = route.params?.scannedQRCodeData;
+
 
   const fetchData = async () => {
     try {
-      // Assuming uptainer.location holds the location information
-      const uptainerList = await getUptainersByLocation(uptainer.location);
+      // userLocation is not yet developed !!
+      const uptainerList = userLocation ? sortedUptainers : await getUptainersByLocation(uptainer.location);
       setUptainerList(uptainerList);
+
       setRefreshing(false);
     } catch (error) {
       console.log('Error:', error);
@@ -64,9 +59,6 @@ const UptainerDetails = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const fetchItemList = async () => {
@@ -84,7 +76,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
             try {
               const cachedImage = await getCachedImage(item.itemId)
-              if (cachedImage){
+              if (cachedImage) {
                 return {
                   ...item,
                   imageUrl: cachedImage,
@@ -132,11 +124,13 @@ const UptainerDetails = ({ navigation, route }) => {
       }
     };
 
+
+
+    fetchData();
     fetchItemList();
     fetchUptainerImage();
-  }, [uptainer, setIsLoading]);
+  }, []);
 
-  const uptainerList = userLocation ? sortedUptainers : uptainersList;
 
   const openAddressOnMap = () => {
     const scheme = Platform.select({
@@ -164,6 +158,7 @@ const UptainerDetails = ({ navigation, route }) => {
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
+        {scannedData && <ProductAlert />}
         {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <ScrollViewComponent
           refreshing={refreshing}
@@ -238,7 +233,7 @@ const UptainerDetails = ({ navigation, route }) => {
           </View>
 
           <View>
-            {uptainerList.map((uptainer) => (
+            {uptainersList.map((uptainer) => (
               <SortSpecificUptainer
                 key={uptainer.uptainerId}
                 uptainerData={uptainer}

@@ -56,7 +56,7 @@ const ProductSaved = ({ navigation }) => {
                 { borderWidth: 2, width: "100%", marginBottom: 20 },
               ]}
               onPress={() => {
-                navigation.navigate("Map");
+                navigation.replace("Map");
               }}
             >
               <Text style={Buttons.secondary_buttonText}>
@@ -69,7 +69,7 @@ const ProductSaved = ({ navigation }) => {
                 { borderWidth: 2, width: "100%" },
               ]}
               onPress={() => {
-                navigation.navigate("Add");
+                navigation.replace("Add");
               }}
             >
               <Text style={Buttons.secondary_buttonText}>

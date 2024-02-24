@@ -148,6 +148,7 @@ export default {
     camera: "Kamera",
     gallery: "Galleri",
     chooseAction: "Vælge en handling",
+    maxDraft:"du kan ikke overstige 15 kladdeelementer"
   },
 
   ProblemComponent: {

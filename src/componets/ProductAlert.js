@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "center",
     justifyContent: "center",
+    elevation:1,
+    zIndex:1
   },
   alertText: {
     color: "white",
