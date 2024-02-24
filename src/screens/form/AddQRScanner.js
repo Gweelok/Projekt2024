@@ -31,6 +31,7 @@ import { BadgeContext } from "./BadgeContext";
 const QRScanner = ({ route, navigation }) => {
   const itemData = route.params;
 
+
   const { badgeCount, setBadgeCount } = useContext(BadgeContext);
   const { currentLanguage } = useLanguage();
   const [hasPermission, setHasPermission] = useState(null);
@@ -67,13 +68,25 @@ const QRScanner = ({ route, navigation }) => {
 
 
   addToDraft = async () => {
+    setIsLoading(true)
+
     // check if already in draft
     if (itemData?.itemUptainer == "Draft") {
+      // update draft item
+      const updatedData = {
+        itemproduct: itemData?.product,
+        itemBrand: itemData?.brand,
+        itemModel: itemData?.model,
+        itemCategory: itemData?.category,
+        itemDescription: itemData?.description,
+        itemcondition: itemData?.condition
+      }
+      await updateItemById(itemData?.itemId, updatedData, itemData?.image)
+
+      setIsLoading(false)
       navigation.replace("ProductSaved")
     } else {
       // add to draft
-      setIsLoading(true)
-
       const response = await createItemDraft(
         itemData?.product,
         itemData?.brand,
