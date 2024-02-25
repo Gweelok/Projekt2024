@@ -37,13 +37,14 @@ const UptainerDetails = ({ route, navigation }) => {
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
 
+  // passed uptainer don't have id !! - NEED FIX
   const uptainer = route.params.uptainerData || route.params;
   const scannedData = route.params?.scannedQRCodeData;
 
 
+  // fetch pass uptainer id items instead of fetching uptainers items with same location - NEED FIX
   const fetchData = async () => {
     try {
-      // userLocation is not yet developed !!
       const uptainerList = userLocation ? sortedUptainers : await getUptainersByLocation(uptainer.location);
       setUptainerList(uptainerList);
 
@@ -62,7 +63,7 @@ const UptainerDetails = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchItemList = async () => {
-      // Fetch items in the uptainer
+      // this fetch does nothing always return empty array use fetchData() instead  !! - NEED FIX
       const storage = getStorage();
       try {
         setIsLoading(true);

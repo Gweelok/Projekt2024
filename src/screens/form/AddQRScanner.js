@@ -70,7 +70,7 @@ const QRScanner = ({ route, navigation }) => {
   addToDraft = async () => {
     setIsLoading(true)
 
-    // check if already in draft
+    // check if passed item already in draft
     if (itemData?.itemUptainer == "Draft") {
       // update draft item
       const updatedData = {
@@ -84,7 +84,10 @@ const QRScanner = ({ route, navigation }) => {
       await updateItemById(itemData?.itemId, updatedData, itemData?.image)
 
       setIsLoading(false)
-      navigation.replace("ProductSaved")
+      navigation.reset({
+        index: 0,
+        routes: [{name:"MyDrafts"},{ name: 'ProductSaved'}]
+      })
     } else {
       // add to draft
       const response = await createItemDraft(
@@ -100,6 +103,10 @@ const QRScanner = ({ route, navigation }) => {
       setIsLoading(false)
 
       if (response.draftAdded) {
+        navigation.reset({
+          index: 0,
+          routes: [{name:"MyDrafts"},{ name: 'ProductSaved'}]
+        })
         navigation.replace("ProductSaved");
         setBadgeCount((prevCount) => prevCount + 1)
       } else {
@@ -147,6 +154,7 @@ const QRScanner = ({ route, navigation }) => {
         if (uptainer) {
           if (itemData?.itemUptainer == "Draft") {
             // item Already in Draft - update
+            setBadgeCount((prevCount) => prevCount - 1)
             const updatedData = {
               itemproduct: itemData?.product,
               itemBrand: itemData?.brand,
@@ -192,8 +200,8 @@ const QRScanner = ({ route, navigation }) => {
                         longitude: uptainer.uptainerLong,
                       },
                       scannedQRCodeData: scannedQRCode
-                     }}],
-                  });
+                     }}]
+                  })
                   
                 },
               },
