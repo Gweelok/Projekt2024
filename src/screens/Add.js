@@ -156,15 +156,7 @@ const Add = ({ route, navigation }) => {
       });
     }
   };
-  const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
-  useEffect(() => {
-    Permissions.getQRCamera().then((loc) => {
-      setHasCameraPermissions(true)
-    }).catch(() => {
-      Alert.alert("Error", t("LocationPermission.error", currentLanguage))
-    })
-  }, []);
 
 
   const handleSkipCategoryDropdown = () => {
@@ -203,13 +195,11 @@ const Add = ({ route, navigation }) => {
           </Text>
 
 
-          {hasCameraPermissions ? (
-            <View style={[{ marginBottom: 10 }]}>
-              <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null} />
-            </View>
-          ) : (
-            <Text style={{ margin: 10 }}>No access to the camera</Text>
-          )}
+
+          <View style={[{ marginBottom: 10 }]}>
+            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null} />
+          </View>
+
 
 
 
