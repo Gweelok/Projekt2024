@@ -3,16 +3,14 @@ import {
   Text,
   View,
   TouchableOpacity,
-  SafeAreaView,
   Alert,
   Pressable,
 } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import Icon from "react-native-vector-icons/AntDesign"; // Replace with the appropriate icon library
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { generateQRCode } from "../../utils/QRCodeGenerator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Backgroundstyle, Buttons, styles } from "../../styles/Stylesheet";
+import { Buttons, styles } from "../../styles/Stylesheet";
 import {
   createItem,
   getUptainerFromQR,

@@ -1,13 +1,9 @@
 import { React, useEffect, useState, useContext, useCallback } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Alert, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { HeaderText, Primarycolor1, Backgroundstyle } from "../../styles/Stylesheet";
-import { useNavigation } from "@react-navigation/native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
-import { Ionicons } from "@expo/vector-icons";
-import { GoBackButton } from "../../styles/GoBackButton";
 import DraftCard from "../../componets/DraftCard";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
-import { ScrollView, RefreshControl } from "react-native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   getBrandById,
@@ -20,9 +16,7 @@ import {
   deleteImage,
 } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton";
-import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
-import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
 import GlobalStyle from "../../styles/GlobalStyle";

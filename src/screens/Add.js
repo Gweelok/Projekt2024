@@ -3,23 +3,20 @@ import {
   Text,
   SafeAreaView,
   Button,
-  ScrollView,
   StyleSheet,
   Pressable,
   Alert,
 } from "react-native";
 import {
-  Backgroundstyle,
   Buttons,
   Primarycolor1,
   Primarycolor3,
 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from "./form/CategoryDropdown";
-import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
 import ProductDropdown from "./form/ProductDropdown";
 import BrandDropdown from "./form/BrandDropdown";
@@ -28,10 +25,8 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
-import { Camera } from "expo-camera";
+import { createItemDraft, updateItemById } from "../utils/Repo";
 import { LoaderContext } from "../componets/LoaderContext";
-import { Permissions } from "../utils/Permissions";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
