@@ -31,7 +31,6 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
-import LoadingScreen from "../componets/LoadingScreen";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -276,7 +275,6 @@ const Add = ({ route, navigation }) => {
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
           <View style={{ }}>
             <Pressable
               onPress={() => {

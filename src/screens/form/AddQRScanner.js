@@ -23,7 +23,6 @@ import {
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
-import LoadingScreen from "../../componets/LoadingScreen";
 import GlobalStyle from "../../styles/GlobalStyle";
 import { BadgeContext } from "./BadgeContext";
 
@@ -224,9 +223,8 @@ const QRScanner = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollViewComponent style={GlobalStyle.BodyWrapper}>
-      <View style={{ marginTop: 40 }}>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
+    <ScrollViewComponent style={ GlobalStyle.BodyWrapper }>
+        <View style={{marginTop: 40}}>
 
         <View style={styles.header}>
           <Text style={styles.headline}>
