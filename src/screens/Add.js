@@ -31,6 +31,7 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
+import { Permissions } from "../utils/Permissions";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -84,9 +85,9 @@ const Add = ({ route, navigation }) => {
   const [description, setDescription] = useState(
     itemData?.description || ""
   );
-  
+
   const { badgeCount, setBadgeCount } = React.useContext(BadgeContext);
-  
+
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
 
@@ -104,34 +105,34 @@ const Add = ({ route, navigation }) => {
       const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
 
       setIsLoading(false);
-      
-      if (res.itemUpdated){
+
+      if (res.itemUpdated) {
         navigation.navigate("ProductSaved");
       }
       console.log(updatedData)
-    } else{
+    } else {
 
       const response = await createItemDraft(
-          product?.productId,
-          brand?.brandId,
-          model?.modelId,
-          category?.categoryId,
-          image,
-          description,
-          condition
-        );
+        product?.productId,
+        brand?.brandId,
+        model?.modelId,
+        category?.categoryId,
+        image,
+        description,
+        condition
+      );
 
-        setIsLoading(false);
+      setIsLoading(false);
 
-        if (response.draftAdded){
-            navigation.navigate("ProductSaved");
-            setBadgeCount((prevCount) => prevCount + 1);
-        } else {
-          Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
+      if (response.draftAdded) {
+        navigation.replace("ProductSaved");
+        setBadgeCount((prevCount) => prevCount + 1);
+      } else {
+        Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
       }
-            
+
     }
-    
+
   };
 
   const addProductConditions = () => {
@@ -151,25 +152,21 @@ const Add = ({ route, navigation }) => {
         condition: condition ? condition : itemData?.itemcondition,
         description: description ? description : itemData?.itemDescription,
         image: image,
-        itemUptainer:itemData?.itemUptainer
+        itemUptainer: itemData?.itemUptainer
       });
     }
   };
   const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const cameraStatus = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermissions(cameraStatus.status === "granted");
-    })();
+    Permissions.getQRCamera().then((loc) => {
+      setHasCameraPermissions(true)
+    }).catch(() => {
+      Alert.alert("Error", t("LocationPermission.error", currentLanguage))
+    })
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const cameraStatus = await Camera.requestCameraPermissionsAsync();
-  //     setHasCameraPermissions(cameraStatus.status == "granted");
-  //   })();
-  // }, []);
+
   const handleSkipCategoryDropdown = () => {
     setIsProductDropdownVisible(true);
   };
@@ -178,7 +175,7 @@ const Add = ({ route, navigation }) => {
     setIsBrandDropdownVisible(true);
   };
   const handleSkipBrandDropdown = () => {
-   setIsModelDropdownVisible(true)
+    setIsModelDropdownVisible(true)
   };
   const handleSkipModelDropdown = () => {
     setIsConditionDropdownVisible(true);
@@ -205,62 +202,69 @@ const Add = ({ route, navigation }) => {
             {t("UpdroppForm.title", currentLanguage)}
           </Text>
 
-          <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null}/>
-          </View>
+
+          {hasCameraPermissions ? (
+            <View style={[{ marginBottom: 10 }]}>
+              <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null} />
+            </View>
+          ) : (
+            <Text style={{ margin: 10 }}>No access to the camera</Text>
+          )}
+
+
 
           <CategoryDropdown
-              onCategorySelect={setCategory}
-              data={itemData?.category ? itemData?.category: itemData?.itemCategory }
-              isVisible={isCategoryDropdownVisible}
-              onSkip={handleSkipCategoryDropdown}
-              isProductDropdownVisible={isProductDropdownVisible}
-              setIsProductDropdownVisible={setIsProductDropdownVisible}
+            onCategorySelect={setCategory}
+            data={itemData?.category ? itemData?.category : itemData?.itemCategory}
+            isVisible={isCategoryDropdownVisible}
+            onSkip={handleSkipCategoryDropdown}
+            isProductDropdownVisible={isProductDropdownVisible}
+            setIsProductDropdownVisible={setIsProductDropdownVisible}
           />
 
 
 
 
           <ProductDropdown
-              onProductSelect={setProduct}
-              categorySelected={!!category} // Pass the state of category selection
-              data={itemData?.product ? itemData?.product : itemData?.itemproduct}
-              setIsBrandDropdownVisible={setIsBrandDropdownVisible}
-              isBrandDropdownVisible={isBrandDropdownVisible}
-              onSkip={handleSkipProductDropdown}
-              isVisible={isProductDropdownVisible}
+            onProductSelect={setProduct}
+            categorySelected={!!category} // Pass the state of category selection
+            data={itemData?.product ? itemData?.product : itemData?.itemproduct}
+            setIsBrandDropdownVisible={setIsBrandDropdownVisible}
+            isBrandDropdownVisible={isBrandDropdownVisible}
+            onSkip={handleSkipProductDropdown}
+            isVisible={isProductDropdownVisible}
           />
 
           <BrandDropdown
-              onBrandSelect={setBrand}
-              productSelected={!!product}
-              data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
-              isVisible={isBrandDropdownVisible}
-              setIsVisible={setIsBrandDropdownVisible}
-              onSkip={handleSkipBrandDropdown}
-              shouldOpenBrandDropdown={isBrandDropdownVisible}
-              setIsModelDropdownVisible={setIsModelDropdownVisible}
-              isModelDropdownVisible={isModelDropdownVisible}
+            onBrandSelect={setBrand}
+            productSelected={!!product}
+            data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
+            isVisible={isBrandDropdownVisible}
+            setIsVisible={setIsBrandDropdownVisible}
+            onSkip={handleSkipBrandDropdown}
+            shouldOpenBrandDropdown={isBrandDropdownVisible}
+            setIsModelDropdownVisible={setIsModelDropdownVisible}
+            isModelDropdownVisible={isModelDropdownVisible}
 
           />
 
           <ModelDropdown
-              brandSelected={!!brand}
-              onModelSelect={setModel}
-              data={itemData?.model ? itemData?.model : itemData?.itemModel}
-              isVisible={isModelDropdownVisible}
-              setIsVisible={setIsModelDropdownVisible}
-              onSkip={handleSkipModelDropdown}
-              setIsConditionDropdownVisible={setIsConditionDropdownVisible}
-              isConditionDropdownVisible={isConditionDropdownVisible}
+            brandSelected={!!brand}
+            onModelSelect={setModel}
+            data={itemData?.model ? itemData?.model : itemData?.itemModel}
+            isVisible={isModelDropdownVisible}
+            setIsVisible={setIsModelDropdownVisible}
+            onSkip={handleSkipModelDropdown}
+            setIsConditionDropdownVisible={setIsConditionDropdownVisible}
+            isConditionDropdownVisible={isConditionDropdownVisible}
           />
 
           <ConditionDropdown
-              onConditionSelect={setCondition}
-              data={itemData?.condition ? itemData?.condition : itemData?.itemcondition}
-              onSkip={handleSkipConditionDropdown}
-              isVisible={isConditionDropdownVisible}
-              setIsVisible={setIsConditionDropdownVisible}
+            onConditionSelect={setCondition}
+            data={itemData?.condition ? itemData?.condition : itemData?.itemcondition}
+            onSkip={handleSkipConditionDropdown}
+            isVisible={isConditionDropdownVisible}
+            setIsVisible={setIsConditionDropdownVisible}
           />
 
           <View style={{ marginBottom: 20 }}>
@@ -275,7 +279,7 @@ const Add = ({ route, navigation }) => {
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-          <View style={{ }}>
+          <View style={{}}>
             <Pressable
               onPress={() => {
                 addProductConditions();

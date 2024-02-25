@@ -25,6 +25,7 @@ import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
 import GlobalStyle from "../../styles/GlobalStyle";
 import { BadgeContext } from "./BadgeContext";
+import { Permissions } from "../../utils/Permissions";
 
 
 const QRScanner = ({ route, navigation }) => {
@@ -33,21 +34,21 @@ const QRScanner = ({ route, navigation }) => {
 
   const { badgeCount, setBadgeCount } = useContext(BadgeContext);
   const { currentLanguage } = useLanguage();
-  const [hasPermission, setHasPermission] = useState(null);
+  const [hasPermission, setHasPermission] = useState(false);
   const [scanned, setScanned] = useState(false);
   const [scannedQRCode, setScannedQRCode] = useState(null);
   const [isActive, setIsActive] = useState(false);
   const { isLoading, setIsLoading } = useContext(LoaderContext);
 
 
-  const askForCameraPermission = async () => {
-    // Made askForCameraPermission an async function
-    const { status } = await BarCodeScanner.requestPermissionsAsync();
-    setHasPermission(status === "granted");
-  };
+
 
   useEffect(() => {
-    askForCameraPermission();
+    Permissions.getQRCamera().then((loc) => {
+      setHasPermission(true)
+    }).catch(() => {
+      Alert.alert("Error", t("LocationPermission.error", currentLanguage))
+    })
   }, []);
 
   alertAddToDraft = () => {
