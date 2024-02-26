@@ -30,8 +30,8 @@ const stationData = [
         uptainerCity: "Frederiksberg",
         uptainerImage: "UPT1.jpg",
         uptainerDescription: "I nærheden af Det Bæredygtige Forsamlingshus",
-        uptainerLat: "55.686256",
-        uptainerLong: "12.519641697795900",
+        uptainerLatitude: "55.686256",
+        uptainerLongitude: "12.519641697795900",
     },
     {
         uptainerName: "KU Lighthouse",
@@ -41,8 +41,8 @@ const stationData = [
         uptainerCity: "Nørrebro",
         uptainerImage: "UPT2.jpg",
         uptainerDescription: "I nærheden af KU Lighthouse",
-        uptainerLat: "55.697947",
-        uptainerLong: "12.560119055467000",
+        uptainerLatitude: "55.697947",
+        uptainerLongitude: "12.560119055467000",
     },
     {
         uptainerName: "COOP 365",
@@ -52,8 +52,8 @@ const stationData = [
         uptainerCity: "Valby",
         uptainerImage: "UPT3.jpg",
         uptainerDescription: "I nærheden af COOP 365",
-        uptainerLat: "55.661317",
-        uptainerLong: "12.50583269168790",
+        uptainerLatitude: "55.661317",
+        uptainerLongitude: "12.50583269168790",
     },
   ];
 
@@ -104,17 +104,18 @@ const StationsMap = ({ navigation }) => {
 
     useEffect(()=>{
         const fetchUptainers = async ()=>{
+      
             let allUptainers
             if (!filteredLocations.length){
-
+                
                 allUptainers = await getAllUptainers()
                 setFilteredLocations(allUptainers)
             }
             const uptainers = allUptainers ? allUptainers : filteredLocations
             const sortedUptainers = await sortUptainersByDistance(userLocation, uptainers)
             setSortedUptainers(sortedUptainers)
-
         }
+        fetchUptainers()
     }, [userLocation])
 
     if (loading) {
@@ -140,11 +141,11 @@ const StationsMap = ({ navigation }) => {
         const sortedUptainers = [...filteredLocations].sort((a, b) => {
             const distanceA = calculateDistance(
                 { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(a.uptainerLat), longitude: parseFloat(a.uptainerLong) }
+                { latitude: parseFloat(a.uptainerLatitude), longitude: parseFloat(a.uptainerLongitude) }
             );
             const distanceB = calculateDistance(
                 { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(b.uptainerLat), longitude: parseFloat(b.uptainerLong) }
+                { latitude: parseFloat(b.uptainerLatitude), longitude: parseFloat(b.uptainerLongitude) }
             )
             return parseFloat(distanceA) - parseFloat(distanceB);
         });
@@ -183,8 +184,8 @@ const StationsMap = ({ navigation }) => {
 
     const selectStation = (location) => {
         mapRef.current.animateToRegion({
-            latitude: parseFloat(location.uptainerLat),
-            longitude: parseFloat(location.uptainerLong),
+            latitude: parseFloat(location.uptainerLatitude),
+            longitude: parseFloat(location.uptainerLongitude),
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
         });
@@ -218,8 +219,8 @@ const StationsMap = ({ navigation }) => {
                         ref={(marker) => (markersRef.current[location.uptainerName] = marker)}
                         key={location.uptainerName}
                         coordinate={{
-                            latitude: parseFloat(location.uptainerLat),
-                            longitude: parseFloat(location.uptainerLong),
+                            latitude: parseFloat(location.uptainerLatitude),
+                            longitude: parseFloat(location.uptainerLongitude),
                         }}
                         image={require('../../../../assets/images/marker_bg.jpg')}
                     >
