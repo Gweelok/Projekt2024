@@ -162,11 +162,11 @@ export default {
       secondHalf: "Ny Brugsfase",
     },
   },
-  QrScannerScreen: {
-    Scan: "Scan for at Updroppe",
+  QRScanner: {
+
     Header: "Placér QR-koden inden for rammen for at aflæse",
     Bottom:
-      "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
+        "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
@@ -177,6 +177,14 @@ export default {
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
+  },
+  TakeQRScanner: {
+    Scan: "Scan for at tage",
+
+  },
+  AddQRScanner: {
+    Scan: "Scan for at Updroppe",
+
   },
   ProductUpdroppedAlert: {
     productUpdropped: "Produktet er nu Updroppet",
