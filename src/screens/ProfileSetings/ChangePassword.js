@@ -13,7 +13,6 @@ import { Backgroundstyle, Buttons, HeaderText, Primarycolor1, styles, styles as 
 import Navigationbar from "../../componets/Navigationbar";
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
-import LoadingScreen from '../../componets/LoadingScreen';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
@@ -149,7 +148,6 @@ const ChangePassword = ({ navigation }) => {
 
     return (
         <View style={Backgroundstyle.interactive_screens}>
-            <LoadingScreen isLoaderShow={isLoading} />
             <SafeAreaView style={GlobalStyle.BodyWrapper}>
                 <View style={styles.HeaderFull}>
                     <BackButton onPress={handleBackPress}></BackButton>

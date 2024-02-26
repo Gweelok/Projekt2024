@@ -271,7 +271,6 @@ const Add = ({ route, navigation }) => {
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
           <View style={{ }}>
             <Pressable
               onPress={() => {

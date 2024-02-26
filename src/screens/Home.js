@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import * as Location from "expo-location";
+import { View, Alert } from "react-native";
 
 import { Backgroundstyle } from "../styles/Stylesheet";
 import GlobalStyle from "../styles/GlobalStyle";
@@ -11,46 +10,47 @@ import SearchBox from '../componets/SearchBox';
 
 import SearchFilter from '../componets/SearchFilter';
 
-import { firebaseAurth } from "../utils/Firebase";
 import { getItemsByName } from '../utils/Repo';
 import { useEffect } from "react";
 import SearchedItems from "../componets/SearchedItems";
+import { Permissions } from "../utils/Permissions";
+import { t, useLanguage } from "../Languages/LanguageHandler";
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [notMatchingProduct, setNotMatchingProduct] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [itemSelected, setItemSelected] = useState(false)
   const [userLocation, setUserLocation] = useState(null)
   const [noProductFoundErr, setNoProductFoundErr] = useState(false)
+  const{currentLanguage}=useLanguage()
+
   const endSearch = () => {
     setSearchText("")
     setItemSelected(false)
   }
-  const handleSearch = (input) =>{
+  const handleSearch = (input) => {
     setSearchText(input)
     if (itemSelected) { setItemSelected(false) }
-    if(noProductFoundErr) {setNoProductFoundErr (false)}
-    
+    if (noProductFoundErr) { setNoProductFoundErr(false) }
   }
-  //Asks for premission to use location at home screen only, must be sent here for new users or copy paste to other screens
-  console.log("start current useeffect " + firebaseAurth.currentUser);
-  (async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      console.log("Permission to access location was denied");
-    } else {
-      console.log("status good");
-      //				let loc = await Location.getLastKnownPositionAsync({});
-      let loc = await Location.getCurrentPositionAsync({});
-      setUserLocation(loc.coords)
-    }
-  })();
+
+
+
+  useEffect(() => {
+    Permissions.getLocation().then((loc) => {
+      setUserLocation(loc)
+    }).catch(() => {
+      Alert.alert("Error", t("LocationPermission.error", currentLanguage))
+    }).finally(()=>{
+      setIsLoading(false)
+    })
+  }, [])
 
   useEffect(() => {
     setNotMatchingProduct(false);
-    
+
     async function getItemsByTextFilter() {
       try {
         setIsLoading(true)
@@ -76,30 +76,30 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
-      <View style={[GlobalStyle.BodyWrapper]}>         
-          <View style={{zIndex: 1}}>
-            <SearchBox
-              onChangeText={handleSearch}
-              value={searchText}
-              placeholderText={"SearchField.productPlaceholder"}
+      <View style={[GlobalStyle.BodyWrapper]}>
+        <View style={{ zIndex: 1 }}>
+          <SearchBox
+            onChangeText={handleSearch}
+            value={searchText}
+            placeholderText={"SearchField.productPlaceholder"}
+          />
+          {(searchText && !itemSelected) ?
+            <SearchFilter
+              data={searchResults}
+              input={searchText}
+              isLoading={isLoading}
+              setItemSelected={setItemSelected}
+              setSearchText={setSearchText}
             />
-            {(searchText && !itemSelected) ?
-              <SearchFilter 
-                data={searchResults} 
-                input={searchText}
-                isLoading={isLoading}
-                setItemSelected={setItemSelected}
-                setSearchText={setSearchText}
-              />
-              : null
-            }
-          </View>
-            {(searchText && itemSelected) &&
-            <SearchedItems endSearch={endSearch} navigation={navigation} setNoProductFound={setNoProductFoundErr}
-              search={searchText} userLocation={userLocation} noProductFound={noProductFoundErr}/>
-            }
-        <SortUptainers navigation={navigation} noProductFound={noProductFoundErr}/>
-        <Navigationbar navigation={navigation} /> 
+            : null
+          }
+        </View>
+        {(searchText && itemSelected) &&
+          <SearchedItems endSearch={endSearch} navigation={navigation} setNoProductFound={setNoProductFoundErr}
+            search={searchText} userLocation={userLocation} noProductFound={noProductFoundErr} />
+        }
+        <SortUptainers navigation={navigation} noProductFound={noProductFoundErr} />
+        <Navigationbar navigation={navigation} />
       </View>
     </View>
   );

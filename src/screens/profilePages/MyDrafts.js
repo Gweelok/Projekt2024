@@ -22,7 +22,6 @@ import {
 import BackButton from "../../componets/BackButton";
 import StatusBarComponent from "../../componets/atoms/StatusBarComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
-import LoadingScreen from "../../componets/LoadingScreen";
 import GeneralPopUp from "../../componets/PopUps/GeneralPopUp";
 import DeleteDraftsPopUp from "../../componets/PopUps/DeleteDraftsPopUp";
 // fetch the data from server
@@ -132,7 +131,6 @@ const MyDrafts = ({navigation}) => {
           {t("MyDraftsScreen.Header", currentLanguage)}
         </Text>
       </View>
-      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
       <ScrollViewComponent
       refreshing={refreshing}
       onRefresh={onRefresh}

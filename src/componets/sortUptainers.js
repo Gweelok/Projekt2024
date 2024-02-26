@@ -1,5 +1,5 @@
 import { getAllUptainers } from "../utils/Repo";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BoxLink } from "../styles/BoxLink";
 import * as Location from "expo-location";
 import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
@@ -13,7 +13,11 @@ import { Primarycolor1 } from "../styles/Stylesheet";
 import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import OnHideView from "./atoms/OnHideView";
+<<<<<<< HEAD
 import Screens from "../utils/ScreenPaths";
+=======
+import { LoaderContext } from "./LoaderContext";
+>>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
 
 const SortUptainers = ({ navigation, noProductFound }) => {
   const [userLocation, setUserLocation] = useState(null);
@@ -21,9 +25,9 @@ const SortUptainers = ({ navigation, noProductFound }) => {
   const [uptainersList, setUptainerList] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const { currentLanguage, setLanguage } = useLanguage();
-  const [loading, setLoading] = useState(true)
+  const {isLoading, setIsLoading} = useContext(LoaderContext)
 
-  const finishLoading = async () => setLoading(false)
+  const finishLoading = async () => setIsLoading(false)
 
   const fetchData = async () => {
     try {
@@ -50,6 +54,7 @@ const SortUptainers = ({ navigation, noProductFound }) => {
 
   // Fetch user location and Uptainers list from the server
   useEffect(() => {
+    setIsLoading(true)
     const fetchData = async () => {
       try {
         // Request user's location permissions and get their current position
@@ -153,9 +158,8 @@ const SortUptainers = ({ navigation, noProductFound }) => {
   return (
     //I added the Scrollview component from Home.js due to it is necceseery for make the refresh on the page
     <View style={{ marginTop: 15 }}>
-      {loading && 
+      {isLoading && 
       <View style={{width: windowWidth, height: windowHeight - 145, alignSelf: 'center', }}>
-          <LoadingScreen isLoaderShow={loading}/>
       </View>}
       <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
         {/* Display the list of sorted uptainers using the Uptainer component */}

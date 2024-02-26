@@ -113,7 +113,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
             } catch (error) {
               console.log("can not change item to taken. Error: ", error);
             }
-            
+            // Do we really need these alerts, feels like a bit breaking the flow.
             Alert.alert(
             t("QrScannerScreen.Success", currentLanguage),
             t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
@@ -121,8 +121,14 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
               {
                 text: t("QrScannerScreen.OK", currentLanguage),
                 onPress: () => {
+<<<<<<< HEAD
                   navigation.navigate(Screens.UPTAINER_DETAILS, {
                     screenFrom: 'QRScanner',
+=======
+                  navigation.navigate("InfographicCO2", {
+                    // I am not sure if we still need to pass the uptainer data and scanned QR code data to the next screen
+                    screenFrom: "QRScanner",
+>>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
                     uptainerData: {
                       id: uptainer.id,
                       name: uptainer.uptainerName,
