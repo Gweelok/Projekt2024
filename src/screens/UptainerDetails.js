@@ -162,13 +162,21 @@ const UptainerDetails = ({ navigation, route }) => {
       .catch((err) => console.error("An error occurred", err));
   };
 
+  const navigateBackCondition = () => {
+    if (route.params?.screenFrom === 'QRScanner') {
+      navigation.push("Add");
+    } else {
+      navigation.goBack(); 
+    }
+  };
+
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
         <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
           <TouchableOpacity
             style={style.backButton}
-            onPress={() => navigation.push("Add")}
+            onPress={() => navigateBackCondition()}
           >
             <Ionicons name="chevron-back" color="white" size={20} />
           </TouchableOpacity>
