@@ -122,7 +122,7 @@ const Add = ({ route, navigation }) => {
             navigation.navigate("ProductSaved");
             setBadgeCount((prevCount) => prevCount + 1);
         } else {
-          console.log('item darft limit exeeded')
+          console.log('item draft limit exceeded')
       }
             
     }
@@ -152,24 +152,11 @@ const Add = ({ route, navigation }) => {
   const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
   useEffect(() => {
-    if (route.params?.from === "UptainerDetails") {
-      resetForm();
-    }
     (async () => {
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
       setHasCameraPermissions(cameraStatus.status === "granted");
     })();
   }, []);
-
-  const resetForm = () => {
-    setImage("");
-    setCategory(null);
-    setProduct(null);
-    setBrand("");
-    setModel("");
-    setCondition(null);
-    setDescription("");
-  }
 
   // useEffect(() => {
   //   (async () => {
