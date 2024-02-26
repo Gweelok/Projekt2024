@@ -1,29 +1,31 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { GlobalStyle, Buttons, Backgroundstyle, Primarycolor1, styles } from "../../../styles/Stylesheet";
+import { Buttons, Backgroundstyle, Primarycolor1, styles, Primarycolor2, Primarycolor3, Primarycolor4 } from "../../../styles/Stylesheet";
 import { t, useLanguage } from "../../../Languages/LanguageHandler";
+import { convertKgToTons } from "../../../utils/uptainersUtils";
+import GlobalStyle from "../../../styles/GlobalStyle";
 
-const StreetStat = ({ data, pos }) => {
+const StreetStat = (props) => {
     const { currentLanguage } = useLanguage();
-    const uptainerName = data?.uptainerName;
-    const uptainerLocation = data?.uptainerLocation;
-    const itemsReused = data?.itemsReused;
-    const Co2Savings = data?.Co2Savings;
+
+    const uptainer = props.uptainer
+
     return (
         <View style={[GlobalStyle, { alignContent: "center", marginTop: 15 }]}>
-            <Text style={[styles.paragraph_text, { fontSize: 19 }]}>{uptainerName} </Text>
-            <Text style={[styles.link, { textAlign: "left", marginTop: 5, textDecorationLine: "none" }]}>{uptainerLocation} </Text>
+            <Text style={[styles.paragraph_text, { fontSize: 19 }]}>{uptainer.uptainerName} </Text>
+            <Text style={[styles.link, { textAlign: "left", marginTop: 5, textDecorationLine: "none" }]}>{uptainer.uptainerStreet} </Text>
             <View style={GlobalStyle}>
                 <Text
-                    style={[Backgroundstyle.message_Screens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${pos}%`, color: "white" }]}>
-                    {itemsReused} {t('StatsPage.ItemsReused', currentLanguage)}
+                    style={[Backgroundstyle.message_Screens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${props.pos}%`, color: "white" }]}>
+                    {uptainer.takenItems} {t('StatsPage.ItemsReused', currentLanguage)}
                 </Text>
             </View>
             <View style={GlobalStyle}>
                 <Text
-                    style={[Backgroundstyle.informationScreens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${pos}%`, color: Primarycolor1 }]}>
-                    {Co2Savings}t. {t('StatsPage.CO2Save', currentLanguage)}
+                    style={[Backgroundstyle.informationScreens, { paddingTop: 9, height: 40, marginTop: 5, paddingLeft: 10, width: `${props.pos}%`, color: Primarycolor1 }]}>
+                    {convertKgToTons(uptainer.savedCO2)}{t('StatsPage.CO2Save', currentLanguage)}
                 </Text>
+
             </View>
         </View>
     );

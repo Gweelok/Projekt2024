@@ -66,6 +66,7 @@ import LoadingScreen from "./src/screens/Splash/LoadingScreen";
 import YourStats from "./src/screens/YourStats";
 import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
 import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
+import InfographicCO2Screen from "./src/screens/InfographicCO2Screen";
 
 import { firebaseAurth } from "./src/utils/Firebase";
 

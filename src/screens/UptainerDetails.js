@@ -17,9 +17,9 @@ import { styles, Backgroundstyle } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
 import { LoaderContext } from '../componets/LoaderContext';
-import LoadingScreen from '../componets/LoadingScreen';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
+import { cacheImage, getCachedImage } from '../utils/Cache';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -82,14 +82,25 @@ const UptainerDetails = ({ navigation, route }) => {
             const brand = await getBrandById(item.itemBrand);
 
             try {
-              const url = await getDownloadURL(pathReference);
+              const cachedImage = await getCachedImage(item.itemId)
+              if (cachedImage){
+                return {
+                  ...item,
+                  imageUrl: cachedImage,
+                  productName: product.productName,
+                  brandName: brand.brandName,
+                };
+              } else {
 
-              return {
-                ...item,
-                imageUrl: url,
-                productName: product.productName,
-                brandName: brand.brandName,
-              };
+                const url = await getDownloadURL(pathReference);
+                await cacheImage(item.itemId, url)
+                return {
+                  ...item,
+                  imageUrl: url,
+                  productName: product.productName,
+                  brandName: brand.brandName,
+                };
+              }
             } catch (error) {
               console.log('Error while downloading image => ', error);
               return {
@@ -152,7 +163,6 @@ const UptainerDetails = ({ navigation, route }) => {
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
       <View style={GlobalStyle.BodyWrapper}>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
         <ScrollViewComponent
           refreshing={refreshing}
           onRefresh={onRefresh}>
