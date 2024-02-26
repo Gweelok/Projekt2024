@@ -13,6 +13,7 @@ import { setUptainersByIds, sortUptainersByDistance } from "../utils/uptainersUt
 const SearchedProducts = ({navigation, search, userLocation, endSearch, noProductFound, setNoProductFound }) =>{
     const [allProducts, setAllProducts] = useState(null)
     const [searchedData, setSearchedData] = useState([])
+    const [numberSearchedItems, setNumberSearchedItems] = useState(0)
     const { currentLanguage, setLanguage } = useLanguage()
     const [allUptainers, setAllUptainers] = useState(null);
     const [loading, setLoading] = useState(true)
@@ -33,7 +34,33 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
                         imageUrl: imageUrl}
                 }))
                 setLoading(false)
-                setSearchedData(dataByImages)
+                let number = 0;
+                const sortedItemsByUptainers = sortedUptainers.map((uptainer) => {
+                    const result = dataByImages.filter(function(item) {
+                        if(item.itemUptainer === uptainer.uptainerId && item.itemTaken === false)
+                        {
+                            return {
+                                ...item
+                            }
+                        }
+                    })
+                    if(result.length){
+                        number += result.length;
+                        return {
+                            uptainer: uptainer,
+                            items: result
+                            }}
+                        else {
+                            return null
+                        }
+                })
+                const filteredSortedItemsByUptainers = sortedItemsByUptainers.filter((obj) => {
+                    if(obj !== null){
+                        return items
+                    }
+                })
+                setSearchedData(filteredSortedItemsByUptainers)
+                setNumberSearchedItems(number)
                 } catch(error) {
                     console.error('Error fetching data:', error.message);
                     setLoading(false); // Set loading to false in case of an error
@@ -45,6 +72,8 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
 
     return (
         <View style={noProductFound ? null : style.container}>
+
+
                 {loading ? (
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={style.loadingContainer}>
                     <ActivityIndicator size='size'/>
@@ -54,17 +83,16 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
                 null : 
                 <ScrollViewComponent style={{width: windowWidth * 0.89}}>
                  
-                    <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
-                    {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
+                    <Text style={style.productsMatch}>{numberSearchedItems} {t("SearchHome.productsMatch", currentLanguage)}</Text>
+                    {(!!searchedData.length) && ( searchedData.map((items, index) =>(
                     <ItemsSearched 
-                    uptainer={allUptainers[item.itemUptainer]}
+                    uptainer={items.uptainer}
                     endSearch={endSearch} navigation={navigation} index={index}
-                    item={item} userLocation={userLocation}/>
+                    items={items.items} userLocation={userLocation}/>
                     )))}
              
                 </ScrollViewComponent>
                 }
-
         </View>
     )
 }
