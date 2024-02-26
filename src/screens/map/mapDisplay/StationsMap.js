@@ -137,22 +137,6 @@ const StationsMap = ({ navigation }) => {
         longitudeDelta: 0.0421,
     };
 
-    const sortLocationsByDistance = () => {
-        const sortedUptainers = [...filteredLocations].sort((a, b) => {
-            const distanceA = calculateDistance(
-                { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(a.uptainerLatitude), longitude: parseFloat(a.uptainerLongitude) }
-            );
-            const distanceB = calculateDistance(
-                { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(b.uptainerLatitude), longitude: parseFloat(b.uptainerLongitude) }
-            )
-            return parseFloat(distanceA) - parseFloat(distanceB);
-        });
-
-        return sortedUptainers;
-    };
-
     const openStationPage = (location) => {
         navigation.navigate('StationDetails', { stationDetail: location });
         console.log('onPress', location);
