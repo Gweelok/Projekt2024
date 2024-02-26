@@ -71,6 +71,7 @@ const StationsMap = ({ navigation }) => {
             if (!filteredLocations.length){
                 
                 allUptainers = await getAllUptainers()
+                setFilteredLocations(allUptainers)
             }
             const uptainers = allUptainers ? allUptainers : sortedUptainers
             if (userLocation){
@@ -119,7 +120,7 @@ const StationsMap = ({ navigation }) => {
                 location.uptainerName.toLowerCase().includes(text.toLowerCase()) ||
                 location.uptainerStreet.toLowerCase().includes(text.toLowerCase()) ||
                 location.uptainerCity.toLowerCase().includes(text.toLowerCase()) ||
-                location.uptainerZip.includes(text)
+                location.uptainerZip.toString().includes(text)
         );
 
         setFilteredLocations(filtered);
