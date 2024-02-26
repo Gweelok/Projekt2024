@@ -19,44 +19,6 @@ import { calculateDistance, sortUptainersByDistance } from '../../../utils/uptai
 import SearchedLocation from './SearchedLocation';
 import { getAllUptainers } from '../../../utils/Repo';
 
-
-
-const stationData = [
-    {
-        uptainerName: "Det Bæredygtige Forsamlingshus",
-        uptainerQR: "https://www.google.com",
-        uptainerStreet: "Stockflethsvej 2",
-        uptainerZip: "2000",
-        uptainerCity: "Frederiksberg",
-        uptainerImage: "UPT1.jpg",
-        uptainerDescription: "I nærheden af Det Bæredygtige Forsamlingshus",
-        uptainerLatitude: "55.686256",
-        uptainerLongitude: "12.519641697795900",
-    },
-    {
-        uptainerName: "KU Lighthouse",
-        uptainerQR: "https://www.google.com",
-        uptainerStreet: "Tagensvej 16A",
-        uptainerZip: "2200",
-        uptainerCity: "Nørrebro",
-        uptainerImage: "UPT2.jpg",
-        uptainerDescription: "I nærheden af KU Lighthouse",
-        uptainerLatitude: "55.697947",
-        uptainerLongitude: "12.560119055467000",
-    },
-    {
-        uptainerName: "COOP 365",
-        uptainerQR: "https://www.google.com",
-        uptainerStreet: "Vigerslev Allé 124",
-        uptainerZip: "2500",
-        uptainerCity: "Valby",
-        uptainerImage: "UPT3.jpg",
-        uptainerDescription: "I nærheden af COOP 365",
-        uptainerLatitude: "55.661317",
-        uptainerLongitude: "12.50583269168790",
-    },
-  ];
-
 const StationsMap = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
     const [filteredLocations, setFilteredLocations] = useState([]);
@@ -109,11 +71,13 @@ const StationsMap = ({ navigation }) => {
             if (!filteredLocations.length){
                 
                 allUptainers = await getAllUptainers()
-                setFilteredLocations(allUptainers)
             }
-            const uptainers = allUptainers ? allUptainers : filteredLocations
-            const sortedUptainers = await sortUptainersByDistance(userLocation, uptainers)
-            setSortedUptainers(sortedUptainers)
+            const uptainers = allUptainers ? allUptainers : sortedUptainers
+            if (userLocation){
+                const sortedUptainers = await sortUptainersByDistance(userLocation, uptainers)
+                setSortedUptainers(sortedUptainers)
+
+            }
         }
         fetchUptainers()
     }, [userLocation])
@@ -146,11 +110,11 @@ const StationsMap = ({ navigation }) => {
         setSearchText(text);
 
         if (text === '') {
-            setFilteredLocations(stationData);
+            setFilteredLocations(sortedUptainers);
             return;
         }
 
-        const filtered = stationData.filter(
+        const filtered = sortedUptainers.filter(
             (location) =>
                 location.uptainerName.toLowerCase().includes(text.toLowerCase()) ||
                 location.uptainerStreet.toLowerCase().includes(text.toLowerCase()) ||
