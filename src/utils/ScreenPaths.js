@@ -42,6 +42,7 @@ const Screens = {
     THANK_YOU: 'ThankYouScreen',
     CAMERA: 'Camera',
     FORGOT_PASSWORD: 'ForgotPassword',
+    INFO_GRAPHIC_CO2:"InfographicCO2"
   };
   
   export default Screens;
