@@ -66,7 +66,7 @@ const SortSpecificUptainer = ({ uptainerData }) => {
         };
 
         fetchItemList();
-    }, [uptainerData.uptainerId]);
+    }, [uptainerData]);
 
     const renderItem = (item) => (
         <TouchableOpacity
@@ -97,7 +97,6 @@ const SortSpecificUptainer = ({ uptainerData }) => {
 
     return (
         <View style={styling.container}>
-            {isLoading && <ActivityIndicator size="large" color="#000" />}
             <ScrollView contentContainerStyle={styling.scrollViewContent}>
                 {data.map((item) => renderItem(item))}
             </ScrollView>

@@ -14,6 +14,7 @@ import { Primarycolor1, styles as stylesGlobal } from "../../styles/Stylesheet";
 import CustomInput from "../../componets/atoms/CustomInput";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { useNavigation } from "@react-navigation/core";
+import { Permissions } from "../../utils/Permissions";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -25,12 +26,11 @@ const ImageUpload = ({ onImageSelect,data}) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const getCameraPermissions = async () => {
-      const { status } = await ImagePicker.getCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    };
-
-    getCameraPermissions();
+    Permissions.getCamera().then(()=>{
+      setHasPermission(true)
+    }).catch(()=>{
+      setHasPermission(false)
+    })
   }, []);
   const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
   const pickImage = async () => {

@@ -42,7 +42,7 @@ const QRScanner = ({ route, navigation }) => {
 
 
   useEffect(() => {
-    Permissions.getQRCamera().then((loc) => {
+    Permissions.getCamera().then((loc) => {
       setHasPermission(true)
     }).catch(() => {
       Alert.alert("Error", t("LocationPermission.error", currentLanguage))
@@ -84,7 +84,7 @@ const QRScanner = ({ route, navigation }) => {
       setIsLoading(false)
       navigation.reset({
         index: 0,
-        routes: [{name:"MyDrafts"},{ name: 'ProductSaved'}]
+        routes: [{ name: "MyDrafts" }, { name: 'ProductSaved' }]
       })
     } else {
       // add to draft
@@ -103,7 +103,7 @@ const QRScanner = ({ route, navigation }) => {
       if (response.draftAdded) {
         navigation.reset({
           index: 0,
-          routes: [{name:"MyDrafts"},{ name: 'ProductSaved'}]
+          routes: [{ name: "MyDrafts" }, { name: 'ProductSaved' }]
         })
         navigation.replace("ProductSaved");
         setBadgeCount((prevCount) => prevCount + 1)
@@ -177,34 +177,23 @@ const QRScanner = ({ route, navigation }) => {
             );
           }
 
-          setIsLoading(false)
-          Alert.alert(
-            t("QrScannerScreen.Success", currentLanguage),
-            t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
-            [
-              {
-                text: t("QrScannerScreen.OK", currentLanguage),
-                onPress: () => {
-                  // reset navigation history to prevent going back to this screen
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name:"Map"},{ name: 'UptainerDetails', params: { 
-                      uptainerData: {
-                        id: uptainer.uptainerId,
-                        name: uptainer.uptainerName,
-                        location: uptainer.uptainerStreet,
-                        uptainerImage: uptainer.uptainerImage,
-                        latitude: uptainer.uptainerLat,
-                        longitude: uptainer.uptainerLong,
-                      },
-                      scannedQRCodeData: scannedQRCode
-                     }}]
-                  })
-                  
+
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Map" }, {
+              name: 'UptainerDetails', params: {
+                uptainerData: {
+                  id: uptainer.uptainerId,
+                  name: uptainer.uptainerName,
+                  location: uptainer.uptainerStreet,
+                  uptainerImage: uptainer.uptainerImage,
+                  latitude: uptainer.uptainerLat,
+                  longitude: uptainer.uptainerLong,
                 },
-              },
-            ]
-          );
+                scannedQRCodeData: scannedQRCode
+              }
+            }]
+          })
 
         } else {
           setIsLoading(false);
@@ -222,8 +211,8 @@ const QRScanner = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollViewComponent style={ GlobalStyle.BodyWrapper }>
-        <View style={{marginTop: 40}}>
+    <ScrollViewComponent style={GlobalStyle.BodyWrapper}>
+      <View style={{ marginTop: 40 }}>
 
         <View style={styles.header}>
           <Text style={styles.headline}>

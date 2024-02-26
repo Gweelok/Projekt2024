@@ -1,5 +1,7 @@
 import * as Location from "expo-location";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import * as ImagePicker from "expo-image-picker";
+import { Camera } from "expo-camera";
 
 export const Permissions = {
   getLocation: async () => {
@@ -11,8 +13,8 @@ export const Permissions = {
       throw ("")
     }
   },
-  getQRCamera: async () => {
-    const { status } = await BarCodeScanner.requestPermissionsAsync()
+  getCamera: async () => {
+    const { status } = await Camera.requestCameraPermissionsAsync()
     if (status != "granted") {
       throw ("")
     }

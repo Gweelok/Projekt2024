@@ -51,11 +51,13 @@ const UptainerDetails = ({ route, navigation }) => {
     } catch (error) {
       console.log('Error:', error);
     }
+
   };
 
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    setIsLoading(true)
     fetchData();
   }, []);
 
@@ -65,7 +67,6 @@ const UptainerDetails = ({ route, navigation }) => {
       // this fetch does nothing always return empty array use fetchData() instead  !! - NEED FIX
       const storage = getStorage();
       try {
-        setIsLoading(true);
         const items = await getItemsInUptainer(uptainer.id);
 
         const updatedData = await Promise.all(
@@ -105,8 +106,6 @@ const UptainerDetails = ({ route, navigation }) => {
         );
 
         setData(updatedData);
-        setIsLoading(false);
-        setRefreshing(false);
       } catch (error) {
         console.log('Error while fetching items => ', error);
       }
