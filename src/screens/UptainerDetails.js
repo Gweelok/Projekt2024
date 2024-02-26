@@ -65,6 +65,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
   useEffect(() => {
     fetchData();
+    console.log('Uptainer:', uptainer);
   }, []);
 
   useEffect(() => {
@@ -169,7 +170,7 @@ const UptainerDetails = ({ navigation, route }) => {
           onRefresh={onRefresh}>
           <TouchableOpacity
             style={style.backButton}
-            onPress={() => navigation.goBack()}>
+            onPress={() => navigation.navigate("Add")}>
             <Ionicons name="chevron-back" color="white" size={20} />
           </TouchableOpacity>
           <View>
