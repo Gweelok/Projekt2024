@@ -11,8 +11,9 @@ const Distance = ({userLocation, uptainer}) => (
 
 const style = StyleSheet.create({
     distance: {
+        fontSize: 12,
         color: Primarycolor1,
-        fontSize: 11
+        marginTop: 5
     },
 })
 export default Distance;

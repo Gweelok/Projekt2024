@@ -4,7 +4,7 @@ import { getItemById, getUptainerById } from "../utils/Repo"
 import { getDownloadURL, getStorage, ref } from "firebase/storage"
 import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
-import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
+import { Primarycolor1, Primarycolor2, Primarycolor3, styles } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
 
 const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptainer}) =>{
@@ -23,11 +23,15 @@ const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptai
           } style={style.mainContainer}>
             <View key={index}>
                 <View style={style.container1}>
-                    <Text style={style.uptainerName}>{uptainer.uptainerName}</Text>
+                    <Text style={styles.menuItem_text}>{uptainer.uptainerName}</Text>                    
+                </View>
+
+                <View style={style.details}>
+                    <Text style={{fontSize: 18, color: Primarycolor1}}>{uptainer.uptainerStreet}, {uptainer.uptainerZip}
+                    {uptainer.uptainerCity}</Text>
                     {!!userLocation && <Distance userLocation={userLocation} uptainer={uptainer}/>}
                 </View>
-                <Text style={style.uptainerAddress}>{uptainer.uptainerStreet}, {uptainer.uptainerZip} {uptainer.uptainerCity}</Text>
-                {!!item?.imageUrl && <Image source={{uri: item.imageUrl}} style={style.image}></Image>}
+                <Image source={{uri: item.imageUrl}} style={style.image}></Image>
             </View>
         </TouchableOpacity>
     )
@@ -37,7 +41,6 @@ const style = StyleSheet.create({
     mainContainer: {
         width: windowWidth * 0.89,
         marginTop: 8,
-        marginLeft: 3
     },
     container1: {
         fontFamily: 'space-grotesk',
@@ -60,7 +63,11 @@ const style = StyleSheet.create({
         marginTop: 5,
         width: 100,
         height: 100,
-    }
+    },
+    details: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
 })
 
 export default ItemsSearched

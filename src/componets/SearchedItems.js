@@ -8,7 +8,7 @@ import { filterProducts } from "../utils/productsUtils"
 import { useLanguage, t } from "../Languages/LanguageHandler"
 import { Primarycolor1, Primarycolor2, Primarycolor3, dropdownStyles } from "../styles/Stylesheet"
 import ItemsSearched from "./ItemsSearched"
-import { setUptainersByIds } from "../utils/uptainersUtils"
+import { setUptainersByIds, sortUptainersByDistance } from "../utils/uptainersUtils"
 
 const SearchedProducts = ({navigation, search, userLocation, endSearch, noProductFound, setNoProductFound }) =>{
     const [allProducts, setAllProducts] = useState(null)
@@ -22,13 +22,15 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
             try {
 
                 const uptainers = await getAllUptainers()
-                const setupUptainers = await setUptainersByIds(uptainers)
+                const sortedUptainers = sortUptainersByDistance(userLocation, uptainers)
+                const setupUptainers = await setUptainersByIds(sortedUptainers)
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
                 if (!searchedItems.length) { setNoProductFound(true)}
                 const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
                     const imageUrl = await getImage(item.itemImage)
-                    return {...item, imageUrl}
+                    return {...item, 
+                        imageUrl: imageUrl}
                 }))
                 setLoading(false)
                 setSearchedData(dataByImages)
