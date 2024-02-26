@@ -259,17 +259,19 @@ export default {
     SoFar: "So far today",
     AmountCO2: "Amount of CO2 saved",
     Yesterday: "Yesterday",
-    kgCO2: "10 kg. CO2 is equivalent to",
-    Amount_first_part: "So",
-    Amount_second_part: "would amount to",
+    CO2Equivalent: "CO2 is equivalent to",
+    CO2AmountBefore:"So",
+    CO2Amount:"is equivalent to",
     Fact_equavalent: "loads of washing and drying",
     BestAcheieve: "Best achieving Uptainers this month",
-    MostVisitedUptainer: "Your most visited Uptainer",
+    MostVisitedUptainer: "Most visited Uptainer",
+    MyMostVisitedUptainer: "Your most visited Uptainer",
+    MyMostVisitedUptainers: "Your most visited Uptainers",
     ItemsReused: "Items reused",
+    Visits: "Visits",
     CO2Save: " CO2 Saved",
     Comunity: "The sustainable community building",
     Info: "Learn how we get our information here",
-    ItemsRecicled: "items reused",
     ItemsDonated: "Items donated",
     ItemsCollected: "Items collected",
     Overview: "Go to the overview of your items",
@@ -299,5 +301,8 @@ export default {
   },
   SearchHome: {
     productsMatch: "products match your search."
+  },
+  LocationPermission:{
+    error:"Location permission denied. Please grant permission to access your location to use this feature"
   }
 };

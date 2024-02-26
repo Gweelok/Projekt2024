@@ -26,10 +26,11 @@ import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
 import Navigationbar from "../../componets/Navigationbar";
-import { getCurrentUser, updateUserData } from "../../utils/Repo";
-import ErrorBanner from "../ErrorBanner";
-import { LoaderContext } from "../../componets/LoaderContext";
-import { Divider } from "react-native-elements";
+import { getCurrentUser, updateUserData } from '../../utils/Repo';
+import ErrorBanner from '../ErrorBanner';
+import { LoaderContext } from '../../componets/LoaderContext';
+import { Divider } from 'react-native-elements';
+
 
 const AccountSettings = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
@@ -154,16 +155,15 @@ const AccountSettings = ({ navigation }) => {
     navigation.navigate("ChangePassword");
   };
 
-  return (
-    <View style={Backgroundstyle.interactive_screens}>
-      <SafeAreaView style={GlobalStyle.BodyWrapper}>
-        <View style={styles.HeaderFull}>
-          <BackButton onPress={handleBackPress}></BackButton>
-          <Text style={styles.HeaderText}>
-            {t("AccountSettingsScreen.Header", currentLanguage)}{" "}
-          </Text>
-        </View>
-        {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
+    return (
+        <View style={Backgroundstyle.interactive_screens}>
+
+            <SafeAreaView style={GlobalStyle.BodyWrapper}>
+                <View style={styles.HeaderFull}>
+                    <BackButton onPress={handleBackPress}></BackButton>
+                    <Text style={styles.HeaderText}>{t('AccountSettingsScreen.Header', currentLanguage)} </Text>
+                </View>
+                {bannerErrorMessage && <ErrorBanner message={bannerErrorMessage} />}
 
         <ScrollViewComponent>
           {/* Section 1 */}
