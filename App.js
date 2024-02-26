@@ -281,6 +281,11 @@ export default function App() {
                   component={ForgotPassword}
                 />
 
+                <Stack.Screen
+                  name="InfographicCO2"
+                  component={InfographicCO2Screen}
+                />
+
               </Stack.Navigator>) : isActive && !user ? (
                 <Stack.Navigator
                   initialRouteName={'Sign in'}
