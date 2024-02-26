@@ -84,7 +84,7 @@ import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
 //import ProductDropdown from "./src/screens/form/ProductDropdown";
 import YourStats from "./src/screens/YourStats";
-import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
+import StatsInfo from "./src/componets/atoms/Stats/StatsInfo"; // COMPONENT!!!!!!!!! <--------------------
 import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
 import InfographicCO2Screen from "./src/screens/InfographicCO2Screen";
 
@@ -125,18 +125,13 @@ export default function App() {
         <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
           <NavigationContainer theme={navStyle}>
             <Stack.Navigator
-<<<<<<< HEAD
               initialRouteName={Screens.SPLASH}
-=======
-              initialRouteName="Landingscreen"
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               screenOptions={{
                 headerShown: false, // This hides the header
                 animation: "none",
                 gestureEnabled: false,
               }}
             >
-<<<<<<< HEAD
               <Stack.Screen
                 name={Screens.SPLASH}
                 component={SplashScreen}
@@ -207,54 +202,21 @@ export default function App() {
                 name={Screens.DELETE_ACCOUNT}
                 component={DeleteAccount}
               />
-=======
-              <Stack.Screen name="SplashScreen" component={SplashScreen} />
-              <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
-              <Stack.Screen name="Landingscreen" component={LandingScreen} />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-              <Stack.Screen name="Sign in" component={SignIn} />
-              <Stack.Screen name="Homepage" component={Home} />
-
-              <Stack.Screen
-                name="DetailView"
-                options={{ animation: "none", headerShown: false }}
-                component={DetailView}
-              />
-
-              <Stack.Screen name="Infopage" component={ArticlePage} />
-              <Stack.Screen name="Map" component={Map} />
-              <Stack.Screen name="Profile" component={Profile} />
-              <Stack.Screen name="ContactUs" component={ContactUs} />
-
-              <Stack.Screen name="DataPolicy" component={DataPolicy} />
-              <Stack.Screen name="MyDrafts" component={MyDrafts} />
-              <Stack.Screen name="MySettings" component={MySettings} />
-
-              <Stack.Screen name="ChangePassword" component={ChangePassword} />
-
-              <Stack.Screen name="DeleteAccount" component={DeleteAccount} />
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
 
               <Stack.Screen
                 name={Screens.ACCOUNT_SETTINGS}
                 component={AccountSettings}
               />
-<<<<<<< HEAD
               <Stack.Screen
                 name={Screens.NOTIFICATIONS}
                 component={Notifications}
               />
-=======
-              <Stack.Screen name="Notifications" component={Notifications} />
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               <Stack.Screen
                 name={Screens.TERMS_AND_CONDITIONS}
                 component={TermsAndConditions}
               />
-              <Stack.Screen name="ProfileCreated" component={ProfileCreated} />
-              <Stack.Screen name="StatsInfo" component={StatsInfo} />
+      
               <Stack.Screen
-<<<<<<< HEAD
                 name={Screens.PROFILE_CREATED}
                 component={ProfileCreated}
               />
@@ -289,19 +251,8 @@ export default function App() {
               <Stack.Screen
                 name={Screens.PRODUCTS}
                 component={ProductScreen}
-=======
-                name="VisitedUptainerStat"
-                component={VisitedUptainerStat}
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               />
-              <Stack.Screen name="Stats" component={Stat} />
-              <Stack.Screen name="YourStats" component={YourStats} />
-              <Stack.Screen name="Add" component={Add} />
-              <Stack.Screen name="TakeQRScanner" component={TakeQRScanner} />
-              <Stack.Screen name="AddQRScanner" component={AddQRScanner} />
-              <Stack.Screen name="Products" component={ProductScreen} />
-
-<<<<<<< HEAD
+         
               <Stack.Screen
                 name={Screens.PRO}
                 component={ProScreen}
@@ -318,58 +269,36 @@ export default function App() {
                 name={Screens.STATIONS}
                 component={StationsScreen}
               />
-=======
-              <Stack.Screen name="Pro" component={ProScreen} />
-              <Stack.Screen name="Bnd" component={BndScreen} />
-              <Stack.Screen name="Mod" component={ModScreen} />
-              <Stack.Screen name="Stations" component={StationsScreen} />
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               <Stack.Screen
                 name={Screens.STATION_DETAILS}
                 component={StationDetailScreen}
               />
-<<<<<<< HEAD
               <Stack.Screen
                 name={Screens.THANKS}
                 component={ThanksScreen}
               />
-=======
-              <Stack.Screen name="Thanks" component={ThanksScreen} />
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               <Stack.Screen
                 name={Screens.LOGOUT_CONFIRMATION}
                 component={LogoutConfirmation}
               />
-<<<<<<< HEAD
               <Stack.Screen
                 name={Screens.PRIVACY_POLICY}
                 component={PrivacyPolicy}
               />
-=======
-              <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               <Stack.Screen
                 name={Screens.UPTAINER_DETAILS}
                 component={UptainerDetails}
               />
-<<<<<<< HEAD
               <Stack.Screen
                 name={Screens.PRODUCT_SAVED}
                 component={ProductSaved}
               />
-=======
-              <Stack.Screen name="ProductSaved" component={ProductSaved} />
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               <Stack.Screen
                 name={Screens.PRODUCT_IS_TAKEN}
                 component={ProductIsTakenScreen}
               />
-              <Stack.Screen name="ProductTaken" component={ProductTaken} />
-              <Stack.Screen name="ThankYouScreen" component={ThankYouscreen} />
-              <Stack.Screen name="Camera" component={CameraScreen} />
-              <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            
               <Stack.Screen
-<<<<<<< HEAD
                 name={Screens.PRODUCT_TAKEN}
                 component={ProductTaken}
               />
@@ -384,11 +313,13 @@ export default function App() {
               <Stack.Screen
                 name={Screens.FORGOT_PASSWORD}
                 component={ForgotPassword}
-=======
-                name="InfographicCO2"
-                component={InfographicCO2Screen}
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
               />
+
+              <Stack.Screen
+                 name={Screens.INFO_GRAPHIC_CO2}
+                 component={InfographicCO2Screen}
+              />
+
             </Stack.Navigator>
           </NavigationContainer>
         </BadgeContext.Provider>

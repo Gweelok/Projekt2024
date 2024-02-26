@@ -1,17 +1,6 @@
 
 import { Text, TouchableOpacity, View, } from "react-native";
 import GlobalStyle from "../../../styles/GlobalStyle";
-<<<<<<< HEAD
-import {Backgroundstyle, Buttons, Primarycolor1, styles} from "../../../styles/Stylesheet";
-import {React, useContext, useEffect} from "react";
-import {BoxLink} from "../../../styles/BoxLink";
-import {AntDesign} from "@expo/vector-icons";
-import {msg} from "@babel/core/lib/config/validation/option-assertions";
-import { t, useLanguage} from "../../../Languages/LanguageHandler";
-import {useNavigation} from "@react-navigation/native";
-import { LoaderContext } from "../../../componets/LoaderContext";
-import { Screens } from "../../../utils/ScreenPaths";
-=======
 import { Backgroundstyle, Buttons, Primarycolor1, styles } from "../../../styles/Stylesheet";
 import { React, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -20,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { LoaderContext } from "../../LoaderContext";
 import { convertKgToTons } from "../../../utils/uptainersUtils";
 import { BoxLink } from "../../../styles/BoxLink";
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
+import { Screens } from "../../../utils/ScreenPaths";
 
 export const VisitedUptainerStat = (props) => {
     const { currentLanguage } = useLanguage();
@@ -30,15 +19,7 @@ export const VisitedUptainerStat = (props) => {
 
 
 
-<<<<<<< HEAD
-    const handlePress = () => {
-        navigation.navigate(Screens.STATS_INFO);
-    };
-
-    return(
-=======
     return (
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
         <View style={GlobalStyle}>
             <View>
                 <View>
@@ -47,21 +28,13 @@ export const VisitedUptainerStat = (props) => {
                             <View style={GlobalStyle.BodyWrapper}>
                                 <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
-<<<<<<< HEAD
                                     navigation.navigate(Screens.UPTAINER_DETAILS , {
-                                        id: bestUptainers?.id,
-                                        name: bestUptainers?.uptainerName,
-                                        location: bestUptainers?.uptainerStreet,
-                                        imageUrl: bestUptainers?.imageUrl,
-=======
-                                    navigation.navigate("UptainerDetails", {
                                         id: uptainer.uptainerId,
                                         name: uptainer.uptainerName,
                                         location: uptainer.uptainerStreet,
                                         uptainerImage: uptainer.uptainerImage,
                                         latitude: uptainer.uptainerLatitude,
                                         longitude: uptainer.uptainerLongitude
->>>>>>> 5dd88e782c537700b43808d30761f25f2ee8aa2f
                                     });
                                 }}>
                                     <Text style={styles.menuItem_text}>{uptainer.uptainerStreet} </Text>

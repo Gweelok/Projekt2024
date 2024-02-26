@@ -121,7 +121,7 @@ const QRScanner = ({ route, navigation, uptainerData }) => {
               {
                 text: t("QrScannerScreen.OK", currentLanguage),
                 onPress: () => {
-                  navigation.navigate(INFO_GRAPHIC_CO2, {
+                  navigation.navigate(Screens.INFO_GRAPHIC_CO2, {
                     // I am not sure if we still need to pass the uptainer data and scanned QR code data to the next screen
                     screenFrom: "QRScanner",
                     uptainerData: {
