@@ -1,12 +1,12 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Primarycolor1, Primarycolor2 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoadingScreen = () => {
   const navigation = useNavigation();
-
+  const [loading, setLoading] = useState(true);
   
   //Conditionally navigate to Landing or Sign in screen based on if it is the first app start
   // Async storage uses local storage to count if this is the first ap start so landing screen only appears once
@@ -20,11 +20,13 @@ const LoadingScreen = () => {
           // Set isFirstTime to 'true' in AsyncStorage
           await AsyncStorage.setItem('isFirstTime9', 'true');
           setTimeout(() => {
-            navigation.navigate("LandingScreen");
+            setLoading(false); // Stop the ActivityIndicator
+            navigation.navigate("Landingscreen");
           }, 2000);
         } else {
           // Not the first time, navigate to Sign in
           setTimeout(() => {
+            setLoading(false); // Stop the ActivityIndicator
             navigation.navigate("Sign in");
           }, 2000);
         }
@@ -38,16 +40,18 @@ const LoadingScreen = () => {
   
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          justifyContent: "center",
-          alignContent: "center",
-          alignSelf: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator size="large" color={Primarycolor1} />
-      </View>
+       {loading && ( // Render ActivityIndicator only when loading state is true
+        <View
+          style={{
+            justifyContent: "center",
+            alignContent: "center",
+            alignSelf: "center",
+            alignItems: "center",
+          }}
+        >
+          <ActivityIndicator size="large" color={Primarycolor1} />
+        </View>
+      )}
     </View>
   );
 };

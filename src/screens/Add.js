@@ -122,7 +122,7 @@ const Add = ({ route, navigation }) => {
             navigation.navigate("ProductSaved");
             setBadgeCount((prevCount) => prevCount + 1);
         } else {
-          console.log('item darft limit exeeded')
+          console.log('item draft limit exceeded')
       }
             
     }
