@@ -1047,6 +1047,9 @@ export async function signInUser(email, password) {
         .then(async (userCredential) => {
             const user = userCredential.user;
 
+            // save user password securely so we can use later to reauthenticate
+            await SecureStorage.savePassword(password)
+
             console.log('User logged in:', user);
             return user;
         })
@@ -1112,53 +1115,28 @@ export async function getCurrentUser() {
 
 // update Authentication user data
 // we can use firebase PhoneProvider Feature to update/verify/login using phone number
-async function updateAuthData(name, email) {
-    try {
-        const user = firebaseAurth.currentUser;
-        /*
-            ADD RE_AUTH HERE.
-            Should also use multifactoring.
-        */
-        if (name) {
-            await updateProfile(user, {
-                displayName: name
-            });
-        }
+async function updateAuthData(name, email, password) {
+    const currentPassword = await SecureStorage.getPassword()
+    const user = firebaseAurth.currentUser
+    const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword)
 
-        if (email) {
-            await updateEmail(user, email);
-        }
+    await reauthenticateWithCredential(user, emailAuthCredential)
 
-        console.log('Authentication data updated successfully');
-    } catch (error) {
-        console.error('Error updating authentication data:', error);
-        throw error; // rethrowing the error to propagate it upwards if necessary
+    if (name) {
+        await updateProfile(user, {
+            displayName: name
+        })
     }
-}
 
-async function updateAuthPassword(newPassword, currentPassword) {
-    try {
 
-        /*
-            Should also use multifactoring.
-        */
-        const user = firebaseAurth.currentUser;
-        const emailAuthCredential = EmailAuthProvider.credential(user.email, currentPassword);
+    if (email) {
+        await updateEmail(user, email)
+    }
 
-        await reauthenticateWithCredential(user, emailAuthCredential);
 
-        if (newPassword) {
-            await updatePassword(user, newPassword);
-        }
-
-        console.log('Password updated successfully');
-    } catch (error) {
-        if (error.code === 'auth/wrong-password') {
-            console.log('Incorrect current password');
-            // Display appropriate error message to the user
-        }
-        console.error('Error updating authentication data:', error);
-        throw error; // rethrowing the error to propagate it upwards if necessary
+    if (password) {
+        await updatePassword(user, password)
+        await SecureStorage.savePassword(password)
     }
 }
 
@@ -1179,32 +1157,14 @@ async function updateDatabaseData(name, email, phone, profilePic) {
 
 
 // use whenever you need to update realtime + auth user data
-export async function updateUserData({ name = "", email = "", phone = "", profilePic = "" }) {
-    try {
-        await updateAuthData(name, email);
-
-        // Exclude realtime database update if the user is changing password only
+// make sure to surround function call with try/catch
+export async function updateUserData({ name="", email="", phone="", profilePic="", password="" }) {
+    await updateAuthData(name, email, password);
+    // exclude realtime database update since user is changing password only
+    if(!password){
         await updateDatabaseData(name, email, phone, profilePic);
-
-        console.log('User data updated successfully');
-    } catch (error) {
-        console.error('Error updating user data:', error);
-        throw error; // Rethrow the error to propagate it upwards if necessary
     }
 }
-
-// use whenever you need to update auth user password
-export async function updateUserPassword({ newPassword = "", currentPassword = "" }) {
-    try {
-        await updateAuthPassword(newPassword, currentPassword);
-
-        console.log('User password updated successfully');
-    } catch (error) {
-        console.error('Error updating user data:', error);
-        throw error; // Rethrow the error to propagate it upwards if necessary
-    }
-}
-
 
 export async function deleteUser(navigation) {
     const user = firebaseAurth.currentUser;

@@ -9,15 +9,16 @@ import {
     Alert,
 } from 'react-native';
 import { t, useLanguage } from '../../Languages/LanguageHandler';
-import { Backgroundstyle, Buttons, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
+import { Backgroundstyle, Buttons, HeaderText, Primarycolor1, styles, styles as stylesGlobal } from '../../styles/Stylesheet';
 import Navigationbar from "../../componets/Navigationbar";
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
-import LoadingScreen from '../../componets/LoadingScreen';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
-import { updateUserPassword } from '../../utils/Repo';
+import { SecureStorage } from '../../utils/SecureStorage';
+import { updateUserData } from '../../utils/Repo';
+
 
 const ChangePassword = ({ navigation }) => {
     const { currentLanguage } = useLanguage();
@@ -58,24 +59,22 @@ const ChangePassword = ({ navigation }) => {
         setcanSave(false)
         setbannerErrorMessage("")
 
+        const oldPassword = await SecureStorage.getPassword()
 
-        if (currentPassword == newPassword) {
+        if (currentPassword != oldPassword) {
+            setbannerErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
+            setcurrentPasswordErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
+            setIsLoading(false)
+        } else if (currentPassword == newPassword) {
             setbannerErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
             setnewPasswordErrorMessage(t('ChangePasswordScreen.PasswordMatchError', currentLanguage))
             setIsLoading(false)
         } else {
-            updateUserPassword({ newPassword: newPassword, currentPassword: currentPassword }).then(() => {
+            updateUserData({ password: newPassword }).then(() => {
                 Alert.alert("Success", t('ChangePasswordScreen.PasswordChanged', currentLanguage))
                 handleBackPress()
-            }).catch((error) => {
-                console.log(error.code)
-                if (error.code === 'auth/wrong-password') {
-                    setbannerErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
-                    setcurrentPasswordErrorMessage(t('ChangePasswordScreen.CurrentPasswordMatchError', currentLanguage))
-                    setIsLoading(false)
-                } else {
-                    setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage))
-                }
+            }).catch(() => {
+                setbannerErrorMessage(t('ChangePasswordScreen.PasswordUpdateError', currentLanguage))
             }).finally(() => {
                 setIsLoading(false)
             })
@@ -148,7 +147,6 @@ const ChangePassword = ({ navigation }) => {
 
     return (
         <View style={Backgroundstyle.interactive_screens}>
-            <LoadingScreen isLoaderShow={isLoading} />
             <SafeAreaView style={GlobalStyle.BodyWrapper}>
                 <View style={styles.HeaderFull}>
                     <BackButton onPress={handleBackPress}></BackButton>

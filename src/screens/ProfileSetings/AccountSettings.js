@@ -23,7 +23,6 @@ import Navigationbar from "../../componets/Navigationbar";
 import { getCurrentUser, updateUserData } from '../../utils/Repo';
 import ErrorBanner from '../ErrorBanner';
 import { LoaderContext } from '../../componets/LoaderContext';
-import LoadingScreen from '../../componets/LoadingScreen';
 import { Divider } from 'react-native-elements';
 
 
@@ -113,11 +112,6 @@ const AccountSettings = ({ navigation }) => {
         setcanSave(false)
         setbannerErrorMessage("")
 
-        /*
-            User should re-type password before being able to reach
-            the code below.
-        */
-
         // update auth + realtime user data
         updateUserData({ name: name, email: email, phone: phone }).then(() => {
             Alert.alert("Success", t('AccountSettingsScreen.Saved', currentLanguage));
@@ -146,7 +140,6 @@ const AccountSettings = ({ navigation }) => {
 
     return (
         <View style={Backgroundstyle.interactive_screens}>
-            <LoadingScreen isLoaderShow={isLoading} />
 
             <SafeAreaView style={GlobalStyle.BodyWrapper}>
                 <View style={styles.HeaderFull}>
