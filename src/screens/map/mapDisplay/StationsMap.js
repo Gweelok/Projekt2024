@@ -15,8 +15,9 @@ import {
 } from "../../../styles/Stylesheet";
 import * as Location from 'expo-location';
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
-import { calculateDistance } from '../../../utils/uptainersUtils';
+import { calculateDistance, sortUptainersByDistance } from '../../../utils/uptainersUtils';
 import SearchedLocation from './SearchedLocation';
+import { getAllUptainers } from '../../../utils/Repo';
 
 
 
@@ -58,10 +59,11 @@ const stationData = [
 
 const StationsMap = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
-    const [filteredLocations, setFilteredLocations] = useState(stationData);
+    const [filteredLocations, setFilteredLocations] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showSearchResults, setShowSearchResults] = useState(false);
+    const [sortedUptainers, setSortedUptainers] = useState([])
     const mapRef = useRef();
     const isLoaderShow = false;
     const { currentLanguage } = useLanguage();
@@ -100,6 +102,21 @@ const StationsMap = ({ navigation }) => {
         return () => clearTimeout(loadingTimer);
     }, []);
 
+    useEffect(()=>{
+        const fetchUptainers = async ()=>{
+            let allUptainers
+            if (!filteredLocations.length){
+
+                allUptainers = await getAllUptainers()
+                setFilteredLocations(allUptainers)
+            }
+            const uptainers = allUptainers ? allUptainers : filteredLocations
+            const sortedUptainers = await sortUptainersByDistance(userLocation, uptainers)
+            setSortedUptainers(sortedUptainers)
+
+        }
+    }, [userLocation])
+
     if (loading) {
         return (
 
@@ -120,7 +137,7 @@ const StationsMap = ({ navigation }) => {
     };
 
     const sortLocationsByDistance = () => {
-        const sortedLocations = [...filteredLocations].sort((a, b) => {
+        const sortedUptainers = [...filteredLocations].sort((a, b) => {
             const distanceA = calculateDistance(
                 { latitude: userLatitude, longitude: userLongitude },
                 { latitude: parseFloat(a.uptainerLat), longitude: parseFloat(a.uptainerLong) }
@@ -132,7 +149,7 @@ const StationsMap = ({ navigation }) => {
             return parseFloat(distanceA) - parseFloat(distanceB);
         });
 
-        return sortedLocations;
+        return sortedUptainers;
     };
 
     const openStationPage = (location) => {
@@ -163,7 +180,6 @@ const StationsMap = ({ navigation }) => {
         }
     };
 
-    const sortedLocations = sortLocationsByDistance();
 
     const selectStation = (location) => {
         mapRef.current.animateToRegion({
@@ -184,7 +200,7 @@ const StationsMap = ({ navigation }) => {
 
 
 
-    const lastIndex = sortedLocations.length - 1;
+    const lastIndex = sortedUptainers.length - 1;
 
     const toggleSearchResults = () => {
         setShowSearchResults(true);
@@ -247,7 +263,7 @@ const StationsMap = ({ navigation }) => {
                     ))
                 )
                 :(
-                    sortedLocations.map((location, index) => (
+                    sortedUptainers.map((location, index) => (
                     <SearchedLocation
                         location={location}
                         onPress={() => {
