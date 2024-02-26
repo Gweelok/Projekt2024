@@ -26,7 +26,7 @@ const LoadingScreen = () => {
         } else {
           // Not the first time, navigate to Sign in
           setTimeout(() => {
-            navigation.navigate(Screens.SIGN_UP);
+            navigation.navigate(Screens.SIGN_IN);
           }, 2000);
         }
       } catch (error) {
