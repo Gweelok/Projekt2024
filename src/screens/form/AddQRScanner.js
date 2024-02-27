@@ -183,8 +183,8 @@ const QRScanner = ({ route, navigation }) => {
             routes: [{ name: Screens.MAP }, {
               name: Screens.UPTAINER_DETAILS, params: {
                 uptainerData: {
-                  id: uptainer.uptainerId,
                   name: uptainer.uptainerName,
+                  location: uptainer.uptainerStreet,
                   uptainerImage: uptainer.uptainerImage,
                   latitude: uptainer.uptainerLat,
                   longitude: uptainer.uptainerLong,

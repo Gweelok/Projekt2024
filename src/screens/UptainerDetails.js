@@ -54,6 +54,7 @@ const UptainerDetails = ({ route, navigation }) => {
     } catch (error) {
       console.log('Error:', error);
     }
+    
 
   };
 
@@ -67,6 +68,7 @@ const UptainerDetails = ({ route, navigation }) => {
 
   useEffect(() => {
     setIsLoading(true)
+    console.log(uptainer)
     const fetchItemList = async () => {
       // this fetch does nothing always return empty array use fetchData() instead  !! - NEED FIX
       const storage = getStorage();
@@ -76,44 +78,46 @@ const UptainerDetails = ({ route, navigation }) => {
         const updatedData = await Promise.all(
           items.map(async (item) => {
             if (!item.itemTaken) {
-            const pathReference = ref(storage, item.itemImage);
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+              const pathReference = ref(storage, item.itemImage);
+              const product = await getProductById(item.itemproduct);
+              const brand = await getBrandById(item.itemBrand);
 
-            try {
-              const cachedImage = await getCachedImage(item.itemId)
-              if (cachedImage) {
+              try {
+                const cachedImage = await getCachedImage(item.itemId)
+                if (cachedImage) {
+                  return {
+                    ...item,
+                    imageUrl: cachedImage,
+                    productName: product.productName,
+                    brandName: brand.brandName,
+                  };
+                } else {
+
+                  const url = await getDownloadURL(pathReference);
+                  await cacheImage(item.itemId, url)
+                  return {
+                    ...item,
+                    imageUrl: url,
+                    productName: product.productName,
+                    brandName: brand.brandName,
+                  };
+                }
+              } catch (error) {
+                console.log('Error while downloading image => ', error);
                 return {
                   ...item,
-                  imageUrl: cachedImage,
-                  productName: product.productName,
-                  brandName: brand.brandName,
-                };
-              } else {
-
-                const url = await getDownloadURL(pathReference);
-                await cacheImage(item.itemId, url)
-                return {
-                  ...item,
-                  imageUrl: url,
-                  productName: product.productName,
-                  brandName: brand.brandName,
+                  imageUrl: 'https://via.placeholder.com/200x200',
                 };
               }
-            } catch (error) {
-              console.log('Error while downloading image => ', error);
-              return {
-                ...item,
-                imageUrl: 'https://via.placeholder.com/200x200',
-              };
             }
-          }})
+          })
         );
 
         setData(updatedData);
       } catch (error) {
         console.log('Error while fetching items => ', error);
       }
+      
     };
 
     const fetchUptainerImage = async () => {
@@ -142,12 +146,12 @@ const UptainerDetails = ({ route, navigation }) => {
       android: "geo:0,0?q=",
     });
     const latLng = `${uptainer.latitude},${uptainer.longitude}`;
-    console.log(uptainer);
+
     const url = Platform.select({
       ios: `${scheme}${uptainer.name}@${latLng}`,
       android: `${scheme}${latLng}(${uptainer.name})`,
     });
-    console.log(url);
+
     Linking.canOpenURL(url)
       .then((supported) => {
         if (!supported) {
@@ -163,7 +167,7 @@ const UptainerDetails = ({ route, navigation }) => {
     if (route.params?.screenFrom === 'QRScanner') {
       navigation.push("Add");
     } else {
-      navigation.goBack(); 
+      navigation.goBack();
     }
   };
 
