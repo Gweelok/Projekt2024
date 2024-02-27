@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Pressable, Alert } from 'react-native';
-import {
-    styles,
-    Backgroundstyle,
-    Buttons,
-    Primarycolor1, Primarycolor3,
-}
-    from '../styles/Stylesheet';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native';
+import {styles,Backgroundstyle,Buttons,Primarycolor1,}from '../styles/Stylesheet';
 import { Ionicons } from '@expo/vector-icons';
 import { t, useLanguage } from "../Languages/LanguageHandler"; // or any other icon library you prefer
 import { signInUser } from '../utils/Repo';//function to login, only needs email and password... returns a boolean
-import { firebaseAurth } from '../utils/Firebase';
 import GlobalStyle from "../styles/GlobalStyle";
-import ForgotPassword from './ForgotPassword';
 import ErrorBanner from './ErrorBanner';
-import { onAuthStateChanged } from '@firebase/auth';
 import BackButton from "../componets/BackButton";
 import Screens from "../utils/ScreenPaths";
 
@@ -27,8 +18,7 @@ const SignIn = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState("Error msg");
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [emailValid, setEmailValid] = useState(true);
-    const [userLogged, setUserLogged] = useState(false);
-    const { currentLanguage, setLanguage } = useLanguage();
+    const { currentLanguage } = useLanguage();
 
     //To check on email
     const onChangeEmailHandler = (text) => {
@@ -90,30 +80,13 @@ const SignIn = ({ navigation }) => {
 
         // If all validations pass
         setShowError(false);
-        signInUser(email, password, navigation);
-
+        signInUser(email, password);
     };
 
     //check if pass should be shown
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
     };
-
-    //Fn to navigate to the Homepage if the user is logged in
-    onAuthStateChanged(firebaseAurth, async (user) => {
-        if (user) {
-            setUserLogged(true);
-        } else {
-            setUserLogged(false);
-        }
-    });
-
-    useEffect(() => {
-        // Check if the user is logged in and navigate
-        if (userLogged) {
-          navigation.navigate(Screens.HOME);
-        }
-    }, [userLogged, navigation]);
 
     let Header = t('SignInScreen.Headline', currentLanguage);
 

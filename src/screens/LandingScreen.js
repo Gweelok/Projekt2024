@@ -3,25 +3,17 @@ import {
   Text,
   StyleSheet,
   Pressable,
-  BackHandler,
-  Alert,
-  TouchableOpacity,
   SafeAreaView,
 } from "react-native";
 import {
-  styles,
   Backgroundstyle,
   Primarycolor1,
   Buttons,
-  Primarycolor2,
   Primarycolor3,
-  main_button,
 } from "../styles/Stylesheet";
-import { Ionicons, Octicons } from "@expo/vector-icons";
-import React, { useState, useEffect } from "react";
+import { Octicons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import { useLanguage, t } from "../Languages/LanguageHandler";
-
-import { firebaseAurth } from "../utils/Firebase";
 
 import Customize from "../componets/LandingScreen/Customize";
 import ReuseSvg from "../componets/svg-components/ReuseSvg";
@@ -30,15 +22,13 @@ import CompleteHousePhoneText from "../componets/LandingScreen/CompleteHousePhon
 import GlobalStyle from "../styles/GlobalStyle";
 import BackButton from "../componets/BackButton";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
-import { onAuthStateChanged } from "firebase/auth";
 import LanguageDropdown from "../Languages/LanguageDropdown";
 import Screens from "../utils/ScreenPaths";
 
 const LandingScreen = ({ navigation }) => {
   // for multi language
-  const { currentLanguage, setLanguage } = useLanguage();
+  const { currentLanguage } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [userLogged, setUserLogged] = useState(false);
   const backButton =
     currentSlide === 0 ? null : (
       <BackButton onPress={() => setCurrentSlide(currentSlide - 1)} />
@@ -76,32 +66,6 @@ const LandingScreen = ({ navigation }) => {
       setCurrentSlide((previousState) => previousState + 1);
     }
   }
-
-  //Fn to navigate to the Signup Screern
-  onAuthStateChanged(firebaseAurth, async (user) => {
-    if (user) {
-      setUserLogged(true);
-    } else {
-      setUserLogged(false);
-    }
-  });
-
-  useEffect(() => {
-    // Check if the user is logged in and navigate accordingly
-    if (userLogged) {
-      navigation.navigate(Screens.HOME);
-    }
-  }, [userLogged, navigation]);
-
-  //Fn to change to langauge and display correct language
-
-  const LanguageSelector = () => {
-    if (currentLanguage == "en") {
-      setLanguage("da");
-    } else {
-      setLanguage("en");
-    }
-  };
 
   return (
     <SafeAreaView style={Backgroundstyle.informationScreens}>

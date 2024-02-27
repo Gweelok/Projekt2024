@@ -12,13 +12,6 @@ const LogoutConfirmation = ({ navigation }) => {
 
   const handleLogout = () => {
     signOut(firebaseAurth)
-      .then(() => {
-        // Reset the navigation stack to prevent going back
-        navigation.reset({
-          index: 0,
-          routes: [{ name: Screens.SIGN_IN }],
-        });
-      })
       .catch((error) => {
         console.log(error);
       });

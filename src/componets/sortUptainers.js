@@ -10,7 +10,6 @@ import QuizPoll from "./atoms/QuizPoll";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
-import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import OnHideView from "./atoms/OnHideView";
 import Screens from "../utils/ScreenPaths";
@@ -91,7 +90,11 @@ const SortUptainers = ({ navigation, noProductFound }) => {
 
     // Render Uptainer components
     return displayedUptainers.map((item) => (
-      <Uptainer key={item.uptainerId} uptainerData={item} userLocation={userLocation} />
+      <Uptainer
+        key={item.uptainerId}
+        uptainerData={item}
+        userLocation={userLocation}
+      />
     ));
   };
 
@@ -149,7 +152,11 @@ const SortUptainers = ({ navigation, noProductFound }) => {
       },
     ],
   };
-  const renderError = () => <Text style={style.noProductFoundErr}>{t("SearchField.notProductFound", currentLanguage)}</Text>
+  const renderError = () => (
+    <Text style={style.noProductFoundErr}>
+      {t("SearchField.notProductFound", currentLanguage)}
+    </Text>
+  );
   // Determine the list of uptainers to use for rendering
   const uptainerList = userLocation ? sortedUptainers : uptainersList;
   return (
@@ -162,16 +169,14 @@ const SortUptainers = ({ navigation, noProductFound }) => {
         {/* Display the list of sorted uptainers using the Uptainer component */}
         {noProductFound && renderError()}
         <OnHideView hide={noProductFound}>
-
-          {uptainerList[0]  && (
+          {uptainerList[0] && (
             <Uptainer
-            key={uptainerList[0].uptainerId}
-            uptainerData={uptainerList[0]}
-            userLocation={userLocation}
-            finishLoading={finishLoading}
+              key={uptainerList[0].uptainerId}
+              uptainerData={uptainerList[0]}
+              userLocation={userLocation}
+              finishLoading={finishLoading}
             />
-            ) 
-          }
+          )}
         </OnHideView>
         {/* Display BoxLink component */}
         <BoxLink
@@ -183,10 +188,7 @@ const SortUptainers = ({ navigation, noProductFound }) => {
         {/* Display the QuizComponent */}
         <QuizPoll data={PollData} />
         <QuizPoll data={QuizData} />
-        <OnHideView hide={noProductFound}>
-
-          {renderUptainers()}
-        </OnHideView>
+        <OnHideView hide={noProductFound}>{renderUptainers()}</OnHideView>
       </ScrollViewComponent>
     </View>
   );
@@ -195,15 +197,14 @@ const SortUptainers = ({ navigation, noProductFound }) => {
 const style = StyleSheet.create({
   noProductFoundErr: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     color: Primarycolor1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingTop: 20,
     paddingBottom: 20,
     zIndex: 1,
     paddingLeft: 5,
-    width: '100%',
-
-}
-})
+    width: "100%",
+  },
+});
 export default SortUptainers;
