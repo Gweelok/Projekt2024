@@ -6,6 +6,7 @@ import React from "react";
 import GlobalStyle from "../../styles/GlobalStyle";
 import BackButton from "../../componets/BackButton";
 import BackButtonHomemade from "../../componets/BackButton";
+import Screens from "../../utils/ScreenPaths";
 
 // eslint-disable-next-line react/prop-types
 const  DeleteAccount=({navigation})=>{
@@ -15,7 +16,7 @@ const  DeleteAccount=({navigation})=>{
     };
     const BackToAccountSettings =()=>{
         // eslint-disable-next-line react/prop-types
-        navigation.navigate('AccountSettings');
+        navigation.navigate(Screens.ACCOUNT_SETTINGS);
     };
 
         return(

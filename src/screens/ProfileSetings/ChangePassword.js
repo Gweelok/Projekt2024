@@ -18,6 +18,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
 import { SecureStorage } from '../../utils/SecureStorage';
 import { updateUserData } from '../../utils/Repo';
+import Screens from "../../utils/ScreenPaths";
 
 
 const ChangePassword = ({ navigation }) => {
@@ -87,7 +88,7 @@ const ChangePassword = ({ navigation }) => {
         setNewPassword("")
         setConfirmPassword("")
         setisInit(false)
-        navigation.navigate("AccountSettings")
+        navigation.navigate(Screens.ACCOUNT_SETTINGS)
     }
 
 

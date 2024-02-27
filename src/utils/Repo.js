@@ -576,10 +576,12 @@ export async function getAllProducts() {
             const productId = childSnapshot.key;
             const productName = childSnapshot.val().productName;
             const co2Footprint = childSnapshot.val().co2Footprint;
+            const categoryId = childSnapshot.val().categoryId;
             products.push({
                 productId: productId,
                 productName: productName,
-                co2Footprint: co2Footprint
+                co2Footprint: co2Footprint,
+                categoryId: categoryId
             });
         });
         return products;

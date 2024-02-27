@@ -15,6 +15,7 @@ import backButton from "../../componets/BackButton";
 import BackButton from "../../componets/BackButton";
 import { NavigationActions as navigation } from "react-navigation";
 import { useNavigation } from "@react-navigation/native";
+import { categoriesSeedData } from "../../utils/SeedData";
 
 const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible, isProductDropdownVisible , onSkip, isVisible,  }) => {
     const { currentLanguage } = useLanguage();
@@ -30,10 +31,11 @@ const CategoryDropdown = ({ onCategorySelect, data, setIsProductDropdownVisible,
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const categoriesList = await getAllCategories();
+                //const categoriesList = await getAllCategories();
+                const categoriesList = categoriesSeedData
                 setCategories(categoriesList);
                 setFilteredCategories(categoriesList);
-                console.log(categoriesList)
+                //console.log(categoriesList)
                 if(data){
 
                     categoriesList.forEach((cat)=> {

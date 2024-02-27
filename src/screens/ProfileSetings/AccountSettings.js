@@ -30,6 +30,7 @@ import { getCurrentUser, updateUserData } from '../../utils/Repo';
 import ErrorBanner from '../ErrorBanner';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Divider } from 'react-native-elements';
+import Screens from "../../utils/ScreenPaths";
 
 
 const AccountSettings = ({ navigation }) => {
@@ -48,9 +49,10 @@ const AccountSettings = ({ navigation }) => {
   const [nameErrorMessage, setnameErrorMessage] = useState("");
   const [phoneErrorMessage, setphoneErrorMessage] = useState("");
 
-  const handleBackPress = () => {
-    navigation.navigate("MySettings");
-  };
+    const handleBackPress = () => {
+        navigation.navigate(Screens.MY_SETTINGS);
+    }
+
 
   const checkFields = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -106,7 +108,7 @@ const AccountSettings = ({ navigation }) => {
         setisInit(true);
       })
       .catch(() => {
-        navigation.navigate("MySettings");
+        navigation.navigate(Screens.MY_SETTINGS);
       })
       .finally(() => {
         setIsLoading(false);
@@ -146,14 +148,15 @@ const AccountSettings = ({ navigation }) => {
       });
   };
 
-  /* complete this task her */
-  const handleDeleteAccount = () => {
-    navigation.navigate("DeleteAccount");
-  };
-  /* complete this task her */
-  const handleChangePasswordPress = () => {
-    navigation.navigate("ChangePassword");
-  };
+    /* complete this task her */
+    const handleDeleteAccount = () => {
+        navigation.navigate(Screens.DELETE_ACCOUNT);
+    };
+    /* complete this task her */
+    const handleChangePasswordPress = () => {
+        navigation.navigate(Screens.CHANGE_PASSWORD);
+    };
+
 
     return (
         <View style={Backgroundstyle.interactive_screens}>

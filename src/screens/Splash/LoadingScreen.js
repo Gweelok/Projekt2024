@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Primarycolor1, Primarycolor2 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Screens from "../../utils/ScreenPaths";
 
 const LoadingScreen = () => {
   const navigation = useNavigation();
@@ -20,14 +21,12 @@ const LoadingScreen = () => {
           // Set isFirstTime to 'true' in AsyncStorage
           await AsyncStorage.setItem('isFirstTime9', 'true');
           setTimeout(() => {
-            setLoading(false); // Stop the ActivityIndicator
-            navigation.navigate("Landingscreen");
+            navigation.navigate(Screens.LANDING);
           }, 2000);
         } else {
           // Not the first time, navigate to Sign in
           setTimeout(() => {
-            setLoading(false); // Stop the ActivityIndicator
-            navigation.navigate("Sign in");
+            navigation.navigate(Screens.SIGN_IN);
           }, 2000);
         }
       } catch (error) {

@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { LoaderContext } from "../../LoaderContext";
 import { convertKgToTons } from "../../../utils/uptainersUtils";
 import { BoxLink } from "../../../styles/BoxLink";
+import { Screens } from "../../../utils/ScreenPaths";
 
 export const VisitedUptainerStat = (props) => {
     const { currentLanguage } = useLanguage();
@@ -27,7 +28,7 @@ export const VisitedUptainerStat = (props) => {
                             <View style={GlobalStyle.BodyWrapper}>
                                 <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
-                                    navigation.navigate("UptainerDetails", {
+                                    navigation.navigate(Screens.UPTAINER_DETAILS , {
                                         id: uptainer.uptainerId,
                                         name: uptainer.uptainerName,
                                         location: uptainer.uptainerStreet,

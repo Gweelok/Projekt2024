@@ -24,6 +24,7 @@ import { LoaderContext } from "../../componets/LoaderContext";
 import GlobalStyle from "../../styles/GlobalStyle";
 import { BadgeContext } from "./BadgeContext";
 import { Permissions } from "../../utils/Permissions";
+import Screens from "../../utils/ScreenPaths";
 
 
 const QRScanner = ({ route, navigation }) => {
@@ -84,7 +85,7 @@ const QRScanner = ({ route, navigation }) => {
       setIsLoading(false)
       navigation.reset({
         index: 0,
-        routes: [{ name: "MyDrafts" }, { name: 'ProductSaved' }]
+        routes: [{ name: Screens.MY_DRAFTS }, { name: Screens.PRODUCT_SAVED }]
       })
     } else {
       // add to draft
@@ -103,9 +104,8 @@ const QRScanner = ({ route, navigation }) => {
       if (response.draftAdded) {
         navigation.reset({
           index: 0,
-          routes: [{ name: "MyDrafts" }, { name: 'ProductSaved' }]
+          routes: [{ name: Screens.MY_DRAFTS }, { name: Screens.PRODUCT_SAVED }]
         })
-        navigation.replace("ProductSaved");
         setBadgeCount((prevCount) => prevCount + 1)
       } else {
         Alert.alert(t("QRScanner.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
@@ -180,8 +180,8 @@ const QRScanner = ({ route, navigation }) => {
 
           navigation.reset({
             index: 0,
-            routes: [{ name: "Map" }, {
-              name: 'UptainerDetails', params: {
+            routes: [{ name: Screens.MAP }, {
+              name: Screens.UPTAINER_DETAILS, params: {
                 uptainerData: {
                   id: uptainer.uptainerId,
                   name: uptainer.uptainerName,
