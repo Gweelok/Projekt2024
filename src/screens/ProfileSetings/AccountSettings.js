@@ -159,9 +159,9 @@ const AccountSettings = ({ navigation }) => {
 
 
     return (
-        <View style={Backgroundstyle.interactive_screens}>
+        <View style={[Backgroundstyle.interactive_screens, GlobalStyle.BodyWrapper]}>
 
-            <SafeAreaView style={GlobalStyle.BodyWrapper}>
+            <SafeAreaView>
                 <View style={styles.HeaderFull}>
                     <BackButton onPress={handleBackPress}></BackButton>
                     <Text style={styles.HeaderText}>{t('AccountSettingsScreen.Header', currentLanguage)} </Text>
