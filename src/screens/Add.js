@@ -192,7 +192,7 @@ const Add = ({ route, navigation }) => {
 
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null} />
+            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? itemData?.imageUrl : null} />
           </View>
 
 
