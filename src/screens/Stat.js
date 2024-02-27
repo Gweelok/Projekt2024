@@ -28,7 +28,6 @@ import {
 } from "../utils/Repo";
 import { getAllItemAndUptainerStats, getAllCO2Stats, calculateGeneralStats, Calculate_co2_Equivalent, convertKgToTons, getUserStats } from "../utils/uptainersUtils";
 import { BoxLink } from "../styles/BoxLink";
-import LoadingScreen from "../componets/LoadingScreen";
 import { useNavigation } from "@react-navigation/core";
 
 const Stat = () => {
@@ -136,7 +135,6 @@ const Stat = () => {
         { flex: 1, justifyContent: "center" },
       ]}
     >
-      <LoadingScreen isLoaderShow={isLoading}></LoadingScreen>
       <SafeAreaView>
         <ScrollViewComponent>
           <View

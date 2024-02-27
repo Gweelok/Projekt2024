@@ -10,7 +10,6 @@ import QuizPoll from "./atoms/QuizPoll";
 import { useLanguage, t } from "../Languages/LanguageHandler";
 import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
-import LoadingScreen from "./LoadingScreen";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import OnHideView from "./atoms/OnHideView";
 import { LoaderContext } from "./LoaderContext";
