@@ -31,7 +31,6 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
-import LoadingScreen from "../componets/LoadingScreen";
 import Screens from "../utils/ScreenPaths";
 
 const ProductDetailScreen = ({ route }) => {
