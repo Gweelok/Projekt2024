@@ -15,8 +15,9 @@ import {
 } from "../../styles/Stylesheet";
 import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { getAllModels } from "../../utils/Repo";
+import { modelsSeedData } from "../../utils/SeedData";
 
-const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsConditionDropdownVisible, isConditionDropdownVisible, onSkip }) => {
+const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsConditionDropdownVisible, isConditionDropdownVisible, onSkip, brand, product }) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedModel, setSelectedModel] = useState(data || null);
@@ -32,9 +33,14 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const modelsList = await getAllModels();
+                //const modelsList = await getAllModels();
+                const modelsList = modelsSeedData
                 setModels(modelsList);
                 setFilteredModels(modelsList);
+                if (product && brand) {
+                    const filteredModelsByBrandAndProduct = filterModelsByBrandAndProduct (modelsList, product, brand)
+                    setFilteredModels(filteredModelsByBrandAndProduct);
+                }
                 if (data) {
                     modelsList.forEach(model =>{
                         if (data === model.modelId) {setSelectedModel(model)}
@@ -46,7 +52,7 @@ const ModelDropdown = ({ onModelSelect, brandSelected, data, isVisible, setIsCon
         };
 
         fetchData();
-    }, []);
+    }, [brand, product]);
 
     const handleModelSelect = (model) => {
         setSelectedModel(model);
@@ -206,3 +212,14 @@ const modelDropdownContainer = {
 };
 
 export default ModelDropdown;
+
+
+function filterModelsByBrandAndProduct (modelList, product, brand) {
+    const result = []
+    for (let i in modelList){
+        if(modelList[i].brandId === brand.brandId && modelList[i].productId === product.productId){
+            result.push(modelList[i])
+        }
+    }
+    return result
+}

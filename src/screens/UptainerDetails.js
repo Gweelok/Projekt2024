@@ -20,7 +20,6 @@ import { LoaderContext } from '../componets/LoaderContext';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
-import LoadingScreen from '../componets/LoadingScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,7 +28,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState('');
-  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const { setIsLoading } = useContext(LoaderContext);
   const [refreshing, setRefreshing] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
@@ -173,8 +172,6 @@ const UptainerDetails = ({ navigation, route }) => {
 
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
-
-      {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
       <View style={GlobalStyle.BodyWrapper}>
         <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>

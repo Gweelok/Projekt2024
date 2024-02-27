@@ -172,6 +172,7 @@ const Add = ({ route, navigation }) => {
   //   })();
   // }, []);
   const handleSkipCategoryDropdown = () => {
+    console.log(category)
     setIsProductDropdownVisible(true);
   };
 
@@ -223,37 +224,41 @@ const Add = ({ route, navigation }) => {
 
 
           <ProductDropdown
-            onProductSelect={setProduct}
-            categorySelected={!!category} // Pass the state of category selection
-            data={itemData?.product ? itemData?.product : itemData?.itemproduct}
-            setIsBrandDropdownVisible={setIsBrandDropdownVisible}
-            isBrandDropdownVisible={isBrandDropdownVisible}
-            onSkip={handleSkipProductDropdown}
-            isVisible={isProductDropdownVisible}
+              onProductSelect={setProduct}
+              categorySelected={!!category} // Pass the state of category selection
+              data={itemData?.product ? itemData?.product : itemData?.itemproduct}
+              category={category}
+              setIsBrandDropdownVisible={setIsBrandDropdownVisible}
+              isBrandDropdownVisible={isBrandDropdownVisible}
+              onSkip={handleSkipProductDropdown}
+              isVisible={isProductDropdownVisible}
           />
 
           <BrandDropdown
-            onBrandSelect={setBrand}
-            productSelected={!!product}
-            data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
-            isVisible={isBrandDropdownVisible}
-            setIsVisible={setIsBrandDropdownVisible}
-            onSkip={handleSkipBrandDropdown}
-            shouldOpenBrandDropdown={isBrandDropdownVisible}
-            setIsModelDropdownVisible={setIsModelDropdownVisible}
-            isModelDropdownVisible={isModelDropdownVisible}
+              onBrandSelect={setBrand}
+              productSelected={!!product}
+              product={product}
+              data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
+              isVisible={isBrandDropdownVisible}
+              setIsVisible={setIsBrandDropdownVisible}
+              onSkip={handleSkipBrandDropdown}
+              shouldOpenBrandDropdown={isBrandDropdownVisible}
+              setIsModelDropdownVisible={setIsModelDropdownVisible}
+              isModelDropdownVisible={isModelDropdownVisible}
 
           />
 
           <ModelDropdown
-            brandSelected={!!brand}
-            onModelSelect={setModel}
-            data={itemData?.model ? itemData?.model : itemData?.itemModel}
-            isVisible={isModelDropdownVisible}
-            setIsVisible={setIsModelDropdownVisible}
-            onSkip={handleSkipModelDropdown}
-            setIsConditionDropdownVisible={setIsConditionDropdownVisible}
-            isConditionDropdownVisible={isConditionDropdownVisible}
+              brandSelected={!!brand}
+              onModelSelect={setModel}
+              brand={brand}
+              product={product}
+              data={itemData?.model ? itemData?.model : itemData?.itemModel}
+              isVisible={isModelDropdownVisible}
+              setIsVisible={setIsModelDropdownVisible}
+              onSkip={handleSkipModelDropdown}
+              setIsConditionDropdownVisible={setIsConditionDropdownVisible}
+              isConditionDropdownVisible={isConditionDropdownVisible}
           />
 
           <ConditionDropdown
