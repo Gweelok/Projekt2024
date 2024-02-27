@@ -36,41 +36,39 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
               const pathReference = ref(storage, item.itemImage);
               const product = await getProductById(item.itemproduct);
               const brand = await getBrandById(item.itemBrand);
-            
+
               try {
-                  const cachedImage = await getCachedImage(item.itemId)
-                  if (cachedImage){
-                    return {
-                      ...item,
-                      imageUrl: cachedImage,
-                      productName: product.productName,
-                      brandName: brand.brandName,
-                    };
-                  } else {
-                    const url = await getDownloadURL(pathReference);
-                    await cacheImage(item.itemId, url)
-                    return {
-                      ...item,
-                      imageUrl: url,
-                      productName: product.productName,
-                      brandName: brand.brandName,
-                    };
-                  }
-                  } catch (error) {
-                    console.log("Error while downloading image => ", error);
-                    return {
-                      ...item,
-                      imageUrl: "https://via.placeholder.com/200x200",
-                    };
-                  }
-              } else {
-                return null;
+                const cachedImage = await getCachedImage(item.itemId);
+                if (cachedImage) {
+                  return {
+                    ...item,
+                    imageUrl: cachedImage,
+                    productName: product.productName,
+                    brandName: brand.brandName,
+                  };
+                } else {
+                  const url = await getDownloadURL(pathReference);
+                  await cacheImage(item.itemId, url);
+                  return {
+                    ...item,
+                    imageUrl: url,
+                    productName: product.productName,
+                    brandName: brand.brandName,
+                  };
+                }
+              } catch (error) {
+                console.log("Error while downloading image => ", error);
+                return {
+                  ...item,
+                  imageUrl: "https://via.placeholder.com/200x200",
+                };
               }
-            
-            })
-            
+            } else {
+              return null;
+            }
+          })
         );
-        finishLoading()
+        if (finishLoading) finishLoading();
         const doubleData = [...updatedData];
         setData(doubleData);
 
@@ -80,7 +78,6 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
         console.log("Error while fetching items => ", error);
       }
     };
-
 
     fetchItemList();
   }, []);
@@ -95,7 +92,7 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
       <TouchableOpacity
         onPress={() => {
           setIsLoading(true);
-          console.log(uptainerData)
+          console.log(uptainerData);
           navigation.navigate("UptainerDetails", {
             uptainerData: {
               id: uptainerData?.id,
@@ -103,7 +100,7 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
               location: uptainerData?.uptainerStreet,
               imageUrl: uptainerData?.imageUrl,
               latitude: uptainerData?.uptainerLatitude,
-              longitude: uptainerData?.uptainerLongitude
+              longitude: uptainerData?.uptainerLongitude,
             },
           });
         }}
@@ -115,8 +112,18 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
           </Text>
           {userLocation && (
             <Text style={styling.distance}>
-              {calculateDistance({ latitude: userLocation.latitude, longitude: userLocation.longitude },
-                { latitude: parseFloat(uptainerData.uptainerLatitude), longitude: parseFloat(uptainerData.uptainerLongitude) })} km</Text>
+              {calculateDistance(
+                {
+                  latitude: userLocation.latitude,
+                  longitude: userLocation.longitude,
+                },
+                {
+                  latitude: parseFloat(uptainerData.uptainerLatitude),
+                  longitude: parseFloat(uptainerData.uptainerLongitude),
+                }
+              )}{" "}
+              km
+            </Text>
           )}
         </View>
       </TouchableOpacity>
@@ -143,10 +150,14 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
               }
             >
               <View style={styling.item}>
-                {item[0]?.imageUrl ? <Image
-                  source={{ uri: item[0]?.imageUrl }}
-                  style={styling.image}
-                />: <ActivityIndicator size='large' color={Primarycolor1}/>}
+                {item[0]?.imageUrl ? (
+                  <Image
+                    source={{ uri: item[0]?.imageUrl }}
+                    style={styling.image}
+                  />
+                ) : (
+                  <ActivityIndicator size="large" color={Primarycolor1} />
+                )}
               </View>
             </TouchableOpacity>
             {/* Second Row */}
@@ -191,14 +202,14 @@ const styling = StyleSheet.create({
     resizeMode: "cover",
   },
   details: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   distance: {
     fontSize: 12,
     color: Primarycolor1,
-    marginTop: 5
-  }
+    marginTop: 5,
+  },
 });
 
 export default Uptainer;
