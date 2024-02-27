@@ -23,6 +23,9 @@ import { cacheImage, getCachedImage } from '../utils/Cache';
 import ProductAlert from '../componets/ProductAlert';
 import { CommonActions } from '@react-navigation/native';
 
+import Screens from "../utils/ScreenPaths";
+
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -214,7 +217,7 @@ const UptainerDetails = ({ route, navigation }) => {
                   marginRight: 0,
                 }}
                 onPress={() =>
-                  navigation.navigate("DetailView", {
+                  navigation.navigate(Screens.DETAIL_VIEW, {
                     itemDescription: cur?.itemDescription,
                     imageUrl: cur?.imageUrl,
                     productName: cur?.productName,

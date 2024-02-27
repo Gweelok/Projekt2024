@@ -10,6 +10,7 @@ import Navigationbar from "../../componets/Navigationbar";
 import { Pressable } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { Animated } from "react-native";
+import Screens from "../../utils/ScreenPaths";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -56,7 +57,7 @@ const ProductSaved = ({ navigation }) => {
                 { borderWidth: 2, width: "100%", marginBottom: 20 },
               ]}
               onPress={() => {
-                navigation.replace("Map");
+                navigation.replace(Screens.MAP);
               }}
             >
               <Text style={Buttons.secondary_buttonText}>
@@ -69,7 +70,7 @@ const ProductSaved = ({ navigation }) => {
                 { borderWidth: 2, width: "100%" },
               ]}
               onPress={() => {
-                navigation.replace("Add");
+                navigation.replace(Screens.ADD);
               }}
             >
               <Text style={Buttons.secondary_buttonText}>

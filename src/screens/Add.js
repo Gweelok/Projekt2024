@@ -27,6 +27,7 @@ import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { createItemDraft, updateItemById } from "../utils/Repo";
 import { LoaderContext } from "../componets/LoaderContext";
+import Screens from "../utils/ScreenPaths";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -98,32 +99,37 @@ const Add = ({ route, navigation }) => {
         itemcondition: condition ? condition : itemData?.itemcondition,
       }
       const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
-
       setIsLoading(false);
 
       if (res.itemUpdated) {
-        navigation.navigate("ProductSaved");
+        navigation.navigate(Screens.PRODUCT_SAVED);
       }
       console.log(updatedData)
     } else {
 
-      const response = await createItemDraft(
-        product?.productId,
-        brand?.brandId,
-        model?.modelId,
-        category?.categoryId,
-        image,
-        description,
-        condition
-      );
-
-      setIsLoading(false);
-
-      if (response.draftAdded) {
-        navigation.replace("ProductSaved");
-        setBadgeCount((prevCount) => prevCount + 1);
+      // Check if at least one of the fields has a value
+      if (product?.productId || brand?.brandId || model?.modelId || category?.categoryId || image || description || condition) {
+        const response = await createItemDraft(
+          product?.productId,
+          brand?.brandId,
+          model?.modelId,
+          category?.categoryId,
+          image,
+          description,
+          condition
+        );
+        
+        setIsLoading(false);
+        
+        if (response.draftAdded){
+            navigation.navigate(Screens.PRODUCT_SAVED);
+            setBadgeCount((prevCount) => prevCount + 1);
+        } else {
+          Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
+        }
       } else {
-        Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
+        Alert.alert("Error", "At least one field must have a value");
+        console.log('At least one field must have a value');
       }
 
     }
@@ -138,7 +144,7 @@ const Add = ({ route, navigation }) => {
     ) {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
-      navigation.navigate("AddQRScanner", {
+      navigation.navigate(Screens.ADD_QR_SCANNER, {
         itemId: itemData?.itemId,
         product: product instanceof Object ? product.productId : itemData?.itemproduct,
         brand: brand instanceof Object ? brand.brandId : itemData?.itemBrand,
@@ -155,6 +161,7 @@ const Add = ({ route, navigation }) => {
 
 
   const handleSkipCategoryDropdown = () => {
+    console.log(category)
     setIsProductDropdownVisible(true);
   };
 
@@ -192,7 +199,7 @@ const Add = ({ route, navigation }) => {
 
 
           <View style={[{ marginBottom: 10 }]}>
-            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? image : null} />
+            <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? itemData?.imageUrl : null} />
           </View>
 
 
@@ -211,37 +218,41 @@ const Add = ({ route, navigation }) => {
 
 
           <ProductDropdown
-            onProductSelect={setProduct}
-            categorySelected={!!category} // Pass the state of category selection
-            data={itemData?.product ? itemData?.product : itemData?.itemproduct}
-            setIsBrandDropdownVisible={setIsBrandDropdownVisible}
-            isBrandDropdownVisible={isBrandDropdownVisible}
-            onSkip={handleSkipProductDropdown}
-            isVisible={isProductDropdownVisible}
+              onProductSelect={setProduct}
+              categorySelected={!!category} // Pass the state of category selection
+              data={itemData?.product ? itemData?.product : itemData?.itemproduct}
+              category={category}
+              setIsBrandDropdownVisible={setIsBrandDropdownVisible}
+              isBrandDropdownVisible={isBrandDropdownVisible}
+              onSkip={handleSkipProductDropdown}
+              isVisible={isProductDropdownVisible}
           />
 
           <BrandDropdown
-            onBrandSelect={setBrand}
-            productSelected={!!product}
-            data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
-            isVisible={isBrandDropdownVisible}
-            setIsVisible={setIsBrandDropdownVisible}
-            onSkip={handleSkipBrandDropdown}
-            shouldOpenBrandDropdown={isBrandDropdownVisible}
-            setIsModelDropdownVisible={setIsModelDropdownVisible}
-            isModelDropdownVisible={isModelDropdownVisible}
+              onBrandSelect={setBrand}
+              productSelected={!!product}
+              product={product}
+              data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
+              isVisible={isBrandDropdownVisible}
+              setIsVisible={setIsBrandDropdownVisible}
+              onSkip={handleSkipBrandDropdown}
+              shouldOpenBrandDropdown={isBrandDropdownVisible}
+              setIsModelDropdownVisible={setIsModelDropdownVisible}
+              isModelDropdownVisible={isModelDropdownVisible}
 
           />
 
           <ModelDropdown
-            brandSelected={!!brand}
-            onModelSelect={setModel}
-            data={itemData?.model ? itemData?.model : itemData?.itemModel}
-            isVisible={isModelDropdownVisible}
-            setIsVisible={setIsModelDropdownVisible}
-            onSkip={handleSkipModelDropdown}
-            setIsConditionDropdownVisible={setIsConditionDropdownVisible}
-            isConditionDropdownVisible={isConditionDropdownVisible}
+              brandSelected={!!brand}
+              onModelSelect={setModel}
+              brand={brand}
+              product={product}
+              data={itemData?.model ? itemData?.model : itemData?.itemModel}
+              isVisible={isModelDropdownVisible}
+              setIsVisible={setIsModelDropdownVisible}
+              onSkip={handleSkipModelDropdown}
+              setIsConditionDropdownVisible={setIsConditionDropdownVisible}
+              isConditionDropdownVisible={isConditionDropdownVisible}
           />
 
           <ConditionDropdown

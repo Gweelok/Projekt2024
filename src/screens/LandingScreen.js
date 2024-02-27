@@ -23,6 +23,8 @@ import GlobalStyle from "../styles/GlobalStyle";
 import BackButton from "../componets/BackButton";
 import CompleteTimelineSvg from "../componets/LandingScreen/CompleteTimelineSvg";
 import LanguageDropdown from "../Languages/LanguageDropdown";
+import Screens from "../utils/ScreenPaths";
+
 const LandingScreen = ({ navigation }) => {
   // for multi language
   const { currentLanguage } = useLanguage();
@@ -59,7 +61,7 @@ const LandingScreen = ({ navigation }) => {
 
   function nextSlideAndSignUp() {
     if (currentSlide + 2 > data.length) {
-      navigation.navigate("SignUp");
+      navigation.navigate(Screens.SIGN_UP);
     } else {
       setCurrentSlide((previousState) => previousState + 1);
     }

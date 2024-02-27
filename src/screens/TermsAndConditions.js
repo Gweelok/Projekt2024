@@ -3,6 +3,7 @@ import { createUser } from "../utils/Repo";
 import { firebaseAurth } from "../utils/Firebase";
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import { Backgroundstyle, styles, Buttons } from "../styles/Stylesheet";
+import Screens from "../utils/ScreenPaths";
 
 const TermsAndConditions = ({ navigation, route }) => {
   const { email, password } = route.params;
@@ -23,7 +24,7 @@ const TermsAndConditions = ({ navigation, route }) => {
       await createUser(email, password);
 
       if (firebaseAurth.currentUser !== null) {
-        navigation.navigate("ProfileCreated");
+        navigation.navigate(Screens.PROFILE_CREATED);
       } else {
         Alert.alert(
           'Error',
@@ -32,7 +33,7 @@ const TermsAndConditions = ({ navigation, route }) => {
             {
               text: 'OK',
               onPress: () => {
-                navigation.navigate('Sign in');
+                navigation.navigate(Screens.SIGN_IN);
               },
             },
           ]

@@ -7,6 +7,7 @@ import { signInUser } from '../utils/Repo';//function to login, only needs email
 import GlobalStyle from "../styles/GlobalStyle";
 import ErrorBanner from './ErrorBanner';
 import BackButton from "../componets/BackButton";
+import Screens from "../utils/ScreenPaths";
 
 const SignIn = ({ navigation }) => {
     const [email, onChangeEmail] = useState('');
@@ -135,7 +136,7 @@ const SignIn = ({ navigation }) => {
                     <Text style={Buttons.main_buttonText}>{Header}</Text>
                 </Pressable>
 
-                <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
+                <Pressable onPress={() => navigation.navigate(Screens.FORGOT_PASSWORD)}>
                     <Text style={[styles.link, { marginTop: 15 }]}>{t("SignInScreen.ForgetPwHint", currentLanguage)}</Text>
                 </Pressable>
 
@@ -152,7 +153,7 @@ const SignIn = ({ navigation }) => {
                 </Pressable>
 
                 <Pressable onPress={() => {
-                    navigation.navigate('SignUp')
+                    navigation.navigate(Screens.SIGN_UP)
                 }}>
                     <Text style={styles.link}>{t("SignInScreen.SignUpHint", currentLanguage)}</Text>
                 </Pressable>
