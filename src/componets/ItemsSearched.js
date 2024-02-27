@@ -7,7 +7,7 @@ import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3, styles } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
 
-const ItemsSearched = ({navigation, items, index, userLocation, endSearch , uptainer}) =>{
+const ItemsSearched = ({navigation, items, userLocation, endSearch , uptainer}) =>{
     return (
         <View>
             <View style={style.container1}>
@@ -19,8 +19,10 @@ const ItemsSearched = ({navigation, items, index, userLocation, endSearch , upta
                 {!!userLocation && <Distance userLocation={userLocation} uptainer={uptainer}/>}
             </View>
             <View style={style.container1}>
-                {items.map((item) => (
-                <TouchableOpacity onPress={() => {
+                {items.map((item, index) => (
+                <TouchableOpacity 
+                        key={index}
+                        onPress={() => {
                         navigation.navigate("DetailView", {
                         data: item?.itemId,
                         itemDescription: item?.itemDescription,

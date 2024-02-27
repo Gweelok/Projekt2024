@@ -34,32 +34,8 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
                         imageUrl: imageUrl}
                 }))
                 setLoading(false)
-                let number = 0;
-                const sortedItemsByUptainers = sortedUptainers.map((uptainer) => {
-                    const result = dataByImages.filter(function(item) {
-                        if(item.itemUptainer === uptainer.uptainerId && item.itemTaken === false)
-                        {
-                            return {
-                                ...item
-                            }
-                        }
-                    })
-                    if(result.length){
-                        number += result.length;
-                        return {
-                            uptainer: uptainer,
-                            items: result
-                            }}
-                        else {
-                            return null
-                        }
-                })
-                const filteredSortedItemsByUptainers = sortedItemsByUptainers.filter((obj) => {
-                    if(obj !== null){
-                        return items
-                    }
-                })
-                setSearchedData(filteredSortedItemsByUptainers)
+                const [ sortedItemsByUptainers, number ] = sortItemsByUptainers (dataByImages, uptainers, userLocation)
+                setSearchedData(sortedItemsByUptainers)
                 setNumberSearchedItems(number)
                 } catch(error) {
                     console.error('Error fetching data:', error.message);
@@ -85,9 +61,10 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
                  
                     <Text style={style.productsMatch}>{numberSearchedItems} {t("SearchHome.productsMatch", currentLanguage)}</Text>
                     {(!!searchedData.length) && ( searchedData.map((items, index) =>(
-                    <ItemsSearched 
+                    <ItemsSearched
+                    key={index} 
                     uptainer={items.uptainer}
-                    endSearch={endSearch} navigation={navigation} index={index}
+                    endSearch={endSearch} navigation={navigation}
                     items={items.items} userLocation={userLocation}/>
                     )))}
              
@@ -120,3 +97,24 @@ const style = StyleSheet.create({
 })
 
 export default SearchedProducts;
+
+function sortItemsByUptainers (items, uptainers, userLocation) {
+    const result = [];
+    let number = 0;
+    const sortedUptainers = sortUptainersByDistance(userLocation, uptainers);
+    for (let i in sortedUptainers) {
+        const filteredItemsUptainer = items.filter((item) => {
+            if(item.itemUptainer === sortedUptainers[i].uptainerId && item.itemTaken === false){
+                return item
+            }
+        });
+        if(filteredItemsUptainer.length > 0){
+            number += filteredItemsUptainer.length;
+            result.push({
+                uptainer: sortedUptainers[i],
+                items: filteredItemsUptainer
+        })
+        }
+    }
+    return [ result, number ]
+}
