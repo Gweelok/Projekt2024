@@ -6,9 +6,10 @@ import { useLanguage, t } from "../Languages/LanguageHandler";
 import CloudSvg from "../componets/svg-components/Cloud";
 import Icon from "react-native-vector-icons/AntDesign";
 import { LoaderContext } from "../componets/LoaderContext";
+import Screens from "../utils/ScreenPaths";
 
 const InfographicCO2Screen = ({ navigation }) => {
-  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const { setIsLoading } = useContext(LoaderContext);
   const [c02Saved, setc02Saved] = useState(0);
   const { currentLanguage } = useLanguage();
 
@@ -30,7 +31,7 @@ const InfographicCO2Screen = ({ navigation }) => {
         <View style={infoGraphicC02Style.cancelIconContainer}>
           <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => navigation.navigate("Homepage")}
+            onPress={() => navigation.navigate(Screens.HOME)}
           >
             <Icon size={30} name="close" style={styles.closeButtonIcon} />
           </TouchableOpacity>

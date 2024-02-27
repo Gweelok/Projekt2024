@@ -19,6 +19,7 @@ import {
 import { LoaderContext } from "../componets/LoaderContext";
 import { calculateDistance } from "../utils/uptainersUtils";
 import { cacheImage, getCachedImage } from "../utils/Cache";
+import Screens from "../utils/ScreenPaths";
 
 const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
   const navigation = useNavigation();
@@ -93,7 +94,7 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
         onPress={() => {
           setIsLoading(true);
           console.log(uptainerData);
-          navigation.navigate("UptainerDetails", {
+          navigation.navigate(Screens.UPTAINER_DETAILS, {
             uptainerData: {
               id: uptainerData?.id,
               name: uptainerData?.uptainerName,
@@ -139,7 +140,7 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
             {/* First Row */}
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("DetailView", {
+                navigation.navigate(Screens.DETAIL_VIEW, {
                   data: item[0]?.itemId,
                   itemDescription: item[0]?.itemDescription,
                   brandName: item[0]?.brandName,
@@ -164,7 +165,7 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
             {item[1] && (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("DetailView", {
+                  navigation.navigate(Screens.DETAIL_VIEW, {
                     data: item[1]?.itemId,
                     itemDescription: item[1]?.itemDescription,
                     brandName: item[1]?.brandName,

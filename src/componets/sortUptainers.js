@@ -12,6 +12,7 @@ import { sortUptainersByDistance } from "../utils/uptainersUtils";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { windowHeight, windowWidth } from "../utils/Dimensions";
 import OnHideView from "./atoms/OnHideView";
+import Screens from "../utils/ScreenPaths";
 import { LoaderContext } from "./LoaderContext";
 
 const SortUptainers = ({ navigation, noProductFound }) => {
@@ -101,7 +102,7 @@ const SortUptainers = ({ navigation, noProductFound }) => {
   const navigatetoinfo = () => {
     // todo all the below data should get from server
     // Navigate to InfoPage with predefined content
-    navigation.navigate("Infopage", {
+    navigation.navigate(Screens.ARTICLE_PAGE, {
       title: "Five Uptainers are set to open in Kobenhavn area this year",
       content: [
         "Have you alwavs wanted to blog but are without a clue when it comes to doing so? Thispiece will provide basic" +

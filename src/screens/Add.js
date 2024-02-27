@@ -31,6 +31,7 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
+import Screens from "../utils/ScreenPaths";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -103,8 +104,8 @@ const Add = ({ route, navigation }) => {
         itemcondition: condition ? condition : itemData?.itemcondition,
       }
       const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
-      if (res.itemUpdated) {
-        navigation.navigate("ProductSaved");
+      if (res.itemUpdated){
+        navigation.navigate(Screens.PRODUCT_SAVED);
       }
       console.log(updatedData)
     } else {
@@ -120,10 +121,9 @@ const Add = ({ route, navigation }) => {
           description,
           condition
         );
-
-        if (response.draftAdded) {
-          navigation.navigate("ProductSaved");
-          setBadgeCount((prevCount) => prevCount + 1);
+        if (response.draftAdded){
+            navigation.navigate(Screens.PRODUCT_SAVED);
+            setBadgeCount((prevCount) => prevCount + 1);
         } else {
           console.log('item draft limit exceeded');
         }
@@ -144,7 +144,7 @@ const Add = ({ route, navigation }) => {
     ) {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
-      navigation.navigate("AddQRScanner", {
+      navigation.navigate(Screens.ADD_QR_SCANNER, {
         itemId: itemData?.itemId,
         product: product instanceof Object ? product.productId : itemData?.itemproduct,
         brand: brand instanceof Object ? brand.brandId : itemData?.itemBrand,
