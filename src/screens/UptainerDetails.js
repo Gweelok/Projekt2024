@@ -63,6 +63,7 @@ const UptainerDetails = ({ route, navigation }) => {
 
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchItemList = async () => {
       // this fetch does nothing always return empty array use fetchData() instead  !! - NEED FIX
       const storage = getStorage();

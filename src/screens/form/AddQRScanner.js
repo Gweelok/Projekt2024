@@ -246,7 +246,7 @@ const QRScanner = ({ route, navigation }) => {
                   <Pressable
                     onPress={handleSaveCode}
                     disabled={isLoading}
-                    style={[Buttons.main_button, isActive && { backgroundColor: "red", borderColor: "red" }]}>
+                    style={[Buttons.main_button, !isActive && { backgroundColor: "red", borderColor: "red" }]}>
                     <Text style={Buttons.main_buttonText}>
                       {t("QRScanner.SaveCode", currentLanguage)}
                     </Text>
