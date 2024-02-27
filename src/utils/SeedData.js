@@ -43,7 +43,7 @@ export const categories = [
 ];
 
 //Brands
-export const brands = [
+export const brandsSeedData= [
   {
     brandId: 1,
     brandName: "Acer"

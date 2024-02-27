@@ -13,7 +13,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton"; // Make sure to import the BackButton component
 
-const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDropdownVisible, isBrandDropdownVisible , onSkip, isVisible, }) => {
+const ProductDropdown = ({ onProductSelect, categorySelected, data, setIsBrandDropdownVisible, isBrandDropdownVisible , onSkip, isVisible, category}) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(data || null);
@@ -34,6 +34,14 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
                 const productsList = await getAllProducts();
                 setProducts(productsList);
                 setFilteredProducts(productsList);
+                if (category){
+                    const filteredProducts = productsList.filter((product) => {
+                        if(product.categoryId === category.categoryId) {
+                            return product
+                        }
+                    })
+                    setFilteredProducts(filteredProducts)
+                }                
                 if (data){
                     productsList.forEach((prod) =>{
                         if(prod.productId === data){ setSelectedProduct(prod)}
@@ -45,7 +53,7 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
         };
 
         fetchData();
-    }, []);
+    }, [category]);
 
     const handleProductSelect = (product) => {
         setSelectedProduct(product);
@@ -59,6 +67,8 @@ const ProductDropdown = ({ onProductSelect, categorySelected,data, setIsBrandDro
 
     const handleSearch = (text) => {
         setSearchText(text);
+        console.log('Hello World2')
+        console.log(category)
         const filtered = products.filter((product) =>
             product.productName.toLowerCase().includes(text.toLowerCase())
         );

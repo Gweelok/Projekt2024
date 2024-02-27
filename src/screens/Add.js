@@ -165,6 +165,7 @@ const Add = ({ route, navigation }) => {
   //   })();
   // }, []);
   const handleSkipCategoryDropdown = () => {
+    console.log(category)
     setIsProductDropdownVisible(true);
   };
 
@@ -219,6 +220,7 @@ const Add = ({ route, navigation }) => {
               onProductSelect={setProduct}
               categorySelected={!!category} // Pass the state of category selection
               data={itemData?.product ? itemData?.product : itemData?.itemproduct}
+              category={category}
               setIsBrandDropdownVisible={setIsBrandDropdownVisible}
               isBrandDropdownVisible={isBrandDropdownVisible}
               onSkip={handleSkipProductDropdown}
@@ -228,6 +230,7 @@ const Add = ({ route, navigation }) => {
           <BrandDropdown
               onBrandSelect={setBrand}
               productSelected={!!product}
+              product={product}
               data={itemData?.brand ? itemData?.brand : itemData?.itemBrand}
               isVisible={isBrandDropdownVisible}
               setIsVisible={setIsBrandDropdownVisible}

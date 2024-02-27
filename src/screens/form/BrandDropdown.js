@@ -16,8 +16,9 @@ import {
     styles,
     styles as stylesGlobal
 } from "../../styles/Stylesheet";
+import {models, brandsSeedData} from "../../utils/SeedData";
 
-const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown}) => {
+const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown, product}) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(data || null);
@@ -37,6 +38,27 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
                 const brandsList = await getAllBrands();
                 setBrands(brandsList);
                 setFilteredBrands(brandsList);
+                const modelsListTest = models;
+                //console.log(models)
+                const brandsListTest = brandsSeedData;
+                //console.log(brandsSeedData)
+                if (product){
+                    const productId = 22;
+                    const filteredBrandsIdTest = modelsListTest.filter((model) => {
+                        if(model.productId === productId) {
+                            return model
+                        }
+                    })
+                    console.log('filteredBrandsId')
+                    console.log(filteredBrandsIdTest)
+                    const filteredBrandsTest = brandsListTest.filter((brand) => {
+                        if(brand.brandId in filteredBrandsIdTest) {
+                            return brand
+                        }
+                    })
+                    //console.log(filteredBrandsTest)
+                    setFilteredBrands(filteredBrandsTest)
+                }      
                 if(data){
                     brandsList.forEach(brand => {
                         if(data === brand.brandId){ setSelectedBrand(brand)}
@@ -48,7 +70,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
         };
 
         fetchData();
-    }, []);
+    }, [product]);
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
