@@ -51,11 +51,11 @@ const QRScanner = ({ route, navigation }) => {
 
   alertAddToDraft = () => {
     Alert.alert(
-      t("QrScannerScreen.Error", currentLanguage),
-      t("QrScannerScreen.QRCodeNotFound", currentLanguage),
+      t("QRScanner.Error", currentLanguage),
+      t("QRScanner.QRCodeNotFound", currentLanguage),
       [
         {
-          text: t("QrScannerScreen.OK", currentLanguage),
+          text: t("QRScanner.OK", currentLanguage),
           onPress: () => {
             addToDraft()
           },
@@ -108,7 +108,7 @@ const QRScanner = ({ route, navigation }) => {
         navigation.replace("ProductSaved");
         setBadgeCount((prevCount) => prevCount + 1)
       } else {
-        Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
+        Alert.alert(t("QRScanner.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
       }
     }
   }
@@ -124,7 +124,7 @@ const QRScanner = ({ route, navigation }) => {
     if (scannedQRCodeExist === "Draft") {
       setScannedQRCode("")
       setIsActive(false);
-      Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("QrScannerScreen.QRCodeNotFound1", currentLanguage));
+      Alert.alert(t("QRScanner.Error", currentLanguage), t("QRScanner.QRCodeNotFound1", currentLanguage));
     } else {
       setScannedQRCode(data)
       setIsActive(true);
@@ -205,7 +205,7 @@ const QRScanner = ({ route, navigation }) => {
       }
     } catch (error) {
       setIsLoading(false);
-      Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("QrScannerScreen.ErrorMsg1", currentLanguage));
+      Alert.alert(t("QRScanner.Error", currentLanguage), t("QRScanner.ErrorMsg1", currentLanguage));
     }
 
   };
@@ -216,7 +216,7 @@ const QRScanner = ({ route, navigation }) => {
 
         <View style={styles.header}>
           <Text style={styles.headline}>
-            {t("QrScannerScreen.Scan", currentLanguage)}
+            {t("AddQRScanner.Scan", currentLanguage)}
           </Text>
           <TouchableOpacity style={styles.closeButton} onPress={() => { navigation.goBack() }} disabled={isLoading}>
             <Icon size={30} name="close" style={styles.closeButtonIcon} />
@@ -225,7 +225,7 @@ const QRScanner = ({ route, navigation }) => {
 
         <View>
           <Text style={styles.paragraph_text}>
-            {t("QrScannerScreen.Header", currentLanguage)}
+            {t("QRScanner.Header", currentLanguage)}
           </Text>
 
           {hasPermission ? (
@@ -243,23 +243,14 @@ const QRScanner = ({ route, navigation }) => {
             {scannedQRCode != null && (
               <View>
                 <View>
-                  {isActive ? (<Pressable
+                  <Pressable
                     onPress={handleSaveCode}
                     disabled={isLoading}
-                    style={Buttons.main_button}>
+                    style={[Buttons.main_button, isActive && { backgroundColor: "red", borderColor: "red" }]}>
                     <Text style={Buttons.main_buttonText}>
-                      {t("QrScannerScreen.SaveCode", currentLanguage)}
+                      {t("QRScanner.SaveCode", currentLanguage)}
                     </Text>
-                  </Pressable>) :
-                    (<Pressable
-                      onPress={handleSaveCode}
-                      disabled={isLoading}
-                      style={[Buttons.main_button, { backgroundColor: "red", borderColor: "red" }]}>
-                      <Text style={Buttons.main_buttonText}>
-                        {t("QrScannerScreen.SaveCode", currentLanguage)}
-                      </Text>
-                    </Pressable>
-                    )}
+                  </Pressable>
                 </View>
                 <View>
                   <Pressable
@@ -267,7 +258,7 @@ const QRScanner = ({ route, navigation }) => {
                     disabled={isLoading}
                     style={Buttons.secondary_button}>
                     <Text style={Buttons.secondary_buttonText}>
-                      {t("QrScannerScreen.ScanAgain", currentLanguage)}
+                      {t("QRScanner.ScanAgain", currentLanguage)}
                     </Text>
                   </Pressable>
                 </View>
@@ -276,7 +267,7 @@ const QRScanner = ({ route, navigation }) => {
           </View>
 
           <Text style={styles.paragraph_text}>
-            {t("QrScannerScreen.Bottom", currentLanguage)}
+            {t("QRScanner.Bottom", currentLanguage)}
           </Text>
         </View>
 
