@@ -185,7 +185,6 @@ const QRScanner = ({ route, navigation }) => {
                 uptainerData: {
                   id: uptainer.uptainerId,
                   name: uptainer.uptainerName,
-                  location: uptainer.uptainerStreet,
                   uptainerImage: uptainer.uptainerImage,
                   latitude: uptainer.uptainerLat,
                   longitude: uptainer.uptainerLong,
