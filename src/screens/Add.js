@@ -104,9 +104,7 @@ const Add = ({ route, navigation }) => {
       if (res.itemUpdated) {
         navigation.navigate(Screens.PRODUCT_SAVED);
       }
-      console.log(updatedData)
     } else {
-
       // Check if at least one of the fields has a value
       if (product?.productId || brand?.brandId || model?.modelId || category?.categoryId || image || description || condition) {
         const response = await createItemDraft(
@@ -119,7 +117,7 @@ const Add = ({ route, navigation }) => {
           condition
         );
         
-        setIsLoading(false);
+        
         
         if (response.draftAdded){
             navigation.navigate(Screens.PRODUCT_SAVED);
@@ -131,6 +129,7 @@ const Add = ({ route, navigation }) => {
         Alert.alert("Error", "At least one field must have a value");
         console.log('At least one field must have a value');
       }
+      setIsLoading(false);
 
     }
 
