@@ -16,7 +16,7 @@ import {
     styles,
     styles as stylesGlobal
 } from "../../styles/Stylesheet";
-import {models, brandsSeedData} from "../../utils/SeedData";
+import { modelsSeedData, brandsSeedData } from "../../utils/SeedData";
 
 const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown, product}) => {
     const { currentLanguage } = useLanguage();
@@ -35,29 +35,14 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const brandsList = await getAllBrands();
-                setBrands(brandsList);
-                setFilteredBrands(brandsList);
-                const modelsListTest = models;
-                //console.log(models)
+                //const brandsList = await getAllBrands();
+                //setBrands(brandsList);
+                //setFilteredBrands(brandsList);
+                const modelsListTest = modelsSeedData;
                 const brandsListTest = brandsSeedData;
-                //console.log(brandsSeedData)
                 if (product){
-                    const productId = 22;
-                    const filteredBrandsIdTest = modelsListTest.filter((model) => {
-                        if(model.productId === productId) {
-                            return model
-                        }
-                    })
-                    console.log('filteredBrandsId')
-                    console.log(filteredBrandsIdTest)
-                    const filteredBrandsTest = brandsListTest.filter((brand) => {
-                        if(brand.brandId in filteredBrandsIdTest) {
-                            return brand
-                        }
-                    })
-                    //console.log(filteredBrandsTest)
-                    setFilteredBrands(filteredBrandsTest)
+                    const filteredBrands = filterBrandsByProduct (modelsListTest, brandsListTest, product)
+                    setFilteredBrands(filteredBrands)
                 }      
                 if(data){
                     brandsList.forEach(brand => {
@@ -224,3 +209,21 @@ const brandDropdownContainer = {
 };
 
 export default BrandDropdown;
+
+
+function filterBrandsByProduct (modelsListTest, brandsListTest, product) {
+    let result = []
+    let filteredBrandsId =[]
+    for (let i in modelsListTest) {
+        if (modelsListTest[i].productId === product.productId) {
+            filteredBrandsId.push(modelsListTest[i].brandId)
+        }
+    }
+    const newfilteredBrandsId = Array.from(new Set(filteredBrandsId))
+    for (let ii in brandsListTest) {
+        if(newfilteredBrandsId.includes(brandsListTest[ii].brandId)){
+            result.push(brandsListTest[ii])
+        }
+    }
+    return result
+}

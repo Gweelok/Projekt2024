@@ -12,6 +12,7 @@ import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { getAllProducts } from "../../utils/Repo";
 import BackButton from "../../componets/BackButton"; // Make sure to import the BackButton component
+import { productsSeedData } from "../../utils/SeedData";
 
 const ProductDropdown = ({ onProductSelect, categorySelected, data, setIsBrandDropdownVisible, isBrandDropdownVisible , onSkip, isVisible, category}) => {
     const { currentLanguage } = useLanguage();
@@ -31,15 +32,12 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data, setIsBrandDr
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const productsList = await getAllProducts();
+                //const productsList = await getAllProducts();
+                const productsList = productsSeedData;
                 setProducts(productsList);
                 setFilteredProducts(productsList);
                 if (category){
-                    const filteredProducts = productsList.filter((product) => {
-                        if(product.categoryId === category.categoryId) {
-                            return product
-                        }
-                    })
+                    const filteredProducts = filterProductsByCategory (productsList, category)
                     setFilteredProducts(filteredProducts)
                 }                
                 if (data){
@@ -210,3 +208,14 @@ const productDropdownContainer = {
 };
 
 export default ProductDropdown;
+
+function filterProductsByCategory (productList, category) {
+    const result = [];
+    for (let i in productList) {
+        if(productList[i].categoryId === category.categoryId)
+        {
+            result.push(productList[i])
+        }
+    }
+    return result
+}

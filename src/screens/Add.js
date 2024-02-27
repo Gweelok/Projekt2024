@@ -244,6 +244,8 @@ const Add = ({ route, navigation }) => {
           <ModelDropdown
               brandSelected={!!brand}
               onModelSelect={setModel}
+              brand={brand}
+              product={product}
               data={itemData?.model ? itemData?.model : itemData?.itemModel}
               isVisible={isModelDropdownVisible}
               setIsVisible={setIsModelDropdownVisible}

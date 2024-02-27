@@ -1,5 +1,5 @@
 //Categories
-export const categories = [
+export const categoriesSeedData = [
   {
     categoryId: 1,
     categoryName: "Smartphones"
@@ -332,7 +332,7 @@ export const stationData = [
 ];
 
 //Products
-export const products = [
+export const productsSeedData = [
   {
     productId: 1,
     categoryId: 1,
@@ -700,7 +700,7 @@ export const items = [
   },
 ];
 
-export const models = [
+export const modelsSeedData = [
   {
     modelId: 1,
     productId: 1,
