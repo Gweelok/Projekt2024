@@ -65,8 +65,6 @@ const ProductDropdown = ({ onProductSelect, categorySelected, data, setIsBrandDr
 
     const handleSearch = (text) => {
         setSearchText(text);
-        console.log('Hello World2')
-        console.log(category)
         const filtered = products.filter((product) =>
             product.productName.toLowerCase().includes(text.toLowerCase())
         );
