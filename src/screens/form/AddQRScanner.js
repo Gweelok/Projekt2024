@@ -22,7 +22,6 @@ import {
 } from "../../utils/Repo";
 import ScrollViewComponent from "../../componets/atoms/ScrollViewComponent";
 import { LoaderContext } from "../../componets/LoaderContext";
-import LoadingScreen from "../../componets/LoadingScreen";
 import GlobalStyle from "../../styles/GlobalStyle";
 
 
@@ -56,11 +55,11 @@ const QRScanner = ({ route, navigation }) => {
     if (scannedQRCodeExist === "Draft") {
       setIsActive(false);
       Alert.alert(
-        t("QrScannerScreen.QRCodeNotFound1", currentLanguage),
-        t("QrScannerScreen.ScanAgain", currentLanguage),
+        t("QRScanner.QRCodeNotFound1", currentLanguage),
+        t("QRScanner.ScanAgain", currentLanguage),
         [
           {
-            text: t("QrScannerScreen.OK", currentLanguage),
+            text: t("QRScanner.OK", currentLanguage),
             onPress: () => {
               //  console.log("Type: " + type + "\nData: " + data);
             },
@@ -129,11 +128,11 @@ const QRScanner = ({ route, navigation }) => {
           }
 
           Alert.alert(
-            t("QrScannerScreen.Success", currentLanguage),
-            t("QrScannerScreen.QRCodeSavedSuccessfully", currentLanguage),
+            t("QRScanner.Success", currentLanguage),
+            t("QRScanner.QRCodeSavedSuccessfully", currentLanguage),
             [
               {
-                text: t("QrScannerScreen.OK", currentLanguage),
+                text: t("QRScanner.OK", currentLanguage),
                 onPress: () => {
                   navigation.navigate('UptainerDetails', {
                     screenFrom: 'QRScanner',
@@ -159,8 +158,8 @@ const QRScanner = ({ route, navigation }) => {
             console.log("Condition met, navDir set to:", navDir1);
 
             Alert.alert(
-              t("QrScannerScreen.QRCodeNotFound", currentLanguage),
-              t("QrScannerScreen.ScanAgain", currentLanguage),
+              t("QRScanner.QRCodeNotFound", currentLanguage),
+              t("QRScanner.ScanAgain", currentLanguage),
               [
                 {
                   text: t("QrScannerScreen.OK", currentLanguage),
@@ -178,11 +177,11 @@ const QRScanner = ({ route, navigation }) => {
         console.error("Error saving scanned QR code:", error);
 
         Alert.alert(
-          t("QrScannerScreen.Error", currentLanguage),
-          t("QrScannerScreen.ErrorMsg1", currentLanguage),
+          t("QRScanner.Error", currentLanguage),
+          t("QRScanner.ErrorMsg1", currentLanguage),
           [
             {
-              text: t("QrScannerScreen.OK", currentLanguage),
+              text: t("QRScanner.OK", currentLanguage),
               onPress: () => {
                 setIsLoading(false);
               },
@@ -199,11 +198,10 @@ const QRScanner = ({ route, navigation }) => {
   return (
     <ScrollViewComponent style={ GlobalStyle.BodyWrapper }>
         <View style={{marginTop: 40}}>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
 
           <View style={styles.header}>
             <Text style={styles.headline}>
-              {t("QrScannerScreen.Scan", currentLanguage)}
+              {t("AddQRScanner.Scan", currentLanguage)}
             </Text>
             <TouchableOpacity style={styles.closeButton} onPress={handlePress} disabled={isLoading}>
               <Icon size={30} name="close" style={styles.closeButtonIcon} />
@@ -212,7 +210,7 @@ const QRScanner = ({ route, navigation }) => {
 
           <View>
             <Text style={styles.paragraph_text}>
-              {t("QrScannerScreen.Header", currentLanguage)}
+              {t("QRScanner.Header", currentLanguage)}
             </Text>
 
             {hasPermission ? (
@@ -235,14 +233,14 @@ const QRScanner = ({ route, navigation }) => {
                       disabled={isLoading}
                       style={Buttons.main_button}>
                       <Text style={Buttons.main_buttonText}>
-                        {t("QrScannerScreen.SaveCode", currentLanguage)}
+                        {t("QRScanner.SaveCode", currentLanguage)}
                       </Text>
                     </Pressable>) : (<Pressable
                       onPress={handleSaveCode}
                       disabled={isLoading}
                       style={[Buttons.main_button, {backgroundColor: "red", borderColor: "red"} ]}>
                       <Text style={Buttons.main_buttonText}>
-                        {t("QrScannerScreen.SaveCode", currentLanguage)}
+                        {t("QRScanner.SaveCode", currentLanguage)}
                       </Text>
                     </Pressable>
                     )}
@@ -253,7 +251,7 @@ const QRScanner = ({ route, navigation }) => {
                       disabled={isLoading}
                       style={Buttons.secondary_button}>
                       <Text style={Buttons.secondary_buttonText}>
-                        {t("QrScannerScreen.ScanAgain", currentLanguage)}
+                        {t("QRScanner.ScanAgain", currentLanguage)}
                       </Text>
                     </Pressable>
                   </View>
@@ -262,7 +260,7 @@ const QRScanner = ({ route, navigation }) => {
             </View>
 
             <Text style={styles.paragraph_text}>
-              {t("QrScannerScreen.Bottom", currentLanguage)}
+              {t("QRScanner.Bottom", currentLanguage)}
             </Text>
           </View>
 

@@ -31,7 +31,6 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
 import { Camera } from "expo-camera";
 import { LoaderContext } from "../componets/LoaderContext";
-import LoadingScreen from "../componets/LoadingScreen";
 
 const ProductDetailScreen = ({ route }) => {
   const { productId, userId } = route.params;
@@ -123,7 +122,7 @@ const Add = ({ route, navigation }) => {
             navigation.navigate("ProductSaved");
             setBadgeCount((prevCount) => prevCount + 1);
         } else {
-          console.log('item darft limit exeeded')
+          console.log('item draft limit exceeded')
       }
             
     }
@@ -270,7 +269,6 @@ const Add = ({ route, navigation }) => {
               {t("UpdroppForm.informativeText", currentLanguage)}
             </Text>
           </View>
-          {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
           <View style={{ }}>
             <Pressable
               onPress={() => {

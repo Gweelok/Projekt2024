@@ -162,11 +162,11 @@ export default {
       secondHalf: "Ny Brugsfase",
     },
   },
-  QrScannerScreen: {
-    Scan: "Scan for at Updroppe",
+  QRScanner: {
+
     Header: "Placér QR-koden inden for rammen for at aflæse",
     Bottom:
-      "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
+        "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
@@ -177,6 +177,14 @@ export default {
     Success: "Success",
     QRCodeSavedSuccessfully: "QR-koden blev gemt.",
     OK: "OK",
+  },
+  TakeQRScanner: {
+    Scan: "Scan for at tage",
+
+  },
+  AddQRScanner: {
+    Scan: "Scan for at Updroppe",
+
   },
   ProductUpdroppedAlert: {
     productUpdropped: "Produktet er nu Updroppet",
@@ -258,17 +266,19 @@ export default {
     SoFar: "Indtil videre i dag",
     AmountCO2: "Mængden af CO2 sparet",
     Yesterday: "I går",
-    kgCO2: "10 kg. CO2 er tilsvarende til",
-    Amount_first_part: "Så",
-    Amount_second_part: "svarer til",
+    CO2Equivalent: "CO2 er tilsvarende til",
+    CO2AmountBefore:"så",
+    CO2Amount:"svarer til",
     Fact_equavalent: "læs vask og tørring",
     BestAcheieve: "Denne måneds bedst præserende Uptainere",
-    MostVisitedUptainer: "Din mest besøgte Uptainer",
+    MostVisitedUptainer: "Mest besøgte Uptainer",
+    MyMostVisitedUptainer: "Din mest besøgte Uptainer",
+    MyMostVisitedUptainers: "Dine mest besøgte Uptainers",
     ItemsReused: "produkter genbrugt",
+    Visits:"besøg",
     CO2Save: " CO2 sparet",
     Comunity: "Det bæredygtige Forsamlingshus",
     Info: "Lær hvordan vi får vores informationer her",
-    ItemsRecicled: "produkter genbrugt",
     ItemsDonated: "Genstande doneret",
     ItemsCollected: "Genstande hentet",
     Overview: "Gå til overblikket af dine produkter",
@@ -303,5 +313,8 @@ export default {
   },
   SearchHome: {
     productsMatch: "produkter matcher din søgning."
+  },
+  LocationPermission:{
+    error:"Placeringstilladelse nægtet. Venligst giv tilladelse til at få adgang til din placering for at bruge denne funktion"
   }
 };
