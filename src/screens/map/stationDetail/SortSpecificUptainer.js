@@ -13,20 +13,26 @@ import {
     getItemsInUptainer,
     getProductById,
     getBrandById,
+    createItem,
 } from "../../../utils/Repo";
 import { LoaderContext } from "../../../componets/LoaderContext";
 import Screens from "../../../utils/ScreenPaths";
+import { Primarycolor1, Primarycolor3, Primarycolor4 } from "../../../styles/Stylesheet";
+import ProductAlert from "../../../componets/ProductAlert";
+import { BadgeContext } from "../../form/BadgeContext";
 
-const SortSpecificUptainer = ({ uptainerData }) => {
+const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
     const navigation = useNavigation();
     const [data, setData] = useState([]);
-    const{setIsLoading}=useContext(LoaderContext)
-    
+    const { setIsLoading } = useContext(LoaderContext)
+    const [addedItem, setaddedItem] = useState(false)
+    const { setBadgeCount } = useContext(BadgeContext)
+
     useEffect(() => {
         const fetchItemList = async () => {
             const storage = getStorage();
             try {
-            
+
                 const items = await getItemsInUptainer(uptainerData.uptainerId);
 
                 const updatedData = await Promise.all(
@@ -65,11 +71,50 @@ const SortSpecificUptainer = ({ uptainerData }) => {
             }
         };
 
+        
+
         fetchItemList();
+
     }, [uptainerData]);
+
+    useEffect(()=>{
+        const updroppItem = async () => {
+            if (newItem.itemUptainer == "Draft") {
+                // item Already in Draft - update
+                setBadgeCount((prevCount) => prevCount - 1)
+                const updatedData = {
+                    itemproduct: newItem.product,
+                    itemBrand: newItem.brand,
+                    itemModel: newItem.model,
+                    itemCategory: newItem.category,
+                    itemDescription: newItem.description,
+                    itemcondition: newItem.condition,
+                    itemUptainer: uptainerData.uptainerId
+                }
+                await updateItemById(newItem.itemId, updatedData, newItem.image)
+            } else {
+                // New item - create
+                await createItem(
+                    newItem.image,
+                    newItem.category,
+                    newItem.product,
+                    newItem.brand,
+                    newItem.model,
+                    newItem.condition,
+                    newItem.description,
+                    scannedQRCode
+                );
+            }
+            setaddedItem(true)
+        }
+        if (newItem) {
+            updroppItem()
+        }
+    },[])
 
     const renderItem = (item) => (
         <TouchableOpacity
+        disabled={!addedItem}
             key={item.itemId}
             onPress={() => {
                 navigation.navigate(Screens.DETAIL_VIEW, {
@@ -83,11 +128,15 @@ const SortSpecificUptainer = ({ uptainerData }) => {
             }}
             style={styling.item}
         >
+
             <View style={styling.imageContainer}>
                 <Image
                     source={{ uri: item.imageUrl }}
                     style={styling.image}
                 />
+                {newItem && ((item.itemId == newItem.itemId && !addedItem) && <ActivityIndicator style={styling.newItemStyle} color={Primarycolor1} size={"large"}></ActivityIndicator>)}
+
+                {newItem && ((item.itemId == newItem.itemId && addedItem) && <ProductAlert />)}
             </View>
             <Text style={styling.productNameText}>
                 {item.productName}
@@ -98,6 +147,7 @@ const SortSpecificUptainer = ({ uptainerData }) => {
     return (
         <View style={styling.container}>
             <ScrollView contentContainerStyle={styling.scrollViewContent}>
+                {newItem && renderItem(newItem)}
                 {data.map((item) => renderItem(item))}
             </ScrollView>
         </View>
@@ -107,6 +157,15 @@ const SortSpecificUptainer = ({ uptainerData }) => {
 const styling = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    newItemStyle: {
+        position: "absolute",
+        height: "100%",
+        width: "100%",
+        opacity: 0.7,
+        backgroundColor: Primarycolor4,
+        zIndex: 1,
+        elevation: 1
     },
     scrollViewContent: {
         flexDirection: "row",
@@ -133,9 +192,9 @@ const styling = StyleSheet.create({
     },
     productNameText: {
         flexDirection: 'row',
-        marginTop:5,
-        marginBottom:10,
-        width:"100%",
+        marginTop: 5,
+        marginBottom: 10,
+        width: "100%",
         fontWeight: "bold",
         fontSize: 15,
     },

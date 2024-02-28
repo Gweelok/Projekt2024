@@ -25,6 +25,7 @@ import GlobalStyle from "../../styles/GlobalStyle";
 import { BadgeContext } from "./BadgeContext";
 import { Permissions } from "../../utils/Permissions";
 import Screens from "../../utils/ScreenPaths";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 
 const QRScanner = ({ route, navigation }) => {
@@ -141,41 +142,21 @@ const QRScanner = ({ route, navigation }) => {
 
     try {
       if (scannedQRCode) {
-        // unnecessary to save qr data to storage
-        await AsyncStorage.setItem("scannedQRCode", scannedQRCode);
-
         // unnecessary to get uptainer id then fetch it's data separately
         const uptainerId = await getUptainerFromQR(scannedQRCode);
         const uptainer = uptainerId ? await getUptainerById(uptainerId) : null;
 
-        // make another verification before updropp - uptainer may be removed when user is afk
+        // updropp item
         if (uptainer) {
-          if (itemData?.itemUptainer == "Draft") {
-            // item Already in Draft - update
-            setBadgeCount((prevCount) => prevCount - 1)
-            const updatedData = {
-              itemproduct: itemData?.product,
-              itemBrand: itemData?.brand,
-              itemModel: itemData?.model,
-              itemCategory: itemData?.category,
-              itemDescription: itemData?.description,
-              itemcondition: itemData?.condition,
-              itemUptainer: uptainerId
-            }
-            await updateItemById(itemData?.itemId, updatedData, itemData?.image)
-          } else {
-            // New item - create
-            await createItem(
-              itemData?.image,
-              itemData?.category,
-              itemData?.product,
-              itemData?.brand,
-              itemData?.model,
-              itemData?.condition,
-              itemData?.description,
-              scannedQRCode
-            );
+          if(itemData.image){
+            itemData.imageUrl = itemData.image.uri
+          }else{
+            const storage = getStorage();
+            const pathReference = ref(storage,"Items/Default.jpg");
+            const url = await getDownloadURL(pathReference);
+            itemData.imageUrl = url
           }
+
 
 
           navigation.reset({
@@ -189,10 +170,12 @@ const QRScanner = ({ route, navigation }) => {
                   latitude: uptainer.uptainerLat,
                   longitude: uptainer.uptainerLong,
                 },
-                scannedQRCodeData: scannedQRCode
+                newItem: itemData,
+                scannedQRCode: scannedQRCode
               }
             }]
           })
+
 
         } else {
           setIsLoading(false);

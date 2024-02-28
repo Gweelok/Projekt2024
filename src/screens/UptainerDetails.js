@@ -40,8 +40,9 @@ const UptainerDetails = ({ route, navigation }) => {
   const [uptainersList, setUptainerList] = useState([]);
 
   // passed uptainer don't have id !! - NEED FIX
+  const newItem=route.params.newItem
   const uptainer = route.params.uptainerData || route.params;
-  const scannedData = route.params?.scannedQRCodeData;
+  const scannedQRCode = route.params?.scannedQRCode;
 
 
   // fetch pass uptainer id items instead of fetching uptainers items with same location - NEED FIX
@@ -68,9 +69,7 @@ const UptainerDetails = ({ route, navigation }) => {
 
   useEffect(() => {
     setIsLoading(true)
-    console.log(uptainer)
     const fetchItemList = async () => {
-      // this fetch does nothing always return empty array use fetchData() instead  !! - NEED FIX
       const storage = getStorage();
       try {
         const items = await getItemsInUptainer(uptainer.id);
@@ -175,7 +174,7 @@ const UptainerDetails = ({ route, navigation }) => {
     <View style={[Backgroundstyle.interactive_screens]}>
 
       <View style={GlobalStyle.BodyWrapper}>
-        {scannedData && <ProductAlert />}
+        
         <ScrollViewComponent
           refreshing={refreshing}
           onRefresh={onRefresh}>
@@ -256,6 +255,8 @@ const UptainerDetails = ({ route, navigation }) => {
               <SortSpecificUptainer
                 key={uptainer.uptainerId}
                 uptainerData={uptainer}
+                newItem={newItem}
+                scannedQRCode={scannedQRCode}
               />
             ))}
           </View>
