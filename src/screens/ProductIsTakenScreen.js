@@ -12,41 +12,29 @@ import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
 import HeaderTitle from "../componets/atoms/HeaderTitle";
 import { Primarycolor1 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
-import { firebaseDB } from "../utils/Firebase";
+import { updateItemToTaken } from "../utils/Repo";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const ProductIsTakenScreen = ({ navigation, route, fetchUpdatedData }) => {
   const productItem = route?.params;
-
   const { currentLanguage } = useLanguage();
 
-  const productIsTaken = async () => {
-    try {
-      const itemId = productItem?.data;
-
-      if (itemId) {
-        const itemData = {
-          itemTaken: true, // Update itemTaken to true
-        };
-
-        // Reference to the Firebase database node where you store your items
-        const itemRef = firebaseDB.ref(`items/${itemId}`);
-
-        // Update the item's data with the new value of itemTaken
-        await itemRef.update(itemData);
-
-        // Call the fetchUpdatedData function to refresh the data in the Uptainer component
-        fetchUpdatedData();
-
-        navigation.navigate("ThankYouScreen");
-      } else {
-        console.error("Item ID is missing.");
+    const productIsTaken = async () => {
+      try {
+        const itemId = productItem?.data;
+        if (itemId) {
+          // This function will be replaced to notifyItemAsTaken since users can only notify.
+          await updateItemToTaken(itemId);
+          navigation.navigate("ThankYouScreen");
+        } else {
+          console.error("Item ID is missing.");
+        }
+      } catch (error) {
+        console.error("Error marking product as taken:", error);
       }
-    } catch (error) {
-      console.error("Error marking product as taken:", error);
-    }
-  };
+    };
 
   return (
     <StatusBarComponent>

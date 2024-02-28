@@ -18,7 +18,7 @@ const ThankYouscreen = ({navigation}) =>{
                 <View >
                     <Headertitle1
                         onRightIconPress={() => {
-                            navigation.goBack();
+                            navigation.navigate("Homepage");
                         }}
                         rightIcon="close-outline"
                     />
