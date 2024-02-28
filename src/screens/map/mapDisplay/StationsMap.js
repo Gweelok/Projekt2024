@@ -18,6 +18,7 @@ import {t, useLanguage} from "../../../Languages/LanguageHandler";
 import { calculateDistance, sortUptainersByDistance } from '../../../utils/uptainersUtils';
 import SearchedLocation from './SearchedLocation';
 import { getAllUptainers } from '../../../utils/Repo';
+import Screens from '../../../utils/ScreenPaths';
 
 const StationsMap = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
@@ -103,7 +104,7 @@ const StationsMap = ({ navigation }) => {
     };
 
     const openStationPage = (location) => {
-        navigation.navigate('StationDetails', { stationDetail: location });
+        navigation.navigate(Screens.STATION_DETAILS , { stationDetail: location });
         console.log('onPress', location);
     };
 

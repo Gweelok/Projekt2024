@@ -6,38 +6,25 @@
  *
  *  not implemented but wished i did: redux, or any other way to store values between screens
  * **/
-
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // base style import
-import { Text, Button } from "react-native-elements";
+import { Text } from "react-native-elements";
 
 // import from files
-import {
-  navStyle,
-  elementsStyles,
-  marginBottom,
-} from "./src/styles/Stylesheet";
+import { navStyle } from "./src/styles/Stylesheet";
 import { ChooseStation } from "./src/componets/molocules/stationOptions";
-import {
-  ChooseCatagories,
-  ChooseProducts,
-  ChooseModels,
-  ChooseBrands,
-} from "./src/componets/molocules/registerOptions";
-import { DashboardScreen } from "./src/screens/dashboardScreen";
+import { ChooseProducts, ChooseModels, ChooseBrands, } from "./src/componets/molocules/registerOptions";
 import { ProductScreen } from "./src/screens/productScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
-import { View } from "react-native-ui-lib";
 import { useFonts } from "expo-font";
 //importing pages for navigation
 import Home from "./src/screens/Home";
 import Map from "./src/screens/map/Map";
 import Profile from "./src/screens/Profile";
-import ProfilePage from "./src/screens/profilePages/ProfilePage";
 import ContactUs from "./src/screens/profilePages/ContactUs";
 import DataPolicy from "./src/screens/profilePages/DataPolicy";
 import LogoutConfirmation from "./src/screens/profilePages/LogoutConfirmation";
@@ -49,20 +36,14 @@ import DetailView from "./src/screens/DetailView";
 import TermsAndConditions from "./src/screens/TermsAndConditions";
 import ProfileCreated from "./src/screens/ProfileCreated";
 import LandingScreen from "./src/screens/LandingScreen";
-import {
-  useLanguage,
-  LanguageProvider,
-  t,
-} from "./src/Languages/LanguageHandler";
+import { LanguageProvider, } from "./src/Languages/LanguageHandler";
 import StationDetailScreen from "./src/screens/map/stationDetail/StationDetailScreen";
-import Info from "./src/screens/Info";
 import SignIn from "./src/screens/SignIn";
 import ArticlePage from "./src/screens/article/ArticlePage";
 import UptainerDetails from "./src/screens/UptainerDetails";
 import AccountSettings from "./src/screens/ProfileSetings/AccountSettings";
 import Notifications from "./src/screens/ProfileSetings/Notifications";
 
-import { seedCheck } from "./src/utils/Repo"; //seed data(only works if DB is empty)
 import TakeQRScanner from "./src/screens/form/TakeQRScanner";
 import AddQRScanner from "./src/screens/form/AddQRScanner";
 import PrivacyPolicy from "./src/screens/profilePages/DataPolicy";
@@ -82,238 +63,289 @@ import CameraScreen from "./src/screens/form/CameraScreen";
 import ForgotPassword from "./src/screens/ForgotPassword";
 import SplashScreen from "./src/screens/Splash/SplashScreen";
 import LoadingScreen from "./src/screens/Splash/LoadingScreen";
-//import ProductDropdown from "./src/screens/form/ProductDropdown";
 import YourStats from "./src/screens/YourStats";
-import StatsInfo from "./src/componets/atoms/Stats/StatsInfo";
+import StatsInfo from "./src/componets/atoms/Stats/StatsInfo"; // COMPONENT!!!!!!!!! <--------------------
 import VisitedUptainerStat from "./src/componets/atoms/Stats/VisitedUptainerStat";
+import InfographicCO2Screen from "./src/screens/InfographicCO2Screen";
 
+import Screens from "./src/utils/ScreenPaths";
+import { firebaseAurth } from "./src/utils/Firebase";
 
-console.log("start");
+console.log("Init App");
 const Stack = createNativeStackNavigator();
 
 // Main function that everything runs in
 export default function App() {
-  // The notification badge for drafts
+
+  //______ Code for handling auto-sign in ______________________
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState(null);
+  const [isActive, setIsActive] = useState(false);
   const [badgeCount, setBadgeCount] = useState(0);
-  // hook that gets and sets test data for resting
-
-  //FirebaseSeed data here:
-  var doneTheStuff;
-  if (!doneTheStuff) {
-    doneTheStuff = true;
-    //seedCheck(); //seed data(only works if DB is empty)
-  }
-
-  //Loading the font
   const [fontsLoaded] = useFonts({
     "space-grotesk": require("./assets/fonts/SpaceGrotesk-Regular.ttf"),
     "space-grotesk-bold": require("./assets/fonts/SpaceGrotesk-Bold.ttf"),
     "space-grotesk-Medium": require("./assets/fonts/SpaceGrotesk-Medium.ttf"),
   });
 
-  if (!fontsLoaded) {
+  // Handle user state changes
+  function onAuthState(user) {
+    setUser(user);
+    if (user) { setIsActive(true) }
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebaseAurth.onAuthStateChanged(onAuthState);
+    return subscriber; // Unsubscribe on unmount
+  }, []);
+
+  //_____________________________________________________________
+
+  if (!fontsLoaded || initializing) {
     // Font is not yet loaded, return null or a loading screen
     return null;
   }
+
   // Main navigation of all the views
   return (
-    //
-      <LanguageProvider>
-    <LoaderProvider>
-      <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
+    <LanguageProvider>
+      <LoaderProvider>
+        <BadgeContext.Provider value={{ badgeCount, setBadgeCount }}>
           <NavigationContainer theme={navStyle}>
-            <Stack.Navigator
-                initialRouteName="LandingScreen"
+
+            {user ? (
+              <Stack.Navigator
+                initialRouteName={Screens.HOME}
                 screenOptions={{
-                  headerShown: false, // This hides the header
+                  headerShown: false,
                   animation: "none",
                   gestureEnabled: false,
                 }}
-            >
-              <Stack.Screen
-                name="SplashScreen"
-                component={SplashScreen}
-              />
-              <Stack.Screen
-                name="LoadingScreen"
-                component={LoadingScreen}
-              />
-              <Stack.Screen
-                name="Landingscreen"
-                component={LandingScreen}
-              />
-              <Stack.Screen
-                name="SignUp"
-                component={SignUpScreen}
-              />
-              <Stack.Screen
-                name="Sign in"
-                component={SignIn}
-              />
-              <Stack.Screen
-                name="Homepage"
+              >
+                <Stack.Screen
+                name={Screens.HOME}
                 component={Home}
               />
 
-              <Stack.Screen 
-              name="DetailView" 
-              options={{ animation: "none", headerShown: false,  }}
-              component={DetailView} />
+              <Stack.Screen
+                name={Screens.DETAIL_VIEW}
+                options={{ animation: "none", headerShown: false, }}
+                component={DetailView}
+              />
 
               <Stack.Screen
-                name="Infopage"
+                name={Screens.ARTICLE_PAGE}
                 component={ArticlePage}
               />
               <Stack.Screen
-                name="Map"
+                name={Screens.MAP}
                 component={Map}
               />
               <Stack.Screen
-                name="Profile"
+                name={Screens.PROFILE}
                 component={Profile}
               />
               <Stack.Screen
-                name="ContactUs"
+                name={Screens.CONTACT_US}
                 component={ContactUs}
               />
 
               <Stack.Screen
-                name="DataPolicy"
+                name={Screens.DATA_POLICY}
                 component={DataPolicy}
               />
               <Stack.Screen
-                name="MyDrafts"
+                name={Screens.MY_DRAFTS}
                 component={MyDrafts}
               />
               <Stack.Screen
-                name="MySettings"
+                name={Screens.MY_SETTINGS}
                 component={MySettings}
               />
 
               <Stack.Screen
-                name="ChangePassword"
+                name={Screens.CHANGE_PASSWORD}
                 component={ChangePassword}
               />
 
               <Stack.Screen
-                name="DeleteAccount"
+                name={Screens.DELETE_ACCOUNT}
                 component={DeleteAccount}
               />
 
               <Stack.Screen
-                name="AccountSettings"
+                name={Screens.ACCOUNT_SETTINGS}
                 component={AccountSettings}
               />
               <Stack.Screen
-                name="Notifications"
+                name={Screens.NOTIFICATIONS}
                 component={Notifications}
               />
               <Stack.Screen
-                name="TermsAndConditions"
+                name={Screens.TERMS_AND_CONDITIONS}
                 component={TermsAndConditions}
               />
+      
               <Stack.Screen
-                name="ProfileCreated"
+                name={Screens.PROFILE_CREATED}
                 component={ProfileCreated}
               />
               <Stack.Screen
-                  name="StatsInfo"
-                  component={StatsInfo}
+                name={Screens.STATS_INFO}
+                component={StatsInfo}
               />
               <Stack.Screen
-                  name="VisitedUptainerStat"
-                  component={VisitedUptainerStat}
+                name={Screens.VISITED_UPTAINER_STAT}
+                component={VisitedUptainerStat}
               />
               <Stack.Screen
-                name="Stats"
+                name={Screens.STATS}
                 component={Stat}
               />
               <Stack.Screen
-                  name="YourStats"
-                  component={YourStats}
+                name={Screens.YOUR_STATS}
+                component={YourStats}
               />
               <Stack.Screen
-                name="Add"
+                name={Screens.ADD}
                 component={Add}
               />
               <Stack.Screen
-                name="TakeQRScanner"
+                name={Screens.TAKE_QR_SCANNER}
                 component={TakeQRScanner}
               />
               <Stack.Screen
-                name="AddQRScanner"
+                name={Screens.ADD_QR_SCANNER}
                 component={AddQRScanner}
               />
               <Stack.Screen
-                name="Products"
+                name={Screens.PRODUCTS}
                 component={ProductScreen}
               />
-
+         
               <Stack.Screen
-                name="Pro"
+                name={Screens.PRO}
                 component={ProScreen}
               />
               <Stack.Screen
-                name="Bnd"
+                name={Screens.BND}
                 component={BndScreen}
               />
               <Stack.Screen
-                name="Mod"
+                name={Screens.MOD}
                 component={ModScreen}
               />
               <Stack.Screen
-                  name="Stations"
-                  component={StationsScreen} />
+                name={Screens.STATIONS}
+                component={StationsScreen}
+              />
               <Stack.Screen
-                name="StationDetails"
+                name={Screens.STATION_DETAILS}
                 component={StationDetailScreen}
               />
               <Stack.Screen
-                name="Thanks"
+                name={Screens.THANKS}
                 component={ThanksScreen}
               />
               <Stack.Screen
-                name="LogoutConfirmation"
+                name={Screens.LOGOUT_CONFIRMATION}
                 component={LogoutConfirmation}
               />
               <Stack.Screen
-                name="PrivacyPolicy"
+                name={Screens.PRIVACY_POLICY}
                 component={PrivacyPolicy}
               />
               <Stack.Screen
-                name="UptainerDetails"
+                name={Screens.UPTAINER_DETAILS}
                 component={UptainerDetails}
               />
               <Stack.Screen
-                name="ProductSaved"
+                name={Screens.PRODUCT_SAVED}
                 component={ProductSaved}
               />
               <Stack.Screen
-                name="ProductIsTakenScreen"
+                name={Screens.PRODUCT_IS_TAKEN}
                 component={ProductIsTakenScreen}
               />
+            
               <Stack.Screen
-                name="ProductTaken"
+                name={Screens.PRODUCT_TAKEN}
                 component={ProductTaken}
               />
               <Stack.Screen
-                name="ThankYouScreen"
+                name={Screens.THANK_YOU}
                 component={ThankYouscreen}
               />
               <Stack.Screen
-                name="Camera"
+                name={Screens.CAMERA}
                 component={CameraScreen}
               />
               <Stack.Screen
-                name="ForgotPassword"
+                name={Screens.FORGOT_PASSWORD}
                 component={ForgotPassword}
               />
-            </Stack.Navigator>
+
+              <Stack.Screen
+                 name={Screens.INFO_GRAPHIC_CO2}
+                 component={InfographicCO2Screen}
+              />
+
+              </Stack.Navigator>) : isActive && !user ? (
+                <Stack.Navigator
+                  initialRouteName={Screens.SIGN_IN}
+                  screenOptions={{
+                    headerShown: false,
+                    animation: "none",
+                    gestureEnabled: false,
+                  }}
+                >
+                  <Stack.Screen
+                    name={Screens.SIGN_IN}
+                    component={SignIn}
+                  />
+                  <Stack.Screen
+                    name={Screens.SIGN_UP}
+                    component={SignUpScreen}
+                  />
+
+                </Stack.Navigator>) : (
+              <Stack.Navigator
+                initialRouteName={Screens.SPLASH}
+                screenOptions={{
+                  headerShown: false,
+                  animation: "none",
+                  gestureEnabled: false,
+                }}
+              >
+                <Stack.Screen
+                  name={Screens.SPLASH}
+                  component={SplashScreen}
+                />
+                <Stack.Screen
+                  name={Screens.LOADING}
+                  component={LoadingScreen}
+                />
+                <Stack.Screen
+                  name={Screens.LANDING}
+                  component={LandingScreen}
+                />
+                <Stack.Screen
+                  name={Screens.SIGN_UP}
+                  component={SignUpScreen}
+                />
+                <Stack.Screen
+                  name={Screens.SIGN_IN}
+                  component={SignIn}
+                />
+
+              </Stack.Navigator>)}
+
           </NavigationContainer>
 
-      </BadgeContext.Provider>
-    </LoaderProvider>
-      </LanguageProvider>
+        </BadgeContext.Provider>
+      </LoaderProvider>
+    </LanguageProvider>
   );
   //Screens
 

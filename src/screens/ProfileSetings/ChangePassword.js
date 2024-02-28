@@ -13,12 +13,12 @@ import { Backgroundstyle, Buttons, HeaderText, Primarycolor1, styles, styles as 
 import Navigationbar from "../../componets/Navigationbar";
 import BackButton from "../../componets/BackButton";
 import GlobalStyle from "../../styles/GlobalStyle";
-import LoadingScreen from '../../componets/LoadingScreen';
 import { LoaderContext } from '../../componets/LoaderContext';
 import { Ionicons } from '@expo/vector-icons';
 import ErrorBanner from '../ErrorBanner';
 import { SecureStorage } from '../../utils/SecureStorage';
 import { updateUserData } from '../../utils/Repo';
+import Screens from "../../utils/ScreenPaths";
 
 
 const ChangePassword = ({ navigation }) => {
@@ -88,7 +88,7 @@ const ChangePassword = ({ navigation }) => {
         setNewPassword("")
         setConfirmPassword("")
         setisInit(false)
-        navigation.navigate("AccountSettings")
+        navigation.navigate(Screens.ACCOUNT_SETTINGS)
     }
 
 
@@ -148,7 +148,6 @@ const ChangePassword = ({ navigation }) => {
 
     return (
         <View style={Backgroundstyle.interactive_screens}>
-            <LoadingScreen isLoaderShow={isLoading} />
             <SafeAreaView style={GlobalStyle.BodyWrapper}>
                 <View style={styles.HeaderFull}>
                     <BackButton onPress={handleBackPress}></BackButton>

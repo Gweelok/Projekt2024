@@ -15,17 +15,17 @@ import {
     getBrandById,
 } from "../../../utils/Repo";
 import { LoaderContext } from "../../../componets/LoaderContext";
+import Screens from "../../../utils/ScreenPaths";
 
 const SortSpecificUptainer = ({ uptainerData }) => {
     const navigation = useNavigation();
     const [data, setData] = useState([]);
-    const { isLoading, setIsLoading } = useContext(LoaderContext);
-
+    
     useEffect(() => {
         const fetchItemList = async () => {
             const storage = getStorage();
             try {
-                setIsLoading(true);
+            
                 const items = await getItemsInUptainer(uptainerData.uptainerId);
 
                 const updatedData = await Promise.all(
@@ -58,10 +58,9 @@ const SortSpecificUptainer = ({ uptainerData }) => {
 
                 const filteredData = updatedData.filter((item) => item !== null);
                 setData(filteredData);
-                setIsLoading(false);
+    
             } catch (error) {
                 console.log("Error while fetching items => ", error);
-                setIsLoading(false);
             }
         };
 
@@ -72,7 +71,7 @@ const SortSpecificUptainer = ({ uptainerData }) => {
         <TouchableOpacity
             key={item.itemId}
             onPress={() => {
-                navigation.navigate("DetailView", {
+                navigation.navigate(Screens.DETAIL_VIEW, {
                     data: item.itemId || "",
                     itemDescription: item.itemDescription || "",
                     brandName: item.brandName || "",
@@ -97,7 +96,6 @@ const SortSpecificUptainer = ({ uptainerData }) => {
 
     return (
         <View style={styling.container}>
-            {isLoading && <ActivityIndicator size="large" color="#000" />}
             <ScrollView contentContainerStyle={styling.scrollViewContent}>
                 {data.map((item) => renderItem(item))}
             </ScrollView>

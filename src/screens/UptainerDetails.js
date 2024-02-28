@@ -17,10 +17,10 @@ import { styles, Backgroundstyle } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
 import { LoaderContext } from '../componets/LoaderContext';
-import LoadingScreen from '../componets/LoadingScreen';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
+import Screens from "../utils/ScreenPaths";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,7 +29,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState('');
-  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const { setIsLoading } = useContext(LoaderContext);
   const [refreshing, setRefreshing] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
@@ -66,6 +66,7 @@ const UptainerDetails = ({ navigation, route }) => {
 
   useEffect(() => {
     fetchData();
+    console.log('Uptainer:', uptainer);
   }, []);
 
   useEffect(() => {
@@ -78,13 +79,14 @@ const UptainerDetails = ({ navigation, route }) => {
 
         const updatedData = await Promise.all(
           items.map(async (item) => {
+            if (!item.itemTaken) {
             const pathReference = ref(storage, item.itemImage);
             const product = await getProductById(item.itemproduct);
             const brand = await getBrandById(item.itemBrand);
 
             try {
               const cachedImage = await getCachedImage(item.itemId)
-              if (cachedImage){
+              if (cachedImage) {
                 return {
                   ...item,
                   imageUrl: cachedImage,
@@ -109,7 +111,7 @@ const UptainerDetails = ({ navigation, route }) => {
                 imageUrl: 'https://via.placeholder.com/200x200',
               };
             }
-          })
+          }})
         );
 
         setData(updatedData);
@@ -161,28 +163,36 @@ const UptainerDetails = ({ navigation, route }) => {
       .catch((err) => console.error("An error occurred", err));
   };
 
+  const navigateBackCondition = () => {
+    if (route.params?.screenFrom === 'QRScanner') {
+      navigation.push("Add");
+    } else {
+      navigation.goBack(); 
+    }
+  };
+
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
+
       <View style={GlobalStyle.BodyWrapper}>
-        {isLoading && <LoadingScreen isLoaderShow={isLoading} />}
-        <ScrollViewComponent
-          refreshing={refreshing}
-          onRefresh={onRefresh}>
+        <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
           <TouchableOpacity
             style={style.backButton}
-            onPress={() => navigation.goBack()}>
+            onPress={() => navigateBackCondition()}
+          >
             <Ionicons name="chevron-back" color="white" size={20} />
           </TouchableOpacity>
           <View>
             <ImageBackground
               style={style.detailsImage}
               source={{
-                uri: uptainerImageUrl || 'https://via.placeholder.com/200x200', // Provide a placeholder if the URL is empty
+                uri: uptainerImageUrl || "https://via.placeholder.com/200x200", // Provide a placeholder if the URL is empty
               }}
             >
               <TouchableOpacity
                 onPress={() => openAddressOnMap()}
-                style={style.productLocation}>
+                style={style.productLocation}
+              >
                 <Text style={style.productAddress}>
                   {uptainer.name} / {uptainer.location}
                 </Text>
@@ -192,12 +202,13 @@ const UptainerDetails = ({ navigation, route }) => {
           </View>
           <View
             style={{
-              flexDirection: 'row',
+              flexDirection: "row",
               marginTop: 50,
               width: windowWidth,
-              flexWrap: 'wrap',
+              flexWrap: "wrap",
               padding: 10,
-            }}>
+            }}
+          >
             {data?.map((cur, i) => (
               <TouchableOpacity
                 key={i}
@@ -205,17 +216,17 @@ const UptainerDetails = ({ navigation, route }) => {
                   marginLeft: 0,
                   marginBottom: 20,
                   marginRight: 0,
-
                 }}
                 onPress={() =>
-                  navigation.navigate('DetailView', {
+                  navigation.navigate(Screens.DETAIL_VIEW, {
                     itemDescription: cur?.itemDescription,
                     imageUrl: cur?.imageUrl,
                     productName: cur?.productName,
                     brandName: cur?.brandName,
                     uptainer,
                   })
-                }>
+                }
+              >
                 <Image
                   style={style.moreProductsImage}
                   source={{
@@ -226,11 +237,11 @@ const UptainerDetails = ({ navigation, route }) => {
                   style={[
                     styles.bodyText,
                     {
-                      fontWeight: '600',
+                      fontWeight: "600",
                       width: windowWidth / 2.7,
-
                     },
-                  ]}>
+                  ]}
+                >
                   {cur?.productName}
                 </Text>
               </TouchableOpacity>
