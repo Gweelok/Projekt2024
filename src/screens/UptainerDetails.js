@@ -38,9 +38,10 @@ const UptainerDetails = ({ route, navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
+  const [addedItemAlert, setaddedItemAlert] = useState(false)
 
   // passed uptainer don't have id !! - NEED FIX
-  const newItem=route.params.newItem
+  const newItem = route.params.newItem
   const uptainer = route.params.uptainerData || route.params;
   const scannedQRCode = route.params?.scannedQRCode;
 
@@ -55,7 +56,7 @@ const UptainerDetails = ({ route, navigation }) => {
     } catch (error) {
       console.log('Error:', error);
     }
-    
+
 
   };
 
@@ -116,7 +117,7 @@ const UptainerDetails = ({ route, navigation }) => {
       } catch (error) {
         console.log('Error while fetching items => ', error);
       }
-      
+
     };
 
     const fetchUptainerImage = async () => {
@@ -174,7 +175,7 @@ const UptainerDetails = ({ route, navigation }) => {
     <View style={[Backgroundstyle.interactive_screens]}>
 
       <View style={GlobalStyle.BodyWrapper}>
-        
+        {newItem && addedItemAlert && <ProductAlert></ProductAlert>}
         <ScrollViewComponent
           refreshing={refreshing}
           onRefresh={onRefresh}>
@@ -257,6 +258,7 @@ const UptainerDetails = ({ route, navigation }) => {
                 uptainerData={uptainer}
                 newItem={newItem}
                 scannedQRCode={scannedQRCode}
+                setaddedItemAlert={setaddedItemAlert}
               />
             ))}
           </View>

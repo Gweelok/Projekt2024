@@ -22,10 +22,10 @@ import ProductAlert from "../../../componets/ProductAlert";
 import { BadgeContext } from "../../form/BadgeContext";
 import { t, useLanguage } from "../../../Languages/LanguageHandler";
 
-const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
+const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode, setaddedItemAlert }) => {
     const navigation = useNavigation();
     const [data, setData] = useState([]);
-    const { setIsLoading } = useContext(LoaderContext)
+    const { isLoading, setIsLoading } = useContext(LoaderContext)
     const [addedItem, setaddedItem] = useState(false)
     const { setBadgeCount } = useContext(BadgeContext)
     const { currentLanguage } = useLanguage()
@@ -76,7 +76,6 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
 
 
         fetchItemList();
-
     }, [uptainerData]);
 
     useEffect(() => {
@@ -94,6 +93,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
                     itemUptainer: uptainerData.uptainerId
                 }
                 await updateItemById(newItem.itemId, updatedData, newItem.image)
+
             } else {
                 // New item - create
                 await createItem(
@@ -107,16 +107,23 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
                     scannedQRCode
                 );
             }
-            setaddedItem(true)
+
+
         }
 
         if (newItem) {
-            try {
-                updroppItem()
-            } catch (error) {
+            updroppItem().then(() => {
+                setTimeout(() => {
+                    setaddedItemAlert(true)
+                    setaddedItem(true)
+                }, newItem.image ? 0 : 2000)
+            }).catch(() => {
+                // set null to remove it from list
+                setaddedItem(null)
                 Alert.alert(t("QRScanner.Error", currentLanguage), t("QRScanner.ErrorMsg1", currentLanguage));
-            }
+            })
         }
+
     }, [])
 
     const renderItem = (item) => (
@@ -142,8 +149,6 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
                     style={styling.image}
                 />
                 {newItem && ((item.itemId == newItem.itemId && !addedItem) && <ActivityIndicator style={styling.newItemStyle} color={Primarycolor1} size={"large"}></ActivityIndicator>)}
-
-                {newItem && ((item.itemId == newItem.itemId && addedItem) && <ProductAlert />)}
             </View>
             <Text style={styling.productNameText}>
                 {item.productName}
@@ -154,7 +159,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
     return (
         <View style={styling.container}>
             <ScrollView contentContainerStyle={styling.scrollViewContent}>
-                {newItem && renderItem(newItem)}
+                {newItem && !isLoading && addedItem != null && renderItem(newItem)}
                 {data.map((item) => renderItem(item))}
             </ScrollView>
         </View>
