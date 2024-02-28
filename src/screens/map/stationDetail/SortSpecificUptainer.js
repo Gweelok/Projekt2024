@@ -5,7 +5,7 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    StyleSheet, ActivityIndicator,
+    StyleSheet, ActivityIndicator, Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
@@ -20,6 +20,7 @@ import Screens from "../../../utils/ScreenPaths";
 import { Primarycolor1, Primarycolor3, Primarycolor4 } from "../../../styles/Stylesheet";
 import ProductAlert from "../../../componets/ProductAlert";
 import { BadgeContext } from "../../form/BadgeContext";
+import { t, useLanguage } from "../../../Languages/LanguageHandler";
 
 const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
     const navigation = useNavigation();
@@ -27,6 +28,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
     const { setIsLoading } = useContext(LoaderContext)
     const [addedItem, setaddedItem] = useState(false)
     const { setBadgeCount } = useContext(BadgeContext)
+    const { currentLanguage } = useLanguage()
 
     useEffect(() => {
         const fetchItemList = async () => {
@@ -71,13 +73,13 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
             }
         };
 
-        
+
 
         fetchItemList();
 
     }, [uptainerData]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const updroppItem = async () => {
             if (newItem.itemUptainer == "Draft") {
                 // item Already in Draft - update
@@ -107,14 +109,19 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode }) => {
             }
             setaddedItem(true)
         }
+
         if (newItem) {
-            updroppItem()
+            try {
+                updroppItem()
+            } catch (error) {
+                Alert.alert(t("QRScanner.Error", currentLanguage), t("QRScanner.ErrorMsg1", currentLanguage));
+            }
         }
-    },[])
+    }, [])
 
     const renderItem = (item) => (
         <TouchableOpacity
-        disabled={!addedItem}
+            disabled={!addedItem}
             key={item.itemId}
             onPress={() => {
                 navigation.navigate(Screens.DETAIL_VIEW, {
