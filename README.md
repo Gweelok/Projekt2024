@@ -1,6 +1,10 @@
 # retireditems
 The application for Make It Good Again’s exchange stations
 
+## App Flow Description
+[App Flow Description](https://xd.adobe.com/view/3d18b326-b7a8-4d83-9840-932c4dc3d103-684b/)
+
+
 # Native React expo: Setup guide
 This will be a guide on how to start the application on your system, I’ll start the same for every system and change it later on.
 
