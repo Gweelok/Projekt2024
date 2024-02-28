@@ -10,6 +10,7 @@ import Navigationbar from "../../componets/Navigationbar";
 import { Pressable } from "react-native";
 import { t, useLanguage } from "../../Languages/LanguageHandler";
 import { Animated } from "react-native";
+import Screens from "../../utils/ScreenPaths";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -55,7 +56,7 @@ const ProductTaken = ({ navigation }) => {
                 { borderWidth: 2, width: "100%", marginBottom: 20 },
               ]}
               onPress={() => {
-                navigation.navigate("ProductIsTakenScreen");
+                navigation.navigate(Screens.PRODUCT_IS_TAKEN);
               }}>
               <Text style={Buttons.secondary_buttonText}>
                 {t("ProductTakenScreen.button", currentLanguage)}

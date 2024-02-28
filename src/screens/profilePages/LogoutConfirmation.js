@@ -5,7 +5,7 @@ import { useLanguage, t } from "../../Languages/LanguageHandler";
 import { firebaseAurth } from "../../utils/Firebase";
 import { signOut } from "firebase/auth";
 import GlobalStyle from "../../styles/GlobalStyle";
-
+import Screens from "../../utils/ScreenPaths";
 
 const LogoutConfirmation = ({ navigation }) => {
   const { currentLanguage } = useLanguage();
@@ -36,7 +36,7 @@ const LogoutConfirmation = ({ navigation }) => {
 
       <TouchableOpacity 
         style={ Buttons.secondary_button }
-        onPress={() => navigation.navigate("Profile")}>
+        onPress={() => navigation.navigate(Screens.PROFILE)}>
         <Text style={Buttons.secondary_buttonText}>
         {t("LogoutConfirmation.cancelButton", currentLanguage)}        
         </Text>

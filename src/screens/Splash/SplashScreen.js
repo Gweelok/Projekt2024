@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { Image } from "react-native";
 import { Primarycolor1 } from "../../styles/Stylesheet";
 import { useNavigation } from "@react-navigation/native";
+import Screens from "../../utils/ScreenPaths";
 
 const SplashScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    setTimeout(() => navigation.navigate("LoadingScreen"), 2000);
+    setTimeout(() => navigation.navigate(Screens.LOADING), 2000);
   }, []);
 
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { Backgroundstyle, Primarycolor3 } from '../styles/Stylesheet';
+import Screens from "../utils/ScreenPaths";
 
 const ProfileCreated = ({ navigation }) => {
   const opacityAnim = useRef(new Animated.Value(0)).current;  // opacity animation
@@ -15,7 +16,7 @@ const ProfileCreated = ({ navigation }) => {
 
     // timer for navigation
     const timer = setTimeout(() => {
-      navigation.navigate('Homepage');  // Navigate to home page
+      navigation.navigate(Screens.HOME);  // Navigate to home page
     }, 1500);
 
     // Clean up timer
