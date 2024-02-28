@@ -6,7 +6,7 @@ import {Animated, Image, StyleSheet, Text, TouchableOpacity, View} from "react-n
 import React from "react";
 import Headertitle1 from "../componets/atoms/HeaderTitle1";
 import { Backgroundstyle, Primarycolor1, Primarycolor3 } from "../styles/Stylesheet";
-import Screens from "../../utils/ScreenPaths";
+import Screens from "../utils/ScreenPaths";
 
 
 const ThankYouscreen = ({navigation}) =>{
