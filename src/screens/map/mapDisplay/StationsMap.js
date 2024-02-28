@@ -35,7 +35,7 @@ const StationsMap = ({ navigation }) => {
 
 
     useEffect(() => {
-        const getUserLocation = async () => {
+        const getData = async () => {
             try {
                 const { status } = await Location.requestForegroundPermissionsAsync();
                 if (status !== 'granted') {
@@ -46,15 +46,27 @@ const StationsMap = ({ navigation }) => {
 
                 const location = await Location.getCurrentPositionAsync({});
                 setUserLocation(location.coords);
+                
+                const allUptainers = await getAllUptainers()
+                setFilteredLocations(allUptainers)
+                if (location.coords){
+
+                    const sortedUptainers = location.coords ?
+                    await sortUptainersByDistance(location.coords, allUptainers) : allUptainers
+
+                    setSortedUptainers(sortedUptainers)
+                }
+
                 setLoading(false);
+
             } catch (error) {
-                console.error('Error fetching location:', error);
-                Alert.alert('Error fetching location. Please try again.');
+                console.error('Error fetching data:', error);
+                Alert.alert('Error fetching data. Please try again.');
                 setLoading(false);
             }
         };
 
-        getUserLocation();
+        getData();
     }, []);
 
     useEffect(() => {
@@ -64,25 +76,6 @@ const StationsMap = ({ navigation }) => {
 
         return () => clearTimeout(loadingTimer);
     }, []);
-
-    useEffect(()=>{
-        const fetchUptainers = async ()=>{
-      
-            let allUptainers
-            if (!filteredLocations.length){
-                
-                allUptainers = await getAllUptainers()
-                setFilteredLocations(allUptainers)
-            }
-            const uptainers = allUptainers ? allUptainers : sortedUptainers
-            if (userLocation){
-                const sortedUptainers = await sortUptainersByDistance(userLocation, uptainers)
-                setSortedUptainers(sortedUptainers)
-
-            }
-        }
-        fetchUptainers()
-    }, [userLocation])
 
     if (loading) {
         return (
