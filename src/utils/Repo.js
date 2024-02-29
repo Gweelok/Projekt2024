@@ -815,7 +815,7 @@ export async function getSearchedItems(searchText) {
             return (productName === searchText ||
                 brandName === searchText ||
                 modelName === searchText ||
-                categoryName === searchText) && item.itemUptainer !== 'Draft'
+                categoryName === searchText) && item.itemUptainer !== 'Draft' && !item.itemTaken
         })
 
         return filteredItems

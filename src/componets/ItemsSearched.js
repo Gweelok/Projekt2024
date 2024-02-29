@@ -54,7 +54,7 @@ const style = StyleSheet.create({
         flex: 1,
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         marginRight: 5
         
     },
@@ -69,6 +69,7 @@ const style = StyleSheet.create({
     },
     image: {
         marginTop: 10,
+        marginRight: 10,
         width: 100,
         height: 100,
     },

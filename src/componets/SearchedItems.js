@@ -28,15 +28,10 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
                 if (!searchedItems.length) { setNoProductFound(true)}
-                const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
-                    const imageUrl = await getImage(item.itemImage)
-                    return {...item, 
-                        imageUrl: imageUrl}
-                }))
                 setLoading(false)
-                const [ sortedItemsByUptainers, number ] = sortItemsByUptainers (dataByImages, uptainers, userLocation)
+                const sortedItemsByUptainers = await sortItemsByUptainers (searchedItems, uptainers, userLocation)
                 setSearchedData(sortedItemsByUptainers)
-                setNumberSearchedItems(number)
+                setNumberSearchedItems(searchedItems.length)
                 } catch(error) {
                     console.error('Error fetching data:', error.message);
                     setLoading(false); // Set loading to false in case of an error
@@ -98,23 +93,34 @@ const style = StyleSheet.create({
 
 export default SearchedProducts;
 
-function sortItemsByUptainers (items, uptainers, userLocation) {
+
+async function sortItemsByUptainers (items, uptainers, userLocation) {
     const result = [];
-    let number = 0;
     const sortedUptainers = sortUptainersByDistance(userLocation, uptainers);
     for (let i in sortedUptainers) {
-        const filteredItemsUptainer = items.filter((item) => {
-            if(item.itemUptainer === sortedUptainers[i].uptainerId && item.itemTaken === false){
-                return item
-            }
-        });
+        const filteredItemsUptainer = await filterAndGetImage (items, sortedUptainers[i].uptainerId);
         if(filteredItemsUptainer.length > 0){
-            number += filteredItemsUptainer.length;
             result.push({
                 uptainer: sortedUptainers[i],
                 items: filteredItemsUptainer
         })
         }
     }
-    return [ result, number ]
+    return result
+}
+
+
+async function filterAndGetImage (items, uptainerId) {
+    const res =[];
+    for(let i in items) {
+        const item = items[i];
+        if(item.itemUptainer === uptainerId){
+            const imageUrl = await getImage(item.itemImage);
+            res.push({
+                ...item,
+                imageUrl: imageUrl
+            })
+        }
+    }
+    return res
 }
