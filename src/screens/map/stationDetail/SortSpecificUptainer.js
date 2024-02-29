@@ -118,7 +118,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode, setaddedIt
                 setTimeout(() => {
                     setaddedItemAlert(true)
                     setaddedItem(true)
-                }, newItem.image ? 0 : 2000)
+                }, 2000)
             }).catch((error) => {
                 console.log(error);
                 // set null to remove it from list
