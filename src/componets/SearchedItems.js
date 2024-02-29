@@ -9,6 +9,7 @@ import { useLanguage, t } from "../Languages/LanguageHandler"
 import { Primarycolor1, Primarycolor2, Primarycolor3, dropdownStyles } from "../styles/Stylesheet"
 import ItemsSearched from "./ItemsSearched"
 import { setUptainersByIds, sortUptainersByDistance } from "../utils/uptainersUtils"
+import { cacheImage, getCachedImage } from "../utils/Cache"
 
 const SearchedProducts = ({navigation, search, userLocation, endSearch, noProductFound, setNoProductFound }) =>{
     const [allProducts, setAllProducts] = useState(null)
@@ -115,11 +116,21 @@ async function filterAndGetImage (items, uptainerId) {
     for(let i in items) {
         const item = items[i];
         if(item.itemUptainer === uptainerId){
-            const imageUrl = await getImage(item.itemImage);
-            res.push({
-                ...item,
-                imageUrl: imageUrl
-            })
+            try {
+                const imageUrl = await getCachedImage(item.itemId);
+                res.push({
+                    ...item,
+                    imageUrl: imageUrl
+                })
+            }
+            catch {                
+                const imageUrl = await getImage(item.itemImage);
+                await cacheImage(item.itemId, imageUrl)
+                res.push({
+                    ...item,
+                    imageUrl: imageUrl
+                })
+            }
         }
     }
     return res
