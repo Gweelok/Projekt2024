@@ -10,6 +10,7 @@ import { TaskContext } from '../../context/TaskContext';
 
 import { Buttons, styles } from '../../styles/styleSheet';
 import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';
+import MenuItemsNoArrow from "../../styles/MenuItemsNoArrow";
 
 const OverViewContent = ({ location }) => {
     const [itemList, setItemList] = useState([]);
@@ -109,7 +110,9 @@ const OverViewContent = ({ location }) => {
                     />
                 </View>
             )}
-
+            <View style={{ marginTop: 20 }}>
+                <MenuItemsNoArrow msg={('Add an item')} onPress={() => navigation.navigate('AddItem',{location})} />
+            </View>
             <NavgationButton
                 disabled={false}
                 path={navigationPath}
