@@ -148,8 +148,9 @@ const QRScanner = ({ route, navigation }) => {
 
         // updropp item
         if (uptainer) {
+          // set image to use it later when rendering new item in items list
           if(itemData.image){
-            itemData.imageUrl = itemData.image.uri
+            itemData.imageUrl = itemData.image.uri || itemData.image
           }else{
             const storage = getStorage();
             const pathReference = ref(storage,"Items/Default.jpg");

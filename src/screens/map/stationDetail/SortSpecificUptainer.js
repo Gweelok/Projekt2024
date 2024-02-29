@@ -14,6 +14,7 @@ import {
     getProductById,
     getBrandById,
     createItem,
+    updateItemById,
 } from "../../../utils/Repo";
 import { LoaderContext } from "../../../componets/LoaderContext";
 import Screens from "../../../utils/ScreenPaths";
@@ -29,6 +30,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode, setaddedIt
     const [addedItem, setaddedItem] = useState(false)
     const { setBadgeCount } = useContext(BadgeContext)
     const { currentLanguage } = useLanguage()
+    const [isIpdropped, setisIpdropped] = useState(false)
 
     useEffect(() => {
         const fetchItemList = async () => {
@@ -82,7 +84,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode, setaddedIt
         const updroppItem = async () => {
             if (newItem.itemUptainer == "Draft") {
                 // item Already in Draft - update
-                setBadgeCount((prevCount) => prevCount - 1)
+                console.log(newItem);
                 const updatedData = {
                     itemproduct: newItem.product,
                     itemBrand: newItem.brand,
@@ -93,7 +95,7 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode, setaddedIt
                     itemUptainer: uptainerData.uptainerId
                 }
                 await updateItemById(newItem.itemId, updatedData, newItem.image)
-
+                setBadgeCount((prevCount) => prevCount - 1)
             } else {
                 // New item - create
                 await createItem(
@@ -117,7 +119,8 @@ const SortSpecificUptainer = ({ uptainerData, newItem, scannedQRCode, setaddedIt
                     setaddedItemAlert(true)
                     setaddedItem(true)
                 }, newItem.image ? 0 : 2000)
-            }).catch(() => {
+            }).catch((error) => {
+                console.log(error);
                 // set null to remove it from list
                 setaddedItem(null)
                 Alert.alert(t("QRScanner.Error", currentLanguage), t("QRScanner.ErrorMsg1", currentLanguage));

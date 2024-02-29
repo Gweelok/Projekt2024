@@ -39,9 +39,9 @@ const UptainerDetails = ({ route, navigation }) => {
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const [uptainersList, setUptainerList] = useState([]);
   const [addedItemAlert, setaddedItemAlert] = useState(false)
+  const [newItem, setnewItem] = useState(route.params.newItem)
 
   // passed uptainer don't have id !! - NEED FIX
-  const newItem = route.params.newItem
   const uptainer = route.params.uptainerData || route.params;
   const scannedQRCode = route.params?.scannedQRCode;
 
@@ -62,6 +62,11 @@ const UptainerDetails = ({ route, navigation }) => {
 
 
   const onRefresh = React.useCallback(() => {
+    // reset updropped item to prevent updropping again 
+    if (newItem) {
+      setnewItem()
+    }
+
     setRefreshing(true);
     setIsLoading(true)
     fetchData();
