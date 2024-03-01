@@ -11,6 +11,8 @@ import { TaskContext } from '../../context/TaskContext';
 import { Buttons, styles } from '../../styles/styleSheet';
 import { getImage, getItemByUptainerId, deleteItemById } from '../../utils/Repo';
 import MenuItemsNoArrow from "../../styles/MenuItemsNoArrow";
+import AddItem from "../../screens/AddItem";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 const OverViewContent = ({ location }) => {
     const [itemList, setItemList] = useState([]);
@@ -110,14 +112,16 @@ const OverViewContent = ({ location }) => {
                     />
                 </View>
             )}
-           <NavgationButton
-               path={'AddItem'}
-               text={'Add an item'}
-               buttonStyle={styles.menuItem}
-               textStyle={styles.menuItem_text}
-               />
-            <View style={{ marginTop: 20 }}>
-                <MenuItemsNoArrow msg={('Add an item')} onPress={() => navigation.navigate('AddItem',{location})} />
+
+            <View
+                style={{ marginTop: 20,marginBottom:10}}>
+                <NavgationButton
+                    path={'AddItem'}
+                    text={'Add an item'}
+                    buttonStyle={[Buttons.addItemButton]}
+                    textStyle={Buttons.addItemText}
+                    param={location}
+                />
             </View>
             <NavgationButton
                 disabled={false}

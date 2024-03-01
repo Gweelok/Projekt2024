@@ -5,7 +5,8 @@ import { windowHeight, windowWidth } from "../utils/Dimensions";
 import AddItemForm from "../components/AddItem/AddItemForm";
 
 export default function AddItem ({ route }) {
-    const {location} = route.params;
+    let location = route.params;
+
 
     return (
         <View style={[style.container, GlobalStyle.BodyWrapper]}>

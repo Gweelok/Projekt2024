@@ -88,6 +88,8 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     backgroundColor: Primarycolor3,
     flexDirection: "row",
+    minWidth:'75%',
+
   },
   // Form labels
   formLabel: {
@@ -285,6 +287,17 @@ export const dropdownStyles = StyleSheet.create({
 });
 
 export const Buttons = StyleSheet.create({
+  addItemButton:{
+    padding: 8,
+    marginLeft: "auto",
+    marginRight: "auto",
+    backgroundColor: Primarycolor3,
+    borderColor: Primarycolor1,
+    borderWidth: 4,
+    minWidth: "75%",
+    marginTop: "4%"
+
+  },
   main_button: {
     padding: 8,
     marginLeft: "auto",
@@ -294,6 +307,12 @@ export const Buttons = StyleSheet.create({
     borderWidth: 4,
     minWidth: "75%",
     marginTop: "4%"
+  },
+  addItemText: {
+    color: "bgGreen",
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "space-grotesk-Medium",
   },
   main_buttonText: {
     color: "white",
