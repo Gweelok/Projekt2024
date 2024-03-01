@@ -9,15 +9,17 @@ const ProductAlert = () => {
 
   useEffect(() => {
     const fadeIn = () => {
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }).start();
+      return setTimeout(() => {
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }).start();
+      }, 1000)
     }
 
     const fadeOut = () => {
-      setTimeout(() => {
+      return setTimeout(() => {
         Animated.timing(fadeAnim, {
           toValue: 0,
           duration: 500,
@@ -26,11 +28,14 @@ const ProductAlert = () => {
       }, 3000)
     }
 
-    fadeIn();
+    fadeIn()
 
-    fadeOut();
+    fadeOut()
 
-    return () => clearTimeout(fadeOut);
+    return () => {
+      clearTimeout(fadeIn)
+      clearTimeout(fadeOut)
+    }
   }, [fadeAnim]);
 
   return (

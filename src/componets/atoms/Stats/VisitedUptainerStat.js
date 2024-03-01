@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { LoaderContext } from "../../LoaderContext";
 import { convertKgToTons } from "../../../utils/uptainersUtils";
 import { BoxLink } from "../../../styles/BoxLink";
-import { Screens } from "../../../utils/ScreenPaths";
+import Screens from "../../../utils/ScreenPaths";
 
 export const VisitedUptainerStat = (props) => {
     const { currentLanguage } = useLanguage();
@@ -29,12 +29,7 @@ export const VisitedUptainerStat = (props) => {
                                 <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
                                     navigation.navigate(Screens.UPTAINER_DETAILS , {
-                                        id: uptainer.uptainerId,
-                                        name: uptainer.uptainerName,
-                                        location: uptainer.uptainerStreet,
-                                        uptainerImage: uptainer.uptainerImage,
-                                        latitude: uptainer.uptainerLatitude,
-                                        longitude: uptainer.uptainerLongitude
+                                        uptainer:uptainer
                                     });
                                 }}>
                                     <Text style={styles.menuItem_text}>{uptainer.uptainerStreet} </Text>

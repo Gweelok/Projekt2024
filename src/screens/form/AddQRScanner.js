@@ -142,46 +142,29 @@ const QRScanner = ({ route, navigation }) => {
 
     try {
       if (scannedQRCode) {
-        // unnecessary to get uptainer id then fetch it's data separately
         const uptainerId = await getUptainerFromQR(scannedQRCode);
-        const uptainer = uptainerId ? await getUptainerById(uptainerId) : null;
 
-        // updropp item
-        if (uptainer) {
           // set image to use it later when rendering new item in items list
           if(itemData.image){
-            itemData.imageUrl = itemData.image.uri || itemData.image
+            itemData.itemImage = itemData.image.uri || itemData.image
           }else{
             const storage = getStorage();
             const pathReference = ref(storage,"Items/Default.jpg");
             const url = await getDownloadURL(pathReference);
-            itemData.imageUrl = url
+            itemData.itemImage = url
           }
-
 
 
           navigation.reset({
             index: 0,
             routes: [{ name: Screens.MAP }, {
               name: Screens.UPTAINER_DETAILS, params: {
-                uptainerData: {
-                  name: uptainer.uptainerName,
-                  location: uptainer.uptainerStreet,
-                  uptainerImage: uptainer.uptainerImage,
-                  latitude: uptainer.uptainerLat,
-                  longitude: uptainer.uptainerLong,
-                },
+                uptainer:{uptainerId:uptainerId},
                 newItem: itemData,
                 scannedQRCode: scannedQRCode
               }
             }]
           })
-
-
-        } else {
-          setIsLoading(false);
-          alertAddToDraft()
-        }
       } else {
         setIsLoading(false);
         alertAddToDraft()

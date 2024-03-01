@@ -95,14 +95,7 @@ const Uptainer = ({ uptainerData, userLocation, finishLoading }) => {
           setIsLoading(true);
           console.log(uptainerData);
           navigation.navigate(Screens.UPTAINER_DETAILS, {
-            uptainerData: {
-              id: uptainerData?.id,
-              name: uptainerData?.uptainerName,
-              location: uptainerData?.uptainerStreet,
-              imageUrl: uptainerData?.imageUrl,
-              latitude: uptainerData?.uptainerLatitude,
-              longitude: uptainerData?.uptainerLongitude,
-            },
+              uptainer:uptainerData
           });
         }}
       >

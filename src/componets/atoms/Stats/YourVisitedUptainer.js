@@ -8,6 +8,7 @@ import {msg} from "@babel/core/lib/config/validation/option-assertions";
 import { t, useLanguage} from "../../../Languages/LanguageHandler";
 import {useNavigation} from "@react-navigation/native";
 import { LoaderContext } from "../../../componets/LoaderContext";
+import Screens from "../../../utils/ScreenPaths";
 
 export const YourVisitedUptainer = (value) => {
     const navigation = useNavigation();
@@ -34,11 +35,8 @@ export const YourVisitedUptainer = (value) => {
                 <View>
                     <TouchableOpacity onPress={() => {
                                     setIsLoading(true);
-                                    navigation.navigate("UptainerDetails", {
-                                        id: uptainerData?.id,
-                                        name: uptainerData?.uptainerName,
-                                        location: uptainerData?.uptainerStreet,
-                                        imageUrl: uptainerData?.imageUrl,
+                                    navigation.navigate(Screens.UPTAINER_DETAILS, {
+                                        uptainer:uptainerData
                                     });
                                     }}>
                         <View style={styles.boxlink}>

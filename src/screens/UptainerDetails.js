@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,142 +7,218 @@ import {
   Image,
   ImageBackground,
   Dimensions,
-  Linking
+  Linking,
+  Alert,
+  ActivityIndicator,
+  Animated
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Navigationbar from '../componets/Navigationbar';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { getItemsInUptainer, getProductById, getBrandById, getAllUptainers, getUptainersByLocation } from '../utils/Repo';
-import { styles, Backgroundstyle } from '../styles/Stylesheet';
+import { getItemsInUptainer, getProductById, getBrandById, getUptainerById, createItem, updateItemById } from '../utils/Repo';
+import { Backgroundstyle, Primarycolor4, Primarycolor1 } from '../styles/Stylesheet';
 import GlobalStyle from '../styles/GlobalStyle';
 import ScrollViewComponent from '../componets/atoms/ScrollViewComponent';
 import { LoaderContext } from '../componets/LoaderContext';
-import Uptainer from "../componets/Uptainer";
-import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
 import ProductAlert from '../componets/ProductAlert';
-import { CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import Screens from "../utils/ScreenPaths";
+import { BadgeContext } from './form/BadgeContext';
+import { t, useLanguage } from '../Languages/LanguageHandler';
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const UptainerDetails = ({ route, navigation }) => {
-
-  const [data, setData] = useState([]);
-  const [uptainerImageUrl, setUptainerImageUrl] = useState('');
-  const { setIsLoading } = useContext(LoaderContext);
+const UptainerDetails = ({ route }) => {
+  const navigation = useNavigation()
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
+  const { setBadgeCount } = useContext(BadgeContext)
+  const { currentLanguage } = useLanguage()
   const [refreshing, setRefreshing] = useState(false);
-  const [userLocation, setUserLocation] = useState(null);
-  const [sortedUptainers, setSortedUptainers] = useState([]);
-  const [uptainersList, setUptainerList] = useState([]);
-  const [addedItemAlert, setaddedItemAlert] = useState(false)
+  const [uptainerData, setuptainerData] = useState()
+  const [itemsData, setitemsData] = useState([])
+
+  const [addedItem, setaddedItem] = useState(false)
+  const [addingItem, setaddingItem] = useState(false)
+
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    if (!(newItem && addedItem && !isLoading)) {
+      return
+    }
+
+    const fadeOut = () => {
+      return setTimeout(() => {
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }).start();
+      }, 1000)
+    }
+
+
+    fadeOut()
+
+    return () => {
+      clearTimeout(fadeOut)
+    }
+  }, [addedItem,isLoading]);
+
+  // props
   const [newItem, setnewItem] = useState(route.params.newItem)
-
-  // passed uptainer don't have id !! - NEED FIX
-  const uptainer = route.params.uptainerData || route.params;
-  const scannedQRCode = route.params?.scannedQRCode;
-
-
-  // fetch pass uptainer id items instead of fetching uptainers items with same location - NEED FIX
-  const fetchData = async () => {
-    try {
-      const uptainerList = userLocation ? sortedUptainers : await getUptainersByLocation(uptainer.location);
-      setUptainerList(uptainerList);
-
-      setRefreshing(false);
-    } catch (error) {
-      console.log('Error:', error);
-    }
-
-
-  };
-
-
-  const onRefresh = React.useCallback(() => {
-    // reset updropped item to prevent updropping again 
-    if (newItem) {
-      setnewItem()
-    }
-
-    setRefreshing(true);
-    setIsLoading(true)
-    fetchData();
-  }, []);
+  const uptainerId = route.params.uptainer.uptainerId
+  const scannedQRCode = route.params.scannedQRCode;
 
 
   useEffect(() => {
-    setIsLoading(true)
-    const fetchItemList = async () => {
-      const storage = getStorage();
-      try {
-        const items = await getItemsInUptainer(uptainer.id);
-
-        const updatedData = await Promise.all(
-          items.map(async (item) => {
-            if (!item.itemTaken) {
-              const pathReference = ref(storage, item.itemImage);
-              const product = await getProductById(item.itemproduct);
-              const brand = await getBrandById(item.itemBrand);
-
-              try {
-                const cachedImage = await getCachedImage(item.itemId)
-                if (cachedImage) {
-                  return {
-                    ...item,
-                    imageUrl: cachedImage,
-                    productName: product.productName,
-                    brandName: brand.brandName,
-                  };
-                } else {
-
-                  const url = await getDownloadURL(pathReference);
-                  await cacheImage(item.itemId, url)
-                  return {
-                    ...item,
-                    imageUrl: url,
-                    productName: product.productName,
-                    brandName: brand.brandName,
-                  };
-                }
-              } catch (error) {
-                console.log('Error while downloading image => ', error);
-                return {
-                  ...item,
-                  imageUrl: 'https://via.placeholder.com/200x200',
-                };
-              }
-            }
-          })
-        );
-
-        setData(updatedData);
-      } catch (error) {
-        console.log('Error while fetching items => ', error);
-      }
-
-    };
-
-    const fetchUptainerImage = async () => {
-      const storage = getStorage();
-      try {
-        const uptainerPathReference = ref(storage, uptainer.uptainerImage);
-        const imageUrl = await getDownloadURL(uptainerPathReference);
-        setUptainerImageUrl(imageUrl);
-      } catch (error) {
-        console.log('Error while getting Uptainer Image URL => ', error);
-        setUptainerImageUrl('https://via.placeholder.com/200x200');
-      }
-    };
-
-
-
-    fetchData();
-    fetchItemList();
-    fetchUptainerImage();
+    fetchData()
   }, []);
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    // if updropped item exist set undefined to remove from list
+    if (newItem) {
+      setnewItem()
+    }
+    fetchData()
+  }
+
+
+  const fetchData = async () => {
+    setIsLoading(true)
+
+
+    try {
+      // if updropping item
+      if (newItem && !addingItem) {
+        // set undefined to prevent updropp again
+        setaddingItem(true)
+
+        updroppItem()
+      }
+
+
+      await fetchUptainerData()
+      await fetchUptainerItems()
+    } catch (error) {
+      Alert.alert("Error", error)
+      navigation.goBack()
+    }
+
+    setIsLoading(false)
+    setRefreshing(false)
+  }
+
+
+
+
+  const updroppItem = async () => {
+    try {
+      if (newItem.itemUptainer == "Draft") {
+        // item Already in Draft - update
+        const updatedData = {
+          itemproduct: newItem.product,
+          itemBrand: newItem.brand,
+          itemModel: newItem.model,
+          itemCategory: newItem.category,
+          itemDescription: newItem.description,
+          itemcondition: newItem.condition,
+          itemUptainer: uptainerId
+        }
+        await updateItemById(newItem.itemId, updatedData, newItem.image)
+        setBadgeCount((prevCount) => prevCount - 1)
+      } else {
+        // New item - create
+        await createItem(
+          newItem.image,
+          newItem.category,
+          newItem.product,
+          newItem.brand,
+          newItem.model,
+          newItem.condition,
+          newItem.description,
+          scannedQRCode
+        )
+      }
+
+      // done adding item
+      setaddedItem(true)
+    } catch (error) {
+      // set undefined to remove from list
+      setnewItem()
+      Alert.alert(t("QRScanner.Error", currentLanguage), t("QRScanner.ErrorMsg1", currentLanguage))
+    }
+
+  }
+
+
+  const fetchUptainerData = async () => {
+    // uptainer data from passed 'uptainerId'
+    const uptainer = await getUptainerById(uptainerId)
+
+    try {
+      // uptainer image
+      const storage = getStorage()
+      const uptainerPathReference = ref(storage, uptainer.uptainerImage)
+      const imageUrl = await getDownloadURL(uptainerPathReference)
+      uptainer.uptainerImage = imageUrl
+    } catch (error) {
+      uptainer.uptainerImage = "https://via.placeholder.com/200x200"
+    }
+
+    setuptainerData(uptainer)
+  }
+
+  const fetchUptainerItems = async () => {
+    const items = (await getItemsInUptainer(uptainerId)).filter((item) => !item.itemTaken)
+    const storage = getStorage()
+
+    const updatedItems = await Promise.all(
+      items.map(async (item) => {
+        const pathReference = ref(storage, item.itemImage);
+        const product = await getProductById(item.itemproduct);
+        const brand = await getBrandById(item.itemBrand);
+
+        try {
+          const cachedImage = await getCachedImage(item.itemId)
+          if (cachedImage) {
+            return {
+              ...item,
+              itemImage: cachedImage,
+              productName: product.productName,
+              brandName: brand.brandName,
+            };
+          } else {
+            const url = await getDownloadURL(pathReference);
+            await cacheImage(item.itemId, url)
+            return {
+              ...item,
+              itemImage: url,
+              productName: product.productName,
+              brandName: brand.brandName,
+            };
+          }
+        } catch (error) {
+          return {
+            ...item,
+            itemImage: 'https://via.placeholder.com/200x200',
+            productName: product.productName,
+            brandName: brand.brandName,
+          }
+        }
+      })
+    )
+
+
+    setitemsData(updatedItems)
+  }
+
+
 
 
   const openAddressOnMap = () => {
@@ -150,123 +226,117 @@ const UptainerDetails = ({ route, navigation }) => {
       ios: "maps://0,0?q=",
       android: "geo:0,0?q=",
     });
-    const latLng = `${uptainer.latitude},${uptainer.longitude}`;
+    const latLng = `${uptainerData.uptainerLat},${uptainerData.uptainerLong}`;
 
     const url = Platform.select({
-      ios: `${scheme}${uptainer.name}@${latLng}`,
-      android: `${scheme}${latLng}(${uptainer.name})`,
+      ios: `${scheme}${uptainerData.uptainerName}@${latLng}`,
+      android: `${scheme}${latLng}(${uptainerData.uptainerName})`,
     });
 
     Linking.canOpenURL(url)
       .then((supported) => {
         if (!supported) {
-          console.log("Can't handle url: " + url);
+          Alert.alert("Error", "Can't handle url: " + url)
         } else {
           return Linking.openURL(url);
         }
       })
-      .catch((err) => console.error("An error occurred", err));
+      .catch((err) => Alert.alert("Error", "An error occurred: " + err))
   };
 
-  const navigateBackCondition = () => {
-    if (route.params?.screenFrom === 'QRScanner') {
-      navigation.push("Add");
-    } else {
-      navigation.goBack();
-    }
-  };
+
+
+  const renderItem = (item) => (
+    <TouchableOpacity
+      disabled={newItem && (item.itemId == newItem.itemId && !addedItem)}
+      key={item.itemId}
+      onPress={() => {
+        navigation.navigate(Screens.DETAIL_VIEW, {
+          data: item.itemId || "",
+          itemDescription: item.itemDescription || "",
+          brandName: item.brandName || "",
+          productName: item.productName || "",
+          imageUrl: item.itemImage || "",
+          uptainer: uptainerData,
+        });
+      }}
+      style={style.item}
+    >
+
+      <View style={style.imageContainer}>
+        <Image
+          source={{ uri: item.itemImage }}
+          style={style.image}
+        />
+
+
+
+
+        {newItem && ((item.itemId == newItem.itemId)) &&
+          <Animated.View style={[style.newItemStyle, { opacity: fadeAnim }]}>
+            <ActivityIndicator style={style.newItemStyle} color={Primarycolor1} size={"large"}></ActivityIndicator>
+          </Animated.View>
+        }
+
+
+      </View>
+      <Text style={style.productNameText}>
+        {item.productName}
+      </Text>
+    </TouchableOpacity>
+  )
+
+
+
 
   return (
     <View style={[Backgroundstyle.interactive_screens]}>
 
       <View style={GlobalStyle.BodyWrapper}>
-        {newItem && addedItemAlert && <ProductAlert></ProductAlert>}
+        {newItem && addedItem && !isLoading && <ProductAlert></ProductAlert>}
+
         <ScrollViewComponent
           refreshing={refreshing}
           onRefresh={onRefresh}>
+
           <TouchableOpacity
             style={style.backButton}
-            onPress={() => navigateBackCondition()}
+            onPress={() => navigation.goBack()}
           >
             <Ionicons name="chevron-back" color="white" size={20} />
           </TouchableOpacity>
+
+
           <View>
             <ImageBackground
               style={style.detailsImage}
               source={{
-                uri: uptainerImageUrl || "https://via.placeholder.com/200x200", // Provide a placeholder if the URL is empty
+                uri: uptainerData?.uptainerImage
               }}
             >
               <TouchableOpacity
-                onPress={() => openAddressOnMap()}
+                onPress={openAddressOnMap}
                 style={style.productLocation}
               >
                 <Text style={style.productAddress}>
-                  {uptainer.name} / {uptainer.location}
+                  {uptainerData?.uptainerName} / {uptainerData?.uptainerStreet}
                 </Text>
                 <Ionicons name="chevron-forward" color="white" size={30} />
               </TouchableOpacity>
             </ImageBackground>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              marginTop: 50,
-              width: windowWidth,
-              flexWrap: "wrap",
-              padding: 10,
-            }}
-          >
-            {data?.map((cur, i) => (
-              <TouchableOpacity
-                key={i}
-                style={{
-                  marginLeft: 0,
-                  marginBottom: 20,
-                  marginRight: 0,
-                }}
-                onPress={() =>
-                  navigation.navigate(Screens.DETAIL_VIEW, {
-                    itemDescription: cur?.itemDescription,
-                    imageUrl: cur?.imageUrl,
-                    productName: cur?.productName,
-                    brandName: cur?.brandName,
-                    uptainer,
-                  })
-                }
-              >
-                <Image
-                  style={style.moreProductsImage}
-                  source={{
-                    uri: cur?.imageUrl,
-                  }}
-                />
-                <Text
-                  style={[
-                    styles.bodyText,
-                    {
-                      fontWeight: "600",
-                      width: windowWidth / 2.7,
-                    },
-                  ]}
-                >
-                  {cur?.productName}
-                </Text>
-              </TouchableOpacity>
-            ))}
+
+
+
+
+          <View style={style.scrollViewContent}>
+            {newItem && !isLoading && renderItem(newItem)}
+            {itemsData.map((item) => renderItem(item))}
           </View>
 
-          <View>
-            {uptainersList.map((uptainer) => (
-              <SortSpecificUptainer
-                key={uptainer.uptainerId}
-                uptainerData={uptainer}
-                newItem={newItem}
-                scannedQRCode={scannedQRCode}
-                setaddedItemAlert={setaddedItemAlert}
-              />
-            ))}
-          </View>
+
+
+
         </ScrollViewComponent>
         <Navigationbar navigation={navigation} />
       </View>
@@ -312,5 +382,46 @@ const style = StyleSheet.create({
   moreProductsImage: {
     width: windowWidth / 2.7,
     height: windowHeight / 6.4,
+  },
+  newItemStyle: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    opacity: 0.7,
+    backgroundColor: Primarycolor4,
+    zIndex: 1,
+    elevation: 1
+  },
+  scrollViewContent: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    paddingVertical: 10,
+    marginTop: 50
+  },
+  item: {
+    width: '47%', // Adjust the width as per your requirement
+    aspectRatio: 1,
+    margin: 0,
+    overflow: "hidden",
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    width: '100%',
+    height: '100%', // Adjust the height as per your requirement
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+  productNameText: {
+    flexDirection: 'row',
+    marginTop: 5,
+    marginBottom: 10,
+    width: "100%",
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });

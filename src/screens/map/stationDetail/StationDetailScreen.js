@@ -78,12 +78,7 @@ const StationDetailScreen = ({ route, navigation }) => {
               onPress={() => {
                 /* todo */
                 navigation.navigate(Screens.UPTAINER_DETAILS, {
-                  uptainerData: {
-                    id: stationDetail?.id,
-                    name: stationDetail?.uptainerName,
-                    location: stationDetail?.uptainerStreet,
-                    // Add other properties if needed
-                  },
+                    uptainer:stationDetail
                 });
               }}
               titleText={t("StationsScreen.showProduct", currentLanguage)}

@@ -102,7 +102,7 @@ const Add = ({ route, navigation }) => {
       setIsLoading(false);
 
       if (res.itemUpdated) {
-        navigation.navigate(Screens.PRODUCT_SAVED);
+        navigation.replace(Screens.PRODUCT_SAVED);
       }
     } else {
       // Check if at least one of the fields has a value
@@ -120,7 +120,7 @@ const Add = ({ route, navigation }) => {
         
         
         if (response.draftAdded){
-            navigation.navigate(Screens.PRODUCT_SAVED);
+            navigation.replace(Screens.PRODUCT_SAVED);
             setBadgeCount((prevCount) => prevCount + 1);
         } else {
           Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
