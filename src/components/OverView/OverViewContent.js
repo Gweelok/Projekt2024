@@ -110,6 +110,12 @@ const OverViewContent = ({ location }) => {
                     />
                 </View>
             )}
+           <NavgationButton
+               path={'AddItem'}
+               text={'Add an item'}
+               buttonStyle={styles.menuItem}
+               textStyle={styles.menuItem_text}
+               />
             <View style={{ marginTop: 20 }}>
                 <MenuItemsNoArrow msg={('Add an item')} onPress={() => navigation.navigate('AddItem',{location})} />
             </View>
