@@ -57,6 +57,7 @@ export default {
     camera: "Camera",
     gallery: "Gallery",
     chooseAction: "Choose an Action",
+    maxDraft:"You can't exceed 15 draft items"
   },
   CustomInput: {
     hint: "optional",

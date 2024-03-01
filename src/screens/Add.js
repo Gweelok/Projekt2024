@@ -3,23 +3,20 @@ import {
   Text,
   SafeAreaView,
   Button,
-  ScrollView,
   StyleSheet,
   Pressable,
   Alert,
 } from "react-native";
 import {
-  Backgroundstyle,
   Buttons,
   Primarycolor1,
   Primarycolor3,
 } from "../styles/Stylesheet";
 import Navigationbar from "../componets/Navigationbar";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 import DescriptionField from "./form/DescriptionField";
 import CategoryDropdown from "./form/CategoryDropdown";
-import CustomInput from "../componets/atoms/CustomInput";
 import ImageUpload from "./form/ImageUpload";
 import ProductDropdown from "./form/ProductDropdown";
 import BrandDropdown from "./form/BrandDropdown";
@@ -28,8 +25,7 @@ import ConditionDropdown from "./form/ConditionDropdown";
 import { BadgeContext } from "./form/BadgeContext";
 import { firebaseApp, firebaseDB } from "../utils/Firebase";
 import ScrollViewComponent from "../componets/atoms/ScrollViewComponent";
-import { createItemDraft, getCurrentUser, updateItemById } from "../utils/Repo";
-import { Camera } from "expo-camera";
+import { createItemDraft, updateItemById } from "../utils/Repo";
 import { LoaderContext } from "../componets/LoaderContext";
 import Screens from "../utils/ScreenPaths";
 
@@ -69,13 +65,11 @@ const Add = ({ route, navigation }) => {
   const { currentLanguage, setLanguage } = useLanguage();
 
   const [image, setImage] = useState(itemData?.imageUrl || "");
-  const [category, setCategory] = useState(itemData?.category || null);
-  const [product, setProduct] = useState(itemData?.product || null);
+  const [category, setCategory] = useState(itemData?.category || "");
+  const [product, setProduct] = useState(itemData?.product || "");
   const [brand, setBrand] = useState(itemData?.brand || "");
   const [model, setModel] = useState(itemData?.model || "");
-  const [condition, setCondition] = useState(
-    itemData?.condition ? itemData?.condition : itemData?.itemcondition || null
-  );
+  const [condition, setCondition] = useState(itemData?.itemcondition || "");
   const [isProductDropdownVisible, setIsProductDropdownVisible] = useState(false);
   const [isBrandDropdownVisible, setIsBrandDropdownVisible] = useState(false);
   const [isCategoryDropdownVisible, setIsCategoryDropdownVisible] = useState(true);
@@ -92,6 +86,7 @@ const Add = ({ route, navigation }) => {
 
   const handleSaveButtonClick = async () => {
     setIsLoading(true);
+
     const itemId = itemData?.itemId
     if (itemId) {
       const updatedData = {
@@ -104,12 +99,12 @@ const Add = ({ route, navigation }) => {
         itemcondition: condition ? condition : itemData?.itemcondition,
       }
       const res = await updateItemById(itemId, updatedData, image instanceof Object ? image : null)
-      if (res.itemUpdated){
+      setIsLoading(false);
+
+      if (res.itemUpdated) {
         navigation.navigate(Screens.PRODUCT_SAVED);
       }
-      console.log(updatedData)
     } else {
-
       // Check if at least one of the fields has a value
       if (product?.productId || brand?.brandId || model?.modelId || category?.categoryId || image || description || condition) {
         const response = await createItemDraft(
@@ -121,26 +116,30 @@ const Add = ({ route, navigation }) => {
           description,
           condition
         );
+        
+        
+        
         if (response.draftAdded){
             navigation.navigate(Screens.PRODUCT_SAVED);
             setBadgeCount((prevCount) => prevCount + 1);
         } else {
-          console.log('item draft limit exceeded');
+          Alert.alert(t("QrScannerScreen.Error", currentLanguage), t("UpdroppForm.maxDraft", currentLanguage))
         }
       } else {
         Alert.alert("Error", "At least one field must have a value");
         console.log('At least one field must have a value');
       }
+      setIsLoading(false);
 
     }
-    setIsLoading(false);
+
   };
 
   const addProductConditions = () => {
     if (
-      !product.productId ||
+      !product?.productId ||
       !condition ||
-      !category.categoryId
+      !category?.categoryId
     ) {
       Alert.alert(t("UpdroppForm.noData", currentLanguage));
     } else {
@@ -153,24 +152,13 @@ const Add = ({ route, navigation }) => {
         condition: condition ? condition : itemData?.itemcondition,
         description: description ? description : itemData?.itemDescription,
         image: image,
+        itemUptainer: itemData?.itemUptainer
       });
     }
   };
-  const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const cameraStatus = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermissions(cameraStatus.status === "granted");
-    })();
-  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const cameraStatus = await Camera.requestCameraPermissionsAsync();
-  //     setHasCameraPermissions(cameraStatus.status == "granted");
-  //   })();
-  // }, []);
+
   const handleSkipCategoryDropdown = () => {
     console.log(category)
     setIsProductDropdownVisible(true);
@@ -207,9 +195,14 @@ const Add = ({ route, navigation }) => {
             {t("UpdroppForm.title", currentLanguage)}
           </Text>
 
+
+
           <View style={[{ marginBottom: 10 }]}>
             <ImageUpload onImageSelect={setImage} data={itemData?.itemImage !== "Items/Default.jpg" ? itemData?.imageUrl : null} />
           </View>
+
+
+
 
           <CategoryDropdown
             onCategorySelect={setCategory}

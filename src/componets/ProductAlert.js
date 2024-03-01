@@ -1,17 +1,44 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Primarycolor1 } from "../styles/Stylesheet";
+import { StyleSheet, Text, View, Animated } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { Primarycolor1, Primarycolor4 } from "../styles/Stylesheet";
 import { t, useLanguage } from "../Languages/LanguageHandler";
 
 const ProductAlert = () => {
-  const { currentLanguage } = useLanguage(); // Move the hook inside the functional component
+  const { currentLanguage } = useLanguage();
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const fadeIn = () => {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+
+    const fadeOut = () => {
+      setTimeout(() => {
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }).start();
+      }, 3000)
+    }
+
+    fadeIn();
+
+    fadeOut();
+
+    return () => clearTimeout(fadeOut);
+  }, [fadeAnim]);
 
   return (
-    <View style={styles.alertContainer}>
+    <Animated.View style={[styles.alertContainer, { opacity: fadeAnim }]}>
       <Text style={styles.alertText}>
         {t("ProductUpdroppedAlert.productUpdropped", currentLanguage)}
       </Text>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -23,16 +50,15 @@ const styles = StyleSheet.create({
     bottom: 60,
     right: 0,
     left: 0,
-    elevation: 0,
     height: 40,
     backgroundColor: Primarycolor1,
-    // justifyContent: "space-around",
     alignItems: "center",
-    alignContent: "center",
-    alignSelf: "center",
     justifyContent: "center",
+    zIndex: 1,
   },
   alertText: {
+    width: "100%",
+    textAlign: "center",
     color: "white",
     fontSize: 15,
     fontWeight: "600",

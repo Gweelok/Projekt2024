@@ -20,12 +20,16 @@ import { LoaderContext } from '../componets/LoaderContext';
 import Uptainer from "../componets/Uptainer";
 import SortSpecificUptainer from "./map/stationDetail/SortSpecificUptainer";
 import { cacheImage, getCachedImage } from '../utils/Cache';
+import ProductAlert from '../componets/ProductAlert';
+import { CommonActions } from '@react-navigation/native';
+
 import Screens from "../utils/ScreenPaths";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const UptainerDetails = ({ navigation, route }) => {
+const UptainerDetails = ({ route, navigation }) => {
 
   const [data, setData] = useState([]);
   const [uptainerImageUrl, setUptainerImageUrl] = useState('');
@@ -33,93 +37,92 @@ const UptainerDetails = ({ navigation, route }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [sortedUptainers, setSortedUptainers] = useState([]);
-  let uptainer = route.params.uptainerData || route.params;
   const [uptainersList, setUptainerList] = useState([]);
+  const [addedItemAlert, setaddedItemAlert] = useState(false)
+  const [newItem, setnewItem] = useState(route.params.newItem)
 
-  useEffect(() => {
-    console.log('Route params:', route.params); // Check the entire route.params object
-    const scannedData = route.params?.scannedQRCodeData;
-    if (scannedData) {
-      console.log('Scanned QR code data:', scannedData);
-      // Handle the scanned data here
-    } else {
-      console.log('Scanned QR code data is undefined or not passed correctly');
-    }
-  }, [route.params?.scannedQRCodeData]);
+  // passed uptainer don't have id !! - NEED FIX
+  const uptainer = route.params.uptainerData || route.params;
+  const scannedQRCode = route.params?.scannedQRCode;
 
+
+  // fetch pass uptainer id items instead of fetching uptainers items with same location - NEED FIX
   const fetchData = async () => {
     try {
-      // Assuming uptainer.location holds the location information
-      const uptainerList = await getUptainersByLocation(uptainer.location);
+      const uptainerList = userLocation ? sortedUptainers : await getUptainersByLocation(uptainer.location);
       setUptainerList(uptainerList);
+
       setRefreshing(false);
     } catch (error) {
       console.log('Error:', error);
     }
+
+
   };
 
 
   const onRefresh = React.useCallback(() => {
+    // reset updropped item to prevent updropping again 
+    if (newItem) {
+      setnewItem()
+    }
+
     setRefreshing(true);
+    setIsLoading(true)
     fetchData();
   }, []);
 
-  useEffect(() => {
-    fetchData();
-    console.log('Uptainer:', uptainer);
-  }, []);
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchItemList = async () => {
-      // Fetch items in the uptainer
       const storage = getStorage();
       try {
-        setIsLoading(true);
         const items = await getItemsInUptainer(uptainer.id);
 
         const updatedData = await Promise.all(
           items.map(async (item) => {
             if (!item.itemTaken) {
-            const pathReference = ref(storage, item.itemImage);
-            const product = await getProductById(item.itemproduct);
-            const brand = await getBrandById(item.itemBrand);
+              const pathReference = ref(storage, item.itemImage);
+              const product = await getProductById(item.itemproduct);
+              const brand = await getBrandById(item.itemBrand);
 
-            try {
-              const cachedImage = await getCachedImage(item.itemId)
-              if (cachedImage) {
+              try {
+                const cachedImage = await getCachedImage(item.itemId)
+                if (cachedImage) {
+                  return {
+                    ...item,
+                    imageUrl: cachedImage,
+                    productName: product.productName,
+                    brandName: brand.brandName,
+                  };
+                } else {
+
+                  const url = await getDownloadURL(pathReference);
+                  await cacheImage(item.itemId, url)
+                  return {
+                    ...item,
+                    imageUrl: url,
+                    productName: product.productName,
+                    brandName: brand.brandName,
+                  };
+                }
+              } catch (error) {
+                console.log('Error while downloading image => ', error);
                 return {
                   ...item,
-                  imageUrl: cachedImage,
-                  productName: product.productName,
-                  brandName: brand.brandName,
-                };
-              } else {
-
-                const url = await getDownloadURL(pathReference);
-                await cacheImage(item.itemId, url)
-                return {
-                  ...item,
-                  imageUrl: url,
-                  productName: product.productName,
-                  brandName: brand.brandName,
+                  imageUrl: 'https://via.placeholder.com/200x200',
                 };
               }
-            } catch (error) {
-              console.log('Error while downloading image => ', error);
-              return {
-                ...item,
-                imageUrl: 'https://via.placeholder.com/200x200',
-              };
             }
-          }})
+          })
         );
 
         setData(updatedData);
-        setIsLoading(false);
-        setRefreshing(false);
       } catch (error) {
         console.log('Error while fetching items => ', error);
       }
+
     };
 
     const fetchUptainerImage = async () => {
@@ -134,11 +137,13 @@ const UptainerDetails = ({ navigation, route }) => {
       }
     };
 
+
+
+    fetchData();
     fetchItemList();
     fetchUptainerImage();
-  }, [uptainer, setIsLoading]);
+  }, []);
 
-  const uptainerList = userLocation ? sortedUptainers : uptainersList;
 
   const openAddressOnMap = () => {
     const scheme = Platform.select({
@@ -146,12 +151,12 @@ const UptainerDetails = ({ navigation, route }) => {
       android: "geo:0,0?q=",
     });
     const latLng = `${uptainer.latitude},${uptainer.longitude}`;
-    console.log(uptainer);
+
     const url = Platform.select({
       ios: `${scheme}${uptainer.name}@${latLng}`,
       android: `${scheme}${latLng}(${uptainer.name})`,
     });
-    console.log(url);
+
     Linking.canOpenURL(url)
       .then((supported) => {
         if (!supported) {
@@ -167,7 +172,7 @@ const UptainerDetails = ({ navigation, route }) => {
     if (route.params?.screenFrom === 'QRScanner') {
       navigation.push("Add");
     } else {
-      navigation.goBack(); 
+      navigation.goBack();
     }
   };
 
@@ -175,7 +180,10 @@ const UptainerDetails = ({ navigation, route }) => {
     <View style={[Backgroundstyle.interactive_screens]}>
 
       <View style={GlobalStyle.BodyWrapper}>
-        <ScrollViewComponent refreshing={refreshing} onRefresh={onRefresh}>
+        {newItem && addedItemAlert && <ProductAlert></ProductAlert>}
+        <ScrollViewComponent
+          refreshing={refreshing}
+          onRefresh={onRefresh}>
           <TouchableOpacity
             style={style.backButton}
             onPress={() => navigateBackCondition()}
@@ -249,10 +257,13 @@ const UptainerDetails = ({ navigation, route }) => {
           </View>
 
           <View>
-            {uptainerList.map((uptainer) => (
+            {uptainersList.map((uptainer) => (
               <SortSpecificUptainer
                 key={uptainer.uptainerId}
                 uptainerData={uptainer}
+                newItem={newItem}
+                scannedQRCode={scannedQRCode}
+                setaddedItemAlert={setaddedItemAlert}
               />
             ))}
           </View>

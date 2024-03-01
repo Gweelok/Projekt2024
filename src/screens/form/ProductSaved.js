@@ -57,7 +57,7 @@ const ProductSaved = ({ navigation }) => {
                 { borderWidth: 2, width: "100%", marginBottom: 20 },
               ]}
               onPress={() => {
-                navigation.navigate(Screens.MAP);
+                navigation.replace(Screens.MAP);
               }}
             >
               <Text style={Buttons.secondary_buttonText}>
@@ -70,7 +70,7 @@ const ProductSaved = ({ navigation }) => {
                 { borderWidth: 2, width: "100%" },
               ]}
               onPress={() => {
-                navigation.navigate(Screens.ADD);
+                navigation.replace(Screens.ADD);
               }}
             >
               <Text style={Buttons.secondary_buttonText}>
