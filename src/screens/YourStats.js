@@ -14,6 +14,7 @@ import VisitedUptainerStat from "../componets/atoms/Stats/VisitedUptainerStat";
 import YourVisitedUptainer from "../componets/atoms/Stats/YourVisitedUptainer";
 import { getAllProducts, getItemsFromUser } from "../utils/Repo";
 import { firebaseAurth } from "../utils/Firebase";
+import Screens from "../utils/ScreenPaths";
 
 const YourStats = (props) => {
   const { currentLanguage } = useLanguage();
@@ -67,7 +68,7 @@ const YourStats = (props) => {
 
 
       <View style={{ marginTop: 10 }}>
-        <TouchableOpacity onPress={() => navigation.navigate("MyDrafts")}>
+        <TouchableOpacity onPress={() => navigation.navigate(Screens.MY_DRAFTS)}>
           <Text style={styles.link}>
             {t("StatsPage.Overview", currentLanguage)}
           </Text>

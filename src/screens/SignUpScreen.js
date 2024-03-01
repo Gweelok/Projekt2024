@@ -22,6 +22,7 @@ import CustomInput from "../componets/atoms/CustomInput";
 import GlobalStyle from "../styles/GlobalStyle";
 import BackButton from "../componets/BackButton";
 import ErrorBanner from "./ErrorBanner";
+import Screens from "../utils/ScreenPaths";
 
 const SignUpScreen = ({ navigation }) => {
   // State variables using React Hooks
@@ -145,7 +146,7 @@ const onChangeEmailHandler = (text) => {
       setErrorMessage("Error msg");
       setEmailValid(true);
       setPasswordCheck(true);
-      return  navigation.navigate("TermsAndConditions", { email, password }); // Return early since we need a valid email before checking password
+      return  navigation.navigate(Screens.TERMS_AND_CONDITIONS, { email, password }); // Return early since we need a valid email before checking password
     }
    /* // If all validations pass
     setShowError(false);
@@ -259,7 +260,7 @@ const onChangeEmailHandler = (text) => {
 
         <Pressable
           onPress={() => {
-            navigation.navigate("Sign in");
+            navigation.navigate(Screens.SIGN_IN);
           }}
         >
           <Text style={styles.link}>

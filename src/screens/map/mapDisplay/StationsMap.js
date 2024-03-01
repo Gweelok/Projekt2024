@@ -17,7 +17,7 @@ import * as Location from 'expo-location';
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
 import { calculateDistance } from '../../../utils/uptainersUtils';
 import SearchedLocation from './SearchedLocation';
-
+import Screens from "../../../utils/ScreenPaths";
 
 
 const stationData = [
@@ -136,7 +136,7 @@ const StationsMap = ({ navigation }) => {
     };
 
     const openStationPage = (location) => {
-        navigation.navigate('StationDetails', { stationDetail: location });
+        navigation.navigate(Screens.STATION_DETAILS , { stationDetail: location });
         console.log('onPress', location);
     };
 

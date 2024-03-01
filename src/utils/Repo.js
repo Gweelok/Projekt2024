@@ -576,10 +576,12 @@ export async function getAllProducts() {
             const productId = childSnapshot.key;
             const productName = childSnapshot.val().productName;
             const co2Footprint = childSnapshot.val().co2Footprint;
+            const categoryId = childSnapshot.val().categoryId;
             products.push({
                 productId: productId,
                 productName: productName,
-                co2Footprint: co2Footprint
+                co2Footprint: co2Footprint,
+                categoryId: categoryId
             });
         });
         return products;
@@ -1052,7 +1054,7 @@ const uploadToFirebase = async (uri, name, path, onProgress) => {
 /****************/
 /***** Auth *****/
 /****************/
-export async function signInUser(email, password, navigation) {
+export async function signInUser(email, password) {
     signInWithEmailAndPassword(firebaseAurth, email, password)
         .then(async (userCredential) => {
             const user = userCredential.user;
@@ -1061,7 +1063,7 @@ export async function signInUser(email, password, navigation) {
             await SecureStorage.savePassword(password)
 
             console.log('User logged in:', user);
-            navigation.navigate("Homepage");
+            return user;
         })
         .catch((error) => {
             authErrors(error);

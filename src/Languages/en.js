@@ -151,11 +151,10 @@ export default {
     Header: "The Problem",
     Body: "A lot of natural resources are used for the production of electronic devices. And many of these resources are wasted because electronic devices are often thrown out before the end of their lifespan.",
   },
-  QrScannerScreen: {
-    Scan: "Scan to Updropp",
+  QRScanner: {
     Header: "Place the QR-code inside the frame to read it",
     Bottom:
-      "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan Later",
+        "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan Later",
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",
@@ -166,6 +165,14 @@ export default {
     Success: "Success",
     QRCodeSavedSuccessfully: "QR Code saved successfully.",
     OK: "OK",
+  },
+  TakeQRScanner: {
+    Scan: "Scan to Take",
+
+  },
+  AddQRScanner: {
+    Scan: "Scan to Updropp",
+
   },
   SolutionComponent: {
     Header: "The Solution",

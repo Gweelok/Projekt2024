@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
-import { LoaderScreen } from 'react-native-ui-lib';
-import LoadingScreen from './LoadingScreen';
+import { StyleSheet, Modal, View, ActivityIndicator } from 'react-native';
+import { Primarycolor1 } from '../styles/Stylesheet';
 
 // using context API, we can create a global loader.
 // create pass data  to pass data
@@ -12,9 +12,21 @@ export const LoaderProvider = ({ children }) => {
 
     return (
         <LoaderContext.Provider value={{ isLoading, setIsLoading }}>
-            {isLoading && <LoadingScreen isLoaderShow={isLoading}/>}
+            {isLoading && <Modal transparent visible={isLoading}>
+                                <View style={styles.loaderContainer}>
+                                    <ActivityIndicator size='large' color={Primarycolor1} />
+                                </View>
+                            </Modal>}
             {children}
         </LoaderContext.Provider>
     );
 };
 
+const styles = StyleSheet.create({
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    }
+  });

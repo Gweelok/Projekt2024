@@ -6,6 +6,7 @@ import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
 import { Primarycolor1, Primarycolor2, Primarycolor3, styles } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
+import Screens from "../utils/ScreenPaths";
 
 const ItemsSearched = ({navigation, items, userLocation, endSearch , uptainer}) =>{
     return (

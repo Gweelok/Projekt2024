@@ -16,8 +16,9 @@ import {
     styles,
     styles as stylesGlobal
 } from "../../styles/Stylesheet";
+import { modelsSeedData, brandsSeedData } from "../../utils/SeedData";
 
-const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown}) => {
+const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsVisible, onSkip,  setIsModelDropdownVisible, shouldOpenBrandDropdown, product}) => {
     const { currentLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBrand, setSelectedBrand] = useState(data || null);
@@ -34,9 +35,15 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const brandsList = await getAllBrands();
-                setBrands(brandsList);
-                setFilteredBrands(brandsList);
+                //const brandsList = await getAllBrands();
+                //setBrands(brandsList);
+                //setFilteredBrands(brandsList);
+                const modelsListTest = modelsSeedData;
+                const brandsListTest = brandsSeedData;
+                if (product){
+                    const filteredBrands = filterBrandsByProduct (modelsListTest, brandsListTest, product)
+                    setFilteredBrands(filteredBrands)
+                }      
                 if(data){
                     brandsList.forEach(brand => {
                         if(data === brand.brandId){ setSelectedBrand(brand)}
@@ -48,7 +55,7 @@ const BrandDropdown = ({ onBrandSelect, productSelected, data, isVisible, setIsV
         };
 
         fetchData();
-    }, []);
+    }, [product]);
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
@@ -202,3 +209,21 @@ const brandDropdownContainer = {
 };
 
 export default BrandDropdown;
+
+
+function filterBrandsByProduct (modelsListTest, brandsListTest, product) {
+    let result = []
+    let filteredBrandsId =[]
+    for (let i in modelsListTest) {
+        if (modelsListTest[i].productId === product.productId) {
+            filteredBrandsId.push(modelsListTest[i].brandId)
+        }
+    }
+    const newfilteredBrandsId = Array.from(new Set(filteredBrandsId))
+    for (let ii in brandsListTest) {
+        if(newfilteredBrandsId.includes(brandsListTest[ii].brandId)){
+            result.push(brandsListTest[ii])
+        }
+    }
+    return result
+}
