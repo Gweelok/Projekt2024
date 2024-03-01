@@ -27,8 +27,8 @@ const SearchedLocation = ({location, styling, onPress, userLatitude, userLongitu
                     (<Text style={styles1.distance}>{` ${calculateDistance(
                         {latitude: userLatitude,
                             longitude: userLongitude},
-                        {latitude: parseFloat(location.uptainerLat),
-                            longitude: parseFloat(location.uptainerLong)}
+                        {latitude: parseFloat(location.uptainerLatitude),
+                            longitude: parseFloat(location.uptainerLongitude)}
                     )} km`}</Text>)}
                 </View>
             </View>

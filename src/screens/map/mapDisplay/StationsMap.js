@@ -15,53 +15,18 @@ import {
 } from "../../../styles/Stylesheet";
 import * as Location from 'expo-location';
 import {t, useLanguage} from "../../../Languages/LanguageHandler";
-import { calculateDistance } from '../../../utils/uptainersUtils';
+import { calculateDistance, sortUptainersByDistance } from '../../../utils/uptainersUtils';
 import SearchedLocation from './SearchedLocation';
-import Screens from "../../../utils/ScreenPaths";
-
-
-const stationData = [
-    {
-        uptainerName: "Det Bæredygtige Forsamlingshus",
-        uptainerQR: "https://www.google.com",
-        uptainerStreet: "Stockflethsvej 2",
-        uptainerZip: "2000",
-        uptainerCity: "Frederiksberg",
-        uptainerImage: "UPT1.jpg",
-        uptainerDescription: "I nærheden af Det Bæredygtige Forsamlingshus",
-        uptainerLat: "55.686256",
-        uptainerLong: "12.519641697795900",
-    },
-    {
-        uptainerName: "KU Lighthouse",
-        uptainerQR: "https://www.google.com",
-        uptainerStreet: "Tagensvej 16A",
-        uptainerZip: "2200",
-        uptainerCity: "Nørrebro",
-        uptainerImage: "UPT2.jpg",
-        uptainerDescription: "I nærheden af KU Lighthouse",
-        uptainerLat: "55.697947",
-        uptainerLong: "12.560119055467000",
-    },
-    {
-        uptainerName: "COOP 365",
-        uptainerQR: "https://www.google.com",
-        uptainerStreet: "Vigerslev Allé 124",
-        uptainerZip: "2500",
-        uptainerCity: "Valby",
-        uptainerImage: "UPT3.jpg",
-        uptainerDescription: "I nærheden af COOP 365",
-        uptainerLat: "55.661317",
-        uptainerLong: "12.50583269168790",
-    },
-  ];
+import { getAllUptainers } from '../../../utils/Repo';
+import Screens from '../../../utils/ScreenPaths';
 
 const StationsMap = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
-    const [filteredLocations, setFilteredLocations] = useState(stationData);
+    const [filteredLocations, setFilteredLocations] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showSearchResults, setShowSearchResults] = useState(false);
+    const [sortedUptainers, setSortedUptainers] = useState([])
     const mapRef = useRef();
     const isLoaderShow = false;
     const { currentLanguage } = useLanguage();
@@ -70,7 +35,7 @@ const StationsMap = ({ navigation }) => {
 
 
     useEffect(() => {
-        const getUserLocation = async () => {
+        const getData = async () => {
             try {
                 const { status } = await Location.requestForegroundPermissionsAsync();
                 if (status !== 'granted') {
@@ -81,15 +46,27 @@ const StationsMap = ({ navigation }) => {
 
                 const location = await Location.getCurrentPositionAsync({});
                 setUserLocation(location.coords);
+                
+                const allUptainers = await getAllUptainers()
+                setFilteredLocations(allUptainers)
+                if (location.coords){
+
+                    const sortedUptainers = location.coords ?
+                    await sortUptainersByDistance(location.coords, allUptainers) : allUptainers
+
+                    setSortedUptainers(sortedUptainers)
+                }
+
                 setLoading(false);
+
             } catch (error) {
-                console.error('Error fetching location:', error);
-                Alert.alert('Error fetching location. Please try again.');
+                console.error('Error fetching data:', error);
+                Alert.alert('Error fetching data. Please try again.');
                 setLoading(false);
             }
         };
 
-        getUserLocation();
+        getData();
     }, []);
 
     useEffect(() => {
@@ -119,22 +96,6 @@ const StationsMap = ({ navigation }) => {
         longitudeDelta: 0.0421,
     };
 
-    const sortLocationsByDistance = () => {
-        const sortedLocations = [...filteredLocations].sort((a, b) => {
-            const distanceA = calculateDistance(
-                { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(a.uptainerLat), longitude: parseFloat(a.uptainerLong) }
-            );
-            const distanceB = calculateDistance(
-                { latitude: userLatitude, longitude: userLongitude },
-                { latitude: parseFloat(b.uptainerLat), longitude: parseFloat(b.uptainerLong) }
-            )
-            return parseFloat(distanceA) - parseFloat(distanceB);
-        });
-
-        return sortedLocations;
-    };
-
     const openStationPage = (location) => {
         navigation.navigate(Screens.STATION_DETAILS , { stationDetail: location });
         console.log('onPress', location);
@@ -144,16 +105,16 @@ const StationsMap = ({ navigation }) => {
         setSearchText(text);
 
         if (text === '') {
-            setFilteredLocations(stationData);
+            setFilteredLocations(sortedUptainers);
             return;
         }
 
-        const filtered = stationData.filter(
+        const filtered = sortedUptainers.filter(
             (location) =>
                 location.uptainerName.toLowerCase().includes(text.toLowerCase()) ||
                 location.uptainerStreet.toLowerCase().includes(text.toLowerCase()) ||
                 location.uptainerCity.toLowerCase().includes(text.toLowerCase()) ||
-                location.uptainerZip.includes(text)
+                location.uptainerZip.toString().includes(text)
         );
 
         setFilteredLocations(filtered);
@@ -163,12 +124,11 @@ const StationsMap = ({ navigation }) => {
         }
     };
 
-    const sortedLocations = sortLocationsByDistance();
 
     const selectStation = (location) => {
         mapRef.current.animateToRegion({
-            latitude: parseFloat(location.uptainerLat),
-            longitude: parseFloat(location.uptainerLong),
+            latitude: parseFloat(location.uptainerLatitude),
+            longitude: parseFloat(location.uptainerLongitude),
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
         });
@@ -184,7 +144,7 @@ const StationsMap = ({ navigation }) => {
 
 
 
-    const lastIndex = sortedLocations.length - 1;
+    const lastIndex = sortedUptainers.length - 1;
 
     const toggleSearchResults = () => {
         setShowSearchResults(true);
@@ -202,8 +162,8 @@ const StationsMap = ({ navigation }) => {
                         ref={(marker) => (markersRef.current[location.uptainerName] = marker)}
                         key={location.uptainerName}
                         coordinate={{
-                            latitude: parseFloat(location.uptainerLat),
-                            longitude: parseFloat(location.uptainerLong),
+                            latitude: parseFloat(location.uptainerLatitude),
+                            longitude: parseFloat(location.uptainerLongitude),
                         }}
                         image={require('../../../../assets/images/marker_bg.jpg')}
                     >
@@ -247,7 +207,7 @@ const StationsMap = ({ navigation }) => {
                     ))
                 )
                 :(
-                    sortedLocations.map((location, index) => (
+                    sortedUptainers.map((location, index) => (
                     <SearchedLocation
                         location={location}
                         onPress={() => {
