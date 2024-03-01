@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
     borderWidth: 4,
     backgroundColor: Primarycolor3,
     flexDirection: "row",
-    minWidth:'75%',
+
 
   },
   // Form labels
