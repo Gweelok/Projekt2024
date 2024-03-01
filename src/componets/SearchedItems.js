@@ -118,18 +118,23 @@ async function filterAndGetImage (items, uptainerId) {
         if(item.itemUptainer === uptainerId){
             try {
                 const imageUrl = await getCachedImage(item.itemId);
-                res.push({
+                if (imageUrl) {
+                    res.push({
+                        ...item,
+                        imageUrl: imageUrl
+                    })
+                }
+                else {
+                    const imageUrl = await getImage(item.itemImage);
+                    await cacheImage(item.itemId, imageUrl)
+                    res.push({
                     ...item,
                     imageUrl: imageUrl
-                })
+                    })
+                }
             }
-            catch {                
-                const imageUrl = await getImage(item.itemImage);
-                await cacheImage(item.itemId, imageUrl)
-                res.push({
-                    ...item,
-                    imageUrl: imageUrl
-                })
+            catch (error) {                
+                console.error(`Error loading item's image ID ${item.itemId}:`, error);
             }
         }
     }
