@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cb77494-3648-4c51-a9b1-053db5d22bbf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/styles/MenuItemsNoArrow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/OverView/OverViewContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverView/OverViewContent.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +61,7 @@
       <workItem from="1708323335991" duration="1055000" />
       <workItem from="1708324485265" duration="4786000" />
       <workItem from="1708515302708" duration="1597000" />
+      <workItem from="1709295927730" duration="583000" />
     </task>
     <servers />
   </component>
