@@ -817,7 +817,7 @@ export async function getSearchedItems(searchText) {
             return (productName === searchText ||
                 brandName === searchText ||
                 modelName === searchText ||
-                categoryName === searchText) && item.itemUptainer !== 'Draft'
+                categoryName === searchText) && item.itemUptainer !== 'Draft' && !item.itemTaken
         })
 
         return filteredItems
@@ -904,7 +904,7 @@ export async function getImage(imagePath) {
 
     try {
         const url = await getDownloadURL(imageRef)
-        return url.at
+        return url
     } catch (err) {
         console.log("Error while downloading image => ", err);
         const url = "https://via.placeholder.com/200x200"

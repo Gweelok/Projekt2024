@@ -4,33 +4,44 @@ import { getItemById, getUptainerById } from "../utils/Repo"
 import { getDownloadURL, getStorage, ref } from "firebase/storage"
 import { calculateDistance } from "../utils/uptainersUtils"
 import { windowWidth } from "../utils/Dimensions"
-import { Primarycolor1, Primarycolor2, Primarycolor3 } from "../styles/Stylesheet"
+import { Primarycolor1, Primarycolor2, Primarycolor3, styles } from "../styles/Stylesheet"
 import Distance from "./atoms/Distance"
 import Screens from "../utils/ScreenPaths";
 
-const ItemsSearched = ({navigation, item, index, userLocation, endSearch , uptainer}) =>{
+const ItemsSearched = ({navigation, items, userLocation, endSearch , uptainer}) =>{
     return (
-        <TouchableOpacity onPress={() => {
-                navigation.navigate(Screens.DETAIL_VIEW, {
-                data: item?.itemId,
-                itemDescription: item?.itemDescription,
-                brandName: item?.brandName,
-                productName: item?.productName,
-                imageUrl: item?.imageUrl,
-                uptainer: uptainer,
-                })
-                endSearch()
-            }
-          } style={style.mainContainer}>
-            <View key={index}>
-                <View style={style.container1}>
-                    <Text style={style.uptainerName}>{uptainer.uptainerName}</Text>
-                    {!!userLocation && <Distance userLocation={userLocation} uptainer={uptainer}/>}
-                </View>
-                <Text style={style.uptainerAddress}>{uptainer.uptainerStreet}, {uptainer.uptainerZip} {uptainer.uptainerCity}</Text>
-                {!!item?.imageUrl && <Image source={{uri: item.imageUrl}} style={style.image}></Image>}
+        <View>
+            <View style={style.container1}>
+                <Text style={styles.menuItem_text}>{uptainer.uptainerName}</Text>                    
             </View>
-        </TouchableOpacity>
+            <View style={style.details}>
+                <Text style={{fontSize: 18, color: Primarycolor1}}>{uptainer.uptainerStreet}, {uptainer.uptainerZip}
+                {uptainer.uptainerCity}</Text>
+                {!!userLocation && <Distance userLocation={userLocation} uptainer={uptainer}/>}
+            </View>
+            <View style={style.container1}>
+                {items.map((item, index) => (
+                <TouchableOpacity 
+                        key={index}
+                        onPress={() => {
+                        navigation.navigate("DetailView", {
+                        data: item?.itemId,
+                        itemDescription: item?.itemDescription,
+                        brandName: item?.brandName,
+                        productName: item?.productName,
+                        imageUrl: item?.imageUrl,
+                        uptainer: uptainer,
+                        })
+                        endSearch()
+                    }
+                  }>
+
+                        <Image source={{uri: item.imageUrl}} style={style.image}></Image>
+
+                </TouchableOpacity>
+                ))}
+            </View>
+        </View>
     )
 }
 
@@ -38,13 +49,13 @@ const style = StyleSheet.create({
     mainContainer: {
         width: windowWidth * 0.89,
         marginTop: 8,
-        marginLeft: 3
     },
     container1: {
         fontFamily: 'space-grotesk',
         flex: 1,
+        flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         marginRight: 5
         
     },
@@ -58,10 +69,15 @@ const style = StyleSheet.create({
         fontSize: 13
     },
     image: {
-        marginTop: 5,
+        marginTop: 10,
+        marginRight: 10,
         width: 100,
         height: 100,
-    }
+    },
+    details: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
 })
 
 export default ItemsSearched

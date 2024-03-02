@@ -8,11 +8,13 @@ import { filterProducts } from "../utils/productsUtils"
 import { useLanguage, t } from "../Languages/LanguageHandler"
 import { Primarycolor1, Primarycolor2, Primarycolor3, dropdownStyles } from "../styles/Stylesheet"
 import ItemsSearched from "./ItemsSearched"
-import { setUptainersByIds } from "../utils/uptainersUtils"
+import { setUptainersByIds, sortUptainersByDistance } from "../utils/uptainersUtils"
+import { cacheImage, getCachedImage } from "../utils/Cache"
 
 const SearchedProducts = ({navigation, search, userLocation, endSearch, noProductFound, setNoProductFound }) =>{
     const [allProducts, setAllProducts] = useState(null)
     const [searchedData, setSearchedData] = useState([])
+    const [numberSearchedItems, setNumberSearchedItems] = useState(0)
     const { currentLanguage, setLanguage } = useLanguage()
     const [allUptainers, setAllUptainers] = useState(null);
     const [loading, setLoading] = useState(true)
@@ -22,16 +24,15 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
             try {
 
                 const uptainers = await getAllUptainers()
-                const setupUptainers = await setUptainersByIds(uptainers)
+                const sortedUptainers = sortUptainersByDistance(userLocation, uptainers)
+                const setupUptainers = await setUptainersByIds(sortedUptainers)
                 setAllUptainers(setupUptainers)
                 const searchedItems = await getSearchedItems(search)
                 if (!searchedItems.length) { setNoProductFound(true)}
-                const dataByImages = await Promise.all(searchedItems.map(async(item, index) => {
-                    const imageUrl = await getImage(item.itemImage)
-                    return {...item, imageUrl}
-                }))
                 setLoading(false)
-                setSearchedData(dataByImages)
+                const sortedItemsByUptainers = await sortItemsByUptainers (searchedItems, uptainers, userLocation)
+                setSearchedData(sortedItemsByUptainers)
+                setNumberSearchedItems(searchedItems.length)
                 } catch(error) {
                     console.error('Error fetching data:', error.message);
                     setLoading(false); // Set loading to false in case of an error
@@ -43,6 +44,8 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
 
     return (
         <View style={noProductFound ? null : style.container}>
+
+
                 {loading ? (
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={style.loadingContainer}>
                     <ActivityIndicator size='size'/>
@@ -52,17 +55,17 @@ const SearchedProducts = ({navigation, search, userLocation, endSearch, noProduc
                 null : 
                 <ScrollViewComponent style={{width: windowWidth * 0.89}}>
                  
-                    <Text style={style.productsMatch}>{searchedData.length} {t("SearchHome.productsMatch", currentLanguage)}</Text>
-                    {(!!searchedData.length && allUptainers) && ( searchedData.map((item, index) =>(
-                    <ItemsSearched 
-                    uptainer={allUptainers[item.itemUptainer]}
-                    endSearch={endSearch} navigation={navigation} index={index}
-                    item={item} userLocation={userLocation}/>
+                    <Text style={style.productsMatch}>{numberSearchedItems} {t("SearchHome.productsMatch", currentLanguage)}</Text>
+                    {(!!searchedData.length) && ( searchedData.map((items, index) =>(
+                    <ItemsSearched
+                    key={index} 
+                    uptainer={items.uptainer}
+                    endSearch={endSearch} navigation={navigation}
+                    items={items.items} userLocation={userLocation}/>
                     )))}
              
                 </ScrollViewComponent>
                 }
-
         </View>
     )
 }
@@ -90,3 +93,50 @@ const style = StyleSheet.create({
 })
 
 export default SearchedProducts;
+
+
+async function sortItemsByUptainers (items, uptainers, userLocation) {
+    const result = [];
+    const sortedUptainers = sortUptainersByDistance(userLocation, uptainers);
+    for (let i in sortedUptainers) {
+        const filteredItemsUptainer = await filterAndGetImage (items, sortedUptainers[i].uptainerId);
+        if(filteredItemsUptainer.length > 0){
+            result.push({
+                uptainer: sortedUptainers[i],
+                items: filteredItemsUptainer
+        })
+        }
+    }
+    return result
+}
+
+
+async function filterAndGetImage (items, uptainerId) {
+    const res =[];
+    for(let i in items) {
+        const item = items[i];
+        if(item.itemUptainer === uptainerId){
+            try {
+                const imageUrl = await getCachedImage(item.itemId);
+                if (imageUrl) {
+                    res.push({
+                        ...item,
+                        imageUrl: imageUrl
+                    })
+                }
+                else {
+                    const imageUrl = await getImage(item.itemImage);
+                    await cacheImage(item.itemId, imageUrl)
+                    res.push({
+                    ...item,
+                    imageUrl: imageUrl
+                    })
+                }
+            }
+            catch (error) {                
+                console.error(`Error loading item's image ID ${item.itemId}:`, error);
+            }
+        }
+    }
+    return res
+}
