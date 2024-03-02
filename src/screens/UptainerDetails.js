@@ -67,7 +67,7 @@ const UptainerDetails = ({ route }) => {
     return () => {
       clearTimeout(fadeOut)
     }
-  }, [addedItem,isLoading]);
+  }, [addedItem, isLoading]);
 
   // props
   const [newItem, setnewItem] = useState(route.params.newItem)
@@ -103,8 +103,7 @@ const UptainerDetails = ({ route }) => {
       }
 
 
-      await fetchUptainerData()
-      await fetchUptainerItems()
+      await Promise.all([fetchUptainerData(), fetchUptainerItems()])
     } catch (error) {
       Alert.alert("Error", error)
       navigation.goBack()
@@ -186,6 +185,7 @@ const UptainerDetails = ({ route }) => {
 
         try {
           const cachedImage = await getCachedImage(item.itemId)
+          
           if (cachedImage) {
             return {
               ...item,
