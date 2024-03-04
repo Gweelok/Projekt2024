@@ -314,6 +314,11 @@ export default function App() {
                     component={TermsAndConditions}
                   />
 
+                  <Stack.Screen
+                    name={Screens.PROFILE_CREATED}
+                    component={ProfileCreated}
+                  />
+
                 </Stack.Navigator>) : (
               <Stack.Navigator
                 initialRouteName={Screens.SPLASH}
@@ -347,6 +352,11 @@ export default function App() {
                 <Stack.Screen
                   name={Screens.TERMS_AND_CONDITIONS}
                   component={TermsAndConditions}
+                />
+
+                <Stack.Screen
+                  name={Screens.PROFILE_CREATED}
+                  component={ProfileCreated}
                 />
 
               </Stack.Navigator>)}
