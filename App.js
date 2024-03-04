@@ -124,172 +124,172 @@ export default function App() {
                 }}
               >
                 <Stack.Screen
-                name={Screens.HOME}
-                component={Home}
-              />
+                  name={Screens.HOME}
+                  component={Home}
+                />
 
-              <Stack.Screen
-                name={Screens.DETAIL_VIEW}
-                options={{ animation: "none", headerShown: false, }}
-                component={DetailView}
-              />
+                <Stack.Screen
+                  name={Screens.DETAIL_VIEW}
+                  options={{ animation: "none", headerShown: false, }}
+                  component={DetailView}
+                />
 
-              <Stack.Screen
-                name={Screens.ARTICLE_PAGE}
-                component={ArticlePage}
-              />
-              <Stack.Screen
-                name={Screens.MAP}
-                component={Map}
-              />
-              <Stack.Screen
-                name={Screens.PROFILE}
-                component={Profile}
-              />
-              <Stack.Screen
-                name={Screens.CONTACT_US}
-                component={ContactUs}
-              />
+                <Stack.Screen
+                  name={Screens.ARTICLE_PAGE}
+                  component={ArticlePage}
+                />
+                <Stack.Screen
+                  name={Screens.MAP}
+                  component={Map}
+                />
+                <Stack.Screen
+                  name={Screens.PROFILE}
+                  component={Profile}
+                />
+                <Stack.Screen
+                  name={Screens.CONTACT_US}
+                  component={ContactUs}
+                />
 
-              <Stack.Screen
-                name={Screens.DATA_POLICY}
-                component={DataPolicy}
-              />
-              <Stack.Screen
-                name={Screens.MY_DRAFTS}
-                component={MyDrafts}
-              />
-              <Stack.Screen
-                name={Screens.MY_SETTINGS}
-                component={MySettings}
-              />
+                <Stack.Screen
+                  name={Screens.DATA_POLICY}
+                  component={DataPolicy}
+                />
+                <Stack.Screen
+                  name={Screens.MY_DRAFTS}
+                  component={MyDrafts}
+                />
+                <Stack.Screen
+                  name={Screens.MY_SETTINGS}
+                  component={MySettings}
+                />
 
-              <Stack.Screen
-                name={Screens.CHANGE_PASSWORD}
-                component={ChangePassword}
-              />
+                <Stack.Screen
+                  name={Screens.CHANGE_PASSWORD}
+                  component={ChangePassword}
+                />
 
-              <Stack.Screen
-                name={Screens.DELETE_ACCOUNT}
-                component={DeleteAccount}
-              />
+                <Stack.Screen
+                  name={Screens.DELETE_ACCOUNT}
+                  component={DeleteAccount}
+                />
 
-              <Stack.Screen
-                name={Screens.ACCOUNT_SETTINGS}
-                component={AccountSettings}
-              />
-              <Stack.Screen
-                name={Screens.NOTIFICATIONS}
-                component={Notifications}
-              />
-              <Stack.Screen
-                name={Screens.TERMS_AND_CONDITIONS}
-                component={TermsAndConditions}
-              />
-      
-              <Stack.Screen
-                name={Screens.PROFILE_CREATED}
-                component={ProfileCreated}
-              />
-              <Stack.Screen
-                name={Screens.STATS_INFO}
-                component={StatsInfo}
-              />
-              <Stack.Screen
-                name={Screens.VISITED_UPTAINER_STAT}
-                component={VisitedUptainerStat}
-              />
-              <Stack.Screen
-                name={Screens.STATS}
-                component={Stat}
-              />
-              <Stack.Screen
-                name={Screens.YOUR_STATS}
-                component={YourStats}
-              />
-              <Stack.Screen
-                name={Screens.ADD}
-                component={Add}
-              />
-              <Stack.Screen
-                name={Screens.TAKE_QR_SCANNER}
-                component={TakeQRScanner}
-              />
-              <Stack.Screen
-                name={Screens.ADD_QR_SCANNER}
-                component={AddQRScanner}
-              />
-              <Stack.Screen
-                name={Screens.PRODUCTS}
-                component={ProductScreen}
-              />
-         
-              <Stack.Screen
-                name={Screens.PRO}
-                component={ProScreen}
-              />
-              <Stack.Screen
-                name={Screens.BND}
-                component={BndScreen}
-              />
-              <Stack.Screen
-                name={Screens.MOD}
-                component={ModScreen}
-              />
-              <Stack.Screen
-                name={Screens.STATIONS}
-                component={StationsScreen}
-              />
-              <Stack.Screen
-                name={Screens.STATION_DETAILS}
-                component={StationDetailScreen}
-              />
-              <Stack.Screen
-                name={Screens.THANKS}
-                component={ThanksScreen}
-              />
-              <Stack.Screen
-                name={Screens.LOGOUT_CONFIRMATION}
-                component={LogoutConfirmation}
-              />
-              <Stack.Screen
-                name={Screens.PRIVACY_POLICY}
-                component={PrivacyPolicy}
-              />
-              <Stack.Screen
-                name={Screens.UPTAINER_DETAILS}
-                component={UptainerDetails}
-              />
-              <Stack.Screen
-                name={Screens.PRODUCT_SAVED}
-                component={ProductSaved}
-              />
-              <Stack.Screen
-                name={Screens.PRODUCT_IS_TAKEN}
-                component={ProductIsTakenScreen}
-              />
-            
-              <Stack.Screen
-                name={Screens.PRODUCT_TAKEN}
-                component={ProductTaken}
-              />
-              <Stack.Screen
-                name={Screens.THANK_YOU}
-                component={ThankYouscreen}
-              />
-              <Stack.Screen
-                name={Screens.CAMERA}
-                component={CameraScreen}
-              />
-              <Stack.Screen
-                name={Screens.FORGOT_PASSWORD}
-                component={ForgotPassword}
-              />
+                <Stack.Screen
+                  name={Screens.ACCOUNT_SETTINGS}
+                  component={AccountSettings}
+                />
+                <Stack.Screen
+                  name={Screens.NOTIFICATIONS}
+                  component={Notifications}
+                />
+                <Stack.Screen
+                  name={Screens.TERMS_AND_CONDITIONS}
+                  component={TermsAndConditions}
+                />
 
-              <Stack.Screen
-                 name={Screens.INFO_GRAPHIC_CO2}
-                 component={InfographicCO2Screen}
-              />
+                <Stack.Screen
+                  name={Screens.PROFILE_CREATED}
+                  component={ProfileCreated}
+                />
+                <Stack.Screen
+                  name={Screens.STATS_INFO}
+                  component={StatsInfo}
+                />
+                <Stack.Screen
+                  name={Screens.VISITED_UPTAINER_STAT}
+                  component={VisitedUptainerStat}
+                />
+                <Stack.Screen
+                  name={Screens.STATS}
+                  component={Stat}
+                />
+                <Stack.Screen
+                  name={Screens.YOUR_STATS}
+                  component={YourStats}
+                />
+                <Stack.Screen
+                  name={Screens.ADD}
+                  component={Add}
+                />
+                <Stack.Screen
+                  name={Screens.TAKE_QR_SCANNER}
+                  component={TakeQRScanner}
+                />
+                <Stack.Screen
+                  name={Screens.ADD_QR_SCANNER}
+                  component={AddQRScanner}
+                />
+                <Stack.Screen
+                  name={Screens.PRODUCTS}
+                  component={ProductScreen}
+                />
+
+                <Stack.Screen
+                  name={Screens.PRO}
+                  component={ProScreen}
+                />
+                <Stack.Screen
+                  name={Screens.BND}
+                  component={BndScreen}
+                />
+                <Stack.Screen
+                  name={Screens.MOD}
+                  component={ModScreen}
+                />
+                <Stack.Screen
+                  name={Screens.STATIONS}
+                  component={StationsScreen}
+                />
+                <Stack.Screen
+                  name={Screens.STATION_DETAILS}
+                  component={StationDetailScreen}
+                />
+                <Stack.Screen
+                  name={Screens.THANKS}
+                  component={ThanksScreen}
+                />
+                <Stack.Screen
+                  name={Screens.LOGOUT_CONFIRMATION}
+                  component={LogoutConfirmation}
+                />
+                <Stack.Screen
+                  name={Screens.PRIVACY_POLICY}
+                  component={PrivacyPolicy}
+                />
+                <Stack.Screen
+                  name={Screens.UPTAINER_DETAILS}
+                  component={UptainerDetails}
+                />
+                <Stack.Screen
+                  name={Screens.PRODUCT_SAVED}
+                  component={ProductSaved}
+                />
+                <Stack.Screen
+                  name={Screens.PRODUCT_IS_TAKEN}
+                  component={ProductIsTakenScreen}
+                />
+
+                <Stack.Screen
+                  name={Screens.PRODUCT_TAKEN}
+                  component={ProductTaken}
+                />
+                <Stack.Screen
+                  name={Screens.THANK_YOU}
+                  component={ThankYouscreen}
+                />
+                <Stack.Screen
+                  name={Screens.CAMERA}
+                  component={CameraScreen}
+                />
+                <Stack.Screen
+                  name={Screens.FORGOT_PASSWORD}
+                  component={ForgotPassword}
+                />
+
+                <Stack.Screen
+                  name={Screens.INFO_GRAPHIC_CO2}
+                  component={InfographicCO2Screen}
+                />
 
               </Stack.Navigator>) : isActive && !user ? (
                 <Stack.Navigator
@@ -307,6 +307,16 @@ export default function App() {
                   <Stack.Screen
                     name={Screens.SIGN_UP}
                     component={SignUpScreen}
+                  />
+
+                  <Stack.Screen
+                    name={Screens.TERMS_AND_CONDITIONS}
+                    component={TermsAndConditions}
+                  />
+
+                  <Stack.Screen
+                    name={Screens.PROFILE_CREATED}
+                    component={ProfileCreated}
                   />
 
                 </Stack.Navigator>) : (
@@ -337,6 +347,16 @@ export default function App() {
                 <Stack.Screen
                   name={Screens.SIGN_IN}
                   component={SignIn}
+                />
+
+                <Stack.Screen
+                  name={Screens.TERMS_AND_CONDITIONS}
+                  component={TermsAndConditions}
+                />
+
+                <Stack.Screen
+                  name={Screens.PROFILE_CREATED}
+                  component={ProfileCreated}
                 />
 
               </Stack.Navigator>)}
