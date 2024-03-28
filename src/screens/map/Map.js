@@ -1,17 +1,14 @@
-import { styles ,Backgroundstyle} from '../../styles/Stylesheet';
-import Navigationbar from '../../componets/Navigationbar';
-import React from 'react';
-import StationsMap from "./mapDisplay/StationsMap";
-import {View} from "react-native";
+import Screen from "../../templates/standardScreens/screen";
 
+import React from "react";
+import StationsMap from "../../components/mapDisplay/stations-map/StationsMap";
 
-const Map = ({ navigation }) => {
-return (
-    <View style={Backgroundstyle.interactive_screens}>
-        <StationsMap navigation={navigation}/>
-        <Navigationbar navigation={navigation}/>
-    </View>
-);
-}
+const Map = () => {
+  return (
+    <Screen>
+      <StationsMap/>
+    </Screen>
+  );
+};
 
 export default Map;

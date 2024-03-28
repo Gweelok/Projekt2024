@@ -3,36 +3,23 @@
  * front end, easy access to be changed here
  * **/
 
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
-import { inline } from "react-native-web/src/exports/StyleSheet/compiler";
-
-
-//Main colors
-export const Primarycolor1 = "#1c4b3d"; // DarkGreen
-export const Primarycolor2 = "#dae2e0"; //lightgreen
-export const Primarycolor3 = "#fff"; // White
-export const Primarycolor4 = "#8EA59E"; //SweetGreen
+import indexStyles from "../styles/index";
 
 // Stylesheet like CSS
 export const styles = StyleSheet.create({
-  landingPageStyle: {
-    flex: 1,
-    marginTop: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   mapStyle: {
-    marginTop: 40,
-    width: 170 * 2,
-    height: 120 * 3,
-    borderRadius: 10,
-    borderWidth: 1,
+    marginTop: indexStyles.metrics.screen.map.marginTop,
+    width: indexStyles.metrics.screen.map.width,
+    height: indexStyles.metrics.screen.map.height,
+    borderRadius: indexStyles.metrics.screen.map.borderRadius,
+    borderWidth: indexStyles.metrics.screen.map.borderWidth,
   },
   seperatorStyle: {
-    height: 1,
-    width: "100%",
-    backgroundColor: "#CED0CE",
+    height: indexStyles.metrics.misc.separator.height,
+    width: indexStyles.metrics.misc.separator.width,
+    backgroundColor: indexStyles.colorPalette.grayishLimeGreen, //<------------------------- add constant
   },
   container: {
     flex: 1,
@@ -41,114 +28,116 @@ export const styles = StyleSheet.create({
   },
   //Headlines
   Header: {
-    fontSize: 35,
-    marginBottom: 20,
-    marginTop: 30,
-    fontFamily: "space-grotesk",
+    fontSize: indexStyles.typography.fontSize.h1,
+    marginBottom: indexStyles.metrics.header.primary.marginBottom,
+    marginTop: indexStyles.metrics.header.primary.marginTop,
+    fontFamily: indexStyles.typography.fontFamily.primary,
   },
   Header_Primarycolor1: {
-    color: Primarycolor1,
-    fontSize: 16,
-    marginTop: 10,
-    marginBottom: 10,
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.body1,
+    marginTop: indexStyles.metrics.header.secondary.marginTop,
+    marginBottom: indexStyles.metrics.header.secondary.marginBottom,
   },
 
   //Links
   link: {
-    color: Primarycolor1,
+    color: indexStyles.colorPalette.Primarycolor1,
     textDecorationLine: "underline",
     textAlign: "center",
-    fontFamily: "space-grotesk",
+    fontFamily: indexStyles.typography.fontFamily.primary,
   },
   //paragraph - use for all paragraphs in the app on interactive screens
   paragraph_text: {
-    fontFamily: "space-grotesk",
-    color: Primarycolor1,
-    fontSize: 16,
+    fontFamily: indexStyles.typography.fontFamily.primary,
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.body1,
   },
   article_text: {
-    color: Primarycolor1,
-    fontSize: 16,
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.body1,
   },
   //Input box
   inputBox: {
-    height: 45,
-    width: "100%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 15,
-    borderWidth: 4,
-    padding: 10,
-    fontSize: 16,
-    fontFamily: "space-grotesk",
-    borderColor: Primarycolor1,
-    backgroundColor: Primarycolor3,
+    height: indexStyles.metrics.box.input.height,
+    width: indexStyles.metrics.box.input.width,
+    marginLeft: indexStyles.metrics.box.input.marginLeft,
+    marginRight: indexStyles.metrics.box.input.marginRight,
+    marginBottom: indexStyles.metrics.box.input.marginBottom,
+    borderWidth: indexStyles.metrics.box.input.borderWidth,
+    padding: indexStyles.metrics.box.input.padding,
+    fontSize: indexStyles.typography.fontSize.body1,
+    fontFamily: indexStyles.typography.fontFamily.primary,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    backgroundColor: indexStyles.colorPalette.Primarycolor3,
     alignSelf: "stretch",
   },
   errorInputBox: {
-    borderColor: "#AA0000",
-    borderWidth: 3,
+    borderColor: indexStyles.colorPalette.errorRed, //Error red  //<------------------------- add constant
+    borderWidth: indexStyles.metrics.box.error.borderWidth,
   },
   errorText: {
-    color:"#AA0000",
-    marginTop:-15,
-    fontSize:14
+    color: indexStyles.colorPalette.errorRed, //Error red  //<------------------------- add constant
+    marginTop: -indexStyles.metrics.text.error.marginTop,
+    fontSize: indexStyles.typography.fontSize.body3,
   },
   //Menu items
   menuItem: {
-    width: "100%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 15,
-    padding: 10,
-    borderColor: Primarycolor1,
-    borderWidth: 4,
-    backgroundColor: Primarycolor3,
+    width: indexStyles.metrics.item.menu.width,
+    marginLeft: indexStyles.metrics.item.menu.marginLeft,
+    marginRight: indexStyles.metrics.item.menu.marginRight,
+    marginBottom: indexStyles.metrics.item.menu.marginBottom,
+    padding: indexStyles.metrics.item.menu.padding,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    borderWidth: indexStyles.metrics.item.menu.borderWidth,
+    backgroundColor: indexStyles.colorPalette.Primarycolor3,
     flexDirection: "row",
   },
   // Form labels
   formLabel: {
-    fontFamily: "space-grotesk-bold",
-    color: Primarycolor1,
-    fontSize: 15,
-    marginLeft: 17,
-    marginBottom: 10,
-    marginTop: 5,
-    fontWeight: "bold",
+    fontFamily: indexStyles.typography.fontFamily.primaryBold,
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.body2,
+    marginLeft: indexStyles.metrics.label.form.marginLeft,
+    marginRight: indexStyles.metrics.label.form.marginRight,
+    marginBottom: indexStyles.metrics.label.form.marginBottom,
+    marginTop: indexStyles.metrics.label.form.marginTop,
+    fontWeight: indexStyles.typography.fontWeight.bold,
   },
   // (optional) text style
   optionalText: {
-    color: Primarycolor1,
-    fontSize: 13,
-    fontWeight: "300",
-    fontFamily: "space-grotesk"
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.body4,
+    fontWeight: indexStyles.typography.fontWeight.regular,
+    fontFamily: indexStyles.typography.fontFamily.primary,
   },
   //Text for both menuitem and boxlink
   menuItem_text: {
-    fontFamily: "space-grotesk-bold",
-    color: Primarycolor1,
-    fontSize: 20,
-    marginRight: "auto",
+    fontFamily: indexStyles.typography.fontFamily.primaryBold,
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.h4,
+    marginRight: indexStyles.metrics.text.menuItem.marginRight,
+    marginTop: indexStyles.metrics.text.menuItem.marginTop, //disabled
   },
   menuItem_arrow: {
-    color: Primarycolor1,
+    color: indexStyles.colorPalette.Primarycolor1,
   },
   Icon_container: {
     justifyContent: "center",
-    marginLeft: "auto",
+    marginLeft: indexStyles.metrics.container.icon.marginLeft,
     alignItems: "center",
   },
 
   //Box_Link
   boxlink: {
-    paddingBottom: 10,
-    paddingTop: 10,
-    marginVertical: 10,
-    padding: 10,
-    borderColor: Primarycolor1,
-    backgroundColor: Primarycolor2,
+    paddingBottom: indexStyles.metrics.box.link.paddingBottom,
+    paddingTop: indexStyles.metrics.box.link.paddingTop,
+    marginVertical: indexStyles.metrics.box.link.marginVertical,
+    padding: indexStyles.metrics.box.link.padding,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    backgroundColor: indexStyles.colorPalette.Primarycolor2,
     flexDirection: "row",
-    minHeight: 80,
+    minHeight: indexStyles.metrics.box.link.minHeight,
     position: "relative",
     alignContent: "center",
     alignItems: "center",
@@ -160,59 +149,59 @@ export const styles = StyleSheet.create({
   },
   badgeContainer: {
     position: "absolute",
-    backgroundColor: Primarycolor1,
-    width: 30,
-    height: 30,
+    backgroundColor: indexStyles.colorPalette.Primarycolor1,
+    width: indexStyles.metrics.container.badge.width,
+    height: indexStyles.metrics.container.badge.height,
     justifyContent: "center",
     alignItems: "center", // Adjust spacing as needed
-    marginLeft: 10,
+    marginLeft: indexStyles.metrics.container.badge.marginLeft,
   },
   badgeText: {
-    color: "white", // Customize the text color as needed
-    fontSize: 20,
-    fontWeight: "bold",
+    color: indexStyles.colorPalette.Primarycolor3, // Customize the text color as needed----- added as const
+    fontSize: indexStyles.typography.fontSize.h4,
+    fontWeight: indexStyles.typography.fontWeight.bold,
   },
   container2: {
     top: "5%",
     flex: 1,
-    backgroundColor: "white", // White background
+    backgroundColor: indexStyles.colorPalette.Primarycolor3, // White background  //<------------------------- add constant
   },
   header: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "white", // White background
-    marginTop: 30, // Adjust the margin to lower the header
-    marginBottom: 10,
+    backgroundColor: indexStyles.colorPalette.Primarycolor3, // White background  //<------------------------- add constant
+    marginTop: indexStyles.metrics.header.primary.marginTop,
+    marginBottom: indexStyles.metrics.header.secondary.marginBottom,
   },
   HeaderFull: {
     flexDirection: "row",
-    width: "100%",
+    width: indexStyles.metrics.header.full.width,
   },
   HeaderText: {
-    fontSize: 30,
-    marginLeft: "auto",
-    marginRight: "auto",
-    fontFamily: "space-grotesk-Medium",
-    color: Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.h2,
+    marginLeft: indexStyles.metrics.header.text.marginLeft,
+    marginRight: indexStyles.metrics.header.text.marginRight,
+    fontFamily: indexStyles.typography.fontFamily.primaryMedium,
+    color: indexStyles.colorPalette.Primarycolor1,
   },
   divider: {
-    borderColor: Primarycolor1,
-    borderWidth: 1,
-    marginVertical: 20
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    borderWidth: indexStyles.metrics.misc.divider.borderWidth,
+    marginVertical: indexStyles.metrics.misc.divider.marginVertical,
   },
   closeButton: {
-    backgroundColor: Primarycolor1,
-    padding: 3, // Decreased padding to make the button smaller
+    backgroundColor: indexStyles.colorPalette.Primarycolor1,
+    padding: indexStyles.metrics.button.close.padding, // Decreased padding to make the button smaller
   },
   closeButtonIcon: {
-    color: "white", // White text color
+    color: indexStyles.colorPalette.Primarycolor3, // White text color  //<------------------------- add constant
   },
   headline: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: Primarycolor1, // Dark green text color
+    fontSize: indexStyles.typography.fontSize.h3,
+    fontWeight: indexStyles.typography.fontWeight.bold,
+    color: indexStyles.colorPalette.Primarycolor1, // Dark green text color
   },
   content: {
     flex: 1,
@@ -220,11 +209,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   qrScannerFrame: {
-    width: "100%",
+    width: indexStyles.metrics.container.qrScanner.width,
     flex: 1,
-    height: 400,
-    marginBottom: 20,
-    marginTop: 20,
+    height: indexStyles.metrics.container.qrScanner.height,
+    marginBottom: indexStyles.metrics.container.qrScanner.marginBottom,
+    marginTop: indexStyles.metrics.container.qrScanner.marginTop,
   },
 
   buttonsContainer: {
@@ -233,20 +222,24 @@ export const styles = StyleSheet.create({
   //Headlines and body text
   bodyText: {
     textAlign: "left",
-  }, Bodywrapper: { backgroundColor: "white", flex: 1, top: "5%" }
-
+  },
+  Bodywrapper: { // prbably not used.
+    backgroundColor: indexStyles.colorPalette.Primarycolor3,
+    flex: 1,
+    top: indexStyles.metrics.container.Bodywrapper.top,
+  }, //<------------------------- add constant
 });
 
 //Profile styles
 export const profileStyles = StyleSheet.create({
   profileIcon: {
-    marginRight: "auto",
-    marginLeft: "auto",
+    marginRight: indexStyles.metrics.icon.profile.marginRight,
+    marginLeft: indexStyles.metrics.icon.profile.marginLeft,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
-    padding: 5,
-    color: Primarycolor1,
+    marginBottom: indexStyles.metrics.icon.profile.marginBottom,
+    padding: indexStyles.metrics.icon.profile.padding,
+    color: indexStyles.colorPalette.Primarycolor1,
   },
 });
 
@@ -255,11 +248,11 @@ const stationListStyle = { width: 170 * 2, height: 80 };
 const cornerStyle = { borderRadius: 5 };
 const chooseStyle = { marginBottom: 10, width: 190 * 2 };
 
-const bigFont = { fontSize: 35 };
-const midFont = { fontSize: 24 };
+/* const bigFont = { fontSize: 35 };
+const midFont = { fontSize: 24 }; */
 
 const buttonStyles = {
-  backgroundColor: "#4cac6a",
+  backgroundColor: indexStyles.colorPalette.cyan, // mint-green?  //<------------------------- add constant (OLD COLOR)
   borderRadius: 10,
 };
 const productButtonStyles = {
@@ -271,10 +264,11 @@ const buttonsWrapper = {
   justifyContent: "space-evenly",
   marginBottom: 30,
 };
-const yellowColor = { backgroundColor: "#f4940a" };
-const greyColor = { backgroundColor: "#f3f3f3" };
 
-export const elementsStyles = {
+//const yellowColor = { backgroundColor: "#f4940a" };
+//const greyColor = { backgroundColor: "#f3f3f3" };
+
+/*export const elementsStyles = {  Keep or del...
   regRenderStyle,
   stationListStyle,
   cornerStyle,
@@ -286,129 +280,127 @@ export const elementsStyles = {
   yellowColor,
   greyColor,
   productButtonStyles,
-};
+};*/
 
 export const navStyle = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "rgb(255,255,255)",
+    background: indexStyles.colorPalette.Primarycolor3, // WHITE - Should be replaced with const //<------------------------- add constant
   },
 };
 
 //Background styles
 export const Backgroundstyle = StyleSheet.create({
   informationScreens: {
-    paddingTop: 50,
+    paddingTop: indexStyles.metrics.screen.information.paddingTop,
     alignItems: "center",
     flex: 1,
-    backgroundColor: Primarycolor2,
+    backgroundColor: indexStyles.colorPalette.Primarycolor2,
   },
   interactive_screens: {
-    paddingTop: 50,
+    paddingTop: indexStyles.metrics.screen.interactive.paddingTop,
     alignItems: "center",
     flex: 1,
-    backgroundColor: Primarycolor3,
+    backgroundColor: indexStyles.colorPalette.Primarycolor3,
   },
   message_Screens: {
     alignItems: "center",
     flex: 1,
-    backgroundColor: Primarycolor1,
+    backgroundColor: indexStyles.colorPalette.Primarycolor1,
   },
 });
 
 //Background styles
 export const Buttons = StyleSheet.create({
   buttonfb: {
-    backgroundColor: "#4765A9",
-    fontSize: 22,
-    padding: 10,
-    marginLeft: "auto",
-    marginRight: "auto",
+    backgroundColor: indexStyles.colorPalette.facebookBlue,
+    fontSize: indexStyles.typography.fontSize.button2,
+    padding: indexStyles.metrics.button.facebook.padding,
+    marginLeft: indexStyles.metrics.button.facebook.marginLeft,
+    marginRight: indexStyles.metrics.button.facebook.marginRight,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: "100%",
-    marginTop: "8%"
+    width: indexStyles.metrics.button.facebook.width,
+    marginTop: indexStyles.metrics.button.facebook.marginTop,
   },
   buttongoogle: {
-    backgroundColor: "#F41616",
-    fontSize: 22,
-    padding: 10,
-    marginBottom: 20,
+    backgroundColor: indexStyles.colorPalette.googleRed, //<------------------------- add constant
+    fontSize: indexStyles.typography.fontSize.button2,
+    padding: indexStyles.metrics.button.google.padding,
+    marginBottom: indexStyles.metrics.button.google.marginBottom,
     alignItems: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "100%",
-    marginTop: "4%"
+    marginLeft: indexStyles.metrics.button.google.marginLeft,
+    marginRight: indexStyles.metrics.button.google.marginRight,
+    width: indexStyles.metrics.button.google.width,
+    marginTop: indexStyles.metrics.button.google.marginTop,
   },
   main_button: {
-    padding: 8,
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: Primarycolor1,
-    borderColor: Primarycolor1,
-    borderWidth: 4,
-    width: "100%",
-    marginVertical: "4%"
+    padding: indexStyles.metrics.button.primary.padding,
+    marginLeft: indexStyles.metrics.button.primary.marginLeft,
+    marginRight: indexStyles.metrics.button.primary.marginRight,
+    backgroundColor: indexStyles.colorPalette.Primarycolor1,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    borderWidth: indexStyles.metrics.button.primary.borderWidth,
+    width: indexStyles.metrics.button.primary.width,
+    marginVertical: indexStyles.metrics.button.primary.marginVertical,
   },
   disabled_button: {
-    opacity: 0.4,
+    opacity: indexStyles.metrics.button.disabled.opacity,
   },
   main_buttonText: {
-    color: "white",
+    color: indexStyles.colorPalette.Primarycolor3,
     textAlign: "center",
-    fontSize: 15,
-    fontFamily: "space-grotesk-Medium",
+    fontSize: indexStyles.typography.fontSize.button1,
+    fontFamily: indexStyles.typography.fontFamily.primaryMedium,
   },
   secondary_button: {
-    padding: 8,
-    marginLeft: "auto",
-    marginRight: "auto",
-    backgroundColor: Primarycolor3,
-    borderColor: Primarycolor1,
-    borderWidth: 4,
-    width: "100%",
-    marginVertical: "2%"
+    padding: indexStyles.metrics.button.secondary.padding,
+    marginLeft: indexStyles.metrics.button.secondary.marginLeft,
+    marginRight: indexStyles.metrics.button.secondary.marginRight,
+    backgroundColor: indexStyles.colorPalette.Primarycolor3,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    borderWidth: indexStyles.metrics.button.secondary.borderWidth,
+    width: indexStyles.metrics.button.secondary.width,
+    marginVertical: indexStyles.metrics.button.secondary.marginVertical,
   },
   secondary_buttonText: {
-    color: Primarycolor1,
+    color: indexStyles.colorPalette.Primarycolor1,
     textAlign: "center",
-    fontSize: 15,
-    fontFamily: "space-grotesk-Medium",
+    fontSize: indexStyles.typography.fontSize.button1,
+    fontFamily: indexStyles.typography.fontFamily.primaryMedium,
   },
   iconContainerRight: {
     position: "absolute",
-    top: 20,
-    right: 20,
-    backgroundColor: Primarycolor1,
+    top: indexStyles.metrics.container.iconRight.top,
+    right: indexStyles.metrics.container.iconRight.right,
+    backgroundColor: indexStyles.colorPalette.Primarycolor1,
   },
   Icon: {
-    color: Primarycolor3,
+    color: indexStyles.colorPalette.Primarycolor3,
   },
 
   //used for continue with facebook and with continue with google
   SocialMediabuttonText: {
-    color: "white",
+    color: indexStyles.colorPalette.Primarycolor3, // <------------------ add constant
     textAlign: "center",
-    fontSize: 15,
-    fontFamily: "space-grotesk-Medium",
+    fontSize: indexStyles.typography.fontSize.body2,
+    fontFamily: indexStyles.typography.fontFamily.primaryMedium,
   },
 });
 export const HeaderText = StyleSheet.create({
   Header: {
-    fontSize: 30,
-    marginBottom: 15,
-    marginTop: 15,
-   // marginLeft: 20,
-    fontFamily: "space-grotesk-Medium",
-    color: Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.h2,
+    marginBottom: indexStyles.metrics.header.text.marginBottom,
+    fontFamily: indexStyles.typography.fontFamily.primaryMedium,
+    color: indexStyles.colorPalette.Primarycolor1,
   },
   Header_Primarycolor1: {
-    color: Primarycolor1,
-    fontSize: 12,
-    marginTop: 10,
-    marginBottom: 10,
+    color: indexStyles.colorPalette.Primarycolor1,
+    fontSize: indexStyles.typography.fontSize.body5,
+    marginTop: indexStyles.metrics.header.secondary.marginTop,
+    marginBottom: indexStyles.metrics.header.secondary.marginBottom,
   },
 });
 // Dropdown
@@ -418,71 +410,76 @@ export const dropdownStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 55,
+    height: indexStyles.metrics.container.dropdownPrimary.height,
   },
   dropdownContainer2: {
-    position: 'absolute',
-    zIndex: 1,
-    marginTop: 87,
-    width: '100%',
-    maxHeight: 250,
+    position: "absolute",
+    zIndex: indexStyles.metrics.container.dropdownSecondary.zIndex,
+    marginTop: indexStyles.metrics.container.dropdownSecondary.marginTop,
+    width: indexStyles.metrics.container.dropdownSecondary.width,
+    maxHeight: indexStyles.metrics.container.dropdownSecondary.maxHeight,
   },
   dropdownText: {
     ...styles.menuItem_text,
     flex: 0,
-    marginRight: 5,
+    marginRight: indexStyles.metrics.text.dropdown.marginRight,
   },
   dropdownList: {
-    borderWidth: 4,
-    borderColor: Primarycolor1,
-    marginTop: 0,
+    borderWidth: indexStyles.metrics.list.dropdown.borderWidth,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    marginTop: indexStyles.metrics.list.dropdown.marginTop,
   },
 
   dropdownListItem: {
-    padding: 10,
+    padding: indexStyles.metrics.list.dropdownItemPrimary.padding,
     borderBottomWidth: 1,
-    borderBottomColor: Primarycolor1,
+    borderBottomColor: indexStyles.colorPalette.Primarycolor1,
   },
   dropdownFilterTextHome: {
-    fontFamily: "space-grotesk-bold",
-    color: Primarycolor4,
+    fontFamily: indexStyles.typography.fontFamily.primaryBold,
+    color: indexStyles.colorPalette.Primarycolor4,
     flex: 0,
-    fontWeight: "regular",
+    fontWeight: indexStyles.typography.fontWeight.regular,
   },
   dropdownListItem2: {
-    backgroundColor: 'white',
-    padding: 10,
-    borderColor: Primarycolor1,
-    width: '100%',
-    borderWidth: 3,
-    borderBottomWidth: 0,
+    backgroundColor: indexStyles.colorPalette.Primarycolor3, //<------------------------- add constant
+    padding: indexStyles.metrics.list.dropdownItemSecondary.padding,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    width: indexStyles.metrics.list.dropdownItemSecondary.width,
+    borderWidth: indexStyles.metrics.list.dropdownItemSecondary.borderWidth,
+    borderBottomWidth:
+      indexStyles.metrics.list.dropdownItemSecondary.borderBottomWidth,
   },
   dropdownSearchFieldListContainer: {
-    top: 40,
-    left: 0,
-    right: 0,
-    zIndex: 1,
-    width: "100%",
-    borderBottomWidth: 3,
-    borderRightWidth: 3,
-    borderLeftWidth: 3,
-    borderTopWidth: 0,
-    borderColor: Primarycolor1,
-    minHeight: 40,
+    top: indexStyles.metrics.container.dropdownSearchFieldList.top,
+    left: indexStyles.metrics.container.dropdownSearchFieldList.left,
+    right: indexStyles.metrics.container.dropdownSearchFieldList.right,
+    zIndex: indexStyles.metrics.container.dropdownSearchFieldList.zIndex,
+    width: indexStyles.metrics.container.dropdownSearchFieldList.width,
+    borderBottomWidth:
+      indexStyles.metrics.container.dropdownSearchFieldList.borderBottomWidth,
+    borderRightWidth:
+      indexStyles.metrics.container.dropdownSearchFieldList.borderRightWidth,
+    borderLeftWidth:
+      indexStyles.metrics.container.dropdownSearchFieldList.borderLeftWidth,
+    borderTopWidth:
+      indexStyles.metrics.container.dropdownSearchFieldList.borderTopWidth,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    minHeight: indexStyles.metrics.container.dropdownSearchFieldList.minHeight,
     justifyContent: "center",
     position: "absolute",
-    backgroundColor: 'white',
+    backgroundColor: indexStyles.colorPalette.Primarycolor3, //<------------------------- add constant
   },
   dropdownSearchFieldList: {
-    backgroundColor: 'white',
-    padding: 10,
-    borderColor: Primarycolor1,
-    width: '100%',
+    backgroundColor: indexStyles.colorPalette.Primarycolor3, //<------------------------- add constant
+    padding: indexStyles.metrics.list.dropdownSearchField.padding,
+    borderColor: indexStyles.colorPalette.Primarycolor1,
+    width: indexStyles.metrics.list.dropdownSearchField.width,
   },
   dropdownErrorText: {
     textAlign: "center",
-    paddingTop: 20,
-    paddingBottom: 40,
-    color: Primarycolor4,
+    paddingTop: indexStyles.metrics.text.dropdownError.paddingTop,
+    paddingBottom: indexStyles.metrics.text.dropdownError.paddingBottom,
+    color: indexStyles.colorPalette.Primarycolor4,
   },
 });

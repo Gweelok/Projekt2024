@@ -130,135 +130,6 @@ to set where your commits go, after that when you want to push your commits to t
 ## And that's it
 And that should be it, I hope, just remember to "pull" every time you open up the project, just to make sure there are no problems.
 
-## How to use Loading on screens
-
-import { LoaderContext } from "../components/LoaderContext";
-import LoadingScreen from "../components/LoadingScreen";
-import useContext
-Create a const to access to the global loading state and its associated setter.
- const { isLoading, setIsLoading } = useContext(LoaderContext);
- setIsLoading(true); for where to start the loading
- setIsLoading(false); where to stop the loading
- {isLoading && <LoadingScreen isLoaderShow={isLoading} />} in return for bring in LoadingScreen
-
-# Databases and you
-## How to Use Firebase Functions in React Native
-
-Welcome to the guide on effectively using Firebase functions in your React Native app. Below, you'll find a comprehensive list of functions available in the repository, along with examples of how to use them. Let's dive in!
-
-#### Diagram Firebase
-
-In this diagram you can see the name of the objects in the database and the name of all the fields.
-![Diagram for working with Realtime Database](https://github.com/ekmakeitgoodagain/updropp/blob/igor_sorokin_add_diagram_to_readme/src/utils/firebaseDiagram.png)
-### Function Descriptions
-
-Each function's purpose is briefly described to help you understand its role in your app.
-
-```javascript
-// Import functions from the repo
-import {
-  // ... (all imports)
-} from './repo';
-```
-
-#### Retrieve Data
-
-Retrieve data from the database using functions like `getAllCategories()` or `getCategoryById(categoryId)`.
-
-```javascript
-// Retrieve all categories
-const allCategories = await getAllCategories();
-
-// Retrieve a specific category by its ID
-const category = await getCategoryById('categoryId');
-```
-
-#### Create Data
-
-Create new records in the database using functions like `createUptainer(data)`. Refer to the function comments or documentation for parameter details.
-
-```javascript
-// Example data for a new uptainer
-const newUptainerData = {
-  // ... (uptainer properties)
-};
-
-// Create a new uptainer
-await createUptainer(newUptainerData);
-```
-
-#### Delete Data
-
-Remove records from the database using delete functions like `deleteCategoryById(categoryId)`.
-
-```javascript
-// Delete a category by its ID
-await deleteCategoryById('categoryId');
-```
-
-#### Update Data
-
-Modify existing data using update functions such as `updateModelById(modelId, newData)`.
-
-```javascript
-// Example updated model data
-const updatedModelData = {
-  // ... (updated model properties)
-};
-
-// Update a model by its ID
-await updateModelById('modelId', updatedModelData);
-```
-
-#### Async Operations
-
-Firebase operations are asynchronous. Handle async operations properly using `async/await` or `.then()` as shown in the examples above. Ensure you handle errors that might occur during these operations.
-
-### All functions that can be called
-
-Find more examples below on how to use various functions:
-
-```javascript
-/Create
-createUptainer(data) 
-createCategory(name)
-createBrand(name)
-createProduct(data)
-createUser(email, password, name = "John Doe") //if there is no name, the name is John Doe
-
-//Get
-getAllCategories()
-getCategoryById(categoryId)
-getAllBrands()
-getBrandById(brandId)
-getAllUptainers()
-getUptainerById(uptainerId)
-getAllModels()
-getModelById(modelId)
-getAllProducts()
-getAllItems()
-getItemById(itemId)
-getCurrentUser()
-
-//Delete
-deleteCategoryById(categoryId)
-deleteBrandById(brandId)
-deleteUptainerById(uptainerId)
-deleteItemById(itemId)
-deleteModelById(modelId)
-deleteUserById //working on it
-
-//Update
-updateModelById(modelId, newData)
-updateUptainerById(uptainerId, newData)
-updateItemById(itemId, newData)
-updateBrandById(brandId, newData)
-updateCategoryById(categoryId, newData)
-updateProductById(productId, newData)
-updateUserData//working on it
-
-```
-
 ### Common Mistakes and Tips
 
 Avoid common mistakes and improve your experience with these tips:
@@ -315,7 +186,13 @@ or in source control. And that should be it, if there are any merge conflicts th
           
 ## General documentation
 Git practices to follow: https://docs.google.com/document/d/12mwrght5QEvpEBXpcRvna5ymurbfKNVBtF0zebospcY/edit?usp=sharing
-App documentation https://docs.google.com/document/d/1VijC9MfpXDLzrSM3ON6yELCc7WYxizAtOBS9lLsdJr4/edit#heading=h.c16o28oukuj
+
+App documentation https://docs.google.com/document/d/1VijC9MfpXDLzrSM3ON6yELCc7WYxizAtOBS9lLsdJr4/
+edit#heading=h.c16o28oukuj
+
+[Backend documentation](docs/Backend.md)
+
+[Frontend documentation](https://docs.google.com/document/d/1KVG4AKh5v6yotMs9fVP9tsPXK2427-fhTqSGn1zxXR4/edit?usp=sharing)
 
 # Troubleshooting 
 

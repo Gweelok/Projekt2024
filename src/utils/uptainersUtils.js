@@ -1,10 +1,12 @@
 import {
   getAllItems,
-  getAllUptainers,
   getItemsFromUser,
-  getAllProducts,
-} from "../utils/Repo";
-import { firebaseAurth } from "./Firebase.js";
+} from "../utils/Repo/Items.js";
+import { getAllProducts, } from "../utils/Repo/Products.js";
+import {
+  getAllUptainers,
+} from "../utils/Repo/Uptainers.js";
+import { firebaseAurth } from "./Repo/Firebase.js";
 
 export const calculateDistance = (
   { latitude: lat1, longitude: lon1 },
@@ -288,14 +290,13 @@ export async function getUserStats() {
   var allUserCollectedItems = []
   var allUserDonatedItems = []
 
-  const userId = firebaseAurth.currentUser.uid
-  //const userId = "8lKtUP0HFuVf0QMUXjxJIIo3QTC3"
-  const allUserItems = await getItemsFromUser(userId);
+
+  const allUserItems = await getItemsFromUser();
 
 
   allUserItems.map((item) => {
     if (item.itemTaken) {
-      if (item.itemUser == userId) {
+      if (item.itemUser == firebaseAurth.currentUser.uid) {
         allUserCollectedItems.push(item)
       }
     } else {
