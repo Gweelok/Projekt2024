@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { styles } from "../../styles/Stylesheet";
 import { t, useLanguage } from "../../languages/LanguageHandler";
@@ -11,6 +11,7 @@ import VisitedUptainerStats from "../../components/Stats/VisitedUptainerStats/Vi
 import LightbulbIcon from "../../components/svg-components/LightbulbIcon";
 import YourStats from "../../components/YourStats/YourStats";
 import GreenBox from "../../components/green-box/GreenBox";
+import { LoaderContext } from "../../contexts/LoaderContext/LoaderContext";
 import ScrollViewComponent from "../../components/ScrollViewComponent/ScrollViewComponent";
 import ChartForStats from "../../components/Stats/ChartForStats/ChartForStats";
 import {
@@ -22,12 +23,13 @@ import {
   getUserStats,
 } from "../../utils/uptainersUtils";
 import { useNavigation } from "@react-navigation/core";
+import { set } from "firebase/database";
 
 const Stat = () => {
   const navigation = useNavigation();
   const { currentLanguage } = useLanguage();
   const [activeButton, setActiveButton] = useState("main"); // 'main' or 'secondary'
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
 
   const [data, setData] = useState({
     myMostVisitedUptainers: [],
@@ -95,6 +97,7 @@ const Stat = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetchAllData();
   }, [activeButton]);
 
