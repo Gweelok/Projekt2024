@@ -30,7 +30,10 @@ const uploadImageStyle = StyleSheet.create({
     position: "absolute",
     zIndex: indexStyles.metrics.icon.cancel.zIndex,
     opacity: indexStyles.metrics.icon.cancel.opacity,
-    backgroundColor: indexStyles.colorPalette.Primarycolor1,
+    backgroundColor: indexStyles.colorPalette.Primarycolor2,
+    height: 35,
+    width: 35,
+    fontSize: 35
   },
   uploadText: {
     marginLeft: indexStyles.metrics.text.upload.marginLeft,
