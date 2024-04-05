@@ -89,9 +89,7 @@ const ProductDropdown = ({
   const handleBack = () => {
     setIsModalVisible(false);
   };
-  const handleSkip = () => {
-    setIsModalVisible(false);
-  };
+
 
   return (
     <View style={productDropdownStyles.container}>
@@ -149,12 +147,6 @@ const ProductDropdown = ({
               />
             </View>
 
-            <TouchableOpacity
-              onPress={handleSkip}
-              style={productDropdownStyles.link}
-            >
-              <Text style={productDropdownStyles.linkText}>Skip</Text>
-            </TouchableOpacity>
           </View>
 
           <ScrollView style={productDropdownStyles.dropdownList}>
