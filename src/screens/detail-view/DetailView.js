@@ -20,6 +20,7 @@ import { t, useLanguage } from "../../languages/LanguageHandler";
 
 import Screens from "../../utils/ScreenPaths";
 import { useNavigation } from "@react-navigation/native";
+import { openAddressOnMap } from "../../utils/uptainersUtils";
 
 const DetailViews = ({ route }) => {
   const navigation = useNavigation();
@@ -55,26 +56,13 @@ const DetailViews = ({ route }) => {
 
   const displayTextValue = itemDescription;
 
-  const openAddressOnMap = () => {
-    const scheme = Platform.select({
-      ios: "maps://0,0?q=",
-      android: "geo:0,0?q=",
-    });
-    const latLng = `${uptainer.uptainerLatitude},${uptainer.uptainerLongitude}`;
-    const url = Platform.select({
-      ios: `${scheme}${uptainer.name}@${latLng}`,
-      android: `${scheme}${latLng}(${uptainer.name})`,
-    });
-    console.log(url);
-    Linking.canOpenURL(url)
-      .then((supported) => {
-        if (!supported) {
-          console.log("Can't handle url: " + url);
-        } else {
-          return Linking.openURL(url);
-        }
-      })
-      .catch((err) => console.error("An error occurred", err));
+  const openOnMap = async () => {
+    
+    openAddressOnMap({
+      lat: uptainer.uptainerLatitude, 
+      long: uptainer.uptainerLongitude, 
+      name: uptainer.uptainerName
+    })
   };
 
   return (
@@ -96,7 +84,7 @@ const DetailViews = ({ route }) => {
 
             <View style={detailViewStyles.detailDivider}>
               <TouchableOpacity
-                onPress={openAddressOnMap}
+                onPress={openOnMap}
                 style={detailViewStyles.locationContainer}
               >
                 <Ionicons

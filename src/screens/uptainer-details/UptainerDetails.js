@@ -31,6 +31,7 @@ import { useNavigation } from "@react-navigation/native";
 import Screens from "../../utils/ScreenPaths";
 import { BadgeContext } from "../../contexts/BadgeContext/BadgeContext";
 import { t, useLanguage } from "../../languages/LanguageHandler";
+import { openAddressOnMap } from "../../utils/uptainersUtils";
 
 const UptainerDetails = ({ route }) => {
   const navigation = useNavigation();
@@ -171,29 +172,12 @@ const UptainerDetails = ({ route }) => {
     setitemsData(updatedItems);
   };
 
-  const openAddressOnMap = () => {
-    const scheme = Platform.select({
-      ios: "maps://0,0?q=",
-      android: "geo:0,0?q=",
-    });
-    const latLng = `${uptainerData.uptainerLat},${uptainerData.uptainerLong}`;
-
-    const url = Platform.select({
-      ios: `${scheme}${uptainerData.uptainerName}@${latLng}`,
-      android: `${scheme}${latLng}(${uptainerData.uptainerName})`,
-    });
-
-    Linking.canOpenURL(url)
-      .then((supported) => {
-        if (!supported) {
-          Alert.alert("Error", "Can't handle url: " + url);
-        } else {
-          return Linking.openURL(url);
-        }
-      })
-      .catch((err) => Alert.alert("Error", "An error occurred: " + err));
-  };
-
+  const openOnMap = async () =>{
+    openAddressOnMap(
+      {lat: uptainerData.uptainerLatitude,
+      long: uptainerData.uptainerLongitude,
+      name: uptainerData.uptainerName})
+  }
   const renderItem = (item) => (
     <TouchableOpacity
       disabled={newItem && item.itemId == newItem.itemId && !addedItem}
@@ -262,7 +246,7 @@ const UptainerDetails = ({ route }) => {
             }}
           >
             <TouchableOpacity
-              onPress={openAddressOnMap}
+              onPress={openOnMap}
               style={uptainerDetailsStyle.productLocation}
             >
               <Text style={uptainerDetailsStyle.productAddress}>

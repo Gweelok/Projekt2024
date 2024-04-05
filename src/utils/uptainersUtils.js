@@ -1,3 +1,4 @@
+import { Linking } from "react-native";
 import {
   getAllItems,
   getItemsFromUser,
@@ -25,7 +26,28 @@ export const calculateDistance = (
   const distance = R * c;
   return distance.toFixed(2);
 };
+export const openAddressOnMap = ({lat, long, name}) => {
+  const scheme = Platform.select({
+    ios: "maps://0,0?q=",
+    android: "geo:0,0?q=",
+  });
+  const latLng = `${lat},${long}`;
 
+  const url = Platform.select({
+    ios: `${scheme}${name}@${latLng}`,
+    android: `${scheme}${latLng}(${name})`,
+  });
+
+  Linking.canOpenURL(url)
+    .then((supported) => {
+      if (!supported) {
+        Alert.alert("Error", "Can't handle url: " + url);
+      } else {
+        return Linking.openURL(url);
+      }
+    })
+    .catch((err) => Alert.alert("Error", "An error occurred: " + err));
+};
 // Function to sort the Uptainers list by distance based on the user's location
 export const sortUptainersByDistance = (userLocation, uptainersList) => {
   // Destructure latitude and longitude from userLocation

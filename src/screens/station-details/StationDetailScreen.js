@@ -13,6 +13,7 @@ import stationDetailsStyles from "./stationDetailStyles";
 import { t, useLanguage } from "../../languages/LanguageHandler";
 import Screens from "../../utils/ScreenPaths";
 import { useNavigation } from "@react-navigation/native";
+import { openAddressOnMap } from "../../utils/uptainersUtils";
 
 const StationDetailScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -21,30 +22,12 @@ const StationDetailScreen = ({ route }) => {
 
   const { currentLanguage, setLanguage } = useLanguage();
 
-  const openMap = async (latitude, longitude, label = "MyLabel") => {
-    const browserUrl = `https://www.google.com/maps/dir/?api=1&origin=&destination=${latitude},${longitude}&travelmode=driving`;
-
-    if (Platform.OS === "android") {
-      // Android open google map first, in driving mode, if google map is not available, then open map in browser.
-      return Linking.openURL(browserUrl);
-    } else if (Platform.OS === "ios") {
-      const url = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
-      Linking.canOpenURL(url).then((supported) => {
-        if (supported) {
-          return Linking.openURL(url);
-        } else {
-          return Linking.openURL(browserUrl);
-        }
-      });
-    }
-  };
-
-  const openStationDirectionPage = () => {
-    openMap(
-      stationDetail.latitude,
-      stationDetail.longitude,
-      stationDetail.name
-    );
+  const openStationDirectionPage = async() => {
+    openAddressOnMap({
+      lat: stationDetail.uptainerLatitude,
+      long: stationDetail.uptainerLongitude,
+      name: stationDetail.uptainerName
+    })
   };
 
   return (
