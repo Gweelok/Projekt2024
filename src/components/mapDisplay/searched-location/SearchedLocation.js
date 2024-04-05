@@ -16,7 +16,7 @@ const SearchedLocation = ({location, styling, onPress, userLatitude, userLongitu
                 <View style={searchedLocationStyles.addressInfo}>
                     <Text style={[styles.article_text, searchedLocationStyles.stationAddress]}>{`${location.uptainerStreet}, ${location.uptainerCity}`}</Text>
                     <View style={searchedLocationStyles.spacer} />
-                    {(userLatitude !== null && userLongitude !== null) &&
+                    {(userLatitude && userLongitude) &&
                     (<Text style={searchedLocationStyles.distance}>{` ${calculateDistance(
                         {latitude: userLatitude,
                             longitude: userLongitude},

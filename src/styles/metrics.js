@@ -591,7 +591,7 @@ export default metrics = {
       marginTop: 25,
     },
     noUptainer: {
-      marginBottom: 50,
+      marginBottom: 20,
       maxHeight: 50,
       marginTop: 15,
     },

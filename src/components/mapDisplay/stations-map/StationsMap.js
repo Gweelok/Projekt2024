@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { View, Alert, Text, ScrollView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +15,9 @@ import { sortUptainersByDistance } from "../../../utils/uptainersUtils";
 
 import { getAllUptainers } from "../../../utils/Repo/Uptainers";
 import Screens from "../../../utils/ScreenPaths";
+import { LoaderContext } from "../../../contexts/LoaderContext/LoaderContext";
+import { Permissions } from "../../../utils/Permissions";
+import { Keyboard } from "react-native";
 
 const StationsMap = () => {
   const navigation = useNavigation();
@@ -22,7 +25,7 @@ const StationsMap = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { isLoading, setIsLoading } = useContext(LoaderContext);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [sortedUptainers, setSortedUptainers] = useState([]);
   const mapRef = useRef();
@@ -33,55 +36,37 @@ const StationsMap = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          Alert.alert("Permission to access location was denied");
-          setLoading(false);
-          return;
+        try {
+          const location = await Permissions.getLocation()
+
+          setUserLocation(location);
+
+          const allUptainers = await getAllUptainers();
+          setFilteredLocations(allUptainers);
+          if (location) {
+            const sortedUptainers = await sortUptainersByDistance(location, allUptainers)
+
+
+            setSortedUptainers(sortedUptainers);
+          } else setSortedUptainers(allUptainers)
+
+          setIsLoading(false);
+        } catch (error) {
+          setIsLoading(false);
+          Alert.alert("Error", t("LocationPermission.error", currentLanguage));
         }
-
-        const location = await Location.getCurrentPositionAsync({});
-        setUserLocation(location.coords);
-
-        const allUptainers = await getAllUptainers();
-        setFilteredLocations(allUptainers);
-        if (location.coords) {
-          const sortedUptainers = location.coords
-            ? await sortUptainersByDistance(location.coords, allUptainers)
-            : allUptainers;
-
-          setSortedUptainers(sortedUptainers);
-        }
-
-        setLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.error("Error fetching data:", error);
         Alert.alert("Error fetching data. Please try again.");
-        setLoading(false);
       }
     };
 
+    setIsLoading(true)
     getData();
   }, []);
 
-  useEffect(() => {
-    const loadingTimer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
 
-    return () => clearTimeout(loadingTimer);
-  }, []);
-
-  if (loading) {
-    return (
-      <View style={stationMapStyles.activityIndicator}>
-        <ActivityIndicator size="large" color="black" />
-      </View>
-    );
-  }
-
-  const userLatitude = userLocation?.latitude || 0;
-  const userLongitude = userLocation?.longitude || 0;
 
   const region = {
     latitude: 55.6761,
@@ -108,14 +93,12 @@ const StationsMap = () => {
         location.uptainerName.toLowerCase().includes(text.toLowerCase()) ||
         location.uptainerStreet.toLowerCase().includes(text.toLowerCase()) ||
         location.uptainerCity.toLowerCase().includes(text.toLowerCase()) ||
+        location.uptainerDescription.toLowerCase().includes(text.toLowerCase()) ||
         location.uptainerZip.toString().includes(text)
     );
 
     setFilteredLocations(filtered);
 
-    if (filtered.length === 0) {
-      setFilteredLocations([]);
-    }
   };
 
   const selectStation = (location) => {
@@ -135,11 +118,15 @@ const StationsMap = () => {
     }
   };
 
-  const lastIndex = sortedUptainers.length - 1;
 
-  const toggleSearchResults = () => {
-    setShowSearchResults(true);
-  };
+
+  const endSearch = () => {
+    if (showSearchResults) {
+      setShowSearchResults(false)
+      Keyboard.dismiss()
+    }
+  }
+
   return (
     <View style={stationMapStyles.container}>
       <MapView
@@ -147,13 +134,14 @@ const StationsMap = () => {
         style={stationMapStyles.map}
         initialRegion={region}
         showsUserLocation={true}
+        onTouchStart={endSearch}
       >
-        {filteredLocations.map((location) => (
+        {filteredLocations.map((location, index) => (
           <Marker
             ref={(marker) =>
               (markersRef.current[location.uptainerName] = marker)
             }
-            key={location.uptainerName}
+            key={index}
             coordinate={{
               latitude: parseFloat(location.uptainerLatitude),
               longitude: parseFloat(location.uptainerLongitude),
@@ -169,7 +157,7 @@ const StationsMap = () => {
 
       <View
         style={stationMapStyles.searchBox}
-        onTouchStart={toggleSearchResults}
+        onTouchStart={()=>{setShowSearchResults(true)}}
       >
         <SearchBox
           onChangeText={handleSearch}
@@ -178,43 +166,26 @@ const StationsMap = () => {
         />
       </View>
 
-      {/* List of sorted locations */}
+      {/* List of searched locations */}
       {showSearchResults && (
         <ScrollView style={stationMapStyles.list}>
           {filteredLocations.length > 0 ? (
-            userLatitude === 0 && userLongitude === 0 ? (
-              filteredLocations.map((location, index) => (
-                <SearchedLocation
-                  location={location}
-                  onPress={() => {
-                    selectStation(location);
-                  }}
-                  index={index}
-                  styling={[
-                    stationMapStyles.dropdownListItem,
-                    index === lastIndex ? stationMapStyles.lastItem : null,
-                  ]}
-                  userLatitude={null}
-                  userLongitude={null}
-                ></SearchedLocation>
-              ))
-            ) : (
-              sortedUptainers.map((location, index) => (
-                <SearchedLocation
-                  location={location}
-                  onPress={() => {
-                    selectStation(location);
-                  }}
-                  index={index}
-                  styling={[
-                    stationMapStyles.dropdownListItem,
-                    index === lastIndex ? stationMapStyles.lastItem : null,
-                  ]}
-                  userLatitude={userLatitude}
-                  userLongitude={userLongitude}
-                ></SearchedLocation>
-              ))
-            )
+            filteredLocations.map((location, index) => (
+              <SearchedLocation
+                location={location}
+                onPress={() => {
+                  selectStation(location);
+                }}
+                key={index}
+                styling={[
+                  stationMapStyles.dropdownListItem,
+                  index === filteredLocations.length - 1 ? stationMapStyles.lastItem : null,
+                ]}
+                userLatitude={userLocation?.latitude}
+                userLongitude={userLocation?.longitude}
+              ></SearchedLocation>
+            ))
+
           ) : (
             <View style={stationMapStyles.noUptainerContainer}>
               <Text style={stationMapStyles.noUptainerText}>
