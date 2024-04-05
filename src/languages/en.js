@@ -155,7 +155,7 @@ export default {
   QRScanner: {
     Header: "Place the QR-code inside the frame to read it",
     Bottom:
-        "If you are not at the Uptainers location, close the QR-scanner and press the button 'Scan Later",
+        "You have to be near the Uptainer to be able to take an item",
     Error: "Error",
     ErrorMsg1: "An error occurred while saving the QR Code.",
     ScanAgain: "Scan Again?",

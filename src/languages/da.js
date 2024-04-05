@@ -167,7 +167,7 @@ export default {
 
     Header: "Placér QR-koden inden for rammen for at aflæse",
     Bottom:
-        "Hvis ikke du er ved Uptaineren, skal du lukke QR-scanneren og trykke på knappen 'scan senere",
+        "For at tage produktet, skal du være ved Uptaineren",
     Error: "Fejl",
     ErrorMsg1: "Der opstod en fejl under lagring af QR-koden.",
     ScanAgain: "Scan Igen?",
