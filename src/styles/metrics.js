@@ -180,9 +180,7 @@ export default metrics = {
     },
     topBar: {
       zIndex: 1,
-      paddingHorizontal: 20,
       marginBottom: 10,
-      marginLeft: -8.5,
       marginTop: 20,
     },
     languageSelector: {
@@ -1264,7 +1262,7 @@ export default metrics = {
       width: "48%",
     },
     landingScreenMainButton: {
-      width: "88.9%",
+      width: "100%",
     },
     housePhoneText: {
       width: "80%",

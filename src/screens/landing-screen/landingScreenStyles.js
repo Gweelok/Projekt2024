@@ -25,9 +25,7 @@ const landingScreenStyles = StyleSheet.create({
     zIndex: indexStyles.metrics.container.topBar.zIndex,
     flexDirection: "row",
     alignSelf: "stretch",
-    paddingHorizontal: indexStyles.metrics.container.topBar.paddingHorizontal,
     marginBottom: indexStyles.metrics.container.topBar.marginBottom,
-    marginLeft: indexStyles.metrics.container.topBar.marginLeft,
   },
   continueButtonContainer: {
     ...Buttons.main_button,

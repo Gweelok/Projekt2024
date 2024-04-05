@@ -9,7 +9,6 @@ const customizeStyles = StyleSheet.create({
     fontSize: indexStyles.typography.fontSize.h1,
     fontFamily: indexStyles.typography.fontFamily.primaryBold,
     color: indexStyles.colorPalette.Primarycolor1,
-    marginLeft: indexStyles.metrics.text.customTop.marginLeft,
   },
   imageContainer: {
     flex: 3,
@@ -20,10 +19,8 @@ const customizeStyles = StyleSheet.create({
   bottom: {
     color: indexStyles.colorPalette.Primarycolor1,
     fontFamily: indexStyles.typography.fontFamily.primaryBold,
-    paddingHorizontal: indexStyles.metrics.text.customBottom.paddingHorizontal,
     flex: 2,
-    alignItems: "center",
-    justifyContent: "center",
+    textAlign:"center",
   },
 });
 
