@@ -21,6 +21,8 @@ import React from "react";
 import AddItem from "./src/screens/AddItem";
 import AddQRScanner from "./src/screens/AddQRScanner";
 import ReportedItems from "./src/screens/ReportedItems";
+// Profile
+import Profile from "./src/screens/profile"; // Import the Profile screen
 
 export default function App() {
   //Loading the font
@@ -81,6 +83,11 @@ export default function App() {
                 options={{ headerShown: false }}
                 name="ReportedItems"
                 component={ReportedItems}
+              />
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="Profile" // Add the Profile screen to the stack
+                component={Profile}
               />
             </Stack.Navigator>
           </NavigationContainer>

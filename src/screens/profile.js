@@ -2,7 +2,6 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AntDesign } from "@expo/vector-icons";
-import NavigationBar from '../components/organisms/Navigationbar'; // Import the NavigationBar component
 import { Primarycolor1 } from "../styles/styleSheet";
 
 const Profile = () => {
@@ -29,7 +28,17 @@ const Profile = () => {
       </TouchableOpacity>
 
       {/* Navigation bar */}
-      <NavigationBar currentRoute={currentRouteName} />
+      <View style={styles.navigationBar}>
+        {/* Your navigation bar content goes here */}
+        {/* Example: */}
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Text>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+          <Text>Settings</Text>
+        </TouchableOpacity>
+        {/* Add more navigation options as needed */}
+      </View>
     </View>
   );
 };
@@ -67,6 +76,14 @@ const styles = StyleSheet.create({
   },
   menuItem_arrow: {
     color: Primarycolor1,
+  },
+  navigationBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    height: 50,
+    backgroundColor: '#f0f0f0',
   },
 });
 
