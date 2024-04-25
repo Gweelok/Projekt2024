@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "829726847217",
+    "firebase_url": "https://projekt2024-98abc-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "projekt2024-98abc",
+    "storage_bucket": "projekt2024-98abc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829726847217:android:98a7cf09530a07466bf950",
+        "android_client_info": {
+          "package_name": "com.retireditems"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtue-XRqe1XQiEoXnvZ6OLWsn4nxotitM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
